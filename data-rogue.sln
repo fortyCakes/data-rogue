@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "data-rogue-core", "..\data-rogue-core\data-rogue-core.csproj", "{2C899088-9F23-4411-BAD7-E175A886C67C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "data-rogue-core", "data-rogue-core\data-rogue-core.csproj", "{2C899088-9F23-4411-BAD7-E175A886C67C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,8 +24,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{2C899088-9F23-4411-BAD7-E175A886C67C} = {DA84697A-A363-4B9F-BA44-DA85B560A530}
 	EndGlobalSection
 EndGlobal
