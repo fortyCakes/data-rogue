@@ -326,6 +326,18 @@
           "System.Xml.XDocument": "4.0.11"
         }
       },
+      "OpenTK/1.1.1589.5942": {
+        "type": "package"
+      },
+      "RLNET/1.0.6": {
+        "type": "package",
+        "dependencies": {
+          "OpenTK": "1.1.1589.5942"
+        }
+      },
+      "RogueSharp/3.0.0": {
+        "type": "package"
+      },
       "runtime.native.System/4.0.0": {
         "type": "package",
         "dependencies": {
@@ -2360,6 +2372,40 @@
         "NETStandard.Library.nuspec",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt"
+      ]
+    },
+    "OpenTK/1.1.1589.5942": {
+      "sha512": "kDJrP4a/bqlyFtMiy+dn9stzAoHxLQ2RvEwp6dcpixefdN1CVcQb9gPjpsEvpUXau+IoSyVsUHxNGDOs7bGUSA==",
+      "type": "package",
+      "path": "OpenTK/1.1.1589.5942",
+      "files": [
+        "OpenTK.1.1.1589.5942.nupkg.sha512",
+        "OpenTK.nuspec",
+        "lib/NET40/OpenTK.dll",
+        "lib/NET40/OpenTK.dll.config",
+        "lib/NET40/OpenTK.xml"
+      ]
+    },
+    "RLNET/1.0.6": {
+      "sha512": "uB0av8QFwSdfQrFCN7a3tk6YDwlQU0SPt3Oh7T7FUzoRwrfRSIF/albeHrlF5ZXN1XsHiUkOz7o9FIZg0plsCg==",
+      "type": "package",
+      "path": "RLNET/1.0.6",
+      "files": [
+        "RLNET.1.0.6.nupkg.sha512",
+        "RLNET.nuspec",
+        "lib/RLNET.dll",
+        "lib/ascii_8x8.png"
+      ]
+    },
+    "RogueSharp/3.0.0": {
+      "sha512": "f1Zn6bkgL342FB4yVKO+DcmhL6R9wRCwuY/xZz5zybuQe9FjF3DPWPT33mj9QlNEiakOqJ9NhVmhO+23Ze0fGQ==",
+      "type": "package",
+      "path": "RogueSharp/3.0.0",
+      "files": [
+        "RogueSharp.3.0.0.nupkg.sha512",
+        "RogueSharp.nuspec",
+        "lib/portable-net40+sl50+win+wpa81+wp80/RogueSharp.XML",
+        "lib/portable-net40+sl50+win+wpa81+wp80/RogueSharp.dll"
       ]
     },
     "runtime.native.System/4.0.0": {
@@ -6588,7 +6634,10 @@
     }
   },
   "projectFileDependencyGroups": {
-    "": [],
+    "": [
+      "RLNET >= 1.0.6",
+      "RogueSharp >= 3.0.0"
+    ],
     ".NETCoreApp,Version=v1.0": [
       "Microsoft.NETCore.App >= 1.0.1"
     ]
