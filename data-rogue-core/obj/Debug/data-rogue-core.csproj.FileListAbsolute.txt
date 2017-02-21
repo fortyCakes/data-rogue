@@ -13,3 +13,9 @@ C:\Users\alex.stuart\Source\Repos\data-rogue-core\obj\Debug\data-rogue-core.pdb
 C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core\bin\Debug\data-rogue-core.exe.config
 C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core\obj\Debug\data-rogue-core.exe
 C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core\obj\Debug\data-rogue-core.pdb
+C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core\bin\Debug\data-rogue-core.exe
+C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core\bin\Debug\data-rogue-core.pdb
+C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core\bin\Debug\OpenTK.xml
+C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core\bin\Debug\RogueSharp.xml
+C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core\obj\Debug\data-rogue-core.csprojResolveAssemblyReference.cache
+C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core\bin\Debug\Images\Tileset\terminal8x8.png
