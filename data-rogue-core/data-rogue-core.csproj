@@ -36,6 +36,10 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="OpenTK, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
       <HintPath>..\data-rogue\packages\OpenTK.1.1.1589.5942\lib\NET40\OpenTK.dll</HintPath>
       <Private>True</Private>
@@ -63,7 +67,10 @@
     <Compile Include="Entities\Monster.cs" />
     <Compile Include="Interfaces\IBehaviour.cs" />
     <Compile Include="Interfaces\ISchedulable.cs" />
+    <Compile Include="Interfaces\IMonsterFactoryDataParser.cs" />
+    <Compile Include="Interfaces\IMonsterFactory.cs" />
     <Compile Include="Monsters\Kobold.cs" />
+    <Compile Include="Monsters\MonsterFactoryDataParser.cs" />
     <Compile Include="Reference\Colors.cs" />
     <Compile Include="Reference\Direction.cs" />
     <Compile Include="Reference\Swatch.cs" />
@@ -81,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Monsters\kobold.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

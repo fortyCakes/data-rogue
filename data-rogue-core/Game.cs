@@ -77,13 +77,13 @@ namespace data_rogue_core
             _rootConsole.Render += OnRootConsoleRender;
 
             //Initialise
+            SchedulingSystem = new SchedulingSystem();
+            CommandSystem = new CommandSystem();
+
             Game.Player = new Player();
             MapGenerator mapGenerator = new MapGenerator(_mapWidth, _mapHeight, 20, 10, 5);
             DungeonMap = mapGenerator.CreateMap();
             DungeonMap.UpdatePlayerFieldOfView();
-
-            SchedulingSystem = new SchedulingSystem();
-            CommandSystem = new CommandSystem();
 
             // Create a new MessageLog and print the random seed used to generate the level
             MessageLog = new MessageLog();
@@ -163,6 +163,7 @@ namespace data_rogue_core
                 DungeonMap.Draw(_mapConsole, _statConsole);
                 Player.Draw(_mapConsole, DungeonMap);
                 Player.DrawStats(_statConsole);
+                MessageLog.Draw(_messageConsole);
 
                 RLConsole.Blit(_mapConsole, 0, 0, _mapWidth, _mapHeight, _rootConsole, 0, _inventoryHeight);
                 RLConsole.Blit(_statConsole, 0, 0, _statWidth, _statHeight, _rootConsole, _mapWidth, 0);

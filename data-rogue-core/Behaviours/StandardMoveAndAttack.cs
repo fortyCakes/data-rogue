@@ -23,7 +23,7 @@ public class StandardMoveAndAttack : IBehaviour
             monsterFov.ComputeFov(monster.X, monster.Y, monster.Awareness, true);
             if (monsterFov.IsInFov(player.X, player.Y))
             {
-                Game.MessageLog.Add($"{monster.Name} is eager to fight {player.Name}");
+                Game.MessageLog.Add($"{monster.Name} spots {player.Name}! It looks eager to fight.");
                 monster.TurnsAlerted = 1;
             }
         }

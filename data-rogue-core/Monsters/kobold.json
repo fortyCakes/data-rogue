@@ -1,0 +1,13 @@
+﻿{
+  "name": "Kobold",
+  "Attack":  "1d3+level/3",
+  "AttackChance" : "25d3",
+  "Awareness" : 10,
+  "Color" : "KoboldColor",
+  "Defense":  "1d3+level/3",
+  "DefenseChance": "10d4",
+  "Gold" : "5d5",
+  "Health" : "2d5",
+  "Speed" : 14,
+  "Symbol" : "k"
+}
