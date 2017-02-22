@@ -70,7 +70,13 @@
     <Compile Include="Interfaces\IMonsterFactoryDataParser.cs" />
     <Compile Include="Interfaces\IMonsterFactory.cs" />
     <Compile Include="Monsters\Kobold.cs" />
+    <Compile Include="Monsters\MonsterFactory.cs" />
     <Compile Include="Monsters\MonsterFactoryDataParser.cs" />
+    <Compile Include="Monsters\Monsters.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Monsters.resx</DependentUpon>
+    </Compile>
     <Compile Include="Reference\Colors.cs" />
     <Compile Include="Reference\Direction.cs" />
     <Compile Include="Reference\Swatch.cs" />
@@ -95,6 +101,12 @@
     <Content Include="Images\Tileset\terminal8x8.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Monsters\Monsters.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Monsters.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

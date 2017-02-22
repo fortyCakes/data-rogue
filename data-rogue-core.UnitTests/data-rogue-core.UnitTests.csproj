@@ -76,7 +76,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Monsters\MonsterFactoryDataParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestHelpers\StatAssertions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

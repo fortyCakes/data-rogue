@@ -2,6 +2,6 @@
 {
     public interface IMonsterFactoryDataParser
     {
-        IMonsterFactory GetMonsterFactory(string monsterData);
+        IMonsterFactory GetMonsterFactory(string monsterJson);
     }
 }

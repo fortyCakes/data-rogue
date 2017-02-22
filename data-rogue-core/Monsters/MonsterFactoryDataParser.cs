@@ -3,14 +3,52 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using RLNET;
+using RogueSharp.DiceNotation;
 
 namespace data_rogue_core.Monsters
 {
     public class MonsterFactoryDataParser : IMonsterFactoryDataParser
     {
-        public IMonsterFactory GetMonsterFactory(string monsterData)
+        public IMonsterFactory GetMonsterFactory(string monsterJson)
         {
-            throw new NotImplementedException();
+            MonsterData monsterData = JsonConvert.DeserializeObject<MonsterData>(monsterJson);
+
+            return new DefaultMonsterFactory(
+                name: monsterData.Name,
+                symbol: monsterData.Symbol,
+                color: RLColor.Blue, 
+                attack: Dice.Parse(monsterData.Attack),
+                attackChance: Dice.Parse(monsterData.AttackChance),
+                defense: Dice.Parse(monsterData.Defense),
+                defenseChance: Dice.Parse(monsterData.DefenseChance),
+                gold: Dice.Parse(monsterData.Gold),
+                health: Dice.Parse(monsterData.Health),
+                speed: Dice.Parse(monsterData.Speed),
+                awareness: Dice.Parse(monsterData.Awareness)
+            );
         }
+
+
+    }
+    
+
+    [JsonObject]
+    public struct MonsterData
+    {
+        public string Attack;
+        public string AttackChance;
+        public string Awareness;
+        public string Color;
+        public string Defense;
+        public string DefenseChance;
+        public string Gold;
+        public string Health;
+        public string MaxHealth;
+        public string Name;
+        public string Speed;
+        public char Symbol;
     }
 }
