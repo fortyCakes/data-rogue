@@ -23,3 +23,4 @@ C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core.UnitTests\obj\Debug
 C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core.UnitTests\obj\Debug\data-rogue-core.UnitTests.pdb
 C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core.UnitTests\bin\Debug\Newtonsoft.Json.dll
 C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core.UnitTests\bin\Debug\Newtonsoft.Json.xml
+C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core.UnitTests\bin\Debug\Data\Monsters\MonsterDataResources.resx

@@ -17,11 +17,12 @@ namespace data_rogue_core.Map
         private readonly int _roomMinSize;
 
         private readonly DungeonMap _map;
+        private IMonsterGenerator _monsterGenerator;
 
         // Constructing a new MapGenerator requires the dimensions of the maps it will create
         // as well as the sizes and maximum number of rooms
         public MapGenerator(int width, int height,
-            int maxRooms, int roomMaxSize, int roomMinSize)
+            int maxRooms, int roomMaxSize, int roomMinSize, IMonsterGenerator monsterGenerator)
         {
             _width = width;
             _height = height;
@@ -29,6 +30,7 @@ namespace data_rogue_core.Map
             _roomMaxSize = roomMaxSize;
             _roomMinSize = roomMinSize;
             _map = new DungeonMap();
+            _monsterGenerator = monsterGenerator;
         }
 
         // Generate a new map that places rooms randomly
@@ -160,7 +162,7 @@ namespace data_rogue_core.Map
                         if (randomRoomLocation != null)
                         {
                             // Temporarily hard code this monster to be created at level 1
-                            var monster = Kobold.Create(1);
+                            var monster = _monsterGenerator.GetNewMonster();
                             monster.X = randomRoomLocation.X;
                             monster.Y = randomRoomLocation.Y;
                             _map.AddMonster(monster);

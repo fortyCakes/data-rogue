@@ -63,20 +63,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Behaviours\StandardMoveAndAttack.cs" />
+    <Compile Include="Data\Monsters\MonsterDataResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MonsterDataResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Door.cs" />
     <Compile Include="Entities\Monster.cs" />
     <Compile Include="Interfaces\IBehaviour.cs" />
     <Compile Include="Interfaces\ISchedulable.cs" />
     <Compile Include="Interfaces\IMonsterFactoryDataParser.cs" />
     <Compile Include="Interfaces\IMonsterFactory.cs" />
-    <Compile Include="Monsters\Kobold.cs" />
-    <Compile Include="Monsters\MonsterFactory.cs" />
-    <Compile Include="Monsters\MonsterFactoryDataParser.cs" />
-    <Compile Include="Monsters\Monsters.Designer.cs">
+    <Compile Include="Interfaces\IMonsterGenerator.cs" />
+    <Compile Include="Data\Vaults\GenericVaults\GenericVaultsResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Monsters.resx</DependentUpon>
+      <DependentUpon>GenericVaultsResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IVault.cs" />
+    <Compile Include="Map\Vaults\Vault.cs" />
+    <Compile Include="Monsters\MonsterFactory.cs" />
+    <Compile Include="Monsters\MonsterFactoryDataParser.cs" />
     <Compile Include="Reference\Colors.cs" />
     <Compile Include="Reference\Direction.cs" />
     <Compile Include="Reference\Swatch.cs" />
@@ -90,22 +97,29 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="System\CommandSystem.cs" />
     <Compile Include="System\MessageLog.cs" />
+    <Compile Include="Monsters\MonsterGenerator.cs" />
     <Compile Include="System\SchedulingSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Monsters\kobold.json" />
+    <None Include="Data\Monsters\kobold.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\Tileset\terminal8x8.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Data\Vaults\GenericVaults\SquareRoomWithPillar.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Monsters\Monsters.resx">
+    <EmbeddedResource Include="Data\Vaults\GenericVaults\GenericVaultsResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Monsters.Designer.cs</LastGenOutput>
+      <LastGenOutput>GenericVaultsResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\Monsters\MonsterDataResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <LastGenOutput>MonsterDataResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

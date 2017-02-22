@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using data_rogue_core.Display;
 using data_rogue_core.Entities;
 using data_rogue_core.Map;
+using data_rogue_core.Monsters;
 using data_rogue_core.Reference;
 using data_rogue_core.System;
 using RLNET;
@@ -81,7 +82,8 @@ namespace data_rogue_core
             CommandSystem = new CommandSystem();
 
             Game.Player = new Player();
-            MapGenerator mapGenerator = new MapGenerator(_mapWidth, _mapHeight, 20, 10, 5);
+            IMonsterGenerator monsterGenerator = new RandomMonsterGenerator();
+            MapGenerator mapGenerator = new MapGenerator(_mapWidth, _mapHeight, 20, 10, 5, monsterGenerator);
             DungeonMap = mapGenerator.CreateMap();
             DungeonMap.UpdatePlayerFieldOfView();
 

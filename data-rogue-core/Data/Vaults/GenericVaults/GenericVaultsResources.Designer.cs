@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace data_rogue_core.Monsters {
+namespace data_rogue_core.Data.Vaults.GenericVaults {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace data_rogue_core.Monsters {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Monsters {
+    internal class GenericVaultsResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Monsters() {
+        internal GenericVaultsResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace data_rogue_core.Monsters {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("data_rogue_core.Monsters.Monsters", typeof(Monsters).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("data_rogue_core.Data.Vaults.GenericVaults.GenericVaultsResources", typeof(GenericVaultsResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,12 +61,16 @@ namespace data_rogue_core.Monsters {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to ......
+        ///......
+        ///..##..
+        ///..##..
+        ///......
+        ///.......
         /// </summary>
-        internal static byte[] kobold {
+        internal static string SquareRoomWithPillar {
             get {
-                object obj = ResourceManager.GetObject("kobold", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("SquareRoomWithPillar", resourceCulture);
             }
         }
     }

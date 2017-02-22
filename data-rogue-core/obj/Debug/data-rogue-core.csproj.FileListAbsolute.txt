@@ -21,3 +21,9 @@ C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core\obj\Debug\data-rogu
 C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core\bin\Debug\Images\Tileset\terminal8x8.png
 C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core\bin\Debug\Newtonsoft.Json.dll
 C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core\bin\Debug\Newtonsoft.Json.xml
+C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core\obj\Debug\data-rogue-core.csproj.GenerateResource.Cache
+C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core\bin\Debug\Monsters\MonsterDataResources.resx
+C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core\bin\Debug\Monsters\MonsterDataResources.Designer.cs
+C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core\obj\Debug\data_rogue_core.Monsters.MonsterDataResources.resources
+C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core\obj\Debug\data_rogue_core.Map.Vaults.GenericVaults.GenericVaults.resources
+C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core\obj\Debug\data_rogue_core.Data.Monsters.MonsterDataResources.resources
