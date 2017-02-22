@@ -75,13 +75,11 @@
     <Compile Include="Interfaces\IMonsterFactoryDataParser.cs" />
     <Compile Include="Interfaces\IMonsterFactory.cs" />
     <Compile Include="Interfaces\IMonsterGenerator.cs" />
-    <Compile Include="Data\Vaults\GenericVaults\GenericVaultsResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GenericVaultsResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Interfaces\IVault.cs" />
-    <Compile Include="Map\Vaults\Vault.cs" />
+    <Compile Include="Interfaces\IVaultDataParser.cs" />
+    <Compile Include="Map\DungeonCell.cs" />
+    <Compile Include="Map\Glyph.cs" />
+    <Compile Include="Map\Vaults\VaultDataParser.cs" />
+    <Compile Include="Map\Vaults\VaultGenerator.cs" />
     <Compile Include="Monsters\MonsterFactory.cs" />
     <Compile Include="Monsters\MonsterFactoryDataParser.cs" />
     <Compile Include="Reference\Colors.cs" />
@@ -103,19 +101,20 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Data\Monsters\kobold.json" />
+    <None Include="Data\Vaults\GenericVaults\RoomWithCurtain.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\Tileset\terminal8x8.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Data\Vaults\GenericVaults\SquareRoomWithPillar.txt" />
+    <None Include="Data\Vaults\GenericVaults\SquareRoomWithPillar.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Data\Vaults\GenericVaults\GenericVaultsResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>GenericVaultsResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Data\Monsters\MonsterDataResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

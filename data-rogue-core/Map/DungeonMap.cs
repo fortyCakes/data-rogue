@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using data_rogue_core.Display;
 using data_rogue_core.Entities;
@@ -13,6 +14,8 @@ namespace data_rogue_core.Map
         public List<Rectangle> Rooms;
         public List<Door> Doors;
         private readonly List<Monster> _monsters;
+        private char[,] _symbols;
+        private RLColor[,] _colors;
 
         public DungeonMap()
         {
@@ -22,11 +25,11 @@ namespace data_rogue_core.Map
             _monsters = new List<Monster>();
         }
 
-        // The Draw method will be called each time the map is updated
-        // It will render all of the symbols/colors for each cell to the map sub console
+        // The Draw method will be called each time the Map is updated
+        // It will render all of the symbols/colors for each cell to the Map sub console
         public void Draw(RLConsole mapConsole, RLConsole statConsole)
         {
-            foreach (Cell cell in GetAllCells())
+            foreach (DungeonCell cell in GetAllCells())
             {
                 SetConsoleSymbolForCell(mapConsole, cell);
             }
@@ -34,7 +37,7 @@ namespace data_rogue_core.Map
             // Keep an index so we know which position to draw monster stats at
             int i = 0;
 
-            // Iterate through each monster on the map and draw it after drawing the Cells
+            // Iterate through each monster on the Map and draw it after drawing the Cells
             foreach (Monster monster in _monsters)
             {
                 // When the monster is in the field-of-view also draw their stats
@@ -50,7 +53,8 @@ namespace data_rogue_core.Map
 
         }
 
-        private void SetConsoleSymbolForCell(RLConsole console, Cell cell)
+
+        private void SetConsoleSymbolForCell(RLConsole console, DungeonCell cell)
         {
             // When we haven't explored a cell yet, we don't want to draw anything
             if (!cell.IsExplored)
@@ -65,11 +69,11 @@ namespace data_rogue_core.Map
                 // '.' for floor and '#' for walls
                 if (cell.IsWalkable)
                 {
-                    console.Set(cell.X, cell.Y, Colors.FloorFov, Colors.FloorBackgroundFov, '.');
+                    console.Set(cell.X, cell.Y, Colors.FloorFov, Colors.FloorBackgroundFov, cell.Symbol);
                 }
                 else
                 {
-                    console.Set(cell.X, cell.Y, Colors.WallFov, Colors.WallBackgroundFov, '#');
+                    console.Set(cell.X, cell.Y, Colors.WallFov, Colors.WallBackgroundFov, cell.Symbol);
                 }
             }
             // When a cell is outside of the field of view draw it with darker colors
@@ -77,11 +81,11 @@ namespace data_rogue_core.Map
             {
                 if (cell.IsWalkable)
                 {
-                    console.Set(cell.X, cell.Y, Colors.Floor, Colors.FloorBackground, '.');
+                    console.Set(cell.X, cell.Y, Colors.Floor, Colors.FloorBackground, cell.Symbol);
                 }
                 else
                 {
-                    console.Set(cell.X, cell.Y, Colors.Wall, Colors.WallBackground, '#');
+                    console.Set(cell.X, cell.Y, Colors.Wall, Colors.WallBackground, cell.Symbol);
                 }
             }
         }
@@ -143,7 +147,7 @@ namespace data_rogue_core.Map
         public void AddMonster(Monster monster)
         {
             _monsters.Add(monster);
-            // After adding the monster to the map make sure to make the cell not walkable
+            // After adding the monster to the Map make sure to make the cell not walkable
             SetIsWalkable(monster.X, monster.Y, false);
             Game.SchedulingSystem.Add(monster);
         }
@@ -187,7 +191,7 @@ namespace data_rogue_core.Map
         public void RemoveMonster(Monster monster)
         {
             _monsters.Remove(monster);
-            // After removing the monster from the map, make sure the cell is walkable again
+            // After removing the monster from the Map, make sure the cell is walkable again
             SetIsWalkable(monster.X, monster.Y, true);
             Game.SchedulingSystem.Remove(monster);
         }
@@ -216,6 +220,100 @@ namespace data_rogue_core.Map
 
                 Game.MessageLog.Add($"{actor.Name} opened a door");
             }
+        }
+
+        public void SetCellProperties(int x, int y, bool isTransparent, bool isWalkable, bool isExplored, char symbol,
+            RLColor color)
+        {
+            SetCellProperties(x,y,isTransparent, isWalkable, isExplored);
+            _symbols[x, y] = symbol;
+            _colors[x, y] = color;
+        }
+
+        public void SetCellProperties(int x, int y, bool isTransparent, bool isWalkable,  char symbol,
+            RLColor color)
+        {
+            SetCellProperties(x, y, isTransparent, isWalkable);
+            _symbols[x, y] = symbol;
+            _colors[x, y] = color;
+        }
+
+        public void Clear(bool isTransparent, bool isWalkable, char symbol, RLColor color)
+        {
+            foreach (DungeonCell cell in GetAllCells())
+            {
+                SetCellProperties(cell.X, cell.Y, isTransparent, isWalkable, symbol, color);
+            }
+        }
+
+        public new DungeonMap Clone()
+        {
+            var map = new DungeonMap();
+            foreach (DungeonCell cell in GetAllCells())
+            {
+                map.SetCellProperties(cell.X, cell.Y, cell.IsTransparent, cell.IsWalkable, cell.IsExplored, cell.Symbol, cell.Color);
+            }
+            return map;
+        }
+
+        internal void Initialize(int width, int height, char symbol, RLColor color)
+        {
+            Initialize(width, height);
+            _symbols =new char[width,height];
+            _colors = new RLColor[width, height];
+            Clear(false, false, symbol, color);
+        }
+
+        public void Copy(DungeonMap sourceMap)
+        {
+            Copy(sourceMap, 0, 0);
+        }
+
+        public void Copy(DungeonMap sourceMap, int left, int top)
+        {
+            if (sourceMap == null)
+            {
+                throw new ArgumentNullException("sourceMap", "Source map cannot be null");
+            }
+
+            if (sourceMap.Width + left > Width)
+            {
+                throw new ArgumentException("Source map 'width' + 'left' cannot be larger than the destination map width");
+            }
+            if (sourceMap.Height + top > Height)
+            {
+                throw new ArgumentException("Source map 'height' + 'top' cannot be larger than the destination map height");
+            }
+            foreach (DungeonCell cell in sourceMap.GetAllCells())
+            {
+                SetCellProperties(cell.X + left, cell.Y + top, cell.IsTransparent, cell.IsWalkable, cell.IsExplored);
+            }
+        }
+
+        public new IEnumerable<DungeonCell> GetAllCells()
+        {
+            for (int y = 0; y < Height; y++)
+            {
+                for (int x = 0; x < Width; x++)
+                {
+                    yield return GetCell(x, y);
+                }
+            }
+        }
+
+        public new DungeonCell GetCell(int x, int y)
+        {
+            var cell = (this as RogueSharp.Map).GetCell(x, y);
+            return new DungeonCell(x,y, _symbols[x,y], _colors[x,y], cell.IsTransparent, cell.IsWalkable, cell.IsInFov, cell.IsExplored);
+        }
+
+        public void RevealAll()
+        {
+            foreach (DungeonCell cell in GetAllCells())
+            {
+                SetCellProperties(cell.X, cell.Y, cell.IsTransparent, cell.IsWalkable, true);
+            }
+            UpdatePlayerFieldOfView();
         }
     }
 }

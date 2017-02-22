@@ -24,22 +24,22 @@ namespace data_rogue_core
         private static readonly int _screenHeight = 70;
         private static RLRootConsole _rootConsole;
 
-        // The map console takes up most of the screen and is where the map will be drawn
+        // The Map console takes up most of the screen and is where the Map will be drawn
         private static readonly int _mapWidth = 80;
         private static readonly int _mapHeight = 48;
         private static RLConsole _mapConsole;
 
-        // Below the map console is the message console which displays attack rolls and other information
+        // Below the Map console is the message console which displays attack rolls and other information
         private static readonly int _messageWidth = 80;
         private static readonly int _messageHeight = 11;
         private static RLConsole _messageConsole;
 
-        // The stat console is to the right of the map and display player and monster stats
+        // The stat console is to the right of the Map and display player and monster stats
         private static readonly int _statWidth = 20;
         private static readonly int _statHeight = 70;
         private static RLConsole _statConsole;
 
-        // Above the map is the inventory console which shows the players equipment, abilities, and items
+        // Above the Map is the inventory console which shows the players equipment, abilities, and items
         private static readonly int _inventoryWidth = 80;
         private static readonly int _inventoryHeight = 11;
         private static RLConsole _inventoryConsole;
@@ -114,6 +114,10 @@ namespace data_rogue_core
             bool didPlayerAct = false;
             RLKeyPress keyPress = _rootConsole.Keyboard.GetKeyPress();
 
+
+            
+
+
             if (CommandSystem.IsPlayerTurn)
             {
                 if (keyPress != null)
@@ -138,6 +142,12 @@ namespace data_rogue_core
                     {
                         _rootConsole.Close();
                     }
+#if DEBUG
+                    else if (keyPress.Key == RLKey.V)
+                    {
+                        DungeonMap.RevealAll();
+                    }
+#endif
                 }
 
                 if (didPlayerAct)

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using data_rogue_core.Display;
 using data_rogue_core.Entities;
 using data_rogue_core.Monsters;
+using RLNET;
 using RogueSharp;
 using RogueSharp.DiceNotation;
 
@@ -33,11 +35,11 @@ namespace data_rogue_core.Map
             _monsterGenerator = monsterGenerator;
         }
 
-        // Generate a new map that places rooms randomly
+        // Generate a new Map that places rooms randomly
         public DungeonMap CreateMap()
         {
             // Set the properties of all cells to false
-            _map.Initialize(_width, _height);
+            _map.Initialize(_width, _height, '#', Colors.Wall);
 
             // Try to place as many rooms as the specified maxRooms
             // Note: Only using decrementing loop because of WordPress formatting
@@ -99,7 +101,7 @@ namespace data_rogue_core.Map
             return _map;
         }
 
-        // Given a rectangular area on the map
+        // Given a rectangular area on the Map
         // set the cell properties for that area to true
         private void CreateRoom(Rectangle room)
         {
@@ -107,26 +109,26 @@ namespace data_rogue_core.Map
             {
                 for (int y = room.Top + 1; y < room.Bottom; y++)
                 {
-                    _map.SetCellProperties(x, y, true, true, false);
+                    _map.SetCellProperties(x, y, true, true, false, '.', Colors.Floor);
                 }
             }
         }
 
-        // Carve a tunnel out of the map parallel to the x-axis
+        // Carve a tunnel out of the Map parallel to the x-axis
         private void CreateHorizontalTunnel(int xStart, int xEnd, int yPosition)
         {
             for (int x = Math.Min(xStart, xEnd); x <= Math.Max(xStart, xEnd); x++)
             {
-                _map.SetCellProperties(x, yPosition, true, true);
+                _map.SetCellProperties(x, yPosition, true, true, '.', Colors.Floor);
             }
         }
 
-        // Carve a tunnel out of the map parallel to the y-axis
+        // Carve a tunnel out of the Map parallel to the y-axis
         private void CreateVerticalTunnel(int yStart, int yEnd, int xPosition)
         {
             for (int y = Math.Min(yStart, yEnd); y <= Math.Max(yStart, yEnd); y++)
             {
-                _map.SetCellProperties(xPosition, y, true, true);
+                _map.SetCellProperties(xPosition, y, true, true, '.', Colors.Floor);
             }
         }
 

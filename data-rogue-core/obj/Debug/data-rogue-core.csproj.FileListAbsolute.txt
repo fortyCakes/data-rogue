@@ -22,8 +22,7 @@ C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core\bin\Debug\Images\Ti
 C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core\bin\Debug\Newtonsoft.Json.dll
 C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core\bin\Debug\Newtonsoft.Json.xml
 C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core\obj\Debug\data-rogue-core.csproj.GenerateResource.Cache
-C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core\bin\Debug\Monsters\MonsterDataResources.resx
-C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core\bin\Debug\Monsters\MonsterDataResources.Designer.cs
-C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core\obj\Debug\data_rogue_core.Monsters.MonsterDataResources.resources
-C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core\obj\Debug\data_rogue_core.Map.Vaults.GenericVaults.GenericVaults.resources
 C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core\obj\Debug\data_rogue_core.Data.Monsters.MonsterDataResources.resources
+C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core\bin\Debug\Data\Monsters\MonsterDataResources.resx
+C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core\bin\Debug\Data\Vaults\GenericVaults\SquareRoomWithPillar.json
+C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core\bin\Debug\Data\Vaults\GenericVaults\RoomWithCurtain.json
