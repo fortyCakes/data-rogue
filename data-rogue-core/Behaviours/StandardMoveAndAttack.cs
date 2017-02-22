@@ -1,10 +1,12 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Linq;
 using data_rogue_core;
 using data_rogue_core.Entities;
 using data_rogue_core.Interfaces;
 using data_rogue_core.Map;
 using data_rogue_core.System;
 using RogueSharp;
+using Path = RogueSharp.Path;
 
 public class StandardMoveAndAttack : IBehaviour
 {
