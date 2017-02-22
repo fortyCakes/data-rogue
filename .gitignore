@@ -2,3 +2,4 @@
 bin/
 .vs/
 data-rogue-core/bin/
+data-rogue-core/obj/
