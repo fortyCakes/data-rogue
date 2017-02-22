@@ -24,3 +24,5 @@ C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core.UnitTests\obj\Debug
 C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core.UnitTests\bin\Debug\Newtonsoft.Json.dll
 C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core.UnitTests\bin\Debug\Newtonsoft.Json.xml
 C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core.UnitTests\bin\Debug\Data\Monsters\MonsterDataResources.resx
+C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core.UnitTests\bin\Debug\Data\Vaults\GenericVaults\SquareRoomWithPillar.json
+C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-core.UnitTests\bin\Debug\Data\Vaults\GenericVaults\RoomWithCurtain.json
