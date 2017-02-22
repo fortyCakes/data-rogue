@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using data_rogue_core.Display;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RLNET;
@@ -19,7 +20,7 @@ namespace data_rogue_core.Monsters
             return new DefaultMonsterFactory(
                 name: monsterData.Name,
                 symbol: monsterData.Symbol,
-                color: RLColor.Blue, 
+                color: GetNamedColor(monsterData.Color), 
                 attack: Dice.Parse(monsterData.Attack),
                 attackChance: Dice.Parse(monsterData.AttackChance),
                 defense: Dice.Parse(monsterData.Defense),
@@ -31,7 +32,10 @@ namespace data_rogue_core.Monsters
             );
         }
 
-
+        private RLColor GetNamedColor(string colorName)
+        {
+            return Colors.GetColor(colorName);
+        }
     }
     
 

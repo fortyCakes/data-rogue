@@ -1,8 +1,10 @@
-﻿using RLNET;
+﻿using System;
+using System.Reflection;
+using RLNET;
 
 namespace data_rogue_core.Display
 {
-    public class Colors
+    public static class Colors
     {
         public static RLColor FloorBackground = RLColor.Black;
         public static RLColor Floor = Swatch.AlternateDarkest;
@@ -25,5 +27,12 @@ namespace data_rogue_core.Display
         public static RLColor Door = Swatch.ComplimentLighter;
         public static RLColor DoorBackgroundFov = Swatch.ComplimentDarker;
         public static RLColor DoorFov = Swatch.ComplimentLightest;
+
+        public static RLColor GetColor(string propertyName)
+        {
+            var prop = typeof(Colors).GetField(propertyName);
+
+            return (RLColor)prop.GetValue(null);
+        }
     }
 }
