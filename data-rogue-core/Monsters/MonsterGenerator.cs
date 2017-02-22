@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Resources;
-using data_rogue_core.Data.Monsters;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 using data_rogue_core.Entities;
 using data_rogue_core.Map;
 
@@ -15,11 +13,11 @@ namespace data_rogue_core.Monsters
         public RandomMonsterGenerator()
         {
             var parser = new MonsterFactoryDataParser();
-            ResourceSet resourceSet = MonsterDataResources.ResourceManager.GetResourceSet(CultureInfo.CurrentCulture, true, true);
+            var path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Data\Monsters\");
 
-            foreach (DictionaryEntry entry in resourceSet)
+            foreach (string file in Directory.EnumerateFiles(path, "*.json", SearchOption.AllDirectories))
             {
-                var json = entry.Value.ToString();
+                var json = File.ReadAllText(file);
                 MonsterFactories.Add(parser.GetMonsterFactory(json));
             }
         }

@@ -63,11 +63,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Behaviours\StandardMoveAndAttack.cs" />
-    <Compile Include="Data\Monsters\MonsterDataResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MonsterDataResources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Entities\Door.cs" />
     <Compile Include="Entities\Monster.cs" />
     <Compile Include="Interfaces\IBehaviour.cs" />
@@ -113,13 +108,6 @@
     <None Include="Data\Vaults\GenericVaults\SquareRoomWithPillar.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\Monsters\MonsterDataResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <LastGenOutput>MonsterDataResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
