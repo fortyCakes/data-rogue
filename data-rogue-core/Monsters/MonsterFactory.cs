@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using data_rogue_core.Display;
 using data_rogue_core.Entities;
 using RLNET;
@@ -38,6 +40,11 @@ namespace data_rogue_core.Monsters
         }
 
         public List<string> Tags { get;}
+
+        public bool Is(string tag)
+        {
+            return Tags.Any(t => string.Equals(t, tag, StringComparison.InvariantCultureIgnoreCase));
+        }
 
         public char Symbol { get; }
         public DiceExpression Attack { get; }

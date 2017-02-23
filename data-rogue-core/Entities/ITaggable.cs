@@ -4,7 +4,7 @@ namespace data_rogue_core.Entities
 {
     public interface ITaggable
     {
-        List<string> Tags { get; set; }
+        List<string> Tags { get; }
 
         bool Is(string tag);
     }
