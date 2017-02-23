@@ -72,7 +72,9 @@
     <Compile Include="Interfaces\IMonsterGenerator.cs" />
     <Compile Include="Interfaces\IVaultDataParser.cs" />
     <Compile Include="Map\DungeonCell.cs" />
-    <Compile Include="Map\Glyph.cs" />
+    <Compile Include="Map\IRoom.cs" />
+    <Compile Include="Map\RectangleRoom.cs" />
+    <Compile Include="Map\VaultRoom.cs" />
     <Compile Include="Map\Vaults\VaultDataParser.cs" />
     <Compile Include="Map\Vaults\VaultGenerator.cs" />
     <Compile Include="Monsters\MonsterFactory.cs" />

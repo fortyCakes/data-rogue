@@ -11,7 +11,7 @@ namespace data_rogue_core.Map
     public class DungeonMap : RogueSharp.Map
     {
         // ... start of new code
-        public List<Rectangle> Rooms;
+        public List<IRoom> Rooms;
         public List<Door> Doors;
         private readonly List<Monster> _monsters;
         private char[,] _symbols;
@@ -20,7 +20,7 @@ namespace data_rogue_core.Map
         public DungeonMap()
         {
             // Initialize the list of rooms when we create a new DungeonMap
-            Rooms = new List<Rectangle>();
+            Rooms = new List<IRoom>();
             Doors = new List<Door>();
             _monsters = new List<Monster>();
         }
@@ -102,6 +102,9 @@ namespace data_rogue_core.Map
         public void UpdatePlayerFieldOfView()
         {
             Player player = Game.Player;
+            bool transparent = GetIsTransparent(player.X, player.Y);
+            SetIsTransparent(player.X, player.Y, true);
+
             // Compute the field-of-view based on the player's location and awareness
             ComputeFov(player.X, player.Y, player.Awareness, true);
             // Mark all cells in field-of-view as having been explored
@@ -112,13 +115,22 @@ namespace data_rogue_core.Map
                     SetCellProperties(cell.X, cell.Y, cell.IsTransparent, cell.IsWalkable, true);
                 }
             }
+
+            SetIsTransparent(player.X, player.Y, transparent);
         }
+
+        
 
         // Returns true when able to place the Actor on the cell or false otherwise
         public bool SetActorPosition(Actor actor, int x, int y)
         {
             if (GetCell(x, y).IsWalkable)
             {
+                if (actor is Player)
+                {
+                    UpdatePlayerFieldOfView();
+                }
+
                 SetIsWalkable(actor.X, actor.Y, true);
                 
                 actor.X = x;
@@ -137,6 +149,18 @@ namespace data_rogue_core.Map
             return false;
         }
 
+        private void SetIsTransparent(int x, int y, bool isTransparent)
+        {
+            Cell cell = GetCell(x, y);
+            SetCellProperties(cell.X, cell.Y, isTransparent, cell.IsWalkable, cell.IsExplored);
+        }
+
+        private bool GetIsTransparent(int x, int y)
+        {
+            Cell cell = GetCell(x, y);
+            return cell.IsTransparent;
+        }
+
         // A helper method for setting the IsWalkable property on a Cell
         public void SetIsWalkable(int x, int y, bool isWalkable)
         {
@@ -153,7 +177,7 @@ namespace data_rogue_core.Map
         }
 
         // Look for a random location in the room that is walkable.
-        public Point GetRandomWalkableLocationInRoom(Rectangle room)
+        public Point GetRandomWalkableLocationInRoom(IRoom room)
         {
             if (DoesRoomHaveWalkableSpace(room))
             {
@@ -173,7 +197,7 @@ namespace data_rogue_core.Map
         }
 
         // Iterate through each Cell in the room and return true if any are walkable
-        public bool DoesRoomHaveWalkableSpace(Rectangle room)
+        public bool DoesRoomHaveWalkableSpace(IRoom room)
         {
             for (int x = 1; x <= room.Width - 2; x++)
             {
@@ -249,6 +273,7 @@ namespace data_rogue_core.Map
         public new DungeonMap Clone()
         {
             var map = new DungeonMap();
+            map.Initialize(Width, Height);
             foreach (DungeonCell cell in GetAllCells())
             {
                 map.SetCellProperties(cell.X, cell.Y, cell.IsTransparent, cell.IsWalkable, cell.IsExplored, cell.Symbol, cell.Color);
@@ -260,6 +285,17 @@ namespace data_rogue_core.Map
         {
             Initialize(width, height);
             _symbols =new char[width,height];
+            _colors = new RLColor[width, height];
+            Clear(false, false, symbol, color);
+        }
+
+        internal new void Initialize(int width, int height)
+        {
+            char symbol = '#';
+            RLColor color = Colors.Wall;
+
+            base.Initialize(width, height);
+            _symbols = new char[width, height];
             _colors = new RLColor[width, height];
             Clear(false, false, symbol, color);
         }
@@ -286,7 +322,7 @@ namespace data_rogue_core.Map
             }
             foreach (DungeonCell cell in sourceMap.GetAllCells())
             {
-                SetCellProperties(cell.X + left, cell.Y + top, cell.IsTransparent, cell.IsWalkable, cell.IsExplored);
+                SetCellProperties(cell.X + left, cell.Y + top, cell.IsTransparent, cell.IsWalkable, cell.IsExplored, cell.Symbol, cell.Color);
             }
         }
 

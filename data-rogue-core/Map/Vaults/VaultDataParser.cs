@@ -57,7 +57,7 @@ namespace data_rogue_core.Map.Vaults
                 case '.':
                     return new DungeonCell(0,0,'.',Colors.Floor,true, true, false);
                 case '~':
-                    return new DungeonCell(0, 0, '.', Colors.Wall, false, true, false);
+                    return new DungeonCell(0, 0, '~', Colors.Wall, false, true, false);
                 default:
                     throw new ArgumentOutOfRangeException();
             }

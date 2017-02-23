@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using data_rogue_core.Display;
 using data_rogue_core.Entities;
 using data_rogue_core.Map;
+using data_rogue_core.Map.Vaults;
 using data_rogue_core.Monsters;
 using data_rogue_core.Reference;
 using data_rogue_core.System;
@@ -82,8 +83,20 @@ namespace data_rogue_core
             CommandSystem = new CommandSystem();
 
             Game.Player = new Player();
+            MapGeneratorParameters mapParams = new MapGeneratorParameters
+            {
+                Height = _mapHeight,
+                Width = _mapWidth,
+                MaxRooms = 20,
+                RoomMinSize = 5,
+                RoomMaxSize = 10,
+                VaultChance = 50
+            };
+
             IMonsterGenerator monsterGenerator = new RandomMonsterGenerator();
-            MapGenerator mapGenerator = new MapGenerator(_mapWidth, _mapHeight, 20, 10, 5, monsterGenerator);
+            IVaultGenerator vaultGenerator = new VaultGenerator();
+
+            MapGenerator mapGenerator = new MapGenerator(mapParams, monsterGenerator, vaultGenerator);
             DungeonMap = mapGenerator.CreateMap();
             DungeonMap.UpdatePlayerFieldOfView();
 

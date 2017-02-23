@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using data_rogue_core.Display;
 using data_rogue_core.Entities;
+using data_rogue_core.Map.Vaults;
 using data_rogue_core.Monsters;
 using RLNET;
 using RogueSharp;
@@ -10,6 +11,16 @@ using RogueSharp.DiceNotation;
 
 namespace data_rogue_core.Map
 {
+    public struct MapGeneratorParameters
+    {
+        public int Width;
+        public int Height;
+        public int MaxRooms;
+        public int RoomMaxSize;
+        public int RoomMinSize;
+        public int VaultChance;
+    }
+
     public class MapGenerator
     {
         private readonly int _width;
@@ -17,22 +28,25 @@ namespace data_rogue_core.Map
         private readonly int _maxRooms;
         private readonly int _roomMaxSize;
         private readonly int _roomMinSize;
+        private readonly int _vaultChance;
 
         private readonly DungeonMap _map;
         private IMonsterGenerator _monsterGenerator;
+        private readonly IVaultGenerator _vaultGenerator;
 
         // Constructing a new MapGenerator requires the dimensions of the maps it will create
         // as well as the sizes and maximum number of rooms
-        public MapGenerator(int width, int height,
-            int maxRooms, int roomMaxSize, int roomMinSize, IMonsterGenerator monsterGenerator)
+        public MapGenerator(MapGeneratorParameters parameters, IMonsterGenerator monsterGenerator, IVaultGenerator vaultGenerator)
         {
-            _width = width;
-            _height = height;
-            _maxRooms = maxRooms;
-            _roomMaxSize = roomMaxSize;
-            _roomMinSize = roomMinSize;
+            _width = parameters.Width;
+            _height = parameters.Height;
+            _maxRooms = parameters.MaxRooms;
+            _roomMaxSize = parameters.RoomMaxSize;
+            _roomMinSize = parameters.RoomMinSize;
+            _vaultChance = parameters.VaultChance;
             _map = new DungeonMap();
             _monsterGenerator = monsterGenerator;
+            _vaultGenerator = vaultGenerator;
         }
 
         // Generate a new Map that places rooms randomly
@@ -42,33 +56,24 @@ namespace data_rogue_core.Map
             _map.Initialize(_width, _height, '#', Colors.Wall);
 
             // Try to place as many rooms as the specified maxRooms
-            // Note: Only using decrementing loop because of WordPress formatting
-            for (int r = _maxRooms; r > 0; r--)
+            for (int r = 0; r < _maxRooms; r++)
             {
-                // Determine the size and position of the room randomly
-                int roomWidth = Game.Random.Next(_roomMinSize, _roomMaxSize);
-                int roomHeight = Game.Random.Next(_roomMinSize, _roomMaxSize);
-                int roomXPosition = Game.Random.Next(0, _width - roomWidth - 1);
-                int roomYPosition = Game.Random.Next(0, _height - roomHeight - 1);
-
-                // All of our rooms can be represented as Rectangles
-                var newRoom = new Rectangle(roomXPosition, roomYPosition,
-                    roomWidth, roomHeight);
-
-                // Check to see if the room rectangle intersects with any other rooms
-                bool newRoomIntersects = _map.Rooms.Any(room => newRoom.Intersects(room));
-
-                // As long as it doesn't intersect add it to the list of rooms
-                if (!newRoomIntersects)
+                IRoom newRoom;
+                if (Game.Random.Next(100) < _vaultChance)
                 {
-                    _map.Rooms.Add(newRoom);
+                    newRoom = CreateVaultRoom();
                 }
+                else
+                {
+                    newRoom = CreateRectangleRoom();
+                }
+                if (newRoom != null) _map.Rooms.Add(newRoom);
             }
             // Iterate through each room that we wanted placed 
             // call CreateRoom to make it
-            foreach (Rectangle room in _map.Rooms)
+            foreach (IRoom room in _map.Rooms)
             {
-                CreateRoom(room);
+                room.CreateRoom(_map);
                 CreateDoors(room);
             }
 
@@ -101,25 +106,61 @@ namespace data_rogue_core.Map
             return _map;
         }
 
-        // Given a rectangular area on the Map
-        // set the cell properties for that area to true
-        private void CreateRoom(Rectangle room)
+        private IRoom CreateVaultRoom()
         {
-            for (int x = room.Left + 1; x < room.Right; x++)
+            var vault = _vaultGenerator.GetVault();
+            int roomWidth = vault.Width;
+            int roomHeight = vault.Height;
+            int roomXPosition = Game.Random.Next(0, _width - roomWidth - 1);
+            int roomYPosition = Game.Random.Next(0, _height - roomHeight - 1);
+
+            var newRoom = new VaultRoom(vault, roomXPosition, roomYPosition);
+
+            bool newRoomIntersects = _map.Rooms.Any(room => newRoom.Intersects(room));
+            if (!newRoomIntersects)
             {
-                for (int y = room.Top + 1; y < room.Bottom; y++)
-                {
-                    _map.SetCellProperties(x, y, true, true, false, '.', Colors.Floor);
-                }
+                return newRoom;
+            }
+            else
+            {
+                return null;
             }
         }
+
+        private IRoom CreateRectangleRoom()
+        {
+            // Determine the size and position of the room randomly
+            int roomWidth = Game.Random.Next(_roomMinSize, _roomMaxSize);
+            int roomHeight = Game.Random.Next(_roomMinSize, _roomMaxSize);
+            int roomXPosition = Game.Random.Next(0, _width - roomWidth - 1);
+            int roomYPosition = Game.Random.Next(0, _height - roomHeight - 1);
+
+            var newRoom = new RectangleRoom(roomXPosition, roomYPosition,
+                roomWidth, roomHeight);
+
+            bool newRoomIntersects = _map.Rooms.Any(room => newRoom.Intersects(room));
+
+            if (!newRoomIntersects)
+            {
+                return newRoom;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        // Given a rectangular area on the Map
+        // set the cell properties for that area to true
+        
 
         // Carve a tunnel out of the Map parallel to the x-axis
         private void CreateHorizontalTunnel(int xStart, int xEnd, int yPosition)
         {
             for (int x = Math.Min(xStart, xEnd); x <= Math.Max(xStart, xEnd); x++)
             {
-                _map.SetCellProperties(x, yPosition, true, true, '.', Colors.Floor);
+                if (!IsInRoom(x,yPosition))
+                    _map.SetCellProperties(x, yPosition, true, true, '.', Colors.Floor);
             }
         }
 
@@ -128,8 +169,14 @@ namespace data_rogue_core.Map
         {
             for (int y = Math.Min(yStart, yEnd); y <= Math.Max(yStart, yEnd); y++)
             {
-                _map.SetCellProperties(xPosition, y, true, true, '.', Colors.Floor);
+                if (!IsInRoom(xPosition,y))
+                    _map.SetCellProperties(xPosition, y, true, true, '.', Colors.Floor);
             }
+        }
+
+        private bool IsInRoom(int x, int y)
+        {
+            return _map.Rooms.Any(r => r.Contains(x, y));
         }
 
         private void PlacePlayer()
@@ -174,9 +221,9 @@ namespace data_rogue_core.Map
             }
         }
 
-        private void CreateDoors(Rectangle room)
+        private void CreateDoors(IRoom room)
         {
-            // The the boundries of the room
+            // The boundaries of the room
             int xMin = room.Left;
             int xMax = room.Right;
             int yMin = room.Top;
