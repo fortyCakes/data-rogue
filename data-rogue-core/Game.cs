@@ -90,7 +90,7 @@ namespace data_rogue_core
                 MaxRooms = 20,
                 RoomMinSize = 5,
                 RoomMaxSize = 10,
-                VaultChance = 50
+                VaultChance = 33
             };
 
             IMonsterGenerator monsterGenerator = new RandomMonsterGenerator();

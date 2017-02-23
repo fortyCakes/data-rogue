@@ -100,6 +100,12 @@
     <None Include="Data\Monsters\kobold.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Vaults\GenericVaults\CurtainArch.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Vaults\GenericVaults\RoomWithVerticalCurtain.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\Vaults\GenericVaults\RoomWithCurtain.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

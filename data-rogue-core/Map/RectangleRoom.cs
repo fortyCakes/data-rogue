@@ -13,9 +13,9 @@ namespace data_rogue_core.Map
 
         public void CreateRoom(DungeonMap map)
         {
-            for (int x = Left + 1; x < Right; x++)
+            for (int x = Left; x < Right; x++)
             {
-                for (int y = Top + 1; y < Bottom; y++)
+                for (int y = Top; y < Bottom; y++)
                 {
                     map.SetCellProperties(x, y, true, true, false, '.', Colors.Floor);
                 }

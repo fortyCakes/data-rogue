@@ -339,6 +339,8 @@ namespace data_rogue_core.Map
 
         public new DungeonCell GetCell(int x, int y)
         {
+            if (x < 0 || y < 0 || x > Width || y > Width) return null;
+
             var cell = (this as RogueSharp.Map).GetCell(x, y);
             return new DungeonCell(x,y, _symbols[x,y], _colors[x,y], cell.IsTransparent, cell.IsWalkable, cell.IsInFov, cell.IsExplored);
         }
