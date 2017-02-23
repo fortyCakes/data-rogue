@@ -71,6 +71,7 @@
     <Compile Include="Interfaces\IMonsterFactory.cs" />
     <Compile Include="Interfaces\IMonsterGenerator.cs" />
     <Compile Include="Interfaces\IVaultDataParser.cs" />
+    <Compile Include="Map\ConsoleMapRenderer.cs" />
     <Compile Include="Map\DungeonCell.cs" />
     <Compile Include="Map\IRoom.cs" />
     <Compile Include="Map\RectangleRoom.cs" />

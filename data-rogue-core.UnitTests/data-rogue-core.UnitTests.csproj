@@ -76,6 +76,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Entities\ActorTests.cs" />
     <Compile Include="Map\Vaults\VaultGeneratorTests.cs" />
     <Compile Include="Monsters\MonsterFactoryDataParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

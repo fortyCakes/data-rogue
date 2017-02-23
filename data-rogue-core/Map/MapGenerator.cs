@@ -74,7 +74,6 @@ namespace data_rogue_core.Map
             foreach (IRoom room in _map.Rooms)
             {
                 room.CreateRoom(_map);
-                CreateDoors(room);
             }
 
             // Iterate through each room that was generated
@@ -98,6 +97,11 @@ namespace data_rogue_core.Map
                     CreateVerticalTunnel(previousRoomCenterY, currentRoomCenterY, previousRoomCenterX);
                     CreateHorizontalTunnel(previousRoomCenterX, currentRoomCenterX, currentRoomCenterY);
                 }
+            }
+
+            foreach (IRoom room in _map.Rooms)
+            {
+                CreateDoors(room);
             }
 
             PlacePlayer();
@@ -224,16 +228,18 @@ namespace data_rogue_core.Map
         private void CreateDoors(IRoom room)
         {
             // The boundaries of the room
-            int xMin = room.Left;
+            int xMin = room.Left-1;
             int xMax = room.Right;
-            int yMin = room.Top;
+            int yMin = room.Top-1;
             int yMax = room.Bottom;
 
+
             // Put the rooms border cells into a list
-            List<Cell> borderCells = _map.GetCellsAlongLine(xMin, yMin, xMax, yMin).ToList();
-            borderCells.AddRange(_map.GetCellsAlongLine(xMin, yMin, xMin, yMax));
-            borderCells.AddRange(_map.GetCellsAlongLine(xMin, yMax, xMax, yMax));
-            borderCells.AddRange(_map.GetCellsAlongLine(xMax, yMin, xMax, yMax));
+            List<Cell> borderCells = new List<Cell>();
+            if (yMin > 0 && xMin>0 && xMax < _map.Width)              borderCells.AddRange(_map.GetCellsAlongLine(xMin, yMin, xMax, yMin));
+            if (xMin > 0 && yMin > 0 && yMax < _map.Height)           borderCells.AddRange(_map.GetCellsAlongLine(xMin, yMin, xMin, yMax));
+            if (xMax < _map.Width && yMax < _map.Height && xMin > 0)  borderCells.AddRange(_map.GetCellsAlongLine(xMin, yMax, xMax, yMax));
+            if (yMax < _map.Height && xMax < _map.Width && yMin > 0)  borderCells.AddRange(_map.GetCellsAlongLine(xMax, yMin, xMax, yMax));
 
             // Go through each of the rooms border cells and look for locations to place doors.
             foreach (Cell cell in borderCells)
@@ -267,6 +273,8 @@ namespace data_rogue_core.Map
             Cell left = _map.GetCell(cell.X - 1, cell.Y);
             Cell top = _map.GetCell(cell.X, cell.Y - 1);
             Cell bottom = _map.GetCell(cell.X, cell.Y + 1);
+
+            if (right == null || left == null || top == null || bottom == null) return false;
 
             // Make sure there is not already a door here
             if (_map.GetDoor(cell.X, cell.Y) != null ||

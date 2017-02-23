@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using data_rogue_core.Display;
 using data_rogue_core.Entities;
+using data_rogue_core.Interfaces;
 using data_rogue_core.Map;
 using data_rogue_core.Map.Vaults;
 using data_rogue_core.Monsters;
@@ -64,9 +65,9 @@ namespace data_rogue_core
             // This must be the exact name of the bitmap font file we are using or it will error.
             string fontFileName = "Images\\Tileset\\terminal8x8.png";
             // The title will appear at the top of the console window
-            string consoleTitle = "RougeSharp";
+            string consoleTitle = "RogueSharp";
             // Tell RLNet to use the bitmap font that we specified and that each tile is 8 x 8 pixels
-            _rootConsole = new RLRootConsole(fontFileName, _screenWidth, _screenHeight, 8, 8, 1f, consoleTitle);
+            _rootConsole = new RLRootConsole(fontFileName, _screenWidth, _screenHeight, 8, 8, 1, consoleTitle);
 
             // Initialize the sub consoles that we will Blit to the root console
             _mapConsole = new RLConsole(_mapWidth, _mapHeight);
@@ -85,9 +86,9 @@ namespace data_rogue_core
             Game.Player = new Player();
             MapGeneratorParameters mapParams = new MapGeneratorParameters
             {
-                Height = _mapHeight,
-                Width = _mapWidth,
-                MaxRooms = 20,
+                Height = _mapHeight*2,
+                Width = _mapWidth*2,
+                MaxRooms = 20 * 4,
                 RoomMinSize = 5,
                 RoomMaxSize = 10,
                 VaultChance = 33
@@ -185,8 +186,8 @@ namespace data_rogue_core
                 _statConsole.Clear();
                 _messageConsole.Clear();
 
-                DungeonMap.Draw(_mapConsole, _statConsole);
-                Player.Draw(_mapConsole, DungeonMap);
+                var drawables = DungeonMap.GetDrawables().Union(new IDrawable[] {Player});
+                ConsoleMapRenderer.RenderMap(Player.X, Player.Y, _mapConsole, DungeonMap, drawables);
                 Player.DrawStats(_statConsole);
                 MessageLog.Draw(_messageConsole);
 
