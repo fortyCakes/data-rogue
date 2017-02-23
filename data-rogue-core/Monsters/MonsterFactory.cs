@@ -1,4 +1,5 @@
-﻿using data_rogue_core.Display;
+﻿using System.Collections.Generic;
+using data_rogue_core.Display;
 using data_rogue_core.Entities;
 using RLNET;
 using RogueSharp.DiceNotation;
@@ -18,7 +19,8 @@ namespace data_rogue_core.Monsters
             DiceExpression defenseChance,
             DiceExpression health,
             DiceExpression speed,
-            DiceExpression gold
+            DiceExpression gold,
+            List<string> tags
         )
         {
             Name = name;
@@ -32,17 +34,20 @@ namespace data_rogue_core.Monsters
             Health = health;
             Speed = speed;
             Gold = gold;
+            Tags = tags;
         }
 
-        public char Symbol { get; private set; }
-        public DiceExpression Attack { get; private set; }
-        public DiceExpression AttackChance { get; private set; }
-        public DiceExpression Awareness { get; private set; }
-        public DiceExpression Defense { get; private set; }
-        public DiceExpression DefenseChance { get; private set; }
-        public DiceExpression Health { get; private set; }
-        public DiceExpression Speed { get; private set; }
-        public DiceExpression Gold { get; private set; }
+        public List<string> Tags { get;}
+
+        public char Symbol { get; }
+        public DiceExpression Attack { get; }
+        public DiceExpression AttackChance { get; }
+        public DiceExpression Awareness { get; }
+        public DiceExpression Defense { get; }
+        public DiceExpression DefenseChance { get; }
+        public DiceExpression Health { get; }
+        public DiceExpression Speed { get; }
+        public DiceExpression Gold { get; }
 
         public RLColor Color { get; set; }
 
@@ -66,6 +71,7 @@ namespace data_rogue_core.Monsters
                 Name=Name,
                 Speed = Speed.Roll().Value,
                 Symbol = Symbol,
+                Tags = Tags,
                 TurnsAlerted = null
             };
         }

@@ -1,11 +1,14 @@
-﻿using data_rogue_core.Display;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using data_rogue_core.Display;
 using data_rogue_core.Interfaces;
 using RLNET;
 using RogueSharp;
 
 namespace data_rogue_core.Entities
 {
-    public class Actor : IActor, IDrawable, IScheduleable
+    public class Actor : IActor, IDrawable, IScheduleable, ITaggable
     {
         private int mAttack;
         private int mSpeed;
@@ -15,6 +18,27 @@ namespace data_rogue_core.Entities
         private int mDefenseChance;
         private int mDefense;
         private int mAttackChance;
+
+        private List<string> _tags = new List<string>();
+
+        // ITaggable
+        public List<string> Tags
+        {
+            get
+            {
+                return _tags;
+            }
+            set
+            {
+                _tags = value;
+            }
+        }
+
+        public bool Is(string tag)
+        {
+            return Tags.Any(t => string.Equals(t, tag, StringComparison.InvariantCultureIgnoreCase));
+        }
+
         // IActor
         public string Name { get; set; }
         public int Awareness { get; set; }

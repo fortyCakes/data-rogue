@@ -28,7 +28,8 @@ namespace data_rogue_core.Monsters
                 gold: Dice.Parse(monsterData.Gold),
                 health: Dice.Parse(monsterData.Health),
                 speed: Dice.Parse(monsterData.Speed),
-                awareness: Dice.Parse(monsterData.Awareness)
+                awareness: Dice.Parse(monsterData.Awareness),
+                tags: monsterData.Tags
             );
         }
 
@@ -54,5 +55,6 @@ namespace data_rogue_core.Monsters
         public string Name;
         public string Speed;
         public char Symbol;
+        public List<string> Tags;
     }
 }

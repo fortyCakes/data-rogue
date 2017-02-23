@@ -9,5 +9,9 @@
   "Gold" : "5d5",
   "Health" : "2d5",
   "Speed" : 14,
-  "Symbol" : "k"
+  "Symbol": "k",
+  "Tags": [
+    "Small",
+    "Draconic"
+  ] 
 }

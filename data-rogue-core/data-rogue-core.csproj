@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Behaviours\StandardMoveAndAttack.cs" />
     <Compile Include="Entities\Door.cs" />
+    <Compile Include="Entities\ITaggable.cs" />
     <Compile Include="Entities\Monster.cs" />
     <Compile Include="Interfaces\IBehaviour.cs" />
     <Compile Include="Interfaces\ISchedulable.cs" />

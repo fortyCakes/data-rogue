@@ -12,6 +12,7 @@ namespace data_rogue_core.Entities
     public class Monster : Actor
     {
         public int? TurnsAlerted { get; set; }
+        
 
         public virtual void PerformAction(CommandSystem commandSystem)
         {
