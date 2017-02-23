@@ -97,6 +97,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Data\Monsters\goblin.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\Monsters\kobold.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

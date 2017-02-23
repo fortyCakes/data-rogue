@@ -16,9 +16,6 @@ namespace data_rogue_core.Display
         public static RLColor WallBackgroundFov = Swatch.SecondaryDarker;
         public static RLColor WallFov = Swatch.SecondaryLighter;
 
-        public static RLColor Player = Swatch.DbLight;
-        public static RLColor KoboldColor = Swatch.DbBrightWood;
-
         public static RLColor TextHeading = RLColor.White;
         public static RLColor Text = Swatch.DbLight;
         public static RLColor Gold = Swatch.DbSun;
@@ -27,6 +24,10 @@ namespace data_rogue_core.Display
         public static RLColor Door = Swatch.ComplimentLighter;
         public static RLColor DoorBackgroundFov = Swatch.ComplimentDarker;
         public static RLColor DoorFov = Swatch.ComplimentLightest;
+
+        public static RLColor Player = Swatch.DbLight;
+        public static RLColor KoboldColor = Swatch.DbBrightWood;
+        public static RLColor GoblinColor = Swatch.DbGrass;
 
         public static RLColor GetColor(string propertyName)
         {
