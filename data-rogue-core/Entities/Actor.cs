@@ -10,29 +10,9 @@ namespace data_rogue_core.Entities
 {
     public class Actor : IActor, IDrawable, IScheduleable, ITaggable
     {
-        private int mAttack;
-        private int mSpeed;
-        private int mMaxHealth;
-        private int mHealth;
-        private int mGold;
-        private int mDefenseChance;
-        private int mDefense;
-        private int mAttackChance;
-
-        private List<string> _tags = new List<string>();
 
         // ITaggable
-        public List<string> Tags
-        {
-            get
-            {
-                return _tags;
-            }
-            set
-            {
-                _tags = value;
-            }
-        }
+        public List<string> Tags { get; set; } = new List<string>();
 
         public bool Is(string tag)
         {
@@ -50,63 +30,26 @@ namespace data_rogue_core.Entities
         public int Y { get; set; }
 
         // Other
-        public int Attack
-        {
-            get { return mAttack; }
-            set { mAttack = value; }
-        }
+        public int Attack { get; set; }
 
-        public int Speed
-        {
-            get { return mSpeed; }
-            set { mSpeed = value; }
-        }
+        public int Speed { get; set; }
 
-        public int MaxHealth
-        {
-            get { return mMaxHealth; }
-            set { mMaxHealth = value; }
-        }
+        public HealthCounter HealthCounter { get; set; }
 
-        public int Health
-        {
-            get { return mHealth; }
-            set { mHealth = value; }
-        }
+        public int MaxHealth => HealthCounter.CounterMax;
+        public int CurrentHealth => HealthCounter.CounterValue;
 
-        public int Gold
-        {
-            get { return mGold; }
-            set { mGold = value; }
-        }
+        public int Gold { get; set; }
 
-        public int DefenseChance
-        {
-            get { return mDefenseChance; }
-            set { mDefenseChance = value; }
-        }
+        public int DefenseChance { get; set; }
 
-        public int Defense
-        {
-            get { return mDefense; }
-            set { mDefense = value; }
-        }
+        public int Defense { get; set; }
 
-        public int AttackChance
-        {
-            get { return mAttackChance; }
-            set { mAttackChance = value; }
-        }
+        public int AttackChance { get; set; }
 
-        public int Time
-        {
-            get
-            {
-                return Speed;
-            }
-        }
-
-        public void Draw(RLConsole console, IMap map, int xOffset, int yOffset)
+        public int Time => Speed;
+        
+        public void Draw(IRLConsoleWriter console, IMap map, int xOffset, int yOffset)
         {
             // Don't draw actors in cells that haven't been explored
             if (!map.GetCell(X, Y).IsExplored)
@@ -126,6 +69,15 @@ namespace data_rogue_core.Entities
             }
         }
 
-        
+
+        public void TakeDamage(int damage)
+        {
+            HealthCounter.TakeDamage(damage);
+        }
+
+        public void Heal(int healing, bool canOverheal)
+        {
+            HealthCounter.Restore(healing, canOverheal);
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using data_rogue_core.Map.Vaults;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -23,14 +24,15 @@ namespace data_rogue_core.UnitTests.Map.Vaults
             var parser = new VaultDataParser();
             var testJson = GetTestJson();
 
-            var action = new Action(() => parser.ParseVault(testJson));
+            var vault =  parser.ParseVault(testJson);
 
-            action.ShouldNotThrow();
+            vault.GetAllCells().Count().Should().Be(30);
         }
 
         private string GetTestJson()
         {
-            return @"{""map"":""
+            return 
+@"{""map"":""
 ......
 ......
 ~~~~~~

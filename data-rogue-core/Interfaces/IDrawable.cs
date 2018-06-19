@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using data_rogue_core.Entities;
 using RLNET;
 using RogueSharp;
 
@@ -11,6 +12,6 @@ namespace data_rogue_core.Interfaces
         int X { get; set; }
         int Y { get; set; }
 
-        void Draw(RLConsole console, IMap map, int xOffset, int yOffset);
+        void Draw(IRLConsoleWriter console, IMap map, int xOffset, int yOffset);
     }
 }

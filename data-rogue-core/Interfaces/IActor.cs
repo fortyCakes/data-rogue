@@ -1,4 +1,6 @@
-﻿namespace data_rogue_core.Interfaces
+﻿using data_rogue_core.Entities;
+
+namespace data_rogue_core.Interfaces
 {
     public interface IActor
     {
@@ -6,8 +8,9 @@
         int Awareness { get; set; }
         int Attack { get; set; }
         int Speed { get; set; }
-        int MaxHealth { get; set; }
-        int Health { get; set; }
+        HealthCounter HealthCounter { get; }
+        int CurrentHealth { get; }
+        int MaxHealth { get; }
         int Gold { get; set; }
         int DefenseChance { get; set; }
         int Defense { get; set; }

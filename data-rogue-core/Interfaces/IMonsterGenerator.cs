@@ -1,4 +1,5 @@
-﻿using data_rogue_core.Entities;
+﻿using System.Collections.Generic;
+using data_rogue_core.Entities;
 
 namespace data_rogue_core.Map
 {
@@ -6,6 +7,6 @@ namespace data_rogue_core.Map
     {
         Monster GetNewMonster();
 
-        Monster GetNewMonsterWithTag(string tag);
+        Monster GetNewMonsterWithTag(List<string> tag);
     }
 }

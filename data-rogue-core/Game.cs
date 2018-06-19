@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +15,6 @@ using RogueSharp.Random;
 
 namespace data_rogue_core
 {
-
     class Game
     {
 
@@ -94,8 +92,11 @@ namespace data_rogue_core
                 VaultChance = 33
             };
 
-            IMonsterGenerator monsterGenerator = new RandomMonsterGenerator();
-            IVaultGenerator vaultGenerator = new VaultGenerator();
+            var monsterData = MonsterDataLoader.GetMonsterData();
+            var vaultData = VaultDataLoader.GetVaultData();
+
+            IMonsterGenerator monsterGenerator = new RandomMonsterGenerator(monsterData, Random);
+            IVaultGenerator vaultGenerator = new VaultGenerator(vaultData);
 
             MapGenerator mapGenerator = new MapGenerator(mapParams, monsterGenerator, vaultGenerator);
             DungeonMap = mapGenerator.CreateMap();
@@ -127,10 +128,6 @@ namespace data_rogue_core
         {
             bool didPlayerAct = false;
             RLKeyPress keyPress = _rootConsole.Keyboard.GetKeyPress();
-
-
-            
-
 
             if (CommandSystem.IsPlayerTurn)
             {

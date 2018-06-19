@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using data_rogue_core.Display;
+using data_rogue_core.Entities;
 using data_rogue_core.Interfaces;
 using RLNET;
 
@@ -13,6 +14,8 @@ namespace data_rogue_core.Map
     {
         public static void RenderMap(int viewpointX, int viewpointY, RLConsole console, DungeonMap map, IEnumerable<IDrawable> drawables)
         {
+            var consoleWriter = new RLConsoleWriter(console);
+
             var consoleWidth = console.Width;
             var consoleHeight = console.Height;
 
@@ -28,17 +31,17 @@ namespace data_rogue_core.Map
             {
                 for (int y = 0; y <= consoleHeight; y++)
                 {
-                    SetConsoleSymbolForCell(console, map, map.GetCell(cellsLeft + x, cellsTop + y), cellsLeft, cellsTop);
+                    SetConsoleSymbolForCell(consoleWriter, map, map.GetCell(cellsLeft + x, cellsTop + y), cellsLeft, cellsTop);
                 }
             }
 
             foreach (IDrawable drawable in drawables)
             {
-                drawable.Draw(console, map, cellsLeft, cellsTop);
+                drawable.Draw(consoleWriter, map, cellsLeft, cellsTop);
             }
         }
 
-        private static void SetConsoleSymbolForCell(RLConsole console, DungeonMap map, DungeonCell cell, int xOffset, int yOffset)
+        private static void SetConsoleSymbolForCell(IRLConsoleWriter console, DungeonMap map, DungeonCell cell, int xOffset, int yOffset)
         {
             // When we haven't explored a cell yet, we don't want to draw anything
             if (!cell.IsExplored)

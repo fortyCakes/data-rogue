@@ -183,11 +183,11 @@ namespace data_rogue_core.System
         {
             if (damage > 0)
             {
-                defender.Health = defender.Health - damage;
+                defender.TakeDamage(damage);
 
                 Game.MessageLog.Add($"  {defender.Name} was hit for {damage} damage");
 
-                if (defender.Health <= 0)
+                if (defender.CurrentHealth <= 0)
                 {
                     ResolveDeath(defender);
                 }

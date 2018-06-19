@@ -21,7 +21,7 @@ namespace data_rogue_core.Entities
         public int X { get; set; }
         public int Y { get; set; }
 
-        public void Draw(RLConsole console, IMap map, int xOffset, int yOffset)
+        public void Draw(IRLConsoleWriter console, IMap map, int xOffset, int yOffset)
         {
 
             if (!map.GetCell(X, Y).IsExplored)

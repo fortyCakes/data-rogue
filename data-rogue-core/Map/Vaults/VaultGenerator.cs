@@ -12,13 +12,12 @@ namespace data_rogue_core.Map.Vaults
     {
         List<DungeonMap> Vaults = new List<DungeonMap>();
 
-        public VaultGenerator()
+        public VaultGenerator(IEnumerable<string> vaultData)
         {
             var parser = new VaultDataParser();
 
-            var path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Data\Vaults\");
-
-            foreach (string file in Directory.EnumerateFiles(path, "*.json", SearchOption.AllDirectories))
+            
+            foreach (string file in vaultData)
             {
                 DungeonMap vault = parser.ParseVault(File.ReadAllText(file));
                 Vaults.Add(vault);

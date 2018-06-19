@@ -66,6 +66,7 @@ namespace data_rogue_core.Monsters
 
             return new Monster()
             {
+                Name = Name,
                 Attack = Attack.Roll().Value,
                 AttackChance = AttackChance.Roll().Value,
                 Awareness = Awareness.Roll().Value,
@@ -73,9 +74,7 @@ namespace data_rogue_core.Monsters
                 Defense = Defense.Roll().Value,
                 DefenseChance = DefenseChance.Roll().Value,
                 Gold=Gold.Roll().Value,
-                Health = health,
-                MaxHealth = health,
-                Name=Name,
+                HealthCounter = new HealthCounter(health),
                 Speed = Speed.Roll().Value,
                 Symbol = Symbol,
                 Tags = Tags,

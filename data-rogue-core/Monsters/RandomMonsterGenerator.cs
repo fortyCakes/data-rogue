@@ -4,23 +4,19 @@ using System.Linq;
 using System.Reflection;
 using data_rogue_core.Entities;
 using data_rogue_core.Map;
+using RogueSharp.Random;
 
 namespace data_rogue_core.Monsters
 {
     public class RandomMonsterGenerator : IMonsterGenerator
     {
+        private readonly IRandom _random;
         public List<IMonsterFactory> MonsterFactories = new List<IMonsterFactory>();
 
-        public RandomMonsterGenerator()
+        public RandomMonsterGenerator(IEnumerable<IMonsterFactory> monsterFactories, IRandom random)
         {
-            var parser = new MonsterFactoryDataParser();
-            var path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Data\Monsters\");
-
-            foreach (string file in Directory.EnumerateFiles(path, "*.json", SearchOption.AllDirectories))
-            {
-                var json = File.ReadAllText(file);
-                MonsterFactories.Add(parser.GetMonsterFactory(json));
-            }
+            _random = random;
+            MonsterFactories = monsterFactories.ToList();
         }
 
         public Monster GetNewMonster()
@@ -28,19 +24,19 @@ namespace data_rogue_core.Monsters
             return GetRandomMonsterFromMonsterFactoryList(MonsterFactories);
         }
 
-        private Monster GetRandomMonsterFromMonsterFactoryList(List<IMonsterFactory> monsterFactories )
+        private Monster GetRandomMonsterFromMonsterFactoryList(List<IMonsterFactory> monsterFactories)
         {
             var monsterFactoriesCount = monsterFactories.Count;
-            var index = Game.Random.Next(monsterFactoriesCount - 1);
+            var index = _random.Next(monsterFactoriesCount - 1);
 
             var monsterFactory = monsterFactories[index];
 
             return monsterFactory.GetMonster();
         }
 
-        public Monster GetNewMonsterWithTag(string tag)
+        public Monster GetNewMonsterWithTag(List<string> tags)
         {
-            var taggedMonsterFactories = MonsterFactories.Where(mf => mf.Is(tag)).ToList();
+            var taggedMonsterFactories = MonsterFactories.Where(mf => tags.All(tag => mf.Is(tag))).ToList();
 
             if (taggedMonsterFactories.Any())
             {

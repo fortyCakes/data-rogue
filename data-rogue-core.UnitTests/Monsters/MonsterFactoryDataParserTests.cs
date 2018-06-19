@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using data_rogue_core.Monsters;
 using data_rogue_core.UnitTests.TestHelpers;
 using FluentAssertions;
@@ -34,7 +35,7 @@ namespace data_rogue_core.UnitTests.Monsters
             var testJson = GetTestJson();
             DefaultMonsterFactory result = _parser.GetMonsterFactory(testJson) as DefaultMonsterFactory;
 
-            result.Attack.StatShouldBe( "1d3");
+            result.Attack.StatShouldBe("1d3");
             result.AttackChance.StatShouldBe("25d3");
             result.Defense.StatShouldBe("1d3");
             result.DefenseChance.StatShouldBe("10d4");
@@ -43,7 +44,6 @@ namespace data_rogue_core.UnitTests.Monsters
             result.Gold.StatShouldBe("5d5");
             result.Health.StatShouldBe("2d5");
         }
-
         
 
         private string GetTestJson()

@@ -63,7 +63,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Behaviours\StandardMoveAndAttack.cs" />
+    <Compile Include="Entities\CounterBase.cs" />
     <Compile Include="Entities\Door.cs" />
+    <Compile Include="Entities\HealthCounter.cs" />
+    <Compile Include="Entities\IRLConsoleWriter.cs" />
     <Compile Include="Entities\ITaggable.cs" />
     <Compile Include="Entities\Monster.cs" />
     <Compile Include="Interfaces\IBehaviour.cs" />
@@ -79,6 +82,7 @@
     <Compile Include="Map\VaultRoom.cs" />
     <Compile Include="Map\Vaults\VaultDataParser.cs" />
     <Compile Include="Map\Vaults\VaultGenerator.cs" />
+    <Compile Include="DataLoaders\MonsterDataLoader.cs" />
     <Compile Include="Monsters\MonsterFactory.cs" />
     <Compile Include="Monsters\MonsterFactoryDataParser.cs" />
     <Compile Include="Reference\Colors.cs" />
@@ -94,8 +98,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="System\CommandSystem.cs" />
     <Compile Include="System\MessageLog.cs" />
-    <Compile Include="Monsters\MonsterGenerator.cs" />
+    <Compile Include="Monsters\RandomMonsterGenerator.cs" />
     <Compile Include="System\SchedulingSystem.cs" />
+    <Compile Include="DataLoaders\VaultDataLoader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
