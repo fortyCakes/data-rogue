@@ -1,6 +1,5 @@
 ﻿using data_rogue_core.Display;
 using RLNET;
-using RogueSharp.DiceNotation;
 
 namespace data_rogue_core.Entities
 {

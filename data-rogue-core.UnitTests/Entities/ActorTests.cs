@@ -1,9 +1,7 @@
-﻿using System;
-using data_rogue_core.Display;
+﻿using data_rogue_core.Display;
 using data_rogue_core.Entities;
 using NSubstitute;
 using NUnit.Framework;
-using RLNET;
 using RogueSharp;
 
 namespace data_rogue_core.UnitTests.Entities

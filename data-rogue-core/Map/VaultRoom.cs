@@ -1,4 +1,3 @@
-using System;
 using RogueSharp;
 
 namespace data_rogue_core.Map

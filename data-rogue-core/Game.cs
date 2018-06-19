@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using data_rogue_core.Display;
 using data_rogue_core.Entities;
 using data_rogue_core.Interfaces;
@@ -81,7 +79,7 @@ namespace data_rogue_core
             SchedulingSystem = new SchedulingSystem();
             CommandSystem = new CommandSystem();
 
-            Game.Player = new Player();
+            Player = new Player();
             MapGeneratorParameters mapParams = new MapGeneratorParameters
             {
                 Height = _mapHeight*2,

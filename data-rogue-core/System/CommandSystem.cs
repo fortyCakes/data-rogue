@@ -77,9 +77,7 @@ namespace data_rogue_core.System
             }
             else
             {
-                Monster monster = scheduleable as Monster;
-
-                if (monster != null)
+                if (scheduleable is Monster monster)
                 {
                     monster.PerformAction(this);
                     Game.SchedulingSystem.Add(monster);

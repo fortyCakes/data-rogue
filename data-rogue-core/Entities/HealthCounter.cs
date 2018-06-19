@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace data_rogue_core.Entities
+﻿namespace data_rogue_core.Entities
 {
     public class HealthCounter : CounterBase
     {

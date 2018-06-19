@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reflection;
 using data_rogue_core.Entities;
 using data_rogue_core.Map;
 using RogueSharp.Random;

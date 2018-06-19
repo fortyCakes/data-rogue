@@ -1,5 +1,4 @@
-﻿using System.Data;
-using data_rogue_core.Entities;
+﻿using data_rogue_core.Entities;
 using RLNET;
 using RogueSharp;
 

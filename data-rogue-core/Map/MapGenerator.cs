@@ -4,8 +4,6 @@ using System.Linq;
 using data_rogue_core.Display;
 using data_rogue_core.Entities;
 using data_rogue_core.Map.Vaults;
-using data_rogue_core.Monsters;
-using RLNET;
 using RogueSharp;
 using RogueSharp.DiceNotation;
 

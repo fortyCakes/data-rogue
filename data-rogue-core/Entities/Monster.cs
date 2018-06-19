@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using data_rogue_core.Display;
 using data_rogue_core.System;
 using RLNET;
@@ -30,7 +26,7 @@ namespace data_rogue_core.Entities
             statConsole.Print(1, yPosition, Symbol.ToString(), Color);
 
             // Figure out the width of the health bar by dividing current health by max health
-            int width = Convert.ToInt32(((double)CurrentHealth / (double)MaxHealth) * 16.0);
+            int width = Convert.ToInt32(CurrentHealth / (double)MaxHealth * 16.0);
             int remainingWidth = 16 - width;
 
             // Set the background colors of the health bar to show how damaged the monster is
