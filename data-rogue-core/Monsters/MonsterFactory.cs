@@ -74,6 +74,7 @@ namespace data_rogue_core.Monsters
                 DefenseChance = DefenseChance.Roll().Value,
                 Gold=Gold.Roll().Value,
                 HealthCounter = new HealthCounter(health),
+                AuraCounter = new AuraCounter(0),
                 Speed = Speed.Roll().Value,
                 Symbol = Symbol,
                 Tags = Tags,

@@ -63,13 +63,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abilities\DoNothing.cs" />
     <Compile Include="Behaviours\StandardMoveAndAttack.cs" />
+    <Compile Include="Core\Ability.cs" />
     <Compile Include="Entities\CounterBase.cs" />
     <Compile Include="Entities\Door.cs" />
+    <Compile Include="Entities\AuraCounter.cs" />
     <Compile Include="Entities\HealthCounter.cs" />
     <Compile Include="Entities\IRLConsoleWriter.cs" />
     <Compile Include="Entities\ITaggable.cs" />
     <Compile Include="Entities\Monster.cs" />
+    <Compile Include="Interfaces\IAbility.cs" />
     <Compile Include="Interfaces\IBehaviour.cs" />
     <Compile Include="Interfaces\ISchedulable.cs" />
     <Compile Include="Interfaces\IMonsterFactoryDataParser.cs" />
@@ -131,6 +135,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

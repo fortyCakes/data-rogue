@@ -36,6 +36,8 @@ namespace data_rogue_core.Entities
 
         public HealthCounter HealthCounter { get; set; }
 
+        public AuraCounter AuraCounter { get; set; }
+
         public int MaxHealth => HealthCounter.CounterMax;
         public int CurrentHealth => HealthCounter.CounterValue;
 
@@ -78,6 +80,16 @@ namespace data_rogue_core.Entities
         public void Heal(int healing, bool canOverheal)
         {
             HealthCounter.Restore(healing, canOverheal);
+        }
+
+        public void TakeAuraDamage(int damage)
+        {
+            AuraCounter.TakeDamage(damage);
+        }
+
+        public void RestoreAura(int restoration)
+        {
+            AuraCounter.Restore(restoration);
         }
     }
 }

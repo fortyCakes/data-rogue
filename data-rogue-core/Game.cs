@@ -157,6 +157,11 @@ namespace data_rogue_core
                         DungeonMap.RevealAll();
                     }
 #endif
+                    else
+                    {
+                        didPlayerAct = CommandSystem.HandleKey(keyPress.Key);
+                        _renderRequired = true;
+                    }
                 }
 
                 if (didPlayerAct)

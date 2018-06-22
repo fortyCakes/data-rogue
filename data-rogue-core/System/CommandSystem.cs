@@ -2,6 +2,7 @@
 using data_rogue_core.Entities;
 using data_rogue_core.Interfaces;
 using data_rogue_core.Reference;
+using RLNET;
 using RogueSharp;
 using RogueSharp.DiceNotation;
 
@@ -208,6 +209,31 @@ namespace data_rogue_core.System
 
                 Game.MessageLog.Add($"  {defender.Name} died and dropped {defender.Gold} gold");
             }
+        }
+
+        public bool HandleKey(RLKey key)
+        {
+            if (key == RLKey.Number1)
+            {
+                return Game.Player.Ability1.Perform();
+            }
+
+            if (key == RLKey.Number2)
+            {
+                return Game.Player.Ability2.Perform();
+            }
+
+            if (key == RLKey.Number3)
+            {
+                return Game.Player.Ability3.Perform();
+            }
+
+            if (key == RLKey.Number4)
+            {
+                return Game.Player.Ability4.Perform();
+            }
+
+            return false;
         }
     }
 }
