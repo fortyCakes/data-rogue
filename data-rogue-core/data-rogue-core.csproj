@@ -63,6 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abilities\DecisiveAttack.cs" />
     <Compile Include="Abilities\DoNothing.cs" />
     <Compile Include="Behaviours\StandardMoveAndAttack.cs" />
     <Compile Include="Core\Ability.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Interfaces\IMonsterFactoryDataParser.cs" />
     <Compile Include="Interfaces\IMonsterFactory.cs" />
     <Compile Include="Interfaces\IMonsterGenerator.cs" />
+    <Compile Include="Interfaces\ITargetable.cs" />
     <Compile Include="Interfaces\IVaultDataParser.cs" />
     <Compile Include="Map\ConsoleMapRenderer.cs" />
     <Compile Include="Map\DungeonCell.cs" />
@@ -106,6 +108,7 @@
     <Compile Include="Monsters\RandomMonsterGenerator.cs" />
     <Compile Include="System\SchedulingSystem.cs" />
     <Compile Include="DataLoaders\VaultDataLoader.cs" />
+    <Compile Include="System\TargetingSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

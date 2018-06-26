@@ -21,6 +21,14 @@ namespace data_rogue_core.UnitTests.Entities
         }
 
         [Test]
+        public void ToString_ReturnsCounterString()
+        {
+            _counterBase = new CounterBase(50, 100);
+
+            _counterBase.ToString().Should().Be("50/100");
+        }
+
+        [Test]
         public void Construct_WithMaxHealth_UsesParameter()
         {
             _counterBase = new CounterBase(100, 200);
@@ -64,6 +72,36 @@ namespace data_rogue_core.UnitTests.Entities
             _counterBase.TakeDamage(155);
 
             _counterBase.CounterValue.Should().Be(0);
+        }
+
+        [Test]
+        public void TakeDamage_CanUnderflow_GoesBelowZero()
+        {
+            _counterBase = new CounterBase(1, 100);
+
+            _counterBase.TakeDamage(100, true);
+
+            _counterBase.CounterValue.Should().Be(-99);
+        }
+
+        [Test]
+        public void TakeDamage_AlreadyBelowZero_DoesntGoLower()
+        {
+            _counterBase = new CounterBase(-1, 100);
+
+            _counterBase.TakeDamage(100, false);
+
+            _counterBase.CounterValue.Should().Be(-1);
+        }
+
+        [Test]
+        public void TakeDamage_CanUnderflow_AlreadyBelowZero_GoesLower()
+        {
+            _counterBase = new CounterBase(-1, 100);
+
+            _counterBase.TakeDamage(100, true);
+
+            _counterBase.CounterValue.Should().Be(-101);
         }
 
         [Test]

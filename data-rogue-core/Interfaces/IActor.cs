@@ -15,5 +15,7 @@ namespace data_rogue_core.Interfaces
         int DefenseChance { get; set; }
         int Defense { get; set; }
         int AttackChance { get; set; }
+
+        void Tick();
     }
 }

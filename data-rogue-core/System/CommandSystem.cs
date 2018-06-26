@@ -15,6 +15,7 @@ namespace data_rogue_core.System
         public void EndPlayerTurn()
         {
             IsPlayerTurn = false;
+            Game.Player.Tick();
         }
 
         // Return value is true if the player was able to move
@@ -116,7 +117,26 @@ namespace data_rogue_core.System
 
             int damage = hits - blocks;
 
-            ResolveDamage(defender, damage);
+            ResolveAuraDamage(attacker, defender, damage);
+        }
+        public void DecisiveAttack(Actor attacker, Actor defender)
+        {
+            StringBuilder attackMessage = new StringBuilder();
+            StringBuilder defenseMessage = new StringBuilder();
+
+            int hits = ResolveAttack(attacker, defender, attackMessage);
+
+            int blocks = ResolveDefense(defender, hits, attackMessage, defenseMessage);
+
+            Game.MessageLog.Add(attackMessage.ToString());
+            if (!string.IsNullOrWhiteSpace(defenseMessage.ToString()))
+            {
+                Game.MessageLog.Add(defenseMessage.ToString());
+            }
+
+            int damage = hits - blocks;
+
+            ResolveDamage(attacker, defender, damage);
         }
 
         private static int ResolveAttack(Actor attacker, Actor defender, StringBuilder attackMessage)
@@ -177,12 +197,31 @@ namespace data_rogue_core.System
             return blocks;
         }
 
-        // Apply any damage that wasn't blocked to the defender
-        private static void ResolveDamage(Actor defender, int damage)
+        private static void ResolveDamage(Actor attacker, Actor defender, int damage)
         {
             if (damage > 0)
             {
                 defender.TakeDamage(damage);
+
+                Game.MessageLog.Add($"  {defender.Name} was hit for {damage} damage");
+
+                if (defender.CurrentHealth <= 0)
+                {
+                    ResolveDeath(defender);
+                }
+            }
+            else
+            {
+                Game.MessageLog.Add($"  {defender.Name} blocked all damage");
+            }
+        }
+
+        private static void ResolveAuraDamage(Actor attacker, Actor defender, int damage)
+        {
+            if (damage > 0)
+            {
+                defender.TakeAuraDamage(damage);
+                attacker.RestoreAura(damage + 1);
 
                 Game.MessageLog.Add($"  {defender.Name} was hit for {damage} damage");
 

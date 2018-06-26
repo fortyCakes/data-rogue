@@ -65,7 +65,17 @@ namespace data_rogue_core.Map
             SetIsTransparent(player.X, player.Y, transparent);
         }
 
-        
+        public IEnumerable<Point> GetMonsterLocations()
+        {
+            return _monsters.Select(m => new Point { X = m.X,Y = m.Y});
+        }
+
+        public IEnumerable<Point> GetMonsterLocationsInFieldOfView()
+        {
+            return _monsters
+                .Where(monster => IsInFov(monster.X, monster.Y))
+                .Select(m => new Point { X = m.X, Y = m.Y });
+        }
 
         // Returns true when able to place the Actor on the cell or false otherwise
         public bool SetActorPosition(Actor actor, int x, int y)

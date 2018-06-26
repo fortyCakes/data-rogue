@@ -21,7 +21,7 @@ namespace data_rogue_core.Entities
             Name = "Rogue";
             Speed = 10;
             Symbol = '@';
-            Ability1 = new DoNothing();
+            Ability1 = new DecisiveAttackAbility();
             Ability2 = new DoNothing();
             Ability3 = new DoNothing();
             Ability4 = new DoNothing();
@@ -31,6 +31,7 @@ namespace data_rogue_core.Entities
         public Ability Ability2 { get; set; }
         public Ability Ability3 { get; set; }
         public Ability Ability4 { get; set; }
+        public int CurrentAura => AuraCounter.CurrentAura;
 
         public void DrawStats(RLConsole statConsole)
         {
@@ -47,6 +48,16 @@ namespace data_rogue_core.Entities
             statConsole.Print(1, 15, $"  4.{Ability4.Name}", Ability4.Color);
 
             statConsole.Print(1, 17, $"Aura:   {AuraCounter}", Colors.Text);
+        }
+
+        public override void Tick()
+        {
+            base.Tick();
+
+            Ability1.Tick();
+            Ability2.Tick();
+            Ability3.Tick();
+            Ability4.Tick();
         }
     }
 }

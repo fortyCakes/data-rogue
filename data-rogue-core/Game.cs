@@ -49,7 +49,9 @@ namespace data_rogue_core
         public static DungeonMap DungeonMap { get; private set; }
         public static MessageLog MessageLog { get; private set; }
         public static SchedulingSystem SchedulingSystem { get; private set; }
-        // Singleton of IRandom used throughout the game when generating random numbers
+
+        public static TargetingSystem TargetingSystem { get; private set; }
+
         public static IRandom Random { get; private set; }
 
         public static void Main()
@@ -78,6 +80,7 @@ namespace data_rogue_core
             //Initialise
             SchedulingSystem = new SchedulingSystem();
             CommandSystem = new CommandSystem();
+            TargetingSystem = new TargetingSystem();
 
             Player = new Player();
             MapGeneratorParameters mapParams = new MapGeneratorParameters
@@ -127,7 +130,15 @@ namespace data_rogue_core
             bool didPlayerAct = false;
             RLKeyPress keyPress = _rootConsole.Keyboard.GetKeyPress();
 
-            if (CommandSystem.IsPlayerTurn)
+            if (TargetingSystem.IsPlayerTargeting)
+            {
+                if (keyPress != null)
+                {
+                    _renderRequired = true;
+                    TargetingSystem.HandleKey(keyPress.Key);
+                }
+            }
+            else if(CommandSystem.IsPlayerTurn)
             {
                 if (keyPress != null)
                 {

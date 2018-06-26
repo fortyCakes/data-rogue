@@ -19,24 +19,37 @@ namespace data_rogue_core.Entities
         public int CounterMax { get; private set; }
         public override string ToString() => $"{CounterValue}/{CounterMax}";
 
-        public void TakeDamage(int damage)
+        public void SetTo(int value)
+        {
+            this.CounterValue = value;
+        }
+
+        public void TakeDamage(int damage, bool canUnderflow = false)
         {
             if (damage <= 0) return;
-            CounterValue = Math.Max(CounterValue - damage, 0);
+
+            if (canUnderflow)
+            {
+                CounterValue -= damage;
+            }
+            else
+            {
+                CounterValue = Math.Max(CounterValue - damage, Math.Min(CounterValue, 0));
+            }
+
         }
 
         public void Restore(int healing, bool canOverheal = false)
         {
-            if (healing > 0)
+            if (healing <= 0) return;
+
+            if (canOverheal)
             {
-                if (canOverheal)
-                {
-                    CounterValue += healing;
-                }
-                else
-                {
-                    CounterValue = Math.Min(CounterValue + healing, Math.Max(CounterValue, CounterMax));
-                }
+                CounterValue += healing;
+            }
+            else
+            {
+                CounterValue = Math.Min(CounterValue + healing, Math.Max(CounterValue, CounterMax));
             }
         }
     }

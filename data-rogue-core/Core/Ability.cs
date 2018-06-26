@@ -25,6 +25,7 @@ namespace data_rogue_core.Core
         {
             if (TurnsUntilRefreshed > 0)
             {
+                Game.MessageLog.Add($"{Name} isn't refreshed yet ({TurnsUntilRefreshed}/{TurnsToRefresh})");
                 return false;
             }
 

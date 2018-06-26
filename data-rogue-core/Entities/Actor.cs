@@ -91,5 +91,10 @@ namespace data_rogue_core.Entities
         {
             AuraCounter.Restore(restoration);
         }
+
+        public virtual void Tick()
+        {
+
+        }
     }
 }
