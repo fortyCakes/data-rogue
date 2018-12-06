@@ -3,12 +3,13 @@ using data_rogue_core.Data;
 using data_rogue_core.Extensions;
 using RLNET;
 using System.Linq;
+using data_rogue_core.Systems;
 
 namespace data_rogue_core.Renderers
 {
     public class ConsoleGameplayRenderer
     {
-        public static void Render(RLConsole console, WorldState world)
+        public static void Render(RLConsole console, WorldState world, IPositionSystem positionSystem)
         {
             var currentMap = world.CurrentMap;
             var player = world.Player;
@@ -29,17 +30,11 @@ namespace data_rogue_core.Renderers
                     var lookupX = playerPosition.X - offsetX + x;
                     var lookupY = playerPosition.Y - offsetY + y;
 
-                    var appearance = world.PositionSystem
+                    var appearance = positionSystem
                         .EntitiesAt(new MapCoordinate ( currentMap.MapKey, lookupX, lookupY))
                         .Select(e => e.Get<Appearance>())
                         .OrderByDescending(a => a.ZOrder)
-                        .FirstOrDefault();
-
-                    if (appearance == null)
-                    {
-                        var mapCell = currentMap.CellAt(lookupX, lookupY);
-                        appearance = mapCell.Get<Appearance>();
-                    }
+                        .First();
 
                     console.Set(x, y, appearance.Color.ToRLColor(), RLColor.Black, appearance.Glyph);
                 }

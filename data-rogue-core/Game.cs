@@ -4,8 +4,10 @@ using RLNET;
 using System.Drawing;
 using System.Threading;
 using data_rogue_core.Data;
+using data_rogue_core.EntitySystem;
 using data_rogue_core.EventSystem;
 using data_rogue_core.EventSystem.Rules;
+using data_rogue_core.Systems;
 
 namespace data_rogue_core
 {
@@ -14,7 +16,11 @@ namespace data_rogue_core
         public static GameState GameState;
 
         public static WorldState WorldState;
+
+        public static IEntityEngineSystem EntityEngineSystem;
         public static IEventRuleSystem EventSystem;
+        public static IPositionSystem PositionSystem;
+        public static IPlayerControlSystem PlayerControlSystem;
 
         public static Menu ActiveMenu;
         public static string StaticDisplayText;
@@ -35,9 +41,10 @@ namespace data_rogue_core
 
         private static void InitialiseRules()
         {
-            EventSystem = new EventRuleSystem();
+            EventSystem.Initialise();
 
-            EventSystem.RegisterRule(new InputHandlerRule());
+            EventSystem.RegisterRule(new InputHandlerRule(PlayerControlSystem));
+            EventSystem.RegisterRule(new PhsyicalCollisionRule(PositionSystem));
         }
 
         private static void InitialiseState()
@@ -51,11 +58,25 @@ namespace data_rogue_core
             {
                 Thread.CurrentThread.IsBackground = true;
 
+                CreateAndRegisterSystems();
                 InitialiseRules();
 
                 DisplayMainMenu();
 
             }).Start();
+        }
+
+        private static void CreateAndRegisterSystems()
+        {
+            EntityEngineSystem = new EntityEngineSystem();
+
+            EventSystem = new EventRuleSystem();
+
+            PositionSystem = new PositionSystem();
+            EntityEngineSystem.Register(PositionSystem);
+
+            PlayerControlSystem = new PlayerControlSystem(PositionSystem, EventSystem);
+            EntityEngineSystem.Register(PlayerControlSystem);
         }
 
         private static void DisplayMainMenu()
@@ -88,7 +109,7 @@ namespace data_rogue_core
                     ConsoleStaticRenderer.Render(_rootConsole, StaticDisplayText);
                     break;
                 case GameState.Playing:
-                    ConsoleGameplayRenderer.Render(_rootConsole, WorldState);
+                    ConsoleGameplayRenderer.Render(_rootConsole, WorldState, PositionSystem);
                     break;
             }
 
@@ -133,7 +154,7 @@ namespace data_rogue_core
             {
                 Thread.CurrentThread.IsBackground = true;
 
-                WorldState = WorldGenerator.Create(DEBUG_SEED);
+                WorldState = WorldGenerator.Create(DEBUG_SEED, EntityEngineSystem);
 
                 GameState = GameState.Playing;
 

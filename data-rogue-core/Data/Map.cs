@@ -23,9 +23,9 @@ namespace data_rogue_core.Data
 
         private static void CheckEntityIsCell(IEntity defaultCell)
         {
-            if (!defaultCell.Has<Terrain>())
+            if (!defaultCell.Has<Physical>())
             {
-                throw new ArgumentException("Map cells must have Terrain");
+                throw new ArgumentException("Map cells must be Physical");
             }
 
             if (!defaultCell.Has<Appearance>())

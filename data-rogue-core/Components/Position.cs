@@ -9,22 +9,7 @@ namespace data_rogue_core.Components
 
         public void Move(Vector vector)
         {
-            MapCoordinate.X += vector.X;
-            MapCoordinate.Y += vector.Y;
-        }
-
-        public static Position operator+(Position position, Vector vector)
-        {
-            var newPosition = new Position
-            {
-                MapCoordinate = new MapCoordinate(
-                    mapKey: position.MapCoordinate.Key,
-                    x: position.MapCoordinate.X + vector.X,
-                    y: position.MapCoordinate.Y + vector.Y
-                )
-            };
-
-            return newPosition;
+            MapCoordinate = MapCoordinate + vector;
         }
     }
 }

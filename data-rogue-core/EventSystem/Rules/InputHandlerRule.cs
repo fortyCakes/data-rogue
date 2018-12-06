@@ -5,13 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 using data_rogue_core.EntitySystem;
 using data_rogue_core.Enums;
+using data_rogue_core.Systems;
 using RLNET;
 
 namespace data_rogue_core.EventSystem.Rules
 {
     public class InputHandlerRule : IEventRule
     {
-        public List<EventType> EventTypes => new List<EventType>{EventType.Input};
+        private IPlayerControlSystem PlayerControlSystem;
+
+        public InputHandlerRule(IPlayerControlSystem playerControlSystem)
+        {
+            PlayerControlSystem = playerControlSystem;
+        }
+
+        public EventTypeList EventTypes => new EventTypeList { EventType.Input };
         public int RuleOrder => 0;
 
         public bool Apply(EventType type, IEntity sender, object eventData)
@@ -26,7 +34,7 @@ namespace data_rogue_core.EventSystem.Rules
                 case GameState.StaticDisplay:
                     return false;
                 case GameState.Playing:
-                    Game.WorldState.PlayerControlSystem.HandleKeyPress(keyPress);
+                    PlayerControlSystem.HandleKeyPress(keyPress);
                     break;
             }
 

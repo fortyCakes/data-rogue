@@ -5,7 +5,7 @@ namespace data_rogue_core.EventSystem
 {
     public class EventRuleSystem : IEventRuleSystem
     {
-        RuleBook RuleBook = new RuleBook();
+        private RuleBook RuleBook;
 
         public bool Try(EventType eventType, IEntity sender, object eventData)
         {
@@ -38,6 +38,11 @@ namespace data_rogue_core.EventSystem
                     RuleBook.Add(type, new RulePage { eventRule });
                 }
             }
+        }
+
+        public void Initialise()
+        {
+            RuleBook = new RuleBook();
         }
     }
 

@@ -68,5 +68,16 @@
 
             return !a.Equals(b);
         }
+
+        public static MapCoordinate operator +(MapCoordinate position, Vector vector)
+        {
+            var newCoordinate =  new MapCoordinate(
+                    mapKey: position.Key,
+                    x: position.X + vector.X,
+                    y: position.Y + vector.Y
+                );
+
+            return newCoordinate;
+        }
     }
 }

@@ -9,20 +9,17 @@ namespace data_rogue_core
     [Serializable]
     public class WorldState
     {
-        public WorldState(EntityEngine entityEngine)
+        public WorldState(IEntityEngineSystem entityEngineSystem)
         {
-            EntityEngine = entityEngine;
+            EntityEngineSystem = entityEngineSystem;
         }
 
         public MapCollection Maps;
 
         public Entity Player;
-    
-        public PositionSystem PositionSystem { get; set; }
 
         public Map CurrentMap { get; set; }
 
-        public EntityEngine EntityEngine { get; private set; }
-        public IPlayerControlSystem PlayerControlSystem { get; set; }
+        public IEntityEngineSystem EntityEngineSystem { get; private set; }
     }
 }

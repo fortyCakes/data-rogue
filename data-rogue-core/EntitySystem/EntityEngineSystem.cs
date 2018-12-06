@@ -5,7 +5,7 @@ using data_rogue_core.Components;
 namespace data_rogue_core.EntitySystem
 {
     [Serializable]
-    public class EntityEngine
+    public class EntityEngineSystem : IEntityEngineSystem
     {
         private uint EntityKey = 0;
 
@@ -47,6 +47,15 @@ namespace data_rogue_core.EntitySystem
         public void Register(ISystem system)
         {
             Systems.Add(system);
+        }
+
+        public void Initialise()
+        {
+            AllEntities = new List<Entity>();
+            foreach (var system in Systems)
+            {
+                system.Initialise();
+            }
         }
     }
 }

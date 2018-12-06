@@ -17,6 +17,11 @@ namespace data_rogue_core.Systems
 
         public abstract SystemComponents RequiredComponents { get; }
 
-        public List<IEntity> Entities { get; set; } = new List<IEntity>();
+        public List<IEntity> Entities { get; set; }
+
+        public void Initialise()
+        {
+            Entities = new List<IEntity>();
+        }
     }
 }

@@ -8,20 +8,20 @@ namespace data_rogue_core
 {
     public class WorldGenerator
     {
-        public static WorldState Create(int seed)
+        public static WorldState Create(int seed, IEntityEngineSystem entityEngineSystem)
         {
-            var state = new WorldState(new EntityEngine());
+            entityEngineSystem.Initialise();
 
-            InitialiseSystems(state);
+            var state = new WorldState(entityEngineSystem);
 
-            var emptyCell = state.EntityEngine.New(
+            var emptyCell = state.EntityEngineSystem.New(
                 new Appearance { Color = Color.LightGray, Glyph = '.' },
-                new Terrain { Passable = true, Transparent = true }
+                new Physical(true,  true)
                 );
 
-            var wallCell = state.EntityEngine.New(
+            var wallCell = state.EntityEngineSystem.New(
                 new Appearance { Color = Color.LightGray, Glyph = '#' },
-                new Terrain { Passable = false, Transparent = false }
+                new Physical(false, false)
             );
 
             var testMap = new Map("testMap", wallCell);
@@ -34,22 +34,14 @@ namespace data_rogue_core
             state.Maps.AddMap(testMap);
             state.CurrentMap = testMap;
 
-            state.Player = state.EntityEngine.New(
+            state.Player = state.EntityEngineSystem.New(
                 new Appearance { Color = Color.White, Glyph = '@', ZOrder = int.MaxValue },
                 new Position { MapCoordinate = new MapCoordinate(testMap.MapKey, 0, 0) },
-                new PlayerControlled()
+                new PlayerControlled(),
+                new Physical(passable:false, transparent:true)
                 );
 
             return state;
-        }
-
-        private static void InitialiseSystems(WorldState state)
-        {
-            state.PositionSystem = new PositionSystem();
-            state.EntityEngine.Register(state.PositionSystem);
-
-            state.PlayerControlSystem = new PlayerControlSystem(state.PositionSystem, Game.EventSystem);
-            state.EntityEngine.Register(state.PlayerControlSystem);
         }
     }
 }

@@ -3,7 +3,7 @@ using data_rogue_core.EntitySystem;
 
 namespace data_rogue_core.EventSystem
 {
-    public interface IEventRuleSystem
+    public interface IEventRuleSystem : IInitialisableSystem
     {
         bool Try(EventType eventType, IEntity sender, object eventData);
 
@@ -12,11 +12,15 @@ namespace data_rogue_core.EventSystem
 
     public interface IEventRule
     {
-        List<EventType> EventTypes {get;}
+        EventTypeList EventTypes {get;}
 
         int RuleOrder { get; }
 
         bool Apply(EventType type, IEntity sender, object eventData);
+    }
+
+    public class EventTypeList : List<EventType>
+    {
     }
 
     public enum EventType
