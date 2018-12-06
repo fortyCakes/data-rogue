@@ -6,7 +6,9 @@ namespace data_rogue_core.EntitySystem
 {
     public class Entity : IEntity
     {
-        public uint EntityId { get; private set; }
+        public uint EntityId { get; }
+
+        public string Name { get; set; }
 
         public List<IEntityComponent> Components = new List<IEntityComponent>();
 
@@ -29,6 +31,14 @@ namespace data_rogue_core.EntitySystem
         public T Get<T>() where T : IEntityComponent
         {
             return (T)Components.SingleOrDefault(t => t.GetType() == typeof(T));
+        }
+
+        public override string ToString()
+        {
+            var componentTypeList = string.Join(",", Components.Select(c => c.GetType().Name));
+            componentTypeList.Substring(0, 200);
+
+            return $"Entity: {Name} ({componentTypeList})";
         }
     }
 }

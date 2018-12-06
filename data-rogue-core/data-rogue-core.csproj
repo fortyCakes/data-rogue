@@ -62,12 +62,14 @@
   <ItemGroup>
     <Compile Include="Components\Appearance.cs" />
     <Compile Include="Components\PlayerControlled.cs" />
+    <Compile Include="Data\EntityDataParser.cs" />
+    <Compile Include="Data\IEntityDataParser.cs" />
     <Compile Include="EntitySystem\IEntityComponent.cs" />
     <Compile Include="Components\Physical.cs" />
-    <Compile Include="Data\MapCoordinate.cs" />
-    <Compile Include="Data\MapKey.cs" />
+    <Compile Include="Maps\MapCoordinate.cs" />
+    <Compile Include="Maps\MapKey.cs" />
     <Compile Include="Components\Position.cs" />
-    <Compile Include="Data\Map.cs" />
+    <Compile Include="Maps\Map.cs" />
     <Compile Include="EntitySystem\EntityEngineSystem.cs" />
     <Compile Include="EntitySystem\Entity.cs" />
     <Compile Include="EntitySystem\IEntity.cs" />
@@ -81,11 +83,11 @@
     <Compile Include="EventSystem\Rules\InputHandlerRule.cs" />
     <Compile Include="EventSystem\Rules\PhsyicalCollisionRule.cs" />
     <Compile Include="Extensions\SerializableDictionary.cs" />
-    <Compile Include="Data\MapCollection.cs" />
+    <Compile Include="Maps\MapCollection.cs" />
     <Compile Include="Renderers\ConsoleGameplayRenderer.cs" />
     <Compile Include="Renderers\ConsoleStaticRenderer.cs" />
-    <Compile Include="Data\Menu.cs" />
-    <Compile Include="Data\MenuItem.cs" />
+    <Compile Include="Menus\Menu.cs" />
+    <Compile Include="Menus\MenuItem.cs" />
     <Compile Include="Enums\GameState.cs" />
     <Compile Include="Extensions\ColorExtensions.cs" />
     <Compile Include="Game.cs" />
@@ -96,12 +98,13 @@
     <Compile Include="Systems\IPositionSystem.cs" />
     <Compile Include="Systems\PlayerControlSystem.cs" />
     <Compile Include="Systems\PositionSystem.cs" />
-    <Compile Include="Data\Vector.cs" />
+    <Compile Include="Maps\Vector.cs" />
     <Compile Include="WorldGenerator.cs" />
     <Compile Include="WorldState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Data\Entities\player.edt" />
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
   </ItemGroup>

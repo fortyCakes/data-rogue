@@ -28,6 +28,13 @@ namespace data_rogue_core.EntitySystem
             return entity;
         }
 
+        public Entity New(string name, params IEntityComponent[] components)
+        {
+            var entity = New(components);
+            entity.Name = name;
+            return entity;
+        }
+
         public void Destroy(Entity entity)
         {
             AllEntities.Remove(entity);

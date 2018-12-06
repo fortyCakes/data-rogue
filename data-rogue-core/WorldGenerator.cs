@@ -15,12 +15,12 @@ namespace data_rogue_core
 
             var emptyCell = state.EntityEngineSystem.New(
                 new Appearance { Color = Color.LightGray, Glyph = '.' },
-                new Physical(true,  true)
+                new Physical { Passable = true, Transparent = true }
                 );
 
             var wallCell = state.EntityEngineSystem.New(
                 new Appearance { Color = Color.LightGray, Glyph = '#' },
-                new Physical(false, false)
+                new Physical { Passable = false, Transparent = false }
             );
 
             var testMap = new Map("testMap", wallCell);
@@ -37,7 +37,7 @@ namespace data_rogue_core
                 new Appearance { Color = Color.White, Glyph = '@', ZOrder = int.MaxValue },
                 new Position { MapCoordinate = new MapCoordinate(testMap.MapKey, 0, 0) },
                 new PlayerControlled(),
-                new Physical(passable:false, transparent:true)
+                new Physical { Passable = false, Transparent = true }
                 );
 
             return state;

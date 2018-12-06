@@ -4,6 +4,7 @@
     {
         void Destroy(Entity entity);
         Entity New(params IEntityComponent[] components);
+        Entity New(string Name, params IEntityComponent[] components);
         void Register(ISystem system);
     }
 }
