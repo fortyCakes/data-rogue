@@ -1,5 +1,6 @@
 *.suo
 bin/
+packages/
 .vs/
 data-rogue-core/bin/
 data-rogue-core/obj/
