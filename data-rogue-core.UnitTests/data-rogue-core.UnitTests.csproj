@@ -88,12 +88,6 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\data-rogue-core\data-rogue-core.csproj">
-      <Project>{2C899088-9F23-4411-BAD7-E175A886C67C}</Project>
-      <Name>data-rogue-core</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

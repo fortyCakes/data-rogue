@@ -43,18 +43,15 @@
     </Reference>
     <Reference Include="OpenTK, Version=2.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
       <HintPath>..\packages\OpenTK.2.0.0\lib\net20\OpenTK.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="RLNET, Version=1.0.6.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\RLNET.1.0.6\lib\RLNET.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="RogueSharp, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\RogueSharp.3.0.0\lib\portable-net40+sl50+win+wpa81+wp80\RogueSharp.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -63,70 +60,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abilities\DecisiveAttack.cs" />
-    <Compile Include="Abilities\DoNothing.cs" />
-    <Compile Include="Behaviours\StandardMoveAndAttack.cs" />
-    <Compile Include="Core\Ability.cs" />
-    <Compile Include="Entities\CounterBase.cs" />
-    <Compile Include="Entities\Door.cs" />
-    <Compile Include="Entities\AuraCounter.cs" />
-    <Compile Include="Entities\HealthCounter.cs" />
-    <Compile Include="Entities\IRLConsoleWriter.cs" />
-    <Compile Include="Entities\ITaggable.cs" />
-    <Compile Include="Entities\Monster.cs" />
-    <Compile Include="Interfaces\IAbility.cs" />
-    <Compile Include="Interfaces\IBehaviour.cs" />
-    <Compile Include="Interfaces\ISchedulable.cs" />
-    <Compile Include="Interfaces\IMonsterFactoryDataParser.cs" />
-    <Compile Include="Interfaces\IMonsterFactory.cs" />
-    <Compile Include="Interfaces\IMonsterGenerator.cs" />
-    <Compile Include="Interfaces\ITargetable.cs" />
-    <Compile Include="Interfaces\IVaultDataParser.cs" />
-    <Compile Include="Map\ConsoleMapRenderer.cs" />
-    <Compile Include="Map\DungeonCell.cs" />
-    <Compile Include="Map\IRoom.cs" />
-    <Compile Include="Map\RectangleRoom.cs" />
-    <Compile Include="Map\VaultRoom.cs" />
-    <Compile Include="Map\Vaults\VaultDataParser.cs" />
-    <Compile Include="Map\Vaults\VaultGenerator.cs" />
-    <Compile Include="DataLoaders\MonsterDataLoader.cs" />
-    <Compile Include="Monsters\MonsterFactory.cs" />
-    <Compile Include="Monsters\MonsterFactoryDataParser.cs" />
-    <Compile Include="Reference\Colors.cs" />
-    <Compile Include="Reference\Direction.cs" />
-    <Compile Include="Reference\Swatch.cs" />
-    <Compile Include="Entities\Actor.cs" />
-    <Compile Include="Entities\Player.cs" />
-    <Compile Include="Interfaces\IActor.cs" />
-    <Compile Include="Interfaces\IDrawable.cs" />
-    <Compile Include="Map\DungeonMap.cs" />
-    <Compile Include="Map\MapGenerator.cs" />
+    <Compile Include="Components\Appearance.cs" />
+    <Compile Include="Components\EntityComponent.cs" />
+    <Compile Include="Components\Terrain.cs" />
+    <Compile Include="Data\MapCoordinate.cs" />
+    <Compile Include="Data\MapKey.cs" />
+    <Compile Include="Components\Position.cs" />
+    <Compile Include="Data\Map.cs" />
+    <Compile Include="EntitySystem\EntityComponent.cs" />
+    <Compile Include="EntitySystem\EntityEngine.cs" />
+    <Compile Include="EntitySystem\Entity.cs" />
+    <Compile Include="EntitySystem\ISystem.cs" />
+    <Compile Include="EntitySystem\SystemComponents.cs" />
+    <Compile Include="Extensions\SerializableDictionary.cs" />
+    <Compile Include="Data\MapCollection.cs" />
+    <Compile Include="Renderers\ConsoleGameplayRenderer.cs" />
+    <Compile Include="Renderers\ConsoleStaticRenderer.cs" />
+    <Compile Include="Data\Menu.cs" />
+    <Compile Include="Data\MenuItem.cs" />
+    <Compile Include="Enums\GameState.cs" />
+    <Compile Include="Extensions\ColorExtensions.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="System\CommandSystem.cs" />
-    <Compile Include="System\MessageLog.cs" />
-    <Compile Include="Monsters\RandomMonsterGenerator.cs" />
-    <Compile Include="System\SchedulingSystem.cs" />
-    <Compile Include="DataLoaders\VaultDataLoader.cs" />
-    <Compile Include="System\TargetingSystem.cs" />
+    <Compile Include="Renderers\ConsoleMenuRenderer.cs" />
+    <Compile Include="Systems\IPositionSystem.cs" />
+    <Compile Include="Systems\PositionSystem.cs" />
+    <Compile Include="RuleBook.cs" />
+    <Compile Include="WorldGenerator.cs" />
+    <Compile Include="WorldState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Data\Monsters\goblin.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Data\Monsters\kobold.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Data\Vaults\GenericVaults\CurtainArch.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Data\Vaults\GenericVaults\RoomWithVerticalCurtain.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Data\Vaults\GenericVaults\RoomWithCurtain.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -134,11 +98,7 @@
     <Content Include="Images\Tileset\terminal8x8.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Data\Vaults\GenericVaults\SquareRoomWithPillar.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
