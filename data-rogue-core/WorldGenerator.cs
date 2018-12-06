@@ -14,17 +14,14 @@ namespace data_rogue_core
         {
             entityEngineSystem.Initialise();
 
+            EntityDataParser entityParser = SetUpEntityParser(entityEngineSystem);
+
             var state = new WorldState(entityEngineSystem);
 
-            var emptyCell = state.EntityEngineSystem.New(
-                new Appearance { Color = Color.LightGray, Glyph = '.' },
-                new Physical { Passable = true, Transparent = true }
-                );
+            var cells = entityParser.Parse(DataFileLoader.LoadFile(@"Entities\MapCells\GenericCells.edt"));
 
-            var wallCell = state.EntityEngineSystem.New(
-                new Appearance { Color = Color.LightGray, Glyph = '#' },
-                new Physical { Passable = false, Transparent = false }
-            );
+            var wallCell = cells.Single(e => e.Name == "WallCell");
+            var emptyCell = cells.Single(e => e.Name == "EmptyCell");
 
             var testMap = new Map("testMap", wallCell);
 
@@ -36,6 +33,18 @@ namespace data_rogue_core
             state.Maps.AddMap(testMap);
             state.CurrentMap = testMap;
 
+            
+
+            var player = entityParser.Parse(DataFileLoader.LoadFile(@"Entities\player.edt")).Single();
+            player.Get<Position>().MapCoordinate = new MapCoordinate("testMap", 0, 0);
+
+            state.Player = player;
+
+            return state;
+        }
+
+        private static EntityDataParser SetUpEntityParser(IEntityEngineSystem entityEngineSystem)
+        {
             var entityParser = new EntityDataParser(
                 new List<Type>
                 {
@@ -43,22 +52,9 @@ namespace data_rogue_core
                     typeof(Physical),
                     typeof(PlayerControlled),
                     typeof(Position)
-                }, 
+                },
                 entityEngineSystem);
-
-            var player = entityParser.Parse(DataFileLoader.LoadFile(@"Entities\player.edt")).Single();
-            player.Get<Position>().MapCoordinate = new MapCoordinate("testMap", 0, 0);
-
-            state.Player = player;
-
-            //state.Player = state.EntityEngineSystem.New(
-            //    new Appearance { Color = Color.White, Glyph = '@', ZOrder = int.MaxValue },
-            //    new Position { MapCoordinate = new MapCoordinate(testMap.MapKey, 0, 0) },
-            //    new PlayerControlled(),
-            //    new Physical { Passable = false, Transparent = true }
-            //    );
-
-            return state;
+            return entityParser;
         }
     }
 }

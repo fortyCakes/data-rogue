@@ -9,11 +9,11 @@ namespace data_rogue_core.Data
     public class Map
     {
         public MapKey MapKey { get; private set; }
-        public Entity DefaultCell { get; private set; }
+        public IEntity DefaultCell { get; private set; }
 
         public Dictionary<MapCoordinate, IEntity> Cells = new Dictionary<MapCoordinate, IEntity>();
 
-        public Map(string key, Entity defaultCell)
+        public Map(string key, IEntity defaultCell)
         {
             CheckEntityIsCell(defaultCell);
 

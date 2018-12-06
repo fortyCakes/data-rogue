@@ -5,6 +5,6 @@
     ZOrder: 9999
 [Physical]
     Passable: false
-    Transparent: false
+    Transparent: true
 [PlayerControlled]
 [Position]
