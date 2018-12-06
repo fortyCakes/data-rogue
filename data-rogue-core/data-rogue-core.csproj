@@ -67,11 +67,15 @@
     <Compile Include="Data\MapKey.cs" />
     <Compile Include="Components\Position.cs" />
     <Compile Include="Data\Map.cs" />
-    <Compile Include="EntitySystem\EntityComponent.cs" />
     <Compile Include="EntitySystem\EntityEngine.cs" />
     <Compile Include="EntitySystem\Entity.cs" />
+    <Compile Include="EntitySystem\IEntity.cs" />
     <Compile Include="EntitySystem\ISystem.cs" />
     <Compile Include="EntitySystem\SystemComponents.cs" />
+    <Compile Include="EventSystem\EventRuleSystem.cs" />
+    <Compile Include="EventSystem\IEventRuleSystem.cs" />
+    <Compile Include="EventSystem\RuleBook.cs" />
+    <Compile Include="EventSystem\Rules\InputHandlerRule.cs" />
     <Compile Include="Extensions\SerializableDictionary.cs" />
     <Compile Include="Data\MapCollection.cs" />
     <Compile Include="Renderers\ConsoleGameplayRenderer.cs" />
@@ -85,7 +89,6 @@
     <Compile Include="Renderers\ConsoleMenuRenderer.cs" />
     <Compile Include="Systems\IPositionSystem.cs" />
     <Compile Include="Systems\PositionSystem.cs" />
-    <Compile Include="RuleBook.cs" />
     <Compile Include="WorldGenerator.cs" />
     <Compile Include="WorldState.cs" />
   </ItemGroup>

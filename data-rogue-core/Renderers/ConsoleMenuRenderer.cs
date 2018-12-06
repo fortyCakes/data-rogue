@@ -1,8 +1,8 @@
-﻿using System;
+﻿using data_rogue_core.Data;
 using data_rogue_core.Extensions;
 using RLNET;
 
-namespace data_rogue_core
+namespace data_rogue_core.Renderers
 {
     public class ConsoleMenuRenderer
     {

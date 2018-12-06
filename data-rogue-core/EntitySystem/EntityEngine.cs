@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using data_rogue_core.Components;
-using data_rogue_core.EntitySystem;
 
-namespace data_rogue_core
+namespace data_rogue_core.EntitySystem
 {
     [Serializable]
     public class EntityEngine

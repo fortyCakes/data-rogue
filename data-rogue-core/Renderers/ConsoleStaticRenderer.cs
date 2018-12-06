@@ -1,6 +1,6 @@
 ﻿using RLNET;
 
-namespace data_rogue_core
+namespace data_rogue_core.Renderers
 {
     public class ConsoleStaticRenderer
     {

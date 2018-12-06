@@ -1,20 +1,20 @@
 ﻿using data_rogue_core.Enums;
 using data_rogue_core.Renderers;
 using RLNET;
-using System;
 using System.Drawing;
-using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
+using data_rogue_core.Data;
+using data_rogue_core.EventSystem;
+using data_rogue_core.EventSystem.Rules;
 
 namespace data_rogue_core
 {
-    public class Game
+    public static class Game
     {
         public static GameState GameState;
 
         public static WorldState WorldState;
-        public static RuleBook RuleBook;
+        public static IEventRuleSystem EventSystem;
 
         public static Menu ActiveMenu;
         public static string StaticDisplayText;
@@ -27,7 +27,6 @@ namespace data_rogue_core
         public static void Main()
         {
             InitialiseState();
-            InitialiseRules();
 
             StartDataLoad();
 
@@ -36,7 +35,9 @@ namespace data_rogue_core
 
         private static void InitialiseRules()
         {
-            //throw new NotImplementedException();
+            EventSystem = new EventRuleSystem();
+
+            EventSystem.RegisterRule(new InputHandlerRule());
         }
 
         private static void InitialiseState()
@@ -50,7 +51,7 @@ namespace data_rogue_core
             {
                 Thread.CurrentThread.IsBackground = true;
 
-                Thread.Sleep(2000);
+                InitialiseRules();
 
                 DisplayMainMenu();
 
@@ -98,12 +99,7 @@ namespace data_rogue_core
         {
             RLKeyPress keyPress = _rootConsole.Keyboard.GetKeyPress();
 
-            switch(GameState)
-            {
-                case GameState.Menu:
-                    ActiveMenu.HandleKeyPress(keyPress);
-                    break;
-            }
+            EventSystem.Try(EventType.Input, null, keyPress);
         }
 
         private static Menu GetMainMenu()
@@ -138,8 +134,6 @@ namespace data_rogue_core
                 Thread.CurrentThread.IsBackground = true;
 
                 WorldState = WorldGenerator.Create(DEBUG_SEED);
-
-                Thread.Sleep(1000);
 
                 GameState = GameState.Playing;
 

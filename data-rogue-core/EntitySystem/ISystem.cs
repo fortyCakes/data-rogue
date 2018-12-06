@@ -1,11 +1,9 @@
-﻿using data_rogue_core.EntitySystem;
-
-namespace data_rogue_core
+﻿namespace data_rogue_core.EntitySystem
 {
     public interface ISystem
     {
-        void AddEntity(Entity entity);
-        void RemoveEntity(Entity entity);
+        void AddEntity(IEntity entity);
+        void RemoveEntity(IEntity entity);
 
         SystemComponents SystemComponents {get;}
     }

@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using RLNET;
 
-namespace data_rogue_core
+namespace data_rogue_core.Data
 {
     public class Menu
     {

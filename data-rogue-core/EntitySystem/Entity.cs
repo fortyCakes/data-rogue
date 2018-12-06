@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace data_rogue_core.EntitySystem
 {
-    public class Entity
+    public class Entity : IEntity
     {
         public uint EntityId { get; private set; }
 

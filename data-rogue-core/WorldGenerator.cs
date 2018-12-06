@@ -5,6 +5,7 @@ using data_rogue_core.Renderers;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using data_rogue_core.Systems;
 
 namespace data_rogue_core
 {

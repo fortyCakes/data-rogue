@@ -1,14 +1,14 @@
-﻿using data_rogue_core.Data;
+﻿using System.Collections.Generic;
+using data_rogue_core.Data;
 using data_rogue_core.EntitySystem;
-using System.Collections.Generic;
 
-namespace data_rogue_core.Renderers
+namespace data_rogue_core.Systems
 {
     public interface IPositionSystem : ISystem
     {
-        IEnumerable<Entity> EntitiesAt(MapCoordinate coordinate);
-        IEnumerable<Entity> EntitiesAt(MapKey mapKey, int X, int Y);
+        IEnumerable<IEntity> EntitiesAt(MapCoordinate coordinate);
+        IEnumerable<IEntity> EntitiesAt(MapKey mapKey, int X, int Y);
 
-        MapCoordinate PositionOf(Entity entity);
+        MapCoordinate PositionOf(IEntity entity);
     }
 }

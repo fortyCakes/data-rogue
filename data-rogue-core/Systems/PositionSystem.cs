@@ -3,25 +3,25 @@ using data_rogue_core.Components;
 using data_rogue_core.Data;
 using data_rogue_core.EntitySystem;
 
-namespace data_rogue_core.Renderers
+namespace data_rogue_core.Systems
 {
     public class PositionSystem : IPositionSystem
     {
         public SystemComponents SystemComponents => new SystemComponents { typeof(Position) };
 
-        public List<Entity> Entities { get; private set; } = new List<Entity>();
+        public List<IEntity> Entities { get; private set; } = new List<IEntity>();
 
-        public void AddEntity(Entity entity)
+        public void AddEntity(IEntity entity)
         {
             Entities.Add(entity);
         }
 
-        public void RemoveEntity(Entity entity)
+        public void RemoveEntity(IEntity entity)
         {
             Entities.Remove(entity);
         }
 
-        public IEnumerable<Entity> EntitiesAt(MapCoordinate coordinate)
+        public IEnumerable<IEntity> EntitiesAt(MapCoordinate coordinate)
         {
             foreach(var entity in Entities)
             {
@@ -32,12 +32,12 @@ namespace data_rogue_core.Renderers
             }
         }
 
-        public MapCoordinate PositionOf(Entity entity)
+        public MapCoordinate PositionOf(IEntity entity)
         {
             return entity.Get<Position>().MapCoordinate;
         }
 
-        public IEnumerable<Entity> EntitiesAt(MapKey mapKey, int X, int Y)
+        public IEnumerable<IEntity> EntitiesAt(MapKey mapKey, int X, int Y)
         {
             return EntitiesAt(new MapCoordinate(mapKey, X, Y));
         }
