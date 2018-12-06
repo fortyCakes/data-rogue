@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="Components\Appearance.cs" />
     <Compile Include="Components\PlayerControlled.cs" />
+    <Compile Include="Data\DataFileLoader.cs" />
     <Compile Include="Data\EntityDataParser.cs" />
     <Compile Include="Data\IEntityDataParser.cs" />
     <Compile Include="EntitySystem\IEntityComponent.cs" />
@@ -104,7 +105,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Data\Entities\player.edt" />
+    <None Include="Data\Entities\player.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
   </ItemGroup>

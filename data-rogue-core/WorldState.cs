@@ -14,7 +14,7 @@ namespace data_rogue_core
 
         public MapCollection Maps;
 
-        public Entity Player;
+        public IEntity Player;
 
         public Map CurrentMap { get; set; }
 
