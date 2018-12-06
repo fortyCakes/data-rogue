@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using data_rogue_core.Components;
 
 namespace data_rogue_core.EntitySystem
 {
