@@ -1,9 +1,6 @@
 ﻿using data_rogue_core.Components;
 using data_rogue_core.Data;
 using data_rogue_core.EntitySystem;
-using data_rogue_core.Renderers;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
 using data_rogue_core.Systems;
 
@@ -22,14 +19,16 @@ namespace data_rogue_core
                 new Terrain { Passable = true, Transparent = true }
                 );
 
-            var testMap = new Map("testMap", emptyCell);
-
             var wallCell = state.EntityEngine.New(
                 new Appearance { Color = Color.LightGray, Glyph = '#' },
                 new Terrain { Passable = false, Transparent = false }
-                );
+            );
 
-            testMap.SetCell(new MapCoordinate("testMap", 5, 5), wallCell);
+            var testMap = new Map("testMap", wallCell);
+
+            
+
+            testMap.SetCellsInRange(-5, 5, -5, 5, emptyCell);
 
             state.Maps = new MapCollection();
             state.Maps.AddMap(testMap);
@@ -37,7 +36,8 @@ namespace data_rogue_core
 
             state.Player = state.EntityEngine.New(
                 new Appearance { Color = Color.White, Glyph = '@', ZOrder = int.MaxValue },
-                new Position { MapCoordinate = new MapCoordinate(testMap.MapKey, 0, 0) }
+                new Position { MapCoordinate = new MapCoordinate(testMap.MapKey, 0, 0) },
+                new PlayerControlled()
                 );
 
             return state;
@@ -47,6 +47,9 @@ namespace data_rogue_core
         {
             state.PositionSystem = new PositionSystem();
             state.EntityEngine.Register(state.PositionSystem);
+
+            state.PlayerControlSystem = new PlayerControlSystem(state.PositionSystem, Game.EventSystem);
+            state.EntityEngine.Register(state.PlayerControlSystem);
         }
     }
 }

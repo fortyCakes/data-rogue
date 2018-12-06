@@ -20,7 +20,7 @@ namespace data_rogue_core.EntitySystem
 
             foreach(var system in Systems)
             {
-                if (entity.HasAll(system.SystemComponents))
+                if (entity.HasAll(system.RequiredComponents))
                 {
                     system.AddEntity(entity);
                 }
@@ -35,7 +35,7 @@ namespace data_rogue_core.EntitySystem
 
             foreach (var system in Systems)
             {
-                if (entity.HasAll(system.SystemComponents))
+                if (entity.HasAll(system.RequiredComponents))
                 {
                     system.RemoveEntity(entity);
                 }

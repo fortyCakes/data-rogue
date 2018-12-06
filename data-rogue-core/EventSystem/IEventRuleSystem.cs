@@ -5,7 +5,7 @@ namespace data_rogue_core.EventSystem
 {
     public interface IEventRuleSystem
     {
-        bool Try(EventType eventType, Entity sender, object eventData);
+        bool Try(EventType eventType, IEntity sender, object eventData);
 
         void RegisterRule(IEventRule eventRule);
     }
@@ -16,11 +16,12 @@ namespace data_rogue_core.EventSystem
 
         int RuleOrder { get; }
 
-        bool Apply(EventType type, Entity sender, object eventData);
+        bool Apply(EventType type, IEntity sender, object eventData);
     }
 
     public enum EventType
     {
-        Input = 1
+        Input = 1,
+        Move = 2
     }
 }

@@ -61,7 +61,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\Appearance.cs" />
-    <Compile Include="Components\EntityComponent.cs" />
+    <Compile Include="Components\PlayerControlled.cs" />
+    <Compile Include="EntitySystem\IEntityComponent.cs" />
     <Compile Include="Components\Terrain.cs" />
     <Compile Include="Data\MapCoordinate.cs" />
     <Compile Include="Data\MapKey.cs" />
@@ -87,8 +88,12 @@
     <Compile Include="Game.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderers\ConsoleMenuRenderer.cs" />
+    <Compile Include="Systems\BaseSystem.cs" />
+    <Compile Include="Systems\IPlayerControlSystem.cs" />
     <Compile Include="Systems\IPositionSystem.cs" />
+    <Compile Include="Systems\PlayerControlSystem.cs" />
     <Compile Include="Systems\PositionSystem.cs" />
+    <Compile Include="Data\Vector.cs" />
     <Compile Include="WorldGenerator.cs" />
     <Compile Include="WorldState.cs" />
   </ItemGroup>

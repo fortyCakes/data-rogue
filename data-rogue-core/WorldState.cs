@@ -18,10 +18,11 @@ namespace data_rogue_core
 
         public Entity Player;
     
-        public PositionSystem PositionSystem;
+        public PositionSystem PositionSystem { get; set; }
 
         public Map CurrentMap { get; set; }
 
         public EntityEngine EntityEngine { get; private set; }
+        public IPlayerControlSystem PlayerControlSystem { get; set; }
     }
 }

@@ -5,6 +5,6 @@
         void AddEntity(IEntity entity);
         void RemoveEntity(IEntity entity);
 
-        SystemComponents SystemComponents {get;}
+        SystemComponents RequiredComponents {get;}
     }
 }

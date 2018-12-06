@@ -14,15 +14,20 @@ namespace data_rogue_core.EventSystem.Rules
         public List<EventType> EventTypes => new List<EventType>{EventType.Input};
         public int RuleOrder => 0;
 
-        public bool Apply(EventType type, Entity sender, object eventData)
+        public bool Apply(EventType type, IEntity sender, object eventData)
         {
+            RLKeyPress keyPress = (RLKeyPress)eventData;
+
             switch (Game.GameState)
             {
                 case GameState.Menu:
-                    Game.ActiveMenu.HandleKeyPress((RLKeyPress) eventData);
+                    Game.ActiveMenu.HandleKeyPress(keyPress);
                     break;
                 case GameState.StaticDisplay:
                     return false;
+                case GameState.Playing:
+                    Game.WorldState.PlayerControlSystem.HandleKeyPress(keyPress);
+                    break;
             }
 
             return true;

@@ -7,7 +7,7 @@ namespace data_rogue_core.EventSystem
     {
         RuleBook RuleBook = new RuleBook();
 
-        public bool Try(EventType eventType, Entity sender, object eventData)
+        public bool Try(EventType eventType, IEntity sender, object eventData)
         {
             if (RuleBook.ContainsKey(eventType))
             {
