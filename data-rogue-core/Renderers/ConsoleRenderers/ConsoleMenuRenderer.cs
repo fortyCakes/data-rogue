@@ -14,22 +14,34 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
         {
             Console.Clear();
 
-            //TODO fix for available height, for now we'll assume we have room.
-
             Console.Print(1, 1, menu.MenuName, RLColor.White);
             Console.Print(1, 2, new string('-', menu.MenuName.Length), RLColor.White);
 
-            int i = 3;
-            foreach(MenuItem item in menu.MenuItems)
+            int availableHeight = Console.Height - 6; // Two for top/bottom border, two for title and underline, one for pagination
+            int selectedIndex = menu.SelectedIndex;
+            int itemCount = menu.MenuItems.Count;
+            int pageCount = (itemCount - 1) / availableHeight + 1;
+            int page = selectedIndex / availableHeight;
+
+            int menuOffset = 3;
+            for (int i = 0; i < availableHeight; i++)
             {
-                if (item == menu.SelectedItem)
+                var displayIndex = page * availableHeight + i;
+                if (displayIndex < itemCount)
                 {
-                    Console.Print(1, i, ">", RLColor.White);
+                    MenuItem item = menu.MenuItems[displayIndex];
+                    Console.Print(2, menuOffset + i, item.Text, item.Enabled? RLColor.White : RLColor.Gray);
                 }
 
-                Console.Print(2, i, item.Text, item.Color.ToRLColor());
+                if (displayIndex == selectedIndex)
+                {
+                    Console.Print(1, menuOffset + i, ">", RLColor.White);
+                }
+            }
 
-                i++;
+            if (pageCount > 1)
+            {
+                Console.Print(1, 3 + availableHeight, $"(page {page} of {pageCount})", RLColor.White);
             }
         }
     }

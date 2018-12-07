@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Menus\StaticMenus\MainMenu.cs" />
     <Compile Include="Renderers\IRendererFactory.cs" />
     <Compile Include="Renderers\ConsoleRenderers\ConsoleMenuRenderer.cs" />
     <Compile Include="Renderers\IGameplayRenderer.cs" />
@@ -131,6 +132,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

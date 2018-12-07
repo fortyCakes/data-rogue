@@ -15,6 +15,7 @@ namespace data_rogue_core.Menus
         private MenuItemSelected OnSelectCallback;
 
         public MenuItem SelectedItem { get; private set; }
+        public int SelectedIndex => MenuItems.IndexOf(SelectedItem);
 
         public Menu(string menuName, MenuItemSelected onSelectCallback, params MenuItem[] items)
         {
@@ -61,9 +62,11 @@ namespace data_rogue_core.Menus
                 switch (keyPress.Key)
                 {
                     case RLKey.Up:
+                    case RLKey.W:
                         Previous();
                         break;
                     case RLKey.Down:
+                    case RLKey.S:
                         Next();
                         break;
                     case RLKey.Enter:

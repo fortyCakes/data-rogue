@@ -1,17 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using data_rogue_core.Renderers;
 using RLNET;
-using System.Drawing;
 using System.Threading;
 using data_rogue_core.Activities;
-using data_rogue_core.Data;
 using data_rogue_core.EntitySystem;
 using data_rogue_core.EventSystem;
 using data_rogue_core.EventSystem.Rules;
-using data_rogue_core.Menus;
+using data_rogue_core.Menus.StaticMenus;
 using data_rogue_core.Renderers.ConsoleRenderers;
 using data_rogue_core.Systems;
-using OpenTK.Graphics.ES11;
 
 namespace data_rogue_core
 {
@@ -48,14 +46,22 @@ namespace data_rogue_core
 
         private static void InitialiseRenderers()
         {
-            var consoleRenderers = new Dictionary<ActivityType, IRenderer>
+            Dictionary<ActivityType, IRenderer> renderers;
+            switch(GraphicsMode)
             {
-                { ActivityType.Gameplay, new ConsoleGameplayRenderer(_rootConsole) },
-                { ActivityType.Menu, new ConsoleMenuRenderer(_rootConsole) },
-                { ActivityType.StaticDisplay, new ConsoleStaticTextRenderer(_rootConsole) }
-            };
+                case GraphicsMode.Console:
+                    renderers = new Dictionary<ActivityType, IRenderer>()
+                    {
+                        {ActivityType.Gameplay, new ConsoleGameplayRenderer(_rootConsole)},
+                        {ActivityType.Menu, new ConsoleMenuRenderer(_rootConsole)},
+                        {ActivityType.StaticDisplay, new ConsoleStaticTextRenderer(_rootConsole)}
+                    };
+                    break;
+                default:
+                    throw new ApplicationException($"Renderers not found for graphics mode {GraphicsMode}.");
+            }
 
-            RendererFactory = new RendererFactory(consoleRenderers);
+            RendererFactory = new RendererFactory(renderers);
         }
 
         private static void RunRootConsole()
@@ -112,7 +118,7 @@ namespace data_rogue_core
 
         private static void DisplayMainMenu()
         {
-            ActivityStack.Push(GetMainMenu());
+            ActivityStack.Push(MainMenu.GetMainMenu());
         }
 
         private static void SetupRootConsole()
@@ -144,34 +150,7 @@ namespace data_rogue_core
             EventSystem.Try(EventType.Input, null, keyPress);
         }
 
-        private static MenuActivity GetMainMenu()
-        {
-            var menu = new Menu("Main Menu", HandleMainMenuSelection,
-                new MenuItem("New Game", Color.White),
-                new MenuItem("Load Game", Color.Gray, false),
-                new MenuItem("Quit", Color.White)
-                );
-
-            return new MenuActivity(menu, RendererFactory);
-        }
-
-        private static void HandleMainMenuSelection(MenuItem item)
-        {
-            switch(item.Text)
-            {
-                case "Quit":
-                    ActivityStack.Pop();
-                    Quit();
-                    break;
-                case "New Game":
-                    ActivityStack.Pop();
-                    StartNewGame();
-                    break;
-
-            }
-        }
-
-        private static void StartNewGame()
+        public static void StartNewGame()
         {
             DisplayStaticText("Generating world...");
 
@@ -186,12 +165,12 @@ namespace data_rogue_core
             }).Start();
         }
 
-        private static void DisplayStaticText(string text)
+        public static void DisplayStaticText(string text)
         {
             ActivityStack.Push(new StaticTextActivity(text, RendererFactory));
         }
 
-        private static void Quit()
+        public static void Quit()
         {
             _rootConsole.Close();
         }
