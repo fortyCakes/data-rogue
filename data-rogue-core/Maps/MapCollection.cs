@@ -1,7 +1,6 @@
-﻿using data_rogue_core.Data;
-using data_rogue_core.Extensions;
+﻿using data_rogue_core.Extensions;
 
-namespace data_rogue_core
+namespace data_rogue_core.Maps
 {
     public class MapCollection : SDictionary<MapKey, Map>
     {

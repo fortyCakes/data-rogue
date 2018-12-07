@@ -1,19 +1,25 @@
-﻿using data_rogue_core.Enums;
+﻿using System.Collections.Generic;
 using data_rogue_core.Renderers;
 using RLNET;
 using System.Drawing;
 using System.Threading;
+using data_rogue_core.Activities;
 using data_rogue_core.Data;
 using data_rogue_core.EntitySystem;
 using data_rogue_core.EventSystem;
 using data_rogue_core.EventSystem.Rules;
+using data_rogue_core.Menus;
+using data_rogue_core.Renderers.ConsoleRenderers;
 using data_rogue_core.Systems;
+using OpenTK.Graphics.ES11;
 
 namespace data_rogue_core
 {
     public static class Game
     {
-        public static GameState GameState;
+        public static ActivityStack ActivityStack;
+        public static GraphicsMode GraphicsMode = GraphicsMode.Console;
+        public static IRendererFactory RendererFactory { get; set; }
 
         public static WorldState WorldState;
 
@@ -22,9 +28,6 @@ namespace data_rogue_core
         public static IPositionSystem PositionSystem;
         public static IPlayerControlSystem PlayerControlSystem;
 
-        public static Menu ActiveMenu;
-        public static string StaticDisplayText;
-
         private const int SCREEN_WIDTH = 100;
         private const int SCREEN_HEIGHT = 70;
         private const int DEBUG_SEED = 1;
@@ -32,11 +35,32 @@ namespace data_rogue_core
 
         public static void Main()
         {
+            SetupRootConsole();
+
+            InitialiseRenderers();
+
             InitialiseState();
 
             StartDataLoad();
 
-            SetupRootConsole();
+            RunRootConsole();
+        }
+
+        private static void InitialiseRenderers()
+        {
+            var consoleRenderers = new Dictionary<ActivityType, IRenderer>
+            {
+                { ActivityType.Gameplay, new ConsoleGameplayRenderer(_rootConsole) },
+                { ActivityType.Menu, new ConsoleMenuRenderer(_rootConsole) },
+                { ActivityType.StaticDisplay, new ConsoleStaticTextRenderer(_rootConsole) }
+            };
+
+            RendererFactory = new RendererFactory(consoleRenderers);
+        }
+
+        private static void RunRootConsole()
+        {
+            _rootConsole.Run();
         }
 
         private static void InitialiseRules()
@@ -49,8 +73,14 @@ namespace data_rogue_core
 
         private static void InitialiseState()
         {
+            ActivityStack = new ActivityStack();
+
+            ActivityStack.Push(new GameplayActivity(RendererFactory));
+
             DisplayStaticText("Loading...");
         }
+
+        
 
         private static void StartDataLoad()
         {
@@ -61,6 +91,7 @@ namespace data_rogue_core
                 CreateAndRegisterSystems();
                 InitialiseRules();
 
+                ActivityStack.Pop();
                 DisplayMainMenu();
 
             }).Start();
@@ -81,8 +112,7 @@ namespace data_rogue_core
 
         private static void DisplayMainMenu()
         {
-            ActiveMenu = GetMainMenu();
-            GameState = GameState.Menu;
+            ActivityStack.Push(GetMainMenu());
         }
 
         private static void SetupRootConsole()
@@ -95,23 +125,14 @@ namespace data_rogue_core
             _rootConsole.Update += OnRootConsoleUpdate;
             _rootConsole.Render += OnRootConsoleRender;
 
-            _rootConsole.Run();
+            
         }
 
         private static void OnRootConsoleRender(object sender, UpdateEventArgs e)
         {
-            switch(GameState)
-            {
-                case GameState.Menu:
-                    ConsoleMenuRenderer.Render(_rootConsole, ActiveMenu);
-                    break;
-                case GameState.StaticDisplay:
-                    ConsoleStaticRenderer.Render(_rootConsole, StaticDisplayText);
-                    break;
-                case GameState.Playing:
-                    ConsoleGameplayRenderer.Render(_rootConsole, WorldState, PositionSystem);
-                    break;
-            }
+            var currentActivity = ActivityStack.Peek();
+
+            currentActivity.Render();
 
             _rootConsole.Draw();
         }
@@ -123,13 +144,15 @@ namespace data_rogue_core
             EventSystem.Try(EventType.Input, null, keyPress);
         }
 
-        private static Menu GetMainMenu()
+        private static MenuActivity GetMainMenu()
         {
-            return new Menu("Main Menu", HandleMainMenuSelection,
+            var menu = new Menu("Main Menu", HandleMainMenuSelection,
                 new MenuItem("New Game", Color.White),
                 new MenuItem("Load Game", Color.Gray, false),
                 new MenuItem("Quit", Color.White)
                 );
+
+            return new MenuActivity(menu, RendererFactory);
         }
 
         private static void HandleMainMenuSelection(MenuItem item)
@@ -137,9 +160,11 @@ namespace data_rogue_core
             switch(item.Text)
             {
                 case "Quit":
+                    ActivityStack.Pop();
                     Quit();
                     break;
                 case "New Game":
+                    ActivityStack.Pop();
                     StartNewGame();
                     break;
 
@@ -156,15 +181,14 @@ namespace data_rogue_core
 
                 WorldState = WorldGenerator.Create(DEBUG_SEED, EntityEngineSystem);
 
-                GameState = GameState.Playing;
+                ActivityStack.Pop();
 
             }).Start();
         }
 
         private static void DisplayStaticText(string text)
         {
-            StaticDisplayText = text;
-            GameState = GameState.StaticDisplay;
+            ActivityStack.Push(new StaticTextActivity(text, RendererFactory));
         }
 
         private static void Quit()

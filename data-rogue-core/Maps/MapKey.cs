@@ -1,4 +1,4 @@
-﻿namespace data_rogue_core.Data
+﻿namespace data_rogue_core.Maps
 {
     public class MapKey 
     {

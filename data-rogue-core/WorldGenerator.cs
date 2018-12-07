@@ -5,6 +5,7 @@ using data_rogue_core.Data;
 using data_rogue_core.EntitySystem;
 using System.Drawing;
 using System.Linq;
+using data_rogue_core.Maps;
 
 namespace data_rogue_core
 {

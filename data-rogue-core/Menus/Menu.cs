@@ -2,7 +2,7 @@
 using System.Linq;
 using RLNET;
 
-namespace data_rogue_core.Data
+namespace data_rogue_core.Menus
 {
     public class Menu
     {

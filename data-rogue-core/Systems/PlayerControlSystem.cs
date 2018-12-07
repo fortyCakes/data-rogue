@@ -2,6 +2,7 @@
 using data_rogue_core.Data;
 using data_rogue_core.EntitySystem;
 using data_rogue_core.EventSystem;
+using data_rogue_core.Maps;
 using RLNET;
 
 namespace data_rogue_core.Systems

@@ -1,9 +1,9 @@
-﻿using data_rogue_core.Components;
-using data_rogue_core.EntitySystem;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using data_rogue_core.Components;
+using data_rogue_core.EntitySystem;
 
-namespace data_rogue_core.Data
+namespace data_rogue_core.Maps
 {
     [Serializable]
     public class Map
