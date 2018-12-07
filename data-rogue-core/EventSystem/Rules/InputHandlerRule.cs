@@ -30,6 +30,7 @@ namespace data_rogue_core.EventSystem.Rules
                     (currentActivity.Data as Menu)?.HandleKeyPress(keyPress);
                     break;
                 case ActivityType.StaticDisplay:
+                    Game.ActivityStack.Pop();
                     return false;
                 case ActivityType.Gameplay:
                     PlayerControlSystem.HandleKeyPress(keyPress);

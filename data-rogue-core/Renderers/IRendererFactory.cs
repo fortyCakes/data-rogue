@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using data_rogue_core.Activities;
-using data_rogue_core.Renderers;
 
-namespace data_rogue_core
+namespace data_rogue_core.Renderers
 {
     public interface IRendererFactory
     {

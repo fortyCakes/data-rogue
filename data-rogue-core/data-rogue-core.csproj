@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Utils\WordWrap.cs" />
     <Compile Include="Menus\StaticMenus\MainMenu.cs" />
     <Compile Include="Renderers\IRendererFactory.cs" />
     <Compile Include="Renderers\ConsoleRenderers\ConsoleMenuRenderer.cs" />
@@ -97,14 +98,13 @@
     <Compile Include="EventSystem\RuleBook.cs" />
     <Compile Include="EventSystem\Rules\InputHandlerRule.cs" />
     <Compile Include="EventSystem\Rules\PhsyicalCollisionRule.cs" />
-    <Compile Include="Extensions\SerializableDictionary.cs" />
     <Compile Include="Maps\MapCollection.cs" />
     <Compile Include="Renderers\ConsoleRenderers\ConsoleGameplayRenderer.cs" />
     <Compile Include="Renderers\ConsoleRenderers\ConsoleStaticTextRenderer.cs" />
     <Compile Include="Menus\Menu.cs" />
     <Compile Include="Menus\MenuItem.cs" />
     <Compile Include="Activities\ActivityStack.cs" />
-    <Compile Include="Extensions\ColorExtensions.cs" />
+    <Compile Include="Utils\ColorExtensions.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Systems\BaseSystem.cs" />

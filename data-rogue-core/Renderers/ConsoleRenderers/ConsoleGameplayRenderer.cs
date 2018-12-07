@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using data_rogue_core.Activities;
 using data_rogue_core.Components;
-using data_rogue_core.Extensions;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems;
+using data_rogue_core.Utils;
 using RLNET;
 
 namespace data_rogue_core.Renderers.ConsoleRenderers

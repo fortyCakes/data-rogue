@@ -6,6 +6,7 @@ namespace data_rogue_core.Activities
     {
         ActivityType Type { get; }
         object Data { get; }
+        bool RendersEntireSpace { get; }
         void Render();
     }
 }

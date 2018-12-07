@@ -1,7 +1,6 @@
-﻿using data_rogue_core.Renderers;
-using data_rogue_core.Systems;
+﻿using data_rogue_core.Systems;
 
-namespace data_rogue_core.Activities
+namespace data_rogue_core.Renderers
 {
     public interface IGameplayRenderer : IRenderer
     {

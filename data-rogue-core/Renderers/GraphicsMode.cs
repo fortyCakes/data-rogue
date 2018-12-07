@@ -1,4 +1,4 @@
-﻿namespace data_rogue_core
+﻿namespace data_rogue_core.Renderers
 {
     public enum GraphicsMode
     {

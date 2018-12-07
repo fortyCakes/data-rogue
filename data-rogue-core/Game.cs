@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using data_rogue_core.Renderers;
 using RLNET;
 using System.Threading;
@@ -44,6 +45,19 @@ namespace data_rogue_core
             RunRootConsole();
         }
 
+        private static void SetupRootConsole()
+        {
+            string fontFileName = "Images\\Tileset\\terminal8x8.png";
+            string consoleTitle = "data-rogue-core";
+
+            _rootConsole = new RLRootConsole(fontFileName, SCREEN_WIDTH, SCREEN_HEIGHT, 8, 8, 1, consoleTitle);
+
+            _rootConsole.Update += OnRootConsoleUpdate;
+            _rootConsole.Render += OnRootConsoleRender;
+
+
+        }
+
         private static void InitialiseRenderers()
         {
             Dictionary<ActivityType, IRenderer> renderers;
@@ -85,9 +99,7 @@ namespace data_rogue_core
 
             DisplayStaticText("Loading...");
         }
-
         
-
         private static void StartDataLoad()
         {
             new Thread(() =>
@@ -121,24 +133,23 @@ namespace data_rogue_core
             ActivityStack.Push(MainMenu.GetMainMenu());
         }
 
-        private static void SetupRootConsole()
-        {
-            string fontFileName = "Images\\Tileset\\terminal8x8.png";
-            string consoleTitle = "data-rogue-core";
-
-            _rootConsole = new RLRootConsole(fontFileName, SCREEN_WIDTH, SCREEN_HEIGHT, 8, 8, 1, consoleTitle);
-
-            _rootConsole.Update += OnRootConsoleUpdate;
-            _rootConsole.Render += OnRootConsoleRender;
-
-            
-        }
-
         private static void OnRootConsoleRender(object sender, UpdateEventArgs e)
         {
-            var currentActivity = ActivityStack.Peek();
+            Stack<IActivity> renderStack = new Stack<IActivity>();
 
-            currentActivity.Render();
+            foreach (IActivity activity in ActivityStack)
+            {
+                renderStack.Push(activity);
+                if (activity.RendersEntireSpace)
+                {
+                    break;
+                }
+            }
+
+            foreach (IActivity activity in renderStack)
+            {
+                activity.Render();
+            }
 
             _rootConsole.Draw();
         }
@@ -147,7 +158,10 @@ namespace data_rogue_core
         {
             RLKeyPress keyPress = _rootConsole.Keyboard.GetKeyPress();
 
-            EventSystem.Try(EventType.Input, null, keyPress);
+            if (!ReferenceEquals(keyPress, null))
+            {
+                EventSystem.Try(EventType.Input, null, keyPress);
+            }
         }
 
         public static void StartNewGame()

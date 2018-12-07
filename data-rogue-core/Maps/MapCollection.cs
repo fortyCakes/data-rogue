@@ -1,8 +1,8 @@
-﻿using data_rogue_core.Extensions;
+﻿using System.Collections.Generic;
 
 namespace data_rogue_core.Maps
 {
-    public class MapCollection : SDictionary<MapKey, Map>
+    public class MapCollection : Dictionary<MapKey, Map>
     {
         public void AddMap(Map map)
         {

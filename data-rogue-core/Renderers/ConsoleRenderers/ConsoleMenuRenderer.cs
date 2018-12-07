@@ -1,5 +1,4 @@
-﻿using data_rogue_core.Extensions;
-using data_rogue_core.Menus;
+﻿using data_rogue_core.Menus;
 using RLNET;
 
 namespace data_rogue_core.Renderers.ConsoleRenderers

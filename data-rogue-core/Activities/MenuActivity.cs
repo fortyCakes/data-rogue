@@ -13,6 +13,7 @@ namespace data_rogue_core.Activities
     {
         public ActivityType Type => ActivityType.Menu;
         public object Data => Menu;
+        public bool RendersEntireSpace => true;
         public Menu Menu { get; }
 
         public MenuActivity(Menu menu, IRendererFactory rendererFactory)
