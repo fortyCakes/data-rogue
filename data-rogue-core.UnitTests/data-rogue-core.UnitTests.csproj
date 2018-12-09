@@ -63,10 +63,11 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntitySystem\EntitySerializerTests.cs" />
+    <Compile Include="Maps\MapSerializerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\EntityDataParserTests.cs" />
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -75,6 +76,20 @@
       <Project>{2C899088-9F23-4411-BAD7-E175A886C67C}</Project>
       <Name>data-rogue-core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="EntitySystem\TestData\ExpectedSerialization_MultipleEntities.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="EntitySystem\TestData\ExpectedSerialization_Entity0.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Maps\TestData\ExpectedSerialization_Map1.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Maps\TestData\ExpectedSerialization_Map0.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

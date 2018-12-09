@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using data_rogue_core.Components;
 using data_rogue_core.EntitySystem;
-using System.Linq;
 using System.Runtime.Serialization;
 using data_rogue_core.Data;
+using Newtonsoft.Json;
 
 namespace data_rogue_core.Maps
 {
-    public class Map : ISerializable
+    public class Map
     {
         public MapKey MapKey { get; set; }
 
@@ -45,6 +45,16 @@ namespace data_rogue_core.Maps
             }
         }
 
+        public bool CellExists(int x, int y)
+        {
+            return Cells.ContainsKey(new MapCoordinate(MapKey, x, y));
+        }
+
+        public void SetCell(int x, int y, IEntity cell)
+        {
+            SetCell(new MapCoordinate(MapKey, x, y), cell);
+        }
+
         public IEntity CellAt(int lookupX, int lookupY)
         {
             var coordinate = new MapCoordinate(MapKey, lookupX, lookupY);
@@ -78,39 +88,28 @@ namespace data_rogue_core.Maps
             }
         }
 
-        public SaveMap Serialize()
+        public void RemoveCellsInRange(int x1, int x2, int y1, int y2)
         {
-            return new SaveMap
+            for (int x = Math.Min(x1, x2); x <= Math.Max(x1, x2); x++)
             {
-                MapKey = MapKey.Key,
-                Cells = Cells.Keys.Select(k => new MapSaveCell
+                for (int y = Math.Min(y1, y2); y <= Math.Max(y1, y2); y++)
                 {
-                    X = k.X,
-                    Y = k.Y,
-                    Id = Cells[k].EntityId
-                }).ToList()
-            };
-        }
-
-        public static Map Deserialize(SaveMap savedMap, IEntityEngineSystem entityEngineSystem)
-        {
-            var key = savedMap.MapKey;
-            var defaultCell = entityEngineSystem.GetEntity(savedMap.DefaultCellId);
-
-            var map = new Map(key, defaultCell);
-            
-            foreach(var savedCell in savedMap.Cells)
-            {
-                var cell = entityEngineSystem.GetEntity(savedCell.Id);
-                map.SetCell(new MapCoordinate(key, savedCell.X, savedCell.Y), cell);
+                    RemoveCell(x, y);
+                }
             }
-
-            return map;
         }
 
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        public void RemoveCell(MapCoordinate mapCoordinate)
         {
-            throw new NotImplementedException();
+            if (Cells.ContainsKey(mapCoordinate))
+            {
+                Cells.Remove(mapCoordinate);
+            }
+        }
+
+        public void RemoveCell(int x, int y)
+        {
+            RemoveCell(new MapCoordinate(MapKey, x, y));
         }
     }
 }

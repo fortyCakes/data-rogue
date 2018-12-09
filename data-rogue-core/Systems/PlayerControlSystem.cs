@@ -36,6 +36,7 @@ namespace data_rogue_core.Systems
                         if (keyPress.Shift)
                         {
                             Save();
+                            Game.ActivityStack.Push(new StaticTextActivity("Saved", Game.RendererFactory));
                         }
                         else
                         {

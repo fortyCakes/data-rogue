@@ -14,3 +14,11 @@
 [Physical]
     Passable: false
     Transparent: false
+"BoulderCell"
+[Appearance]
+    Glyph: O
+    Color: #bbbbbb
+    ZOrder: 0
+[Physical]
+    Passable: false
+    Transparent: false

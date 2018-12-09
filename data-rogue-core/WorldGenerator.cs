@@ -14,20 +14,18 @@ namespace data_rogue_core
         {
             entityEngineSystem.Initialise();
 
-            EntityDataParser entityParser = SetUpEntityParser(entityEngineSystem);
-
             var state = new WorldState(entityEngineSystem);
 
-            var cells = entityParser.Parse(DataFileLoader.LoadFile(@"Entities\MapCells\GenericCells.edt"));
+            var cells = EntitySerializer.DeserializeMultiple(DataFileLoader.LoadFile(@"Entities\MapCells\GenericCells.edt"), entityEngineSystem);
 
             var wallCell = cells.Single(e => e.Name == "WallCell");
             var emptyCell = cells.Single(e => e.Name == "EmptyCell");
+            var boulderCell = cells.Single(e => e.Name == "BoulderCell");
 
             var testMap = new Map("testMap", wallCell);
 
-            
-
             testMap.SetCellsInRange(-5, 5, -5, 5, emptyCell);
+            testMap.SetCell(-5, -5, boulderCell);
 
             state.Maps = new MapCollection();
             state.Maps.AddMap(testMap);
@@ -35,26 +33,12 @@ namespace data_rogue_core
 
             
 
-            var player = entityParser.Parse(DataFileLoader.LoadFile(@"Entities\player.edt")).Single();
+            var player = EntitySerializer.Deserialize(DataFileLoader.LoadFile(@"Entities\player.edt"), entityEngineSystem);
             player.Get<Position>().MapCoordinate = new MapCoordinate("testMap", 0, 0);
 
             state.Player = player;
 
             return state;
-        }
-
-        private static EntityDataParser SetUpEntityParser(IEntityEngineSystem entityEngineSystem)
-        {
-            var entityParser = new EntityDataParser(
-                new List<Type>
-                {
-                    typeof(Appearance),
-                    typeof(Physical),
-                    typeof(PlayerControlled),
-                    typeof(Position)
-                },
-                entityEngineSystem);
-            return entityParser;
         }
     }
 }

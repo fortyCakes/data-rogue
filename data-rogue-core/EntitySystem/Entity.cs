@@ -8,13 +8,14 @@ namespace data_rogue_core.EntitySystem
     {
         public uint EntityId { get; }
 
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
 
         public List<IEntityComponent> Components = new List<IEntityComponent>();
 
-        public Entity(uint entityId, IEntityComponent[] components)
+        public Entity(uint entityId, string name, IEntityComponent[] components)
         {
             EntityId = entityId;
+            Name = name;
             Components = new List<IEntityComponent>(components);
         }
 
@@ -36,9 +37,11 @@ namespace data_rogue_core.EntitySystem
         public override string ToString()
         {
             var componentTypeList = string.Join(",", Components.Select(c => c.GetType().Name));
-            componentTypeList.Substring(0, 200);
+            componentTypeList = componentTypeList.Substring(0, Math.Min(200, componentTypeList.Length));
 
-            return $"Entity: {Name} ({componentTypeList})";
+            return $"Entity {EntityId}: {Name} ({componentTypeList})";
+
         }
+
     }
 }

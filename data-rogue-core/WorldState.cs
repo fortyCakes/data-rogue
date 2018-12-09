@@ -23,8 +23,8 @@ namespace data_rogue_core
         {
             return new SaveState
             {
-                Entities = EntityEngineSystem.AllEntities,
-                Maps = Maps.AllMaps.Select(m => m.Serialize()).ToList(),
+                Entities = EntityEngineSystem.AllEntities.Select(e => EntitySerializer.Serialize(e)).ToList(),
+                Maps = Maps.AllMaps.Select(m => MapSerializer.Serialize(m)).ToList(),
                 CurrentMapKey = CurrentMap.MapKey.Key
             };
         }

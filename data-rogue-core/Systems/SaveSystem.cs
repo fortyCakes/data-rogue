@@ -15,18 +15,20 @@ namespace data_rogue_core
             var directoryName = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Saves");
             var fileName = Path.Combine(directoryName, "saveFile.sav");
 
-            var loadedState = JsonConvert.DeserializeObject<SaveState>(File.ReadAllText(fileName));
+            var loadedState = SaveState.Deserialize(File.ReadAllText(fileName));
 
             entityEngineSystem.Initialise();
 
-            foreach (var entity in loadedState.Entities)
+            foreach (var savedEntity in loadedState.Entities)
             {
+                var entity = EntitySerializer.Deserialize(savedEntity, entityEngineSystem);
+
                 entityEngineSystem.Load(entity.EntityId, entity);
             }
 
             foreach(var savedMap in loadedState.Maps)
             {
-                var map = Map.Deserialize(savedMap, entityEngineSystem);
+                var map = MapSerializer.Deserialize(savedMap, entityEngineSystem);
 
                 world.Maps.Add(map.MapKey, map);
             }
@@ -46,7 +48,7 @@ namespace data_rogue_core
 
             var saveState = world.GetSaveState();
 
-            File.WriteAllText(fileName, JsonConvert.SerializeObject(saveState));
+            File.WriteAllText(fileName, saveState.Serialize());
         }
     }
 }
