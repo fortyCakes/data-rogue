@@ -11,7 +11,7 @@ namespace data_rogue_core
             EntityEngineSystem = entityEngineSystem;
         }
 
-        public MapCollection Maps;
+        public MapCollection Maps = new MapCollection();
 
         public IEntity Player;
 

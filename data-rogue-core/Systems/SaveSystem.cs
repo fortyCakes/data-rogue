@@ -23,8 +23,10 @@ namespace data_rogue_core
             foreach (var savedEntity in loadedState.Entities)
             {
                 var entity = EntitySerializer.Deserialize(savedEntity, entityEngineSystem);
-
-                entityEngineSystem.Load(entity.EntityId, entity);
+                if (entity.Name == "Player")
+                {
+                    world.Player = entity;
+                }
             }
 
             foreach(var savedMap in loadedState.Maps)

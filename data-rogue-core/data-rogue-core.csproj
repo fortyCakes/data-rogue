@@ -99,7 +99,7 @@
     <Compile Include="Maps\MapSaveCell.cs" />
     <Compile Include="Systems\SaveSystem.cs" />
     <Compile Include="Data\SaveState.cs" />
-    <Compile Include="Systems\IInitialisableSystem.cs" />
+    <Compile Include="Systems\Interfaces\IInitialisableSystem.cs" />
     <Compile Include="EntitySystem\ISystem.cs" />
     <Compile Include="EntitySystem\SystemComponents.cs" />
     <Compile Include="EventSystem\EventRuleSystem.cs" />
@@ -117,8 +117,8 @@
     <Compile Include="Game.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Systems\BaseSystem.cs" />
-    <Compile Include="Systems\IPlayerControlSystem.cs" />
-    <Compile Include="Systems\IPositionSystem.cs" />
+    <Compile Include="Systems\Interfaces\IPlayerControlSystem.cs" />
+    <Compile Include="Systems\Interfaces\IPositionSystem.cs" />
     <Compile Include="Systems\PlayerControlSystem.cs" />
     <Compile Include="Systems\PositionSystem.cs" />
     <Compile Include="Maps\Vector.cs" />
