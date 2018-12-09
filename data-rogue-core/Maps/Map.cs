@@ -1,12 +1,12 @@
-﻿using data_rogue_core.Components;
-using data_rogue_core.EntitySystem;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using data_rogue_core.Components;
+using data_rogue_core.EntitySystem;
 using System.Linq;
 using System.Runtime.Serialization;
+using data_rogue_core.Data;
 
-namespace data_rogue_core.Data
+namespace data_rogue_core.Maps
 {
     public class Map : ISerializable
     {

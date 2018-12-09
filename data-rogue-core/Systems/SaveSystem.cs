@@ -1,7 +1,6 @@
-﻿using data_rogue_core.Data;
-using data_rogue_core.EntitySystem;
+﻿using data_rogue_core.EntitySystem;
+using data_rogue_core.Maps;
 using Newtonsoft.Json;
-using System;
 using System.IO;
 using System.Reflection;
 

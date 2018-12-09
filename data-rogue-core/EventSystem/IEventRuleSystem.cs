@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using data_rogue_core.EntitySystem;
+using data_rogue_core.Systems;
 
 namespace data_rogue_core.EventSystem
 {

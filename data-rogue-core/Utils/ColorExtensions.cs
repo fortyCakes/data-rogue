@@ -1,7 +1,7 @@
-﻿using RLNET;
-using System.Drawing;
+﻿using System.Drawing;
+using RLNET;
 
-namespace data_rogue_core.Extensions
+namespace data_rogue_core.Utils
 {
     public static class ColorExtensions
     {

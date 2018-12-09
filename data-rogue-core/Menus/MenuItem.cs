@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace data_rogue_core.Data
+namespace data_rogue_core.Menus
 {
     public class MenuItem
     {
@@ -8,10 +8,9 @@ namespace data_rogue_core.Data
         public bool Enabled { get; private set; }
         public Color Color { get; private set; }
 
-        public MenuItem(string text, Color color, bool enabled = true)
+        public MenuItem(string text, bool enabled = true)
         {
             Text = text;
-            Color = color;
             Enabled = enabled;
         }
     }

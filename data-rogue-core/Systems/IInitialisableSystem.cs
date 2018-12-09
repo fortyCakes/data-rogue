@@ -1,4 +1,4 @@
-﻿namespace data_rogue_core.EntitySystem
+﻿namespace data_rogue_core.Systems
 {
     public interface IInitialisableSystem
     {

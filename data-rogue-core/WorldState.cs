@@ -1,12 +1,6 @@
-﻿using data_rogue_core.Data;
-using data_rogue_core.EntitySystem;
-using Newtonsoft.Json;
-using System;
-using System.IO;
+﻿using data_rogue_core.EntitySystem;
 using System.Linq;
-using System.Reflection;
-using System.Threading;
-using System.Windows.Forms;
+using data_rogue_core.Maps;
 
 namespace data_rogue_core
 {

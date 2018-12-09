@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace data_rogue_core.Data
+namespace data_rogue_core.Maps
 {
     [Serializable]
     public class MapKey 

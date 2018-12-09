@@ -1,27 +1,36 @@
-﻿using data_rogue_core.Components;
-using data_rogue_core.Data;
-using data_rogue_core.Extensions;
-using RLNET;
-using System.Linq;
+﻿using System.Linq;
+using data_rogue_core.Components;
+using data_rogue_core.Maps;
 using data_rogue_core.Systems;
+using data_rogue_core.Utils;
+using RLNET;
 
-namespace data_rogue_core.Renderers
+namespace data_rogue_core.Renderers.ConsoleRenderers
 {
-    public class ConsoleGameplayRenderer
+    public class ConsoleGameplayRenderer : BaseConsoleRenderer, IGameplayRenderer
     {
-        public static void Render(RLConsole console, WorldState world, IPositionSystem positionSystem)
+        public ConsoleGameplayRenderer(RLConsole console) : base(console)
         {
+        }
+
+        public void Render(WorldState world, IPositionSystem positionSystem)
+        {
+            Console.Clear();
+
+            if (ReferenceEquals(world, null) || ReferenceEquals(positionSystem, null))
+            {
+                return;
+            }
+
             var currentMap = world.CurrentMap;
             var player = world.Player;
             var playerPosition = player.Get<Position>().MapCoordinate;
 
-            var consoleWidth = console.Width;
-            var consoleHeight = console.Height;
+            var consoleWidth = Console.Width;
+            var consoleHeight = Console.Height;
 
             int offsetX = consoleWidth / 2;
             int offsetY = consoleHeight / 2;
-
-            console.Clear();
 
             for (int y = 0; y < consoleHeight; y++) 
             {
@@ -36,7 +45,7 @@ namespace data_rogue_core.Renderers
                         .OrderByDescending(a => a.ZOrder)
                         .First();
 
-                    console.Set(x, y, appearance.Color.ToRLColor(), RLColor.Black, appearance.Glyph);
+                    Console.Set(x, y, appearance.Color.ToRLColor(), RLColor.Black, appearance.Glyph);
                 }
             }
         }
