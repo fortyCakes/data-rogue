@@ -1,0 +1,9 @@
+﻿using data_rogue_core.Maps;
+
+namespace data_rogue_core
+{
+    public interface IMapGenerator
+    {
+        Map Generate(string mapName, string seed);
+    }
+}

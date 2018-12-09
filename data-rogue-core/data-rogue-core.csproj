@@ -125,6 +125,8 @@
     <Compile Include="Systems\PlayerControlSystem.cs" />
     <Compile Include="Systems\PositionSystem.cs" />
     <Compile Include="Maps\Vector.cs" />
+    <Compile Include="World\IMapGenerator.cs" />
+    <Compile Include="Maps\Generators\TestMapGenerator.cs" />
     <Compile Include="World\WorldGenerator.cs" />
     <Compile Include="World\WorldState.cs" />
   </ItemGroup>

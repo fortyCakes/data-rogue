@@ -8,33 +8,33 @@ namespace data_rogue_core
 {
     public class WorldGenerator
     {
-        public static WorldState Create(int seed, IEntityEngineSystem entityEngineSystem)
+        public static WorldState Create(string seed, IEntityEngineSystem entityEngineSystem)
         {
             entityEngineSystem.Initialise();
 
-            var state = new WorldState(entityEngineSystem);
+            var world = new WorldState(entityEngineSystem);
 
-            var wallCell = entityEngineSystem.GetEntitiesWithName("Cell:Wall").Single();
-            var emptyCell = entityEngineSystem.GetEntitiesWithName("Cell:Empty").Single();
-            var boulderCell = entityEngineSystem.GetEntitiesWithName("Cell:Boulder").Single();
+            GenerateInitialMap(seed, entityEngineSystem, world);
 
-            var testMap = new Map("testMap", wallCell);
+            AddPlayerToWorld(entityEngineSystem, world);
 
-            testMap.SetCellsInRange(-5, 5, -5, 5, emptyCell);
-            testMap.SetCell(-5, -5, boulderCell);
+            return world;
+        }
 
-            state.Maps = new MapCollection();
-            state.Maps.AddMap(testMap);
-            state.CurrentMap = testMap;
+        private static void GenerateInitialMap(string seed, IEntityEngineSystem entityEngineSystem, WorldState world)
+        {
+            IMapGenerator mapGenerator = new TestMapGenerator(entityEngineSystem);
+            var testMap = mapGenerator.Generate("testMap", seed);
+            world.Maps.AddMap(testMap);
+            world.CurrentMap = testMap;
+        }
 
-            
-
+        private static void AddPlayerToWorld(IEntityEngineSystem entityEngineSystem, WorldState world)
+        {
             var player = EntitySerializer.Deserialize(DataFileLoader.LoadFile(@"Entities\player.edt"), entityEngineSystem);
             player.Get<Position>().MapCoordinate = new MapCoordinate("testMap", 0, 0);
 
-            state.Player = player;
-
-            return state;
+            world.Player = player;
         }
     }
 }

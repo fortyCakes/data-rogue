@@ -29,7 +29,7 @@ namespace data_rogue_core
         private const int SCREEN_WIDTH = 100;
         private const int SCREEN_HEIGHT = 70;
 
-        private const int DEBUG_SEED = 1;
+        private const string DEBUG_SEED = "DEBUG";
         private static RLRootConsole _rootConsole;
 
         public static void Main()
