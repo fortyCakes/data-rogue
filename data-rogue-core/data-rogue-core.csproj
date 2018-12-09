@@ -61,8 +61,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\EntityBuilder.cs" />
+    <Compile Include="Data\SaveStateSerializer.cs" />
     <Compile Include="EntitySystem\ComponentSerializer.cs" />
     <Compile Include="EntitySystem\EntitySerializer.cs" />
+    <Compile Include="EntitySystem\ICustomFieldSerialization.cs" />
     <Compile Include="Maps\MapSerializer.cs" />
     <Compile Include="Utils\StringExtensions.cs" />
     <Compile Include="Utils\WordWrap.cs" />
@@ -83,7 +85,6 @@
     <Compile Include="Activities\Activity.cs" />
     <Compile Include="Data\DataFileLoader.cs" />
     <Compile Include="Data\IEntityDataParser.cs" />
-    <Compile Include="Data\SaveMap.cs" />
     <Compile Include="EntitySystem\IEntityComponent.cs" />
     <Compile Include="Components\Physical.cs" />
     <Compile Include="Activities\ActivityType.cs" />

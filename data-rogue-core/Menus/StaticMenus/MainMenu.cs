@@ -8,7 +8,7 @@ namespace data_rogue_core.Menus.StaticMenus
         {
             var menu = new Menu("Main Menu", HandleMainMenuSelection,
                 new MenuItem("New Game"),
-                new MenuItem("Load Game", false),
+                new MenuItem("Load Game"),
                 new MenuItem("Quit")
             );
 
@@ -26,6 +26,10 @@ namespace data_rogue_core.Menus.StaticMenus
                 case "New Game":
                     Game.ActivityStack.Pop();
                     Game.StartNewGame();
+                    break;
+                case "Load Game":
+                    Game.ActivityStack.Pop();
+                    Game.LoadGame();
                     break;
 
             }

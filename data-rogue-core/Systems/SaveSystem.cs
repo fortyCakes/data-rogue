@@ -2,6 +2,7 @@
 using data_rogue_core.Maps;
 using Newtonsoft.Json;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 
 namespace data_rogue_core
@@ -15,7 +16,7 @@ namespace data_rogue_core
             var directoryName = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Saves");
             var fileName = Path.Combine(directoryName, "saveFile.sav");
 
-            var loadedState = SaveState.Deserialize(File.ReadAllText(fileName));
+            var loadedState = SaveStateSerializer.Deserialize(File.ReadAllText(fileName), entityEngineSystem);
 
             entityEngineSystem.Initialise();
 
@@ -33,6 +34,8 @@ namespace data_rogue_core
                 world.Maps.Add(map.MapKey, map);
             }
 
+            world.CurrentMap = world.Maps.Single(m => m.Key.Key == loadedState.CurrentMapKey).Value;
+
             return world;
         }
 
@@ -48,7 +51,7 @@ namespace data_rogue_core
 
             var saveState = world.GetSaveState();
 
-            File.WriteAllText(fileName, saveState.Serialize());
+            File.WriteAllText(fileName, SaveStateSerializer.Serialize(saveState));
         }
     }
 }

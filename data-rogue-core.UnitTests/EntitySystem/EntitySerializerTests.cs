@@ -3,6 +3,7 @@ using System.Drawing;
 using System.IO;
 using data_rogue_core.Components;
 using data_rogue_core.EntitySystem;
+using data_rogue_core.Maps;
 using FluentAssertions;
 using NSubstitute;
 using NUnit.Framework;
@@ -32,11 +33,12 @@ namespace data_rogue_core.UnitTests.Data
                 
                 return entity;
             });
-            _entityEngineSystem.ComponentTypes.ReturnsForAnyArgs(new[] { typeof(Appearance) });
+            _entityEngineSystem.ComponentTypes.ReturnsForAnyArgs(new[] { typeof(Appearance), typeof(Position) });
         }
 
         [Test]
         [TestCase(0)]
+        [TestCase(1)]
         public void TestEntity_Deserialize_MatchesTestEntity(int testCase)
         {
             string testData = LoadSerializedData(testCase);
@@ -50,6 +52,7 @@ namespace data_rogue_core.UnitTests.Data
 
         [Test]
         [TestCase(0)]
+        [TestCase(1)]
         public void TestEntity_Serialize_MatchesSerializedData(int testCase)
         {
             var testEntity = GetTestEntity(testCase);
@@ -71,7 +74,7 @@ namespace data_rogue_core.UnitTests.Data
             var expected = new List<Entity>
             {
                 GetTestEntity(0),
-                GetTestEntity(1)
+                GetTestEntity(0)
             };
 
             entities.Should().BeEquivalentTo(expected);
@@ -103,9 +106,11 @@ namespace data_rogue_core.UnitTests.Data
             var testEntity0 = new Entity(0, "TestEntity", new[] {
                 new Appearance() { Glyph = '£', Color = Color.FromArgb(255, 0, 0)
                 }});
-            var testEntity1 = new Entity(1, "TestEntity2", new[] {
-                new Appearance() { Glyph = '£', Color = Color.FromArgb(255, 0, 0)
-                }});
+
+            var testEntity1 = new Entity(1, "EntityWithPosition", new[]
+            {
+                new Position() { MapCoordinate = new MapCoordinate("TestMapKey", 1, 1)}
+            });
 
             return new[] { testEntity0, testEntity1 };
         }

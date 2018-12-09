@@ -28,6 +28,7 @@ namespace data_rogue_core
 
         private const int SCREEN_WIDTH = 100;
         private const int SCREEN_HEIGHT = 70;
+
         private const int DEBUG_SEED = 1;
         private static RLRootConsole _rootConsole;
 
@@ -172,6 +173,21 @@ namespace data_rogue_core
                 Thread.CurrentThread.IsBackground = true;
 
                 WorldState = WorldGenerator.Create(DEBUG_SEED, EntityEngineSystem);
+
+                ActivityStack.Pop();
+
+            }).Start();
+        }
+
+        public static void LoadGame()
+        {
+            DisplayStaticText("Generating world...");
+
+            new Thread(() =>
+            {
+                Thread.CurrentThread.IsBackground = true;
+
+                WorldState = SaveSystem.Load(EntityEngineSystem);
 
                 ActivityStack.Pop();
 

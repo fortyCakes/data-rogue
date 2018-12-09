@@ -1,6 +1,9 @@
-﻿namespace data_rogue_core.Maps
+﻿using data_rogue_core.EntitySystem;
+using System.Text.RegularExpressions;
+
+namespace data_rogue_core.Maps
 {
-    public class MapCoordinate
+    public class MapCoordinate : ICustomFieldSerialization
     {
         public MapKey Key;
         public int X;
@@ -20,6 +23,10 @@
             Y = y;
         }
 
+        public MapCoordinate()
+        {
+        }
+
         public override bool Equals(object obj)
         {
             MapCoordinate other = obj as MapCoordinate;
@@ -37,6 +44,19 @@
         public override string ToString()
         {
             return $"Key: {Key}, X: {X}, Y: {Y}";
+        }
+
+        public string Serialize()
+        {
+            return this.ToString();
+        }
+
+        public void Deserialize(string value)
+        {
+            var match = Regex.Match(value, "^Key: (.*), X: (-?[0-9]*), Y: (-?[0-9]*)$");
+            Key = new MapKey(match.Groups[1].Value);
+            X = int.Parse(match.Groups[2].Value);
+            Y = int.Parse(match.Groups[3].Value);
         }
 
         public static bool operator== (MapCoordinate a, MapCoordinate b)

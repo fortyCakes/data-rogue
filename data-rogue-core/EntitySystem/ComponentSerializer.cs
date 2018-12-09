@@ -31,9 +31,14 @@ namespace data_rogue_core.EntitySystem
                 object value = field.GetValue(component);
                 string stringValue = null;
 
-                if (field.FieldType == typeof(Color))
+                Type fieldType = field.FieldType;
+                if (fieldType == typeof(Color))
                 {
                     stringValue = ColorTranslator.ToHtml((Color)value);
+                }
+                else if (typeof(ICustomFieldSerialization).IsAssignableFrom(fieldType))
+                {
+                    stringValue = ((ICustomFieldSerialization)value).Serialize();
                 }
                 else if (IsNullOrDefault(value))
                 {
@@ -101,6 +106,12 @@ namespace data_rogue_core.EntitySystem
             if (fieldType == typeof(Color))
             {
                 safeValue = ColorTranslator.FromHtml(value);
+            }
+            else if (typeof(ICustomFieldSerialization).IsAssignableFrom(fieldType))
+            {
+                var instance = Activator.CreateInstance(fieldType);
+                ((ICustomFieldSerialization)instance).Deserialize(value);
+                safeValue = instance;
             }
             else if (value != null)
             {

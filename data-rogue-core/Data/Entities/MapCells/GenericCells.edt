@@ -17,7 +17,7 @@
 "BoulderCell"
 [Appearance]
     Glyph: O
-    Color: #bbbbbb
+    Color: #efefef
     ZOrder: 0
 [Physical]
     Passable: false

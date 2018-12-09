@@ -66,6 +66,7 @@
     <Compile Include="EntitySystem\EntitySerializerTests.cs" />
     <Compile Include="Maps\MapSerializerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Systems\SaveSystemTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -78,6 +79,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="EntitySystem\TestData\ExpectedSerialization_Entity1.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="EntitySystem\TestData\ExpectedSerialization_MultipleEntities.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -90,7 +94,11 @@
     <Content Include="Maps\TestData\ExpectedSerialization_Map0.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Systems\TestData\ExpectedSerialization_SaveState0.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -1,0 +1,3 @@
+﻿"EntityWithPosition":1
+[Position]
+    MapCoordinate: Key: TestMapKey, X: 1, Y: 1

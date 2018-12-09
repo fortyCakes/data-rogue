@@ -1,0 +1,17 @@
+﻿CurrentMapKey:"TestMapKey"
+===== ENTITIES =====
+"TestEntity":3
+[Appearance]
+    Color: #FF0000
+    Glyph: £
+===== MAPS =====
+Map:"TestMapKey"
+default:0
+-4,-2
+#:0
+.:1
+........
+........
+........
+.....#..
+........
