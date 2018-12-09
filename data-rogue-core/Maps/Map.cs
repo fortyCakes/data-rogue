@@ -1,15 +1,26 @@
 ﻿using data_rogue_core.Components;
 using data_rogue_core.EntitySystem;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
 
 namespace data_rogue_core.Data
 {
-    [Serializable]
-    public class Map
+    public class Map : ISerializable
     {
-        public MapKey MapKey { get; private set; }
+        public MapKey MapKey { get; set; }
+
         public IEntity DefaultCell { get; private set; }
+
+        public uint DefaultCellId
+        {
+            get
+            {
+                return DefaultCell.EntityId;
+            }
+        }
 
         public Dictionary<MapCoordinate, IEntity> Cells = new Dictionary<MapCoordinate, IEntity>();
 
@@ -65,6 +76,41 @@ namespace data_rogue_core.Data
                     SetCell(new MapCoordinate(MapKey, x, y), cell);
                 }
             }
+        }
+
+        public SaveMap Serialize()
+        {
+            return new SaveMap
+            {
+                MapKey = MapKey.Key,
+                Cells = Cells.Keys.Select(k => new MapSaveCell
+                {
+                    X = k.X,
+                    Y = k.Y,
+                    Id = Cells[k].EntityId
+                }).ToList()
+            };
+        }
+
+        public static Map Deserialize(SaveMap savedMap, IEntityEngineSystem entityEngineSystem)
+        {
+            var key = savedMap.MapKey;
+            var defaultCell = entityEngineSystem.GetEntity(savedMap.DefaultCellId);
+
+            var map = new Map(key, defaultCell);
+            
+            foreach(var savedCell in savedMap.Cells)
+            {
+                var cell = entityEngineSystem.GetEntity(savedCell.Id);
+                map.SetCell(new MapCoordinate(key, savedCell.X, savedCell.Y), cell);
+            }
+
+            return map;
+        }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            throw new NotImplementedException();
         }
     }
 }

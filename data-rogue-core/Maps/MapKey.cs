@@ -1,5 +1,8 @@
-﻿namespace data_rogue_core.Data
+﻿using System;
+
+namespace data_rogue_core.Data
 {
+    [Serializable]
     public class MapKey 
     {
         public string Key;

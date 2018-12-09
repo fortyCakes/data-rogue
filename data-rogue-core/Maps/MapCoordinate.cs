@@ -24,7 +24,7 @@
         {
             MapCoordinate other = obj as MapCoordinate;
 
-            if (other == null) return false;
+            if (ReferenceEquals(other, null)) return false;
 
             return Key == other.Key && X == other.X && Y == other.Y;
         }

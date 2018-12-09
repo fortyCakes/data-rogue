@@ -5,6 +5,6 @@ namespace data_rogue_core.Data
 {
     public interface IEntityDataParser
     {
-        IEnumerable<IEntity> Parse(IEnumerable<string> lines);
+        List<IEntity> Parse(IEnumerable<string> lines);
     }
 }

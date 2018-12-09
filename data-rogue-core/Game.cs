@@ -127,7 +127,7 @@ namespace data_rogue_core
         {
             return new Menu("Main Menu", HandleMainMenuSelection,
                 new MenuItem("New Game", Color.White),
-                new MenuItem("Load Game", Color.Gray, false),
+                new MenuItem("Load Game", Color.Gray),
                 new MenuItem("Quit", Color.White)
                 );
         }
@@ -142,7 +142,9 @@ namespace data_rogue_core
                 case "New Game":
                     StartNewGame();
                     break;
-
+                case "Load Game":
+                    WorldState = SaveSystem.Load(EntityEngineSystem);
+                    break;
             }
         }
 

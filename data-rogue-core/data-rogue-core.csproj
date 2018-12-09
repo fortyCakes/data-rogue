@@ -65,6 +65,7 @@
     <Compile Include="Data\DataFileLoader.cs" />
     <Compile Include="Data\EntityDataParser.cs" />
     <Compile Include="Data\IEntityDataParser.cs" />
+    <Compile Include="Data\SaveMap.cs" />
     <Compile Include="EntitySystem\IEntityComponent.cs" />
     <Compile Include="Components\Physical.cs" />
     <Compile Include="Maps\MapCoordinate.cs" />
@@ -75,6 +76,9 @@
     <Compile Include="EntitySystem\Entity.cs" />
     <Compile Include="EntitySystem\IEntity.cs" />
     <Compile Include="EntitySystem\IEntityEngineSystem.cs" />
+    <Compile Include="Maps\MapSaveCell.cs" />
+    <Compile Include="Systems\SaveSystem.cs" />
+    <Compile Include="Data\SaveState.cs" />
     <Compile Include="Systems\IInitialisableSystem.cs" />
     <Compile Include="EntitySystem\ISystem.cs" />
     <Compile Include="EntitySystem\SystemComponents.cs" />
@@ -118,6 +122,9 @@
     <Content Include="Images\Tileset\terminal8x8.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Saves\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

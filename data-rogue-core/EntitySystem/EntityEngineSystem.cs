@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace data_rogue_core.EntitySystem
 {
@@ -8,8 +10,9 @@ namespace data_rogue_core.EntitySystem
     {
         private uint EntityKey = 0;
 
-        public List<Entity> AllEntities = new List<Entity>();
+        public List<Entity> AllEntities { get; private set; } = new List<Entity>();
 
+        [JsonIgnore]
         public List<ISystem> Systems = new List<ISystem>();
 
         public Entity New(params IEntityComponent[] components)
@@ -17,15 +20,20 @@ namespace data_rogue_core.EntitySystem
             var entity = new Entity(EntityKey++, components);
             AllEntities.Add(entity);
 
-            foreach(var system in Systems)
+            RegisterEntityWithSystems(entity);
+
+            return entity;
+        }
+
+        private void RegisterEntityWithSystems(Entity entity)
+        {
+            foreach (var system in Systems)
             {
                 if (entity.HasAll(system.RequiredComponents))
                 {
                     system.AddEntity(entity);
                 }
             }
-
-            return entity;
         }
 
         public Entity New(string name, params IEntityComponent[] components)
@@ -62,6 +70,20 @@ namespace data_rogue_core.EntitySystem
             {
                 system.Initialise();
             }
+        }
+
+        public void Load(uint EntityId, Entity entity)
+        {
+            AllEntities.Add(entity);
+
+            RegisterEntityWithSystems(entity);
+
+            EntityKey = Math.Max(EntityKey, EntityId + 1);
+        }
+
+        public Entity GetEntity(uint entityId)
+        {
+            return AllEntities.Single(e => e.EntityId == entityId);
         }
     }
 }

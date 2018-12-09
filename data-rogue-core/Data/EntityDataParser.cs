@@ -19,7 +19,7 @@ namespace data_rogue_core.Data
             EntityEngineSystem = entityEngineSystem;
         }
 
-        public IEnumerable<IEntity> Parse(IEnumerable<string> lines)
+        public List<IEntity> Parse(IEnumerable<string> lines)
         {
             var entityBuilders = new List<EntityBuilder>();
             EntityBuilder currentEntity = null;
@@ -58,7 +58,7 @@ namespace data_rogue_core.Data
                 }
             }
 
-            return entityBuilders.Select(b => b.Build(EntityEngineSystem, ComponentTypes));
+            return entityBuilders.Select(b => b.Build(EntityEngineSystem, ComponentTypes)).OfType<IEntity>().ToList();
         }
     }
 

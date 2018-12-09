@@ -1,4 +1,5 @@
-﻿using data_rogue_core.Components;
+﻿using System;
+using data_rogue_core.Components;
 using data_rogue_core.Data;
 using data_rogue_core.EntitySystem;
 using data_rogue_core.EventSystem;
@@ -32,13 +33,26 @@ namespace data_rogue_core.Systems
                         MoveEntities(-1, 0);
                         break;
                     case RLKey.S:
-                        MoveEntities(0, 1);
+                        if (keyPress.Shift)
+                        {
+                            Save();
+                        }
+                        else
+                        {
+                            MoveEntities(0, 1);
+                        }
+                        
                         break;
                     case RLKey.D:
                         MoveEntities(1, 0);
                         break;
                 }
             }
+        }
+
+        private void Save()
+        {
+            SaveSystem.Save(Game.WorldState);
         }
 
         private void MoveEntities(int x, int y)
