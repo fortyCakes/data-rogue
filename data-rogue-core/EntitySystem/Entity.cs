@@ -9,6 +9,7 @@ namespace data_rogue_core.EntitySystem
         public uint EntityId { get; }
 
         public string Name { get; set; } = "";
+        public bool IsStatic { get; set; } = false;
 
         public List<IEntityComponent> Components = new List<IEntityComponent>();
 

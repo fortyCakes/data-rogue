@@ -11,7 +11,7 @@ namespace data_rogue_core.EntitySystem
     {
         private uint EntityKey = 0;
 
-        public List<Entity> AllEntities { get; private set; } = new List<Entity>();
+        public IStaticEntityLoader StaticEntityLoader { get; }
 
         public IEnumerable<Type> ComponentTypes => new List<Type> {
             typeof(Appearance),
@@ -20,8 +20,17 @@ namespace data_rogue_core.EntitySystem
             typeof(Position)
         };
 
-            [JsonIgnore]
+        public List<Entity> AllEntities { get; private set; } = new List<Entity>();
+
+        public List<Entity> MutableEntities => AllEntities.Where(e => !e.IsStatic).ToList();
+
+        [JsonIgnore]
         public List<ISystem> Systems = new List<ISystem>();
+
+        public EntityEngineSystem(IStaticEntityLoader loader)
+        {
+            StaticEntityLoader = loader;
+        }
 
         public Entity New(string Name, params IEntityComponent[] components)
         {
@@ -66,11 +75,16 @@ namespace data_rogue_core.EntitySystem
 
         public void Initialise()
         {
+            EntityKey = 0;
             AllEntities = new List<Entity>();
             foreach (var system in Systems)
             {
                 system.Initialise();
             }
+
+            StaticEntityLoader.Load(this);
+
+            AllEntities.ForEach(e => e.IsStatic = true);
         }
 
         public Entity Load(uint EntityId, Entity entity)
@@ -87,6 +101,11 @@ namespace data_rogue_core.EntitySystem
         public Entity GetEntity(uint entityId)
         {
             return AllEntities.Single(e => e.EntityId == entityId);
+        }
+
+        public IEnumerable<Entity> GetEntitiesWithName(string entityName)
+        {
+            return AllEntities.Where(e => e.Name == entityName);
         }
     }
 }

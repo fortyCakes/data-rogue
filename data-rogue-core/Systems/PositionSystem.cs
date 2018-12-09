@@ -13,7 +13,8 @@ namespace data_rogue_core.Systems
         {
             foreach(var entity in Entities)
             {
-                if (entity.Get<Position>().MapCoordinate.Equals(coordinate))
+                Position entityPosition = entity.Get<Position>();
+                if (entityPosition.MapCoordinate.Equals(coordinate))
                 {
                     yield return entity;
                 }

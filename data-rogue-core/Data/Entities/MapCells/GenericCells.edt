@@ -1,4 +1,4 @@
-﻿"EmptyCell"
+﻿"Cell:Empty"
 [Appearance]
     Glyph: .
     Color: #aaaaaa
@@ -6,7 +6,7 @@
 [Physical]
     Passable: true
     Transparent: true
-"WallCell"
+"Cell:Wall"
 [Appearance]
     Glyph: #
     Color: #aaaaaa
@@ -14,7 +14,7 @@
 [Physical]
     Passable: false
     Transparent: false
-"BoulderCell"
+"Cell:Boulder"
 [Appearance]
     Glyph: O
     Color: #efefef

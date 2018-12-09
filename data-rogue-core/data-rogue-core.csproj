@@ -60,11 +60,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\LoadingScreenActivity.cs" />
     <Compile Include="Data\EntityBuilder.cs" />
     <Compile Include="Data\SaveStateSerializer.cs" />
     <Compile Include="EntitySystem\ComponentSerializer.cs" />
+    <Compile Include="EntitySystem\DataStaticEntityLoader.cs" />
     <Compile Include="EntitySystem\EntitySerializer.cs" />
     <Compile Include="EntitySystem\ICustomFieldSerialization.cs" />
+    <Compile Include="EntitySystem\IStaticEntityLoader.cs" />
     <Compile Include="Maps\MapSerializer.cs" />
     <Compile Include="Utils\StringExtensions.cs" />
     <Compile Include="Utils\WordWrap.cs" />
@@ -122,8 +125,8 @@
     <Compile Include="Systems\PlayerControlSystem.cs" />
     <Compile Include="Systems\PositionSystem.cs" />
     <Compile Include="Maps\Vector.cs" />
-    <Compile Include="WorldGenerator.cs" />
-    <Compile Include="WorldState.cs" />
+    <Compile Include="World\WorldGenerator.cs" />
+    <Compile Include="World\WorldState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

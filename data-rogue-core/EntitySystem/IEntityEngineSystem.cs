@@ -18,6 +18,9 @@ namespace data_rogue_core.EntitySystem
 
         void Register(ISystem system);
 
+        IEnumerable<Entity> GetEntitiesWithName(string name);
+
         List<Entity> AllEntities { get; }
+        List<Entity> MutableEntities { get; }
     }
 }

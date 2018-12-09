@@ -2,16 +2,16 @@
 
 namespace data_rogue_core.Activities
 {
-    public class StaticTextActivity : IActivity
+    public class LoadingScreenActivity : IActivity
     {
         public ActivityType Type => ActivityType.StaticDisplay;
         public object Data => Text;
-        public bool RendersEntireSpace => false;
+        public bool RendersEntireSpace => true;
 
         public string Text { get; set; }
         public IStaticTextRenderer Renderer { get; }
 
-        public StaticTextActivity(string staticText, IRendererFactory rendererFactory)
+        public LoadingScreenActivity(string staticText, IRendererFactory rendererFactory)
         {
             Text = staticText;
             Renderer = (IStaticTextRenderer)rendererFactory.GetRendererFor(Type);

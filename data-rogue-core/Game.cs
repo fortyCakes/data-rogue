@@ -97,7 +97,7 @@ namespace data_rogue_core
 
             ActivityStack.Push(new GameplayActivity(RendererFactory));
 
-            DisplayStaticText("Loading...");
+            DisplayLoadingScreen("Loading...");
         }
         
         private static void StartDataLoad()
@@ -117,7 +117,7 @@ namespace data_rogue_core
 
         private static void CreateAndRegisterSystems()
         {
-            EntityEngineSystem = new EntityEngineSystem();
+            EntityEngineSystem = new EntityEngineSystem(new DataStaticEntityLoader());
 
             EventSystem = new EventRuleSystem();
 
@@ -166,7 +166,7 @@ namespace data_rogue_core
 
         public static void StartNewGame()
         {
-            DisplayStaticText("Generating world...");
+            DisplayLoadingScreen("Generating world...");
 
             new Thread(() =>
             {
@@ -181,7 +181,7 @@ namespace data_rogue_core
 
         public static void LoadGame()
         {
-            DisplayStaticText("Generating world...");
+            DisplayLoadingScreen("Loading save file...");
 
             new Thread(() =>
             {
@@ -194,9 +194,9 @@ namespace data_rogue_core
             }).Start();
         }
 
-        public static void DisplayStaticText(string text)
+        public static void DisplayLoadingScreen(string text)
         {
-            ActivityStack.Push(new StaticTextActivity(text, RendererFactory));
+            ActivityStack.Push(new LoadingScreenActivity(text, RendererFactory));
         }
 
         public static void Quit()

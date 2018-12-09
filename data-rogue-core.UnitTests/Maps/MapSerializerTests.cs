@@ -2,6 +2,7 @@
 using data_rogue_core.EntitySystem;
 using data_rogue_core.Maps;
 using FluentAssertions;
+using NSubstitute;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace data_rogue_core.UnitTests.Maps
         [SetUp]
         public void SetUp()
         {
-            _entityEngine = new EntityEngineSystem();
+            _entityEngine = new EntityEngineSystem(Substitute.For<IStaticEntityLoader>());
 
             _wallCell = CreateCell('#');
             _floorCell = CreateCell('.');

@@ -2,6 +2,6 @@
 {
     public interface IStaticTextRenderer : IRenderer
     {
-        void Render(string text);
+        void Render(string text, bool renderEntireSpace);
     }
 }

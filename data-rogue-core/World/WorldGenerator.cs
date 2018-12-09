@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using data_rogue_core.Components;
+﻿using data_rogue_core.Components;
 using data_rogue_core.Data;
 using data_rogue_core.EntitySystem;
 using System.Linq;
@@ -16,11 +14,9 @@ namespace data_rogue_core
 
             var state = new WorldState(entityEngineSystem);
 
-            var cells = EntitySerializer.DeserializeMultiple(DataFileLoader.LoadFile(@"Entities\MapCells\GenericCells.edt"), entityEngineSystem);
-
-            var wallCell = cells.Single(e => e.Name == "WallCell");
-            var emptyCell = cells.Single(e => e.Name == "EmptyCell");
-            var boulderCell = cells.Single(e => e.Name == "BoulderCell");
+            var wallCell = entityEngineSystem.GetEntitiesWithName("Cell:Wall").Single();
+            var emptyCell = entityEngineSystem.GetEntitiesWithName("Cell:Empty").Single();
+            var boulderCell = entityEngineSystem.GetEntitiesWithName("Cell:Boulder").Single();
 
             var testMap = new Map("testMap", wallCell);
 

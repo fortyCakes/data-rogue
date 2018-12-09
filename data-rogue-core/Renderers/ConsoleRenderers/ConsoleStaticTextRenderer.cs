@@ -10,8 +10,13 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
         {
         }
 
-        public void Render(string text)
+        public void Render(string text, bool renderEntireSpace)
         {
+            if (renderEntireSpace)
+            {
+                Console.Clear();
+            }
+
             var width = Console.Width;
             var height = Console.Height;
 

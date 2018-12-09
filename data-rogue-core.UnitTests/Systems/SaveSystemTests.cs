@@ -22,7 +22,7 @@ namespace data_rogue_core.UnitTests.Data
         [SetUp]
         public void SetUp()
         {
-            _entityEngineSystem = new EntityEngineSystem();
+            _entityEngineSystem = new EntityEngineSystem(Substitute.For<IStaticEntityLoader>());
 
             _wallCell = CreateCell('#');
             _floorCell = CreateCell('.');
