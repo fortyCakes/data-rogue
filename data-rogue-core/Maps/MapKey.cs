@@ -18,7 +18,7 @@ namespace data_rogue_core.Maps
 
             if (other == null) return false;
 
-            return Key == other.Key;
+            return Key.Equals(other.Key);
         }
 
         public override int GetHashCode()

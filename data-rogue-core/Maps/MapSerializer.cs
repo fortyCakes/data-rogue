@@ -56,11 +56,11 @@ namespace data_rogue_core.Maps
             return stringBuilder.ToString();
         }
         
-        public static Map Deserialize(string savedMap, IEntityEngineSystem entityEngineSystem)
+        public static Map Deserialize(string savedMap, IEntityEngineSystem entityEngineSystem, string mapNameOverride = null)
         {
             var lines = savedMap.Split('\n');
 
-            var mapKey = Extract(lines[0], "Map:\"(.*)\"");
+            var mapName = mapNameOverride ?? Extract(lines[0], "Map:\"(.*)\"");
             var defaultCellId = Extract(lines[1], "default:(.*)").Trim();
             var coordinateMatch = Regex.Match(lines[2], "(-?[0-9]),(-?[0-9])");
             var leftX = int.Parse(coordinateMatch.Groups[1].Value);
@@ -72,7 +72,7 @@ namespace data_rogue_core.Maps
 
             var glyphDictionary = GetCellsInMap(entityEngineSystem, lines, ref lineIndex);
 
-            Map deserialisedMap = new Map(mapKey, defaultCell);
+            Map deserialisedMap = new Map(mapName, defaultCell);
 
             for (int j = 0; j+lineIndex < lines.Length; j++)
             {

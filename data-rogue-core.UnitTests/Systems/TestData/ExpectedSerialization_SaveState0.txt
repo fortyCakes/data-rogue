@@ -2,8 +2,8 @@
 ===== ENTITIES =====
 "TestEntity":3
 [Appearance]
-    Color: #FF0000
-    Glyph: £
+Color: #FF0000
+Glyph: £
 ===== MAPS =====
 Map:"TestMapKey"
 default:Cell:Wall

@@ -1,8 +1,8 @@
 ﻿"TestEntity":0
 [Appearance]
-    Color: #FF0000
-    Glyph: £
+Color: #FF0000
+Glyph: £
 "TestEntity":0
 [Appearance]
-    Color: #FF0000
-    Glyph: £
+Color: #FF0000
+Glyph: £

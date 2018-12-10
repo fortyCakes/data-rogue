@@ -136,6 +136,9 @@
     <None Include="Data\Entities\player.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Entities\World\World.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
   </ItemGroup>

@@ -8,6 +8,7 @@ using data_rogue_core.Maps;
 using FluentAssertions;
 using NSubstitute;
 using NUnit.Framework;
+using static data_rogue_core.UnitTests.Data.EntitySerializerTests;
 
 namespace data_rogue_core.UnitTests.Data
 {

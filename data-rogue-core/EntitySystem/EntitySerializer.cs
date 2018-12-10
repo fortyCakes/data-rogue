@@ -68,9 +68,9 @@ namespace data_rogue_core.EntitySystem
 
             foreach (string line in lines)
             {
-                if (line.StartsWith("#"))
+                if (string.IsNullOrWhiteSpace(line) || IsComment(line))
                 {
-                    continue; // Comment
+                    continue;
                 }
 
                 if (line.StartsWith("\""))
@@ -90,6 +90,8 @@ namespace data_rogue_core.EntitySystem
 
                         currentEntity = new EntityBuilder(entityName);
                     }
+
+                    continue;
                 }
 
                 if (line.StartsWith("["))
@@ -98,15 +100,20 @@ namespace data_rogue_core.EntitySystem
                     currentComponent = new StringBuilder();
                     currentComponent.AppendLine(line);
                     currentEntity?.Components.Add(currentComponent);
+
+                    continue;
                 }
 
-                if (line.StartsWith("    ") || line.StartsWith("\t"))
-                {
-                    currentComponent.AppendLine(line);
-                }
+                currentComponent.AppendLine(line);
+
             }
 
             return currentEntity.Build(entityEngineSystem);
+        }
+
+        private static bool IsComment(string line)
+        {
+            return line.StartsWith("#");
         }
     }
 }
