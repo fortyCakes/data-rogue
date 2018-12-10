@@ -3,6 +3,7 @@ using data_rogue_core.Data;
 using data_rogue_core.EntitySystem;
 using System.Linq;
 using data_rogue_core.Maps;
+using data_rogue_core.Maps.Generators;
 
 namespace data_rogue_core
 {
@@ -23,7 +24,7 @@ namespace data_rogue_core
 
         private static void GenerateInitialMap(string seed, IEntityEngineSystem entityEngineSystem, WorldState world)
         {
-            IMapGenerator mapGenerator = new TestMapGenerator(entityEngineSystem);
+            IMapGenerator mapGenerator = new StaticMapGenerator(entityEngineSystem, "StaticMaps/entrance.map");
             var testMap = mapGenerator.Generate("testMap", seed);
             world.Maps.AddMap(testMap);
             world.CurrentMap = testMap;

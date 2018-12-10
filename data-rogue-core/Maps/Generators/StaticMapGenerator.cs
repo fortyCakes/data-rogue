@@ -17,7 +17,11 @@ namespace data_rogue_core.Maps.Generators
         public Map Generate(string mapName, string seed)
         {
             var mapData = DataFileLoader.LoadFile(MapFile);
-            return MapSerializer.Deserialize(mapData, EntityEngineSystem);
+            var map = MapSerializer.Deserialize(mapData, EntityEngineSystem);
+
+            map.MapKey = new MapKey(mapName);
+
+            return map;
         }
     }
 }
