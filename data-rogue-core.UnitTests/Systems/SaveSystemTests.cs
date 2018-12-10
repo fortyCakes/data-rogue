@@ -24,8 +24,8 @@ namespace data_rogue_core.UnitTests.Data
         {
             _entityEngineSystem = new EntityEngineSystem(Substitute.For<IStaticEntityLoader>());
 
-            _wallCell = CreateCell('#');
-            _floorCell = CreateCell('.');
+            _wallCell = CreateCell('#', "Cell:Wall");
+            _floorCell = CreateCell('.', "Cell:Empty");
         }
 
         [Test]
@@ -117,9 +117,9 @@ namespace data_rogue_core.UnitTests.Data
             return new[] { testMap0, testMap1 };
         }
 
-        private IEntity CreateCell(char glyph)
+        private IEntity CreateCell(char glyph, string name)
         {
-            return _entityEngineSystem.New("cell",
+            return _entityEngineSystem.New(name,
                new Appearance { Glyph = glyph },
                new Physical()
                );

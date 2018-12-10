@@ -19,7 +19,7 @@ namespace data_rogue_core.Maps
 
             stringBuilder.AppendLine($"Map:\"{map.MapKey.Key}\"");
 
-            stringBuilder.AppendLine($"default:" + map.DefaultCell.EntityId);
+            stringBuilder.AppendLine($"default:" + map.DefaultCell.Name);
 
             var leftX = map.Cells.Min(c => c.Key.X);
             var rightX = map.Cells.Max(c => c.Key.X);
@@ -41,7 +41,7 @@ namespace data_rogue_core.Maps
                 {
                     if (map.CellExists(x, y))
                     {
-                        var cellId = map.CellAt(x, y).EntityId;
+                        var cellId = map.CellAt(x, y).Name;
                         var glyph = glyphs[cellId];
                         stringBuilder.Append(glyph);
                     }
@@ -61,12 +61,12 @@ namespace data_rogue_core.Maps
             var lines = savedMap.Split('\n');
 
             var mapKey = Extract(lines[0], "Map:\"(.*)\"");
-            var defaultCellId = uint.Parse(Extract(lines[1], "default:(.*)"));
+            var defaultCellId = Extract(lines[1], "default:(.*)").Trim();
             var coordinateMatch = Regex.Match(lines[2], "(-?[0-9]),(-?[0-9])");
             var leftX = int.Parse(coordinateMatch.Groups[1].Value);
             var topY = int.Parse(coordinateMatch.Groups[2].Value);
 
-            IEntity defaultCell = entityEngineSystem.GetEntity(defaultCellId);
+            IEntity defaultCell = entityEngineSystem.GetEntitiesWithName(defaultCellId).Single();
 
             var lineIndex = 3;
 
@@ -106,11 +106,11 @@ namespace data_rogue_core.Maps
 
             Match match;
 
-            while ((match = Regex.Match(lines[lineIndex], "(.):([0-9]*)")).Success)
+            while ((match = Regex.Match(lines[lineIndex], "(.):(.*)")).Success)
             {
                 char glyph = match.Groups[1].Value.First();
-                uint entityId = uint.Parse(match.Groups[2].Value);
-                IEntity entity = entityEngineSystem.GetEntity(entityId);
+                string entityName = match.Groups[2].Value.Trim();
+                IEntity entity = entityEngineSystem.GetEntitiesWithName(entityName).Single();
 
                 cellsInMap.Add(glyph, entity);
 
@@ -125,9 +125,9 @@ namespace data_rogue_core.Maps
             return Regex.Match(input, pattern).Groups[1].Value;
         }
 
-        private static Dictionary<uint, char> GetMapGlyphs(Map map)
+        private static Dictionary<string, char> GetMapGlyphs(Map map)
         {
-            var mapGlyphs = new Dictionary<uint, char>();
+            var mapGlyphs = new Dictionary<string, char>();
 
             var distinctCells = map.Cells.Values
                 .Union(new List<IEntity> { map.DefaultCell })
@@ -151,7 +151,7 @@ namespace data_rogue_core.Maps
                 }
 
                 usedGlyphs += persistGlyph;
-                mapGlyphs.Add(cell.EntityId, persistGlyph);
+                mapGlyphs.Add(cell.Name, persistGlyph);
             }
 
             return mapGlyphs;

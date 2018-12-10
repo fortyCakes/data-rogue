@@ -68,6 +68,7 @@
     <Compile Include="EntitySystem\EntitySerializer.cs" />
     <Compile Include="EntitySystem\ICustomFieldSerialization.cs" />
     <Compile Include="EntitySystem\IStaticEntityLoader.cs" />
+    <Compile Include="Maps\Generators\StaticMapGenerator.cs" />
     <Compile Include="Maps\MapSerializer.cs" />
     <Compile Include="Utils\StringExtensions.cs" />
     <Compile Include="Utils\WordWrap.cs" />
@@ -142,6 +143,7 @@
     <None Include="Data\Entities\MapCells\GenericCells.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Data\StaticMaps\entrance.map" />
     <Content Include="Images\Tileset\terminal8x8.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
