@@ -4,12 +4,7 @@ using data_rogue_core.Maps;
 using FluentAssertions;
 using NSubstitute;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace data_rogue_core.UnitTests.Maps
 {
@@ -25,8 +20,8 @@ namespace data_rogue_core.UnitTests.Maps
         {
             _entityEngine = new EntityEngineSystem(Substitute.For<IStaticEntityLoader>());
 
-            _wallCell = CreateCell('#');
-            _floorCell = CreateCell('.');
+            _wallCell = CreateCell('#', "Cell:Wall");
+            _floorCell = CreateCell('.', "Cell:Empty");
         }
 
         [Test]
@@ -91,9 +86,9 @@ namespace data_rogue_core.UnitTests.Maps
             return new[] { testMap0, testMap1 };
         }
 
-        private IEntity CreateCell(char glyph)
+        private IEntity CreateCell(char glyph, string name)
         {
-             return _entityEngine.New("cell",
+             return _entityEngine.New(name,
                 new Appearance { Glyph = glyph },
                 new Physical()
                 );

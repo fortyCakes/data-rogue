@@ -1,8 +1,8 @@
 ﻿Map:"testMapKey"
-default:0
+default:Cell:Wall
 -4,-2
-#:0
-.:1
+#:Cell:Wall
+.:Cell:Empty
 ........
 ........
 ........

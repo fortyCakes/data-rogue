@@ -1,10 +1,10 @@
 ﻿"Player"
 [Appearance]
-    Glyph: @
-    Color: #FFFFFF
-    ZOrder: 9999
+Glyph: @
+Color: #FFFFFF
+ZOrder: 9999
 [Physical]
-    Passable: false
-    Transparent: true
+Passable: false
+Transparent: true
 [PlayerControlled]
 [Position]

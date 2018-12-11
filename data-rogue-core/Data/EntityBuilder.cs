@@ -25,7 +25,7 @@ namespace data_rogue_core.Data
 
         public Entity Build(IEntityEngineSystem engine)
         {
-            var components = Components.Select(c => ComponentSerializer.Deserialize(c.ToString(), engine, 1)).ToArray();
+            var components = Components.Select(c => ComponentSerializer.Deserialize(c.ToString(), engine, 0)).ToArray();
 
             if (Id.HasValue)
             {

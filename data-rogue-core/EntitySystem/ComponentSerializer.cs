@@ -16,8 +16,6 @@ namespace data_rogue_core.EntitySystem
 
         public static string Serialize(IEntityComponent component, int depth)
         {
-            var prefix = new string(' ', depth * 4);
-
             var stringBuilder = new StringBuilder();
 
             var componentType = component.GetType();
@@ -51,7 +49,7 @@ namespace data_rogue_core.EntitySystem
 
                 if (stringValue != null)
                 {
-                    stringBuilder.AppendLine($"{prefix}{field.Name}: {stringValue}");
+                    stringBuilder.AppendLine($"{field.Name}: {stringValue}");
                 }
             }
 

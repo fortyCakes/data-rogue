@@ -33,7 +33,7 @@ namespace data_rogue_core.Maps
 
             if (ReferenceEquals(other, null)) return false;
 
-            return Key == other.Key && X == other.X && Y == other.Y;
+            return Key?.Key == other.Key?.Key && X == other.X && Y == other.Y;
         }
 
         public override int GetHashCode()

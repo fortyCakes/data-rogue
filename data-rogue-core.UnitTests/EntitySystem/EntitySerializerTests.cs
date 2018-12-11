@@ -11,7 +11,7 @@ using NUnit.Framework;
 namespace data_rogue_core.UnitTests.Data
 {
     [TestFixture]
-    class EntitySerializerTests
+    partial class EntitySerializerTests
     {
         private IEntityEngineSystem _entityEngineSystem;
 
@@ -43,11 +43,11 @@ namespace data_rogue_core.UnitTests.Data
         {
             string testData = LoadSerializedData(testCase);
 
-            var entity = EntitySerializer.Deserialize(testData, _entityEngineSystem);
+            var entity = new List<Entity> { EntitySerializer.Deserialize(testData, _entityEngineSystem) };
 
-            var expected = GetTestEntity(testCase);
+            var expected = new List<Entity> { GetTestEntity(testCase) };
 
-            entity.Should().BeEquivalentTo(expected);
+            entity.Should().BeEquivalentTo(expected, options => options.Using(new EntityListEquivalence()));
         }
 
         [Test]
@@ -77,7 +77,7 @@ namespace data_rogue_core.UnitTests.Data
                 GetTestEntity(0)
             };
 
-            entities.Should().BeEquivalentTo(expected);
+            entities.Should().BeEquivalentTo(expected, options => options.Using(new EntityListEquivalence()));
 
         }
 

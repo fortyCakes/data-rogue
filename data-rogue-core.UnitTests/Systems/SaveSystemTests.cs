@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using data_rogue_core.Components;
@@ -24,8 +23,8 @@ namespace data_rogue_core.UnitTests.Data
         {
             _entityEngineSystem = new EntityEngineSystem(Substitute.For<IStaticEntityLoader>());
 
-            _wallCell = CreateCell('#');
-            _floorCell = CreateCell('.');
+            _wallCell = CreateCell('#', "Cell:Wall");
+            _floorCell = CreateCell('.', "Cell:Empty");
         }
 
         [Test]
@@ -77,7 +76,7 @@ namespace data_rogue_core.UnitTests.Data
         private SaveState GetTestSaveState(int saveState)
         {
             return new SaveState() {
-                CurrentMapKey = "TestMapKey",
+                Seed = "TestSeed",
                 Maps = new List<string> { MapSerializer.Serialize(GetTestMap(0))},
                 Entities = new List<string>() { EntitySerializer.Serialize( GetTestEntity(0))}
             } ;
@@ -117,9 +116,9 @@ namespace data_rogue_core.UnitTests.Data
             return new[] { testMap0, testMap1 };
         }
 
-        private IEntity CreateCell(char glyph)
+        private IEntity CreateCell(char glyph, string name)
         {
-            return _entityEngineSystem.New("cell",
+            return _entityEngineSystem.New(name,
                new Appearance { Glyph = glyph },
                new Physical()
                );

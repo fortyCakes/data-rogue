@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using data_rogue_core.Components;
 using data_rogue_core.EntitySystem;
-using System.Runtime.Serialization;
-using data_rogue_core.Data;
-using Newtonsoft.Json;
 
 namespace data_rogue_core.Maps
 {

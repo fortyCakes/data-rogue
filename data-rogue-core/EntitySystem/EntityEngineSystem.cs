@@ -13,12 +13,13 @@ namespace data_rogue_core.EntitySystem
 
         public IStaticEntityLoader StaticEntityLoader { get; }
 
-        public IEnumerable<Type> ComponentTypes => new List<Type> {
-            typeof(Appearance),
-            typeof(Physical),
-            typeof(PlayerControlled),
-            typeof(Position)
-        };
+        public IEnumerable<Type> ComponentTypes => 
+            AppDomain
+            .CurrentDomain
+            .GetAssemblies()
+            .SelectMany(s => s.GetTypes())
+            .Where(p => typeof(IEntityComponent).IsAssignableFrom(p))
+            .ToList();
 
         public List<Entity> AllEntities { get; private set; } = new List<Entity>();
 
@@ -106,6 +107,11 @@ namespace data_rogue_core.EntitySystem
         public IEnumerable<Entity> GetEntitiesWithName(string entityName)
         {
             return AllEntities.Where(e => e.Name == entityName);
+        }
+
+        public Entity GetEntityWithName(string v)
+        {
+            return GetEntitiesWithName(v).Single();
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using data_rogue_core.EntitySystem;
 using data_rogue_core.Maps;
-using Newtonsoft.Json;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -11,12 +10,12 @@ namespace data_rogue_core
     {
         public static WorldState Load(IEntityEngineSystem entityEngineSystem)
         {
-            var world = new WorldState(entityEngineSystem);
-
             var directoryName = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Saves");
             var fileName = Path.Combine(directoryName, "saveFile.sav");
 
             var loadedState = SaveStateSerializer.Deserialize(File.ReadAllText(fileName), entityEngineSystem);
+
+            var world = new WorldState(entityEngineSystem, loadedState.Seed);
 
             entityEngineSystem.Initialise();
 
@@ -35,8 +34,6 @@ namespace data_rogue_core
 
                 world.Maps.Add(map.MapKey, map);
             }
-
-            world.CurrentMap = world.Maps.Single(m => m.Key.Key == loadedState.CurrentMapKey).Value;
 
             return world;
         }

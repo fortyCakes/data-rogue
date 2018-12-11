@@ -1,15 +1,15 @@
-﻿CurrentMapKey:"TestMapKey"
+﻿Seed: TestSeed
 ===== ENTITIES =====
 "TestEntity":3
 [Appearance]
-    Color: #FF0000
-    Glyph: £
+Color: #FF0000
+Glyph: £
 ===== MAPS =====
 Map:"TestMapKey"
-default:0
+default:Cell:Wall
 -4,-2
-#:0
-.:1
+#:Cell:Wall
+.:Cell:Empty
 ........
 ........
 ........

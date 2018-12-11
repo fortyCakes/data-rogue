@@ -1,4 +1,6 @@
-﻿using data_rogue_core.Activities;
+﻿using System;
+using System.Text.RegularExpressions;
+using data_rogue_core.Activities;
 using data_rogue_core.Components;
 using data_rogue_core.EntitySystem;
 using data_rogue_core.EventSystem;
@@ -43,7 +45,7 @@ namespace data_rogue_core.Systems
                         {
                             MoveEntities(0, 1);
                         }
-                        
+
                         break;
                     case RLKey.D:
                         MoveEntities(1, 0);
