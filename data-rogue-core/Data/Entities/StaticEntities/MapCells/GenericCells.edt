@@ -6,6 +6,15 @@ ZOrder: 0
 [Physical]
 Passable: true
 Transparent: true
+"Cell:SpawnPoint"
+[SpawnPoint]
+[Appearance]
+Glyph: ,
+Color: #aaaaff
+ZOrder: 0
+[Physical]
+Passable: true
+Transparent: true
 "Cell:Wall"
 [Appearance]
 Glyph: #

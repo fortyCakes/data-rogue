@@ -1,6 +1,7 @@
 ﻿using data_rogue_core.EntitySystem;
 using System.Linq;
 using data_rogue_core.Maps;
+using data_rogue_core.Components;
 
 namespace data_rogue_core
 {
@@ -15,7 +16,9 @@ namespace data_rogue_core
 
         public IEntity Player;
 
-        public Map CurrentMap { get; set; }
+        //public Map CurrentMap => Maps[Player.Get<Position>().MapCoordinate.Key];
+
+        public MapCoordinate CameraPosition => Player.Get<Position>().MapCoordinate;
 
         public IEntityEngineSystem EntityEngineSystem { get; private set; }
 
@@ -24,8 +27,7 @@ namespace data_rogue_core
             return new SaveState
             {
                 Entities = EntityEngineSystem.MutableEntities.Select(e => EntitySerializer.Serialize(e)).ToList(),
-                Maps = Maps.AllMaps.Select(m => MapSerializer.Serialize(m)).ToList(),
-                CurrentMapKey = CurrentMap.MapKey.Key
+                Maps = Maps.AllMaps.Select(m => MapSerializer.Serialize(m)).ToList()
             };
         }
     }

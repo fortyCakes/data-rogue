@@ -22,5 +22,7 @@ namespace data_rogue_core.EntitySystem
 
         List<Entity> AllEntities { get; }
         List<Entity> MutableEntities { get; }
+
+        Entity GetEntityWithName(string name);
     }
 }

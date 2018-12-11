@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using data_rogue_core.Components;
@@ -8,7 +7,6 @@ using data_rogue_core.Maps;
 using FluentAssertions;
 using NSubstitute;
 using NUnit.Framework;
-using static data_rogue_core.UnitTests.Data.EntitySerializerTests;
 
 namespace data_rogue_core.UnitTests.Data
 {
@@ -78,7 +76,6 @@ namespace data_rogue_core.UnitTests.Data
         private SaveState GetTestSaveState(int saveState)
         {
             return new SaveState() {
-                CurrentMapKey = "TestMapKey",
                 Maps = new List<string> { MapSerializer.Serialize(GetTestMap(0))},
                 Entities = new List<string>() { EntitySerializer.Serialize( GetTestEntity(0))}
             } ;

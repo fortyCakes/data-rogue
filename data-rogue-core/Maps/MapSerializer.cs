@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using data_rogue_core.Components;
 using data_rogue_core.EntitySystem;
 using System.Linq;

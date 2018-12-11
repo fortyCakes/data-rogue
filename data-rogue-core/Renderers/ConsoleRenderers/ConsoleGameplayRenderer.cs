@@ -22,9 +22,9 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
                 return;
             }
 
-            var currentMap = world.CurrentMap;
-            var player = world.Player;
-            var playerPosition = player.Get<Position>().MapCoordinate;
+            var currentMap = world.Maps[world.CameraPosition.Key];
+            var cameraX = world.CameraPosition.X;
+            var cameraY = world.CameraPosition.Y;
 
             var consoleWidth = Console.Width;
             var consoleHeight = Console.Height;
@@ -36,8 +36,8 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             {
                 for (int x = 0; x < consoleWidth; x++)
                 {
-                    var lookupX = playerPosition.X - offsetX + x;
-                    var lookupY = playerPosition.Y - offsetY + y;
+                    var lookupX = cameraX - offsetX + x;
+                    var lookupY = cameraY - offsetY + y;
 
                     var appearance = positionSystem
                         .EntitiesAt(new MapCoordinate ( currentMap.MapKey, lookupX, lookupY))

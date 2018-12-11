@@ -1,6 +1,5 @@
 ﻿using data_rogue_core.EntitySystem;
 using data_rogue_core.Maps;
-using Newtonsoft.Json;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -35,8 +34,6 @@ namespace data_rogue_core
 
                 world.Maps.Add(map.MapKey, map);
             }
-
-            world.CurrentMap = world.Maps.Single(m => m.Key.Key == loadedState.CurrentMapKey).Value;
 
             return world;
         }

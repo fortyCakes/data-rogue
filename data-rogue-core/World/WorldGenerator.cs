@@ -1,9 +1,11 @@
 ﻿using data_rogue_core.Components;
 using data_rogue_core.Data;
 using data_rogue_core.EntitySystem;
-using System.Linq;
 using data_rogue_core.Maps;
 using data_rogue_core.Maps.Generators;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace data_rogue_core
 {
@@ -15,27 +17,66 @@ namespace data_rogue_core
 
             var world = new WorldState(entityEngineSystem);
 
-            GenerateInitialMap(seed, entityEngineSystem, world);
+            var spawnPoint = CreateInitialMapAndGetSpawnPoint(seed, entityEngineSystem, world);
 
-            AddPlayerToWorld(entityEngineSystem, world);
+            AddPlayerToWorld(entityEngineSystem, world, spawnPoint);
 
             return world;
         }
 
-        private static void GenerateInitialMap(string seed, IEntityEngineSystem entityEngineSystem, WorldState world)
+        private static MapCoordinate CreateInitialMapAndGetSpawnPoint(string seed, IEntityEngineSystem entityEngineSystem, WorldState world)
         {
-            IMapGenerator mapGenerator = new StaticMapGenerator(entityEngineSystem, "StaticMaps/entrance.map");
-            var testMap = mapGenerator.Generate("testMap", seed);
-            world.Maps.AddMap(testMap);
-            world.CurrentMap = testMap;
+            var worldStructure = entityEngineSystem.GetEntityWithName("World").Get<World>();
+            var initialBranchEntity = entityEngineSystem.GetEntityWithName(worldStructure.InitialBranch);
+                
+            var initialBranch = initialBranchEntity.Get<Branch>();
+
+            GenerateBranch(world, initialBranch, entityEngineSystem);
+
+            var initialMap = world.Maps[new MapKey($"{initialBranch.BranchName}:1")];
+
+            return GetSpawnPoint(initialMap);
         }
 
-        private static void AddPlayerToWorld(IEntityEngineSystem entityEngineSystem, WorldState world)
+        private static MapCoordinate GetSpawnPoint(Map initialMap)
+        {
+            var definedSpawnPoint = initialMap.Cells.Where(c => c.Value.Has<SpawnPoint>());
+
+            if (definedSpawnPoint.Count() == 0)
+            {
+                throw new ApplicationException("No SpawnPoint on initial map.");
+            }
+
+            return definedSpawnPoint.First().Key;
+        }
+
+        public static void GenerateBranch(WorldState world, Branch branchDefinition, IEntityEngineSystem entityEngineSystem)
+        {
+            var branchGenerator = BranchGenerators.Single(s => s.GenerationType == branchDefinition.GenerationType);
+
+            GeneratedBranch branch = branchGenerator.Generate(branchDefinition, entityEngineSystem);
+
+            foreach (Map map in branch.Maps)
+            {
+                world.Maps.AddMap(map);
+            }
+        }
+
+        private static void AddPlayerToWorld(IEntityEngineSystem entityEngineSystem, WorldState world, MapCoordinate spawnPoint)
         {
             var player = EntitySerializer.Deserialize(DataFileLoader.LoadFile(@"Entities\player.edt"), entityEngineSystem);
-            player.Get<Position>().MapCoordinate = new MapCoordinate("testMap", 0, 0);
+            player.Get<Position>().MapCoordinate = spawnPoint;
 
             world.Player = player;
         }
+
+        public static List<IBranchGenerator> BranchGenerators =>
+            AppDomain
+            .CurrentDomain
+            .GetAssemblies()
+            .SelectMany(s => s.GetTypes())
+            .Where(p => typeof(IBranchGenerator).IsAssignableFrom(p) && p != typeof(IBranchGenerator))
+            .Select(type => (IBranchGenerator)Activator.CreateInstance(type))
+            .ToList();
     }
 }

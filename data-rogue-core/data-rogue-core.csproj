@@ -61,6 +61,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\LoadingScreenActivity.cs" />
+    <Compile Include="Components\Branch.cs" />
+    <Compile Include="Components\BranchLink.cs" />
+    <Compile Include="Components\SpawnPoint.cs" />
+    <Compile Include="Data\BranchLinkEnd.cs" />
+    <Compile Include="Components\World.cs" />
     <Compile Include="Data\EntityBuilder.cs" />
     <Compile Include="Data\SaveStateSerializer.cs" />
     <Compile Include="EntitySystem\ComponentSerializer.cs" />
@@ -126,6 +131,9 @@
     <Compile Include="Systems\PlayerControlSystem.cs" />
     <Compile Include="Systems\PositionSystem.cs" />
     <Compile Include="Maps\Vector.cs" />
+    <Compile Include="World\GenerationStrategies\GeneratedBranch.cs" />
+    <Compile Include="World\GenerationStrategies\EntranceBranchGenerator.cs" />
+    <Compile Include="World\GenerationStrategies\IBranchGenerator.cs" />
     <Compile Include="World\IMapGenerator.cs" />
     <Compile Include="Maps\Generators\TestMapGenerator.cs" />
     <Compile Include="World\WorldGenerator.cs" />
@@ -136,17 +144,20 @@
     <None Include="Data\Entities\player.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Data\Entities\World\World.edt">
+    <None Include="Data\Entities\StaticEntities\World\World.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Data\Entities\MapCells\GenericCells.edt">
+    <None Include="Data\Entities\StaticEntities\MapCells\GenericCells.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\StaticMaps\entrance.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Entities\StaticEntities\World\Branches\Entrance.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Content Include="Images\Tileset\terminal8x8.png">

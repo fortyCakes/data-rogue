@@ -1,5 +1,4 @@
-﻿CurrentMapKey:"TestMapKey"
-===== ENTITIES =====
+﻿===== ENTITIES =====
 "TestEntity":3
 [Appearance]
 Color: #FF0000

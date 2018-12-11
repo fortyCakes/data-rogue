@@ -1,6 +1,5 @@
 ﻿using data_rogue_core.EntitySystem;
 using data_rogue_core.Utils;
-using System;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -15,7 +14,6 @@ namespace data_rogue_core
         public static string Serialize(SaveState state)
         {
             var stringBuilder = new StringBuilder();
-            stringBuilder.AppendLine($"CurrentMapKey:\"{state.CurrentMapKey}\"");
             stringBuilder.AppendLine($"===== ENTITIES =====");
             foreach (var entity in state.Entities)
             {
@@ -37,12 +35,10 @@ namespace data_rogue_core
 
             var state = new SaveState();
 
-            state.CurrentMapKey = Regex.Match(lines.First(), "^CurrentMapKey:\"(.*)\"").Groups[1].Value;
-
             int lineIndex;
 
             var textBuilder = new StringBuilder();
-            for (lineIndex = 2; lineIndex < lines.Length; lineIndex++)
+            for (lineIndex = 1; lineIndex < lines.Length; lineIndex++)
             {
                 var line = lines[lineIndex];
 
