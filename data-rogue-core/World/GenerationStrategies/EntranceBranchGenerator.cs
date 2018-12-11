@@ -2,6 +2,7 @@
 using data_rogue_core.Data;
 using data_rogue_core.EntitySystem;
 using data_rogue_core.Maps;
+using data_rogue_core.Maps.Generators;
 using System.Collections.Generic;
 
 namespace data_rogue_core
@@ -10,13 +11,14 @@ namespace data_rogue_core
     {
         public string GenerationType => "Entrance";
 
-        public GeneratedBranch Generate(Branch branchDefinition, IEntityEngineSystem engine)
+        public GeneratedBranch Generate(Branch branchDefinition, IEntityEngineSystem engine, string seed)
         {
-            var entranceMap = MapSerializer.Deserialize(DataFileLoader.LoadFile("StaticMaps/entrance.map"), engine, $"{branchDefinition.BranchName}:1");
+            var entranceMap = new StaticMapGenerator(engine, "StaticMaps/entrance.map").Generate($"{branchDefinition.BranchName}:1", seed);
+            var entranceMap2 = new StaticMapGenerator(engine, "StaticMaps/entrance2.map").Generate($"{branchDefinition.BranchName}:2", seed);
 
             var generatedBranch = new GeneratedBranch();
 
-            generatedBranch.Maps = new List<Map> { entranceMap };
+            generatedBranch.Maps = new List<Map> { entranceMap, entranceMap2 };
 
             return generatedBranch;
         }

@@ -14,6 +14,8 @@ namespace data_rogue_core
         public static string Serialize(SaveState state)
         {
             var stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine($"Seed: {state.Seed}");
+
             stringBuilder.AppendLine($"===== ENTITIES =====");
             foreach (var entity in state.Entities)
             {
@@ -35,10 +37,12 @@ namespace data_rogue_core
 
             var state = new SaveState();
 
+            state.Seed = Regex.Match(lines.First(), "^Seed: (.*)").Groups[1].Value;
+
             int lineIndex;
 
             var textBuilder = new StringBuilder();
-            for (lineIndex = 1; lineIndex < lines.Length; lineIndex++)
+            for (lineIndex = 2; lineIndex < lines.Length; lineIndex++)
             {
                 var line = lines[lineIndex];
 

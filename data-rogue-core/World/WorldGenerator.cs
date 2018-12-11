@@ -15,7 +15,7 @@ namespace data_rogue_core
         {
             entityEngineSystem.Initialise();
 
-            var world = new WorldState(entityEngineSystem);
+            var world = new WorldState(entityEngineSystem, seed);
 
             var spawnPoint = CreateInitialMapAndGetSpawnPoint(seed, entityEngineSystem, world);
 
@@ -31,7 +31,7 @@ namespace data_rogue_core
                 
             var initialBranch = initialBranchEntity.Get<Branch>();
 
-            GenerateBranch(world, initialBranch, entityEngineSystem);
+            GenerateBranch(world, initialBranch, entityEngineSystem, seed);
 
             var initialMap = world.Maps[new MapKey($"{initialBranch.BranchName}:1")];
 
@@ -50,11 +50,11 @@ namespace data_rogue_core
             return definedSpawnPoint.First().Key;
         }
 
-        public static void GenerateBranch(WorldState world, Branch branchDefinition, IEntityEngineSystem entityEngineSystem)
+        public static void GenerateBranch(WorldState world, Branch branchDefinition, IEntityEngineSystem entityEngineSystem, string seed)
         {
             var branchGenerator = BranchGenerators.Single(s => s.GenerationType == branchDefinition.GenerationType);
 
-            GeneratedBranch branch = branchGenerator.Generate(branchDefinition, entityEngineSystem);
+            GeneratedBranch branch = branchGenerator.Generate(branchDefinition, entityEngineSystem, seed);
 
             foreach (Map map in branch.Maps)
             {

@@ -1,4 +1,5 @@
-﻿===== ENTITIES =====
+﻿Seed: TestSeed
+===== ENTITIES =====
 "TestEntity":3
 [Appearance]
 Color: #FF0000

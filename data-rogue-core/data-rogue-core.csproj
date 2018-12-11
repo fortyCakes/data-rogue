@@ -134,8 +134,7 @@
     <Compile Include="World\GenerationStrategies\GeneratedBranch.cs" />
     <Compile Include="World\GenerationStrategies\EntranceBranchGenerator.cs" />
     <Compile Include="World\GenerationStrategies\IBranchGenerator.cs" />
-    <Compile Include="World\IMapGenerator.cs" />
-    <Compile Include="Maps\Generators\TestMapGenerator.cs" />
+    <Compile Include="Maps\Generators\IMapGenerator.cs" />
     <Compile Include="World\WorldGenerator.cs" />
     <Compile Include="World\WorldState.cs" />
   </ItemGroup>
@@ -145,6 +144,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\Entities\StaticEntities\World\World.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\StaticMaps\entrance2.map">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="OpenTK.dll.config" />
