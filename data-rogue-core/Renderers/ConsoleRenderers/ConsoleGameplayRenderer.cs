@@ -26,6 +26,8 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             var player = world.Player;
             var playerPosition = player.Get<Position>().MapCoordinate;
 
+            var playerFov = currentMap.FovFrom(playerPosition, 5);
+
             var consoleWidth = Console.Width;
             var consoleHeight = Console.Height;
 
@@ -39,13 +41,17 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
                     var lookupX = playerPosition.X - offsetX + x;
                     var lookupY = playerPosition.Y - offsetY + y;
 
+                    MapCoordinate coordinate = new MapCoordinate ( currentMap.MapKey, lookupX, lookupY);
+
                     var appearance = positionSystem
-                        .EntitiesAt(new MapCoordinate ( currentMap.MapKey, lookupX, lookupY))
+                        .EntitiesAt(coordinate)
                         .Select(e => e.Get<Appearance>())
                         .OrderByDescending(a => a.ZOrder)
                         .First();
 
-                    Console.Set(x, y, appearance.Color.ToRLColor(), RLColor.Black, appearance.Glyph);
+                    var backColor = playerFov.Contains(coordinate) ? RLColor.Gray : RLColor.Black;
+
+                    Console.Set(x, y, appearance.Color.ToRLColor(), backColor, appearance.Glyph);
                 }
             }
         }

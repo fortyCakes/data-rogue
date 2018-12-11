@@ -111,5 +111,32 @@ namespace data_rogue_core.Maps
         {
             RemoveCell(new MapCoordinate(MapKey, x, y));
         }
+
+        public List<MapCoordinate> FovFrom(MapCoordinate mapCoordinate, int range)
+        {
+            var list = new List<MapCoordinate>();
+
+            if (mapCoordinate.Key != this.MapKey)
+            {
+                return list;
+            }
+
+            list.Add(mapCoordinate);
+
+            for (int x = -range; x < range; x++)
+            {
+                for (int y = -range; y < range; y++)
+                {
+                    var checkCoordinate = new MapCoordinate(MapKey, mapCoordinate.X + x, mapCoordinate.Y + y);
+
+                    if (true)
+                    {
+                        list.Add(checkCoordinate);
+                    }
+                }
+            }
+
+            return list;
+        }
     }
 }

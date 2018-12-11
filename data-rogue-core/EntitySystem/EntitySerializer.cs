@@ -66,11 +66,13 @@ namespace data_rogue_core.EntitySystem
             EntityBuilder currentEntity = null;
             StringBuilder currentComponent = null;
 
+
+
             foreach (string line in lines)
             {
-                if (line.StartsWith("#"))
+                if (string.IsNullOrWhiteSpace(line))
                 {
-                    continue; // Comment
+                    continue; // empty line
                 }
 
                 if (line.StartsWith("\""))
