@@ -26,6 +26,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             var cameraX = world.CameraPosition.X;
             var cameraY = world.CameraPosition.Y;
 
+            MapCoordinate playerPosition = world.Player.Get<Position>().MapCoordinate;
             var playerFov = currentMap.FovFrom(playerPosition, 5);
 
             var consoleWidth = Console.Width;
@@ -49,7 +50,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
                         .OrderByDescending(a => a.ZOrder)
                         .First();
 
-                    var backColor = playerFov.Contains(coordinate) ? RLColor.Gray : RLColor.Black;
+                    var backColor = playerFov.Contains(coordinate) ? new RLColor(32,32,32) : RLColor.Black;
 
                     Console.Set(x, y, appearance.Color.ToRLColor(), backColor, appearance.Glyph);
                 }
