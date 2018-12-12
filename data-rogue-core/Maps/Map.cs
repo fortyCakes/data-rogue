@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using data_rogue_core.Components;
 using data_rogue_core.EntitySystem;
 
@@ -65,6 +66,20 @@ namespace data_rogue_core.Maps
             }
         }
 
+        public IEntity CellAt(MapCoordinate coordinate)
+        {
+            if (coordinate.Key != MapKey) return null;
+
+            if (Cells.ContainsKey(coordinate))
+            {
+                return Cells[coordinate];
+            }
+            else
+            {
+                return DefaultCell;
+            }
+        }
+
         internal void SetCell(MapCoordinate coordinate, IEntity cell)
         {
             CheckEntityIsCell(cell);
@@ -111,29 +126,18 @@ namespace data_rogue_core.Maps
 
         public List<MapCoordinate> FovFrom(MapCoordinate mapCoordinate, int range)
         {
-            var list = new List<MapCoordinate>();
-
             if (mapCoordinate.Key != this.MapKey)
             {
-                return list;
+                return new List<MapCoordinate>();
             }
 
-            list.Add(mapCoordinate);
+            bool GetTransparent(Vector v) => CellAt(mapCoordinate + v).Get<Physical>().Transparent;
 
-            for (int x = -range; x < range; x++)
-            {
-                for (int y = -range; y < range; y++)
-                {
-                    var checkCoordinate = new MapCoordinate(MapKey, mapCoordinate.X + x, mapCoordinate.Y + y);
+            var visibleVectors = ShadowcastingFovCalculator.InFov(range, GetTransparent);
 
-                    if (true)
-                    {
-                        list.Add(checkCoordinate);
-                    }
-                }
-            }
+            var visibleCells = visibleVectors.Select(v => mapCoordinate + v).ToList();
 
-            return list;
+            return visibleCells;
         }
     }
 }

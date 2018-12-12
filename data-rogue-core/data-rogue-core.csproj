@@ -75,6 +75,9 @@
     <Compile Include="EntitySystem\IStaticEntityLoader.cs" />
     <Compile Include="Maps\Generators\StaticMapGenerator.cs" />
     <Compile Include="Maps\MapSerializer.cs" />
+    <Compile Include="Maps\Matrix.cs" />
+    <Compile Include="Maps\Octant.cs" />
+    <Compile Include="Maps\ShadowcastingFovCalculator.cs" />
     <Compile Include="Utils\StringExtensions.cs" />
     <Compile Include="Utils\WordWrap.cs" />
     <Compile Include="Menus\StaticMenus\MainMenu.cs" />

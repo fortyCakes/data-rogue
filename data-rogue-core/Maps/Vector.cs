@@ -10,5 +10,17 @@
             X = x;
             Y = y;
         }
+
+        public override bool Equals(object obj)
+        {
+            Vector other = obj as Vector;
+
+            if (ReferenceEquals(other, null))
+            {
+                return false;
+            }
+
+            return other.X == this.X && other.Y == this.Y;
+        }
     }
 }
