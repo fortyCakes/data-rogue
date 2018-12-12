@@ -1,4 +1,6 @@
-﻿namespace data_rogue_core.Maps
+﻿using System.Runtime.CompilerServices;
+
+namespace data_rogue_core.Maps
 {
     public class Vector
     {
@@ -20,7 +22,45 @@
                 return false;
             }
 
-            return other.X == this.X && other.Y == this.Y;
+            return this.Equals(other);
+        }
+
+        protected bool Equals(Vector other)
+        {
+            return X == other.X && Y == other.Y;
+        }
+
+        public override string ToString()
+        {
+            return $"X: {X}, Y: {Y}";
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return (X * 397) ^ Y;
+            }
+        }
+
+        public static Vector operator +(Vector thisVector, Vector thatVector)
+        {
+            return new Vector(thisVector.X + thatVector.X, thisVector.Y + thatVector.Y);
+        }
+
+        public static bool operator == (Vector thisVector, Vector thatVector)
+        {
+            if (ReferenceEquals(thisVector, null)) return false;
+            if (ReferenceEquals(thatVector, null)) return false;
+
+            return thisVector.Equals(thatVector);
+        }
+
+        public static bool operator !=(Vector thisVector, Vector thatVector)
+        {
+            if (ReferenceEquals(thisVector, null)) return false;
+            if (ReferenceEquals(thatVector, null)) return false;
+            return !(thisVector == thatVector);
         }
     }
 }

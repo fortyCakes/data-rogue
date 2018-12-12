@@ -16,13 +16,11 @@ namespace data_rogue_core.Maps
             new Octant(new Matrix(0, -1, -1, 0))
         };
 
-        private readonly Matrix _matrix;
+        public Matrix Matrix { get; }
 
         private Octant(Matrix coordinateTransform)
         {
-            _matrix = coordinateTransform;
+            Matrix = coordinateTransform;
         }
-
-        public Vector Apply(Vector input) => _matrix * input;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 using data_rogue_core.Activities;
 using data_rogue_core.Components;
@@ -56,7 +57,26 @@ namespace data_rogue_core.Systems
                     case RLKey.Escape:
                         Game.ActivityStack.Push(MainMenu.GetMainMenu());
                         break;
+                    case RLKey.Period:
+                        DebugChangeFloor(+1);
+                        break;
+                    case RLKey.Comma:
+                        DebugChangeFloor(-1);
+                        break;
                 }
+            }
+        }
+
+        private void DebugChangeFloor(int change)
+        {
+            var playerMapCoordinate = Game.WorldState.Player.Get<Position>().MapCoordinate;
+
+            var match = Regex.Match(playerMapCoordinate.Key.Key, "^(.*):([0-9]*)$");
+
+            string newMap = $"{match.Groups[1].Value}:{int.Parse(match.Groups[2].Value) + change}";
+            if (Game.WorldState.Maps.Any(m => m.Key.Key == newMap))
+            {
+                playerMapCoordinate.Key = new MapKey(newMap);
             }
         }
 
