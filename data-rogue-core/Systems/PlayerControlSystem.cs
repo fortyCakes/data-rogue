@@ -31,10 +31,10 @@ namespace data_rogue_core.Systems
                 switch (keyPress.Key)
                 {
                     case RLKey.W:
-                        MoveEntities(0, -1);
+                        MoveEntity(Game.WorldState.Player, 0, -1);
                         break;
                     case RLKey.A:
-                        MoveEntities(-1, 0);
+                        MoveEntity(Game.WorldState.Player, -1, 0);
                         break;
                     case RLKey.S:
                         if (keyPress.Shift)
@@ -44,12 +44,12 @@ namespace data_rogue_core.Systems
                         }
                         else
                         {
-                            MoveEntities(0, 1);
+                            MoveEntity(Game.WorldState.Player, 0, 1);
                         }
 
                         break;
                     case RLKey.D:
-                        MoveEntities(1, 0);
+                        MoveEntity(Game.WorldState.Player, 1, 0);
                         break;
                     case RLKey.L:
                         Game.ActivityStack.Push(new StaticTextActivity(@"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", Game.RendererFactory));
@@ -58,11 +58,31 @@ namespace data_rogue_core.Systems
                         Game.ActivityStack.Push(MainMenu.GetMainMenu());
                         break;
                     case RLKey.Period:
-                        DebugChangeFloor(+1);
+                        UseStairs(StairDirection.Down);
                         break;
                     case RLKey.Comma:
-                        DebugChangeFloor(-1);
+                        UseStairs(StairDirection.Up);
                         break;
+                }
+            }
+        }
+
+        private void UseStairs(StairDirection direction)
+        {
+            IEntity player = Game.WorldState.Player;
+            var playerMapCoordinate = player.Get<Position>().MapCoordinate;
+
+            var stairs = PositionSystem
+                .EntitiesAt(playerMapCoordinate)
+                .Where(e => e.Has<Portal>())
+                .Select(e => e.Get<Portal>())
+                .SingleOrDefault();
+
+            if (stairs != null && stairs.Direction == direction)
+            {
+                if (EventSystem.Try(EventType.ChangeFloor, player, direction))
+                {
+                    player.Get<Position>().MapCoordinate = stairs.Destination;
                 }
             }
         }
@@ -85,15 +105,20 @@ namespace data_rogue_core.Systems
             SaveSystem.Save(Game.WorldState);
         }
 
-        private void MoveEntities(int x, int y)
+        private void MoveAllEntities(int x, int y)
         {
             foreach (var entity in Entities)
             {
-                var vector = new Vector(x, y);
-                if (EventSystem.Try(EventType.Move, entity, vector))
-                {
-                    PositionSystem.Move(entity.Get<Position>(), vector);
-                }
+                MoveEntity(entity, x, y);
+            }
+        }
+
+        private void MoveEntity(IEntity entity, int x, int y)
+        {
+            var vector = new Vector(x, y);
+            if (EventSystem.Try(EventType.Move, entity, vector))
+            {
+                PositionSystem.Move(entity.Get<Position>(), vector);
             }
         }
     }

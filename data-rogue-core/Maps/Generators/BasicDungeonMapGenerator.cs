@@ -13,7 +13,7 @@ namespace data_rogue_core.Maps.Generators
         private IEntityEngineSystem Engine { get; }
         public IRandom Random;
 
-        private int size = 100;
+        private int size = 50;
         private int numRooms = 10;
         private int roomSize = 10;
 

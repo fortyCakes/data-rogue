@@ -6,6 +6,7 @@ ZOrder: 0
 [Physical]
 Passable: true
 Transparent: true
+
 "Cell:SpawnPoint"
 [SpawnPoint]
 [Appearance]
@@ -15,6 +16,7 @@ ZOrder: 0
 [Physical]
 Passable: true
 Transparent: true
+
 "Cell:Wall"
 [Appearance]
 Glyph: #
@@ -23,6 +25,7 @@ ZOrder: 0
 [Physical]
 Passable: false
 Transparent: false
+
 "Cell:Boulder"
 [Appearance]
 Glyph: O
@@ -31,3 +34,25 @@ ZOrder: 0
 [Physical]
 Passable: false
 Transparent: false
+
+"Cell:StairsDown"
+[Appearance]
+Glyph: >
+Color: #aaaaaa
+ZOrder: 0
+[Physical]
+Passable: true
+Transparent: true
+[Portal]
+Direction: Down
+
+"Cell:StairsUp"
+[Appearance]
+Glyph: <
+Color: #aaaaaa
+ZOrder: 0
+[Physical]
+Passable: true
+Transparent: true
+[Portal]
+Direction: Up

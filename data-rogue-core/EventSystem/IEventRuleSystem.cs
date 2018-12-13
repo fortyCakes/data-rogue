@@ -27,6 +27,7 @@ namespace data_rogue_core.EventSystem
     public enum EventType
     {
         Input = 1,
-        Move = 2
+        Move = 2,
+        ChangeFloor = 3
     }
 }

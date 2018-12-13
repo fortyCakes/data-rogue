@@ -83,6 +83,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="EntitySystem\TestData\ExpectedSerialization_Entity2.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="EntitySystem\TestData\ExpectedSerialization_Entity1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

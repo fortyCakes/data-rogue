@@ -30,17 +30,18 @@ namespace data_rogue_core.EntitySystem
                 string stringValue = null;
 
                 Type fieldType = field.FieldType;
-                if (fieldType == typeof(Color))
+
+                if (IsNullOrDefault(value))
+                {
+                    stringValue = null;
+                }
+                else if (fieldType == typeof(Color))
                 {
                     stringValue = ColorTranslator.ToHtml((Color)value);
                 }
                 else if (typeof(ICustomFieldSerialization).IsAssignableFrom(fieldType))
                 {
                     stringValue = ((ICustomFieldSerialization)value).Serialize();
-                }
-                else if (IsNullOrDefault(value))
-                {
-                    stringValue = null;
                 }
                 else
                 {
@@ -110,6 +111,10 @@ namespace data_rogue_core.EntitySystem
                 var instance = Activator.CreateInstance(fieldType);
                 ((ICustomFieldSerialization)instance).Deserialize(value);
                 safeValue = instance;
+            }
+            else if (fieldType.IsEnum)
+            {
+                safeValue = Enum.Parse(fieldType, value);
             }
             else if (value != null)
             {

@@ -1,0 +1,3 @@
+﻿"EntityWithPortal":1
+[Portal]
+Direction: Down

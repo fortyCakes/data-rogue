@@ -33,12 +33,13 @@ namespace data_rogue_core.UnitTests.Data
                 
                 return entity;
             });
-            _entityEngineSystem.ComponentTypes.ReturnsForAnyArgs(new[] { typeof(Appearance), typeof(Position) });
+            _entityEngineSystem.ComponentTypes.ReturnsForAnyArgs(new[] { typeof(Appearance), typeof(Position), typeof(Portal) });
         }
 
         [Test]
         [TestCase(0)]
         [TestCase(1)]
+        [TestCase(2)]
         public void TestEntity_Deserialize_MatchesTestEntity(int testCase)
         {
             string testData = LoadSerializedData(testCase);
@@ -53,6 +54,7 @@ namespace data_rogue_core.UnitTests.Data
         [Test]
         [TestCase(0)]
         [TestCase(1)]
+        [TestCase(2)]
         public void TestEntity_Serialize_MatchesSerializedData(int testCase)
         {
             var testEntity = GetTestEntity(testCase);
@@ -112,7 +114,12 @@ namespace data_rogue_core.UnitTests.Data
                 new Position() { MapCoordinate = new MapCoordinate("TestMapKey", 1, 1)}
             });
 
-            return new[] { testEntity0, testEntity1 };
+            var testEntity2 = new Entity(1, "EntityWithPortal", new[]
+            {
+                new Portal() { Destination = null, Direction = StairDirection.Down}
+            });
+
+            return new[] { testEntity0, testEntity1, testEntity2 };
         }
     }
 }
