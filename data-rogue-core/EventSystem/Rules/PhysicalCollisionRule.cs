@@ -6,9 +6,9 @@ using data_rogue_core.Systems;
 
 namespace data_rogue_core.EventSystem.Rules
 {
-    class PhsyicalCollisionRule : IEventRule
+    class PhysicalCollisionRule : IEventRule
     {
-        public PhsyicalCollisionRule(IPositionSystem positionSystem)
+        public PhysicalCollisionRule(IPositionSystem positionSystem)
         {
             PositionSystem = positionSystem;
         }
