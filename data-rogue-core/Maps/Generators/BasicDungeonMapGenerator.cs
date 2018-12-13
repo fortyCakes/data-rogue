@@ -28,9 +28,9 @@ namespace data_rogue_core.Maps.Generators
             Engine = engine;
         }
 
-        public Map Generate(string mapName, string seed)
+        public Map Generate(string mapName, IRandom random)
         {
-            Random = new RNG(seed);
+            Random = random;
 
             wallCell = Engine.GetEntityWithName("Cell:Wall");
             floorCell = Engine.GetEntityWithName("Cell:Empty");
@@ -42,8 +42,8 @@ namespace data_rogue_core.Maps.Generators
 
             for (int i = 0; i < numRooms; i++)
             {
-                int leftX = Random.Next(0, size);
-                int topY = Random.Next(0, size);
+                int leftX = Random.Between(0, size);
+                int topY = Random.Between(0, size);
 
                 var room = new Room
                 {
@@ -93,8 +93,8 @@ namespace data_rogue_core.Maps.Generators
         public Vector GetPointInRoom(IRandom random)
         {
             return new Vector(
-                random.Next(LeftX, RightX),
-                random.Next(TopY, BottomY));
+                random.Between(LeftX, RightX),
+                random.Between(TopY, BottomY));
         }
     }
 }

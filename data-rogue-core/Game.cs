@@ -30,6 +30,9 @@ namespace data_rogue_core
         private const int SCREEN_HEIGHT = 70;
 
         private const string DEBUG_SEED = "DEBUG";
+
+        public static string Seed => DEBUG_SEED;
+
         private static RLRootConsole _rootConsole;
 
         public static void Main()
@@ -89,7 +92,9 @@ namespace data_rogue_core
 
             EventSystem.RegisterRule(new InputHandlerRule(PlayerControlSystem));
             EventSystem.RegisterRule(new PhysicalCollisionRule(PositionSystem));
+            EventSystem.RegisterRule(new BranchGeneratorRule(EntityEngineSystem, PositionSystem, Seed));
         }
+
 
         private static void InitialiseState()
         {
@@ -172,7 +177,7 @@ namespace data_rogue_core
             {
                 Thread.CurrentThread.IsBackground = true;
 
-                WorldState = WorldGenerator.Create(DEBUG_SEED, EntityEngineSystem);
+                WorldState = WorldGenerator.Create(Seed, EntityEngineSystem, PositionSystem);
 
                 ActivityStack.Pop();
 

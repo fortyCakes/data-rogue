@@ -74,8 +74,8 @@ namespace data_rogue_core.Systems
 
             var stairs = PositionSystem
                 .EntitiesAt(playerMapCoordinate)
-                .Where(e => e.Has<Portal>())
-                .Select(e => e.Get<Portal>())
+                .Where(e => e.Has<Stairs>())
+                .Select(e => e.Get<Stairs>())
                 .SingleOrDefault();
 
             if (stairs != null && stairs.Direction == direction)
@@ -83,6 +83,22 @@ namespace data_rogue_core.Systems
                 if (EventSystem.Try(EventType.ChangeFloor, player, direction))
                 {
                     player.Get<Position>().MapCoordinate = stairs.Destination;
+                }
+            }
+            else
+            {
+                var portal = PositionSystem
+                    .EntitiesAt(playerMapCoordinate)
+                    .Where(e => e.Has<Portal>())
+                    .Select(e => e.Get<Portal>())
+                    .SingleOrDefault();
+
+                if (portal != null)
+                {
+                    if (EventSystem.Try(EventType.UsePortal, player, portal))
+                    {
+                        player.Get<Position>().MapCoordinate = portal.Destination;
+                    }
                 }
             }
         }

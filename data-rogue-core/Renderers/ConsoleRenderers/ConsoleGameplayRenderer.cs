@@ -55,6 +55,9 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
                     Console.Set(x, y, appearance.Color.ToRLColor(), backColor, appearance.Glyph);
                 }
             }
+
+            // TODO REMOVE
+            Console.Print(0, 0, Game.WorldState.CameraPosition.Key.Key, RLColor.Black, RLColor.White);
         }
     }
 }

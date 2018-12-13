@@ -7,7 +7,7 @@ namespace data_rogue_core
     public interface IRandom
     {
         void Seed(string seed);
-        int Next(int min, int max);
+        int Between(int min, int max);
 
         T PickOne<T>(List<T> items);
     }
@@ -31,7 +31,7 @@ namespace data_rogue_core
             Seed(seed.GetHashCode());
         }
 
-        public int Next(int min, int max)
+        public int Between(int min, int max)
         {
             return _random.Next(min, max);
         }
@@ -39,7 +39,7 @@ namespace data_rogue_core
         public T PickOne<T>(List<T> items)
         {
             var max = items.Count();
-            var index = Next(1, max) - 1;
+            var index = Between(1, max) - 1;
             return items[index];
         }
     }

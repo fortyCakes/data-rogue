@@ -10,8 +10,8 @@ Transparent: true
 "Cell:SpawnPoint"
 [SpawnPoint]
 [Appearance]
-Glyph: ,
-Color: #aaaaff
+Glyph: .
+Color: #aaaaaa
 ZOrder: 0
 [Physical]
 Passable: true
@@ -43,7 +43,7 @@ ZOrder: 0
 [Physical]
 Passable: true
 Transparent: true
-[Portal]
+[Stairs]
 Direction: Down
 
 "Cell:StairsUp"
@@ -54,5 +54,5 @@ ZOrder: 0
 [Physical]
 Passable: true
 Transparent: true
-[Portal]
+[Stairs]
 Direction: Up

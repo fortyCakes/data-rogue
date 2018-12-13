@@ -28,6 +28,7 @@ namespace data_rogue_core.EventSystem
     {
         Input = 1,
         Move = 2,
-        ChangeFloor = 3
+        ChangeFloor = 3,
+        UsePortal = 4
     }
 }

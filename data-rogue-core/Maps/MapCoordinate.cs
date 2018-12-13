@@ -63,12 +63,12 @@ namespace data_rogue_core.Maps
         {
             if (ReferenceEquals(a, null))
             {
-                return false;
+                return ReferenceEquals(b, null);
             }
 
             if (ReferenceEquals(b, null))
             {
-                return false;
+                return ReferenceEquals(a, null);
             }
 
             return a.Equals(b);
@@ -78,12 +78,12 @@ namespace data_rogue_core.Maps
         {
             if (ReferenceEquals(a, null))
             {
-                return false;
+                return !ReferenceEquals(b, null);
             }
 
             if (ReferenceEquals(b, null))
             {
-                return false;
+                return !ReferenceEquals(a, null);
             }
 
             return !a.Equals(b);

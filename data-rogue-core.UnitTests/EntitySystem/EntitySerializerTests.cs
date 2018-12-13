@@ -33,7 +33,7 @@ namespace data_rogue_core.UnitTests.Data
                 
                 return entity;
             });
-            _entityEngineSystem.ComponentTypes.ReturnsForAnyArgs(new[] { typeof(Appearance), typeof(Position), typeof(Portal) });
+            _entityEngineSystem.ComponentTypes.ReturnsForAnyArgs(new[] { typeof(Appearance), typeof(Position), typeof(Stairs) });
         }
 
         [Test]
@@ -114,9 +114,9 @@ namespace data_rogue_core.UnitTests.Data
                 new Position() { MapCoordinate = new MapCoordinate("TestMapKey", 1, 1)}
             });
 
-            var testEntity2 = new Entity(1, "EntityWithPortal", new[]
+            var testEntity2 = new Entity(1, "EntityWithStairs", new[]
             {
-                new Portal() { Destination = null, Direction = StairDirection.Down}
+                new Stairs() { Destination = null, Direction = StairDirection.Down}
             });
 
             return new[] { testEntity0, testEntity1, testEntity2 };

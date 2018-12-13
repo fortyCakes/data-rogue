@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\LoadingScreenActivity.cs" />
+    <Compile Include="Components\BranchPortal.cs" />
     <Compile Include="Components\Stairs.cs" />
     <Compile Include="Components\Branch.cs" />
     <Compile Include="Components\BranchLink.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="EntitySystem\EntitySerializer.cs" />
     <Compile Include="EntitySystem\ICustomFieldSerialization.cs" />
     <Compile Include="EntitySystem\IStaticEntityLoader.cs" />
+    <Compile Include="EventSystem\Rules\BranchGeneratorRule.cs" />
     <Compile Include="Maps\Generators\BasicDungeonMapGenerator.cs" />
     <Compile Include="Systems\IRandom.cs" />
     <Compile Include="Maps\Generators\StaticMapGenerator.cs" />
@@ -137,6 +139,9 @@
     <Compile Include="Systems\PlayerControlSystem.cs" />
     <Compile Include="Systems\PositionSystem.cs" />
     <Compile Include="Maps\Vector.cs" />
+    <Compile Include="World\BranchGeneratorFactory.cs" />
+    <Compile Include="World\GenerationStrategies\BaseBranchGenerator.cs" />
+    <Compile Include="World\GenerationStrategies\DungeonBranchGenerator.cs" />
     <Compile Include="World\GenerationStrategies\GeneratedBranch.cs" />
     <Compile Include="World\GenerationStrategies\EntranceBranchGenerator.cs" />
     <Compile Include="World\GenerationStrategies\IBranchGenerator.cs" />

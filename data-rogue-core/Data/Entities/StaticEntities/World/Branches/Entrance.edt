@@ -1,5 +1,16 @@
 ﻿"Branch:Entrance"
 [Branch]
-BranchName: Entrance
+BranchName: Branch:Entrance
 GenerationType: Entrance
 Depth: 2
+
+"Branch:Dungeon"
+[Branch]
+BranchName: Branch:Dungeon
+GenerationType: Dungeon
+Depth: 5
+
+"BranchLink:EntranceToDungeon"
+[BranchLink]
+From: BranchLinkEnd: Branch:Entrance 2-2
+To: BranchLinkEnd: Branch:Dungeon 1-1

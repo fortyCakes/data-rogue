@@ -14,7 +14,7 @@ namespace data_rogue_core.Maps.Generators
         public IEntityEngineSystem EntityEngineSystem { get; }
         public string MapFile { get; }
 
-        public Map Generate(string mapName, string seed)
+        public Map Generate(string mapName, IRandom random)
         {
             var mapData = DataFileLoader.LoadFile(MapFile);
             var map = MapSerializer.Deserialize(mapData, EntityEngineSystem, mapName);

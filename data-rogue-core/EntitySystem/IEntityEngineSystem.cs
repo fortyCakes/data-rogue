@@ -24,5 +24,8 @@ namespace data_rogue_core.EntitySystem
         List<Entity> MutableEntities { get; }
 
         Entity GetEntityWithName(string name);
+
+        List<Entity> EntitiesWith<T>() where T: IEntityComponent;
+        List<T> GetAll<T>() where T : IEntityComponent;
     }
 }

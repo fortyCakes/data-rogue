@@ -3,15 +3,9 @@ using data_rogue_core.Maps;
 
 namespace data_rogue_core.Components
 {
-    public class Stairs : IEntityComponent
+    public class Portal : IEntityComponent
     {
-        public StairDirection Direction;
+        public string BranchLink;
         public MapCoordinate Destination;
-    }
-
-    public enum StairDirection
-    {
-        Up = 1,
-        Down = 2
     }
 }

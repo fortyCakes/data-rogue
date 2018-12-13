@@ -113,5 +113,15 @@ namespace data_rogue_core.EntitySystem
         {
             return GetEntitiesWithName(v).Single();
         }
+
+        public List<Entity> EntitiesWith<T>() where T: IEntityComponent
+        {
+            return AllEntities.Where(e => e.Has<T>()).ToList();
+        }
+
+        public List<T> GetAll<T>() where T : IEntityComponent
+        {
+            return EntitiesWith<T>().Select(e => e.Get<T>()).ToList();
+        }
     }
 }

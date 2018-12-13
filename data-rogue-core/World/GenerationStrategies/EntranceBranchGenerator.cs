@@ -5,69 +5,34 @@ using data_rogue_core.EntitySystem;
 using data_rogue_core.Maps;
 using data_rogue_core.Maps.Generators;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using data_rogue_core.Systems;
 
 namespace data_rogue_core
 {
-    internal class EntranceBranchGenerator : IBranchGenerator
+    public class EntranceBranchGenerator: BaseBranchGenerator
     {
+        public override string GenerationType => "Entrance";
 
-
-        public string GenerationType => "Entrance";
-
-        private IRandom Random { get; set; }
-
-        public GeneratedBranch Generate(Branch branchDefinition, IEntityEngineSystem engine, string seed)
+        protected override List<Map> GenerateMaps(Branch branchDefinition, IEntityEngineSystem engine)
         {
-            Random = new RNG(seed);
-
-            var entranceMap = new StaticMapGenerator(engine, "StaticMaps/entrance.map").Generate($"{branchDefinition.BranchName}:1", seed);
-            var entranceMap2 = new StaticMapGenerator(engine, "StaticMaps/entrance2.map").Generate($"{branchDefinition.BranchName}:2", seed);
-
-            var generatedBranch = new GeneratedBranch();
-
-            generatedBranch.Maps = new List<Map> { entranceMap, entranceMap2 };
-
-            Map previousMap = null;
-            foreach (var map in generatedBranch.Maps)
-            {
-                if (previousMap != null)
-                {
-                    LinkStairs(previousMap, map);
-                }
-
-                previousMap = map;
-            }
-
-            return generatedBranch;
+            var entranceMap = new StaticMapGenerator(engine, "StaticMaps/entrance.map").Generate($"{branchDefinition.BranchName}:1", Random);
+            var entranceMap2 = new StaticMapGenerator(engine, "StaticMaps/entrance2.map").Generate($"{branchDefinition.BranchName}:2", Random);
+            var generatedBranchMaps = new List<Map> { entranceMap, entranceMap2 };
+            return generatedBranchMaps;
         }
 
-        private void LinkStairs(Map previousMap, Map map)
+        protected override void AddEntities(GeneratedBranch branch, Branch branchDefinition, IEntityEngineSystem engine, IPositionSystem position)
         {
-            var stairsDown = GetStairs(previousMap, StairDirection.Down);
-            var stairsUp = GetStairs(map, StairDirection.Up);
-
-            if (stairsUp.Count != stairsDown.Count)
+            var components = new IEntityComponent[]
             {
-                throw new ApplicationException("Stair counts do not match between floors");
-            }
+                new Appearance {Color = Color.Blue, Glyph = '>', ZOrder = 1}, 
+                new Portal(),
+                new Position {MapCoordinate = new MapCoordinate($"{branchDefinition.BranchName}:2", 0, 0)}
+            };
 
-            while (stairsDown.Count > 0)
-            {
-                var downStairs = Random.PickOne(stairsDown);
-                var upStairs = Random.PickOne(stairsUp);
-
-                downStairs.Value.Get<Portal>().Destination = upStairs.Key;
-                upStairs.Value.Get<Portal>().Destination = downStairs.Key;
-
-                stairsDown.Remove(downStairs);
-                stairsUp.Remove(upStairs);
-            }
-        }
-
-        private static List<KeyValuePair<MapCoordinate, IEntity>> GetStairs(Map map, StairDirection direction)
-        {
-            return map.Cells.Where(c => c.Value.Has<Portal>() && c.Value.Get<Portal>().Direction == direction).ToList();
+            engine.New("entrance room portal", components);
         }
     }
 }

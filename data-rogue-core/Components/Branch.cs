@@ -7,5 +7,6 @@ namespace data_rogue_core.Components
         public string BranchName;
         public string GenerationType;
         public int Depth;
+        public bool Generated;
     }
 }
