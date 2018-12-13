@@ -13,7 +13,8 @@ namespace data_rogue_core
 
         public GeneratedBranch Generate(Branch branchDefinition, IEntityEngineSystem engine, string seed)
         {
-            var entranceMap = new StaticMapGenerator(engine, "StaticMaps/entrance.map").Generate($"{branchDefinition.BranchName}:1", seed);
+            var entranceMap = new BasicDungeonMapGenerator(engine).Generate($"{branchDefinition.BranchName}:1", seed);
+                //new StaticMapGenerator(engine, "StaticMaps/entrance.map").Generate($"{branchDefinition.BranchName}:1", seed);
             var entranceMap2 = new StaticMapGenerator(engine, "StaticMaps/entrance2.map").Generate($"{branchDefinition.BranchName}:2", seed);
 
             var generatedBranch = new GeneratedBranch();

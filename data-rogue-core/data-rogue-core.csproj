@@ -73,6 +73,8 @@
     <Compile Include="EntitySystem\EntitySerializer.cs" />
     <Compile Include="EntitySystem\ICustomFieldSerialization.cs" />
     <Compile Include="EntitySystem\IStaticEntityLoader.cs" />
+    <Compile Include="Maps\Generators\BasicDungeonMapGenerator.cs" />
+    <Compile Include="Systems\IRandom.cs" />
     <Compile Include="Maps\Generators\StaticMapGenerator.cs" />
     <Compile Include="Maps\MapSerializer.cs" />
     <Compile Include="Maps\Matrix.cs" />
@@ -118,7 +120,7 @@
     <Compile Include="EventSystem\IEventRuleSystem.cs" />
     <Compile Include="EventSystem\RuleBook.cs" />
     <Compile Include="EventSystem\Rules\InputHandlerRule.cs" />
-    <Compile Include="EventSystem\Rules\PhsyicalCollisionRule.cs" />
+    <Compile Include="EventSystem\Rules\PhysicalCollisionRule.cs" />
     <Compile Include="Maps\MapCollection.cs" />
     <Compile Include="Renderers\ConsoleRenderers\ConsoleGameplayRenderer.cs" />
     <Compile Include="Renderers\ConsoleRenderers\ConsoleStaticTextRenderer.cs" />

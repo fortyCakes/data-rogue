@@ -88,7 +88,7 @@ namespace data_rogue_core
             EventSystem.Initialise();
 
             EventSystem.RegisterRule(new InputHandlerRule(PlayerControlSystem));
-            EventSystem.RegisterRule(new PhsyicalCollisionRule(PositionSystem));
+            EventSystem.RegisterRule(new PhysicalCollisionRule(PositionSystem));
         }
 
         private static void InitialiseState()
