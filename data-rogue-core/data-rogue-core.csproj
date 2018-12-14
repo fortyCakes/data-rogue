@@ -75,6 +75,7 @@
     <Compile Include="EntitySystem\EntitySerializer.cs" />
     <Compile Include="EntitySystem\ICustomFieldSerialization.cs" />
     <Compile Include="EntitySystem\IStaticEntityLoader.cs" />
+    <Compile Include="EventSystem\IEventRule.cs" />
     <Compile Include="EventSystem\Rules\BranchGeneratorRule.cs" />
     <Compile Include="Maps\Generators\BasicDungeonMapGenerator.cs" />
     <Compile Include="Systems\IRandom.cs" />

@@ -9,3 +9,4 @@ data-rogue-core.UnitTests/obj/
 _NCrunch_data-rogue/
 *.ncrunchsolution
 *.ncrunchsolution.user
+/DataRogueWorldEditor/obj/Debug

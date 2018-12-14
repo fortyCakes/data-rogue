@@ -11,15 +11,6 @@ namespace data_rogue_core.EventSystem
         void RegisterRule(IEventRule eventRule);
     }
 
-    public interface IEventRule
-    {
-        EventTypeList EventTypes {get;}
-
-        int RuleOrder { get; }
-
-        bool Apply(EventType type, IEntity sender, object eventData);
-    }
-
     public class EventTypeList : List<EventType>
     {
     }
