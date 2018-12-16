@@ -38,7 +38,7 @@ namespace DataRogueWorldEditor
             frmMapEditor.Show(dockPanel, DockState.Document);
         }
 
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        private void itemSave_Click(object sender, EventArgs e)
         {
             var editor = dockPanel.ActiveContent as IEditor;
 
@@ -48,7 +48,7 @@ namespace DataRogueWorldEditor
             }
         }
 
-        private void tsmOpenMap_Click(object sender, EventArgs e)
+        private void itemOpenMap_Click(object sender, EventArgs e)
         {
             OpenFileDialog open = new OpenFileDialog();
 
@@ -63,7 +63,7 @@ namespace DataRogueWorldEditor
             }
         }
 
-        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void itemSaveAs_Click(object sender, EventArgs e)
         {
             var editor = dockPanel.ActiveContent as IEditor;
 
@@ -71,6 +71,11 @@ namespace DataRogueWorldEditor
             {
                 editor.SaveAs();
             }
+        }
+
+        private void itemNewMap_Click(object sender, EventArgs e)
+        {
+            OpenMapEditor(null);
         }
     }
 }

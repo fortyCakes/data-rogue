@@ -55,8 +55,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblSelectedCell = new System.Windows.Forms.Label();
             this.toolsVisible = new System.Windows.Forms.ToolStrip();
+            this.btnSave = new System.Windows.Forms.ToolStripButton();
+            this.btnSaveAs = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnMap = new System.Windows.Forms.ToolStripButton();
-            this.btnEnemies = new System.Windows.Forms.ToolStripButton();
+            this.btnEntities = new System.Windows.Forms.ToolStripButton();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -169,7 +172,7 @@
             // toolStripContainer2.ContentPanel
             // 
             this.toolStripContainer2.ContentPanel.Controls.Add(this.lblCurrentTool);
-            this.toolStripContainer2.ContentPanel.Size = new System.Drawing.Size(196, 356);
+            this.toolStripContainer2.ContentPanel.Size = new System.Drawing.Size(188, 356);
             this.toolStripContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
             // 
             // toolStripContainer2.LeftToolStripPanel
@@ -245,7 +248,7 @@
             this.btnScrollRight});
             this.toolsScroll.Location = new System.Drawing.Point(0, 125);
             this.toolsScroll.Name = "toolsScroll";
-            this.toolsScroll.Size = new System.Drawing.Size(24, 94);
+            this.toolsScroll.Size = new System.Drawing.Size(32, 113);
             this.toolsScroll.TabIndex = 2;
             // 
             // btnScrollLeft
@@ -254,8 +257,9 @@
             this.btnScrollLeft.Image = global::DataRogueWorldEditor.Properties.Resources.leftarrow;
             this.btnScrollLeft.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnScrollLeft.Name = "btnScrollLeft";
-            this.btnScrollLeft.Size = new System.Drawing.Size(22, 20);
+            this.btnScrollLeft.Size = new System.Drawing.Size(30, 20);
             this.btnScrollLeft.Text = "toolStripButton1";
+            this.btnScrollLeft.Click += new System.EventHandler(this.btnScrollLeft_Click);
             // 
             // btnScrollUp
             // 
@@ -263,7 +267,7 @@
             this.btnScrollUp.Image = global::DataRogueWorldEditor.Properties.Resources.uparrow;
             this.btnScrollUp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnScrollUp.Name = "btnScrollUp";
-            this.btnScrollUp.Size = new System.Drawing.Size(22, 20);
+            this.btnScrollUp.Size = new System.Drawing.Size(30, 20);
             this.btnScrollUp.Text = "toolStripButton2";
             this.btnScrollUp.Click += new System.EventHandler(this.btnScrollUp_Click);
             // 
@@ -273,7 +277,7 @@
             this.btnScrollDown.Image = global::DataRogueWorldEditor.Properties.Resources.downarrow;
             this.btnScrollDown.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnScrollDown.Name = "btnScrollDown";
-            this.btnScrollDown.Size = new System.Drawing.Size(22, 20);
+            this.btnScrollDown.Size = new System.Drawing.Size(30, 20);
             this.btnScrollDown.Text = "toolStripButton3";
             this.btnScrollDown.Click += new System.EventHandler(this.btnScrollDown_Click);
             // 
@@ -283,8 +287,9 @@
             this.btnScrollRight.Image = global::DataRogueWorldEditor.Properties.Resources.rightarrow;
             this.btnScrollRight.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnScrollRight.Name = "btnScrollRight";
-            this.btnScrollRight.Size = new System.Drawing.Size(22, 20);
+            this.btnScrollRight.Size = new System.Drawing.Size(30, 20);
             this.btnScrollRight.Text = "toolStripButton4";
+            this.btnScrollRight.Click += new System.EventHandler(this.btnScrollRight_Click);
             // 
             // dgvGlyphs
             // 
@@ -298,6 +303,7 @@
             this.dgvGlyphs.Size = new System.Drawing.Size(220, 292);
             this.dgvGlyphs.TabIndex = 0;
             this.dgvGlyphs.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGlyphs_DoubleClickCell);
+            this.dgvGlyphs.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGlyphs_CellValueChanged);
             // 
             // Glyph
             // 
@@ -368,6 +374,7 @@
             this.txtMapKey.Name = "txtMapKey";
             this.txtMapKey.Size = new System.Drawing.Size(161, 20);
             this.txtMapKey.TabIndex = 10;
+            this.txtMapKey.TextChanged += new System.EventHandler(this.txtMapKey_TextChanged);
             // 
             // txtDefaultCell
             // 
@@ -377,6 +384,7 @@
             this.txtDefaultCell.Name = "txtDefaultCell";
             this.txtDefaultCell.Size = new System.Drawing.Size(161, 20);
             this.txtDefaultCell.TabIndex = 9;
+            this.txtDefaultCell.TextChanged += new System.EventHandler(this.txtDefaultCell_TextChanged);
             // 
             // label2
             // 
@@ -418,12 +426,40 @@
             this.toolsVisible.Dock = System.Windows.Forms.DockStyle.None;
             this.toolsVisible.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolsVisible.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnSave,
+            this.btnSaveAs,
+            this.toolStripButton1,
             this.btnMap,
-            this.btnEnemies});
+            this.btnEntities});
             this.toolsVisible.Location = new System.Drawing.Point(6, 0);
             this.toolsVisible.Name = "toolsVisible";
-            this.toolsVisible.Size = new System.Drawing.Size(49, 25);
+            this.toolsVisible.Size = new System.Drawing.Size(101, 25);
             this.toolsVisible.TabIndex = 0;
+            // 
+            // btnSave
+            // 
+            this.btnSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSave.Image = global::DataRogueWorldEditor.Properties.Resources.save;
+            this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(23, 22);
+            this.btnSave.Text = "toolStripButton2";
+            this.btnSave.ToolTipText = "Save";
+            // 
+            // btnSaveAs
+            // 
+            this.btnSaveAs.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSaveAs.Image = global::DataRogueWorldEditor.Properties.Resources.saveas;
+            this.btnSaveAs.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSaveAs.Name = "btnSaveAs";
+            this.btnSaveAs.Size = new System.Drawing.Size(23, 22);
+            this.btnSaveAs.Text = "toolStripButton3";
+            this.btnSaveAs.ToolTipText = "Save As";
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(6, 25);
             // 
             // btnMap
             // 
@@ -433,17 +469,19 @@
             this.btnMap.Name = "btnMap";
             this.btnMap.Size = new System.Drawing.Size(23, 22);
             this.btnMap.Text = "toolStripButton1";
+            this.btnMap.ToolTipText = "Toggle Map";
             this.btnMap.Click += new System.EventHandler(this.btnMap_Click);
             // 
-            // btnEnemies
+            // btnEntities
             // 
-            this.btnEnemies.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnEnemies.Image = global::DataRogueWorldEditor.Properties.Resources.zombie;
-            this.btnEnemies.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnEnemies.Name = "btnEnemies";
-            this.btnEnemies.Size = new System.Drawing.Size(23, 22);
-            this.btnEnemies.Text = "toolStripButton2";
-            this.btnEnemies.Click += new System.EventHandler(this.btnEnemies_Click);
+            this.btnEntities.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnEntities.Image = global::DataRogueWorldEditor.Properties.Resources.entity;
+            this.btnEntities.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEntities.Name = "btnEntities";
+            this.btnEntities.Size = new System.Drawing.Size(23, 22);
+            this.btnEntities.Text = "toolStripButton2";
+            this.btnEntities.ToolTipText = "Toggle Entities";
+            this.btnEntities.Click += new System.EventHandler(this.btnEnemies_Click);
             // 
             // frmMapEditor
             // 
@@ -498,7 +536,7 @@
         private System.Windows.Forms.ToolStripContainer toolStripContainer1;
         private System.Windows.Forms.ToolStrip toolsVisible;
         private System.Windows.Forms.ToolStripButton btnMap;
-        private System.Windows.Forms.ToolStripButton btnEnemies;
+        private System.Windows.Forms.ToolStripButton btnEntities;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.SplitContainer splitContainer3;
@@ -524,5 +562,8 @@
         private System.Windows.Forms.ToolStripButton btnScrollUp;
         private System.Windows.Forms.ToolStripButton btnScrollDown;
         private System.Windows.Forms.ToolStripButton btnScrollRight;
+        private System.Windows.Forms.ToolStripButton btnSave;
+        private System.Windows.Forms.ToolStripSeparator toolStripButton1;
+        private System.Windows.Forms.ToolStripButton btnSaveAs;
     }
 }

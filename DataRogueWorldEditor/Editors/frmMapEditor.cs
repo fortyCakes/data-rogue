@@ -18,17 +18,33 @@ namespace DataRogueWorldEditor.Editors
 {
     public partial class frmMapEditor : WeifenLuo.WinFormsUI.Docking.DockContent, IEditor
     {
+        public Map Map { get; private set; }
+
+        public bool IsDirty
+        {
+            get => _isDirty;
+            set {
+                _isDirty = value;
+                SetTabTitle();
+            }
+        }
+
+
+        private string FileName
+        {
+            get => _fileName;
+            set
+            {
+                _fileName = value;
+                SetTabTitle();
+            }
+        }
+
         private MapEditorTool _currentTool;
 
         private bool ShowMap { get; set; } = true;
-        private bool ShowEnemies { get; set; } = true;
+        private bool ShowEntities { get; set; } = true;
         private bool ShowItems { get; set; } = true;
-        public Map Map { get; private set; }
-
-        public int MapLeftX => Map.Cells.Min(c => c.Key.X);
-        public int MapTopY => Map.Cells.Min(c => c.Key.Y);
-        public int MapRightX => Map.Cells.Max(c => c.Key.X);
-        public int MapBottomY => Map.Cells.Max(c => c.Key.Y);
 
         int MapDisplayHeight => (lblMap.Height - 20) / 13;
         int MapDisplayWidth => (lblMap.Width - 20) / 6;
@@ -37,6 +53,8 @@ namespace DataRogueWorldEditor.Editors
         public int offsetY;
         private IEntity _paintingWithCell;
         private MapCoordinate _selectedCoordinate;
+        private string _fileName;
+        private bool _isDirty;
 
         internal MapEditorTool SelectedTool
         {
@@ -58,7 +76,9 @@ namespace DataRogueWorldEditor.Editors
             }
         }
 
-        public IEntity PaintingWithCell { get => _paintingWithCell;
+        public IEntity PaintingWithCell
+        {
+            get => _paintingWithCell;
             set
             {
                 _paintingWithCell = value;
@@ -82,9 +102,18 @@ namespace DataRogueWorldEditor.Editors
         {
             InitializeComponent();
 
-            var mapFileText = File.ReadAllText(filename);
+            FileName = filename;
 
-            Map = MapSerializer.Deserialize(mapFileText, entityEngineSystem);
+            if (string.IsNullOrEmpty(FileName))
+            {
+                Map = new Map("new map key", entityEngineSystem.GetEntityWithName("Cell:Wall"));
+            }
+            else
+            {
+                var mapFileText = File.ReadAllText(FileName);
+
+                Map = MapSerializer.Deserialize(mapFileText, entityEngineSystem);
+            }
 
             SetData();
 
@@ -98,8 +127,8 @@ namespace DataRogueWorldEditor.Editors
 
         private void SetOffsets()
         {
-            var mapHeight = MapBottomY - MapTopY;
-            var mapWidth = MapRightX - MapLeftX;
+            var mapHeight = Map.BottomY - Map.TopY;
+            var mapWidth = Map.RightX - Map.LeftX;
 
             offsetX = mapWidth / 2 - MapDisplayWidth / 2;
             offsetY = mapHeight / 2 - MapDisplayHeight / 2;
@@ -107,23 +136,28 @@ namespace DataRogueWorldEditor.Editors
 
         private void SetData() //IEntityEngineSystem entityEngineSystem)
         {
+            SetTabTitle();
+
             txtMapKey.Text = Map.MapKey.Key;
 
             txtDefaultCell.Text = Map.DefaultCell.Name;
 
             btnMap.Checked = ShowMap;
-            btnEnemies.Checked = ShowEnemies;
-
-            PaintingWithCell = Map.DefaultCell;
+            btnEntities.Checked = ShowEntities;
 
             var cellMapping = MapSerializer.GetMapGlyphs(Map);
 
             GlyphEntities = new BindingList<MapEditorGlyphBinding>(
                 cellMapping.Select(m => new MapEditorGlyphBinding { Glyph = m.Value.ToString(), Entity = m.Key }).ToList());
 
-
             dgvGlyphs.DataSource = GlyphEntities;
 
+            PaintingWithCell = Map.DefaultCell;
+        }
+
+        private void SetTabTitle()
+        {
+            this.Text = Path.GetFileName(FileName) + (IsDirty ? "*" : "");
         }
 
         private void btnMap_Click(object sender, EventArgs e)
@@ -134,8 +168,8 @@ namespace DataRogueWorldEditor.Editors
 
         private void btnEnemies_Click(object sender, EventArgs e)
         {
-            ShowEnemies = !ShowEnemies;
-            btnEnemies.Checked = ShowEnemies;
+            ShowEntities = !ShowEntities;
+            btnEntities.Checked = ShowEntities;
         }
 
         private void btnItems_Click(object sender, EventArgs e)
@@ -146,12 +180,53 @@ namespace DataRogueWorldEditor.Editors
 
         public void Save()
         {
-            throw new NotImplementedException();
+            DoSave(false);
         }
 
         public void SaveAs()
         {
-            throw new NotImplementedException();
+            DoSave(true);
+        }
+
+        private void DoSave(bool forceSaveDialog)
+        {
+            Map.MapKey = new MapKey(txtMapKey.Text);
+
+            Map.DefaultCell = EntityEngineSystem.GetEntityWithName(txtDefaultCell.Text);
+
+            var serialisedMap = MapSerializer.Serialize(Map);
+
+            if (FileName == null || forceSaveDialog)
+            {
+                var ok = DisplaySaveFileDialog();
+                if (!ok)
+                {
+                    return;
+                }
+            }
+
+            File.WriteAllText(FileName, serialisedMap);
+
+            IsDirty = false;
+        }
+
+        private bool DisplaySaveFileDialog()
+        {
+            var dialog = new SaveFileDialog
+            {
+                Title = "Save Map",
+                Filter = "data-rogue map file|*.map"
+            };
+
+            var result = dialog.ShowDialog();
+
+            if (result == DialogResult.OK && !string.IsNullOrEmpty(dialog.FileName))
+            {
+                FileName = dialog.FileName;
+                return true;
+            }
+
+            return false;
         }
 
         private void RenderMap()
@@ -191,21 +266,23 @@ namespace DataRogueWorldEditor.Editors
 
         private void ApplyTool(MapEditorTool tool, MapCoordinate coordinate, MouseEventType mouseEventType, MouseButtons buttons)
         {
-            bool isClicking = (mouseEventType == MouseEventType.Click || mouseEventType == MouseEventType.MouseMove ) && buttons == MouseButtons.Left;
+            bool isClicking = (mouseEventType == MouseEventType.Click || mouseEventType == MouseEventType.MouseMove) && buttons == MouseButtons.Left;
 
             switch (tool)
             {
                 case MapEditorTool.SetCell:
-                    
+
                     if (isClicking)
                     {
                         Map.SetCell(coordinate, PaintingWithCell);
+                        IsDirty = true;
                     }
                     break;
                 case MapEditorTool.ClearCell:
                     if (isClicking)
                     {
                         Map.ClearCell(coordinate);
+                        IsDirty = true;
                     }
                     break;
                 case MapEditorTool.SelectCell:
@@ -237,7 +314,9 @@ namespace DataRogueWorldEditor.Editors
         private void dgvGlyphs_DoubleClickCell(object sender, DataGridViewCellEventArgs e)
         {
             DataGridView dataGridView = (sender as DataGridView);
-            var cellName = dataGridView.Rows[e.RowIndex].Cells[1].Value.ToString();
+            var cellName = dataGridView.Rows[e.RowIndex].Cells[1].Value?.ToString();
+
+            if (string.IsNullOrEmpty(cellName)) return;
 
             var entity = EntityEngineSystem.GetEntityWithName(cellName);
 
@@ -313,7 +392,7 @@ namespace DataRogueWorldEditor.Editors
         {
             SelectedTool = MapEditorTool.SelectCell;
         }
-        
+
         private void DisplayCellData(MapCoordinate coordinate)
         {
             if (coordinate == null)
@@ -346,6 +425,21 @@ namespace DataRogueWorldEditor.Editors
             }
 
             lblSelectedCell.Text = stringBuilder.ToString();
+        }
+
+        private void txtMapKey_TextChanged(object sender, EventArgs e)
+        {
+            IsDirty = true;
+        }
+
+        private void txtDefaultCell_TextChanged(object sender, EventArgs e)
+        {
+            IsDirty = true;
+        }
+
+        private void dgvGlyphs_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            IsDirty = true;
         }
     }
 
