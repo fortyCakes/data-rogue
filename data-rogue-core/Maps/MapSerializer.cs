@@ -101,8 +101,6 @@ namespace data_rogue_core.Maps
         {
             var cellsInMap = new Dictionary<char, IEntity>();
 
-            
-
             Match match;
 
             while ((match = Regex.Match(lines[lineIndex], "(.):(.*)")).Success)
@@ -118,13 +116,12 @@ namespace data_rogue_core.Maps
 
             return cellsInMap;
         }
-
         private static string Extract(string input, string pattern)
         {
             return Regex.Match(input, pattern).Groups[1].Value;
         }
 
-        private static Dictionary<string, char> GetMapGlyphs(Map map)
+        public static Dictionary<string, char> GetMapGlyphs(Map map)
         {
             var mapGlyphs = new Dictionary<string, char>();
 

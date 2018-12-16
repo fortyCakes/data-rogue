@@ -5,7 +5,7 @@ namespace data_rogue_core.Maps
     [Serializable]
     public class MapKey 
     {
-        public string Key;
+        public string Key { get; set; }
 
         public MapKey(string key)
         {

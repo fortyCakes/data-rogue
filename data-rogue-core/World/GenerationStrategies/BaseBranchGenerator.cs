@@ -37,7 +37,7 @@ namespace data_rogue_core
             {
                 if (previousMap != null)
                 {
-                    LinkStairs(previousMap, map);
+                    LinkStairs(previousMap, map, engine);
                 }
 
                 previousMap = map;
@@ -109,10 +109,10 @@ namespace data_rogue_core
         }
 
 
-        protected virtual void LinkStairs(Map previousMap, Map map)
+        protected virtual void LinkStairs(Map previousMap, Map map, IEntityEngineSystem engine)
         {
-            var stairsDown = GetStairs(previousMap, StairDirection.Down);
-            var stairsUp = GetStairs(map, StairDirection.Up);
+            var stairsDown = GetStairs(previousMap, StairDirection.Down, engine);
+            var stairsUp = GetStairs(map, StairDirection.Up, engine);
 
             if (stairsUp.Count != stairsDown.Count)
             {
@@ -124,17 +124,20 @@ namespace data_rogue_core
                 var downStairs = Random.PickOne(stairsDown);
                 var upStairs = Random.PickOne(stairsUp);
 
-                downStairs.Value.Get<Stairs>().Destination = upStairs.Key;
-                upStairs.Value.Get<Stairs>().Destination = downStairs.Key;
+                downStairs.Value.Destination = upStairs.Key;
+                upStairs.Value.Destination = downStairs.Key;
 
                 stairsDown.Remove(downStairs);
                 stairsUp.Remove(upStairs);
             }
         }
 
-        protected virtual List<KeyValuePair<MapCoordinate, IEntity>> GetStairs(Map map, StairDirection direction)
+        protected virtual List<KeyValuePair<MapCoordinate, Stairs>> GetStairs(Map map, StairDirection direction, IEntityEngineSystem engine)
         {
-            return map.Cells.Where(c => c.Value.Has<Stairs>() && c.Value.Get<Stairs>().Direction == direction).ToList();
+            return engine.EntitiesWith<Stairs>()
+                .Where(c => c.Get<Stairs>().Direction == direction)
+                .Select(c => new KeyValuePair<MapCoordinate, Stairs>(c.Get<Position>().MapCoordinate, c.Get<Stairs>()))
+                .ToList();
         }
     }
 }

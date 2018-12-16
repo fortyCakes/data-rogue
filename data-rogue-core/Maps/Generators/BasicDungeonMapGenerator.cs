@@ -21,7 +21,6 @@ namespace data_rogue_core.Maps.Generators
 
         private Entity wallCell;
         private Entity floorCell;
-        private Entity spawnCell;
 
         public BasicDungeonMapGenerator(IEntityEngineSystem engine)
         {
@@ -34,7 +33,6 @@ namespace data_rogue_core.Maps.Generators
 
             wallCell = Engine.GetEntityWithName("Cell:Wall");
             floorCell = Engine.GetEntityWithName("Cell:Empty");
-            spawnCell = Engine.GetEntityWithName("Cell:SpawnPoint");
 
             var map = new Map(mapName, wallCell);
 
@@ -65,10 +63,6 @@ namespace data_rogue_core.Maps.Generators
 
                 previousRoom = room;
             }
-
-            var spawnAt = Random.PickOne(map.Cells.Where(m => m.Value == floorCell).ToList());
-
-            map.SetCell(spawnAt.Key, spawnCell);
 
             return map;
         }

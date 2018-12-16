@@ -34,25 +34,3 @@ ZOrder: 0
 [Physical]
 Passable: false
 Transparent: false
-
-"Cell:StairsDown"
-[Appearance]
-Glyph: >
-Color: #aaaaaa
-ZOrder: 0
-[Physical]
-Passable: true
-Transparent: true
-[Stairs]
-Direction: Down
-
-"Cell:StairsUp"
-[Appearance]
-Glyph: <
-Color: #aaaaaa
-ZOrder: 0
-[Physical]
-Passable: true
-Transparent: true
-[Stairs]
-Direction: Up

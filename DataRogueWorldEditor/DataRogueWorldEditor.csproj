@@ -48,12 +48,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\MapEditorCell.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MapEditorCell.Designer.cs">
+      <DependentUpon>MapEditorCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MapEditorGlyphEntity.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MapEditorGlyphEntity.Designer.cs">
+      <DependentUpon>MapEditorGlyphEntity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Editors\frmMapEditor.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Editors\frmMapEditor.Designer.cs">
       <DependentUpon>frmMapEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Editors\IEditor.cs" />
+    <Compile Include="FolderEntityLoader.cs" />
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -62,6 +76,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\MapEditorCell.resx">
+      <DependentUpon>MapEditorCell.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MapEditorGlyphEntity.resx">
+      <DependentUpon>MapEditorGlyphEntity.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editors\frmMapEditor.resx">
       <DependentUpon>frmMapEditor.cs</DependentUpon>
     </EmbeddedResource>
@@ -76,6 +96,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -90,6 +111,42 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chest.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\scroll.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\zombie.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\data-rogue-core\data-rogue-core.csproj">
+      <Project>{2C899088-9F23-4411-BAD7-E175A886C67C}</Project>
+      <Name>data-rogue-core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pencil.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\eraser.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cursor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\leftarrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rightarrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uparrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\downarrow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

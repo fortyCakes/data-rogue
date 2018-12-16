@@ -80,7 +80,7 @@ namespace data_rogue_core.Maps
             }
         }
 
-        internal void SetCell(MapCoordinate coordinate, IEntity cell)
+        public void SetCell(MapCoordinate coordinate, IEntity cell)
         {
             CheckEntityIsCell(cell);
 
@@ -138,6 +138,14 @@ namespace data_rogue_core.Maps
             var visibleCells = visibleVectors.Select(v => mapCoordinate + v).ToList();
 
             return visibleCells;
+        }
+
+        public void ClearCell(MapCoordinate coordinate)
+        {
+            if (Cells.ContainsKey(coordinate))
+            {
+                Cells.Remove(coordinate);
+            }
         }
     }
 }
