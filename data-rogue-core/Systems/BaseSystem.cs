@@ -17,6 +17,8 @@ namespace data_rogue_core.Systems
 
         public abstract SystemComponents RequiredComponents { get; }
 
+        public abstract SystemComponents ForbiddenComponents { get; }
+
         public List<IEntity> Entities { get; set; }
 
         public void Initialise()

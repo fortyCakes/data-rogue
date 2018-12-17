@@ -8,5 +8,6 @@ namespace data_rogue_core.EntitySystem
         void RemoveEntity(IEntity entity);
 
         SystemComponents RequiredComponents {get;}
+        SystemComponents ForbiddenComponents { get; }
     }
 }

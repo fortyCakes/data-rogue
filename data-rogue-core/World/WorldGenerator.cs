@@ -2,36 +2,36 @@
 using data_rogue_core.Data;
 using data_rogue_core.EntitySystem;
 using data_rogue_core.Maps;
-using data_rogue_core.Maps.Generators;
 using System;
 using System.Linq;
 using data_rogue_core.Systems;
+using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core
 {
     public class WorldGenerator
     {
-        public static WorldState Create(string seed, IEntityEngineSystem entityEngineSystem, IPositionSystem positionSystem)
+        public static WorldState Create(string seed, IEntityEngineSystem entityEngineSystem, IPositionSystem positionSystem, IPrototypeSystem prototypeSystem)
         {
             entityEngineSystem.Initialise();
 
             var world = new WorldState(entityEngineSystem, seed);
 
-            var spawnPoint = CreateInitialMapAndGetSpawnPoint(seed, entityEngineSystem, positionSystem, world);
+            var spawnPoint = CreateInitialMapAndGetSpawnPoint(seed, entityEngineSystem, positionSystem, prototypeSystem, world);
 
             AddPlayerToWorld(entityEngineSystem, world, spawnPoint);
 
             return world;
         }
 
-        private static MapCoordinate CreateInitialMapAndGetSpawnPoint(string seed, IEntityEngineSystem entityEngineSystem, IPositionSystem positionSystem, WorldState world)
+        private static MapCoordinate CreateInitialMapAndGetSpawnPoint(string seed, IEntityEngineSystem entityEngineSystem, IPositionSystem positionSystem, IPrototypeSystem prototypeSystem, WorldState world)
         {
             var worldStructure = entityEngineSystem.GetEntityWithName("World").Get<World>();
             var initialBranchEntity = entityEngineSystem.GetEntityWithName(worldStructure.InitialBranch);
                 
             var initialBranch = initialBranchEntity.Get<Branch>();
 
-            GenerateBranch(world, initialBranch, entityEngineSystem, positionSystem, seed);
+            GenerateBranch(world, initialBranch, entityEngineSystem, positionSystem, prototypeSystem, seed);
 
             var initialMap = world.Maps[new MapKey($"{initialBranch.BranchName}:1")];
 
@@ -50,11 +50,11 @@ namespace data_rogue_core
             return definedSpawnPoint.First().Key;
         }
 
-        public static void GenerateBranch(WorldState world, Branch branchDefinition, IEntityEngineSystem entityEngineSystem, IPositionSystem positionSystem, string seed)
+        public static void GenerateBranch(WorldState world, Branch branchDefinition, IEntityEngineSystem entityEngineSystem, IPositionSystem positionSystem, IPrototypeSystem prototypeSystem, string seed)
         {
             var branchGenerator = BranchGeneratorFactory.GetGenerator(branchDefinition.GenerationType);
 
-            GeneratedBranch branch = branchGenerator.Generate(branchDefinition, entityEngineSystem, positionSystem, seed);
+            GeneratedBranch branch = branchGenerator.Generate(branchDefinition, entityEngineSystem, positionSystem, prototypeSystem, seed);
 
             foreach (Map map in branch.Maps)
             {

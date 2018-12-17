@@ -8,11 +8,13 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using data_rogue_core.Systems;
+using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core
 {
     public class EntranceBranchGenerator: BaseBranchGenerator
     {
+
         public override string GenerationType => "Entrance";
 
         protected override List<Map> GenerateMaps(Branch branchDefinition, IEntityEngineSystem engine)
@@ -23,22 +25,13 @@ namespace data_rogue_core
             return generatedBranchMaps;
         }
 
-        protected override void AddEntities(GeneratedBranch branch, Branch branchDefinition, IEntityEngineSystem engine, IPositionSystem position)
+        protected override void ExecuteMapGenCommands(GeneratedBranch generatedBranch, Branch branch, IEntityEngineSystem engine, IPositionSystem position, IPrototypeSystem prototypeSystem)
         {
-            engine.New("entrance room portal", 
-                new Appearance { Color = Color.Blue, Glyph = '>', ZOrder = 1 },
-                new Portal(),
-                new Position { MapCoordinate = new MapCoordinate($"{branchDefinition.BranchName}:2", 0, 0) });
 
-            engine.New("down stairs",
-                new Appearance { Color = Color.LightGray, Glyph = '>', ZOrder = 1 },
-                new Stairs { Direction = StairDirection.Down },
-                new Position { MapCoordinate = new MapCoordinate($"{branchDefinition.BranchName}:1", 10, 0) });
-
-            engine.New("up stairs",
-                new Appearance { Color = Color.LightGray, Glyph = '<', ZOrder = 1 },
-                new Stairs { Direction = StairDirection.Up },
-                new Position { MapCoordinate = new MapCoordinate($"{branchDefinition.BranchName}:2", 0, 5) });
+            var newPortal = prototypeSystem.CreateAt("Props:Portal", "branch entrance portal", branch.At(2, 0, 0));
+            var stairs1 = prototypeSystem.CreateAt("Props:DownStairs", "down stairs", branch.At(1, 10, 0));
+            var stairs2 = prototypeSystem.CreateAt("Props:UpStairs", "down stairs", branch.At(2, 0, 5));
+            
         }
     }
 }

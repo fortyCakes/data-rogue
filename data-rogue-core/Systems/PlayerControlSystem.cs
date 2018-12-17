@@ -13,6 +13,9 @@ namespace data_rogue_core.Systems
 {
     public class PlayerControlSystem : BaseSystem, IPlayerControlSystem
     {
+        public override SystemComponents RequiredComponents => new SystemComponents { typeof(PlayerControlled), typeof(Position) };
+        public override SystemComponents ForbiddenComponents => new SystemComponents { typeof(Prototype) };
+
         private readonly IPositionSystem PositionSystem;
         private readonly IEventRuleSystem EventSystem;
 
@@ -22,7 +25,6 @@ namespace data_rogue_core.Systems
             EventSystem = eventRuleSystem;
         }
 
-        public override SystemComponents RequiredComponents => new SystemComponents { typeof(PlayerControlled), typeof(Position) };
 
         public void HandleKeyPress(RLKeyPress keyPress)
         {

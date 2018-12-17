@@ -1,0 +1,8 @@
+﻿"Props:Portal"
+[Portal]
+[Prototype]
+[Appearance]
+Glyph: >
+Color: #aaaaff
+ZOrder: 1
+[Position]

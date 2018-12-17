@@ -1,0 +1,19 @@
+﻿"Props:DownStairs"
+[Stairs]
+Direction: Down
+[Prototype]
+[Appearance]
+Glyph: >
+Color: #aaaaaa
+ZOrder: 1
+[Position]
+
+"Props:UpStairs"
+[Stairs]
+Direction: Up
+[Prototype]
+[Appearance]
+Glyph: <
+Color: #aaaaaa
+ZOrder: 1
+[Position]

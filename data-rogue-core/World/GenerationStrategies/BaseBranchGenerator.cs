@@ -7,30 +7,31 @@ using data_rogue_core.Maps.Generators;
 using System.Collections.Generic;
 using System.Linq;
 using data_rogue_core.Systems;
+using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core
 {
     public abstract class BaseBranchGenerator : IBranchGenerator
     {
+        
         public abstract string GenerationType { get; }
 
         protected abstract List<Map> GenerateMaps(Branch branchDefinition, IEntityEngineSystem engine);
 
-        protected abstract void AddEntities(GeneratedBranch branch, Branch branchDefinition, IEntityEngineSystem engine, IPositionSystem position);
-
-        
+        protected abstract void ExecuteMapGenCommands(GeneratedBranch generatedBranch, Branch branch, IEntityEngineSystem engine, IPositionSystem position, IPrototypeSystem prototypeSystem);
 
         protected IRandom Random { get; set; }
+        public Branch BranchDefinition { get; }
 
-        public GeneratedBranch Generate(Branch branchDefinition, IEntityEngineSystem engine, IPositionSystem positionSystem, string seed)
+        public GeneratedBranch Generate(Branch branch, IEntityEngineSystem engine, IPositionSystem positionSystem, IPrototypeSystem prototypeSystem, string seed)
         {
             Random = new RNG(seed);
 
-            var generatedBranchMaps = GenerateMaps(branchDefinition, engine);
+            var generatedBranchMaps = GenerateMaps(branch, engine);
 
             var generatedBranch = new GeneratedBranch() { Maps = generatedBranchMaps };
 
-            AddEntities(generatedBranch, branchDefinition, engine, positionSystem);
+            ExecuteMapGenCommands(generatedBranch, branch, engine, positionSystem, prototypeSystem);
 
             Map previousMap = null;
             foreach (var map in generatedBranch.Maps)
@@ -43,26 +44,26 @@ namespace data_rogue_core
                 previousMap = map;
             }
 
-            AddBranchPortals(generatedBranch, branchDefinition, engine, positionSystem);
+            AddBranchPortals(generatedBranch, branch, engine, positionSystem);
 
-            branchDefinition.Generated = true;
+            branch.Generated = true;
 
             return generatedBranch;
         }
 
-        protected virtual void AddBranchPortals(GeneratedBranch branch, Branch branchDefinition, IEntityEngineSystem engine, IPositionSystem positionSystem)
+        protected virtual void AddBranchPortals(GeneratedBranch generatedBranch, Branch branch, IEntityEngineSystem engine, IPositionSystem positionSystem)
         {
             var links = engine.GetAll<BranchLink>();
 
             var relevantLinks = new Dictionary<BranchLinkEnd, BranchLinkEnd>();
             foreach (var link in links)
             {
-                if (link.From.Branch == branchDefinition.BranchName)
+                if (link.From.Branch == branch.BranchName)
                 {
                     relevantLinks.Add(link.From, link.To);
                 }
 
-                if (link.To.Branch == branchDefinition.BranchName)
+                if (link.To.Branch == branch.BranchName)
                 {
                     relevantLinks.Add(link.To, link.From);
                 }
@@ -75,7 +76,7 @@ namespace data_rogue_core
 
                 var level = Random.Between(thisEnd.LevelFrom, thisEnd.LevelTo);
 
-                var mapKey = new MapKey($"{branchDefinition.BranchName}:{level}");
+                var mapKey = new MapKey(branch.LevelName(level));
 
                 var potentialPortals = engine.EntitiesWith<Portal>()
                     .Where(p => p.Get<Position>().MapCoordinate.Key == mapKey)

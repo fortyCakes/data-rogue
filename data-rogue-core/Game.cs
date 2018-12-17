@@ -10,6 +10,7 @@ using data_rogue_core.EventSystem.Rules;
 using data_rogue_core.Menus.StaticMenus;
 using data_rogue_core.Renderers.ConsoleRenderers;
 using data_rogue_core.Systems;
+using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core
 {
@@ -25,6 +26,7 @@ namespace data_rogue_core
         public static IEventRuleSystem EventSystem;
         public static IPositionSystem PositionSystem;
         public static IPlayerControlSystem PlayerControlSystem;
+        public static IPrototypeSystem PrototypeSystem;
 
         private const int SCREEN_WIDTH = 100;
         private const int SCREEN_HEIGHT = 70;
@@ -92,7 +94,7 @@ namespace data_rogue_core
 
             EventSystem.RegisterRule(new InputHandlerRule(PlayerControlSystem));
             EventSystem.RegisterRule(new PhysicalCollisionRule(PositionSystem));
-            EventSystem.RegisterRule(new BranchGeneratorRule(EntityEngineSystem, PositionSystem, Seed));
+            EventSystem.RegisterRule(new BranchGeneratorRule(EntityEngineSystem, PositionSystem, PrototypeSystem, Seed));
         }
 
 
@@ -128,6 +130,9 @@ namespace data_rogue_core
 
             PositionSystem = new PositionSystem();
             EntityEngineSystem.Register(PositionSystem);
+
+            PrototypeSystem = new PrototypeSystem(EntityEngineSystem, PositionSystem);
+            EntityEngineSystem.Register(PrototypeSystem);
 
             PlayerControlSystem = new PlayerControlSystem(PositionSystem, EventSystem);
             EntityEngineSystem.Register(PlayerControlSystem);
@@ -177,7 +182,7 @@ namespace data_rogue_core
             {
                 Thread.CurrentThread.IsBackground = true;
 
-                WorldState = WorldGenerator.Create(Seed, EntityEngineSystem, PositionSystem);
+                WorldState = WorldGenerator.Create(Seed, EntityEngineSystem, PositionSystem, PrototypeSystem);
 
                 ActivityStack.Pop();
 

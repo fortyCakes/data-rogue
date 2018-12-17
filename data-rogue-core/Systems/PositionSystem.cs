@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using data_rogue_core.Components;
 using data_rogue_core.EntitySystem;
 using data_rogue_core.Maps;
@@ -8,6 +9,7 @@ namespace data_rogue_core.Systems
     public class PositionSystem : BaseSystem, IPositionSystem
     {
         public override SystemComponents RequiredComponents => new SystemComponents { typeof(Position) };
+        public override SystemComponents ForbiddenComponents => new SystemComponents { typeof(Prototype) };
 
         public IEnumerable<IEntity> EntitiesAt(MapCoordinate coordinate)
         {
@@ -34,9 +36,24 @@ namespace data_rogue_core.Systems
             position.Move(vector);
         }
 
+        public void Move(IEntity entity, Vector vector)
+        {
+            Move(entity.Get<Position>(), vector);
+        }
+
         public IEnumerable<IEntity> EntitiesAt(MapKey mapKey, int X, int Y)
         {
             return EntitiesAt(new MapCoordinate(mapKey, X, Y));
+        }
+
+        public void SetPosition(IEntity entity, MapCoordinate mapCoordinate)
+        {
+            SetPosition(entity.Get<Position>(), mapCoordinate);
+        }
+
+        public void SetPosition(Position position, MapCoordinate mapCoordinate)
+        {
+            position.MapCoordinate = mapCoordinate;
         }
     }
 }

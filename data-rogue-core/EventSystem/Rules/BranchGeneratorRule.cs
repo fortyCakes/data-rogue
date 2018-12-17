@@ -6,6 +6,7 @@ using data_rogue_core.EntitySystem;
 using data_rogue_core.Maps;
 using data_rogue_core.Menus;
 using data_rogue_core.Systems;
+using data_rogue_core.Systems.Interfaces;
 using RLNET;
 
 namespace data_rogue_core.EventSystem.Rules
@@ -14,12 +15,14 @@ namespace data_rogue_core.EventSystem.Rules
     {
         private readonly IEntityEngineSystem _engine;
         private readonly IPositionSystem _positionSystem;
+        private readonly IPrototypeSystem _prototypeSystem;
         private readonly string _seed;
 
-        public BranchGeneratorRule(IEntityEngineSystem engine, IPositionSystem positionSystem, string seed)
+        public BranchGeneratorRule(IEntityEngineSystem engine, IPositionSystem positionSystem, IPrototypeSystem prototypeSystem, string seed)
         {
             _engine = engine;
             _positionSystem = positionSystem;
+            _prototypeSystem = prototypeSystem;
             _seed = seed;
         }
 
@@ -38,7 +41,7 @@ namespace data_rogue_core.EventSystem.Rules
 
                 var generator = BranchGeneratorFactory.GetGenerator(branch.GenerationType);
 
-                var generatedBranch = generator.Generate(branch, _engine, _positionSystem, _seed);
+                var generatedBranch = generator.Generate(branch, _engine, _positionSystem, _prototypeSystem, _seed);
 
                 foreach (Map map in generatedBranch.Maps)
                 {

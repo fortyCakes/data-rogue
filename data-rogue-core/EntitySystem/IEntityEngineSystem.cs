@@ -25,7 +25,7 @@ namespace data_rogue_core.EntitySystem
 
         Entity GetEntityWithName(string name);
 
-        List<Entity> EntitiesWith<T>() where T: IEntityComponent;
+        List<Entity> EntitiesWith<T>(bool includePrototypes = false) where T: IEntityComponent;
         List<T> GetAll<T>() where T : IEntityComponent;
     }
 }

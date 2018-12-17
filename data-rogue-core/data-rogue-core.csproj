@@ -61,7 +61,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\LoadingScreenActivity.cs" />
-    <Compile Include="Components\BranchPortal.cs" />
+    <Compile Include="Components\Portal.cs" />
+    <Compile Include="Components\Prototype.cs" />
     <Compile Include="Components\Stairs.cs" />
     <Compile Include="Components\Branch.cs" />
     <Compile Include="Components\BranchLink.cs" />
@@ -78,14 +79,18 @@
     <Compile Include="EventSystem\IEventRule.cs" />
     <Compile Include="EventSystem\Rules\BranchGeneratorRule.cs" />
     <Compile Include="Maps\Generators\BasicDungeonMapGenerator.cs" />
-    <Compile Include="Maps\MapGenCommands\IMapGenCommandResolver.cs" />
+    <Compile Include="Maps\MapGenCommands\CommandExecutorFactory.cs" />
+    <Compile Include="Maps\MapGenCommands\EntityCommandExecutor.cs" />
+    <Compile Include="Maps\MapGenCommands\ICommandExecutor.cs" />
     <Compile Include="Maps\MapGenCommands\MapGenCommand.cs" />
+    <Compile Include="Systems\Interfaces\IPrototypeSystem.cs" />
     <Compile Include="Systems\IRandom.cs" />
     <Compile Include="Maps\Generators\StaticMapGenerator.cs" />
     <Compile Include="Maps\MapSerializer.cs" />
     <Compile Include="Maps\Matrix.cs" />
     <Compile Include="Maps\Octant.cs" />
     <Compile Include="Maps\ShadowcastingFovCalculator.cs" />
+    <Compile Include="Systems\PrototypeSystem.cs" />
     <Compile Include="Utils\StringExtensions.cs" />
     <Compile Include="Utils\WordWrap.cs" />
     <Compile Include="Menus\StaticMenus\MainMenu.cs" />
@@ -157,6 +162,9 @@
     <None Include="Data\Entities\player.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Entities\StaticEntities\Props\stairs.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\Entities\StaticEntities\World\World.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -174,6 +182,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\Entities\StaticEntities\World\Branches\Entrance.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Entities\StaticEntities\Props\portal.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Content Include="Images\Tileset\terminal8x8.png">

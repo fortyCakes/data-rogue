@@ -47,7 +47,7 @@ namespace data_rogue_core.EntitySystem
         {
             foreach (var system in Systems)
             {
-                if (entity.HasAll(system.RequiredComponents))
+                if (entity.HasAll(system.RequiredComponents) && entity.HasNone(system.ForbiddenComponents))
                 {
                     system.AddEntity(entity);
                 }
@@ -114,9 +114,9 @@ namespace data_rogue_core.EntitySystem
             return GetEntitiesWithName(v).Single();
         }
 
-        public List<Entity> EntitiesWith<T>() where T: IEntityComponent
+        public List<Entity> EntitiesWith<T>(bool includePrototypes = false) where T: IEntityComponent
         {
-            return AllEntities.Where(e => e.Has<T>()).ToList();
+            return AllEntities.Where(e => e.Has<T>() && (includePrototypes || !e.Has<Prototype>())).ToList();
         }
 
         public List<T> GetAll<T>() where T : IEntityComponent

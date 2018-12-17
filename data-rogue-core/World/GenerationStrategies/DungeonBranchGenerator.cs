@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using data_rogue_core.Systems;
+using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core
 {
@@ -31,9 +32,9 @@ namespace data_rogue_core
             return generatedBranchMaps;
         }
 
-        protected override void AddEntities(GeneratedBranch branch, Branch branchDefinition, IEntityEngineSystem engine, IPositionSystem position)
+        protected override void ExecuteMapGenCommands(GeneratedBranch generatedBranch, Branch branch, IEntityEngineSystem engine, IPositionSystem position, IPrototypeSystem prototypeSystem)
         {
-            var firstLayer = branch.Maps.First();
+            var firstLayer = generatedBranch.Maps.First();
             var emptyCell = engine.GetEntityWithName("Cell:Empty");
 
             var emptyPositions = firstLayer.Cells.Where(c => c.Value == emptyCell).ToList();
@@ -46,7 +47,7 @@ namespace data_rogue_core
                 new Position {MapCoordinate = emptyPosition}
             };
 
-            engine.New($"Branch entrance portal for {branchDefinition.BranchName}", components);
+            engine.New($"Branch entrance portal for {branch.BranchName}", components);
         }
     }
 }

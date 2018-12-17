@@ -11,7 +11,7 @@ namespace data_rogue_core.EntitySystem
         public string Name { get; set; } = "";
         public bool IsStatic { get; set; } = false;
 
-        public List<IEntityComponent> Components = new List<IEntityComponent>();
+        public List<IEntityComponent> Components { get; set; } = new List<IEntityComponent>();
 
         public Entity(uint entityId, string name, IEntityComponent[] components)
         {
@@ -44,5 +44,9 @@ namespace data_rogue_core.EntitySystem
 
         }
 
+        public bool HasNone(SystemComponents forbiddenComponents)
+        {
+            return !forbiddenComponents.Any(fc => Components.Any(c => c.GetType() == fc));
+        }
     }
 }
