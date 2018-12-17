@@ -1,20 +1,538 @@
-﻿using System;
+﻿using data_rogue_core.Components;
+using data_rogue_core.EntitySystem;
+using data_rogue_core.Maps;
+using DataRogueWorldEditor.Controls;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Appearance = data_rogue_core.Components.Appearance;
 
 namespace DataRogueWorldEditor.Editors
 {
-    public partial class frmMapEditor : WeifenLuo.WinFormsUI.Docking.DockContent
+    public partial class frmMapEditor : WeifenLuo.WinFormsUI.Docking.DockContent, IEditor
     {
-        public frmMapEditor()
+        public Map Map { get; private set; }
+
+        public bool IsDirty
+        {
+            get => _isDirty;
+            set {
+                _isDirty = value;
+                SetTabTitle();
+            }
+        }
+
+
+        private string FileName
+        {
+            get => _fileName;
+            set
+            {
+                _fileName = value;
+                SetTabTitle();
+            }
+        }
+
+        private MapEditorTool _currentTool;
+
+        private bool ShowMap { get; set; } = true;
+        private bool ShowEntities { get; set; } = true;
+        private bool ShowItems { get; set; } = true;
+
+        int MapDisplayHeight => (lblMap.Height - 20) / 13;
+        int MapDisplayWidth => (lblMap.Width - 20) / 6;
+
+        public int offsetX;
+        public int offsetY;
+        private IEntity _paintingWithCell;
+        private MapCoordinate _selectedCoordinate;
+        private string _fileName;
+        private bool _isDirty;
+        private MapCoordinate _oldMapGenCoordinate;
+
+        internal MapEditorTool SelectedTool
+        {
+            get => _currentTool;
+            set
+            {
+                _currentTool = value;
+                lblCurrentTool.Text = $"Current Tool: {_currentTool}";
+
+                var toolControls = new[] { btnClearCell, btnSetCell, btnSelectCell };
+                foreach (ToolStripButton control in toolControls)
+                {
+                    control.Checked = false;
+                }
+
+                if (_currentTool == MapEditorTool.SetCell) { btnSetCell.Checked = true; }
+                if (_currentTool == MapEditorTool.ClearCell) { btnClearCell.Checked = true; }
+                if (_currentTool == MapEditorTool.SelectCell) { btnSelectCell.Checked = true; }
+            }
+        }
+
+        public IEntity PaintingWithCell
+        {
+            get => _paintingWithCell;
+            set
+            {
+                _paintingWithCell = value;
+                SetPaintingWithCellHilight(_paintingWithCell.Name);
+            }
+        }
+
+        public BindingList<MapEditorGlyphBinding> GlyphEntities { get; set; }
+        public BindingList<MapGenCommand> MapGenCommands { get; private set; }
+        public IEntityEngineSystem EntityEngineSystem { get; }
+        public MapCoordinate SelectedCoordinate
+        {
+            get => _selectedCoordinate;
+            set
+            {
+                _selectedCoordinate = value;
+                DisplayCellData(_selectedCoordinate);
+            }
+        }
+
+        public frmMapEditor(string filename, IEntityEngineSystem entityEngineSystem)
         {
             InitializeComponent();
+
+            FileName = filename;
+
+            if (string.IsNullOrEmpty(FileName))
+            {
+                Map = new Map("new map key", entityEngineSystem.GetEntityWithName("Cell:Wall"));
+            }
+            else
+            {
+                var mapFileText = File.ReadAllText(FileName);
+
+                Map = MapSerializer.Deserialize(mapFileText, entityEngineSystem);
+            }
+
+            dgvCommands.AutoGenerateColumns = false;
+
+            colCommandTypes.DataSource = Enum.GetValues(typeof(MapGenCommandType));
+            colCommandTypes.ValueType = typeof(MapGenCommandType);
+            colCommandTypes.DataPropertyName = "MapGenCommandType";
+
+            SetData();
+
+            SetOffsets();
+
+            RenderMap();
+
+            SelectedTool = MapEditorTool.SetCell;
+            EntityEngineSystem = entityEngineSystem;
         }
+
+        private void SetOffsets()
+        {
+            var mapHeight = Map.BottomY - Map.TopY;
+            var mapWidth = Map.RightX - Map.LeftX;
+
+            offsetX = mapWidth / 2 - MapDisplayWidth / 2;
+            offsetY = mapHeight / 2 - MapDisplayHeight / 2;
+        }
+
+        private void SetData() //IEntityEngineSystem entityEngineSystem)
+        {
+            SetTabTitle();
+
+            txtMapKey.Text = Map.MapKey.Key;
+
+            txtDefaultCell.Text = Map.DefaultCell.Name;
+
+            btnMap.Checked = ShowMap;
+            btnEntities.Checked = ShowEntities;
+
+            var cellMapping = MapSerializer.GetMapGlyphs(Map);
+
+            GlyphEntities = new BindingList<MapEditorGlyphBinding>(
+                cellMapping.Select(m => new MapEditorGlyphBinding { Glyph = m.Value.ToString(), Entity = m.Key }).ToList());
+
+            dgvGlyphs.DataSource = GlyphEntities;
+
+            PaintingWithCell = Map.DefaultCell;
+        }
+
+        private void SetTabTitle()
+        {
+            this.Text = Path.GetFileName(FileName) + (IsDirty ? "*" : "");
+        }
+
+        private void btnMap_Click(object sender, EventArgs e)
+        {
+            ShowMap = !ShowMap;
+            btnMap.Checked = ShowMap;
+        }
+
+        private void btnEnemies_Click(object sender, EventArgs e)
+        {
+            ShowEntities = !ShowEntities;
+            btnEntities.Checked = ShowEntities;
+        }
+
+        private void btnItems_Click(object sender, EventArgs e)
+        {
+            ShowItems = !ShowItems;
+            //btnItems.Checked = ShowItems;
+        }
+
+        public void Save()
+        {
+            DoSave(false);
+        }
+
+        public void SaveAs()
+        {
+            DoSave(true);
+        }
+
+        private void DoSave(bool forceSaveDialog)
+        {
+            UpdateMapGenCommandBinding(_oldMapGenCoordinate);
+
+            Map.MapKey = new MapKey(txtMapKey.Text);
+
+            Map.DefaultCell = EntityEngineSystem.GetEntityWithName(txtDefaultCell.Text);
+
+            var serialisedMap = MapSerializer.Serialize(Map);
+
+            if (FileName == null || forceSaveDialog)
+            {
+                var ok = DisplaySaveFileDialog();
+                if (!ok)
+                {
+                    return;
+                }
+            }
+
+            File.WriteAllText(FileName, serialisedMap);
+
+            IsDirty = false;
+        }
+
+        private bool DisplaySaveFileDialog()
+        {
+            var dialog = new SaveFileDialog
+            {
+                Title = "Save Map",
+                Filter = "data-rogue map file|*.map"
+            };
+
+            var result = dialog.ShowDialog();
+
+            if (result == DialogResult.OK && !string.IsNullOrEmpty(dialog.FileName))
+            {
+                FileName = dialog.FileName;
+                return true;
+            }
+
+            return false;
+        }
+
+        private void RenderMap()
+        {
+            var stringBuilder = new StringBuilder();
+
+            int height = (lblMap.Height - 20) / 13;
+            int width = (lblMap.Width - 20) / 6;
+
+            var leftX = offsetX - 1;
+            var topY = offsetY - 1;
+
+            for (int y = topY; y <= topY + height; y++)
+            {
+                for (int x = leftX; x <= leftX + width; x++)
+                {
+                    if (Map.CellExists(x, y))
+                    {
+                        var cellId = Map.CellAt(x, y).Name;
+                        var glyph = GlyphEntities.Single(g => g.Entity == cellId);
+                        stringBuilder.Append(glyph.Glyph);
+                    }
+                    else
+                    {
+                        stringBuilder.Append(" ");
+                    }
+                }
+                stringBuilder.Append("\n");
+            }
+
+            var mapText = stringBuilder.ToString();
+
+            lblMap.Text = mapText;
+
+            DisplayCellData(SelectedCoordinate);
+        }
+
+        private void ApplyTool(MapEditorTool tool, MapCoordinate coordinate, MouseEventType mouseEventType, MouseButtons buttons)
+        {
+            bool isClicking = (mouseEventType == MouseEventType.Click || mouseEventType == MouseEventType.MouseMove) && buttons == MouseButtons.Left;
+
+            switch (tool)
+            {
+                case MapEditorTool.SetCell:
+
+                    if (isClicking)
+                    {
+                        Map.SetCell(coordinate, PaintingWithCell);
+                        IsDirty = true;
+                    }
+                    break;
+                case MapEditorTool.ClearCell:
+                    if (isClicking)
+                    {
+                        Map.ClearCell(coordinate);
+                        IsDirty = true;
+                    }
+                    break;
+                case MapEditorTool.SelectCell:
+                    if (isClicking)
+                    {
+                        SelectMapCell(coordinate);
+                    }
+                    break;
+            }
+
+            RenderMap();
+        }
+
+        private void SelectMapCell(MapCoordinate coordinate)
+        {
+            SelectedCoordinate = coordinate;
+        }
+
+        private void btnSetCell_Click(object sender, EventArgs e)
+        {
+            SelectedTool = MapEditorTool.SetCell;
+        }
+
+        private void btnClearCell_Click(object sender, EventArgs e)
+        {
+            SelectedTool = MapEditorTool.ClearCell;
+        }
+
+        private void dgvGlyphs_DoubleClickCell(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridView dataGridView = (sender as DataGridView);
+            var cellName = dataGridView.Rows[e.RowIndex].Cells[1].Value?.ToString();
+
+            if (string.IsNullOrEmpty(cellName)) return;
+
+            var entity = EntityEngineSystem.GetEntityWithName(cellName);
+
+            PaintingWithCell = entity;
+        }
+
+        private void SetPaintingWithCellHilight(string cellName)
+        {
+            foreach (DataGridViewRow row in dgvGlyphs.Rows)
+            {
+                if (row.Cells[1].Value?.ToString() == cellName)
+                {
+                    ColorRow(row, Color.CornflowerBlue);
+                }
+                else
+                {
+                    ColorRow(row, Color.White);
+                }
+            }
+        }
+
+        private static void ColorRow(DataGridViewRow row, Color color)
+        {
+            foreach (DataGridViewCell cell in row.Cells)
+            {
+                cell.Style.BackColor = color;
+            }
+        }
+
+        private void lblMap_MouseClick(object sender, MouseEventArgs e)
+        {
+            ApplyToolAtCoordinates(e, MouseEventType.Click);
+        }
+
+        private void lblMap_MouseMove(object sender, MouseEventArgs e)
+        {
+            ApplyToolAtCoordinates(e, MouseEventType.MouseMove);
+        }
+
+        private void ApplyToolAtCoordinates(MouseEventArgs e, MouseEventType eventType)
+        {
+            int cellX = ((e.X - 3) / 6) - 1 + offsetX;
+            int cellY = ((e.Y - 1) / 13) - 1 + offsetY;
+
+            ApplyTool(SelectedTool, new MapCoordinate(Map.MapKey, cellX, cellY), eventType, e.Button);
+        }
+
+        private void btnScrollLeft_Click(object sender, EventArgs e)
+        {
+            offsetX--;
+            RenderMap();
+        }
+
+        private void btnScrollRight_Click(object sender, EventArgs e)
+        {
+            offsetX++;
+            RenderMap();
+        }
+
+        private void btnScrollUp_Click(object sender, EventArgs e)
+        {
+            offsetY--;
+            RenderMap();
+        }
+
+        private void btnScrollDown_Click(object sender, EventArgs e)
+        {
+            offsetY++;
+            RenderMap();
+        }
+
+        private void btnSelectCell_Click(object sender, EventArgs e)
+        {
+            SelectedTool = MapEditorTool.SelectCell;
+        }
+
+        private void DisplayCellData(MapCoordinate coordinate)
+        {
+            if (coordinate == null)
+            {
+                return;
+            }
+
+            var stringBuilder = new StringBuilder();
+
+            stringBuilder.AppendLine($"X: {coordinate.X} Y: {coordinate.Y}");
+
+            if (Map.CellExists(coordinate.X, coordinate.Y))
+            {
+                var cell = Map.Cells[coordinate];
+
+                var physical = cell.Get<Physical>();
+                var appearance = cell.Get<Appearance>();
+
+                stringBuilder.AppendLine($"{cell.Name}");
+                stringBuilder.AppendLine($"Passable: {physical.Passable}");
+                stringBuilder.AppendLine($"Transparent: {physical.Transparent}");
+                stringBuilder.AppendLine($"Glyph: {appearance.Glyph}");
+                stringBuilder.AppendLine($"Color: {ColorTranslator.ToHtml(appearance.Color)}");
+                stringBuilder.AppendLine($"ZOrder: {appearance.ZOrder}");
+            }
+            else
+            {
+                stringBuilder.AppendLine();
+                stringBuilder.AppendLine($"(no cell set, default will be used)");
+            }
+
+            if (coordinate != _oldMapGenCoordinate)
+            {
+                UpdateMapGenCommandBinding(coordinate);
+            }
+
+            lblSelectedCell.Text = stringBuilder.ToString();
+        }
+
+        private void UpdateMapGenCommandBinding(MapCoordinate newCoordinate)
+        {
+            // Remove the commands that match the old coordinate
+            Map.MapGenCommands = Map.MapGenCommands.Where(c => !(c.Vector.X == _oldMapGenCoordinate.X && c.Vector.Y == _oldMapGenCoordinate.Y)).ToList();
+
+            if (MapGenCommands?.Any() == true)
+            {
+                Map.MapGenCommands.AddRange(MapGenCommands.Where(c => c.MapGenCommandType != MapGenCommandType.Null).Select(c => MakeNewCommand(c, _oldMapGenCoordinate)));
+            }
+
+            MapGenCommands = new BindingList<MapGenCommand>(Map.MapGenCommands.Where(c => c.Vector.X == newCoordinate.X && c.Vector.Y == newCoordinate.Y).ToList());
+            dgvCommands.DataSource = MapGenCommands;
+
+            _oldMapGenCoordinate = newCoordinate;
+        }
+
+        private MapGenCommand MakeNewCommand(MapGenCommand c, MapCoordinate coordinate)
+        {
+            return new MapGenCommand { MapGenCommandType = c.MapGenCommandType, Parameters = c.Parameters, Vector = new Vector(coordinate.X, coordinate.Y) };
+        }
+
+        private void txtMapKey_TextChanged(object sender, EventArgs e)
+        {
+            IsDirty = true;
+        }
+
+        private void txtDefaultCell_TextChanged(object sender, EventArgs e)
+        {
+            IsDirty = true;
+        }
+
+        private void dgvGlyphs_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            IsDirty = true;
+        }
+
+        private void lblMap_Paint(object sender, PaintEventArgs e)
+        {
+            Label lbl = sender as Label;
+            e.Graphics.Clear(lbl.BackColor);
+
+            TextRenderer.DrawText(e.Graphics, lbl.Text, lbl.Font,
+                lbl.ClientRectangle,
+                lbl.ForeColor,
+                lbl.BackColor, TextFormatFlags.Default);
+        }
+    }
+
+    public enum MouseEventType
+    {
+        Click,
+        MouseDown,
+        MouseUp,
+        MouseMove
+    }
+
+    public class MapEditorGlyphBinding : INotifyPropertyChanged
+    {
+        private char _glyph;
+        private string _entity;
+
+        public string Glyph {
+            get => _glyph.ToString();
+            set
+            {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Glyph)));
+                _glyph = value.First();
+            }
+        }
+        public string Entity
+        {
+            get => _entity;
+            set
+            {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Entity)));
+                _entity = value;
+            }
+        }
+
+        public MapEditorGlyphBinding()
+        {
+
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+    }
+
+    enum MapEditorTool
+    {
+        SetCell,
+        ClearCell,
+        SelectCell
     }
 }

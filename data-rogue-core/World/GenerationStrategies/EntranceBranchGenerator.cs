@@ -25,14 +25,20 @@ namespace data_rogue_core
 
         protected override void AddEntities(GeneratedBranch branch, Branch branchDefinition, IEntityEngineSystem engine, IPositionSystem position)
         {
-            var components = new IEntityComponent[]
-            {
-                new Appearance {Color = Color.Blue, Glyph = '>', ZOrder = 1}, 
+            engine.New("entrance room portal", 
+                new Appearance { Color = Color.Blue, Glyph = '>', ZOrder = 1 },
                 new Portal(),
-                new Position {MapCoordinate = new MapCoordinate($"{branchDefinition.BranchName}:2", 0, 0)}
-            };
+                new Position { MapCoordinate = new MapCoordinate($"{branchDefinition.BranchName}:2", 0, 0) });
 
-            engine.New("entrance room portal", components);
+            engine.New("down stairs",
+                new Appearance { Color = Color.LightGray, Glyph = '>', ZOrder = 1 },
+                new Stairs { Direction = StairDirection.Down },
+                new Position { MapCoordinate = new MapCoordinate($"{branchDefinition.BranchName}:1", 10, 0) });
+
+            engine.New("up stairs",
+                new Appearance { Color = Color.LightGray, Glyph = '<', ZOrder = 1 },
+                new Stairs { Direction = StairDirection.Up },
+                new Position { MapCoordinate = new MapCoordinate($"{branchDefinition.BranchName}:2", 0, 5) });
         }
     }
 }

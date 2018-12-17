@@ -6,8 +6,13 @@ using data_rogue_core.EntitySystem;
 
 namespace data_rogue_core
 {
-    internal class DataStaticEntityLoader : IStaticEntityLoader
+    public class DataStaticEntityLoader : IStaticEntityLoader
     {
+        public DataStaticEntityLoader()
+        {
+
+        }
+
         public void Load(IEntityEngineSystem engine)
         {
             var basePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Data/Entities/StaticEntities");

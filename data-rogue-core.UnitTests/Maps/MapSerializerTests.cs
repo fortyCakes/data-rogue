@@ -27,6 +27,7 @@ namespace data_rogue_core.UnitTests.Maps
         [Test]
         [TestCase(0)]
         [TestCase(1)]
+        [TestCase(2)]
         public void Serialize_File1_TestMap_ReturnsExpectedSerialization(int testCase)
         {
             var testMap = GetTestMap(testCase);
@@ -41,6 +42,7 @@ namespace data_rogue_core.UnitTests.Maps
         [Test]
         [TestCase(0)]
         [TestCase(1)]
+        [TestCase(2)]
         public void Deserialize_File1_ReturnsTestMap(int testCase)
         {
             string serialisedText = LoadSerializedData(testCase);
@@ -83,7 +85,20 @@ namespace data_rogue_core.UnitTests.Maps
             testMap1.RemoveCellsInRange(1, 2, 1, 1);
             testMap1.RemoveCellsInRange(5, 6, 2, 3);
 
-            return new[] { testMap0, testMap1 };
+            var testMap2 = new Map("testMapKey3", _wallCell);
+
+            testMap2.SetCellsInRange(0, 11, 0, 4, _floorCell);
+            testMap2.RemoveCellsInRange(1, 2, 1, 1);
+            testMap2.RemoveCellsInRange(5, 6, 2, 3);
+
+            testMap2.MapGenCommands.Add(
+                new MapGenCommand {
+                    MapGenCommandType = MapGenCommandType.Entity,
+                    Parameters = "Portal:Portal",
+                    Vector = new Vector(1,2)
+            });
+
+            return new[] { testMap0, testMap1, testMap2 };
         }
 
         private IEntity CreateCell(char glyph, string name)

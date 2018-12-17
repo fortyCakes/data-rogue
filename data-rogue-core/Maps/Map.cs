@@ -10,7 +10,11 @@ namespace data_rogue_core.Maps
     {
         public MapKey MapKey { get; set; }
 
-        public IEntity DefaultCell { get; private set; }
+        public IEntity DefaultCell { get; set; }
+
+        public Dictionary<MapCoordinate, IEntity> Cells = new Dictionary<MapCoordinate, IEntity>();
+
+        public List<MapGenCommand> MapGenCommands { get; set; } = new List<MapGenCommand>();
 
         public uint DefaultCellId
         {
@@ -20,7 +24,10 @@ namespace data_rogue_core.Maps
             }
         }
 
-        public Dictionary<MapCoordinate, IEntity> Cells = new Dictionary<MapCoordinate, IEntity>();
+        public int LeftX => Cells.Any() ? Cells.Min(c => c.Key.X) : 0;
+        public int TopY => Cells.Any() ? Cells.Min(c => c.Key.Y) : 0;
+        public int RightX => Cells.Any() ? Cells.Max(c => c.Key.X) : 0;
+        public int BottomY => Cells.Any() ? Cells.Max(c => c.Key.Y) : 0;
 
         public Map(string key, IEntity defaultCell)
         {
@@ -80,7 +87,7 @@ namespace data_rogue_core.Maps
             }
         }
 
-        internal void SetCell(MapCoordinate coordinate, IEntity cell)
+        public void SetCell(MapCoordinate coordinate, IEntity cell)
         {
             CheckEntityIsCell(cell);
 
@@ -138,6 +145,14 @@ namespace data_rogue_core.Maps
             var visibleCells = visibleVectors.Select(v => mapCoordinate + v).ToList();
 
             return visibleCells;
+        }
+
+        public void ClearCell(MapCoordinate coordinate)
+        {
+            if (Cells.ContainsKey(coordinate))
+            {
+                Cells.Remove(coordinate);
+            }
         }
     }
 }

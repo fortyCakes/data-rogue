@@ -4,6 +4,7 @@ using data_rogue_core.EntitySystem;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System;
 
 namespace data_rogue_core.Maps
 {
@@ -20,12 +21,12 @@ namespace data_rogue_core.Maps
 
             stringBuilder.AppendLine($"default:" + map.DefaultCell.Name);
 
-            var leftX = map.Cells.Min(c => c.Key.X);
-            var rightX = map.Cells.Max(c => c.Key.X);
-            var topY = map.Cells.Min(c => c.Key.Y);
-            var bottomY = map.Cells.Max(c => c.Key.Y);
+            stringBuilder.AppendLine($"{map.LeftX},{map.TopY}");
 
-            stringBuilder.AppendLine($"{leftX},{topY}");
+            foreach(MapGenCommand command in map.MapGenCommands)
+            {
+                stringBuilder.AppendLine(command.ToString());
+            }
 
             var glyphs = GetMapGlyphs(map);
 
@@ -34,9 +35,9 @@ namespace data_rogue_core.Maps
                 stringBuilder.AppendLine($"{glyph.Value}:{glyph.Key}");
             }
 
-            for (int y = topY; y <= bottomY; y++)
+            for (int y = map.TopY; y <= map.BottomY; y++)
             {
-                for (int x = leftX; x <= rightX; x++)
+                for (int x = map.LeftX; x <= map.RightX; x++)
                 {
                     if (map.CellExists(x, y))
                     {
@@ -69,6 +70,8 @@ namespace data_rogue_core.Maps
 
             var lineIndex = 3;
 
+            var commands = GetCommandsInMap(lines, ref lineIndex);
+
             var glyphDictionary = GetCellsInMap(entityEngineSystem, lines, ref lineIndex);
 
             Map deserialisedMap = new Map(mapName, defaultCell);
@@ -94,14 +97,41 @@ namespace data_rogue_core.Maps
                 }
             }
 
+            deserialisedMap.MapGenCommands = commands;
+
             return deserialisedMap;
+        }
+
+        private static List<MapGenCommand> GetCommandsInMap(string[] lines, ref int lineIndex)
+        {
+            var commandsInMap = new List<MapGenCommand>();
+
+            Match match;
+            while ((match = Regex.Match(lines[lineIndex], @"(\d*),(\d*): (.*)\((.*)\)")).Success)
+            {
+                var x = int.Parse(match.Groups[1].Value);
+                var y = int.Parse(match.Groups[2].Value);
+
+                var command = (MapGenCommandType)Enum.Parse(typeof(MapGenCommandType), match.Groups[3].Value);
+
+                var parameters = match.Groups[4].Value;
+
+                commandsInMap.Add(new MapGenCommand
+                {
+                    Vector = new Vector(x, y),
+                    MapGenCommandType = command,
+                    Parameters = parameters
+                });
+
+                lineIndex++;
+            }
+
+            return commandsInMap;
         }
 
         private static Dictionary<char, IEntity> GetCellsInMap(IEntityEngineSystem entityEngineSystem, string[] lines, ref int lineIndex)
         {
             var cellsInMap = new Dictionary<char, IEntity>();
-
-            
 
             Match match;
 
@@ -118,13 +148,12 @@ namespace data_rogue_core.Maps
 
             return cellsInMap;
         }
-
         private static string Extract(string input, string pattern)
         {
             return Regex.Match(input, pattern).Groups[1].Value;
         }
 
-        private static Dictionary<string, char> GetMapGlyphs(Map map)
+        public static Dictionary<string, char> GetMapGlyphs(Map map)
         {
             var mapGlyphs = new Dictionary<string, char>();
 

@@ -46,7 +46,7 @@ namespace data_rogue_core
                 new Position {MapCoordinate = emptyPosition}
             };
 
-            engine.New("entrance room portal", components);
+            engine.New($"Branch entrance portal for {branchDefinition.BranchName}", components);
         }
     }
 }
