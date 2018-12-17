@@ -55,6 +55,7 @@ namespace DataRogueWorldEditor.Editors
         private MapCoordinate _selectedCoordinate;
         private string _fileName;
         private bool _isDirty;
+        private MapCoordinate _oldMapGenCoordinate;
 
         internal MapEditorTool SelectedTool
         {
@@ -87,6 +88,7 @@ namespace DataRogueWorldEditor.Editors
         }
 
         public BindingList<MapEditorGlyphBinding> GlyphEntities { get; set; }
+        public BindingList<MapGenCommand> MapGenCommands { get; private set; }
         public IEntityEngineSystem EntityEngineSystem { get; }
         public MapCoordinate SelectedCoordinate
         {
@@ -114,6 +116,12 @@ namespace DataRogueWorldEditor.Editors
 
                 Map = MapSerializer.Deserialize(mapFileText, entityEngineSystem);
             }
+
+            dgvCommands.AutoGenerateColumns = false;
+
+            colCommandTypes.DataSource = Enum.GetValues(typeof(MapGenCommandType));
+            colCommandTypes.ValueType = typeof(MapGenCommandType);
+            colCommandTypes.DataPropertyName = "MapGenCommandType";
 
             SetData();
 
@@ -190,6 +198,8 @@ namespace DataRogueWorldEditor.Editors
 
         private void DoSave(bool forceSaveDialog)
         {
+            UpdateMapGenCommandBinding(_oldMapGenCoordinate);
+
             Map.MapKey = new MapKey(txtMapKey.Text);
 
             Map.DefaultCell = EntityEngineSystem.GetEntityWithName(txtDefaultCell.Text);
@@ -358,8 +368,8 @@ namespace DataRogueWorldEditor.Editors
 
         private void ApplyToolAtCoordinates(MouseEventArgs e, MouseEventType eventType)
         {
-            int cellX = ((e.X - 8) / 6) - 1 + offsetX;
-            int cellY = ((e.Y - 6) / 13) - 1 + offsetY;
+            int cellX = ((e.X - 3) / 6) - 1 + offsetX;
+            int cellY = ((e.Y - 1) / 13) - 1 + offsetY;
 
             ApplyTool(SelectedTool, new MapCoordinate(Map.MapKey, cellX, cellY), eventType, e.Button);
         }
@@ -424,7 +434,33 @@ namespace DataRogueWorldEditor.Editors
                 stringBuilder.AppendLine($"(no cell set, default will be used)");
             }
 
+            if (coordinate != _oldMapGenCoordinate)
+            {
+                UpdateMapGenCommandBinding(coordinate);
+            }
+
             lblSelectedCell.Text = stringBuilder.ToString();
+        }
+
+        private void UpdateMapGenCommandBinding(MapCoordinate newCoordinate)
+        {
+            // Remove the commands that match the old coordinate
+            Map.MapGenCommands = Map.MapGenCommands.Where(c => !(c.Vector.X == _oldMapGenCoordinate.X && c.Vector.Y == _oldMapGenCoordinate.Y)).ToList();
+
+            if (MapGenCommands?.Any() == true)
+            {
+                Map.MapGenCommands.AddRange(MapGenCommands.Where(c => c.MapGenCommandType != MapGenCommandType.Null).Select(c => MakeNewCommand(c, _oldMapGenCoordinate)));
+            }
+
+            MapGenCommands = new BindingList<MapGenCommand>(Map.MapGenCommands.Where(c => c.Vector.X == newCoordinate.X && c.Vector.Y == newCoordinate.Y).ToList());
+            dgvCommands.DataSource = MapGenCommands;
+
+            _oldMapGenCoordinate = newCoordinate;
+        }
+
+        private MapGenCommand MakeNewCommand(MapGenCommand c, MapCoordinate coordinate)
+        {
+            return new MapGenCommand { MapGenCommandType = c.MapGenCommandType, Parameters = c.Parameters, Vector = new Vector(coordinate.X, coordinate.Y) };
         }
 
         private void txtMapKey_TextChanged(object sender, EventArgs e)
@@ -440,6 +476,17 @@ namespace DataRogueWorldEditor.Editors
         private void dgvGlyphs_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             IsDirty = true;
+        }
+
+        private void lblMap_Paint(object sender, PaintEventArgs e)
+        {
+            Label lbl = sender as Label;
+            e.Graphics.Clear(lbl.BackColor);
+
+            TextRenderer.DrawText(e.Graphics, lbl.Text, lbl.Font,
+                lbl.ClientRectangle,
+                lbl.ForeColor,
+                lbl.BackColor, TextFormatFlags.Default);
         }
     }
 

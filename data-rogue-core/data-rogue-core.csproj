@@ -78,6 +78,8 @@
     <Compile Include="EventSystem\IEventRule.cs" />
     <Compile Include="EventSystem\Rules\BranchGeneratorRule.cs" />
     <Compile Include="Maps\Generators\BasicDungeonMapGenerator.cs" />
+    <Compile Include="Maps\MapGenCommands\IMapGenCommandResolver.cs" />
+    <Compile Include="Maps\MapGenCommands\MapGenCommand.cs" />
     <Compile Include="Systems\IRandom.cs" />
     <Compile Include="Maps\Generators\StaticMapGenerator.cs" />
     <Compile Include="Maps\MapSerializer.cs" />

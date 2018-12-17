@@ -53,6 +53,9 @@
             this.txtDefaultCell = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.dgvCommands = new System.Windows.Forms.DataGridView();
+            this.colCommandTypes = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblSelectedCell = new System.Windows.Forms.Label();
             this.toolsVisible = new System.Windows.Forms.ToolStrip();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
@@ -86,6 +89,7 @@
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
             this.splitContainer4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCommands)).BeginInit();
             this.toolsVisible.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -172,7 +176,7 @@
             // toolStripContainer2.ContentPanel
             // 
             this.toolStripContainer2.ContentPanel.Controls.Add(this.lblCurrentTool);
-            this.toolStripContainer2.ContentPanel.Size = new System.Drawing.Size(188, 356);
+            this.toolStripContainer2.ContentPanel.Size = new System.Drawing.Size(196, 356);
             this.toolStripContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
             // 
             // toolStripContainer2.LeftToolStripPanel
@@ -248,7 +252,7 @@
             this.btnScrollRight});
             this.toolsScroll.Location = new System.Drawing.Point(0, 125);
             this.toolsScroll.Name = "toolsScroll";
-            this.toolsScroll.Size = new System.Drawing.Size(32, 113);
+            this.toolsScroll.Size = new System.Drawing.Size(24, 94);
             this.toolsScroll.TabIndex = 2;
             // 
             // btnScrollLeft
@@ -257,7 +261,7 @@
             this.btnScrollLeft.Image = global::DataRogueWorldEditor.Properties.Resources.leftarrow;
             this.btnScrollLeft.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnScrollLeft.Name = "btnScrollLeft";
-            this.btnScrollLeft.Size = new System.Drawing.Size(30, 20);
+            this.btnScrollLeft.Size = new System.Drawing.Size(22, 20);
             this.btnScrollLeft.Text = "toolStripButton1";
             this.btnScrollLeft.Click += new System.EventHandler(this.btnScrollLeft_Click);
             // 
@@ -267,7 +271,7 @@
             this.btnScrollUp.Image = global::DataRogueWorldEditor.Properties.Resources.uparrow;
             this.btnScrollUp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnScrollUp.Name = "btnScrollUp";
-            this.btnScrollUp.Size = new System.Drawing.Size(30, 20);
+            this.btnScrollUp.Size = new System.Drawing.Size(22, 20);
             this.btnScrollUp.Text = "toolStripButton2";
             this.btnScrollUp.Click += new System.EventHandler(this.btnScrollUp_Click);
             // 
@@ -277,7 +281,7 @@
             this.btnScrollDown.Image = global::DataRogueWorldEditor.Properties.Resources.downarrow;
             this.btnScrollDown.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnScrollDown.Name = "btnScrollDown";
-            this.btnScrollDown.Size = new System.Drawing.Size(30, 20);
+            this.btnScrollDown.Size = new System.Drawing.Size(22, 20);
             this.btnScrollDown.Text = "toolStripButton3";
             this.btnScrollDown.Click += new System.EventHandler(this.btnScrollDown_Click);
             // 
@@ -287,7 +291,7 @@
             this.btnScrollRight.Image = global::DataRogueWorldEditor.Properties.Resources.rightarrow;
             this.btnScrollRight.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnScrollRight.Name = "btnScrollRight";
-            this.btnScrollRight.Size = new System.Drawing.Size(30, 20);
+            this.btnScrollRight.Size = new System.Drawing.Size(22, 20);
             this.btnScrollRight.Text = "toolStripButton4";
             this.btnScrollRight.Click += new System.EventHandler(this.btnScrollRight_Click);
             // 
@@ -321,6 +325,9 @@
             // 
             // pnlMap
             // 
+            this.pnlMap.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlMap.Controls.Add(this.lblMap);
             this.pnlMap.Location = new System.Drawing.Point(0, 0);
             this.pnlMap.Name = "pnlMap";
@@ -341,6 +348,7 @@
             this.lblMap.Size = new System.Drawing.Size(751, 681);
             this.lblMap.TabIndex = 0;
             this.lblMap.Text = "█......\r\n█.....\r\n....█..\r\n.......";
+            this.lblMap.Paint += new System.Windows.Forms.PaintEventHandler(this.lblMap_Paint);
             this.lblMap.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lblMap_MouseClick);
             this.lblMap.MouseMove += new System.Windows.Forms.MouseEventHandler(this.lblMap_MouseMove);
             // 
@@ -361,6 +369,7 @@
             // 
             // splitContainer4.Panel2
             // 
+            this.splitContainer4.Panel2.Controls.Add(this.dgvCommands);
             this.splitContainer4.Panel2.Controls.Add(this.lblSelectedCell);
             this.splitContainer4.Size = new System.Drawing.Size(259, 685);
             this.splitContainer4.SplitterDistance = 85;
@@ -406,17 +415,46 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "MapKey";
             // 
+            // dgvCommands
+            // 
+            this.dgvCommands.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvCommands.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCommands.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colCommandTypes,
+            this.dataGridViewTextBoxColumn2});
+            this.dgvCommands.Location = new System.Drawing.Point(-2, 148);
+            this.dgvCommands.Name = "dgvCommands";
+            this.dgvCommands.Size = new System.Drawing.Size(259, 446);
+            this.dgvCommands.TabIndex = 1;
+            // 
+            // colCommandTypes
+            // 
+            this.colCommandTypes.DataPropertyName = "CommandType";
+            this.colCommandTypes.HeaderText = "Command";
+            this.colCommandTypes.Name = "colCommandTypes";
+            this.colCommandTypes.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colCommandTypes.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colCommandTypes.Width = 75;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "Parameters";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Parameters";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
             // lblSelectedCell
             // 
-            this.lblSelectedCell.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.lblSelectedCell.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSelectedCell.BackColor = System.Drawing.Color.White;
             this.lblSelectedCell.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSelectedCell.Location = new System.Drawing.Point(0, 0);
             this.lblSelectedCell.Name = "lblSelectedCell";
             this.lblSelectedCell.Padding = new System.Windows.Forms.Padding(5);
-            this.lblSelectedCell.Size = new System.Drawing.Size(257, 148);
+            this.lblSelectedCell.Size = new System.Drawing.Size(257, 145);
             this.lblSelectedCell.TabIndex = 0;
             this.lblSelectedCell.Text = "X: 0, Y: 0\r\nCell:Wall\r\nPassable: True\r\nTransparent: True\r\nGlyph: .\r\nColor: #aaaaa" +
     "a\r\nZOrder: 0";
@@ -525,6 +563,7 @@
             this.splitContainer4.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
             this.splitContainer4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCommands)).EndInit();
             this.toolsVisible.ResumeLayout(false);
             this.toolsVisible.PerformLayout();
             this.ResumeLayout(false);
@@ -565,5 +604,8 @@
         private System.Windows.Forms.ToolStripButton btnSave;
         private System.Windows.Forms.ToolStripSeparator toolStripButton1;
         private System.Windows.Forms.ToolStripButton btnSaveAs;
+        private System.Windows.Forms.DataGridView dgvCommands;
+        private System.Windows.Forms.DataGridViewComboBoxColumn colCommandTypes;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
     }
 }

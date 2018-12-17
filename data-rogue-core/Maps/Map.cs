@@ -12,6 +12,10 @@ namespace data_rogue_core.Maps
 
         public IEntity DefaultCell { get; set; }
 
+        public Dictionary<MapCoordinate, IEntity> Cells = new Dictionary<MapCoordinate, IEntity>();
+
+        public List<MapGenCommand> MapGenCommands { get; set; } = new List<MapGenCommand>();
+
         public uint DefaultCellId
         {
             get
@@ -19,12 +23,11 @@ namespace data_rogue_core.Maps
                 return DefaultCell.EntityId;
             }
         }
+
         public int LeftX => Cells.Any() ? Cells.Min(c => c.Key.X) : 0;
         public int TopY => Cells.Any() ? Cells.Min(c => c.Key.Y) : 0;
         public int RightX => Cells.Any() ? Cells.Max(c => c.Key.X) : 0;
         public int BottomY => Cells.Any() ? Cells.Max(c => c.Key.Y) : 0;
-
-        public Dictionary<MapCoordinate, IEntity> Cells = new Dictionary<MapCoordinate, IEntity>();
 
         public Map(string key, IEntity defaultCell)
         {
