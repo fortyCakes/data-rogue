@@ -13,12 +13,12 @@ namespace data_rogue_core.UnitTests.Data
     [TestFixture]
     partial class EntitySerializerTests
     {
-        private IEntityEngineSystem _entityEngineSystem;
+        private IEntityEngine _entityEngineSystem;
 
         [SetUp]
         public void SetUp()
         {
-            _entityEngineSystem = Substitute.For<IEntityEngineSystem>();
+            _entityEngineSystem = Substitute.For<IEntityEngine>();
             _entityEngineSystem.New(Arg.Any<string>(), Arg.Any<IEntityComponent[]>()).ReturnsForAnyArgs(callInfo =>
             {
                 var entity = new Entity(0, "entity", callInfo.ArgAt<IEntityComponent[]>(1));

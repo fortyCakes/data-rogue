@@ -13,7 +13,7 @@ namespace data_rogue_core.UnitTests.Data
     [TestFixture]
     class SaveStateTests
     {
-        private IEntityEngineSystem _entityEngineSystem;
+        private IEntityEngine _entityEngineSystem;
         private IEntity _wallCell;
         private IEntity _floorCell;
 
@@ -21,7 +21,7 @@ namespace data_rogue_core.UnitTests.Data
         [SetUp]
         public void SetUp()
         {
-            _entityEngineSystem = new EntityEngineSystem(Substitute.For<IStaticEntityLoader>());
+            _entityEngineSystem = new EntityEngineSystem(Substitute.For<BaseStaticEntityLoader>());
 
             _wallCell = CreateCell('#', "Cell:Wall");
             _floorCell = CreateCell('.', "Cell:Empty");

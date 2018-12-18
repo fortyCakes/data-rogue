@@ -56,7 +56,7 @@ namespace data_rogue_core.Maps
             return stringBuilder.ToString();
         }
         
-        public static Map Deserialize(string savedMap, IEntityEngineSystem entityEngineSystem, string mapNameOverride = null)
+        public static Map Deserialize(string savedMap, IEntityEngine entityEngineSystem, string mapNameOverride = null)
         {
             var lines = savedMap.Split('\n');
 
@@ -129,7 +129,7 @@ namespace data_rogue_core.Maps
             return commandsInMap;
         }
 
-        private static Dictionary<char, IEntity> GetCellsInMap(IEntityEngineSystem entityEngineSystem, string[] lines, ref int lineIndex)
+        private static Dictionary<char, IEntity> GetCellsInMap(IEntityEngine entityEngineSystem, string[] lines, ref int lineIndex)
         {
             var cellsInMap = new Dictionary<char, IEntity>();
 

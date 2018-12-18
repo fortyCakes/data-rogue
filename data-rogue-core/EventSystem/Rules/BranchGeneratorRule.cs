@@ -13,12 +13,12 @@ namespace data_rogue_core.EventSystem.Rules
 {
     public class BranchGeneratorRule : IEventRule
     {
-        private readonly IEntityEngineSystem _engine;
+        private readonly IEntityEngine _engine;
         private readonly IPositionSystem _positionSystem;
         private readonly IPrototypeSystem _prototypeSystem;
         private readonly string _seed;
 
-        public BranchGeneratorRule(IEntityEngineSystem engine, IPositionSystem positionSystem, IPrototypeSystem prototypeSystem, string seed)
+        public BranchGeneratorRule(IEntityEngine engine, IPositionSystem positionSystem, IPrototypeSystem prototypeSystem, string seed)
         {
             _engine = engine;
             _positionSystem = positionSystem;

@@ -17,7 +17,7 @@ namespace data_rogue_core
 
         public override string GenerationType => "Entrance";
 
-        protected override List<Map> GenerateMaps(Branch branchDefinition, IEntityEngineSystem engine)
+        protected override List<Map> GenerateMaps(Branch branchDefinition, IEntityEngine engine)
         {
             var entranceMap = new StaticMapGenerator(engine, "StaticMaps/entrance.map").Generate($"{branchDefinition.BranchName}:1", Random);
             var entranceMap2 = new StaticMapGenerator(engine, "StaticMaps/entrance2.map").Generate($"{branchDefinition.BranchName}:2", Random);
@@ -25,7 +25,7 @@ namespace data_rogue_core
             return generatedBranchMaps;
         }
 
-        protected override void CreateEntities(GeneratedBranch generatedBranch, Branch branch, IEntityEngineSystem engine, IPositionSystem positionSystem, IPrototypeSystem prototypeSystem, string seed)
+        protected override void CreateEntities(GeneratedBranch generatedBranch, Branch branch, IEntityEngine engine, IPositionSystem positionSystem, IPrototypeSystem prototypeSystem, string seed)
         {
             // none
         }

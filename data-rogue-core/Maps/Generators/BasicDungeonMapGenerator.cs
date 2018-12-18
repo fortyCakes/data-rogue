@@ -10,7 +10,7 @@ namespace data_rogue_core.Maps.Generators
 {
     public class BasicDungeonMapGenerator : IMapGenerator
     {
-        private IEntityEngineSystem Engine { get; }
+        private IEntityEngine Engine { get; }
         public IRandom Random;
 
         private int size = 50;
@@ -22,7 +22,7 @@ namespace data_rogue_core.Maps.Generators
         private Entity wallCell;
         private Entity floorCell;
 
-        public BasicDungeonMapGenerator(IEntityEngineSystem engine)
+        public BasicDungeonMapGenerator(IEntityEngine engine)
         {
             Engine = engine;
         }

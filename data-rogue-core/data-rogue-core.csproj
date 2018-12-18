@@ -71,11 +71,11 @@
     <Compile Include="Components\World.cs" />
     <Compile Include="Data\EntityBuilder.cs" />
     <Compile Include="Data\SaveStateSerializer.cs" />
+    <Compile Include="EntitySystem\BaseStaticEntityLoader.cs" />
     <Compile Include="EntitySystem\ComponentSerializer.cs" />
     <Compile Include="EntitySystem\DataStaticEntityLoader.cs" />
     <Compile Include="EntitySystem\EntitySerializer.cs" />
     <Compile Include="EntitySystem\ICustomFieldSerialization.cs" />
-    <Compile Include="EntitySystem\IStaticEntityLoader.cs" />
     <Compile Include="EventSystem\IEventRule.cs" />
     <Compile Include="EventSystem\Rules\BranchGeneratorRule.cs" />
     <Compile Include="Maps\Generators\BasicDungeonMapGenerator.cs" />
@@ -154,6 +154,7 @@
     <Compile Include="World\GenerationStrategies\EntranceBranchGenerator.cs" />
     <Compile Include="World\GenerationStrategies\IBranchGenerator.cs" />
     <Compile Include="Maps\Generators\IMapGenerator.cs" />
+    <Compile Include="EntitySystem\WorldEntityLoader.cs" />
     <Compile Include="World\WorldGenerator.cs" />
     <Compile Include="World\WorldState.cs" />
   </ItemGroup>
@@ -165,7 +166,7 @@
     <None Include="Data\Entities\StaticEntities\Props\stairs.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Data\Entities\StaticEntities\World\World.edt">
+    <None Include="Data\Entities\World\World.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\StaticMaps\entrance2.map">
@@ -181,7 +182,7 @@
     <None Include="Data\StaticMaps\entrance.map">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Data\Entities\StaticEntities\World\Branches\Entrance.edt">
+    <None Include="Data\Entities\World\Branches\Entrance.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\Entities\StaticEntities\Props\portal.edt">

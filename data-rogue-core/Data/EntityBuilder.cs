@@ -23,7 +23,7 @@ namespace data_rogue_core.Data
             this.Id = entityId;
         }
 
-        public Entity Build(IEntityEngineSystem engine)
+        public Entity Build(IEntityEngine engine)
         {
             var components = Components.Select(c => ComponentSerializer.Deserialize(c.ToString(), engine, 0)).ToArray();
 

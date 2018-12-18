@@ -57,7 +57,7 @@ namespace data_rogue_core.EntitySystem
             return stringBuilder.ToString();
         }
 
-        public static IEntityComponent Deserialize(string input, IEntityEngineSystem entityEngineSystem, int depth)
+        public static IEntityComponent Deserialize(string input, IEntityEngine entityEngineSystem, int depth)
         {
             var lines = input.SplitLines();
 

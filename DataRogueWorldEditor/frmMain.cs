@@ -17,7 +17,7 @@ namespace DataRogueWorldEditor
     public partial class frmMain : Form
     {
         private DockPanel dockPanel;
-        private IEntityEngineSystem EntityEngineSystem { get; set; } = new EntityEngineSystem(new FolderEntityLoader());
+        private IEntityEngine EntityEngineSystem { get; set; } = new EntityEngineSystem(new FolderEntityLoader());
 
         public frmMain()
         {

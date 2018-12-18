@@ -89,7 +89,7 @@ namespace DataRogueWorldEditor.Editors
 
         public BindingList<MapEditorGlyphBinding> GlyphEntities { get; set; }
         public BindingList<MapGenCommand> MapGenCommands { get; private set; }
-        public IEntityEngineSystem EntityEngineSystem { get; }
+        public IEntityEngine EntityEngineSystem { get; }
         public MapCoordinate SelectedCoordinate
         {
             get => _selectedCoordinate;
@@ -100,7 +100,7 @@ namespace DataRogueWorldEditor.Editors
             }
         }
 
-        public frmMapEditor(string filename, IEntityEngineSystem entityEngineSystem)
+        public frmMapEditor(string filename, IEntityEngine entityEngineSystem)
         {
             InitializeComponent();
 

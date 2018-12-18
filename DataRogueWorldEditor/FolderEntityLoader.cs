@@ -7,14 +7,9 @@ using data_rogue_core.EntitySystem;
 
 namespace data_rogue_core
 {
-    public class FolderEntityLoader : IStaticEntityLoader
+    public class FolderEntityLoader : BaseStaticEntityLoader
     {
-        public FolderEntityLoader()
-        {
-
-        }
-
-        public void Load(IEntityEngineSystem engine)
+        public override void Load(IEntityEngine engine)
         {
             string basePath;
 #if DEBUG

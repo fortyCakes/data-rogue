@@ -22,7 +22,7 @@ namespace data_rogue_core
 
         public static WorldState WorldState;
 
-        public static IEntityEngineSystem EntityEngineSystem;
+        public static IEntityEngine EntityEngineSystem;
         public static IEventRuleSystem EventSystem;
         public static IPositionSystem PositionSystem;
         public static IPlayerControlSystem PlayerControlSystem;

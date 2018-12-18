@@ -25,7 +25,7 @@ namespace data_rogue_core.EntitySystem
             return stringBuilder.ToString();
         }
 
-        public static List<Entity> DeserializeMultiple(string input, IEntityEngineSystem entityEngineSystem)
+        public static List<Entity> DeserializeMultiple(string input, IEntityEngine entityEngineSystem)
         {
             var entityTexts = SplitIntoEntities(input);
 
@@ -59,7 +59,7 @@ namespace data_rogue_core.EntitySystem
             }
         }
 
-        public static Entity Deserialize(string input, IEntityEngineSystem entityEngineSystem)
+        public static Entity Deserialize(string input, IEntityEngine entityEngineSystem)
         {
             var lines = input.SplitLines();
 

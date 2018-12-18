@@ -16,13 +16,13 @@ namespace data_rogue_core.Systems
         public override SystemComponents RequiredComponents => new SystemComponents { typeof(Prototype) };
         public override SystemComponents ForbiddenComponents => new SystemComponents { };
 
-        public PrototypeSystem(IEntityEngineSystem engine, IPositionSystem positionSystem)
+        public PrototypeSystem(IEntityEngine engine, IPositionSystem positionSystem)
         {
             Engine = engine;
             PositionSystem = positionSystem;
         }
 
-        public IEntityEngineSystem Engine { get; }
+        public IEntityEngine Engine { get; }
         public IPositionSystem PositionSystem { get; }
 
         public IEntity Create(int entityId, string newName)

@@ -9,6 +9,6 @@ namespace data_rogue_core
     {
         string GenerationType { get; }
 
-        GeneratedBranch Generate(Branch branchDefinition, IEntityEngineSystem engine, IPositionSystem positionSystem, IPrototypeSystem prototypeSystem, string seed);
+        GeneratedBranch Generate(Branch branchDefinition, IEntityEngine engine, IPositionSystem positionSystem, IPrototypeSystem prototypeSystem, string seed);
     }
 }

@@ -5,13 +5,13 @@ namespace data_rogue_core.Maps.Generators
 {
     public class StaticMapGenerator : IMapGenerator
     {
-        public StaticMapGenerator(IEntityEngineSystem entityEngineSystem, string mapFile)
+        public StaticMapGenerator(IEntityEngine entityEngineSystem, string mapFile)
         {
             EntityEngineSystem = entityEngineSystem;
             MapFile = mapFile;
         }
 
-        public IEntityEngineSystem EntityEngineSystem { get; }
+        public IEntityEngine EntityEngineSystem { get; }
         public string MapFile { get; }
 
         public Map Generate(string mapName, IRandom random)

@@ -17,13 +17,13 @@ namespace data_rogue_core
         
         public abstract string GenerationType { get; }
 
-        protected abstract List<Map> GenerateMaps(Branch branchDefinition, IEntityEngineSystem engine);
+        protected abstract List<Map> GenerateMaps(Branch branchDefinition, IEntityEngine engine);
 
-        protected abstract void CreateEntities(GeneratedBranch generatedBranch, Branch branch, IEntityEngineSystem engine, IPositionSystem positionSystem, IPrototypeSystem prototypeSystem, string seed);
+        protected abstract void CreateEntities(GeneratedBranch generatedBranch, Branch branch, IEntityEngine engine, IPositionSystem positionSystem, IPrototypeSystem prototypeSystem, string seed);
 
         protected IRandom Random { get; set; }
 
-        public GeneratedBranch Generate(Branch branch, IEntityEngineSystem engine, IPositionSystem positionSystem, IPrototypeSystem prototypeSystem, string seed)
+        public GeneratedBranch Generate(Branch branch, IEntityEngine engine, IPositionSystem positionSystem, IPrototypeSystem prototypeSystem, string seed)
         {
             Random = new RNG(seed);
 
@@ -52,7 +52,7 @@ namespace data_rogue_core
             return generatedBranch;
         }
 
-        protected virtual void AddBranchPortals(GeneratedBranch generatedBranch, Branch branch, IEntityEngineSystem engine, IPositionSystem positionSystem)
+        protected virtual void AddBranchPortals(GeneratedBranch generatedBranch, Branch branch, IEntityEngine engine, IPositionSystem positionSystem)
         {
             var links = engine.GetAll<BranchLink>();
 
@@ -111,7 +111,7 @@ namespace data_rogue_core
         }
 
 
-        protected virtual void LinkStairs(Map previousMap, Map map, IEntityEngineSystem engine)
+        protected virtual void LinkStairs(Map previousMap, Map map, IEntityEngine engine)
         {
             var stairsDown = GetStairs(previousMap, StairDirection.Down, engine);
             var stairsUp = GetStairs(map, StairDirection.Up, engine);
@@ -134,7 +134,7 @@ namespace data_rogue_core
             }
         }
 
-        protected void ExecuteMapGenCommands(GeneratedBranch generatedBranch, Branch branch, IEntityEngineSystem engine, IPrototypeSystem prototypeSystem)
+        protected void ExecuteMapGenCommands(GeneratedBranch generatedBranch, Branch branch, IEntityEngine engine, IPrototypeSystem prototypeSystem)
         {
             foreach (Map map in generatedBranch.Maps)
             {
@@ -147,7 +147,7 @@ namespace data_rogue_core
             }
         }
 
-        protected virtual List<KeyValuePair<MapCoordinate, Stairs>> GetStairs(Map map, StairDirection direction, IEntityEngineSystem engine)
+        protected virtual List<KeyValuePair<MapCoordinate, Stairs>> GetStairs(Map map, StairDirection direction, IEntityEngine engine)
         {
             return engine.EntitiesWith<Stairs>()
                 .Where(c => c.Get<Stairs>().Direction == direction)

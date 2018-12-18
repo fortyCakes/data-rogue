@@ -18,7 +18,7 @@ namespace data_rogue_core.UnitTests.Maps
         [SetUp]
         public void SetUp()
         {
-            _entityEngine = new EntityEngineSystem(Substitute.For<IStaticEntityLoader>());
+            _entityEngine = new EntityEngineSystem(new NullStaticEntityLoader());
 
             _wallCell = CreateCell('#', "Cell:Wall");
             _floorCell = CreateCell('.', "Cell:Empty");

@@ -16,7 +16,7 @@ namespace data_rogue_core
     {
         public override string GenerationType => "Dungeon";
 
-        protected override List<Map> GenerateMaps(Branch branchDefinition, IEntityEngineSystem engine)
+        protected override List<Map> GenerateMaps(Branch branchDefinition, IEntityEngine engine)
         {
             var mapgen = new BasicDungeonMapGenerator(engine);
 
@@ -32,7 +32,7 @@ namespace data_rogue_core
             return generatedBranchMaps;
         }
 
-        protected override void CreateEntities(GeneratedBranch generatedBranch, Branch branch, IEntityEngineSystem engine, IPositionSystem position, IPrototypeSystem prototypeSystem, string seed)
+        protected override void CreateEntities(GeneratedBranch generatedBranch, Branch branch, IEntityEngine engine, IPositionSystem position, IPrototypeSystem prototypeSystem, string seed)
         {
             var firstLayer = generatedBranch.Maps.First();
             var emptyCell = engine.GetEntityWithName("Cell:Empty");

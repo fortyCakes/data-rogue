@@ -8,7 +8,7 @@ namespace data_rogue_core
 {
     public class SaveSystem
     {
-        public static WorldState Load(IEntityEngineSystem entityEngineSystem)
+        public static WorldState Load(IEntityEngine entityEngineSystem)
         {
             var directoryName = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Saves");
             var fileName = Path.Combine(directoryName, "saveFile.sav");

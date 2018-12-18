@@ -5,7 +5,7 @@ using data_rogue_core.Systems;
 
 namespace data_rogue_core.EntitySystem
 {
-    public interface IEntityEngineSystem : IInitialisableSystem
+    public interface IEntityEngine : IInitialisableSystem
     {
         IEnumerable<Type> ComponentTypes { get; }
 

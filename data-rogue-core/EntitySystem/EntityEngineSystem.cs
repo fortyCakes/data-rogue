@@ -7,11 +7,11 @@ using System.Linq;
 namespace data_rogue_core.EntitySystem
 {
     [Serializable]
-    public class EntityEngineSystem : IEntityEngineSystem
+    public class EntityEngineSystem : IEntityEngine
     {
         private uint EntityKey = 0;
 
-        public IStaticEntityLoader StaticEntityLoader { get; }
+        public BaseStaticEntityLoader StaticEntityLoader { get; }
 
         public IEnumerable<Type> ComponentTypes => 
             AppDomain
@@ -28,7 +28,7 @@ namespace data_rogue_core.EntitySystem
         [JsonIgnore]
         public List<ISystem> Systems = new List<ISystem>();
 
-        public EntityEngineSystem(IStaticEntityLoader loader)
+        public EntityEngineSystem(BaseStaticEntityLoader loader)
         {
             StaticEntityLoader = loader;
         }
