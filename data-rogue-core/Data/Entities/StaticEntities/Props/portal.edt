@@ -1,6 +1,8 @@
 ﻿"Props:Portal"
 [Portal]
 [Prototype]
+Name: Props:Portal
+Singleton: false
 [Appearance]
 Glyph: >
 Color: #aaaaff

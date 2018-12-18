@@ -12,7 +12,7 @@ namespace data_rogue_core.Maps.MapGenCommands
         {
             var coordinate = new MapCoordinate(map.MapKey, offsetVector + command.Vector);
 
-            prototypeSystem.CreateAt(command.Parameters, Guid.NewGuid().ToString(), coordinate);
+            prototypeSystem.CreateAt(command.Parameters, coordinate);
         }
     }
 }

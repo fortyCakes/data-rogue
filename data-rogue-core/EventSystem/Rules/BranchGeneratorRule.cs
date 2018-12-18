@@ -33,7 +33,7 @@ namespace data_rogue_core.EventSystem.Rules
         {
             var portal = eventData as Portal;
 
-            var branch = _engine.GetEntityWithName(portal.BranchLink).Get<Branch>();
+            var branch = _engine.GetEntity(portal.BranchLink.Value).Get<Branch>();
 
             if (!branch.Generated)
             {

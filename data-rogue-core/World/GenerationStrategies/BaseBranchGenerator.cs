@@ -45,14 +45,14 @@ namespace data_rogue_core
                 previousMap = map;
             }
 
-            AddBranchPortals(generatedBranch, branch, engine, positionSystem);
+            AddBranchPortals(generatedBranch, branch, engine, positionSystem, prototypeSystem);
 
             branch.Generated = true;
 
             return generatedBranch;
         }
 
-        protected virtual void AddBranchPortals(GeneratedBranch generatedBranch, Branch branch, IEntityEngine engine, IPositionSystem positionSystem)
+        protected virtual void AddBranchPortals(GeneratedBranch generatedBranch, Branch branch, IEntityEngine engine, IPositionSystem positionSystem, IPrototypeSystem prototypeSystem)
         {
             var links = engine.GetAll<BranchLink>();
 
@@ -81,7 +81,7 @@ namespace data_rogue_core
 
                 var potentialPortals = engine.EntitiesWith<Portal>()
                     .Where(p => p.Get<Position>().MapCoordinate.Key == mapKey)
-                    .Where(p => string.IsNullOrEmpty(p.Get<Portal>().BranchLink))
+                    .Where(p => !p.Get<Portal>().BranchLink.HasValue)
                     .ToList();
 
                 if (!potentialPortals.Any())
@@ -92,7 +92,7 @@ namespace data_rogue_core
                 var portalEntity = Random.PickOne(potentialPortals);
                 var thisPortal = portalEntity.Get<Portal>();
 
-                thisPortal.BranchLink = thatEnd.Branch;
+                thisPortal.BranchLink = prototypeSystem.Create(thatEnd.Branch).EntityId;
 
                 var destinationBranch = engine.GetEntityWithName(link.Value.Branch).Get<Branch>();
 
@@ -109,7 +109,6 @@ namespace data_rogue_core
                 }
             }
         }
-
 
         protected virtual void LinkStairs(Map previousMap, Map map, IEntityEngine engine)
         {

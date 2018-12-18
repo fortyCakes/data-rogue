@@ -25,48 +25,53 @@ namespace data_rogue_core.Systems
         public IEntityEngine Engine { get; }
         public IPositionSystem PositionSystem { get; }
 
-        public IEntity Create(int entityId, string newName)
+        public IEntity Create(int entityId)
         {
             var entity = this.Entities.Single(e => e.EntityId == entityId);
 
-            return MakeInstanceOf(entity, newName);
+            return MakeInstanceOf(entity);
         }
 
-        public IEntity Create(string entityName, string newName)
+        public IEntity Create(string entityName)
         {
             var entity = this.Entities.Single(e => e.Name == entityName);
 
-            return MakeInstanceOf(entity, newName);
+            return MakeInstanceOf(entity);
         }
 
-        public IEntity Create(IEntity entity, string newName)
+        public IEntity Create(IEntity entity)
         {
-            return MakeInstanceOf(entity, newName);
+            return MakeInstanceOf(entity);
         }
 
-        public IEntity CreateAt(string entityName, string newName, MapCoordinate mapCoordinate)
+        public IEntity CreateAt(string entityName, MapCoordinate mapCoordinate)
         {
-            var entity = Create(entityName, newName);
+            var entity = Create(entityName);
             PositionSystem.SetPosition(entity, mapCoordinate);
             return entity;
         }
 
-        public IEntity CreateAt(IEntity entity, string newName, MapCoordinate mapCoordinate)
+        public IEntity CreateAt(IEntity entity, MapCoordinate mapCoordinate)
         {
-            var newEntity = Create(entity, newName);
+            var newEntity = Create(entity);
             PositionSystem.SetPosition(newEntity, mapCoordinate);
             return newEntity;
         }
 
-        public IEntity CreateAt(int entityId, string newName, MapCoordinate mapCoordinate)
+        public IEntity CreateAt(int entityId, MapCoordinate mapCoordinate)
         {
-            var entity = Create(entityId, newName);
+            var entity = Create(entityId);
             PositionSystem.SetPosition(entity, mapCoordinate);
             return entity;
         }
 
-        private IEntity MakeInstanceOf(IEntity entity, string withName)
+        private IEntity MakeInstanceOf(IEntity entity)
         {
+            if (entity.Get<Prototype>().Singleton)
+            {
+                return entity;
+            }
+
             var newComponents = new List<IEntityComponent>();
 
             foreach(var component in entity.Components.Where(c => c.GetType() != typeof(Prototype)))
@@ -84,7 +89,7 @@ namespace data_rogue_core.Systems
                 newComponents.Add(newComponent);
             }
 
-            return Engine.New(withName, newComponents.ToArray());
+            return Engine.New(null, newComponents.ToArray());
         }
 
     }

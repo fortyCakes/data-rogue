@@ -18,14 +18,16 @@ namespace data_rogue_core.EntitySystem
 
         void Register(ISystem system);
 
-        IEnumerable<Entity> GetEntitiesWithName(string name);
 
         List<Entity> AllEntities { get; }
         List<Entity> MutableEntities { get; }
 
-        Entity GetEntityWithName(string name);
 
         List<Entity> EntitiesWith<T>(bool includePrototypes = false) where T: IEntityComponent;
+
         List<T> GetAll<T>() where T : IEntityComponent;
+
+        Entity GetEntityWithName(string name);
+        IEnumerable<Entity> GetEntitiesWithName(string name);
     }
 }
