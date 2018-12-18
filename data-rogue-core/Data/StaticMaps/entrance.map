@@ -1,6 +1,7 @@
 Map:"Entrance"
 default:Cell:Wall
 -5,-9
+10,0: Entity(Props:StairsDown)
 .:Cell:Empty
 ,:Cell:SpawnPoint
 #:Cell:Wall

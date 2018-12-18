@@ -1,4 +1,4 @@
-﻿"Props:DownStairs"
+﻿"Props:StairsDown"
 [Stairs]
 Direction: Down
 [Prototype]
@@ -8,7 +8,7 @@ Color: #aaaaaa
 ZOrder: 1
 [Position]
 
-"Props:UpStairs"
+"Props:StairsUp"
 [Stairs]
 Direction: Up
 [Prototype]

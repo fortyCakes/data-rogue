@@ -1,6 +1,8 @@
 ﻿Map:"Entrance"
 default:Cell:Wall
 -5,-5
+0,0: Entity(Props:Portal)
+0,10: Entity(Props:StairsUp)
 .:Cell:Empty
 #:Cell:Wall
 .............................

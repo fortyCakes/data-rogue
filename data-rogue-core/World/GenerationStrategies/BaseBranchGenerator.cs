@@ -6,6 +6,7 @@ using data_rogue_core.Maps;
 using data_rogue_core.Maps.Generators;
 using System.Collections.Generic;
 using System.Linq;
+using data_rogue_core.Maps.MapGenCommands;
 using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
 
@@ -18,10 +19,9 @@ namespace data_rogue_core
 
         protected abstract List<Map> GenerateMaps(Branch branchDefinition, IEntityEngineSystem engine);
 
-        protected abstract void ExecuteMapGenCommands(GeneratedBranch generatedBranch, Branch branch, IEntityEngineSystem engine, IPositionSystem position, IPrototypeSystem prototypeSystem);
+        protected abstract void CreateEntities(GeneratedBranch generatedBranch, Branch branch, IEntityEngineSystem engine, IPositionSystem positionSystem, IPrototypeSystem prototypeSystem, string seed);
 
         protected IRandom Random { get; set; }
-        public Branch BranchDefinition { get; }
 
         public GeneratedBranch Generate(Branch branch, IEntityEngineSystem engine, IPositionSystem positionSystem, IPrototypeSystem prototypeSystem, string seed)
         {
@@ -31,7 +31,8 @@ namespace data_rogue_core
 
             var generatedBranch = new GeneratedBranch() { Maps = generatedBranchMaps };
 
-            ExecuteMapGenCommands(generatedBranch, branch, engine, positionSystem, prototypeSystem);
+            CreateEntities(generatedBranch, branch, engine, positionSystem, prototypeSystem, seed);
+            ExecuteMapGenCommands(generatedBranch, branch, engine, prototypeSystem);
 
             Map previousMap = null;
             foreach (var map in generatedBranch.Maps)
@@ -130,6 +131,19 @@ namespace data_rogue_core
 
                 stairsDown.Remove(downStairs);
                 stairsUp.Remove(upStairs);
+            }
+        }
+
+        protected void ExecuteMapGenCommands(GeneratedBranch generatedBranch, Branch branch, IEntityEngineSystem engine, IPrototypeSystem prototypeSystem)
+        {
+            foreach (Map map in generatedBranch.Maps)
+            {
+                foreach (var command in map.MapGenCommands)
+                {
+                    var executor =  MapGenCommandExecutorFactory.GetExecutor(command.MapGenCommandType);
+
+                    executor.Execute(map, engine, prototypeSystem, command, new Vector(0,0));
+                }
             }
         }
 

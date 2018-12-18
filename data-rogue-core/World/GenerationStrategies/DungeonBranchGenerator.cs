@@ -32,7 +32,7 @@ namespace data_rogue_core
             return generatedBranchMaps;
         }
 
-        protected override void ExecuteMapGenCommands(GeneratedBranch generatedBranch, Branch branch, IEntityEngineSystem engine, IPositionSystem position, IPrototypeSystem prototypeSystem)
+        protected override void CreateEntities(GeneratedBranch generatedBranch, Branch branch, IEntityEngineSystem engine, IPositionSystem position, IPrototypeSystem prototypeSystem, string seed)
         {
             var firstLayer = generatedBranch.Maps.First();
             var emptyCell = engine.GetEntityWithName("Cell:Empty");

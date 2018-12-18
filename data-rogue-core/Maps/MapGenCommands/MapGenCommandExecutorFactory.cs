@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace data_rogue_core.Maps.MapGenCommands
 {
-    public static class CommandExecutorFactory
+    public static class MapGenCommandExecutorFactory
     {
         public static List<ICommandExecutor> CommandExecutors =>
             AppDomain

@@ -28,6 +28,7 @@ namespace data_rogue_core.Maps
         public int TopY => Cells.Any() ? Cells.Min(c => c.Key.Y) : 0;
         public int RightX => Cells.Any() ? Cells.Max(c => c.Key.X) : 0;
         public int BottomY => Cells.Any() ? Cells.Max(c => c.Key.Y) : 0;
+        public Vector Origin => new Vector(LeftX, TopY);
 
         public Map(string key, IEntity defaultCell)
         {

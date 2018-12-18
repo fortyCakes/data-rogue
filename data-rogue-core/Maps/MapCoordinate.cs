@@ -27,6 +27,13 @@ namespace data_rogue_core.Maps
         {
         }
 
+        public MapCoordinate(MapKey mapKey, Vector vector)
+        {
+            Key = mapKey;
+            X = vector.X;
+            Y = vector.Y;
+        }
+
         public override bool Equals(object obj)
         {
             MapCoordinate other = obj as MapCoordinate;
