@@ -1,6 +1,7 @@
 ﻿using data_rogue_core.Components;
-using data_rogue_core.EntitySystem;
+using data_rogue_core.EntityEngine;
 using data_rogue_core.Maps;
+using data_rogue_core.Systems.Interfaces;
 using FluentAssertions;
 using NSubstitute;
 using NUnit.Framework;
@@ -11,17 +12,22 @@ namespace data_rogue_core.UnitTests.Maps
     [TestFixture]
     public class MapSerializerTests
     {
-        private EntityEngineSystem _entityEngine;
+        private EntityEngine.EntityEngine _entityEngine;
+        private IPrototypeSystem _prototypeSystem;
         private IEntity _wallCell;
         private IEntity _floorCell;
 
         [SetUp]
         public void SetUp()
         {
-            _entityEngine = new EntityEngineSystem(new NullStaticEntityLoader());
+            _entityEngine = new EntityEngine.EntityEngine(new NullStaticEntityLoader());
+            _prototypeSystem = Substitute.For<IPrototypeSystem>();
 
             _wallCell = CreateCell('#', "Cell:Wall");
+            _prototypeSystem.Create("Cell:Wall").Returns(_wallCell);
+
             _floorCell = CreateCell('.', "Cell:Empty");
+            _prototypeSystem.Create("Cell:Empty").Returns(_floorCell);
         }
 
         [Test]
@@ -47,7 +53,7 @@ namespace data_rogue_core.UnitTests.Maps
         {
             string serialisedText = LoadSerializedData(testCase);
 
-            var result = MapSerializer.Deserialize(serialisedText, _entityEngine);
+            var result = MapSerializer.Deserialize(serialisedText, _entityEngine, _prototypeSystem);
 
             var reserialised = MapSerializer.Serialize(result);
 

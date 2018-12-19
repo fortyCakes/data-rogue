@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using data_rogue_core.Components;
-using data_rogue_core.EntitySystem;
+using data_rogue_core.EntityEngine;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System;
+using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.Maps
 {
@@ -56,29 +57,29 @@ namespace data_rogue_core.Maps
             return stringBuilder.ToString();
         }
         
-        public static Map Deserialize(string savedMap, IEntityEngine entityEngineSystem, string mapNameOverride = null)
+        public static Map Deserialize(string savedMap, IEntityEngine entityEngineSystem, IPrototypeSystem prototypeSystem, string mapNameOverride = null)
         {
             var lines = savedMap.Split('\n');
 
             var mapName = mapNameOverride ?? Extract(lines[0], "Map:\"(.*)\"");
-            var defaultCellId = Extract(lines[1], "default:(.*)").Trim();
+            var defaultCellName = Extract(lines[1], "default:(.*)").Trim();
             var coordinateMatch = Regex.Match(lines[2], "(-?[0-9]),(-?[0-9])");
             var leftX = int.Parse(coordinateMatch.Groups[1].Value);
             var topY = int.Parse(coordinateMatch.Groups[2].Value);
 
-            IEntity defaultCell = entityEngineSystem.GetEntitiesWithName(defaultCellId).Single();
+            IEntity defaultCell = prototypeSystem.Create(defaultCellName);
 
             var lineIndex = 3;
 
             var commands = GetCommandsInMap(lines, ref lineIndex);
 
-            var glyphDictionary = GetCellsInMap(entityEngineSystem, lines, ref lineIndex);
+            var glyphDictionary = GetCellsInMap(entityEngineSystem, prototypeSystem, lines, ref lineIndex);
 
             Map deserialisedMap = new Map(mapName, defaultCell);
 
             for (int j = 0; j+lineIndex < lines.Length; j++)
             {
-                var line = lines[lineIndex+j].Trim();
+                var line = lines[lineIndex+j].Trim('\r', '\n');
 
                 for (int i = 0; i < line.Length; i++)
                 {
@@ -129,7 +130,7 @@ namespace data_rogue_core.Maps
             return commandsInMap;
         }
 
-        private static Dictionary<char, IEntity> GetCellsInMap(IEntityEngine entityEngineSystem, string[] lines, ref int lineIndex)
+        private static Dictionary<char, IEntity> GetCellsInMap(IEntityEngine entityEngineSystem, IPrototypeSystem prototypeSystem, string[] lines, ref int lineIndex)
         {
             var cellsInMap = new Dictionary<char, IEntity>();
 
@@ -139,7 +140,7 @@ namespace data_rogue_core.Maps
             {
                 char glyph = match.Groups[1].Value.First();
                 string entityName = match.Groups[2].Value.Trim();
-                IEntity entity = entityEngineSystem.GetEntitiesWithName(entityName).Single();
+                IEntity entity = prototypeSystem.Create(entityName);
 
                 cellsInMap.Add(glyph, entity);
 

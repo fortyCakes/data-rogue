@@ -1,6 +1,7 @@
 ﻿using data_rogue_core.Components;
-using data_rogue_core.EntitySystem;
+using data_rogue_core.EntityEngine;
 using data_rogue_core.Maps;
+using data_rogue_core.Systems.Interfaces;
 using DataRogueWorldEditor.Controls;
 using System;
 using System.Collections.Generic;
@@ -90,6 +91,8 @@ namespace DataRogueWorldEditor.Editors
         public BindingList<MapEditorGlyphBinding> GlyphEntities { get; set; }
         public BindingList<MapGenCommand> MapGenCommands { get; private set; }
         public IEntityEngine EntityEngineSystem { get; }
+        public IPrototypeSystem PrototypeSystem { get; }
+
         public MapCoordinate SelectedCoordinate
         {
             get => _selectedCoordinate;
@@ -100,7 +103,7 @@ namespace DataRogueWorldEditor.Editors
             }
         }
 
-        public frmMapEditor(string filename, IEntityEngine entityEngineSystem)
+        public frmMapEditor(string filename, IEntityEngine entityEngineSystem, IPrototypeSystem prototypeSystem)
         {
             InitializeComponent();
 
@@ -108,13 +111,13 @@ namespace DataRogueWorldEditor.Editors
 
             if (string.IsNullOrEmpty(FileName))
             {
-                Map = new Map("new map key", entityEngineSystem.GetEntityWithName("Cell:Wall"));
+                Map = new Map("new map key", prototypeSystem.Create("Cell:Wall"));
             }
             else
             {
                 var mapFileText = File.ReadAllText(FileName);
 
-                Map = MapSerializer.Deserialize(mapFileText, entityEngineSystem);
+                Map = MapSerializer.Deserialize(mapFileText, entityEngineSystem, prototypeSystem);
             }
 
             dgvCommands.AutoGenerateColumns = false;
@@ -131,6 +134,7 @@ namespace DataRogueWorldEditor.Editors
 
             SelectedTool = MapEditorTool.SetCell;
             EntityEngineSystem = entityEngineSystem;
+            PrototypeSystem = prototypeSystem;
         }
 
         private void SetOffsets()
@@ -202,7 +206,7 @@ namespace DataRogueWorldEditor.Editors
 
             Map.MapKey = new MapKey(txtMapKey.Text);
 
-            Map.DefaultCell = EntityEngineSystem.GetEntityWithName(txtDefaultCell.Text);
+            Map.DefaultCell = PrototypeSystem.Create(txtDefaultCell.Text);
 
             var serialisedMap = MapSerializer.Serialize(Map);
 
@@ -328,7 +332,7 @@ namespace DataRogueWorldEditor.Editors
 
             if (string.IsNullOrEmpty(cellName)) return;
 
-            var entity = EntityEngineSystem.GetEntityWithName(cellName);
+            var entity = PrototypeSystem.Create(cellName);
 
             PaintingWithCell = entity;
         }

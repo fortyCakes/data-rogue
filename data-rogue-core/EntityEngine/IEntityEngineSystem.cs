@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using data_rogue_core.Systems;
 
-namespace data_rogue_core.EntitySystem
+namespace data_rogue_core.EntityEngine
 {
     public interface IEntityEngine : IInitialisableSystem
     {
@@ -27,7 +27,7 @@ namespace data_rogue_core.EntitySystem
 
         List<T> GetAll<T>() where T : IEntityComponent;
 
-        Entity GetEntityWithName(string name);
-        IEnumerable<Entity> GetEntitiesWithName(string name);
+        //Entity GetEntityWithName(string name);
+        //IEnumerable<Entity> GetEntitiesWithName(string name);
     }
 }

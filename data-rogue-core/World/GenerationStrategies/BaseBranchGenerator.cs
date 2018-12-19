@@ -1,7 +1,7 @@
 ﻿using System;
 using data_rogue_core.Components;
 using data_rogue_core.Data;
-using data_rogue_core.EntitySystem;
+using data_rogue_core.EntityEngine;
 using data_rogue_core.Maps;
 using data_rogue_core.Maps.Generators;
 using System.Collections.Generic;
@@ -17,7 +17,7 @@ namespace data_rogue_core
         
         public abstract string GenerationType { get; }
 
-        protected abstract List<Map> GenerateMaps(Branch branchDefinition, IEntityEngine engine);
+        protected abstract List<Map> GenerateMaps(Branch branchDefinition, IEntityEngine engine, IPrototypeSystem prototypeSystem);
 
         protected abstract void CreateEntities(GeneratedBranch generatedBranch, Branch branch, IEntityEngine engine, IPositionSystem positionSystem, IPrototypeSystem prototypeSystem, string seed);
 
@@ -27,7 +27,7 @@ namespace data_rogue_core
         {
             Random = new RNG(seed);
 
-            var generatedBranchMaps = GenerateMaps(branch, engine);
+            var generatedBranchMaps = GenerateMaps(branch, engine, prototypeSystem);
 
             var generatedBranch = new GeneratedBranch() { Maps = generatedBranchMaps };
 
@@ -94,7 +94,7 @@ namespace data_rogue_core
 
                 thisPortal.BranchLink = prototypeSystem.Create(thatEnd.Branch).EntityId;
 
-                var destinationBranch = engine.GetEntityWithName(link.Value.Branch).Get<Branch>();
+                var destinationBranch = prototypeSystem.Create(link.Value.Branch).Get<Branch>();
 
                 thisEnd.Location = portalEntity.Get<Position>().MapCoordinate;
 

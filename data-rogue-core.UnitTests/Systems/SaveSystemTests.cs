@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.IO;
 using data_rogue_core.Components;
-using data_rogue_core.EntitySystem;
+using data_rogue_core.EntityEngine;
 using data_rogue_core.Maps;
 using FluentAssertions;
 using NSubstitute;
@@ -21,7 +21,7 @@ namespace data_rogue_core.UnitTests.Data
         [SetUp]
         public void SetUp()
         {
-            _entityEngineSystem = new EntityEngineSystem(Substitute.For<BaseStaticEntityLoader>());
+            _entityEngineSystem = new EntityEngine.EntityEngine(Substitute.For<BaseStaticEntityLoader>());
 
             _wallCell = CreateCell('#', "Cell:Wall");
             _floorCell = CreateCell('.', "Cell:Empty");

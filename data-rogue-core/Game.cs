@@ -4,7 +4,7 @@ using data_rogue_core.Renderers;
 using RLNET;
 using System.Threading;
 using data_rogue_core.Activities;
-using data_rogue_core.EntitySystem;
+using data_rogue_core.EntityEngine;
 using data_rogue_core.EventSystem;
 using data_rogue_core.EventSystem.Rules;
 using data_rogue_core.Menus.StaticMenus;
@@ -124,7 +124,7 @@ namespace data_rogue_core
 
         private static void CreateAndRegisterSystems()
         {
-            EntityEngineSystem = new EntityEngineSystem(new DataStaticEntityLoader());
+            EntityEngineSystem = new EntityEngine.EntityEngine(new DataStaticEntityLoader());
 
             EventSystem = new EventRuleSystem();
 
@@ -197,7 +197,7 @@ namespace data_rogue_core
             {
                 Thread.CurrentThread.IsBackground = true;
 
-                WorldState = SaveSystem.Load(EntityEngineSystem);
+                WorldState = SaveSystem.Load(EntityEngineSystem, PrototypeSystem);
 
                 ActivityStack.Pop();
 

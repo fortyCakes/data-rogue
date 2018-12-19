@@ -3,7 +3,7 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 using data_rogue_core.Data;
-using data_rogue_core.EntitySystem;
+using data_rogue_core.EntityEngine;
 
 namespace data_rogue_core
 {

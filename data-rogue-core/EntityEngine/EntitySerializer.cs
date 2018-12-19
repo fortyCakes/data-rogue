@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace data_rogue_core.EntitySystem
+namespace data_rogue_core.EntityEngine
 {
     public static class EntitySerializer
     {

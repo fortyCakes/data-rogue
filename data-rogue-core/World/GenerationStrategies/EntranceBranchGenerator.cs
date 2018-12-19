@@ -1,7 +1,7 @@
 ﻿using System;
 using data_rogue_core.Components;
 using data_rogue_core.Data;
-using data_rogue_core.EntitySystem;
+using data_rogue_core.EntityEngine;
 using data_rogue_core.Maps;
 using data_rogue_core.Maps.Generators;
 using System.Collections.Generic;
@@ -17,10 +17,10 @@ namespace data_rogue_core
 
         public override string GenerationType => "Entrance";
 
-        protected override List<Map> GenerateMaps(Branch branchDefinition, IEntityEngine engine)
+        protected override List<Map> GenerateMaps(Branch branchDefinition, IEntityEngine engine, IPrototypeSystem prototypeSystem)
         {
-            var entranceMap = new StaticMapGenerator(engine, "StaticMaps/entrance.map").Generate($"{branchDefinition.BranchName}:1", Random);
-            var entranceMap2 = new StaticMapGenerator(engine, "StaticMaps/entrance2.map").Generate($"{branchDefinition.BranchName}:2", Random);
+            var entranceMap = new StaticMapGenerator(engine, prototypeSystem, "StaticMaps/entrance.map").Generate($"{branchDefinition.BranchName}:1", Random);
+            var entranceMap2 = new StaticMapGenerator(engine, prototypeSystem, "StaticMaps/entrance2.map").Generate($"{branchDefinition.BranchName}:2", Random);
             var generatedBranchMaps = new List<Map> { entranceMap, entranceMap2 };
             return generatedBranchMaps;
         }

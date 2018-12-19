@@ -4,10 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace data_rogue_core.EntitySystem
+namespace data_rogue_core.EntityEngine
 {
     [Serializable]
-    public class EntityEngineSystem : IEntityEngine
+    public class EntityEngine : IEntityEngine
     {
         private uint EntityKey = 0;
 
@@ -28,7 +28,7 @@ namespace data_rogue_core.EntitySystem
         [JsonIgnore]
         public List<ISystem> Systems = new List<ISystem>();
 
-        public EntityEngineSystem(BaseStaticEntityLoader loader)
+        public EntityEngine(BaseStaticEntityLoader loader)
         {
             StaticEntityLoader = loader;
         }

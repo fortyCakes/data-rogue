@@ -1,6 +1,6 @@
 ﻿using data_rogue_core.Systems;
 
-namespace data_rogue_core.EntitySystem
+namespace data_rogue_core.EntityEngine
 {
     public interface ISystem : IInitialisableSystem
     {

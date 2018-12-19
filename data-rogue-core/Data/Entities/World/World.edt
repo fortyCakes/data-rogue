@@ -1,3 +1,6 @@
 ﻿"World"
+[Prototype]
+Name: World
+Singleton: true
 [World]
 InitialBranch: Branch:Entrance

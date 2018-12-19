@@ -8,7 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using data_rogue_core;
-using data_rogue_core.EntitySystem;
+using data_rogue_core.EntityEngine;
+using data_rogue_core.Systems;
 using DataRogueWorldEditor.Editors;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -16,14 +17,19 @@ namespace DataRogueWorldEditor
 {
     public partial class frmMain : Form
     {
+        public PrototypeSystem PrototypeSystem { get; }
+
         private DockPanel dockPanel;
-        private IEntityEngine EntityEngineSystem { get; set; } = new EntityEngineSystem(new FolderEntityLoader());
+        private IEntityEngine EntityEngineSystem { get; } = new EntityEngine(new FolderEntityLoader());
 
         public frmMain()
         {
             InitializeComponent();
 
             EntityEngineSystem.Initialise();
+
+            PrototypeSystem = new PrototypeSystem(EntityEngineSystem, null);
+            EntityEngineSystem.Register(PrototypeSystem);
 
             dockPanel = new DockPanel();
             dockPanel.Dock = DockStyle.Fill;
@@ -33,7 +39,7 @@ namespace DataRogueWorldEditor
 
         private void OpenMapEditor(string filename)
         {
-            var frmMapEditor = new frmMapEditor(filename, EntityEngineSystem);
+            var frmMapEditor = new frmMapEditor(filename, EntityEngineSystem, PrototypeSystem);
 
             frmMapEditor.Show(dockPanel, DockState.Document);
         }
