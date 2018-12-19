@@ -9,6 +9,7 @@ using System.Linq;
 using data_rogue_core.Maps.MapGenCommands;
 using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
+using System.Drawing;
 
 namespace data_rogue_core
 {
@@ -35,7 +36,7 @@ namespace data_rogue_core
             ExecuteMapGenCommands(generatedBranch, branch, engine, prototypeSystem);
 
             Map previousMap = null;
-            foreach (var map in generatedBranch.Maps)
+            foreach (var map in generatedBranch.Maps.OrderBy(m => m.MapKey.Key))
             {
                 if (previousMap != null)
                 {
@@ -149,9 +150,57 @@ namespace data_rogue_core
         protected virtual List<KeyValuePair<MapCoordinate, Stairs>> GetStairs(Map map, StairDirection direction, IEntityEngine engine)
         {
             return engine.EntitiesWith<Stairs>()
+                .Where(e => e.Get<Position>().MapCoordinate.Key == map.MapKey)
                 .Where(c => c.Get<Stairs>().Direction == direction)
                 .Select(c => new KeyValuePair<MapCoordinate, Stairs>(c.Get<Position>().MapCoordinate, c.Get<Stairs>()))
                 .ToList();
+        }
+
+
+
+        protected void PlaceStairs(GeneratedBranch generatedBranch, IEntityEngine engine, IPositionSystem position, IPrototypeSystem prototypeSystem)
+        {
+            Map previousMap = null;
+            foreach (Map map in generatedBranch.Maps.OrderBy(m => m.MapKey.Key))
+            {
+                if (previousMap != null)
+                {
+                    PlaceStairSet(previousMap, map, position, prototypeSystem);
+                }
+
+                previousMap = map;
+            }
+        }
+
+        protected void PlaceStairSet(Map previousMap, Map map, IPositionSystem position, IPrototypeSystem prototypeSystem)
+        {
+
+            var downStairsCoordinate = EmptyPositionOn(previousMap, position, prototypeSystem);
+            var upStairsCoordinate = EmptyPositionOn(map, position, prototypeSystem);
+
+            var downStairs = prototypeSystem.CreateAt("Props:StairsDown", downStairsCoordinate);
+            var upStairs = prototypeSystem.CreateAt("Props:StairsUp", upStairsCoordinate);
+        }
+
+        protected void PlaceDefaultEntrancePortal(GeneratedBranch generatedBranch, Branch branch, IEntityEngine engine, IPositionSystem position, IPrototypeSystem prototypeSystem)
+        {
+            var firstLayer = generatedBranch.Maps.First();
+
+            MapCoordinate emptyPosition = EmptyPositionOn(firstLayer, position, prototypeSystem);
+
+            prototypeSystem.CreateAt("Props:Portal", emptyPosition);
+        }
+
+        protected MapCoordinate EmptyPositionOn(Map firstLayer, IPositionSystem positionSystem, IPrototypeSystem prototypeSystem)
+        {
+            var emptyCell = prototypeSystem.Create("Cell:Empty");
+
+            var emptyPositions = firstLayer.Cells
+                .Where(c => c.Value == emptyCell)
+                .Where(c => !positionSystem.Any(c.Key))
+                .ToList();
+            var emptyPosition = Random.PickOne(emptyPositions).Key;
+            return emptyPosition;
         }
     }
 }

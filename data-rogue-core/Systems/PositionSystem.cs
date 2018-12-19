@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using data_rogue_core.Components;
 using data_rogue_core.EntityEngine;
 using data_rogue_core.Maps;
@@ -54,6 +55,11 @@ namespace data_rogue_core.Systems
         public void SetPosition(Position position, MapCoordinate mapCoordinate)
         {
             position.MapCoordinate = mapCoordinate;
+        }
+
+        public bool Any(MapCoordinate key)
+        {
+            return Entities.Any(e => e.Get<Position>().MapCoordinate == key);
         }
     }
 }

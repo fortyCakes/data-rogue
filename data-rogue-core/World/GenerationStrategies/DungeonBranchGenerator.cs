@@ -34,20 +34,13 @@ namespace data_rogue_core
 
         protected override void CreateEntities(GeneratedBranch generatedBranch, Branch branch, IEntityEngine engine, IPositionSystem position, IPrototypeSystem prototypeSystem, string seed)
         {
-            var firstLayer = generatedBranch.Maps.First();
-            var emptyCell = prototypeSystem.Create("Cell:Empty");
+            PlaceDefaultEntrancePortal(generatedBranch, branch, engine, position, prototypeSystem);
 
-            var emptyPositions = firstLayer.Cells.Where(c => c.Value == emptyCell).ToList();
-            var emptyPosition = Random.PickOne(emptyPositions).Key;
+            PlaceStairs(generatedBranch, engine, position, prototypeSystem);
 
-            var components = new IEntityComponent[]
-            {
-                new Appearance {Color = Color.Blue, Glyph = '>', ZOrder = 1},
-                new Portal(),
-                new Position {MapCoordinate = emptyPosition}
-            };
+            PlaceStairs(generatedBranch, engine, position, prototypeSystem);
 
-            engine.New($"Branch entrance portal for {branch.BranchName}", components);
+            PlaceStairs(generatedBranch, engine, position, prototypeSystem);
         }
     }
 }

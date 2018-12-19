@@ -50,7 +50,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
                         .OrderByDescending(a => a.ZOrder)
                         .First();
 
-                    var backColor = playerFov.Contains(coordinate) ? new RLColor(128,128,0) : RLColor.Black;
+                    var backColor = playerFov.Contains(coordinate) ? new RLColor(96,96,0) : RLColor.Black;
 
                     Console.Set(x, y, appearance.Color.ToRLColor(), backColor, appearance.Glyph);
                 }
