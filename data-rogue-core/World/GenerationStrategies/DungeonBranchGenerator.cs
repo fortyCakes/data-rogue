@@ -41,6 +41,19 @@ namespace data_rogue_core
             PlaceStairs(generatedBranch, engine, position, prototypeSystem);
 
             PlaceStairs(generatedBranch, engine, position, prototypeSystem);
+
+            foreach (var map in generatedBranch.Maps)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    PlaceMonster(map, position, prototypeSystem);
+                }
+            }
+        }
+
+        private void PlaceMonster(Map map, IPositionSystem positionSystem, IPrototypeSystem prototypeSystem)
+        {
+            prototypeSystem.CreateAt("Monster:Goblin", EmptyPositionOn(map, positionSystem, prototypeSystem));
         }
     }
 }

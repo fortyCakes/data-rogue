@@ -1,5 +1,4 @@
 ﻿"Monster:Goblin"
-[Portal]
 [Prototype]
 Name: Monster:Goblin
 Singleton: false
