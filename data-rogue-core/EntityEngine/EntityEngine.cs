@@ -54,8 +54,10 @@ namespace data_rogue_core.EntityEngine
             }
         }
 
-        public void Destroy(Entity entity)
+        public void Destroy(uint entityId)
         {
+            var entity = GetEntity(entityId);
+
             AllEntities.Remove(entity);
 
             foreach (var system in Systems)

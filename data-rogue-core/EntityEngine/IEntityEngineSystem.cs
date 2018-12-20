@@ -9,7 +9,7 @@ namespace data_rogue_core.EntityEngine
     {
         IEnumerable<Type> ComponentTypes { get; }
 
-        void Destroy(Entity entity);
+        void Destroy(uint entityId);
         Entity New(string Name, params IEntityComponent[] components);
 
         Entity GetEntity(uint entityId);

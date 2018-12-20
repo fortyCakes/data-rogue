@@ -56,7 +56,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
                 }
             }
 
-            // TODO REMOVE
+            // TODO REMOVE AND PUT IN ACTUAL CONSOLES
             Console.Print(0, 0, Game.WorldState.CameraPosition.Key.Key, RLColor.Black, RLColor.White);
         }
     }

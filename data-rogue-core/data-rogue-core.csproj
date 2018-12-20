@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\LoadingScreenActivity.cs" />
+    <Compile Include="Components\Fighter.cs" />
     <Compile Include="Components\Portal.cs" />
     <Compile Include="Components\Prototype.cs" />
     <Compile Include="Components\Stairs.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Data\BranchLinkEnd.cs" />
     <Compile Include="Components\World.cs" />
     <Compile Include="Data\EntityBuilder.cs" />
+    <Compile Include="Data\StatCounter.cs" />
     <Compile Include="EntityEngine\SaveStateSerializer.cs" />
     <Compile Include="EntityEngine\BaseStaticEntityLoader.cs" />
     <Compile Include="EntityEngine\ComponentSerializer.cs" />
@@ -79,11 +81,14 @@
     <Compile Include="EntityEngine\ICustomFieldSerialization.cs" />
     <Compile Include="EventSystem\IEventRule.cs" />
     <Compile Include="EventSystem\Rules\BranchGeneratorRule.cs" />
+    <Compile Include="EventSystem\Rules\BumpAttackRule.cs" />
     <Compile Include="Maps\Generators\BasicDungeonMapGenerator.cs" />
     <Compile Include="Maps\MapGenCommands\MapGenCommandExecutorFactory.cs" />
     <Compile Include="Maps\MapGenCommands\EntityCommandExecutor.cs" />
     <Compile Include="Maps\MapGenCommands\ICommandExecutor.cs" />
     <Compile Include="Maps\MapGenCommands\MapGenCommand.cs" />
+    <Compile Include="Systems\FighterSystem.cs" />
+    <Compile Include="Systems\Interfaces\IFighterSystem.cs" />
     <Compile Include="Systems\Interfaces\IPrototypeSystem.cs" />
     <Compile Include="Systems\IRandom.cs" />
     <Compile Include="Maps\Generators\StaticMapGenerator.cs" />
@@ -161,6 +166,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Data\Entities\player.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Entities\StaticEntities\Monsters\goblin.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\Entities\StaticEntities\Props\stairs.edt">
