@@ -14,6 +14,8 @@ namespace data_rogue_core.Maps
 
         public Dictionary<MapCoordinate, IEntity> Cells = new Dictionary<MapCoordinate, IEntity>();
 
+        public HashSet<MapCoordinate> SeenCoordinates = new HashSet<MapCoordinate>();
+
         public List<MapGenCommand> MapGenCommands { get; set; } = new List<MapGenCommand>();
 
         public uint DefaultCellId
@@ -154,6 +156,11 @@ namespace data_rogue_core.Maps
             {
                 Cells.Remove(coordinate);
             }
+        }
+
+        public void SetSeen(MapCoordinate coordinate, bool seen = true)
+        {
+            SeenCoordinates.Add(coordinate);
         }
     }
 }

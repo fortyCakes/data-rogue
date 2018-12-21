@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 using data_rogue_core.Components;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems;
@@ -28,6 +30,10 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
             MapCoordinate playerPosition = world.Player.Get<Position>().MapCoordinate;
             var playerFov = currentMap.FovFrom(playerPosition, 9);
+            foreach (var coordinate in playerFov)
+            {
+                currentMap.SetSeen(coordinate);
+            }
 
             var consoleWidth = Console.Width;
             var consoleHeight = Console.Height;
@@ -42,22 +48,48 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
                     var lookupX = cameraX - offsetX + x;
                     var lookupY = cameraY - offsetY + y;
 
-                    MapCoordinate coordinate = new MapCoordinate ( currentMap.MapKey, lookupX, lookupY);
-
-                    var appearance = positionSystem
-                        .EntitiesAt(coordinate)
-                        .Select(e => e.Get<Appearance>())
-                        .OrderByDescending(a => a.ZOrder)
-                        .First();
-
-                    var backColor = playerFov.Contains(coordinate) ? new RLColor(128,128,0) : RLColor.Black;
-
-                    Console.Set(x, y, appearance.Color.ToRLColor(), backColor, appearance.Glyph);
+                    DrawCell(x, y, positionSystem, currentMap, lookupX, lookupY, playerFov);
                 }
             }
 
             // TODO REMOVE
             Console.Print(0, 0, Game.WorldState.CameraPosition.Key.Key, RLColor.Black, RLColor.White);
+        }
+
+        private void DrawCell(int x, int y, IPositionSystem positionSystem, Map currentMap, int lookupX, int lookupY, List<MapCoordinate> playerFov)
+        {
+            MapCoordinate coordinate = new MapCoordinate(currentMap.MapKey, lookupX, lookupY);
+
+            var isInFov = playerFov.Contains(coordinate);
+
+            Appearance appearance = null;
+
+            if (isInFov)
+            {
+                appearance = positionSystem
+                    .EntitiesAt(coordinate)
+                    .Select(e => e.Get<Appearance>())
+                    .OrderByDescending(a => a.ZOrder)
+                    .First();
+            }
+            else if (currentMap.SeenCoordinates.Contains(coordinate))
+            {
+                appearance = currentMap.CellAt(coordinate).Get<Appearance>();
+            }
+            else
+            {
+                appearance = new Appearance()
+                {
+                    Color = Color.Black,
+                    Glyph = ' ',
+                    ZOrder = 0
+                };
+            }
+
+            var foreColor = isInFov ? appearance.Color.ToRLColor() : RLColor.Gray;
+            var backColor = RLColor.Black;
+
+            Console.Set(x, y, foreColor, backColor, appearance.Glyph);
         }
     }
 }
