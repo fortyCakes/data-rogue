@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.IO;
 using data_rogue_core.Components;
-using data_rogue_core.EntitySystem;
+using data_rogue_core.EntityEngine;
 using data_rogue_core.Maps;
 using FluentAssertions;
 using NSubstitute;
@@ -13,12 +13,12 @@ namespace data_rogue_core.UnitTests.Data
     [TestFixture]
     partial class EntitySerializerTests
     {
-        private IEntityEngineSystem _entityEngineSystem;
+        private IEntityEngine _entityEngineSystem;
 
         [SetUp]
         public void SetUp()
         {
-            _entityEngineSystem = Substitute.For<IEntityEngineSystem>();
+            _entityEngineSystem = Substitute.For<IEntityEngine>();
             _entityEngineSystem.New(Arg.Any<string>(), Arg.Any<IEntityComponent[]>()).ReturnsForAnyArgs(callInfo =>
             {
                 var entity = new Entity(0, "entity", callInfo.ArgAt<IEntityComponent[]>(1));

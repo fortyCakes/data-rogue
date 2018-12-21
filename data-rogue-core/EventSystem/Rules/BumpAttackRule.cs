@@ -3,32 +3,38 @@ using data_rogue_core.Components;
 using data_rogue_core.EntityEngine;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems;
+using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.EventSystem.Rules
 {
-    class PhysicalCollisionRule : IEventRule
+    class BumpAttackRule : IEventRule
     {
-        public PhysicalCollisionRule(IPositionSystem positionSystem)
+        public BumpAttackRule(IPositionSystem positionSystem,IFighterSystem fighterSystem)
         {
             PositionSystem = positionSystem;
+            FighterSystem = fighterSystem;
         }
 
         public EventTypeList EventTypes => new EventTypeList{ EventType.Move };
-        public int RuleOrder => 0;
+        public int RuleOrder => 1;
 
-        private IPositionSystem PositionSystem { get; }
+        public IPositionSystem PositionSystem { get; }
+        private IFighterSystem FighterSystem { get; }
 
         public bool Apply(EventType type, IEntity sender, object eventData)
         {
-            if (IsSolid(sender))
+            if (IsFighter(sender))
             {
                 var vector = (Vector) eventData;
                 var targetCoordinate = sender.Get<Position>().MapCoordinate + vector;
 
                 var entitiesAtPosition = PositionSystem.EntitiesAt(targetCoordinate);
 
-                if (entitiesAtPosition.Any(IsSolid))
+                if (entitiesAtPosition.Any(IsFighter))
                 {
+                    var defender = entitiesAtPosition.Single(e => IsFighter(e));
+
+                    FighterSystem.Attack(sender, defender);
                     return false;
                 }
             }
@@ -36,9 +42,9 @@ namespace data_rogue_core.EventSystem.Rules
             return true;
         }
 
-        private static bool IsSolid(IEntity e)
+        private static bool IsFighter(IEntity e)
         {
-            return e.Get<Physical>()?.Passable == false;
+            return e.Has<Fighter>();
         }
     }
 }

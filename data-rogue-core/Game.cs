@@ -4,7 +4,7 @@ using data_rogue_core.Renderers;
 using RLNET;
 using System.Threading;
 using data_rogue_core.Activities;
-using data_rogue_core.EntitySystem;
+using data_rogue_core.EntityEngine;
 using data_rogue_core.EventSystem;
 using data_rogue_core.EventSystem.Rules;
 using data_rogue_core.Menus.StaticMenus;
@@ -22,11 +22,12 @@ namespace data_rogue_core
 
         public static WorldState WorldState;
 
-        public static IEntityEngineSystem EntityEngineSystem;
+        public static IEntityEngine EntityEngineSystem;
         public static IEventRuleSystem EventSystem;
         public static IPositionSystem PositionSystem;
         public static IPlayerControlSystem PlayerControlSystem;
         public static IPrototypeSystem PrototypeSystem;
+        public static IFighterSystem FighterSystem;
 
         private const int SCREEN_WIDTH = 100;
         private const int SCREEN_HEIGHT = 70;
@@ -94,6 +95,7 @@ namespace data_rogue_core
 
             EventSystem.RegisterRule(new InputHandlerRule(PlayerControlSystem));
             EventSystem.RegisterRule(new PhysicalCollisionRule(PositionSystem));
+            EventSystem.RegisterRule(new BumpAttackRule(PositionSystem, FighterSystem));
             EventSystem.RegisterRule(new BranchGeneratorRule(EntityEngineSystem, PositionSystem, PrototypeSystem, Seed));
         }
 
@@ -124,12 +126,15 @@ namespace data_rogue_core
 
         private static void CreateAndRegisterSystems()
         {
-            EntityEngineSystem = new EntityEngineSystem(new DataStaticEntityLoader());
+            EntityEngineSystem = new EntityEngine.EntityEngine(new DataStaticEntityLoader());
 
             EventSystem = new EventRuleSystem();
 
             PositionSystem = new PositionSystem();
             EntityEngineSystem.Register(PositionSystem);
+
+            FighterSystem = new FighterSystem(EntityEngineSystem);
+            EntityEngineSystem.Register(FighterSystem);
 
             PrototypeSystem = new PrototypeSystem(EntityEngineSystem, PositionSystem);
             EntityEngineSystem.Register(PrototypeSystem);
@@ -197,7 +202,7 @@ namespace data_rogue_core
             {
                 Thread.CurrentThread.IsBackground = true;
 
-                WorldState = SaveSystem.Load(EntityEngineSystem);
+                WorldState = SaveSystem.Load(EntityEngineSystem, PrototypeSystem);
 
                 ActivityStack.Pop();
 

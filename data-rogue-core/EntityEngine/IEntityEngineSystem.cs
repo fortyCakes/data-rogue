@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 using data_rogue_core.Systems;
 
-namespace data_rogue_core.EntitySystem
+namespace data_rogue_core.EntityEngine
 {
-    public interface IEntityEngineSystem : IInitialisableSystem
+    public interface IEntityEngine : IInitialisableSystem
     {
         IEnumerable<Type> ComponentTypes { get; }
 
-        void Destroy(Entity entity);
+        void Destroy(uint entityId);
         Entity New(string Name, params IEntityComponent[] components);
 
         Entity GetEntity(uint entityId);
@@ -18,14 +18,16 @@ namespace data_rogue_core.EntitySystem
 
         void Register(ISystem system);
 
-        IEnumerable<Entity> GetEntitiesWithName(string name);
 
         List<Entity> AllEntities { get; }
         List<Entity> MutableEntities { get; }
 
-        Entity GetEntityWithName(string name);
 
         List<Entity> EntitiesWith<T>(bool includePrototypes = false) where T: IEntityComponent;
+
         List<T> GetAll<T>() where T : IEntityComponent;
+
+        //Entity GetEntityWithName(string name);
+        //IEnumerable<Entity> GetEntitiesWithName(string name);
     }
 }

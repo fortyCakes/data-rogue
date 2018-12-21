@@ -52,7 +52,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
                 }
             }
 
-            // TODO REMOVE
+            // TODO REMOVE AND PUT IN ACTUAL CONSOLES
             Console.Print(0, 0, Game.WorldState.CameraPosition.Key.Key, RLColor.Black, RLColor.White);
         }
 
@@ -85,7 +85,6 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
                     ZOrder = 0
                 };
             }
-
             var foreColor = isInFov ? appearance.Color.ToRLColor() : RLColor.Gray;
             var backColor = RLColor.Black;
 

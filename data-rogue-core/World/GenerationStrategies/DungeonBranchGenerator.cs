@@ -1,7 +1,7 @@
 ﻿using System;
 using data_rogue_core.Components;
 using data_rogue_core.Data;
-using data_rogue_core.EntitySystem;
+using data_rogue_core.EntityEngine;
 using data_rogue_core.Maps;
 using data_rogue_core.Maps.Generators;
 using System.Collections.Generic;
@@ -16,9 +16,9 @@ namespace data_rogue_core
     {
         public override string GenerationType => "Dungeon";
 
-        protected override List<Map> GenerateMaps(Branch branchDefinition, IEntityEngineSystem engine)
+        protected override List<Map> GenerateMaps(Branch branchDefinition, IEntityEngine engine, IPrototypeSystem prototypeSystem)
         {
-            var mapgen = new BasicDungeonMapGenerator(engine);
+            var mapgen = new BasicDungeonMapGenerator(engine, prototypeSystem);
 
             var generatedBranchMaps = new List<Map>();
 
@@ -32,22 +32,28 @@ namespace data_rogue_core
             return generatedBranchMaps;
         }
 
-        protected override void CreateEntities(GeneratedBranch generatedBranch, Branch branch, IEntityEngineSystem engine, IPositionSystem position, IPrototypeSystem prototypeSystem, string seed)
+        protected override void CreateEntities(GeneratedBranch generatedBranch, Branch branch, IEntityEngine engine, IPositionSystem position, IPrototypeSystem prototypeSystem, string seed)
         {
-            var firstLayer = generatedBranch.Maps.First();
-            var emptyCell = engine.GetEntityWithName("Cell:Empty");
+            PlaceDefaultEntrancePortal(generatedBranch, branch, engine, position, prototypeSystem);
 
-            var emptyPositions = firstLayer.Cells.Where(c => c.Value == emptyCell).ToList();
-            var emptyPosition = Random.PickOne(emptyPositions).Key;
+            PlaceStairs(generatedBranch, engine, position, prototypeSystem);
 
-            var components = new IEntityComponent[]
+            PlaceStairs(generatedBranch, engine, position, prototypeSystem);
+
+            PlaceStairs(generatedBranch, engine, position, prototypeSystem);
+
+            foreach (var map in generatedBranch.Maps)
             {
-                new Appearance {Color = Color.Blue, Glyph = '>', ZOrder = 1},
-                new Portal(),
-                new Position {MapCoordinate = emptyPosition}
-            };
+                for (int i = 0; i < 10; i++)
+                {
+                    PlaceMonster(map, position, prototypeSystem);
+                }
+            }
+        }
 
-            engine.New($"Branch entrance portal for {branch.BranchName}", components);
+        private void PlaceMonster(Map map, IPositionSystem positionSystem, IPrototypeSystem prototypeSystem)
+        {
+            prototypeSystem.CreateAt("Monster:Goblin", EmptyPositionOn(map, positionSystem, prototypeSystem));
         }
     }
 }

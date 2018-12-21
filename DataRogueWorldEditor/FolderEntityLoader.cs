@@ -3,18 +3,13 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 using data_rogue_core.Data;
-using data_rogue_core.EntitySystem;
+using data_rogue_core.EntityEngine;
 
 namespace data_rogue_core
 {
-    public class FolderEntityLoader : IStaticEntityLoader
+    public class FolderEntityLoader : BaseStaticEntityLoader
     {
-        public FolderEntityLoader()
-        {
-
-        }
-
-        public void Load(IEntityEngineSystem engine)
+        public override void Load(IEntityEngine engine)
         {
             string basePath;
 #if DEBUG

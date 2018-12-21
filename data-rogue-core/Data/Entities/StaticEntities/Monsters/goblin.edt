@@ -1,0 +1,16 @@
+﻿"Monster:Goblin"
+[Prototype]
+Name: Monster:Goblin
+Singleton: false
+[Appearance]
+Glyph: g
+Color: #aaffaa
+ZOrder: 10
+[Position]
+[Physical]
+Passable: false
+Transparent: true
+[Fighter]
+Health: 1/1
+Attack: 1
+Defence: 1

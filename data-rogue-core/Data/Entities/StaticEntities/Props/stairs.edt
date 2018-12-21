@@ -2,6 +2,8 @@
 [Stairs]
 Direction: Down
 [Prototype]
+Name: Props:StairsDown
+Singleton: false
 [Appearance]
 Glyph: >
 Color: #aaaaaa
@@ -12,6 +14,8 @@ ZOrder: 1
 [Stairs]
 Direction: Up
 [Prototype]
+Name: Props:StairsUp
+Singleton: false
 [Appearance]
 Glyph: <
 Color: #aaaaaa

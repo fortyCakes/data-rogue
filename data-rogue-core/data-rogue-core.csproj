@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\LoadingScreenActivity.cs" />
+    <Compile Include="Components\Fighter.cs" />
     <Compile Include="Components\Portal.cs" />
     <Compile Include="Components\Prototype.cs" />
     <Compile Include="Components\Stairs.cs" />
@@ -70,19 +71,24 @@
     <Compile Include="Data\BranchLinkEnd.cs" />
     <Compile Include="Components\World.cs" />
     <Compile Include="Data\EntityBuilder.cs" />
-    <Compile Include="Data\SaveStateSerializer.cs" />
-    <Compile Include="EntitySystem\ComponentSerializer.cs" />
-    <Compile Include="EntitySystem\DataStaticEntityLoader.cs" />
-    <Compile Include="EntitySystem\EntitySerializer.cs" />
-    <Compile Include="EntitySystem\ICustomFieldSerialization.cs" />
-    <Compile Include="EntitySystem\IStaticEntityLoader.cs" />
+    <Compile Include="Data\StatCounter.cs" />
+    <Compile Include="EntityEngine\SaveStateSerializer.cs" />
+    <Compile Include="EntityEngine\BaseStaticEntityLoader.cs" />
+    <Compile Include="EntityEngine\ComponentSerializer.cs" />
+    <Compile Include="EntityEngine\DataStaticEntityLoader.cs" />
+    <Compile Include="EntityEngine\EntityEngine.cs" />
+    <Compile Include="EntityEngine\EntitySerializer.cs" />
+    <Compile Include="EntityEngine\ICustomFieldSerialization.cs" />
     <Compile Include="EventSystem\IEventRule.cs" />
     <Compile Include="EventSystem\Rules\BranchGeneratorRule.cs" />
+    <Compile Include="EventSystem\Rules\BumpAttackRule.cs" />
     <Compile Include="Maps\Generators\BasicDungeonMapGenerator.cs" />
     <Compile Include="Maps\MapGenCommands\MapGenCommandExecutorFactory.cs" />
     <Compile Include="Maps\MapGenCommands\EntityCommandExecutor.cs" />
     <Compile Include="Maps\MapGenCommands\ICommandExecutor.cs" />
     <Compile Include="Maps\MapGenCommands\MapGenCommand.cs" />
+    <Compile Include="Systems\FighterSystem.cs" />
+    <Compile Include="Systems\Interfaces\IFighterSystem.cs" />
     <Compile Include="Systems\Interfaces\IPrototypeSystem.cs" />
     <Compile Include="Systems\IRandom.cs" />
     <Compile Include="Maps\Generators\StaticMapGenerator.cs" />
@@ -110,23 +116,22 @@
     <Compile Include="Activities\Activity.cs" />
     <Compile Include="Data\DataFileLoader.cs" />
     <Compile Include="Data\IEntityDataParser.cs" />
-    <Compile Include="EntitySystem\IEntityComponent.cs" />
+    <Compile Include="EntityEngine\IEntityComponent.cs" />
     <Compile Include="Components\Physical.cs" />
     <Compile Include="Activities\ActivityType.cs" />
     <Compile Include="Maps\MapCoordinate.cs" />
     <Compile Include="Maps\MapKey.cs" />
     <Compile Include="Components\Position.cs" />
     <Compile Include="Maps\Map.cs" />
-    <Compile Include="EntitySystem\EntityEngineSystem.cs" />
-    <Compile Include="EntitySystem\Entity.cs" />
-    <Compile Include="EntitySystem\IEntity.cs" />
-    <Compile Include="EntitySystem\IEntityEngineSystem.cs" />
+    <Compile Include="EntityEngine\Entity.cs" />
+    <Compile Include="EntityEngine\IEntity.cs" />
+    <Compile Include="EntityEngine\IEntityEngineSystem.cs" />
     <Compile Include="Maps\MapSaveCell.cs" />
     <Compile Include="Systems\SaveSystem.cs" />
     <Compile Include="Data\SaveState.cs" />
     <Compile Include="Systems\Interfaces\IInitialisableSystem.cs" />
-    <Compile Include="EntitySystem\ISystem.cs" />
-    <Compile Include="EntitySystem\SystemComponents.cs" />
+    <Compile Include="EntityEngine\ISystem.cs" />
+    <Compile Include="EntityEngine\SystemComponents.cs" />
     <Compile Include="EventSystem\EventRuleSystem.cs" />
     <Compile Include="EventSystem\IEventRuleSystem.cs" />
     <Compile Include="EventSystem\RuleBook.cs" />
@@ -154,6 +159,7 @@
     <Compile Include="World\GenerationStrategies\EntranceBranchGenerator.cs" />
     <Compile Include="World\GenerationStrategies\IBranchGenerator.cs" />
     <Compile Include="Maps\Generators\IMapGenerator.cs" />
+    <Compile Include="EntityEngine\WorldEntityLoader.cs" />
     <Compile Include="World\WorldGenerator.cs" />
     <Compile Include="World\WorldState.cs" />
   </ItemGroup>
@@ -162,10 +168,13 @@
     <None Include="Data\Entities\player.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Entities\StaticEntities\Monsters\goblin.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\Entities\StaticEntities\Props\stairs.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Data\Entities\StaticEntities\World\World.edt">
+    <None Include="Data\Entities\World\World.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\StaticMaps\entrance2.map">
@@ -181,7 +190,7 @@
     <None Include="Data\StaticMaps\entrance.map">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Data\Entities\StaticEntities\World\Branches\Entrance.edt">
+    <None Include="Data\Entities\World\Branches\Entrance.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\Entities\StaticEntities\Props\portal.edt">

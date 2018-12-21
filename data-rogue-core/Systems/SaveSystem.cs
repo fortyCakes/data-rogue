@@ -1,5 +1,6 @@
-﻿using data_rogue_core.EntitySystem;
+﻿using data_rogue_core.EntityEngine;
 using data_rogue_core.Maps;
+using data_rogue_core.Systems.Interfaces;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -8,7 +9,7 @@ namespace data_rogue_core
 {
     public class SaveSystem
     {
-        public static WorldState Load(IEntityEngineSystem entityEngineSystem)
+        public static WorldState Load(IEntityEngine entityEngineSystem, IPrototypeSystem prototypeSystem)
         {
             var directoryName = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Saves");
             var fileName = Path.Combine(directoryName, "saveFile.sav");
@@ -30,7 +31,7 @@ namespace data_rogue_core
 
             foreach(var savedMap in loadedState.Maps)
             {
-                var map = MapSerializer.Deserialize(savedMap, entityEngineSystem);
+                var map = MapSerializer.Deserialize(savedMap, entityEngineSystem, prototypeSystem);
 
                 world.Maps.Add(map.MapKey, map);
             }

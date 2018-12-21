@@ -6,6 +6,9 @@ ZOrder: 0
 [Physical]
 Passable: true
 Transparent: true
+[Prototype]
+Name: Cell:Empty
+Singleton: true
 
 "Cell:SpawnPoint"
 [SpawnPoint]
@@ -16,6 +19,9 @@ ZOrder: 0
 [Physical]
 Passable: true
 Transparent: true
+[Prototype]
+Name: Cell:SpawnPoint
+Singleton: true
 
 "Cell:Wall"
 [Appearance]
@@ -25,6 +31,9 @@ ZOrder: 0
 [Physical]
 Passable: false
 Transparent: false
+[Prototype]
+Name: Cell:Wall
+Singleton: true
 
 "Cell:Boulder"
 [Appearance]
@@ -34,3 +43,6 @@ ZOrder: 0
 [Physical]
 Passable: false
 Transparent: false
+[Prototype]
+Name: Cell:Boulder
+Singleton: true

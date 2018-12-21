@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using data_rogue_core.EntitySystem;
+using data_rogue_core.EntityEngine;
 using FluentAssertions;
 using FluentAssertions.Equivalency;
 

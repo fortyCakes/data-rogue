@@ -1,4 +1,4 @@
-﻿using data_rogue_core.EntitySystem;
+﻿using data_rogue_core.EntityEngine;
 using System.Linq;
 using data_rogue_core.Maps;
 using data_rogue_core.Components;
@@ -7,7 +7,7 @@ namespace data_rogue_core
 {
     public class WorldState
     {
-        public WorldState(IEntityEngineSystem entityEngineSystem, string seed)
+        public WorldState(IEntityEngine entityEngineSystem, string seed)
         {
             EntityEngineSystem = entityEngineSystem;
             Seed = seed;
@@ -21,7 +21,7 @@ namespace data_rogue_core
 
         public MapCoordinate CameraPosition => Player.Get<Position>().MapCoordinate;
 
-        public IEntityEngineSystem EntityEngineSystem { get; private set; }
+        public IEntityEngine EntityEngineSystem { get; private set; }
         public string Seed { get; }
 
         public SaveState GetSaveState()

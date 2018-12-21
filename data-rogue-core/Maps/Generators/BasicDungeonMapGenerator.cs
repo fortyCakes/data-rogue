@@ -4,13 +4,16 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using data_rogue_core.EntitySystem;
+using data_rogue_core.EntityEngine;
+using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.Maps.Generators
 {
     public class BasicDungeonMapGenerator : IMapGenerator
     {
-        private IEntityEngineSystem Engine { get; }
+        private IEntityEngine Engine { get; }
+        public IPrototypeSystem PrototypeSystem { get; }
+
         public IRandom Random;
 
         private int size = 50;
@@ -19,20 +22,21 @@ namespace data_rogue_core.Maps.Generators
 
         private List<Room> Rooms = new List<Room>();
 
-        private Entity wallCell;
-        private Entity floorCell;
+        private IEntity wallCell;
+        private IEntity floorCell;
 
-        public BasicDungeonMapGenerator(IEntityEngineSystem engine)
+        public BasicDungeonMapGenerator(IEntityEngine engine, IPrototypeSystem prototypeSystem)
         {
             Engine = engine;
+            PrototypeSystem = prototypeSystem;
         }
 
         public Map Generate(string mapName, IRandom random)
         {
             Random = random;
 
-            wallCell = Engine.GetEntityWithName("Cell:Wall");
-            floorCell = Engine.GetEntityWithName("Cell:Empty");
+            wallCell = PrototypeSystem.Create("Cell:Wall");
+            floorCell = PrototypeSystem.Create("Cell:Empty");
 
             var map = new Map(mapName, wallCell);
 

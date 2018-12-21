@@ -2,7 +2,7 @@
 using System.Threading;
 using data_rogue_core.Activities;
 using data_rogue_core.Components;
-using data_rogue_core.EntitySystem;
+using data_rogue_core.EntityEngine;
 using data_rogue_core.Maps;
 using data_rogue_core.Menus;
 using data_rogue_core.Systems;
@@ -13,12 +13,12 @@ namespace data_rogue_core.EventSystem.Rules
 {
     public class BranchGeneratorRule : IEventRule
     {
-        private readonly IEntityEngineSystem _engine;
+        private readonly IEntityEngine _engine;
         private readonly IPositionSystem _positionSystem;
         private readonly IPrototypeSystem _prototypeSystem;
         private readonly string _seed;
 
-        public BranchGeneratorRule(IEntityEngineSystem engine, IPositionSystem positionSystem, IPrototypeSystem prototypeSystem, string seed)
+        public BranchGeneratorRule(IEntityEngine engine, IPositionSystem positionSystem, IPrototypeSystem prototypeSystem, string seed)
         {
             _engine = engine;
             _positionSystem = positionSystem;
@@ -33,7 +33,7 @@ namespace data_rogue_core.EventSystem.Rules
         {
             var portal = eventData as Portal;
 
-            var branch = _engine.GetEntityWithName(portal.BranchLink).Get<Branch>();
+            var branch = _engine.GetEntity(portal.BranchLink.Value).Get<Branch>();
 
             if (!branch.Generated)
             {

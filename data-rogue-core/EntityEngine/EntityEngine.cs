@@ -4,14 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace data_rogue_core.EntitySystem
+namespace data_rogue_core.EntityEngine
 {
     [Serializable]
-    public class EntityEngineSystem : IEntityEngineSystem
+    public class EntityEngine : IEntityEngine
     {
         private uint EntityKey = 0;
 
-        public IStaticEntityLoader StaticEntityLoader { get; }
+        public BaseStaticEntityLoader StaticEntityLoader { get; }
 
         public IEnumerable<Type> ComponentTypes => 
             AppDomain
@@ -28,7 +28,7 @@ namespace data_rogue_core.EntitySystem
         [JsonIgnore]
         public List<ISystem> Systems = new List<ISystem>();
 
-        public EntityEngineSystem(IStaticEntityLoader loader)
+        public EntityEngine(BaseStaticEntityLoader loader)
         {
             StaticEntityLoader = loader;
         }
@@ -54,8 +54,10 @@ namespace data_rogue_core.EntitySystem
             }
         }
 
-        public void Destroy(Entity entity)
+        public void Destroy(uint entityId)
         {
+            var entity = GetEntity(entityId);
+
             AllEntities.Remove(entity);
 
             foreach (var system in Systems)
