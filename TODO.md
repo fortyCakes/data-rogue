@@ -5,7 +5,7 @@ See entities on the map editor
 	Dropdown for cell selection
 "seen tiles" on the map editor
 Message log
-Stats console
+* Stats console
 	Ability scores/Stats
 	Time system
 		Tilt Combat

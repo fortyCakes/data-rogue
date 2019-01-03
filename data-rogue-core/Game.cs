@@ -28,6 +28,7 @@ namespace data_rogue_core
         public static IPlayerControlSystem PlayerControlSystem;
         public static IPrototypeSystem PrototypeSystem;
         public static IFighterSystem FighterSystem;
+        public static IMessageSystem MessageSystem;
 
         private const int SCREEN_WIDTH = 100;
         private const int SCREEN_HEIGHT = 70;
@@ -126,6 +127,8 @@ namespace data_rogue_core
 
         private static void CreateAndRegisterSystems()
         {
+            MessageSystem = new MessageSystem();
+
             EntityEngineSystem = new EntityEngine.EntityEngine(new DataStaticEntityLoader());
 
             EventSystem = new EventRuleSystem();
@@ -133,7 +136,7 @@ namespace data_rogue_core
             PositionSystem = new PositionSystem();
             EntityEngineSystem.Register(PositionSystem);
 
-            FighterSystem = new FighterSystem(EntityEngineSystem);
+            FighterSystem = new FighterSystem(EntityEngineSystem, MessageSystem);
             EntityEngineSystem.Register(FighterSystem);
 
             PrototypeSystem = new PrototypeSystem(EntityEngineSystem, PositionSystem);
