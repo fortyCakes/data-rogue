@@ -3,11 +3,7 @@
 See entities on the map editor
 	Dropdown for entity selection
 	Dropdown for cell selection
-Vault based map gen
-Better tunneler
-Mapgen visualiser (debug menu)
-Mouse support
-	Descriptions
+"seen tiles" on the map editor
 Message log
 Stats console
 	Ability scores/Stats
@@ -25,8 +21,13 @@ Rules from file
 Separate out core from implementation
 Scriptable effects
 
-0.2
+0.2+
 
+Mouse support
+	Descriptions
+Vault based map gen
+Mapgen visualiser (debug menu)
+Better tunneler
 Animation system
 Tiles renderer
 Use item on item
@@ -36,7 +37,7 @@ Random item generation
 Traps
 Encounter based map population
 
-1.0
+1.0+
 
 Stock of monsters
 Stock of items

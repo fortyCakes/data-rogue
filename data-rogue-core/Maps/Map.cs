@@ -162,5 +162,10 @@ namespace data_rogue_core.Maps
         {
             SeenCoordinates.Add(coordinate);
         }
+
+        public void SetSeen(int x, int y, bool seen = true)
+        {
+            SeenCoordinates.Add(new MapCoordinate(MapKey, x, y));
+        }
     }
 }

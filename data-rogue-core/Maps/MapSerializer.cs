@@ -54,6 +54,32 @@ namespace data_rogue_core.Maps
                 stringBuilder.AppendLine();
             }
 
+            if (map.SeenCoordinates.Any())
+            {
+                var leftXSeen = map.SeenCoordinates.Min(c => c.X);
+                var topYSeen = map.SeenCoordinates.Min(c => c.Y);
+                var rightXSeen = map.SeenCoordinates.Max(c => c.X);
+                var bottomYSeen = map.SeenCoordinates.Max(c => c.Y);
+
+                stringBuilder.AppendLine($"Seen:{leftXSeen},{topYSeen}");
+
+                for (int y = topYSeen; y <= bottomYSeen; y++)
+                {
+                    for (int x = leftXSeen; x <= rightXSeen; x++)
+                    {
+                        if (map.SeenCoordinates.Contains(new MapCoordinate(map.MapKey, x, y)))
+                        {
+                            stringBuilder.Append("+");
+                        }
+                        else
+                        {
+                            stringBuilder.Append(" ");
+                        }
+                    }
+                    stringBuilder.AppendLine();
+                }
+            }
+
             return stringBuilder.ToString();
         }
         
@@ -77,24 +103,52 @@ namespace data_rogue_core.Maps
 
             Map deserialisedMap = new Map(mapName, defaultCell);
 
-            for (int j = 0; j+lineIndex < lines.Length; j++)
+            bool seenMode = false;
+            int yOffset = 0;
+
+            for (int j = 0; j + lineIndex < lines.Length; j++)
             {
-                var line = lines[lineIndex+j].Trim('\r', '\n');
+                var line = lines[lineIndex + j].Trim('\r', '\n');
 
-                for (int i = 0; i < line.Length; i++)
+                if (line.StartsWith("Seen:"))
                 {
-                    char glyph = line[i];
-                    if (glyph == DEFAULT_CELL_GLYPH)
+                    seenMode = true;
+                    var match = Regex.Match(line, "Seen:(.*),(.*)");
+                    leftX = int.Parse(match.Groups[1].Value);
+                    topY = int.Parse(match.Groups[2].Value);
+                    yOffset = -j-1;
+                    continue;
+                }
+
+                if (seenMode)
+                {
+                    for (int i = 0; i < line.Length; i++)
                     {
-                        continue;
+                        char glyph = line[i];
+                        if (glyph == '+')
+                        {
+                            deserialisedMap.SetSeen(leftX + i, topY + j + yOffset);
+                        }
                     }
+                }
+                else
+                {
 
-                    int x = leftX + i;
-                    int y = topY + j;
+                    for (int i = 0; i < line.Length; i++)
+                    {
+                        char glyph = line[i];
+                        if (glyph == DEFAULT_CELL_GLYPH)
+                        {
+                            continue;
+                        }
 
-                    IEntity cell = glyphDictionary[glyph];
+                        int x = leftX + i;
+                        int y = topY + j;
 
-                    deserialisedMap.SetCell(x, y, cell);
+                        IEntity cell = glyphDictionary[glyph];
+
+                        deserialisedMap.SetCell(x, y, cell);
+                    }
                 }
             }
 

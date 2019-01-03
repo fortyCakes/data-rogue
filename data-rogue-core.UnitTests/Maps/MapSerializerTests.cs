@@ -85,6 +85,7 @@ namespace data_rogue_core.UnitTests.Maps
             testMap0.SetCell(1, 1, _wallCell);
 
             testMap0.SetSeen(new MapCoordinate("testMapKey", 0, 0));
+            testMap0.SetSeen(new MapCoordinate("testMapKey", 1, 1));
 
             var testMap1 = new Map("testMapKey2", _wallCell);
 
