@@ -176,12 +176,14 @@ namespace DataRogueWorldEditor.Editors
         {
             ShowMap = !ShowMap;
             btnMap.Checked = ShowMap;
+            RenderMap();
         }
 
         private void btnEnemies_Click(object sender, EventArgs e)
         {
             ShowEntities = !ShowEntities;
             btnEntities.Checked = ShowEntities;
+            RenderMap();
         }
 
         private void btnItems_Click(object sender, EventArgs e)
@@ -245,7 +247,8 @@ namespace DataRogueWorldEditor.Editors
 
         private void RenderMap()
         {
-            var stringBuilder = new StringBuilder();
+            var mapStringBuilder = new StringBuilder();
+            var entityStringBuilder = new StringBuilder();
 
             int height = (lblMap.Height - 20) / 13;
             int width = (lblMap.Width - 20) / 6;
@@ -261,21 +264,35 @@ namespace DataRogueWorldEditor.Editors
                     {
                         var cellId = Map.CellAt(x, y).Name;
                         var glyph = GlyphEntities.Single(g => g.Entity == cellId);
-                        stringBuilder.Append(glyph.Glyph);
+                        mapStringBuilder.Append(glyph.Glyph);
                     }
                     else
                     {
-                        stringBuilder.Append(" ");
+                        mapStringBuilder.Append(" ");
+                    }
+
+                    if (Map.MapGenCommands.Any(c => c.Vector == new Vector(x+3,y)))
+                    {
+                        entityStringBuilder.Append("╬");
+                    }
+                    else
+                    {
+                        entityStringBuilder.Append(" ");
                     }
                 }
-                stringBuilder.Append("\n");
+                mapStringBuilder.Append("\n");
+                entityStringBuilder.Append("\n");
             }
 
-            var mapText = stringBuilder.ToString();
+            var mapText = ShowMap ? mapStringBuilder.ToString() : "";
+            var entityText = ShowEntities ? entityStringBuilder.ToString() : "";
 
             lblMap.Text = mapText;
+            lblMapEntities.Text = entityText;
 
             DisplayCellData(SelectedCoordinate);
+
+            lblMapEntities.Refresh();
         }
 
         private void ApplyTool(MapEditorTool tool, MapCoordinate coordinate, MouseEventType mouseEventType, MouseButtons buttons)
@@ -362,20 +379,23 @@ namespace DataRogueWorldEditor.Editors
 
         private void lblMap_MouseClick(object sender, MouseEventArgs e)
         {
-            ApplyToolAtCoordinates(e, MouseEventType.Click);
+            ApplyToolAtCoordinates(e.X, e.Y, e.Button, MouseEventType.Click);
         }
 
         private void lblMap_MouseMove(object sender, MouseEventArgs e)
         {
-            ApplyToolAtCoordinates(e, MouseEventType.MouseMove);
+            if (e.Button == MouseButtons.Left)
+            {
+                ApplyToolAtCoordinates(e.X, e.Y, e.Button, MouseEventType.MouseMove);
+            }
         }
 
-        private void ApplyToolAtCoordinates(MouseEventArgs e, MouseEventType eventType)
+        private void ApplyToolAtCoordinates(int x, int y, MouseButtons buttons, MouseEventType eventType)
         {
-            int cellX = ((e.X - 3) / 6) - 1 + offsetX;
-            int cellY = ((e.Y - 1) / 13) - 1 + offsetY;
+            int cellX = ((x - 3) / 6) - 1 + offsetX;
+            int cellY = ((y - 1) / 13) - 1 + offsetY;
 
-            ApplyTool(SelectedTool, new MapCoordinate(Map.MapKey, cellX, cellY), eventType, e.Button);
+            ApplyTool(SelectedTool, new MapCoordinate(Map.MapKey, cellX, cellY), eventType, buttons);
         }
 
         private void btnScrollLeft_Click(object sender, EventArgs e)
@@ -448,8 +468,10 @@ namespace DataRogueWorldEditor.Editors
 
         private void UpdateMapGenCommandBinding(MapCoordinate newCoordinate)
         {
-            // Remove the commands that match the old coordinate
-            Map.MapGenCommands = Map.MapGenCommands.Where(c => !(c.Vector.X == _oldMapGenCoordinate.X && c.Vector.Y == _oldMapGenCoordinate.Y)).ToList();
+            if (_oldMapGenCoordinate != null)
+            {
+                Map.MapGenCommands = Map.MapGenCommands.Where(c => !(c.Vector.X == _oldMapGenCoordinate.X && c.Vector.Y == _oldMapGenCoordinate.Y)).ToList();
+            }
 
             if (MapGenCommands?.Any() == true)
             {
@@ -491,6 +513,24 @@ namespace DataRogueWorldEditor.Editors
                 lbl.ClientRectangle,
                 lbl.ForeColor,
                 lbl.BackColor, TextFormatFlags.Default);
+        }
+
+        private void lblMapEntities_Paint(object sender, PaintEventArgs e)
+        {
+            lblMapEntities.Refresh();
+        }
+
+        private void lblMapEntities_MouseClick(object sender, MouseEventArgs e)
+        {
+             ApplyToolAtCoordinates(e.X + lblMapEntities.Left, e.Y + lblMapEntities.Top, e.Button, MouseEventType.Click);
+        }
+
+        private void lblMapEntities_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ApplyToolAtCoordinates(e.X + lblMapEntities.Left, e.Y + lblMapEntities.Top, e.Button, MouseEventType.MouseMove);
+            }
         }
     }
 
