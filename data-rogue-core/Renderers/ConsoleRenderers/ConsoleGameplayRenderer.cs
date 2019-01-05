@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using data_rogue_core.Components;
+using data_rogue_core.Data;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems;
+using data_rogue_core.Systems.Interfaces;
 using data_rogue_core.Utils;
 using RLNET;
 
@@ -30,7 +32,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
         }
 
-        public void Render(WorldState world, IPositionSystem positionSystem)
+        public void Render(WorldState world, IPositionSystem positionSystem, IMessageSystem messageSystem)
         {
             Console.Clear();
 
@@ -43,7 +45,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
             RenderStats(world);
 
-            RenderMessages();
+            RenderMessages(messageSystem);
 
             RenderLines();
         }
@@ -62,9 +64,18 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             Console.Set(Console.Width - STATS_WIDTH - 1, Console.Height - MESSAGE_HEIGHT - 1, RLColor.White, RLColor.Black, 180);
         }
 
-        private void RenderMessages()
+        private void RenderMessages(IMessageSystem messageSystem)
         {
             MessageConsole.Clear();
+
+            var messages = messageSystem.RecentMessages(15);
+            messages.Reverse();
+
+            int y = 0;
+            foreach (Message message in messages)
+            {
+                MessageConsole.Print(0, y++, 1, message.Text, message.Color.ToRLColor(), null, MessageConsole.Width);
+            }
 
             RLConsole.Blit(MessageConsole, 0, 0, MessageConsole.Width, MessageConsole.Height, Console, 0, Console.Height - 15);
         }
