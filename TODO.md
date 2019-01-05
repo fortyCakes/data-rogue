@@ -1,6 +1,6 @@
 0.1
 
-See entities on the map editor
+* See entities on the map editor
 	Dropdown for entity selection
 	Dropdown for cell selection
 "seen tiles" on the map editor
