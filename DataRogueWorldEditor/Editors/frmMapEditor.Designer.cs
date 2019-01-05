@@ -1,4 +1,6 @@
-﻿namespace DataRogueWorldEditor.Editors
+﻿using DataRogueWorldEditor.Controls;
+
+namespace DataRogueWorldEditor.Editors
 {
     partial class frmMapEditor
     {
@@ -47,6 +49,7 @@
             this.Glyph = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Entity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlMap = new System.Windows.Forms.Panel();
+            this.lblMapEntities = new DataRogueWorldEditor.Controls.TransparentLabel();
             this.lblMap = new System.Windows.Forms.Label();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.txtMapKey = new System.Windows.Forms.TextBox();
@@ -328,11 +331,30 @@
             this.pnlMap.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlMap.Controls.Add(this.lblMapEntities);
             this.pnlMap.Controls.Add(this.lblMap);
             this.pnlMap.Location = new System.Drawing.Point(0, 0);
             this.pnlMap.Name = "pnlMap";
             this.pnlMap.Size = new System.Drawing.Size(751, 681);
             this.pnlMap.TabIndex = 1;
+            // 
+            // lblMapEntities
+            // 
+            this.lblMapEntities.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblMapEntities.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMapEntities.ForeColor = System.Drawing.Color.Gold;
+            this.lblMapEntities.Location = new System.Drawing.Point(4, 2);
+            this.lblMapEntities.Name = "lblMapEntities";
+            this.lblMapEntities.Padding = new System.Windows.Forms.Padding(5);
+            this.lblMapEntities.Size = new System.Drawing.Size(751, 681);
+            this.lblMapEntities.TabIndex = 0;
+            this.lblMapEntities.TabStop = false;
+            this.lblMapEntities.Text = "█......\r\n█.....\r\n....█..\r\n.......";
+            this.lblMapEntities.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.lblMapEntities.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lblMapEntities_MouseClick);
+            this.lblMapEntities.MouseMove += new System.Windows.Forms.MouseEventHandler(this.lblMapEntities_MouseMove);
             // 
             // lblMap
             // 
@@ -607,5 +629,6 @@
         private System.Windows.Forms.DataGridView dgvCommands;
         private System.Windows.Forms.DataGridViewComboBoxColumn colCommandTypes;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private TransparentLabel lblMapEntities;
     }
 }

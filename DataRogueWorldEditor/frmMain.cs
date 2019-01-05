@@ -26,10 +26,10 @@ namespace DataRogueWorldEditor
         {
             InitializeComponent();
 
-            EntityEngineSystem.Initialise();
-
             PrototypeSystem = new PrototypeSystem(EntityEngineSystem, null);
             EntityEngineSystem.Register(PrototypeSystem);
+
+            EntityEngineSystem.Initialise();
 
             dockPanel = new DockPanel();
             dockPanel.Dock = DockStyle.Fill;

@@ -48,8 +48,6 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             RenderMessages(messageSystem);
 
             RenderLines();
-
-            // TODO REMOVE AND PUT IN ACTUAL CONSOLES
         }
 
         private void RenderLines()

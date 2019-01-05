@@ -162,7 +162,7 @@ namespace data_rogue_core.Maps
             var commandsInMap = new List<MapGenCommand>();
 
             Match match;
-            while ((match = Regex.Match(lines[lineIndex], @"(\d*),(\d*): (.*)\((.*)\)")).Success)
+            while ((match = Regex.Match(lines[lineIndex], @"(-?\d*),(-?\d*): (.*)\((.*)\)")).Success)
             {
                 var x = int.Parse(match.Groups[1].Value);
                 var y = int.Parse(match.Groups[2].Value);
