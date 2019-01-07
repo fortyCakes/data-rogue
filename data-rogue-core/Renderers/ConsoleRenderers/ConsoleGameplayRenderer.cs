@@ -71,10 +71,10 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             var messages = messageSystem.RecentMessages(15);
             messages.Reverse();
 
-            int y = 0;
+            int y = 14;
             foreach (Message message in messages)
             {
-                MessageConsole.Print(0, y++, 1, message.Text, message.Color.ToRLColor(), null, MessageConsole.Width);
+                MessageConsole.Print(0, y--, 1, message.Text, message.Color.ToRLColor(), null, MessageConsole.Width);
             }
 
             RLConsole.Blit(MessageConsole, 0, 0, MessageConsole.Width, MessageConsole.Height, Console, 0, Console.Height - 15);
