@@ -94,10 +94,15 @@ namespace data_rogue_core
         {
             EventSystem.Initialise();
 
-            EventSystem.RegisterRule(new InputHandlerRule(PlayerControlSystem));
-            EventSystem.RegisterRule(new PhysicalCollisionRule(PositionSystem));
-            EventSystem.RegisterRule(new BumpAttackRule(PositionSystem, FighterSystem));
-            EventSystem.RegisterRule(new BranchGeneratorRule(EntityEngineSystem, PositionSystem, PrototypeSystem, Seed));
+            EventSystem.RegisterRules(
+                new InputHandlerRule(PlayerControlSystem),
+                new PhysicalCollisionRule(PositionSystem),
+                new BumpAttackRule(PositionSystem, FighterSystem),
+                new BranchGeneratorRule(EntityEngineSystem, PositionSystem, PrototypeSystem, Seed),
+                new AlwaysHitAttackRule(EntityEngineSystem),
+                new DealDamageRule(EventSystem, MessageSystem),
+                new PeopleDieWhenTheyAreKilledRule(EntityEngineSystem, MessageSystem)
+            );
         }
 
 
@@ -125,6 +130,7 @@ namespace data_rogue_core
             }).Start();
         }
 
+
         private static void CreateAndRegisterSystems()
         {
             MessageSystem = new MessageSystem();
@@ -136,7 +142,7 @@ namespace data_rogue_core
             PositionSystem = new PositionSystem();
             EntityEngineSystem.Register(PositionSystem);
 
-            FighterSystem = new FighterSystem(EntityEngineSystem, MessageSystem);
+            FighterSystem = new FighterSystem(EntityEngineSystem, MessageSystem, EventSystem);
             EntityEngineSystem.Register(FighterSystem);
 
             PrototypeSystem = new PrototypeSystem(EntityEngineSystem, PositionSystem);

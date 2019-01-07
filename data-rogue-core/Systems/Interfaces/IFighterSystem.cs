@@ -9,6 +9,6 @@ namespace data_rogue_core.Systems.Interfaces
 {
     public interface IFighterSystem : ISystem
     {
-        void Attack(IEntity sender, IEntity defender);
+        void BasicAttack(IEntity sender, IEntity defender);
     }
 }

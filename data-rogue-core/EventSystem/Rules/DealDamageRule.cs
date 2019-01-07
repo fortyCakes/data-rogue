@@ -1,0 +1,40 @@
+﻿using System.Drawing;
+using data_rogue_core.Components;
+using data_rogue_core.EntityEngine;
+using data_rogue_core.EventSystem.EventData;
+using data_rogue_core.Systems.Interfaces;
+
+namespace data_rogue_core.EventSystem.Rules
+{
+    class DealDamageRule : IEventRule
+    {
+        public DealDamageRule(IEventRuleSystem eventRuleSystem, IMessageSystem messageSystem)
+        {
+            EventRuleSystem = eventRuleSystem;
+            MessageSystem = messageSystem;
+        }
+
+        public EventTypeList EventTypes => new EventTypeList{ EventType.Damage };
+        public int RuleOrder => 0;
+
+        private IEventRuleSystem EventRuleSystem { get; }
+        public IMessageSystem MessageSystem { get; }
+
+        public bool Apply(EventType type, IEntity sender, object eventData)
+        {
+            var fighter = sender.Get<Fighter>();
+            var data = eventData as DamageEventData;
+
+            fighter.Health.Subtract(data.Damage);
+
+            MessageSystem.Write($"{sender.Get<Description>().Name} takes {data.Damage} damage.", Color.White);
+
+            if (fighter.Health.Current <= 0)
+            {
+                EventRuleSystem.Try(EventType.Death, sender, null);
+            }
+
+            return true;
+        }
+    }
+}

@@ -40,6 +40,14 @@ namespace data_rogue_core.EventSystem
             }
         }
 
+        public void RegisterRules(params IEventRule[] rules)
+        {
+            foreach (var rule in rules)
+            {
+                RegisterRule(rule);
+            }
+        }
+
         public void Initialise()
         {
             RuleBook = new RuleBook();

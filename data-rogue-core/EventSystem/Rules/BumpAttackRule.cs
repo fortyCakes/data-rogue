@@ -34,7 +34,7 @@ namespace data_rogue_core.EventSystem.Rules
                 {
                     var defender = entitiesAtPosition.Single(e => IsFighter(e));
 
-                    FighterSystem.Attack(sender, defender);
+                    FighterSystem.BasicAttack(sender, defender);
                     return false;
                 }
             }

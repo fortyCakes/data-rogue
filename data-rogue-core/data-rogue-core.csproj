@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\LoadingScreenActivity.cs" />
+    <Compile Include="Components\Description.cs" />
     <Compile Include="Components\Fighter.cs" />
     <Compile Include="Components\Portal.cs" />
     <Compile Include="Components\Prototype.cs" />
@@ -79,9 +80,14 @@
     <Compile Include="EntityEngine\EntityEngine.cs" />
     <Compile Include="EntityEngine\EntitySerializer.cs" />
     <Compile Include="EntityEngine\ICustomFieldSerialization.cs" />
+    <Compile Include="EventSystem\EventData\Class1.cs" />
+    <Compile Include="EventSystem\EventType.cs" />
     <Compile Include="EventSystem\IEventRule.cs" />
+    <Compile Include="EventSystem\Rules\PeopleDieWhenTheyAreKilledRule.cs" />
+    <Compile Include="EventSystem\Rules\AlwaysHitAttackRule.cs" />
     <Compile Include="EventSystem\Rules\BranchGeneratorRule.cs" />
     <Compile Include="EventSystem\Rules\BumpAttackRule.cs" />
+    <Compile Include="EventSystem\Rules\DealDamageRule.cs" />
     <Compile Include="Maps\Generators\BasicDungeonMapGenerator.cs" />
     <Compile Include="Maps\MapGenCommands\MapGenCommandExecutorFactory.cs" />
     <Compile Include="Maps\MapGenCommands\EntityCommandExecutor.cs" />

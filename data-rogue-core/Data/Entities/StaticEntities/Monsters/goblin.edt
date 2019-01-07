@@ -14,3 +14,5 @@ Transparent: true
 Health: 1/1
 Attack: 1
 Defence: 1
+[Description]
+Name: Goblin

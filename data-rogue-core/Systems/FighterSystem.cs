@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using data_rogue_core.EventSystem;
 
 namespace data_rogue_core.Systems
 {
@@ -17,27 +18,29 @@ namespace data_rogue_core.Systems
         public override SystemComponents RequiredComponents => new SystemComponents { typeof(Fighter) };
         public override SystemComponents ForbiddenComponents => new SystemComponents { typeof(Prototype) };
 
-        public FighterSystem(IEntityEngine engine, IMessageSystem messageSystem)
+        public FighterSystem(IEntityEngine engine, IMessageSystem messageSystem, IEventRuleSystem eventRuleSystem)
         {
             Engine = engine;
             MessageSystem = messageSystem;
+            EventRuleSystem = eventRuleSystem;
         }
 
         public IEntityEngine Engine { get; }
         public IMessageSystem MessageSystem { get; }
+        public IEventRuleSystem EventRuleSystem { get; }
 
-        public void Attack(IEntity attacker, IEntity defender)
+        public void BasicAttack(IEntity attacker, IEntity defender)
         {
             var attackingFighter = attacker.Get<Fighter>();
             var defendingFighter = defender.Get<Fighter>();
 
-            defendingFighter.Health.Subtract(attackingFighter.Attack);
+            MessageSystem.Write($"{attacker.Name} attacks {defender.Name}", Color.White);
 
-            if (defendingFighter.Health.Current == 0)
+            var hit = EventRuleSystem.Try(EventType.Attack, attacker, defender);
+
+            if (hit)
             {
-                // TODO on die methods, esp. player
-                MessageSystem.Write($"{defender.Name} is dead.", Color.White);
-                Engine.Destroy(defender.EntityId);
+                EventRuleSystem.Try(EventType.Damage, defender, 1);
             }
         }
     }

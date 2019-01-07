@@ -1,0 +1,33 @@
+﻿using System.Drawing;
+using System.Linq;
+using data_rogue_core.Components;
+using data_rogue_core.EntityEngine;
+using data_rogue_core.Maps;
+using data_rogue_core.Systems;
+using data_rogue_core.Systems.Interfaces;
+
+namespace data_rogue_core.EventSystem.Rules
+{
+    class PeopleDieWhenTheyAreKilledRule : IEventRule
+    {
+        public PeopleDieWhenTheyAreKilledRule(IEntityEngine engine, IMessageSystem messageSystem)
+        {
+            EntityEngine = engine;
+            MessageSystem = messageSystem;
+        }
+
+        public EventTypeList EventTypes => new EventTypeList{ EventType.Death };
+        public int RuleOrder => 0;
+
+        private IEntityEngine EntityEngine { get; }
+        public IMessageSystem MessageSystem { get; }
+
+        public bool Apply(EventType type, IEntity sender, object eventData)
+        {
+            MessageSystem.Write($"{sender.Get<Description>().Name} dies.", Color.White);
+            EntityEngine.Destroy(sender.EntityId);
+
+            return true;
+        }
+    }
+}

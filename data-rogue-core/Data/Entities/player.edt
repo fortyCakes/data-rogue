@@ -12,3 +12,5 @@ Transparent: true
 Health: 10/10
 Attack: 1
 Defence: 1
+[Description]
+Name: Player
