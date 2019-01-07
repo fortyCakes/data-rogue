@@ -69,6 +69,7 @@
     <Compile Include="Components\Branch.cs" />
     <Compile Include="Components\BranchLink.cs" />
     <Compile Include="Components\SpawnPoint.cs" />
+    <Compile Include="Components\Timeable.cs" />
     <Compile Include="Data\BranchLinkEnd.cs" />
     <Compile Include="Components\World.cs" />
     <Compile Include="Data\EntityBuilder.cs" />
@@ -98,6 +99,8 @@
     <Compile Include="Systems\Interfaces\IMessageSystem.cs" />
     <Compile Include="Systems\Interfaces\IPrototypeSystem.cs" />
     <Compile Include="Data\Message.cs" />
+    <Compile Include="Systems\Interfaces\ITimeSystem.cs" />
+    <Compile Include="Systems\TimeSystem.cs" />
     <Compile Include="Systems\MessageSystem.cs" />
     <Compile Include="Systems\IRandom.cs" />
     <Compile Include="Maps\Generators\StaticMapGenerator.cs" />

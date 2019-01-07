@@ -78,7 +78,8 @@ namespace data_rogue_core.UnitTests.Data
             return new SaveState() {
                 Seed = "TestSeed",
                 Maps = new List<string> { MapSerializer.Serialize(GetTestMap(0))},
-                Entities = new List<string>() { EntitySerializer.Serialize( GetTestEntity(0))}
+                Entities = new List<string>() { EntitySerializer.Serialize( GetTestEntity(0))},
+                Time = 42
             } ;
         }
 

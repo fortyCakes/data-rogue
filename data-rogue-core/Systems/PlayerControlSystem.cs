@@ -7,6 +7,7 @@ using data_rogue_core.EntityEngine;
 using data_rogue_core.EventSystem;
 using data_rogue_core.Maps;
 using data_rogue_core.Menus.StaticMenus;
+using data_rogue_core.Systems.Interfaces;
 using RLNET;
 
 namespace data_rogue_core.Systems
@@ -18,9 +19,11 @@ namespace data_rogue_core.Systems
 
         private readonly IPositionSystem PositionSystem;
         private readonly IEventRuleSystem EventSystem;
+        private readonly ITimeSystem TimeSystem;
 
-        public PlayerControlSystem(IPositionSystem positionSystem, IEventRuleSystem eventRuleSystem)
+        public PlayerControlSystem(IPositionSystem positionSystem, IEventRuleSystem eventRuleSystem, ITimeSystem timeSystem)
         {
+            TimeSystem = timeSystem;
             PositionSystem = positionSystem;
             EventSystem = eventRuleSystem;
         }
@@ -28,7 +31,7 @@ namespace data_rogue_core.Systems
 
         public void HandleKeyPress(RLKeyPress keyPress)
         {
-            if (keyPress != null)
+            if (TimeSystem.WaitingForInput && keyPress != null)
             {
                 switch (keyPress.Key)
                 {

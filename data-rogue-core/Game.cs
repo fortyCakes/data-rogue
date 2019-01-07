@@ -29,6 +29,7 @@ namespace data_rogue_core
         public static IPrototypeSystem PrototypeSystem;
         public static IFighterSystem FighterSystem;
         public static IMessageSystem MessageSystem;
+        public static ITimeSystem TimeSystem;
 
         private const int SCREEN_WIDTH = 100;
         private const int SCREEN_HEIGHT = 70;
@@ -137,6 +138,9 @@ namespace data_rogue_core
 
             EntityEngineSystem = new EntityEngine.EntityEngine(new DataStaticEntityLoader());
 
+            TimeSystem = new TimeSystem();
+            EntityEngineSystem.Register(TimeSystem);
+
             EventSystem = new EventRuleSystem();
 
             PositionSystem = new PositionSystem();
@@ -148,7 +152,7 @@ namespace data_rogue_core
             PrototypeSystem = new PrototypeSystem(EntityEngineSystem, PositionSystem);
             EntityEngineSystem.Register(PrototypeSystem);
 
-            PlayerControlSystem = new PlayerControlSystem(PositionSystem, EventSystem);
+            PlayerControlSystem = new PlayerControlSystem(PositionSystem, EventSystem, TimeSystem);
             EntityEngineSystem.Register(PlayerControlSystem);
         }
 
@@ -196,7 +200,7 @@ namespace data_rogue_core
             {
                 Thread.CurrentThread.IsBackground = true;
 
-                WorldState = WorldGenerator.Create(Seed, EntityEngineSystem, PositionSystem, PrototypeSystem);
+                WorldState = WorldGenerator.Create(Seed, EntityEngineSystem, PositionSystem, TimeSystem, PrototypeSystem);
 
                 ActivityStack.Pop();
 
@@ -211,7 +215,7 @@ namespace data_rogue_core
             {
                 Thread.CurrentThread.IsBackground = true;
 
-                WorldState = SaveSystem.Load(EntityEngineSystem, PrototypeSystem);
+                WorldState = SaveSystem.Load(EntityEngineSystem, TimeSystem, PrototypeSystem);
 
                 ActivityStack.Pop();
 

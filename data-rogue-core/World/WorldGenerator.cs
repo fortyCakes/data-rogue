@@ -11,11 +11,11 @@ namespace data_rogue_core
 {
     public class WorldGenerator
     {
-        public static WorldState Create(string seed, IEntityEngine entityEngineSystem, IPositionSystem positionSystem, IPrototypeSystem prototypeSystem)
+        public static WorldState Create(string seed, IEntityEngine entityEngineSystem, IPositionSystem positionSystem, ITimeSystem timeSystem, IPrototypeSystem prototypeSystem)
         {
             entityEngineSystem.Initialise();
 
-            var world = new WorldState(entityEngineSystem, seed);
+            var world = new WorldState(entityEngineSystem, timeSystem, seed);
 
             (new WorldEntityLoader()).Load(entityEngineSystem);
 

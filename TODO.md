@@ -6,15 +6,15 @@
 "seen tiles" on the map editor
 Message log
 * Stats console
-	Ability scores/Stats
 	Time system
+		Stats
 		Tilt Combat
 		Monster turns
 Items (getting and dropping)
 	Usable items
 	Equippable items
+Skills/Magic
 Aura
-	Skills
 Monster spawning (from monster prototype tags)
 Item spawning (from item tags)
 Rules from file
