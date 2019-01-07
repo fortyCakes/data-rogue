@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using data_rogue_core.EventSystem;
+using data_rogue_core.EventSystem.EventData;
 
 namespace data_rogue_core.Systems
 {
@@ -40,7 +41,7 @@ namespace data_rogue_core.Systems
 
             if (hit)
             {
-                EventRuleSystem.Try(EventType.Damage, defender, 1);
+                EventRuleSystem.Try(EventType.Damage, defender, new DamageEventData{Damage = 1});
             }
         }
     }
