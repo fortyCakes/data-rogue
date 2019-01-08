@@ -8,6 +8,7 @@
         UsePortal,
         Attack,
         Damage,
-        Death
+        Death,
+        SpendTime
     }
 }

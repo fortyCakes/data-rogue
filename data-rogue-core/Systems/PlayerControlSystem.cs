@@ -36,10 +36,10 @@ namespace data_rogue_core.Systems
                 switch (keyPress.Key)
                 {
                     case RLKey.W:
-                        MoveEntity(Game.WorldState.Player, 0, -1);
+                        MovePlayer( 0, -1);
                         break;
                     case RLKey.A:
-                        MoveEntity(Game.WorldState.Player, -1, 0);
+                        MovePlayer(-1, 0);
                         break;
                     case RLKey.S:
                         if (keyPress.Shift)
@@ -49,12 +49,12 @@ namespace data_rogue_core.Systems
                         }
                         else
                         {
-                            MoveEntity(Game.WorldState.Player, 0, 1);
+                            MovePlayer(0, 1);
                         }
 
                         break;
                     case RLKey.D:
-                        MoveEntity(Game.WorldState.Player, 1, 0);
+                        MovePlayer(1, 0);
                         break;
                     case RLKey.L:
                         Game.ActivityStack.Push(new StaticTextActivity(@"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", Game.RendererFactory));
@@ -126,20 +126,15 @@ namespace data_rogue_core.Systems
             SaveSystem.Save(Game.WorldState);
         }
 
-        private void MoveAllEntities(int x, int y)
+        private void MovePlayer(int x, int y)
         {
-            foreach (var entity in Entities)
-            {
-                MoveEntity(entity, x, y);
-            }
-        }
-
-        private void MoveEntity(IEntity entity, int x, int y)
-        {
+            var player = Game.WorldState.Player;
             var vector = new Vector(x, y);
-            if (EventSystem.Try(EventType.Move, entity, vector))
+
+            if (EventSystem.Try(EventType.Move, player, vector))
             {
-                PositionSystem.Move(entity.Get<Position>(), vector);
+                PositionSystem.Move(player.Get<Position>(), vector);
+                EventSystem.Try(EventType.SpendTime, player, 1000);
             }
         }
     }

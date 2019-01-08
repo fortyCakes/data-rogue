@@ -102,7 +102,8 @@ namespace data_rogue_core
                 new BranchGeneratorRule(EntityEngineSystem, PositionSystem, PrototypeSystem, Seed),
                 new AlwaysHitAttackRule(EntityEngineSystem),
                 new DealDamageRule(EventSystem, MessageSystem),
-                new PeopleDieWhenTheyAreKilledRule(EntityEngineSystem, MessageSystem)
+                new PeopleDieWhenTheyAreKilledRule(EntityEngineSystem, MessageSystem),
+                new SpendTimeRule(TimeSystem)
             );
         }
 
@@ -146,7 +147,7 @@ namespace data_rogue_core
             PositionSystem = new PositionSystem();
             EntityEngineSystem.Register(PositionSystem);
 
-            FighterSystem = new FighterSystem(EntityEngineSystem, MessageSystem, EventSystem);
+            FighterSystem = new FighterSystem(EntityEngineSystem, MessageSystem, EventSystem, TimeSystem);
             EntityEngineSystem.Register(FighterSystem);
 
             PrototypeSystem = new PrototypeSystem(EntityEngineSystem, PositionSystem);
@@ -189,6 +190,11 @@ namespace data_rogue_core
             if (!ReferenceEquals(keyPress, null))
             {
                 EventSystem.Try(EventType.Input, null, keyPress);
+            }
+
+            while(!TimeSystem.WaitingForInput && ActivityStack.Peek().Type == ActivityType.Gameplay)
+            {
+                TimeSystem.Tick();
             }
         }
 

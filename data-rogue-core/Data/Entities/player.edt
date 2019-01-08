@@ -7,6 +7,7 @@ ZOrder: 9999
 Passable: false
 Transparent: true
 [PlayerControlled]
+[Actor]
 [Position]
 [Fighter]
 Health: 10/10

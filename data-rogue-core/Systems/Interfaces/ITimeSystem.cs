@@ -6,7 +6,9 @@ namespace data_rogue_core.Systems.Interfaces
     {
         void Tick();
 
-        bool WaitingForInput { get; }
+        bool WaitingForInput { get; set; }
         ulong CurrentTime { get; set; }
+
+        void SpendTicks(IEntity entity, int ticks);
     }
 }

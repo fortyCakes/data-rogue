@@ -61,6 +61,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\LoadingScreenActivity.cs" />
+    <Compile Include="Components\Behaviours\ActionResults.cs" />
+    <Compile Include="Components\Behaviours\IBehaviour.cs" />
     <Compile Include="Components\Description.cs" />
     <Compile Include="Components\Fighter.cs" />
     <Compile Include="Components\Portal.cs" />
@@ -84,6 +86,7 @@
     <Compile Include="EventSystem\EventData\Class1.cs" />
     <Compile Include="EventSystem\EventType.cs" />
     <Compile Include="EventSystem\IEventRule.cs" />
+    <Compile Include="EventSystem\Rules\SpendTimeRule.cs" />
     <Compile Include="EventSystem\Rules\PeopleDieWhenTheyAreKilledRule.cs" />
     <Compile Include="EventSystem\Rules\AlwaysHitAttackRule.cs" />
     <Compile Include="EventSystem\Rules\BranchGeneratorRule.cs" />
@@ -124,7 +127,7 @@
     <Compile Include="Renderers\IRenderer.cs" />
     <Compile Include="Renderers\IStaticTextRenderer.cs" />
     <Compile Include="Components\Appearance.cs" />
-    <Compile Include="Components\PlayerControlled.cs" />
+    <Compile Include="Components\Behaviours\PlayerControlled.cs" />
     <Compile Include="Activities\Activity.cs" />
     <Compile Include="Data\DataFileLoader.cs" />
     <Compile Include="Data\IEntityDataParser.cs" />

@@ -7,7 +7,7 @@ using data_rogue_core.EntityEngine;
 
 namespace data_rogue_core.Components
 {
-    class Timeable : IEntityComponent
+    class Actor : IEntityComponent
     {
         public ulong NextTick;
     }
