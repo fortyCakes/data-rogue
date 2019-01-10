@@ -4,6 +4,7 @@ using data_rogue_core.Renderers;
 using RLNET;
 using System.Threading;
 using data_rogue_core.Activities;
+using data_rogue_core.Behaviours;
 using data_rogue_core.EntityEngine;
 using data_rogue_core.EventSystem;
 using data_rogue_core.EventSystem.Rules;
@@ -30,6 +31,8 @@ namespace data_rogue_core
         public static IFighterSystem FighterSystem;
         public static IMessageSystem MessageSystem;
         public static ITimeSystem TimeSystem;
+        public static IBehaviourFactory BehaviourFactory;
+        public static IRandom Random;
 
         private const int SCREEN_WIDTH = 100;
         private const int SCREEN_HEIGHT = 70;
@@ -138,14 +141,18 @@ namespace data_rogue_core
             MessageSystem = new MessageSystem();
 
             EntityEngineSystem = new EntityEngine.EntityEngine(new DataStaticEntityLoader());
-
-            TimeSystem = new TimeSystem();
-            EntityEngineSystem.Register(TimeSystem);
-
+            
             EventSystem = new EventRuleSystem();
 
             PositionSystem = new PositionSystem();
             EntityEngineSystem.Register(PositionSystem);
+
+            Random = new RNG(DEBUG_SEED);
+
+            BehaviourFactory = new BehaviourFactory(PositionSystem, EventSystem, Random);
+
+            TimeSystem = new TimeSystem(BehaviourFactory);
+            EntityEngineSystem.Register(TimeSystem);
 
             FighterSystem = new FighterSystem(EntityEngineSystem, MessageSystem, EventSystem, TimeSystem);
             EntityEngineSystem.Register(FighterSystem);
@@ -154,7 +161,6 @@ namespace data_rogue_core
             EntityEngineSystem.Register(PrototypeSystem);
 
             PlayerControlSystem = new PlayerControlSystem(PositionSystem, EventSystem, TimeSystem);
-            EntityEngineSystem.Register(PlayerControlSystem);
         }
 
         private static void DisplayMainMenu()

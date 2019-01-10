@@ -12,10 +12,8 @@ using RLNET;
 
 namespace data_rogue_core.Systems
 {
-    public class PlayerControlSystem : BaseSystem, IPlayerControlSystem
+    public class PlayerControlSystem : IPlayerControlSystem
     {
-        public override SystemComponents RequiredComponents => new SystemComponents { typeof(PlayerControlled), typeof(Position) };
-        public override SystemComponents ForbiddenComponents => new SystemComponents { typeof(Prototype) };
 
         private readonly IPositionSystem PositionSystem;
         private readonly IEventRuleSystem EventSystem;

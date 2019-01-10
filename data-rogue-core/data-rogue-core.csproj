@@ -61,8 +61,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\LoadingScreenActivity.cs" />
-    <Compile Include="Components\Behaviours\ActionResults.cs" />
-    <Compile Include="Components\Behaviours\IBehaviour.cs" />
+    <Compile Include="Behaviours\ActionResults.cs" />
+    <Compile Include="Behaviours\BehaviourFactory.cs" />
+    <Compile Include="Behaviours\IBehaviour.cs" />
+    <Compile Include="Behaviours\RandomlyMoveBehaviour.cs" />
+    <Compile Include="Behaviours\PlayerControlledBehaviour.cs" />
     <Compile Include="Components\Description.cs" />
     <Compile Include="Components\Fighter.cs" />
     <Compile Include="Components\Portal.cs" />
@@ -71,7 +74,7 @@
     <Compile Include="Components\Branch.cs" />
     <Compile Include="Components\BranchLink.cs" />
     <Compile Include="Components\SpawnPoint.cs" />
-    <Compile Include="Components\Timeable.cs" />
+    <Compile Include="Components\Actor.cs" />
     <Compile Include="Data\BranchLinkEnd.cs" />
     <Compile Include="Components\World.cs" />
     <Compile Include="Data\EntityBuilder.cs" />
@@ -98,6 +101,7 @@
     <Compile Include="Maps\MapGenCommands\ICommandExecutor.cs" />
     <Compile Include="Maps\MapGenCommands\MapGenCommand.cs" />
     <Compile Include="Systems\FighterSystem.cs" />
+    <Compile Include="Behaviours\IBehaviourFactory.cs" />
     <Compile Include="Systems\Interfaces\IFighterSystem.cs" />
     <Compile Include="Systems\Interfaces\IMessageSystem.cs" />
     <Compile Include="Systems\Interfaces\IPrototypeSystem.cs" />
@@ -127,7 +131,6 @@
     <Compile Include="Renderers\IRenderer.cs" />
     <Compile Include="Renderers\IStaticTextRenderer.cs" />
     <Compile Include="Components\Appearance.cs" />
-    <Compile Include="Components\Behaviours\PlayerControlled.cs" />
     <Compile Include="Activities\Activity.cs" />
     <Compile Include="Data\DataFileLoader.cs" />
     <Compile Include="Data\IEntityDataParser.cs" />

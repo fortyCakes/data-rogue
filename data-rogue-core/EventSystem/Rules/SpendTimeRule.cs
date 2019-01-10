@@ -22,9 +22,12 @@ namespace data_rogue_core.EventSystem.Rules
 
         public bool Apply(EventType type, IEntity sender, object eventData)
         {
-            TimeSystem.SpendTicks(sender, (int)eventData);
+            Actor actor = sender.Get<Actor>();
 
-            if (sender.Has<PlayerControlled>())
+            TimeSystem.SpendTicks(sender, (int)eventData);
+            actor.HasActed = true;
+            
+            if (actor.Behaviours == "PlayerControlled")
             {
                 TimeSystem.WaitingForInput = false;
             }

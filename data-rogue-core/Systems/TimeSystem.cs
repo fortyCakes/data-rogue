@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using data_rogue_core.Behaviours;
 using data_rogue_core.Components;
-using data_rogue_core.Components.Behaviours;
 using data_rogue_core.EntityEngine;
 using data_rogue_core.Systems.Interfaces;
 
@@ -8,6 +10,13 @@ namespace data_rogue_core.Systems
 {
     class TimeSystem : BaseSystem, ITimeSystem
     {
+        public IBehaviourFactory BehaviourFactory { get; }
+
+        public TimeSystem(IBehaviourFactory behaviourFactory)
+        {
+            BehaviourFactory = behaviourFactory;
+        }
+
         public new void Initialise()
         {
             CurrentTime = 0;
@@ -17,7 +26,7 @@ namespace data_rogue_core.Systems
         public ulong CurrentTime { get; set; }
         
         public override SystemComponents RequiredComponents => new SystemComponents {typeof(Actor)};
-        public override SystemComponents ForbiddenComponents => new SystemComponents();
+        public override SystemComponents ForbiddenComponents => new SystemComponents{typeof(Prototype)};
 
         public void Tick()
         {
@@ -38,22 +47,23 @@ namespace data_rogue_core.Systems
         private void Act(IEntity entity)
         {
             var actor = entity.Get<Actor>();
+            actor.HasActed = false;
 
-            foreach (IEntityComponent component in entity.Components)
+            var behaviours = GetBehaviours(actor);
+
+            foreach (IBehaviour behaviour in behaviours)
             {
-                var behaviour = component as IBehaviour;
                 if (behaviour != null)
                 {
-                    var actionResult = behaviour.Act();
+                    var actionResult = behaviour.Act(entity);
 
                     if (actionResult.WaitForInput)
                     {
                         WaitingForInput = true;
                         break;
                     }
-                    else if (actionResult.Acted)
+                    else if (actor.HasActed)
                     {
-                        actor.NextTick = CurrentTime + (ulong)actionResult.Ticks;
                         break;
                     }
                 }
@@ -62,6 +72,16 @@ namespace data_rogue_core.Systems
             if (actor.NextTick <= CurrentTime)
             {
                 actor.NextTick = CurrentTime + 1;
+            }
+        }
+
+        private IEnumerable<IBehaviour> GetBehaviours(Actor actor)
+        {
+            var behaviours = actor.Behaviours?.Split(',') ?? new string[0];
+
+            foreach (var behaviour in behaviours)
+            {
+                yield return BehaviourFactory.Get(behaviour);
             }
         }
 

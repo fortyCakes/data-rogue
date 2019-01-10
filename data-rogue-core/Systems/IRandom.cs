@@ -33,7 +33,7 @@ namespace data_rogue_core
 
         public int Between(int min, int max)
         {
-            return _random.Next(min, max);
+            return _random.Next(min, max+1);
         }
 
         public T PickOne<T>(List<T> items)

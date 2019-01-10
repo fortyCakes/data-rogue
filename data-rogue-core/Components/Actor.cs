@@ -10,5 +10,8 @@ namespace data_rogue_core.Components
     class Actor : IEntityComponent
     {
         public ulong NextTick;
+
+        public string Behaviours;
+        public bool HasActed;
     }
 }

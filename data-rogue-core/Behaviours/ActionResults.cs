@@ -1,4 +1,4 @@
-﻿namespace data_rogue_core.Components.Behaviours
+﻿namespace data_rogue_core.Behaviours
 {
     public class BehaviourResult
     {
