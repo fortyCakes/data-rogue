@@ -101,9 +101,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
             StatsConsole.Print(1, 10, mapname, RLColor.White, RLColor.Black);
 
-            var time = world.TimeSystem.CurrentTime / 100;
-
-            StatsConsole.Print(1, 12, $"Time: {time.ToString("F2")}", RLColor.White, RLColor.Black);
+            StatsConsole.Print(1, 12, $"Time: {world.TimeSystem.TimeString}", RLColor.White, RLColor.Black);
 
             RLConsole.Blit(StatsConsole, 0, 0, StatsConsole.Width, StatsConsole.Height, Console, Console.Width - 22, 0);
         }

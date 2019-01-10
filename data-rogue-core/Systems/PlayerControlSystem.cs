@@ -54,6 +54,18 @@ namespace data_rogue_core.Systems
                     case RLKey.D:
                         MovePlayer(1, 0);
                         break;
+                    case RLKey.Y:
+                        MovePlayer(-1, -1);
+                        break;
+                    case RLKey.U:
+                        MovePlayer(1, -1);
+                        break;
+                    case RLKey.B:
+                        MovePlayer(-1, 1);
+                        break;
+                    case RLKey.N:
+                        MovePlayer(1, 1);
+                        break;
                     case RLKey.L:
                         Game.ActivityStack.Push(new StaticTextActivity(@"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", Game.RendererFactory));
                         break;
@@ -61,13 +73,28 @@ namespace data_rogue_core.Systems
                         Game.ActivityStack.Push(MainMenu.GetMainMenu());
                         break;
                     case RLKey.Period:
-                        UseStairs(StairDirection.Down);
+                        if (keyPress.Shift)
+                        {
+                            UseStairs(StairDirection.Down);
+                        }
+                        else
+                        {
+                            Wait(1000);
+                        }
                         break;
                     case RLKey.Comma:
-                        UseStairs(StairDirection.Up);
+                        if (keyPress.Shift)
+                        {
+                            UseStairs(StairDirection.Up);
+                        }
                         break;
                 }
             }
+        }
+
+        private void Wait(int ticks)
+        {
+            EventSystem.Try(EventType.SpendTime, Game.WorldState.Player, ticks);
         }
 
         private void UseStairs(StairDirection direction)
@@ -129,11 +156,7 @@ namespace data_rogue_core.Systems
             var player = Game.WorldState.Player;
             var vector = new Vector(x, y);
 
-            if (EventSystem.Try(EventType.Move, player, vector))
-            {
-                PositionSystem.Move(player.Get<Position>(), vector);
-                EventSystem.Try(EventType.SpendTime, player, 1000);
-            }
+            EventSystem.Try(EventType.Move, player, vector);
         }
     }
 }

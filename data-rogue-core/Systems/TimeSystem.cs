@@ -4,12 +4,15 @@ using System.Linq;
 using data_rogue_core.Behaviours;
 using data_rogue_core.Components;
 using data_rogue_core.EntityEngine;
+using data_rogue_core.Maps;
 using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.Systems
 {
     class TimeSystem : BaseSystem, ITimeSystem
     {
+        private MapKey ActiveMapKey;
+
         public IBehaviourFactory BehaviourFactory { get; }
 
         public TimeSystem(IBehaviourFactory behaviourFactory)
@@ -24,17 +27,21 @@ namespace data_rogue_core.Systems
         }
 
         public ulong CurrentTime { get; set; }
-        
-        public override SystemComponents RequiredComponents => new SystemComponents {typeof(Actor)};
-        public override SystemComponents ForbiddenComponents => new SystemComponents{typeof(Prototype)};
+
+        public override SystemComponents RequiredComponents => new SystemComponents { typeof(Actor) };
+        public override SystemComponents ForbiddenComponents => new SystemComponents { typeof(Prototype) };
 
         public void Tick()
         {
             CurrentTime++;
 
+            ActiveMapKey = Game.WorldState.Player.Get<Position>().MapCoordinate.Key;
+
             if (Entities != null)
             {
-                foreach (var entity in Entities)
+                var entitiesAtStartOfTick = new List<IEntity>(Entities);
+
+                foreach (var entity in entitiesAtStartOfTick)
                 {
                     if (entity.Get<Actor>().NextTick <= CurrentTime)
                     {
@@ -46,7 +53,15 @@ namespace data_rogue_core.Systems
 
         private void Act(IEntity entity)
         {
+            if (entity.Has<Position>())
+            {
+                var mapKey = entity.Get<Position>().MapCoordinate.Key;
+
+                if (mapKey != ActiveMapKey) return;
+            }
+
             var actor = entity.Get<Actor>();
+
             actor.HasActed = false;
 
             var behaviours = GetBehaviours(actor);
@@ -93,5 +108,12 @@ namespace data_rogue_core.Systems
 
         public bool WaitingForInput { get; set; }
 
+        public string TimeString  {
+            get
+            {
+                var timeInAut = CurrentTime / 100;
+                return timeInAut.ToString("F2");
+            }            
+        }
     }
 }

@@ -7,7 +7,7 @@ using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.Systems
 {
-    public class MessageSystem : IMessageSystem
+    public class MessageSystem : IInitialisableSystem ,IMessageSystem
     {
         public MessageSystem()
         {
@@ -24,6 +24,11 @@ namespace data_rogue_core.Systems
         public List<Message> RecentMessages(int messages)
         {
             return AllMessages.Skip(Math.Max(0, AllMessages.Count - messages)).ToList();
+        }
+
+        public void Initialise()
+        {
+            AllMessages.Clear();
         }
     }
 }

@@ -10,5 +10,7 @@ namespace data_rogue_core.Systems.Interfaces
         ulong CurrentTime { get; set; }
 
         void SpendTicks(IEntity entity, int ticks);
+
+        string TimeString { get; }
     }
 }

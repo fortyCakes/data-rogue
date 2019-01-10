@@ -106,7 +106,9 @@ namespace data_rogue_core
                 new AlwaysHitAttackRule(EntityEngineSystem),
                 new DealDamageRule(EventSystem, MessageSystem),
                 new PeopleDieWhenTheyAreKilledRule(EntityEngineSystem, MessageSystem),
-                new SpendTimeRule(TimeSystem)
+                new SpendTimeRule(TimeSystem),
+                new PlayerDeathRule(EntityEngineSystem, MessageSystem),
+                new CompleteMoveRule(PositionSystem, EventSystem)
             );
         }
 
@@ -198,7 +200,7 @@ namespace data_rogue_core
                 EventSystem.Try(EventType.Input, null, keyPress);
             }
 
-            while(!TimeSystem.WaitingForInput && ActivityStack.Peek().Type == ActivityType.Gameplay)
+            while(!TimeSystem.WaitingForInput && ActivityStack.Count > 0 && ActivityStack.Peek().Type == ActivityType.Gameplay)
             {
                 TimeSystem.Tick();
             }
@@ -212,7 +214,7 @@ namespace data_rogue_core
             {
                 Thread.CurrentThread.IsBackground = true;
 
-                WorldState = WorldGenerator.Create(Seed, EntityEngineSystem, PositionSystem, TimeSystem, PrototypeSystem);
+                WorldState = WorldGenerator.Create(Seed, EntityEngineSystem, PositionSystem, TimeSystem, PrototypeSystem, MessageSystem);
 
                 ActivityStack.Pop();
 

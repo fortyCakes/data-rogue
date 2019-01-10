@@ -17,4 +17,4 @@ Defence: 1
 [Description]
 Name: Goblin
 [Actor]
-Behaviours: RandomlyMove
+Behaviours: MoveInPlayerDirection

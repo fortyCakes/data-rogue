@@ -27,12 +27,7 @@ namespace data_rogue_core.Behaviours
 
             var vector = new Vector(isXMove ? move : 0, !isXMove ? move : 0);
 
-            var ok = _eventRuleSystem.Try(EventType.Move, entity, vector);
-            if (ok)
-            {
-                _positionSystem.Move(entity.Get<Position>(), vector);
-                _eventRuleSystem.Try(EventType.SpendTime, entity, 1000);
-            }
+            _eventRuleSystem.Try(EventType.Move, entity, vector);
 
             return new BehaviourResult();
         }

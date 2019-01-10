@@ -60,10 +60,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\DeathScreenActivity.cs" />
     <Compile Include="Activities\LoadingScreenActivity.cs" />
     <Compile Include="Behaviours\ActionResults.cs" />
     <Compile Include="Behaviours\BehaviourFactory.cs" />
     <Compile Include="Behaviours\IBehaviour.cs" />
+    <Compile Include="Behaviours\MoveToPlayerBehaviour.cs" />
     <Compile Include="Behaviours\RandomlyMoveBehaviour.cs" />
     <Compile Include="Behaviours\PlayerControlledBehaviour.cs" />
     <Compile Include="Components\Description.cs" />
@@ -89,6 +91,8 @@
     <Compile Include="EventSystem\EventData\Class1.cs" />
     <Compile Include="EventSystem\EventType.cs" />
     <Compile Include="EventSystem\IEventRule.cs" />
+    <Compile Include="EventSystem\Rules\MovePositionRule.cs" />
+    <Compile Include="EventSystem\Rules\PlayerDeathRule.cs" />
     <Compile Include="EventSystem\Rules\SpendTimeRule.cs" />
     <Compile Include="EventSystem\Rules\PeopleDieWhenTheyAreKilledRule.cs" />
     <Compile Include="EventSystem\Rules\AlwaysHitAttackRule.cs" />
