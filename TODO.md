@@ -4,19 +4,20 @@
 	Dropdown for entity selection
 	Dropdown for cell selection
 "seen tiles" on the map editor
-Message log
+*Message log
+	Save message log
 * Stats console
-	Time system
+	*Time system
 		Stats
 		Tilt Combat
-		Monster turns
+		*Monster turns
 Items (getting and dropping)
 	Usable items
 	Equippable items
 Skills/Magic
 Aura
 Monster spawning (from monster prototype tags)
-Item spawning (from item tags)
+Item spawning (from item prototype tags)
 Rules from file
 Separate out core from implementation
 Scriptable effects
@@ -36,6 +37,7 @@ Audio system
 Random item generation
 Traps
 Encounter based map population
+View message log scrollback
 
 1.0+
 
