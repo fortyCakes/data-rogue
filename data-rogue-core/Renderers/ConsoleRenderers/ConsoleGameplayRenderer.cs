@@ -14,6 +14,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 {
     public class ConsoleGameplayRenderer : BaseConsoleRenderer, IGameplayRenderer
     {
+        private const bool DEBUG_SEEALL = true;
         private const int STATS_WIDTH = 22;
         private const int MESSAGE_HEIGHT = 15;
 
@@ -145,7 +146,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
         {
             MapCoordinate coordinate = new MapCoordinate(currentMap.MapKey, lookupX, lookupY);
 
-            var isInFov = playerFov.Contains(coordinate);
+            var isInFov = playerFov.Contains(coordinate) || DEBUG_SEEALL;
 
             Appearance appearance = null;
 

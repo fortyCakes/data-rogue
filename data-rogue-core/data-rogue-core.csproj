@@ -104,6 +104,7 @@
     <Compile Include="Maps\MapGenCommands\EntityCommandExecutor.cs" />
     <Compile Include="Maps\MapGenCommands\ICommandExecutor.cs" />
     <Compile Include="Maps\MapGenCommands\MapGenCommand.cs" />
+    <Compile Include="Systems\AStar.cs" />
     <Compile Include="Systems\FighterSystem.cs" />
     <Compile Include="Behaviours\IBehaviourFactory.cs" />
     <Compile Include="Systems\Interfaces\IFighterSystem.cs" />

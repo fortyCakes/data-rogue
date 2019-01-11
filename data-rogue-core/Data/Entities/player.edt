@@ -10,7 +10,7 @@ Transparent: true
 Behaviours: PlayerControlled
 [Position]
 [Fighter]
-Health: 10/10
+Health: 1000/1000
 Attack: 1
 Defence: 1
 [Description]

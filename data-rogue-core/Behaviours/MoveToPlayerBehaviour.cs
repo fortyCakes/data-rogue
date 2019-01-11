@@ -1,4 +1,5 @@
-﻿using data_rogue_core.Components;
+﻿using System.Linq;
+using data_rogue_core.Components;
 using data_rogue_core.EntityEngine;
 using data_rogue_core.EventSystem;
 using data_rogue_core.Maps;
@@ -22,14 +23,17 @@ namespace data_rogue_core.Behaviours
             var position = entity.Get<Position>().MapCoordinate;
             var playerPosition = positionSystem.PositionOf(Game.WorldState.Player);
 
-            if (position.Key == playerPosition.Key)
+            var path = positionSystem.Path(position, playerPosition);
+
+            if (path != null)
             {
+                var targetPosition = path.First();
                 var vector = new Vector(0, 0);
 
-                if (playerPosition.X > position.X) vector.X = 1;
-                if (playerPosition.X < position.X) vector.X = -1;
-                if (playerPosition.Y > position.Y) vector.Y = 1;
-                if (playerPosition.Y < position.Y) vector.Y = -1;
+                if (targetPosition.X > position.X) vector.X = 1;
+                if (targetPosition.X < position.X) vector.X = -1;
+                if (targetPosition.Y > position.Y) vector.Y = 1;
+                if (targetPosition.Y < position.Y) vector.Y = -1;
 
                 eventRuleSystem.Try(EventType.Move, entity, vector);
             }

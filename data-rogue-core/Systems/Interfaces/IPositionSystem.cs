@@ -16,5 +16,6 @@ namespace data_rogue_core.Systems
         void SetPosition(IEntity entity, MapCoordinate mapCoordinate);
         void SetPosition(Position position, MapCoordinate mapCoordinate);
         bool Any(MapCoordinate key);
+        IEnumerable<MapCoordinate> Path(MapCoordinate origin, MapCoordinate destination);
     }
 }

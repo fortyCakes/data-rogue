@@ -61,5 +61,18 @@ namespace data_rogue_core.Systems
         {
             return Entities.Any(e => e.Get<Position>().MapCoordinate == key);
         }
+
+        public IEnumerable<MapCoordinate> Path(MapCoordinate origin, MapCoordinate destination)
+        {
+            if (origin.Key != destination.Key)
+            {
+                // on different levels
+                return null;
+            }
+
+            var map = Game.WorldState.Maps[origin.Key];
+
+            return AStar.Path(map, origin, destination);
+        }
     }
 }
