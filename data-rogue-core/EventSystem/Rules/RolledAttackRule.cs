@@ -42,10 +42,10 @@ namespace data_rogue_core.EventSystem.Rules
             var attackStat = EventRuleSystem.GetStat(sender, Stat.Agility);
             var defenceStat = EventRuleSystem.GetStat(defender, Stat.Agility);
 
-            var attackRoll = _random.Roll(attackStat);
-            var defenceRoll = _random.Roll(defenceStat);
+            var attackRoll = _random.StatCheck(attackStat);
+            var defenceRoll = _random.StatCheck(defenceStat);
 
-            bool hit = (attackRoll > defenceRoll);
+            bool hit = attackRoll >= defenceRoll;
 
             MessageSystem.Write($"{attackerDescription.Name} rolls {attackStat}, gets {attackRoll}. {defenderDescription.Name} rolls {defenceStat}, gets {defenceRoll}. {(hit ? "Hit" : "Miss")}", Color.White);
             
