@@ -92,6 +92,7 @@
     <Compile Include="EventSystem\EventData\GetStatEventData.cs" />
     <Compile Include="EventSystem\EventType.cs" />
     <Compile Include="EventSystem\IEventRule.cs" />
+    <Compile Include="EventSystem\Rules\TiltDamageRule.cs" />
     <Compile Include="EventSystem\Rules\GetBaseStatRule.cs" />
     <Compile Include="EventSystem\Rules\RolledAttackRule.cs" />
     <Compile Include="EventSystem\Rules\MovePositionRule.cs" />

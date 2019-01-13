@@ -24,7 +24,7 @@ namespace data_rogue_core.EventSystem.Rules
 
         public bool Apply(EventType type, IEntity sender, object eventData)
         {
-            MessageSystem.Write($"{sender.Get<Description>().Name} dies.", Color.White);
+            MessageSystem.Write($"{sender.Get<Description>().Name} dies.", Color.DarkRed);
             EntityEngine.Destroy(sender.EntityId);
 
             return true;

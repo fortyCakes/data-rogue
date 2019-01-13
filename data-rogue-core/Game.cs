@@ -109,7 +109,8 @@ namespace data_rogue_core
                 new SpendTimeRule(TimeSystem),
                 new PlayerDeathRule(EntityEngineSystem, MessageSystem),
                 new CompleteMoveRule(PositionSystem, EventSystem),
-                new GetBaseStatRule(EntityEngineSystem)
+                new GetBaseStatRule(EntityEngineSystem),
+                new TiltDamageRule(EventSystem, MessageSystem)
             );
         }
 

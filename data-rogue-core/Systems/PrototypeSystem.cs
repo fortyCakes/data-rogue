@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using data_rogue_core.Data;
 
 namespace data_rogue_core.Systems
 {
@@ -82,8 +83,16 @@ namespace data_rogue_core.Systems
 
                 foreach (FieldInfo fieldInfo in componentType.GetFields())
                 {
-                    var oldValue = fieldInfo.GetValue(component);
-                    fieldInfo.SetValue(newComponent, oldValue);
+                    if (fieldInfo.FieldType == typeof(StatCounter))
+                    {
+                        StatCounter oldValue = (StatCounter)fieldInfo.GetValue(component);
+                        fieldInfo.SetValue(newComponent, new StatCounter{Current = oldValue.Current, Max = oldValue.Max} );
+                    }
+                    else
+                    {
+                        var oldValue = fieldInfo.GetValue(component);
+                        fieldInfo.SetValue(newComponent, oldValue);
+                    }
                 }
 
                 newComponents.Add(newComponent);

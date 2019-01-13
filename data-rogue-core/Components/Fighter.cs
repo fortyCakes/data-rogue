@@ -12,5 +12,7 @@ namespace data_rogue_core.Components
 
         public int Muscle;
         public int Agility;
+
+        public int BreakCounter = 0;
     }
 }

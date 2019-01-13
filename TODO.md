@@ -1,16 +1,14 @@
+BUGS
+
+StatCounter prototype copying
+
 0.1
 
-* See entities on the map editor
-	Dropdown for entity selection
-	Dropdown for cell selection
+Dropdown for entity selection
+Dropdown for cell selection
 "seen tiles" on the map editor
-*Message log
-	Save message log
-* Stats console
-	*Time system
-		Stats
-		Tilt Combat
-		*Monster turns
+Save message log
+Enemy display in stats window
 Items (getting and dropping)
 	Usable items
 	Equippable items

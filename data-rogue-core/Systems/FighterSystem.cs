@@ -40,13 +40,12 @@ namespace data_rogue_core.Systems
             var attackerDescription = attacker.Get<Description>();
             var defenderDescription = defender.Get<Description>();
 
-            MessageSystem.Write($"{attackerDescription.Name} attacks {defenderDescription.Name}", Color.White);
-
             var hit = EventRuleSystem.Try(EventType.Attack, attacker, defender);
 
             if (hit)
             {
-                EventRuleSystem.Try(EventType.Damage, defender, new DamageEventData{Damage = 1});
+                var baseDamage = attackingFighter.Muscle;
+                EventRuleSystem.Try(EventType.Damage, defender, new DamageEventData{Damage = baseDamage});
             }
 
             EventRuleSystem.Try(EventType.SpendTime, attacker, 1000);

@@ -14,7 +14,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 {
     public class ConsoleGameplayRenderer : BaseConsoleRenderer, IGameplayRenderer
     {
-        private const bool DEBUG_SEEALL = true;
+        private const bool DEBUG_SEEALL = false;
         private const int STATS_WIDTH = 22;
         private const int MESSAGE_HEIGHT = 15;
 
@@ -86,13 +86,16 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             StatsConsole.Clear();
 
             var player = world.Player;
+            var fighter = player.Get<Fighter>();
 
             StatsConsole.Print(1,1, player.Name, RLColor.White, RLColor.Black);
             StatsConsole.Print(1,2, " the (TITLE)", RLColor.White, RLColor.Black);
 
-            StatsConsole.Print(1, 4, $"hp {player.Get<Fighter>().Health}", RLColor.White, RLColor.Black);
+            PrintBar(StatsConsole, 1, 4, STATS_WIDTH - 2, "hp", fighter.Health, RLColor.Red);
+            PrintBar(StatsConsole, 1, 6, STATS_WIDTH - 2, "aura", fighter.Aura, RLColor.Yellow);
+            PrintBar(StatsConsole, 1, 8, STATS_WIDTH - 2, "tilt", fighter.Tilt, RLColor.Magenta);
 
-            StatsConsole.Print(1, 9, "Location:", RLColor.White, RLColor.Black);
+            StatsConsole.Print(1, 10, "Location:", RLColor.White, RLColor.Black);
 
             var mapname = player.Get<Position>().MapCoordinate.Key.Key.ToString();
             if (mapname.StartsWith("Branch:"))
@@ -100,11 +103,46 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
                 mapname = mapname.Substring(7);
             }
 
-            StatsConsole.Print(1, 10, mapname, RLColor.White, RLColor.Black);
+            StatsConsole.Print(1, 11, mapname, RLColor.White, RLColor.Black);
 
-            StatsConsole.Print(1, 12, $"Time: {world.TimeSystem.TimeString}", RLColor.White, RLColor.Black);
+            StatsConsole.Print(1, 13, $"Time: {world.TimeSystem.TimeString}", RLColor.White, RLColor.Black);
 
             RLConsole.Blit(StatsConsole, 0, 0, StatsConsole.Width, StatsConsole.Height, Console, Console.Width - 22, 0);
+        }
+
+        private void PrintBar(RLConsole console, int x, int y, int length, string name, StatCounter counter, RLColor color)
+        {
+            var counterStart = name.Length + 2;
+            var counterText = counter.ToString();
+
+            for (int i = 0; i < length; i++)
+            {
+                char glyph = ' ';
+
+                if (i < name.Length)
+                {
+                    glyph = name[i];
+                }
+                else if (i == name.Length)
+                {
+                    glyph = ':';
+                }
+                else if (i >= counterStart && i < counterStart + counterText.Length)
+                {
+                    glyph = counterText[i - counterStart];
+                }
+
+                if ((decimal)i / length < (decimal)counter.Current / counter.Max)
+                {
+                    console.Set(x + i, y, RLColor.Black, color, glyph);
+                }
+                else
+                {
+                    console.Set(x + i, y, color, RLColor.Black, glyph);
+                }
+
+                
+            }
         }
 
         private void RenderMap(WorldState world, IPositionSystem positionSystem)

@@ -47,7 +47,7 @@ namespace data_rogue_core
 
         public decimal StatCheck(decimal input)
         {
-            return Math.Ceiling(input / 2) + Between(0, (int)Math.Ceiling(input / 4));
+            return Between((int)Math.Ceiling(input / 2), 128 + (int)Math.Ceiling(input * 1 / 4));
         }
     }
 }
