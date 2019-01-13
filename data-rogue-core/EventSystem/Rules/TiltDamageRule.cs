@@ -28,7 +28,7 @@ namespace data_rogue_core.EventSystem.Rules
 
             var tiltMissing = fighter.Tilt.Max - fighter.Tilt.Current;
 
-            if (tiltMissing <= 0)
+            if (fighter.BrokenTicks > 0)
                 return true;
 
             var ratio = 1;
@@ -47,7 +47,7 @@ namespace data_rogue_core.EventSystem.Rules
 
                 data.Damage = (int)Math.Floor((decimal)tiltOver * ratio);
 
-                fighter.BreakCounter = 5;
+                fighter.BrokenTicks = 5000 - 1;
             }
             else
             {

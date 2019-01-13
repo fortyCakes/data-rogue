@@ -4,25 +4,24 @@ BUGS
 
 0.1
 
-Tilt recovery and Break
-Dropdown for entity selection
-Dropdown for cell selection
-"seen tiles" on the map editor
+Tension and Aura
+	Resting
 Save message log
 Enemy display in stats window
+Skills/Magic (scriptable effects)
 Items (getting and dropping)
 	Usable items
 	Equippable items
-Skills/Magic
-Aura
-Monster spawning (from monster prototype tags)
-Item spawning (from item prototype tags)
+Randomised Monster spawning (from monster prototype tags)
+Randomised Item spawning (from item prototype tags)
 Rules from file
 Separate out core from implementation
-Scriptable effects
 
 0.2+
 
+"seen tiles" on the map editor
+Dropdown for entity selection
+Dropdown for cell selection
 Mouse support
 	Descriptions
 Vault based map gen

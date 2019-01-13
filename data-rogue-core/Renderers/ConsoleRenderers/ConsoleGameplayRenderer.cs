@@ -48,21 +48,24 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
             RenderMessages(messageSystem);
 
-            RenderLines();
+            RenderLines(world.Player.Get<Fighter>().BrokenTicks > 0);
         }
 
-        private void RenderLines()
+        private void RenderLines(bool alert)
         {
+            var foreColor = alert? RLColor.Red : RLColor.White;
+            var backColor = RLColor.Black;
+
             for (int x = 0; x < Console.Width - STATS_WIDTH - 1; x++)
             {
-                Console.Set(x, Console.Height - MESSAGE_HEIGHT - 1, RLColor.White, RLColor.Black, 196);
+                Console.Set(x, Console.Height - MESSAGE_HEIGHT - 1, foreColor, backColor, 196);
             }
             for (int y = 0; y < Console.Height; y++)
             {
-                Console.Set(Console.Width - STATS_WIDTH - 1, y, RLColor.White, RLColor.Black, 179);
+                Console.Set(Console.Width - STATS_WIDTH - 1, y, foreColor, backColor, 179);
             }
 
-            Console.Set(Console.Width - STATS_WIDTH - 1, Console.Height - MESSAGE_HEIGHT - 1, RLColor.White, RLColor.Black, 180);
+            Console.Set(Console.Width - STATS_WIDTH - 1, Console.Height - MESSAGE_HEIGHT - 1, foreColor, backColor, 180);
         }
 
         private void RenderMessages(IMessageSystem messageSystem)
@@ -94,6 +97,10 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             PrintBar(StatsConsole, 1, 4, STATS_WIDTH - 2, "hp", fighter.Health, RLColor.Red);
             PrintBar(StatsConsole, 1, 6, STATS_WIDTH - 2, "aura", fighter.Aura, RLColor.Yellow);
             PrintBar(StatsConsole, 1, 8, STATS_WIDTH - 2, "tilt", fighter.Tilt, RLColor.Magenta);
+            if (fighter.BrokenTicks > 0)
+            {
+                StatsConsole.Print(1, 9, $" DEFENCE BREAK {((decimal)fighter.BrokenTicks/100).ToString("F2")} ", RLColor.White, RLColor.Red);
+            }
 
             StatsConsole.Print(1, 10, "Location:", RLColor.White, RLColor.Black);
 

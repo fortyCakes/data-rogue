@@ -26,9 +26,11 @@ namespace data_rogue_core.Systems
             base.Initialise();
         }
 
+        public bool TiltTick => CurrentTime % 1000 == 0;
+
         public ulong CurrentTime { get; set; }
 
-        public override SystemComponents RequiredComponents => new SystemComponents { typeof(Actor) };
+        public override SystemComponents RequiredComponents => new SystemComponents { typeof(Actor), typeof(Fighter) };
         public override SystemComponents ForbiddenComponents => new SystemComponents { typeof(Prototype) };
 
         public void Tick()
@@ -43,6 +45,11 @@ namespace data_rogue_core.Systems
 
                 foreach (var entity in entitiesAtStartOfTick)
                 {
+                    if (entity.Has<Fighter>())
+                    {
+                        TickFighter(entity);
+                    }
+
                     if (entity.Get<Actor>().NextTick <= CurrentTime)
                     {
                         Act(entity);
@@ -60,6 +67,34 @@ namespace data_rogue_core.Systems
                 if (mapKey != ActiveMapKey) return;
             }
 
+            if (entity.Has<Actor>())
+            {
+                TickActor(entity);
+            }
+        }
+
+        private void TickFighter(IEntity entity)
+        {
+            var fighter = entity.Get<Fighter>();
+
+            if (fighter.BrokenTicks > 0)
+            {
+                fighter.BrokenTicks--;
+                if (fighter.BrokenTicks == 0)
+                {
+                    fighter.Tilt.Current /= 2;
+                }
+                return;
+            }
+
+            if (fighter.Tilt.Current > 0 && TiltTick)
+            {
+                fighter.Tilt.Current--;
+            }
+        }
+
+        private void TickActor(IEntity entity)
+        {
             var actor = entity.Get<Actor>();
 
             actor.HasActed = false;
