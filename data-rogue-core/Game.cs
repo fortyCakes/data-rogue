@@ -103,12 +103,13 @@ namespace data_rogue_core
                 new PhysicalCollisionRule(PositionSystem),
                 new BumpAttackRule(PositionSystem, FighterSystem),
                 new BranchGeneratorRule(EntityEngineSystem, PositionSystem, PrototypeSystem, Seed),
-                new AlwaysHitAttackRule(EntityEngineSystem),
+                new RolledAttackRule(EntityEngineSystem, Random, EventSystem, MessageSystem),
                 new DealDamageRule(EventSystem, MessageSystem),
                 new PeopleDieWhenTheyAreKilledRule(EntityEngineSystem, MessageSystem),
                 new SpendTimeRule(TimeSystem),
                 new PlayerDeathRule(EntityEngineSystem, MessageSystem),
-                new CompleteMoveRule(PositionSystem, EventSystem)
+                new CompleteMoveRule(PositionSystem, EventSystem),
+                new GetBaseStatRule(EntityEngineSystem)
             );
         }
 

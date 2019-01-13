@@ -88,9 +88,12 @@
     <Compile Include="EntityEngine\EntityEngine.cs" />
     <Compile Include="EntityEngine\EntitySerializer.cs" />
     <Compile Include="EntityEngine\ICustomFieldSerialization.cs" />
-    <Compile Include="EventSystem\EventData\Class1.cs" />
+    <Compile Include="EventSystem\EventData\DamageEventData.cs" />
+    <Compile Include="EventSystem\EventData\GetStatEventData.cs" />
     <Compile Include="EventSystem\EventType.cs" />
     <Compile Include="EventSystem\IEventRule.cs" />
+    <Compile Include="EventSystem\Rules\GetBaseStatRule.cs" />
+    <Compile Include="EventSystem\Rules\RolledAttackRule.cs" />
     <Compile Include="EventSystem\Rules\MovePositionRule.cs" />
     <Compile Include="EventSystem\Rules\PlayerDeathRule.cs" />
     <Compile Include="EventSystem\Rules\SpendTimeRule.cs" />
@@ -121,6 +124,7 @@
     <Compile Include="Maps\Octant.cs" />
     <Compile Include="Maps\ShadowcastingFovCalculator.cs" />
     <Compile Include="Systems\PrototypeSystem.cs" />
+    <Compile Include="Utils\EventRuleSystemExtensions.cs" />
     <Compile Include="Utils\StringExtensions.cs" />
     <Compile Include="Utils\WordWrap.cs" />
     <Compile Include="Menus\StaticMenus\MainMenu.cs" />

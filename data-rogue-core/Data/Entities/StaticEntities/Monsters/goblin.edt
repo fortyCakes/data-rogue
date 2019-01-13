@@ -12,8 +12,10 @@ Passable: false
 Transparent: true
 [Fighter]
 Health: 1/1
-Attack: 1
-Defence: 1
+Tilt: 0/100
+Aura: 0/100
+Muscle: 4
+Agility: 12
 [Description]
 Name: Goblin
 [Actor]

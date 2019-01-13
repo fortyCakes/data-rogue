@@ -10,6 +10,8 @@ namespace data_rogue_core
         int Between(int min, int max);
 
         T PickOne<T>(List<T> items);
+
+        decimal Roll(decimal attackStat);
     }
 
     public class RNG : IRandom
@@ -41,6 +43,11 @@ namespace data_rogue_core
             var max = items.Count();
             var index = Between(1, max) - 1;
             return items[index];
+        }
+
+        public decimal Roll(decimal input)
+        {
+            return Between(1, 100) + input;
         }
     }
 }

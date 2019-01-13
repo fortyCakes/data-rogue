@@ -10,8 +10,10 @@ Transparent: true
 Behaviours: PlayerControlled
 [Position]
 [Fighter]
-Health: 1000/1000
-Attack: 1
-Defence: 1
+Health: 25/25
+Tilt: 0/100
+Aura: 0/100
+Muscle: 15
+Agility: 15
 [Description]
 Name: Player

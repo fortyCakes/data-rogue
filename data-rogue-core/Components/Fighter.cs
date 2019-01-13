@@ -7,8 +7,10 @@ namespace data_rogue_core.Components
     public class Fighter : IEntityComponent
     {
         public StatCounter Health;
+        public StatCounter Tilt;
+        public StatCounter Aura;
 
-        public int Attack;
-        public int Defence;
+        public int Muscle;
+        public int Agility;
     }
 }

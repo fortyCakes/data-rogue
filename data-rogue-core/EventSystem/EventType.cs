@@ -9,6 +9,7 @@
         Attack,
         Damage,
         Death,
-        SpendTime
+        SpendTime,
+        GetStat
     }
 }
