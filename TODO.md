@@ -1,9 +1,10 @@
 BUGS
 
-StatCounter prototype copying
+-
 
 0.1
 
+Tilt recovery and Break
 Dropdown for entity selection
 Dropdown for cell selection
 "seen tiles" on the map editor
