@@ -9,7 +9,8 @@ namespace data_rogue_core.EventSystem.EventData
     public enum Stat
     {
         Muscle,
-        Agility
+        Agility,
+        Tension
     }
 
     public class GetStatEventData

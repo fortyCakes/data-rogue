@@ -16,10 +16,10 @@ namespace data_rogue_core.Systems
     {
 
         private readonly IPositionSystem PositionSystem;
-        private readonly IEventRuleSystem EventSystem;
+        private readonly IEventSystem EventSystem;
         private readonly ITimeSystem TimeSystem;
 
-        public PlayerControlSystem(IPositionSystem positionSystem, IEventRuleSystem eventRuleSystem, ITimeSystem timeSystem)
+        public PlayerControlSystem(IPositionSystem positionSystem, IEventSystem eventRuleSystem, ITimeSystem timeSystem)
         {
             TimeSystem = timeSystem;
             PositionSystem = positionSystem;

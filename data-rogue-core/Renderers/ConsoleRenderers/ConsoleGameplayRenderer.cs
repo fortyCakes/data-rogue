@@ -4,6 +4,8 @@ using System.Drawing;
 using System.Linq;
 using data_rogue_core.Components;
 using data_rogue_core.Data;
+using data_rogue_core.EventSystem;
+using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
@@ -33,7 +35,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
         }
 
-        public void Render(WorldState world, IPositionSystem positionSystem, IMessageSystem messageSystem)
+        public void Render(WorldState world, IPositionSystem positionSystem, IMessageSystem messageSystem, IEventSystem eventSystem)
         {
             Console.Clear();
 
@@ -44,7 +46,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
             RenderMap(world, positionSystem);
 
-            RenderStats(world);
+            RenderStats(world, eventSystem);
 
             RenderMessages(messageSystem);
 
@@ -84,7 +86,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             RLConsole.Blit(MessageConsole, 0, 0, MessageConsole.Width, MessageConsole.Height, Console, 0, Console.Height - 15);
         }
 
-        private void RenderStats(WorldState world)
+        private void RenderStats(WorldState world, IEventSystem eventSystem)
         {
             StatsConsole.Clear();
 
@@ -101,8 +103,13 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             {
                 StatsConsole.Print(1, 9, $" DEFENCE BREAK {((decimal)fighter.BrokenTicks/100).ToString("F2")} ", RLColor.White, RLColor.Red);
             }
+            else
+            {
+                var tension = eventSystem.GetStat(player, Stat.Tension);
+                StatsConsole.Print(1, 9, $"Tension: {tension}", RLColor.White, RLColor.Black);
+            }
 
-            StatsConsole.Print(1, 10, "Location:", RLColor.White, RLColor.Black);
+            StatsConsole.Print(1, 11, "Location:", RLColor.White, RLColor.Black);
 
             var mapname = player.Get<Position>().MapCoordinate.Key.Key.ToString();
             if (mapname.StartsWith("Branch:"))
@@ -110,9 +117,9 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
                 mapname = mapname.Substring(7);
             }
 
-            StatsConsole.Print(1, 11, mapname, RLColor.White, RLColor.Black);
+            StatsConsole.Print(1, 12, mapname, RLColor.White, RLColor.Black);
 
-            StatsConsole.Print(1, 13, $"Time: {world.TimeSystem.TimeString}", RLColor.White, RLColor.Black);
+            StatsConsole.Print(1, 14, $"Time: {world.TimeSystem.TimeString}", RLColor.White, RLColor.Black);
 
             RLConsole.Blit(StatsConsole, 0, 0, StatsConsole.Width, StatsConsole.Height, Console, Console.Width - 22, 0);
         }

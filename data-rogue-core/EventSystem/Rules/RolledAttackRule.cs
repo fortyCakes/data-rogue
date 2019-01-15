@@ -14,7 +14,7 @@ namespace data_rogue_core.EventSystem.Rules
     {
         private readonly IRandom _random;
 
-        public RolledAttackRule(IEntityEngine engine, IRandom random, IEventRuleSystem eventRuleSystem, IMessageSystem messageSystem)
+        public RolledAttackRule(IEntityEngine engine, IRandom random, IEventSystem eventRuleSystem, IMessageSystem messageSystem)
         {
             _random = random;
             EntityEngine = engine;
@@ -26,7 +26,7 @@ namespace data_rogue_core.EventSystem.Rules
         public int RuleOrder => 0;
 
         private IEntityEngine EntityEngine { get; }
-        public IEventRuleSystem EventRuleSystem { get; }
+        public IEventSystem EventRuleSystem { get; }
         public IMessageSystem MessageSystem { get; }
 
         public bool Apply(EventType type, IEntity sender, object eventData)

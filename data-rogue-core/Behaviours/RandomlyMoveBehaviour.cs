@@ -10,10 +10,10 @@ namespace data_rogue_core.Behaviours
     public class RandomlyMoveBehaviour : IBehaviour
     {
         private readonly IPositionSystem _positionSystem;
-        private readonly IEventRuleSystem _eventRuleSystem;
+        private readonly IEventSystem _eventRuleSystem;
         private readonly IRandom _random;
 
-        public RandomlyMoveBehaviour(IPositionSystem positionSystem, IEventRuleSystem eventRuleSystem, IRandom random)
+        public RandomlyMoveBehaviour(IPositionSystem positionSystem, IEventSystem eventRuleSystem, IRandom random)
         {
             _positionSystem = positionSystem;
             _eventRuleSystem = eventRuleSystem;

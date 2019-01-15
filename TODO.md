@@ -12,6 +12,7 @@ Skills/Magic (scriptable effects)
 Items (getting and dropping)
 	Usable items
 	Equippable items
+Nonhostile monsters (factions)
 Randomised Monster spawning (from monster prototype tags)
 Randomised Item spawning (from item prototype tags)
 Rules from file

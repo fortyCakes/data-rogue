@@ -92,6 +92,8 @@
     <Compile Include="EventSystem\EventData\GetStatEventData.cs" />
     <Compile Include="EventSystem\EventType.cs" />
     <Compile Include="EventSystem\IEventRule.cs" />
+    <Compile Include="EventSystem\IEventSystem.cs" />
+    <Compile Include="EventSystem\Rules\EnemiesInViewAddTensionRule.cs" />
     <Compile Include="EventSystem\Rules\TiltDamageRule.cs" />
     <Compile Include="EventSystem\Rules\GetBaseStatRule.cs" />
     <Compile Include="EventSystem\Rules\RolledAttackRule.cs" />
@@ -161,7 +163,6 @@
     <Compile Include="EntityEngine\ISystem.cs" />
     <Compile Include="EntityEngine\SystemComponents.cs" />
     <Compile Include="EventSystem\EventRuleSystem.cs" />
-    <Compile Include="EventSystem\IEventRuleSystem.cs" />
     <Compile Include="EventSystem\RuleBook.cs" />
     <Compile Include="EventSystem\Rules\InputHandlerRule.cs" />
     <Compile Include="EventSystem\Rules\PhysicalCollisionRule.cs" />

@@ -7,14 +7,14 @@ namespace data_rogue_core.Behaviours
     public class BehaviourFactory : IBehaviourFactory
     {
         private IPositionSystem _positionSystem;
-        private IEventRuleSystem _eventRuleSystem;
+        private IEventSystem _eventRuleSystem;
         private IRandom _random;
 
         private PlayerControlledBehaviour playerControlledBehaviour;
         private RandomlyMoveBehaviour randomlyMoveBehaviour;
         private MoveInPlayerDirectionBehaviour moveToPlayerBehaviour;
 
-        public BehaviourFactory(IPositionSystem positionSystem, IEventRuleSystem eventRuleSystem, IRandom random)
+        public BehaviourFactory(IPositionSystem positionSystem, IEventSystem eventRuleSystem, IRandom random)
         {
             _positionSystem = positionSystem;
             _eventRuleSystem = eventRuleSystem;

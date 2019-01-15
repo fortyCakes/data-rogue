@@ -5,7 +5,7 @@ using data_rogue_core.Systems;
 
 namespace data_rogue_core.EventSystem
 {
-    public interface IEventRuleSystem : IInitialisableSystem
+    public interface IEventSystem : IInitialisableSystem
     {
         bool Try(EventType eventType, IEntity sender, object eventData);
 

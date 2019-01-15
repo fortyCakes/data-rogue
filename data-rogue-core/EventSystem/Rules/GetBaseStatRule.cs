@@ -16,7 +16,7 @@ namespace data_rogue_core.EventSystem.Rules
         }
 
         public EventTypeList EventTypes => new EventTypeList{ EventType.GetStat };
-        public int RuleOrder => 0;
+        public int RuleOrder => int.MaxValue;
 
         private IEntityEngine EntityEngine { get; }
 
@@ -31,6 +31,13 @@ namespace data_rogue_core.EventSystem.Rules
                     break;
                 case Stat.Agility:
                     data.Value = sender.Get<Fighter>().Agility;
+                    break;
+                case Stat.Tension:
+                    if (sender != Game.WorldState.Player)
+                    {
+                        throw new ApplicationException("Only the Player can check tension.");
+                    }
+                    data.Value = 0;
                     break;
                 default:
                     throw new ApplicationException($"Could not resolve stat {data.Stat.ToString()}");

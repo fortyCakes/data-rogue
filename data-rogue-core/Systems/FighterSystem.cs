@@ -19,7 +19,7 @@ namespace data_rogue_core.Systems
         public override SystemComponents RequiredComponents => new SystemComponents { typeof(Fighter) };
         public override SystemComponents ForbiddenComponents => new SystemComponents { typeof(Prototype) };
 
-        public FighterSystem(IEntityEngine engine, IMessageSystem messageSystem, IEventRuleSystem eventRuleSystem, ITimeSystem timeSystem)
+        public FighterSystem(IEntityEngine engine, IMessageSystem messageSystem, IEventSystem eventRuleSystem, ITimeSystem timeSystem)
         {
             Engine = engine;
             MessageSystem = messageSystem;
@@ -29,7 +29,7 @@ namespace data_rogue_core.Systems
 
         public IEntityEngine Engine { get; }
         public IMessageSystem MessageSystem { get; }
-        public IEventRuleSystem EventRuleSystem { get; }
+        public IEventSystem EventRuleSystem { get; }
         public ITimeSystem TimeSystem { get; }
 
         public void BasicAttack(IEntity attacker, IEntity defender)

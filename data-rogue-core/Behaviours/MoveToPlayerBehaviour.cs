@@ -10,9 +10,9 @@ namespace data_rogue_core.Behaviours
     internal class MoveInPlayerDirectionBehaviour : IBehaviour
     {
         private readonly IPositionSystem positionSystem;
-        private readonly IEventRuleSystem eventRuleSystem;
+        private readonly IEventSystem eventRuleSystem;
 
-        public MoveInPlayerDirectionBehaviour(IPositionSystem positionSystem, IEventRuleSystem eventRuleSystem)
+        public MoveInPlayerDirectionBehaviour(IPositionSystem positionSystem, IEventSystem eventRuleSystem)
         {
             this.positionSystem = positionSystem;
             this.eventRuleSystem = eventRuleSystem;

@@ -11,9 +11,9 @@ namespace data_rogue_core.EventSystem.Rules
     class CompleteMoveRule : IEventRule
     {
         private readonly IPositionSystem positionSystem;
-        private readonly IEventRuleSystem eventRuleSystem;
+        private readonly IEventSystem eventRuleSystem;
 
-        public CompleteMoveRule(IPositionSystem positionSystem, IEventRuleSystem eventRuleSystem)
+        public CompleteMoveRule(IPositionSystem positionSystem, IEventSystem eventRuleSystem)
         {
             this.positionSystem = positionSystem;
             this.eventRuleSystem = eventRuleSystem;

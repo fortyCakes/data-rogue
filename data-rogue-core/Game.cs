@@ -24,7 +24,7 @@ namespace data_rogue_core
         public static WorldState WorldState;
 
         public static IEntityEngine EntityEngineSystem;
-        public static IEventRuleSystem EventSystem;
+        public static IEventSystem EventSystem;
         public static IPositionSystem PositionSystem;
         public static IPlayerControlSystem PlayerControlSystem;
         public static IPrototypeSystem PrototypeSystem;
@@ -110,7 +110,8 @@ namespace data_rogue_core
                 new PlayerDeathRule(EntityEngineSystem, MessageSystem),
                 new CompleteMoveRule(PositionSystem, EventSystem),
                 new GetBaseStatRule(EntityEngineSystem),
-                new TiltDamageRule(EventSystem, MessageSystem)
+                new TiltDamageRule(EventSystem, MessageSystem),
+                new EnemiesInViewAddTensionRule(EntityEngineSystem, PositionSystem)
             );
         }
 

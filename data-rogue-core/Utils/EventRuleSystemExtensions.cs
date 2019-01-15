@@ -11,7 +11,7 @@ namespace data_rogue_core.Utils
 {
     public static class EventRuleSystemExtensions
     {
-        public static decimal GetStat(this IEventRuleSystem eventSystem, IEntity sender, Stat stat)
+        public static decimal GetStat(this IEventSystem eventSystem, IEntity sender, Stat stat)
         {
             GetStatEventData data = new GetStatEventData {Stat = stat};
             eventSystem.Try(EventType.GetStat, sender, data);
