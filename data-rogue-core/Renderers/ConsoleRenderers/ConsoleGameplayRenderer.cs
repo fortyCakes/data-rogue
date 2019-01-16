@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using data_rogue_core.Components;
 using data_rogue_core.Data;
+using data_rogue_core.EntityEngine;
 using data_rogue_core.EventSystem;
 using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.Maps;
@@ -203,13 +204,14 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
             Appearance appearance = null;
 
-            if (isInFov)
-            {
-                var entity = positionSystem
-                    .EntitiesAt(coordinate)
-                    .OrderByDescending(a => a.Get<Appearance>().ZOrder)
-                    .First();
+           
+            var entity = positionSystem
+                .EntitiesAt(coordinate)
+                .OrderByDescending(a => a.Get<Appearance>().ZOrder)
+                .FirstOrDefault(e => isInFov || IsRemembered(currentMap, coordinate, e));
 
+            if (entity != null)
+            {
                 appearance = entity.Get<Appearance>();
 
                 if (entity.Has<Fighter>())
@@ -224,12 +226,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
                     {
                         backColor = Gradient(fighter.Tilt.Max, Color.Black, Color.Purple, fighter.Tilt.Current);
                     }
-                    
                 }
-            }
-            else if (currentMap.SeenCoordinates.Contains(coordinate))
-            {
-                appearance = currentMap.CellAt(coordinate).Get<Appearance>();
             }
             else
             {
@@ -239,11 +236,19 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
                     Glyph = ' ',
                     ZOrder = 0
                 };
+
+                backColor = RLColor.Black;
             }
+
             var foreColor = isInFov ? appearance.Color.ToRLColor() : RLColor.Gray;
             
 
             MapConsole.Set(x, y, foreColor, backColor, appearance.Glyph);
+        }
+
+        private static bool IsRemembered(Map currentMap, MapCoordinate coordinate, IEntity e)
+        {
+            return currentMap.SeenCoordinates.Contains(coordinate) && e.Has<Memorable>();
         }
 
         private RLColor Gradient(int max, Color fromColor, Color toColor, int value)

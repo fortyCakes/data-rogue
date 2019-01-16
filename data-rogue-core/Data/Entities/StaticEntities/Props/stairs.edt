@@ -9,6 +9,7 @@ Glyph: >
 Color: #aaaaaa
 ZOrder: 1
 [Position]
+[Memorable]
 
 "Props:StairsUp"
 [Stairs]
@@ -21,3 +22,4 @@ Glyph: <
 Color: #aaaaaa
 ZOrder: 1
 [Position]
+[Memorable]

@@ -9,6 +9,7 @@ Transparent: true
 [Prototype]
 Name: Cell:Empty
 Singleton: true
+[Memorable]
 
 "Cell:SpawnPoint"
 [SpawnPoint]
@@ -22,6 +23,7 @@ Transparent: true
 [Prototype]
 Name: Cell:SpawnPoint
 Singleton: true
+[Memorable]
 
 "Cell:Wall"
 [Appearance]
@@ -34,6 +36,7 @@ Transparent: false
 [Prototype]
 Name: Cell:Wall
 Singleton: true
+[Memorable]
 
 "Cell:Boulder"
 [Appearance]
@@ -46,3 +49,4 @@ Transparent: false
 [Prototype]
 Name: Cell:Boulder
 Singleton: true
+[Memorable]

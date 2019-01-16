@@ -71,6 +71,7 @@
     <Compile Include="Components\Description.cs" />
     <Compile Include="Components\Fighter.cs" />
     <Compile Include="Components\Portal.cs" />
+    <Compile Include="Components\Memorable.cs" />
     <Compile Include="Components\Prototype.cs" />
     <Compile Include="Components\Stairs.cs" />
     <Compile Include="Components\Branch.cs" />
