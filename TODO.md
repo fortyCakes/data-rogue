@@ -4,11 +4,12 @@ BUGS
 
 0.1
 
-Tension and Aura
-	Resting
+Aura
+Resting
 Save message log
 Enemy display in stats window
 Skills/Magic (scriptable effects)
+	Gaining skills (how?)
 Items (getting and dropping)
 	Usable items
 	Equippable items
@@ -20,6 +21,7 @@ Separate out core from implementation
 
 0.2+
 
+Monsters spawn with items and drop them
 "seen tiles" on the map editor
 Dropdown for entity selection
 Dropdown for cell selection

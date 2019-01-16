@@ -48,5 +48,7 @@ namespace data_rogue_core.EntityEngine
         {
             return !forbiddenComponents.Any(fc => Components.Any(c => c.GetType() == fc));
         }
+
+        public bool IsPlayer => Name == "Player";
     }
 }

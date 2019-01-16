@@ -12,5 +12,7 @@ namespace data_rogue_core.EntityEngine
 
         T Get<T>() where T : IEntityComponent;
         bool Has<T>() where T : IEntityComponent;
+
+        bool IsPlayer { get; }
     }
 }

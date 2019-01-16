@@ -156,7 +156,7 @@ namespace data_rogue_core
 
             BehaviourFactory = new BehaviourFactory(PositionSystem, EventSystem, Random);
 
-            TimeSystem = new TimeSystem(BehaviourFactory);
+            TimeSystem = new TimeSystem(BehaviourFactory, EventSystem);
             EntityEngineSystem.Register(TimeSystem);
 
             FighterSystem = new FighterSystem(EntityEngineSystem, MessageSystem, EventSystem, TimeSystem);

@@ -4,8 +4,11 @@ using System.Linq;
 using data_rogue_core.Behaviours;
 using data_rogue_core.Components;
 using data_rogue_core.EntityEngine;
+using data_rogue_core.EventSystem;
+using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems.Interfaces;
+using data_rogue_core.Utils;
 
 namespace data_rogue_core.Systems
 {
@@ -14,10 +17,12 @@ namespace data_rogue_core.Systems
         private MapKey ActiveMapKey;
 
         public IBehaviourFactory BehaviourFactory { get; }
+        public IEventSystem EventSystem { get; }
 
-        public TimeSystem(IBehaviourFactory behaviourFactory)
+        public TimeSystem(IBehaviourFactory behaviourFactory, IEventSystem eventSystem)
         {
             BehaviourFactory = behaviourFactory;
+            EventSystem = eventSystem;
         }
 
         public new void Initialise()
@@ -27,6 +32,8 @@ namespace data_rogue_core.Systems
         }
 
         public bool TiltTick => CurrentTime % 1000 == 0;
+
+        public bool AuraTick => CurrentTime % 100 == 0;
 
         public ulong CurrentTime { get; set; }
 
@@ -77,6 +84,35 @@ namespace data_rogue_core.Systems
         {
             var fighter = entity.Get<Fighter>();
 
+            UpdateTilt(fighter);
+
+            if (AuraTick)
+            {
+                UpdateAura(entity, fighter);
+            }
+        }
+
+        private void UpdateAura(IEntity entity, Fighter fighter)
+        {
+            if (entity.IsPlayer)
+            {
+                var tension = EventSystem.GetStat(entity, Stat.Tension);
+
+                if (tension > 0)
+                {
+                    var auraAmount = Math.Ceiling(Math.Log((double) tension + 1));
+
+                    fighter.Aura.Add((int) auraAmount);
+                }
+                else
+                {
+                    fighter.Aura.Subtract(1);
+                }
+            }
+        }
+
+        private void UpdateTilt(Fighter fighter)
+        {
             if (fighter.BrokenTicks > 0)
             {
                 fighter.BrokenTicks--;
@@ -84,6 +120,7 @@ namespace data_rogue_core.Systems
                 {
                     fighter.Tilt.Current /= 2;
                 }
+
                 return;
             }
 
