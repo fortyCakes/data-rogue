@@ -13,6 +13,7 @@ Behaviours: PlayerControlled
 Health: 25/25
 Tilt: 0/100
 Aura: 0/500
+BaseAura: 100
 Muscle: 15
 Agility: 15
 [Description]

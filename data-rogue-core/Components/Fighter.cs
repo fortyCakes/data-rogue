@@ -9,6 +9,7 @@ namespace data_rogue_core.Components
         public StatCounter Health;
         public StatCounter Tilt;
         public StatCounter Aura;
+        public int BaseAura;
 
         public int Muscle;
         public int Agility;

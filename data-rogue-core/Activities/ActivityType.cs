@@ -4,5 +4,6 @@
         Menu = 1,
         StaticDisplay = 2,
         Gameplay = 3,
+        Form = 4
     }
 }

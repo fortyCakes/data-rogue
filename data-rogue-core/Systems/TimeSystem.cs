@@ -106,7 +106,14 @@ namespace data_rogue_core.Systems
                 }
                 else
                 {
-                    fighter.Aura.Subtract(1);
+                    if (fighter.Aura.Current > fighter.BaseAura)
+                    {
+                        fighter.Aura.Subtract(1);
+                    }
+                    else if (fighter.Aura.Current < fighter.BaseAura)
+                    {
+                        fighter.Aura.Add(1);
+                    }
                 }
             }
         }

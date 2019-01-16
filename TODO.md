@@ -4,6 +4,9 @@ BUGS
 
 0.1
 
+Character creation
+	Name entry
+	Stat assignment
 Resting
 Save message log
 Enemy display in stats window
