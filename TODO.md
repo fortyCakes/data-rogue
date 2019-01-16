@@ -4,8 +4,8 @@ BUGS
 
 0.1
 
-Tension and Aura
-	Resting
+Aura
+Resting
 Save message log
 Enemy display in stats window
 Skills/Magic (scriptable effects)
