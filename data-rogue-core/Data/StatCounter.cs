@@ -35,5 +35,10 @@ namespace data_rogue_core.Data
         {
             Current = Math.Max(Current - amount, 0);
         }
+
+        public void Add(int amount)
+        {
+            Current = Math.Min(Current + amount, Max);
+        }
     }
 }

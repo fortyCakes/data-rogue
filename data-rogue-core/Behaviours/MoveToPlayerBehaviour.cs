@@ -23,22 +23,32 @@ namespace data_rogue_core.Behaviours
             var position = entity.Get<Position>().MapCoordinate;
             var playerPosition = positionSystem.PositionOf(Game.WorldState.Player);
 
-            var path = positionSystem.Path(position, playerPosition);
+            var monsterFov = Game.WorldState.Maps[position.Key].FovFrom(position, 9);
 
-            if (path != null)
+            if (monsterFov.Contains(playerPosition))
             {
-                var targetPosition = path.First();
-                var vector = new Vector(0, 0);
 
-                if (targetPosition.X > position.X) vector.X = 1;
-                if (targetPosition.X < position.X) vector.X = -1;
-                if (targetPosition.Y > position.Y) vector.Y = 1;
-                if (targetPosition.Y < position.Y) vector.Y = -1;
+                var path = positionSystem.Path(position, playerPosition);
 
-                eventRuleSystem.Try(EventType.Move, entity, vector);
+                if (path != null)
+                {
+                    var targetPosition = path.First();
+                    var vector = new Vector(0, 0);
+
+                    if (targetPosition.X > position.X) vector.X = 1;
+                    if (targetPosition.X < position.X) vector.X = -1;
+                    if (targetPosition.Y > position.Y) vector.Y = 1;
+                    if (targetPosition.Y < position.Y) vector.Y = -1;
+
+                    eventRuleSystem.Try(EventType.Move, entity, vector);
+                }
+
+                return new BehaviourResult();
             }
-
-            return new BehaviourResult();
+            else
+            {
+                return new BehaviourResult{Acted = false};
+            }
         }
     }
 }

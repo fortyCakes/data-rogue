@@ -79,7 +79,8 @@ namespace data_rogue_core
                     {
                         {ActivityType.Gameplay, new ConsoleGameplayRenderer(_rootConsole)},
                         {ActivityType.Menu, new ConsoleMenuRenderer(_rootConsole)},
-                        {ActivityType.StaticDisplay, new ConsoleStaticTextRenderer(_rootConsole)}
+                        {ActivityType.StaticDisplay, new ConsoleStaticTextRenderer(_rootConsole)},
+                        {ActivityType.Form, new ConsoleFormRenderer(_rootConsole) }
                     };
                     break;
                 default:
@@ -156,7 +157,7 @@ namespace data_rogue_core
 
             BehaviourFactory = new BehaviourFactory(PositionSystem, EventSystem, Random);
 
-            TimeSystem = new TimeSystem(BehaviourFactory);
+            TimeSystem = new TimeSystem(BehaviourFactory, EventSystem);
             EntityEngineSystem.Register(TimeSystem);
 
             FighterSystem = new FighterSystem(EntityEngineSystem, MessageSystem, EventSystem, TimeSystem);
@@ -207,6 +208,11 @@ namespace data_rogue_core
             {
                 TimeSystem.Tick();
             }
+        }
+
+        public static void CreateCharacter()
+        {
+            ActivityStack.Push(new FormActivity());
         }
 
         public static void StartNewGame()

@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using data_rogue_core.Components;
 using data_rogue_core.Data;
+using data_rogue_core.EntityEngine;
 using data_rogue_core.EventSystem;
 using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.Maps;
@@ -16,7 +17,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 {
     public class ConsoleGameplayRenderer : BaseConsoleRenderer, IGameplayRenderer
     {
-        private const bool DEBUG_SEEALL = false;
+        private const bool DEBUG_SEAL = false;
         private const int STATS_WIDTH = 22;
         private const int MESSAGE_HEIGHT = 15;
 
@@ -197,22 +198,35 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
         private void DrawCell(int x, int y, IPositionSystem positionSystem, Map currentMap, int lookupX, int lookupY, List<MapCoordinate> playerFov)
         {
             MapCoordinate coordinate = new MapCoordinate(currentMap.MapKey, lookupX, lookupY);
+            var backColor = RLColor.Black;
 
-            var isInFov = playerFov.Contains(coordinate) || DEBUG_SEEALL;
+            var isInFov = playerFov.Contains(coordinate) || DEBUG_SEAL;
 
             Appearance appearance = null;
 
-            if (isInFov)
+           
+            var entity = positionSystem
+                .EntitiesAt(coordinate)
+                .OrderByDescending(a => a.Get<Appearance>().ZOrder)
+                .FirstOrDefault(e => isInFov || IsRemembered(currentMap, coordinate, e));
+
+            if (entity != null)
             {
-                appearance = positionSystem
-                    .EntitiesAt(coordinate)
-                    .Select(e => e.Get<Appearance>())
-                    .OrderByDescending(a => a.ZOrder)
-                    .First();
-            }
-            else if (currentMap.SeenCoordinates.Contains(coordinate))
-            {
-                appearance = currentMap.CellAt(coordinate).Get<Appearance>();
+                appearance = entity.Get<Appearance>();
+
+                if (entity.Has<Fighter>())
+                {
+                    var fighter = entity.Get<Fighter>();
+
+                    if (fighter.BrokenTicks > 0)
+                    {
+                        backColor = RLColor.Red;
+                    }
+                    else
+                    {
+                        backColor = Gradient(fighter.Tilt.Max, Color.Black, Color.Purple, fighter.Tilt.Current);
+                    }
+                }
             }
             else
             {
@@ -222,11 +236,32 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
                     Glyph = ' ',
                     ZOrder = 0
                 };
+
+                backColor = RLColor.Black;
             }
+
             var foreColor = isInFov ? appearance.Color.ToRLColor() : RLColor.Gray;
-            var backColor = RLColor.Black;
+            
 
             MapConsole.Set(x, y, foreColor, backColor, appearance.Glyph);
+        }
+
+        private static bool IsRemembered(Map currentMap, MapCoordinate coordinate, IEntity e)
+        {
+            return currentMap.SeenCoordinates.Contains(coordinate) && e.Has<Memorable>();
+        }
+
+        private RLColor Gradient(int max, Color fromColor, Color toColor, int value)
+        {
+            var weight2 = (decimal)value / max;
+            var weight1 = 1 - weight2;
+
+            var color = Color.FromArgb(
+                red: (int)Math.Floor(fromColor.R * weight1 + toColor.R * weight2),
+                green: (int)Math.Floor(fromColor.G * weight1 + toColor.G * weight2),
+                blue: (int)Math.Floor(fromColor.B * weight1 + toColor.B * weight2));
+
+            return color.ToRLColor();
         }
     }
 }

@@ -13,10 +13,11 @@ Transparent: true
 [Fighter]
 Health: 1/1
 Tilt: 0/20
-Aura: 0/100
+Aura: 0/0
+BaseAura: 0
 Muscle: 4
 Agility: 12
 [Description]
 Name: Goblin
 [Actor]
-Behaviours: MoveInPlayerDirection
+Behaviours: MoveInPlayerDirection,RandomlyMove

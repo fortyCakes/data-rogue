@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\DeathScreenActivity.cs" />
+    <Compile Include="Activities\FormActivity.cs" />
     <Compile Include="Activities\LoadingScreenActivity.cs" />
     <Compile Include="Behaviours\ActionResults.cs" />
     <Compile Include="Behaviours\BehaviourFactory.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Components\Description.cs" />
     <Compile Include="Components\Fighter.cs" />
     <Compile Include="Components\Portal.cs" />
+    <Compile Include="Components\Memorable.cs" />
     <Compile Include="Components\Prototype.cs" />
     <Compile Include="Components\Stairs.cs" />
     <Compile Include="Components\Branch.cs" />
@@ -97,7 +99,7 @@
     <Compile Include="EventSystem\Rules\TiltDamageRule.cs" />
     <Compile Include="EventSystem\Rules\GetBaseStatRule.cs" />
     <Compile Include="EventSystem\Rules\RolledAttackRule.cs" />
-    <Compile Include="EventSystem\Rules\MovePositionRule.cs" />
+    <Compile Include="EventSystem\Rules\CompleteMoveRule.cs" />
     <Compile Include="EventSystem\Rules\PlayerDeathRule.cs" />
     <Compile Include="EventSystem\Rules\SpendTimeRule.cs" />
     <Compile Include="EventSystem\Rules\PeopleDieWhenTheyAreKilledRule.cs" />
@@ -105,11 +107,18 @@
     <Compile Include="EventSystem\Rules\BranchGeneratorRule.cs" />
     <Compile Include="EventSystem\Rules\BumpAttackRule.cs" />
     <Compile Include="EventSystem\Rules\DealDamageRule.cs" />
+    <Compile Include="Forms\FormData.cs" />
+    <Compile Include="Forms\FormDataType.cs" />
+    <Compile Include="Forms\StaticForms\CharacterCreationForm.cs" />
+    <Compile Include="Forms\FormButton.cs" />
     <Compile Include="Maps\Generators\BasicDungeonMapGenerator.cs" />
     <Compile Include="Maps\MapGenCommands\MapGenCommandExecutorFactory.cs" />
     <Compile Include="Maps\MapGenCommands\EntityCommandExecutor.cs" />
     <Compile Include="Maps\MapGenCommands\ICommandExecutor.cs" />
     <Compile Include="Maps\MapGenCommands\MapGenCommand.cs" />
+    <Compile Include="Renderers\ConsoleRenderers\ConsoleFormRenderer.cs" />
+    <Compile Include="Forms\Form.cs" />
+    <Compile Include="Renderers\IFormRenderer.cs" />
     <Compile Include="Systems\AStar.cs" />
     <Compile Include="Systems\FighterSystem.cs" />
     <Compile Include="Behaviours\IBehaviourFactory.cs" />
