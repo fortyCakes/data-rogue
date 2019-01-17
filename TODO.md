@@ -4,9 +4,10 @@ BUGS
 
 0.1
 
-Character creation
-	Name entry
-	Stat assignment
+Refactor form data and input
+	Subclassed strongly typed forms?
+Character creation stat assignment
+Character creation class pick
 Resting
 Save message log
 Enemy display in stats window
@@ -24,6 +25,7 @@ Separate out core from implementation
 	Aura and Tilt separation
 		Stat window rendering customisation
 		Map rendering customisation
+Remove RLNet dependencies from core?
 
 0.2+
 
