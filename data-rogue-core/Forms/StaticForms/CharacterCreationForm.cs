@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using data_rogue_core.Activities;
 using data_rogue_core.Forms;
-using data_rogue_core.Renderers.ConsoleRenderers;
 
 namespace data_rogue_core.Menus.StaticMenus
 {
@@ -11,8 +9,10 @@ namespace data_rogue_core.Menus.StaticMenus
         public static FormActivity GetCharacterCreation()
         {
             var form = new Form(
+                "Character Creation",
                 FormButton.Ok | FormButton.Cancel,
-                new FormData {FormDataType = FormDataType.Text, Name = "Name", Value = "PLAYERNAME"}
+                HandleCharacterCreationFormSelection,
+                new FormData {FormDataType = FormDataType.Text, Name = "Name", Value = "Rodney"}
             );
 
             return new FormActivity(form, Game.RendererFactory);
@@ -23,10 +23,12 @@ namespace data_rogue_core.Menus.StaticMenus
             switch(button)
             {
                 case FormButton.Ok:
-                    throw new NotImplementedException();
+                    Game.ActivityStack.Pop();
+                    Game.StartNewGame(form);
                     break;
                 case FormButton.Cancel:
-                    throw new NotImplementedException();
+                    Game.ActivityStack.Pop();
+                    Game.ActivityStack.Push(MainMenu.GetMainMenu());
                     break;
                 default:
                     throw new ApplicationException("Unknown form button");

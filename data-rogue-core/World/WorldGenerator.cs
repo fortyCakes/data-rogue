@@ -6,12 +6,13 @@ using System;
 using System.Linq;
 using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
+using data_rogue_core.Forms;
 
 namespace data_rogue_core
 {
     public class WorldGenerator
     {
-        public static WorldState Create(string seed, IEntityEngine entityEngineSystem, IPositionSystem positionSystem, ITimeSystem timeSystem, IPrototypeSystem prototypeSystem, IMessageSystem messageSystem)
+        public static WorldState Create(string seed, IEntityEngine entityEngineSystem, IPositionSystem positionSystem, ITimeSystem timeSystem, IPrototypeSystem prototypeSystem, IMessageSystem messageSystem, Form characterCreationForm)
         {
             messageSystem.Initialise();
 
@@ -23,7 +24,7 @@ namespace data_rogue_core
 
             var spawnPoint = CreateInitialMapAndGetSpawnPoint(seed, entityEngineSystem, positionSystem, prototypeSystem, world);
 
-            AddPlayerToWorld(entityEngineSystem, world, spawnPoint);
+            AddPlayerToWorld(entityEngineSystem, world, spawnPoint, characterCreationForm);
 
             return world;
         }
@@ -66,10 +67,11 @@ namespace data_rogue_core
             }
         }
 
-        private static void AddPlayerToWorld(IEntityEngine entityEngineSystem, WorldState world, MapCoordinate spawnPoint)
+        private static void AddPlayerToWorld(IEntityEngine entityEngineSystem, WorldState world, MapCoordinate spawnPoint, Form form)
         {
             var player = EntitySerializer.Deserialize(DataFileLoader.LoadFile(@"Entities\player.edt"), entityEngineSystem);
             player.Get<Position>().MapCoordinate = spawnPoint;
+            player.Get<Description>().Name = form.FormData.Single(f => f.Name == "Name").Value.ToString();
 
             world.Player = player;
         }

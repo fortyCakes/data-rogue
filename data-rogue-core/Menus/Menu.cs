@@ -62,11 +62,9 @@ namespace data_rogue_core.Menus
                 switch (keyPress.Key)
                 {
                     case RLKey.Up:
-                    case RLKey.W:
                         Previous();
                         break;
                     case RLKey.Down:
-                    case RLKey.S:
                         Next();
                         break;
                     case RLKey.Enter:

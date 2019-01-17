@@ -12,6 +12,7 @@ using data_rogue_core.Menus.StaticMenus;
 using data_rogue_core.Renderers.ConsoleRenderers;
 using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
+using data_rogue_core.Forms;
 
 namespace data_rogue_core
 {
@@ -212,10 +213,10 @@ namespace data_rogue_core
 
         public static void CreateCharacter()
         {
-            ActivityStack.Push(new FormActivity());
+            ActivityStack.Push(CharacterCreationForm.GetCharacterCreation());
         }
 
-        public static void StartNewGame()
+        public static void StartNewGame(Form characterCreationForm)
         {
             DisplayLoadingScreen("Generating world...");
 
@@ -223,7 +224,7 @@ namespace data_rogue_core
             {
                 Thread.CurrentThread.IsBackground = true;
 
-                WorldState = WorldGenerator.Create(Seed, EntityEngineSystem, PositionSystem, TimeSystem, PrototypeSystem, MessageSystem);
+                WorldState = WorldGenerator.Create(Seed, EntityEngineSystem, PositionSystem, TimeSystem, PrototypeSystem, MessageSystem, characterCreationForm);
 
                 ActivityStack.Pop();
 

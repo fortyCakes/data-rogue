@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace data_rogue_core.Menus.StaticMenus
+namespace data_rogue_core.Forms
 {
     [Flags]
     public enum FormButton

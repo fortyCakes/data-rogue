@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
+﻿
 using data_rogue_core.Renderers;
+using data_rogue_core.Forms;
 using data_rogue_core.Renderers.ConsoleRenderers;
 
 namespace data_rogue_core.Activities

@@ -1,6 +1,8 @@
 ﻿using data_rogue_core.Activities;
 using data_rogue_core.EntityEngine;
+using data_rogue_core.Forms;
 using data_rogue_core.Menus;
+using data_rogue_core.Renderers.ConsoleRenderers;
 using data_rogue_core.Systems;
 using RLNET;
 
@@ -33,6 +35,9 @@ namespace data_rogue_core.EventSystem.Rules
                     return false;
                 case ActivityType.Gameplay:
                     PlayerControlSystem.HandleKeyPress(keyPress);
+                    break;
+                case ActivityType.Form:
+                    (currentActivity.Data as Form)?.HandleKeyPress(keyPress);
                     break;
             }
 

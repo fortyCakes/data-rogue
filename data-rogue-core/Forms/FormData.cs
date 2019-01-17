@@ -1,6 +1,6 @@
 ﻿using data_rogue_core.Forms;
 
-namespace data_rogue_core.Renderers.ConsoleRenderers
+namespace data_rogue_core.Forms
 {
     public class FormData
     {

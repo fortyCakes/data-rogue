@@ -25,7 +25,7 @@ namespace data_rogue_core.Menus.StaticMenus
                     break;
                 case "New Game":
                     Game.ActivityStack.Pop();
-                    Game.StartNewGame();
+                    Game.CreateCharacter();
                     break;
                 case "Load Game":
                     Game.ActivityStack.Pop();
