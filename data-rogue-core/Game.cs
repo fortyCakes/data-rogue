@@ -59,10 +59,10 @@ namespace data_rogue_core
 
         private static void SetupRootConsole()
         {
-            string fontFileName = "Images\\Tileset\\terminal8x8.png";
+            string fontFileName = "Images\\Tileset\\Alloy_curses_12x12.png";
             string consoleTitle = "data-rogue-core";
 
-            _rootConsole = new RLRootConsole(fontFileName, SCREEN_WIDTH, SCREEN_HEIGHT, 8, 8, 1, consoleTitle);
+            _rootConsole = new RLRootConsole(fontFileName, SCREEN_WIDTH, SCREEN_HEIGHT, 12, 12, 1, consoleTitle);
 
             _rootConsole.Update += OnRootConsoleUpdate;
             _rootConsole.Render += OnRootConsoleRender;

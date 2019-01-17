@@ -235,6 +235,9 @@
     <None Include="Data\Entities\StaticEntities\Props\portal.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="Images\Tileset\Alloy_curses_12x12.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Tileset\cheepicus_8x8.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
