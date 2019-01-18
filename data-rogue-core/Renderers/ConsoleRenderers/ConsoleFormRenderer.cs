@@ -43,24 +43,34 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
             int yCoordinate = 5;
 
-            foreach(FormData formData in form.FormData)
+            foreach(var field in form.Fields)
             {
-                RenderSingleControl(ref yCoordinate, formData, form.Selected == formData.Name);
+                RenderSingleControl(ref yCoordinate, field.Key, field.Value, form.Selected == field.Key);
             }
         }
 
-        private void RenderSingleControl(ref int yCoordinate, FormData formData, bool selected)
+        private void RenderSingleControl(ref int yCoordinate, string fieldName, FormData formData, bool selected)
         {
             var foreColor = selected ? RLColor.Cyan : RLColor.White;
 
             switch (formData.FormDataType)
             {
-                case Forms.FormDataType.Text:
+                case FormDataType.Text:
 
-                    Console.Print(1, yCoordinate, formData.Name + ": ", foreColor);
-                    Console.Print(1 + formData.Name.Length + 3, yCoordinate, ((string)formData.Value).PadRight(30, '_'), RLColor.White);
+                    Console.Print(1, yCoordinate, fieldName + ": ", foreColor);
+                    Console.Print(1 + fieldName.Length + 3, yCoordinate, ((string)formData.Value).PadRight(30, '_'), RLColor.White);
 
                     yCoordinate += 2;
+                    break;
+                case FormDataType.MultipleChoice:
+                    
+                    Console.Print(1, yCoordinate, fieldName + ": ", foreColor);
+                    Console.Print(fieldName.Length + 5, yCoordinate, ((string)formData.Value).PadRight(28, ' '), RLColor.White);
+                    Console.Print(fieldName.Length + 4, yCoordinate, "[", foreColor);
+                    Console.Set(fieldName.Length + 3, yCoordinate, foreColor, null, selected ? 27 : 0);
+                    Console.Set(fieldName.Length + 32, yCoordinate, foreColor, null, selected ? 26 : 0);
+                    Console.Print(fieldName.Length + 31, yCoordinate, "]", foreColor);
+
                     break;
                 default:
                     throw new NotImplementedException();

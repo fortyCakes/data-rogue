@@ -7,12 +7,14 @@ using System.Linq;
 using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
 using data_rogue_core.Forms;
+using data_rogue_core.Menus.StaticMenus;
+using data_rogue_core.Forms.StaticForms;
 
 namespace data_rogue_core
 {
     public class WorldGenerator
     {
-        public static WorldState Create(string seed, IEntityEngine entityEngineSystem, IPositionSystem positionSystem, ITimeSystem timeSystem, IPrototypeSystem prototypeSystem, IMessageSystem messageSystem, Form characterCreationForm)
+        public static WorldState Create(string seed, IEntityEngine entityEngineSystem, IPositionSystem positionSystem, ITimeSystem timeSystem, IPrototypeSystem prototypeSystem, IMessageSystem messageSystem, CharacterCreationForm characterCreationForm)
         {
             messageSystem.Initialise();
 
@@ -67,11 +69,11 @@ namespace data_rogue_core
             }
         }
 
-        private static void AddPlayerToWorld(IEntityEngine entityEngineSystem, WorldState world, MapCoordinate spawnPoint, Form form)
+        private static void AddPlayerToWorld(IEntityEngine entityEngineSystem, WorldState world, MapCoordinate spawnPoint, CharacterCreationForm form)
         {
             var player = EntitySerializer.Deserialize(DataFileLoader.LoadFile(@"Entities\player.edt"), entityEngineSystem);
             player.Get<Position>().MapCoordinate = spawnPoint;
-            player.Get<Description>().Name = form.FormData.Single(f => f.Name == "Name").Value.ToString();
+            player.Get<Description>().Name = form.Name;
 
             world.Player = player;
         }

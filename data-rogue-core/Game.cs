@@ -13,6 +13,7 @@ using data_rogue_core.Renderers.ConsoleRenderers;
 using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
 using data_rogue_core.Forms;
+using data_rogue_core.Forms.StaticForms;
 
 namespace data_rogue_core
 {
@@ -213,10 +214,10 @@ namespace data_rogue_core
 
         public static void CreateCharacter()
         {
-            ActivityStack.Push(CharacterCreationForm.GetCharacterCreation());
+            ActivityStack.Push(CharacterCreationForm.GetCharacterCreationActivity());
         }
 
-        public static void StartNewGame(Form characterCreationForm)
+        public static void StartNewGame(CharacterCreationForm characterCreationForm)
         {
             DisplayLoadingScreen("Generating world...");
 

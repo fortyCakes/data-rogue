@@ -12,7 +12,9 @@ namespace data_rogue_core.Forms
         public string Title { get; }
         public FormButton Buttons { get; }
         public FormButtonSelected OnSelectCallback { get; }
-        public List<FormData> FormData { get; set; }
+        public Dictionary<string, FormData> Fields { get; set; }
+
+        private List<string> FieldsKeyList => Fields.OrderBy(f => f.Value.Order).Select(f => f.Key).ToList();
 
         public delegate void FormButtonSelected(FormButton selectedButton, Form form);
 
@@ -20,52 +22,77 @@ namespace data_rogue_core.Forms
 
         public string Selected { get; set; } = "";
 
-        public Form(string title, FormButton buttons, FormButtonSelected onSelectCallback, params FormData[] formData)
+        public Form(string title, FormButton buttons, FormButtonSelected onSelectCallback, Dictionary<string, FormData> fields)
         {
             Buttons = buttons;
             OnSelectCallback = onSelectCallback;
-            FormData = formData.ToList();
+            Fields = fields;
 
-            Selected = FormData.First().Name;
+            Selected = Fields.First().Key;
         }
 
         public void HandleKeyPress(RLKeyPress keyPress)
         {
-            switch(keyPress.Key)
-            {
-                case RLKey.Up:
-                    MoveUp();
-                    break;
-                case RLKey.Down:
-                    MoveDown();
-                    break;
-                case RLKey.Left:
-                    MoveLeft();
-                    break;
-                case RLKey.Right:
-                    MoveRight();
-                    break;
-                case RLKey.Enter:
-                    Select();
-                    break;
-            }
+            var handled = false;
 
-            var selectedFormData = FormData.SingleOrDefault(f => f.Name == Selected);
-            if (selectedFormData != null)
+            if (Fields.ContainsKey(Selected))
             {
+                var selectedFormData = Fields[Selected];
                 switch (selectedFormData.FormDataType)
                 {
                     case FormDataType.Text:
-                        HandleKeyPressText(keyPress, selectedFormData);
-
+                        handled = HandleKeyPress_Text(keyPress, selectedFormData);
+                        break;
+                    case FormDataType.MultipleChoice:
+                        handled = HandleKeyPress_MultipleChoice(keyPress, selectedFormData);
                         break;
                     default:
                         throw new NotImplementedException();
                 }
             }
+
+            if (!handled)
+            {
+                switch (keyPress.Key)
+                {
+                    case RLKey.Up:
+                        MoveUp();
+                        break;
+                    case RLKey.Down:
+                        MoveDown();
+                        break;
+                    case RLKey.Left:
+                        MoveLeft();
+                        break;
+                    case RLKey.Right:
+                        MoveRight();
+                        break;
+                    case RLKey.Enter:
+                        Select();
+                        break;
+                }
+            }
+            
+            
         }
 
-        private static void HandleKeyPressText(RLKeyPress keyPress, FormData selectedFormData)
+        private bool HandleKeyPress_MultipleChoice(RLKeyPress keyPress, FormData selectedFormData)
+        {
+            if (keyPress.Key == RLKey.Right)
+            {
+                ((MultipleChoiceFormData)selectedFormData).ChangeSelection(+1);
+                return true;
+            }
+            if (keyPress.Key == RLKey.Left)
+            {
+                ((MultipleChoiceFormData)selectedFormData).ChangeSelection(-1);
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool HandleKeyPress_Text(RLKeyPress keyPress, FormData selectedFormData)
         {
             if (keyPress.Key >= RLKey.A && keyPress.Key <= RLKey.Z || keyPress.Key == RLKey.Space)
             {
@@ -75,6 +102,8 @@ namespace data_rogue_core.Forms
 
                     selectedFormData.Value += keyPress.Shift ? key.ToUpper() : key.ToLower();
                 }
+
+                return true;
             }
 
             if (keyPress.Key == RLKey.BackSpace)
@@ -86,19 +115,22 @@ namespace data_rogue_core.Forms
                     text = text.Substring(0, text.Length - 1);
                     selectedFormData.Value = text;
                 }
+                return true;
             }
+
+            return false;
         }
 
         private void MoveUp()
         {
-            if (Selected == FormData.First().Name)
+            if (Selected == Fields.First().Key)
             {
                 Selected = GetFirstButton();
                 return;
             }
             else if (Enum.GetNames(typeof(FormButton)).Contains(Selected))
             {
-                Selected = FormData.Last().Name;
+                Selected = Fields.Last().Key;
             }
             else
             {
@@ -108,14 +140,14 @@ namespace data_rogue_core.Forms
 
         private void MoveDown()
         {
-            if (Selected == FormData.Last().Name)
+            if (Selected == Fields.Last().Key)
             {
                 Selected = GetFirstButton();
                 return;
             }
             else if (Enum.GetNames(typeof(FormButton)).Contains(Selected))
             {
-                Selected = FormData.First().Name;
+                Selected = Fields.First().Key;
             }
             else
             {
@@ -168,9 +200,9 @@ namespace data_rogue_core.Forms
 
         private void MoveIndex(int move)
         {
-            var currentIndex = FormData.IndexOf(FormData.Single(f => f.Name == Selected));
+            var currentIndex = FieldsKeyList.IndexOf(Selected);
 
-            Selected = FormData[currentIndex + move].Name;
+            Selected = FieldsKeyList[currentIndex + move];
         }
 
         private string GetFirstButton()
