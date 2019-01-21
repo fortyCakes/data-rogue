@@ -1,13 +1,14 @@
-﻿using System.IO;
+﻿using data_rogue_core.Behaviours;
+using System.IO;
 using System.Reflection;
 
 namespace data_rogue_core.EntityEngine
 {
     public abstract class BaseStaticEntityLoader
     {
-        public abstract void Load(IEntityEngine engine);
+        public abstract void Load(IEntityEngine engine, IBehaviourFactory behaviourFactory);
 
-        protected static void Load(IEntityEngine engine, string subdirectory)
+        protected static void Load(IEntityEngine engine, IBehaviourFactory behaviourFactory, string subdirectory)
         {
                 var basePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), subdirectory);
 
@@ -16,7 +17,7 @@ namespace data_rogue_core.EntityEngine
                 foreach (var file in edtFiles)
                 {
                     var text = File.ReadAllText(file);
-                    EntitySerializer.DeserializeMultiple(text, engine);
+                    EntitySerializer.DeserializeMultiple(text, engine, behaviourFactory);
                 }
 
         }
@@ -24,7 +25,7 @@ namespace data_rogue_core.EntityEngine
 
     public class NullStaticEntityLoader: BaseStaticEntityLoader
     {
-        public override void Load(IEntityEngine engine)
+        public override void Load(IEntityEngine engine, IBehaviourFactory behaviourFactory)
         {
             return;
         }

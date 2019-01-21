@@ -1,4 +1,5 @@
-﻿using data_rogue_core.EntityEngine;
+﻿using data_rogue_core.Behaviours;
+using data_rogue_core.EntityEngine;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems.Interfaces;
 using System.IO;
@@ -9,7 +10,7 @@ namespace data_rogue_core
 {
     public class SaveSystem
     {
-        public static WorldState Load(IEntityEngine entityEngineSystem, ITimeSystem timeSystem, IPrototypeSystem prototypeSystem)
+        public static WorldState Load(IEntityEngine entityEngineSystem, ITimeSystem timeSystem, IPrototypeSystem prototypeSystem, IBehaviourFactory behaviourFactory)
         {
             var directoryName = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Saves");
             var fileName = Path.Combine(directoryName, "saveFile.sav");
@@ -20,11 +21,11 @@ namespace data_rogue_core
 
             var world = new WorldState(entityEngineSystem, timeSystem, loadedState.Seed);
 
-            entityEngineSystem.Initialise();
+            entityEngineSystem.Initialise(behaviourFactory);
 
             foreach (var savedEntity in loadedState.Entities)
             {
-                var entity = EntitySerializer.Deserialize(savedEntity, entityEngineSystem);
+                var entity = EntitySerializer.Deserialize(savedEntity, entityEngineSystem, behaviourFactory);
                 if (entity.Name == "Player")
                 {
                     world.Player = entity;

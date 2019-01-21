@@ -2,3 +2,5 @@
 [Appearance]
 Color: #FF0000
 Glyph: £
+[MoveToPlayerBehaviour]
+Priority: 100

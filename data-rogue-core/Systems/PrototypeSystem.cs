@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using data_rogue_core.Data;
+using data_rogue_core.Behaviours;
 
 namespace data_rogue_core.Systems
 {
@@ -17,14 +18,16 @@ namespace data_rogue_core.Systems
         public override SystemComponents RequiredComponents => new SystemComponents { typeof(Prototype) };
         public override SystemComponents ForbiddenComponents => new SystemComponents { };
 
-        public PrototypeSystem(IEntityEngine engine, IPositionSystem positionSystem)
+        public PrototypeSystem(IEntityEngine engine, IPositionSystem positionSystem, IBehaviourFactory behaviourFactory)
         {
             Engine = engine;
             PositionSystem = positionSystem;
+            BehaviourFactory = behaviourFactory;
         }
 
-        public IEntityEngine Engine { get; }
-        public IPositionSystem PositionSystem { get; }
+        public IEntityEngine Engine;
+        public IPositionSystem PositionSystem;
+        private IBehaviourFactory BehaviourFactory;
 
         public IEntity Create(int entityId)
         {
@@ -79,14 +82,22 @@ namespace data_rogue_core.Systems
             {
                 var componentType = component.GetType();
 
-                IEntityComponent newComponent = (IEntityComponent)Activator.CreateInstance(componentType);
+                IEntityComponent newComponent;
+
+                if (IsBehaviour(componentType))
+                {
+                    newComponent = BehaviourFactory.Get(componentType);
+                }
+                else {
+                    newComponent = (IEntityComponent)Activator.CreateInstance(componentType);
+                }
 
                 foreach (FieldInfo fieldInfo in componentType.GetFields())
                 {
                     if (fieldInfo.FieldType == typeof(StatCounter))
                     {
                         StatCounter oldValue = (StatCounter)fieldInfo.GetValue(component);
-                        fieldInfo.SetValue(newComponent, new StatCounter{Current = oldValue.Current, Max = oldValue.Max} );
+                        fieldInfo.SetValue(newComponent, new StatCounter { Current = oldValue.Current, Max = oldValue.Max });
                     }
                     else
                     {
@@ -101,5 +112,9 @@ namespace data_rogue_core.Systems
             return Engine.New(null, newComponents.ToArray());
         }
 
+        private static bool IsBehaviour(Type type)
+        {
+            return type.GetInterfaces().Contains(typeof(IBehaviour));
+        }
     }
 }

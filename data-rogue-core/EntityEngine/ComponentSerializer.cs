@@ -1,4 +1,5 @@
-﻿using data_rogue_core.Utils;
+﻿using data_rogue_core.Behaviours;
+using data_rogue_core.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -57,7 +58,7 @@ namespace data_rogue_core.EntityEngine
             return stringBuilder.ToString();
         }
 
-        public static IEntityComponent Deserialize(string input, IEntityEngine entityEngineSystem, int depth)
+        public static IEntityComponent Deserialize(string input, IEntityEngine entityEngineSystem, IBehaviourFactory behaviourFactory, int depth)
         {
             var lines = input.SplitLines();
 
@@ -65,7 +66,16 @@ namespace data_rogue_core.EntityEngine
 
             var type = entityEngineSystem.ComponentTypes.Single(t => t.Name == name);
 
-            IEntityComponent component = (IEntityComponent)Activator.CreateInstance(type);
+            IEntityComponent component;
+
+            if (type.GetInterfaces().Contains(typeof(IBehaviour)))
+            {
+                component = behaviourFactory.Get(type);
+            }
+            else
+            {
+                component = (IEntityComponent)Activator.CreateInstance(type);
+            }
 
             BindValuesRecursively(component, lines.Skip(1), depth);
 

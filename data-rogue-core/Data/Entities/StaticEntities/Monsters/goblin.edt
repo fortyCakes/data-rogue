@@ -20,4 +20,7 @@ Agility: 12
 [Description]
 Name: Goblin
 [Actor]
-Behaviours: MoveInPlayerDirection,RandomlyMove
+[MoveToPlayerBehaviour]
+Priority: 0
+[RandomlyMoveBehaviour]
+Priority: -1

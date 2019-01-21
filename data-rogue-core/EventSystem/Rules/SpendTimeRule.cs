@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using System.Linq;
+using data_rogue_core.Behaviours;
 using data_rogue_core.Components;
 using data_rogue_core.EntityEngine;
 using data_rogue_core.Maps;
@@ -27,7 +28,7 @@ namespace data_rogue_core.EventSystem.Rules
             TimeSystem.SpendTicks(sender, (int)eventData);
             actor.HasActed = true;
             
-            if (actor.Behaviours == "PlayerControlled")
+            if (sender.Has<PlayerControlledBehaviour>())
             {
                 TimeSystem.WaitingForInput = false;
             }

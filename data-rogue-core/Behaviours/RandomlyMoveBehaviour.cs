@@ -7,7 +7,8 @@ using data_rogue_core.Systems;
 
 namespace data_rogue_core.Behaviours
 {
-    public class RandomlyMoveBehaviour : IBehaviour
+
+    public class RandomlyMoveBehaviour : BaseBehaviour, IEntityComponent
     {
         private readonly IPositionSystem _positionSystem;
         private readonly IEventSystem _eventRuleSystem;
@@ -20,7 +21,7 @@ namespace data_rogue_core.Behaviours
             _random = random;
         }
 
-        public BehaviourResult Act(IEntity entity)
+        public override BehaviourResult Act(IEntity entity)
         {
             var isXMove = _random.PickOne(new List<bool>{true, false});
             var move = _random.PickOne(new List<int> {-1, 1});

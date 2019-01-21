@@ -6,14 +6,13 @@ using System.Threading;
 using data_rogue_core.Activities;
 using data_rogue_core.Behaviours;
 using data_rogue_core.EntityEngine;
-using data_rogue_core.EventSystem;
-using data_rogue_core.EventSystem.Rules;
 using data_rogue_core.Menus.StaticMenus;
 using data_rogue_core.Renderers.ConsoleRenderers;
 using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
-using data_rogue_core.Forms;
 using data_rogue_core.Forms.StaticForms;
+using data_rogue_core.EventSystem.Rules;
+using data_rogue_core.EventSystem;
 
 namespace data_rogue_core
 {
@@ -44,6 +43,7 @@ namespace data_rogue_core
         public static string Seed => DEBUG_SEED;
 
         private static RLRootConsole _rootConsole;
+        private static bool _leaving = false;
 
         public static void Main()
         {
@@ -149,15 +149,13 @@ namespace data_rogue_core
             MessageSystem = new MessageSystem();
 
             EntityEngineSystem = new EntityEngine.EntityEngine(new DataStaticEntityLoader());
-            
-            EventSystem = new EventRuleSystem();
+
+            EventSystem = new EventSystem.EventSystem();
 
             PositionSystem = new PositionSystem();
             EntityEngineSystem.Register(PositionSystem);
 
             Random = new RNG(DEBUG_SEED);
-
-            BehaviourFactory = new BehaviourFactory(PositionSystem, EventSystem, Random);
 
             TimeSystem = new TimeSystem(BehaviourFactory, EventSystem);
             EntityEngineSystem.Register(TimeSystem);
@@ -165,10 +163,12 @@ namespace data_rogue_core
             FighterSystem = new FighterSystem(EntityEngineSystem, MessageSystem, EventSystem, TimeSystem);
             EntityEngineSystem.Register(FighterSystem);
 
-            PrototypeSystem = new PrototypeSystem(EntityEngineSystem, PositionSystem);
-            EntityEngineSystem.Register(PrototypeSystem);
-
             PlayerControlSystem = new PlayerControlSystem(PositionSystem, EventSystem, TimeSystem);
+
+            BehaviourFactory = new BehaviourFactory(PositionSystem, EventSystem, Random);
+
+            PrototypeSystem = new PrototypeSystem(EntityEngineSystem, PositionSystem, BehaviourFactory);
+            EntityEngineSystem.Register(PrototypeSystem);
         }
 
         private static void DisplayMainMenu()
@@ -199,16 +199,19 @@ namespace data_rogue_core
 
         private static void OnRootConsoleUpdate(object sender, UpdateEventArgs e)
         {
-            RLKeyPress keyPress = _rootConsole.Keyboard.GetKeyPress();
-
-            if (!ReferenceEquals(keyPress, null))
+            if (!_leaving)
             {
-                EventSystem.Try(EventType.Input, null, keyPress);
-            }
+                RLKeyPress keyPress = _rootConsole.Keyboard.GetKeyPress();
 
-            while(!TimeSystem.WaitingForInput && ActivityStack.Count > 0 && ActivityStack.Peek().Type == ActivityType.Gameplay)
-            {
-                TimeSystem.Tick();
+                if (!ReferenceEquals(keyPress, null))
+                {
+                    EventSystem.Try(EventType.Input, null, keyPress);
+                }
+
+                while (!TimeSystem.WaitingForInput && ActivityStack.Count > 0 && ActivityStack.Peek().Type == ActivityType.Gameplay)
+                {
+                    TimeSystem.Tick();
+                }
             }
         }
 
@@ -225,7 +228,7 @@ namespace data_rogue_core
             {
                 Thread.CurrentThread.IsBackground = true;
 
-                WorldState = WorldGenerator.Create(Seed, EntityEngineSystem, PositionSystem, TimeSystem, PrototypeSystem, MessageSystem, characterCreationForm);
+                WorldState = WorldGenerator.Create(Seed, EntityEngineSystem, PositionSystem, TimeSystem, PrototypeSystem, MessageSystem, BehaviourFactory, characterCreationForm);
 
                 ActivityStack.Pop();
 
@@ -240,7 +243,7 @@ namespace data_rogue_core
             {
                 Thread.CurrentThread.IsBackground = true;
 
-                WorldState = SaveSystem.Load(EntityEngineSystem, TimeSystem, PrototypeSystem);
+                WorldState = SaveSystem.Load(EntityEngineSystem, TimeSystem, PrototypeSystem, BehaviourFactory);
 
                 ActivityStack.Pop();
 
@@ -254,6 +257,7 @@ namespace data_rogue_core
 
         public static void Quit()
         {
+            _leaving = true;
             _rootConsole.Close();
         }
 

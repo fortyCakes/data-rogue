@@ -64,8 +64,10 @@
     <Compile Include="Activities\FormActivity.cs" />
     <Compile Include="Activities\LoadingScreenActivity.cs" />
     <Compile Include="Behaviours\ActionResults.cs" />
+    <Compile Include="Behaviours\BaseBehaviour.cs" />
     <Compile Include="Behaviours\BehaviourFactory.cs" />
     <Compile Include="Behaviours\IBehaviour.cs" />
+    <Compile Include="Behaviours\TestBehaviour.cs" />
     <Compile Include="Behaviours\MoveToPlayerBehaviour.cs" />
     <Compile Include="Behaviours\RandomlyMoveBehaviour.cs" />
     <Compile Include="Behaviours\PlayerControlledBehaviour.cs" />

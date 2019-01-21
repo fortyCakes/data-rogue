@@ -2,8 +2,10 @@
 
 namespace data_rogue_core.Behaviours
 {
-    public interface IBehaviour
+    public interface IBehaviour : IEntityComponent
     {
+        int BehaviourPriority { get; }
+
         BehaviourResult Act(IEntity entity);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using data_rogue_core.Behaviours;
 using data_rogue_core.EntityEngine;
 
 namespace data_rogue_core.Data
@@ -23,9 +24,9 @@ namespace data_rogue_core.Data
             this.Id = entityId;
         }
 
-        public Entity Build(IEntityEngine engine)
+        public Entity Build(IEntityEngine engine, IBehaviourFactory behaviourFactory)
         {
-            var components = Components.Select(c => ComponentSerializer.Deserialize(c.ToString(), engine, 0)).ToArray();
+            var components = Components.Select(c => ComponentSerializer.Deserialize(c.ToString(), engine, behaviourFactory, 0)).ToArray();
 
             if (Id.HasValue)
             {

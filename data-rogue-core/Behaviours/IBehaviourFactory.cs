@@ -1,7 +1,9 @@
-﻿namespace data_rogue_core.Behaviours
+﻿using System;
+
+namespace data_rogue_core.Behaviours
 {
     public interface IBehaviourFactory
     {
-        IBehaviour Get(string behaviourName);
+        IBehaviour Get(Type behaviourType);
     }
 }

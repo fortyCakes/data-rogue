@@ -3,7 +3,7 @@ using data_rogue_core.EntityEngine;
 
 namespace data_rogue_core.EventSystem
 {
-    public class EventRuleSystem : IEventSystem
+    public class EventSystem : IEventSystem
     {
         private RuleBook RuleBook;
 

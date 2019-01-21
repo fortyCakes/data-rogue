@@ -143,7 +143,7 @@ namespace data_rogue_core.Systems
 
             actor.HasActed = false;
 
-            var behaviours = GetBehaviours(actor);
+            var behaviours = GetBehaviours(entity);
 
             foreach (IBehaviour behaviour in behaviours)
             {
@@ -169,14 +169,9 @@ namespace data_rogue_core.Systems
             }
         }
 
-        private IEnumerable<IBehaviour> GetBehaviours(Actor actor)
+        private IEnumerable<IBehaviour> GetBehaviours(IEntity entity)
         {
-            var behaviours = actor.Behaviours?.Split(',') ?? new string[0];
-
-            foreach (var behaviour in behaviours)
-            {
-                yield return BehaviourFactory.Get(behaviour);
-            }
+            return entity.Components.OfType<IBehaviour>();
         }
 
         public void SpendTicks(IEntity entity, int ticks)

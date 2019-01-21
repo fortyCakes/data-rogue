@@ -7,12 +7,14 @@ using data_rogue_core.Systems;
 
 namespace data_rogue_core.Behaviours
 {
-    public class MoveToPlayerBehaviour : BaseBehaviour
+    public class TestBehaviour : BaseBehaviour
     {
+        public string Memory;
+
         private readonly IPositionSystem positionSystem;
         private readonly IEventSystem eventRuleSystem;
 
-        public MoveToPlayerBehaviour(IPositionSystem positionSystem, IEventSystem eventRuleSystem)
+        public TestBehaviour(IPositionSystem positionSystem, IEventSystem eventRuleSystem)
         {
             this.positionSystem = positionSystem;
             this.eventRuleSystem = eventRuleSystem;

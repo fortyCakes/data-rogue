@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using data_rogue_core.EventSystem;
 using data_rogue_core.Systems;
 
@@ -10,40 +11,35 @@ namespace data_rogue_core.Behaviours
         private IEventSystem _eventRuleSystem;
         private IRandom _random;
 
-        private PlayerControlledBehaviour playerControlledBehaviour;
-        private RandomlyMoveBehaviour randomlyMoveBehaviour;
-        private MoveInPlayerDirectionBehaviour moveToPlayerBehaviour;
+
+        private Dictionary<Type, Func<IBehaviour>> constructors;
+        
 
         public BehaviourFactory(IPositionSystem positionSystem, IEventSystem eventRuleSystem, IRandom random)
         {
             _positionSystem = positionSystem;
             _eventRuleSystem = eventRuleSystem;
             _random = random;
-
-            InitialiseBehaviours();
-        }
-
-        private void InitialiseBehaviours()
-        {
-            playerControlledBehaviour = new PlayerControlledBehaviour();
-            randomlyMoveBehaviour = new RandomlyMoveBehaviour(_positionSystem, _eventRuleSystem, _random);
-            moveToPlayerBehaviour = new MoveInPlayerDirectionBehaviour(_positionSystem, _eventRuleSystem);
-        }
-
-        public IBehaviour Get(string behaviourName)
-        {
             
-            switch (behaviourName)
+            constructors = new Dictionary<Type, Func<IBehaviour>>()
             {
-                case "PlayerControlled":
-                    return playerControlledBehaviour;
-                case "RandomlyMove":
-                    return randomlyMoveBehaviour;
-                case "MoveInPlayerDirection":
-                    return moveToPlayerBehaviour;
-                default:
-                    throw new ArgumentException($"Could not resolve behaviour {behaviourName}");
+                { typeof(PlayerControlledBehaviour), () => new PlayerControlledBehaviour() },
+                { typeof(MoveToPlayerBehaviour), () => new MoveToPlayerBehaviour(_positionSystem, _eventRuleSystem) },
+                { typeof(RandomlyMoveBehaviour), () => new RandomlyMoveBehaviour(_positionSystem, _eventRuleSystem, _random) },
+                
+                { typeof(TestBehaviour), () => new TestBehaviour(_positionSystem, _eventRuleSystem) },
+            };
+        }
+
+        public IBehaviour Get(Type type)
+        {
+            if (!constructors.ContainsKey(type))
+            {
+                throw new Exception("Behaviour type not found in BehaviourFactory.");
             }
+
+            return constructors[type]();
+            
         }
     }
 }

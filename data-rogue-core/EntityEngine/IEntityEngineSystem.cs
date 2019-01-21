@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using data_rogue_core.Behaviours;
 using data_rogue_core.Systems;
 
 namespace data_rogue_core.EntityEngine
 {
-    public interface IEntityEngine : IInitialisableSystem
+    public interface IEntityEngine
     {
         IEnumerable<Type> ComponentTypes { get; }
 
@@ -27,7 +27,6 @@ namespace data_rogue_core.EntityEngine
 
         List<T> GetAll<T>() where T : IEntityComponent;
 
-        //Entity GetEntityWithName(string name);
-        //IEnumerable<Entity> GetEntitiesWithName(string name);
+        void Initialise(IBehaviourFactory behaviourFactory);
     }
 }

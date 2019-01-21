@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using data_rogue_core;
+using data_rogue_core.Behaviours;
 using data_rogue_core.EntityEngine;
+using data_rogue_core.EventSystem;
 using data_rogue_core.Systems;
 using DataRogueWorldEditor.Editors;
 using WeifenLuo.WinFormsUI.Docking;
@@ -19,6 +14,8 @@ namespace DataRogueWorldEditor
     {
         public PrototypeSystem PrototypeSystem { get; }
 
+        private IPositionSystem PositionSystem;
+        private IEventSystem EventSystem;
         private DockPanel dockPanel;
         private IEntityEngine EntityEngineSystem { get; } = new EntityEngine(new FolderEntityLoader());
 
@@ -26,10 +23,15 @@ namespace DataRogueWorldEditor
         {
             InitializeComponent();
 
-            PrototypeSystem = new PrototypeSystem(EntityEngineSystem, null);
-            EntityEngineSystem.Register(PrototypeSystem);
+            PositionSystem = new PositionSystem();
+            EventSystem = new EventSystem();
+            
+            var behaviourFactory = new BehaviourFactory(PositionSystem, EventSystem, new RNG("whatever"));
 
-            EntityEngineSystem.Initialise();
+            EntityEngineSystem.Initialise(behaviourFactory);
+            
+            PrototypeSystem = new PrototypeSystem(EntityEngineSystem, null, behaviourFactory);
+            EntityEngineSystem.Register(PrototypeSystem);
 
             dockPanel = new DockPanel();
             dockPanel.Dock = DockStyle.Fill;

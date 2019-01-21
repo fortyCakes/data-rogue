@@ -1,4 +1,5 @@
-﻿using data_rogue_core.Data;
+﻿using data_rogue_core.Behaviours;
+using data_rogue_core.Data;
 using data_rogue_core.Utils;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,11 +26,11 @@ namespace data_rogue_core.EntityEngine
             return stringBuilder.ToString();
         }
 
-        public static List<Entity> DeserializeMultiple(string input, IEntityEngine entityEngineSystem)
+        public static List<Entity> DeserializeMultiple(string input, IEntityEngine entityEngineSystem, IBehaviourFactory behaviourFactory)
         {
             var entityTexts = SplitIntoEntities(input);
 
-            return entityTexts.Select(text => Deserialize(text, entityEngineSystem)).ToList();
+            return entityTexts.Select(text => Deserialize(text, entityEngineSystem, behaviourFactory)).ToList();
         }
 
         private static IEnumerable<string> SplitIntoEntities(string input)
@@ -59,7 +60,7 @@ namespace data_rogue_core.EntityEngine
             }
         }
 
-        public static Entity Deserialize(string input, IEntityEngine entityEngineSystem)
+        public static Entity Deserialize(string input, IEntityEngine entityEngineSystem, IBehaviourFactory behaviourFactory)
         {
             var lines = input.SplitLines();
 
@@ -110,7 +111,7 @@ namespace data_rogue_core.EntityEngine
 
             }
 
-            return currentEntity.Build(entityEngineSystem);
+            return currentEntity.Build(entityEngineSystem, behaviourFactory);
         }
 
         private static bool IsComment(string line)

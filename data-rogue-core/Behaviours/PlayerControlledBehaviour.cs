@@ -2,9 +2,9 @@
 
 namespace data_rogue_core.Behaviours
 {
-    public class PlayerControlledBehaviour : IBehaviour
+    public class PlayerControlledBehaviour : BaseBehaviour
     {
-        public BehaviourResult Act(IEntity entity)
+        public override BehaviourResult Act(IEntity entity)
         {
             return new BehaviourResult {WaitForInput = true};
         }

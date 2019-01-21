@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using data_rogue_core.Behaviours;
 using data_rogue_core.Components;
 using data_rogue_core.EntityEngine;
+using data_rogue_core.EventSystem;
 using data_rogue_core.Maps;
+using data_rogue_core.Systems;
 using FluentAssertions;
 using NSubstitute;
 using NUnit.Framework;
@@ -14,10 +17,19 @@ namespace data_rogue_core.UnitTests.Data
     partial class EntitySerializerTests
     {
         private IEntityEngine _entityEngineSystem;
+        private IPositionSystem PositionSystem;
+        private IEventSystem EventSystem;
+        private BehaviourFactory BehaviourFactory;
+        private IRandom Random;
 
         [SetUp]
         public void SetUp()
         {
+            PositionSystem = Substitute.For<IPositionSystem>();
+            EventSystem = Substitute.For<IEventSystem>();
+            Random = Substitute.For<IRandom>();
+            BehaviourFactory = new BehaviourFactory(PositionSystem, EventSystem, Random);
+
             _entityEngineSystem = Substitute.For<IEntityEngine>();
             _entityEngineSystem.New(Arg.Any<string>(), Arg.Any<IEntityComponent[]>()).ReturnsForAnyArgs(callInfo =>
             {
@@ -33,7 +45,7 @@ namespace data_rogue_core.UnitTests.Data
                 
                 return entity;
             });
-            _entityEngineSystem.ComponentTypes.ReturnsForAnyArgs(new[] { typeof(Appearance), typeof(Position), typeof(Stairs) });
+            _entityEngineSystem.ComponentTypes.ReturnsForAnyArgs(new[] { typeof(Appearance), typeof(Position), typeof(Stairs), typeof(MoveToPlayerBehaviour) });
         }
 
         [Test]
@@ -44,7 +56,7 @@ namespace data_rogue_core.UnitTests.Data
         {
             string testData = LoadSerializedData(testCase);
 
-            var entity = new List<Entity> { EntitySerializer.Deserialize(testData, _entityEngineSystem) };
+            var entity = new List<Entity> { EntitySerializer.Deserialize(testData, _entityEngineSystem, BehaviourFactory) };
 
             var expected = new List<Entity> { GetTestEntity(testCase) };
 
@@ -71,7 +83,7 @@ namespace data_rogue_core.UnitTests.Data
         {
             var multipleSerialised = LoadFile("EntitySystem/TestData/ExpectedSerialization_MultipleEntities.txt");
 
-            var entities = EntitySerializer.DeserializeMultiple(multipleSerialised, _entityEngineSystem);
+            var entities = EntitySerializer.DeserializeMultiple(multipleSerialised, _entityEngineSystem, BehaviourFactory);
 
             var expected = new List<Entity>
             {
@@ -105,9 +117,10 @@ namespace data_rogue_core.UnitTests.Data
 
         private Entity[] SetUpTestEntities()
         {
-            var testEntity0 = new Entity(0, "TestEntity", new[] {
-                new Appearance() { Glyph = '£', Color = Color.FromArgb(255, 0, 0)
-                }});
+            var testEntity0 = new Entity(0, "TestEntity", new IEntityComponent[] {
+                new Appearance() { Glyph = '£', Color = Color.FromArgb(255, 0, 0)},
+                new MoveToPlayerBehaviour(PositionSystem, EventSystem) { Priority = 100 }
+            });
 
             var testEntity1 = new Entity(1, "EntityWithPosition", new[]
             {

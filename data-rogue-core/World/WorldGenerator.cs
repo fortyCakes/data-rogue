@@ -9,24 +9,25 @@ using data_rogue_core.Systems.Interfaces;
 using data_rogue_core.Forms;
 using data_rogue_core.Menus.StaticMenus;
 using data_rogue_core.Forms.StaticForms;
+using data_rogue_core.Behaviours;
 
 namespace data_rogue_core
 {
     public class WorldGenerator
     {
-        public static WorldState Create(string seed, IEntityEngine entityEngineSystem, IPositionSystem positionSystem, ITimeSystem timeSystem, IPrototypeSystem prototypeSystem, IMessageSystem messageSystem, CharacterCreationForm characterCreationForm)
+        public static WorldState Create(string seed, IEntityEngine entityEngineSystem, IPositionSystem positionSystem, ITimeSystem timeSystem, IPrototypeSystem prototypeSystem, IMessageSystem messageSystem, IBehaviourFactory behaviourFactory, CharacterCreationForm characterCreationForm)
         {
             messageSystem.Initialise();
 
-            entityEngineSystem.Initialise();
+            entityEngineSystem.Initialise(behaviourFactory);
 
             var world = new WorldState(entityEngineSystem, timeSystem, seed);
 
-            (new WorldEntityLoader()).Load(entityEngineSystem);
+            (new WorldEntityLoader()).Load(entityEngineSystem, behaviourFactory);
 
             var spawnPoint = CreateInitialMapAndGetSpawnPoint(seed, entityEngineSystem, positionSystem, prototypeSystem, world);
 
-            AddPlayerToWorld(entityEngineSystem, world, spawnPoint, characterCreationForm);
+            AddPlayerToWorld(entityEngineSystem, world, spawnPoint, behaviourFactory, characterCreationForm);
 
             return world;
         }
@@ -69,9 +70,9 @@ namespace data_rogue_core
             }
         }
 
-        private static void AddPlayerToWorld(IEntityEngine entityEngineSystem, WorldState world, MapCoordinate spawnPoint, CharacterCreationForm form)
+        private static void AddPlayerToWorld(IEntityEngine entityEngineSystem, WorldState world, MapCoordinate spawnPoint, IBehaviourFactory behaviourFactory, CharacterCreationForm form)
         {
-            var player = EntitySerializer.Deserialize(DataFileLoader.LoadFile(@"Entities\player.edt"), entityEngineSystem);
+            var player = EntitySerializer.Deserialize(DataFileLoader.LoadFile(@"Entities\player.edt"), entityEngineSystem, behaviourFactory);
             player.Get<Position>().MapCoordinate = spawnPoint;
             player.Get<Description>().Name = form.Name;
 
