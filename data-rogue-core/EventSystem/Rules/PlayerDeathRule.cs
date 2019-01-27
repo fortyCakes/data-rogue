@@ -12,10 +12,10 @@ namespace data_rogue_core.EventSystem.Rules
 {
     class PlayerDeathRule : IEventRule
     {
-        public PlayerDeathRule(IEntityEngine engine, IMessageSystem messageSystem)
+        public PlayerDeathRule(ISystemContainer systemContainer)
         {
-            EntityEngine = engine;
-            MessageSystem = messageSystem;
+            EntityEngine = systemContainer.EntityEngine;
+            MessageSystem = systemContainer.MessageSystem;
         }
 
         public EventTypeList EventTypes => new EventTypeList{ EventType.Death };

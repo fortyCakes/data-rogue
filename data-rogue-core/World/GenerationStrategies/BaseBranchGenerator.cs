@@ -18,43 +18,47 @@ namespace data_rogue_core
         
         public abstract string GenerationType { get; }
 
-        protected abstract List<Map> GenerateMaps(Branch branchDefinition, IEntityEngine engine, IPrototypeSystem prototypeSystem);
+        protected abstract List<Map> GenerateMaps(ISystemContainer systemContainer, Branch branchDefinition);
 
-        protected abstract void CreateEntities(GeneratedBranch generatedBranch, Branch branch, IEntityEngine engine, IPositionSystem positionSystem, IPrototypeSystem prototypeSystem, string seed);
+        protected abstract void CreateEntities(ISystemContainer systemContainer, GeneratedBranch generatedBranch, Branch branch);
 
         protected IRandom Random { get; set; }
 
-        public GeneratedBranch Generate(Branch branch, IEntityEngine engine, IPositionSystem positionSystem, IPrototypeSystem prototypeSystem, string seed)
+        public GeneratedBranch Generate(ISystemContainer systemContainer, Branch branch)
         {
-            Random = new RNG(seed);
+            Random = new RNG(systemContainer.Seed + branch.BranchName);
 
-            var generatedBranchMaps = GenerateMaps(branch, engine, prototypeSystem);
+            var generatedBranchMaps = GenerateMaps(systemContainer, branch);
 
             var generatedBranch = new GeneratedBranch() { Maps = generatedBranchMaps };
 
-            CreateEntities(generatedBranch, branch, engine, positionSystem, prototypeSystem, seed);
-            ExecuteMapGenCommands(generatedBranch, branch, engine, prototypeSystem);
+            CreateEntities(systemContainer, generatedBranch, branch);
+            ExecuteMapGenCommands(systemContainer, generatedBranch, branch);
 
             Map previousMap = null;
             foreach (var map in generatedBranch.Maps.OrderBy(m => m.MapKey.Key))
             {
                 if (previousMap != null)
                 {
-                    LinkStairs(previousMap, map, engine);
+                    LinkStairs(systemContainer, previousMap, map);
                 }
 
                 previousMap = map;
             }
 
-            AddBranchPortals(generatedBranch, branch, engine, positionSystem, prototypeSystem);
+            AddBranchPortals(systemContainer, generatedBranch, branch);
 
             branch.Generated = true;
 
             return generatedBranch;
         }
 
-        protected virtual void AddBranchPortals(GeneratedBranch generatedBranch, Branch branch, IEntityEngine engine, IPositionSystem positionSystem, IPrototypeSystem prototypeSystem)
+        protected virtual void AddBranchPortals(ISystemContainer systemContainer, GeneratedBranch generatedBranch, Branch branch)
         {
+            var engine = systemContainer.EntityEngine;
+            var prototypeSystem = systemContainer.PrototypeSystem;
+            var positionSystem = systemContainer.PositionSystem;
+
             var links = engine.GetAll<BranchLink>();
 
             var relevantLinks = new Dictionary<BranchLinkEnd, BranchLinkEnd>();
@@ -111,10 +115,10 @@ namespace data_rogue_core
             }
         }
 
-        protected virtual void LinkStairs(Map previousMap, Map map, IEntityEngine engine)
+        protected virtual void LinkStairs(ISystemContainer systemContainer, Map previousMap, Map map)
         {
-            var stairsDown = GetStairs(previousMap, StairDirection.Down, engine);
-            var stairsUp = GetStairs(map, StairDirection.Up, engine);
+            var stairsDown = GetStairs(previousMap, StairDirection.Down, systemContainer.EntityEngine);
+            var stairsUp = GetStairs(map, StairDirection.Up, systemContainer.EntityEngine);
 
             if (stairsUp.Count != stairsDown.Count)
             {
@@ -134,7 +138,7 @@ namespace data_rogue_core
             }
         }
 
-        protected void ExecuteMapGenCommands(GeneratedBranch generatedBranch, Branch branch, IEntityEngine engine, IPrototypeSystem prototypeSystem)
+        protected void ExecuteMapGenCommands(ISystemContainer systemContainer, GeneratedBranch generatedBranch, Branch branch)
         {
             foreach (Map map in generatedBranch.Maps)
             {
@@ -142,7 +146,7 @@ namespace data_rogue_core
                 {
                     var executor =  MapGenCommandExecutorFactory.GetExecutor(command.MapGenCommandType);
 
-                    executor.Execute(map, engine, prototypeSystem, command, new Vector(0,0));
+                    executor.Execute(systemContainer, map, command, new Vector(0,0));
                 }
             }
         }
@@ -158,46 +162,46 @@ namespace data_rogue_core
 
 
 
-        protected void PlaceStairs(GeneratedBranch generatedBranch, IEntityEngine engine, IPositionSystem position, IPrototypeSystem prototypeSystem)
+        protected void PlaceStairs(ISystemContainer systemContainer, GeneratedBranch generatedBranch)
         {
             Map previousMap = null;
             foreach (Map map in generatedBranch.Maps.OrderBy(m => m.MapKey.Key))
             {
                 if (previousMap != null)
                 {
-                    PlaceStairSet(previousMap, map, position, prototypeSystem);
+                    PlaceStairSet(systemContainer, previousMap, map);
                 }
 
                 previousMap = map;
             }
         }
 
-        protected void PlaceStairSet(Map previousMap, Map map, IPositionSystem position, IPrototypeSystem prototypeSystem)
+        protected void PlaceStairSet(ISystemContainer systemContainer, Map previousMap, Map map)
         {
 
-            var downStairsCoordinate = EmptyPositionOn(previousMap, position, prototypeSystem);
-            var upStairsCoordinate = EmptyPositionOn(map, position, prototypeSystem);
+            var downStairsCoordinate = EmptyPositionOn(previousMap, systemContainer);
+            var upStairsCoordinate = EmptyPositionOn(map, systemContainer);
 
-            var downStairs = prototypeSystem.CreateAt("Props:StairsDown", downStairsCoordinate);
-            var upStairs = prototypeSystem.CreateAt("Props:StairsUp", upStairsCoordinate);
+            var downStairs = systemContainer.PrototypeSystem.CreateAt("Props:StairsDown", downStairsCoordinate);
+            var upStairs = systemContainer.PrototypeSystem.CreateAt("Props:StairsUp", upStairsCoordinate);
         }
 
-        protected void PlaceDefaultEntrancePortal(GeneratedBranch generatedBranch, Branch branch, IEntityEngine engine, IPositionSystem position, IPrototypeSystem prototypeSystem)
+        protected void PlaceDefaultEntrancePortal(ISystemContainer systemContainer, GeneratedBranch generatedBranch, Branch branch)
         {
             var firstLayer = generatedBranch.Maps.First();
 
-            MapCoordinate emptyPosition = EmptyPositionOn(firstLayer, position, prototypeSystem);
+            MapCoordinate emptyPosition = EmptyPositionOn(firstLayer, systemContainer);
 
-            prototypeSystem.CreateAt("Props:Portal", emptyPosition);
+            systemContainer.PrototypeSystem.CreateAt("Props:Portal", emptyPosition);
         }
 
-        protected MapCoordinate EmptyPositionOn(Map firstLayer, IPositionSystem positionSystem, IPrototypeSystem prototypeSystem)
+        protected MapCoordinate EmptyPositionOn(Map firstLayer, ISystemContainer systemContainer)
         {
-            var emptyCell = prototypeSystem.Create("Cell:Empty");
+            var emptyCell = systemContainer.PrototypeSystem.Create("Cell:Empty");
 
             var emptyPositions = firstLayer.Cells
                 .Where(c => c.Value == emptyCell)
-                .Where(c => !positionSystem.Any(c.Key))
+                .Where(c => !systemContainer.PositionSystem.Any(c.Key))
                 .ToList();
             var emptyPosition = Random.PickOne(emptyPositions).Key;
             return emptyPosition;

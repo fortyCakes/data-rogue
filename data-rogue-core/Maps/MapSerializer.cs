@@ -83,8 +83,9 @@ namespace data_rogue_core.Maps
             return stringBuilder.ToString();
         }
         
-        public static Map Deserialize(string savedMap, IEntityEngine entityEngineSystem, IPrototypeSystem prototypeSystem, string mapNameOverride = null)
+        public static Map Deserialize(ISystemContainer systemContainer, string savedMap, string mapNameOverride = null)
         {
+
             var lines = savedMap.Split('\n');
 
             var mapName = mapNameOverride ?? Extract(lines[0], "Map:\"(.*)\"");
@@ -93,13 +94,13 @@ namespace data_rogue_core.Maps
             var leftX = int.Parse(coordinateMatch.Groups[1].Value);
             var topY = int.Parse(coordinateMatch.Groups[2].Value);
 
-            IEntity defaultCell = prototypeSystem.Create(defaultCellName);
+            IEntity defaultCell = systemContainer.PrototypeSystem.Create(defaultCellName);
 
             var lineIndex = 3;
 
             var commands = GetCommandsInMap(lines, ref lineIndex);
 
-            var glyphDictionary = GetCellsInMap(entityEngineSystem, prototypeSystem, lines, ref lineIndex);
+            var glyphDictionary = GetCellsInMap(systemContainer, lines, ref lineIndex);
 
             Map deserialisedMap = new Map(mapName, defaultCell);
 
@@ -184,7 +185,7 @@ namespace data_rogue_core.Maps
             return commandsInMap;
         }
 
-        private static Dictionary<char, IEntity> GetCellsInMap(IEntityEngine entityEngineSystem, IPrototypeSystem prototypeSystem, string[] lines, ref int lineIndex)
+        private static Dictionary<char, IEntity> GetCellsInMap(ISystemContainer systemContainer, string[] lines, ref int lineIndex)
         {
             var cellsInMap = new Dictionary<char, IEntity>();
 
@@ -194,7 +195,7 @@ namespace data_rogue_core.Maps
             {
                 char glyph = match.Groups[1].Value.First();
                 string entityName = match.Groups[2].Value.Trim();
-                IEntity entity = prototypeSystem.Create(entityName);
+                IEntity entity = systemContainer.PrototypeSystem.Create(entityName);
 
                 cellsInMap.Add(glyph, entity);
 

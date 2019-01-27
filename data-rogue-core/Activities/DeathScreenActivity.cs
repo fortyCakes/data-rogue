@@ -18,7 +18,7 @@ namespace data_rogue_core.Activities
                 stringBuilder.AppendLine("You are dead.");
                 stringBuilder.AppendLine($"Name: {Game.WorldState.Player.Get<Description>().Name}");
                 stringBuilder.AppendLine();
-                stringBuilder.AppendLine($"Time: {Game.TimeSystem.CurrentTime} aut");
+                stringBuilder.AppendLine($"Time: {Game.SystemContainer.TimeSystem.CurrentTime} aut");
 
                 return stringBuilder.ToString();
             }

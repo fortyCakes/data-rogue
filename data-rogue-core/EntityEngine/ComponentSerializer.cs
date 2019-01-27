@@ -1,4 +1,5 @@
 ﻿using data_rogue_core.Behaviours;
+using data_rogue_core.Systems.Interfaces;
 using data_rogue_core.Utils;
 using System;
 using System.Collections.Generic;
@@ -44,6 +45,14 @@ namespace data_rogue_core.EntityEngine
                 {
                     stringValue = ((ICustomFieldSerialization)value).Serialize();
                 }
+                else if (fieldType == typeof(string) && ((string)value).Contains("\n"))
+                {
+                    stringBuilder.AppendLine($"{field.Name}: {"{"}");
+                    stringBuilder.AppendLine(value.ToString());
+                    stringBuilder.AppendLine("}");
+
+                    stringValue = null;
+                }
                 else
                 {
                     stringValue = value.ToString();
@@ -58,46 +67,71 @@ namespace data_rogue_core.EntityEngine
             return stringBuilder.ToString();
         }
 
-        public static IEntityComponent Deserialize(string input, IEntityEngine entityEngineSystem, IBehaviourFactory behaviourFactory, int depth)
+        public static IEntityComponent Deserialize(ISystemContainer systemContainer, string input, int depth)
         {
             var lines = input.SplitLines();
 
             var name = Regex.Match(lines[0], NAME_PATTERN).Groups[1].Value;
 
-            var type = entityEngineSystem.ComponentTypes.Single(t => t.Name == name);
+            var type = systemContainer.EntityEngine.ComponentTypes.Single(t => t.Name == name);
 
             IEntityComponent component;
 
             if (type.GetInterfaces().Contains(typeof(IBehaviour)))
             {
-                component = behaviourFactory.Get(type);
+                component = systemContainer.BehaviourFactory.Get(type);
             }
             else
             {
                 component = (IEntityComponent)Activator.CreateInstance(type);
             }
 
-            BindValuesRecursively(component, lines.Skip(1), depth);
+            BindValues(component, lines.Skip(1), depth);
 
             return component;
         }
 
-        private static void BindValuesRecursively(IEntityComponent component, IEnumerable<string> lines, int depth)
+        private static void BindValues(IEntityComponent component, IEnumerable<string> lines, int depth)
         {
+            bool multiLineStringMode = false;
+            string multilineKey = null;
+            StringBuilder multilineStringBuilder = new StringBuilder();
+
             foreach (var line in lines)
             {
                 var expandedLine = line.Replace("\t", "     ");
 
                 var lineData = expandedLine.Substring(depth * 4);
 
+                if (multiLineStringMode && lineData == "}")
+                {
+                    BindSingleValue(component, multilineKey, multilineStringBuilder.ToString().TrimEnd());
+                    multiLineStringMode = false;
+                    continue;
+                }
+
                 var valueMatch = Regex.Match(lineData, VALUE_PATTERN);
 
-                if (valueMatch.Success)
+                if (multiLineStringMode)
+                {
+                    multilineStringBuilder.AppendLine(lineData);
+                }
+                else if (valueMatch.Success)
                 {
                     var key = valueMatch.Groups[1].Value;
                     var value = valueMatch.Groups[2].Value.TrimEnd();
 
-                    BindSingleValue(component, key, value);
+                    if (value == "{")
+                    {
+                        multiLineStringMode = true;
+                        multilineKey = key;
+                        multilineStringBuilder = new StringBuilder();
+                    }
+                    else
+                    {
+
+                        BindSingleValue(component, key, value);
+                    }
                 }
                 else
                 {

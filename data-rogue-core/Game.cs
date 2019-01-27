@@ -24,16 +24,7 @@ namespace data_rogue_core
 
         public static WorldState WorldState;
 
-        public static IEntityEngine EntityEngineSystem;
-        public static IEventSystem EventSystem;
-        public static IPositionSystem PositionSystem;
-        public static IPlayerControlSystem PlayerControlSystem;
-        public static IPrototypeSystem PrototypeSystem;
-        public static IFighterSystem FighterSystem;
-        public static IMessageSystem MessageSystem;
-        public static ITimeSystem TimeSystem;
-        public static IBehaviourFactory BehaviourFactory;
-        public static IRandom Random;
+        public static ISystemContainer SystemContainer;
 
         private const int SCREEN_WIDTH = 100;
         private const int SCREEN_HEIGHT = 70;
@@ -99,22 +90,23 @@ namespace data_rogue_core
 
         private static void InitialiseRules()
         {
-            EventSystem.Initialise();
+            SystemContainer.EventSystem.Initialise();
 
-            EventSystem.RegisterRules(
-                new InputHandlerRule(PlayerControlSystem),
-                new PhysicalCollisionRule(PositionSystem),
-                new BumpAttackRule(PositionSystem, FighterSystem),
-                new BranchGeneratorRule(EntityEngineSystem, PositionSystem, PrototypeSystem, Seed),
-                new RolledAttackRule(EntityEngineSystem, Random, EventSystem, MessageSystem),
-                new DealDamageRule(EventSystem, MessageSystem),
-                new PeopleDieWhenTheyAreKilledRule(EntityEngineSystem, MessageSystem),
-                new SpendTimeRule(TimeSystem),
-                new PlayerDeathRule(EntityEngineSystem, MessageSystem),
-                new CompleteMoveRule(PositionSystem, EventSystem),
-                new GetBaseStatRule(EntityEngineSystem),
-                new TiltDamageRule(EventSystem, MessageSystem),
-                new EnemiesInViewAddTensionRule(EntityEngineSystem, PositionSystem)
+            SystemContainer.EventSystem.RegisterRules(
+                new InputHandlerRule(SystemContainer),
+                new PhysicalCollisionRule(SystemContainer),
+                new BumpAttackRule(SystemContainer),
+                new BranchGeneratorRule(SystemContainer),
+                new RolledAttackRule(SystemContainer),
+                new DealDamageRule(SystemContainer),
+                new PeopleDieWhenTheyAreKilledRule(SystemContainer),
+                new SpendTimeRule(SystemContainer),
+                new PlayerDeathRule(SystemContainer),
+                new CompleteMoveRule(SystemContainer),
+                new GetBaseStatRule(SystemContainer),
+                new TiltDamageRule(SystemContainer),
+                new EnemiesInViewAddTensionRule(SystemContainer),
+                new ActivateSkillRule(SystemContainer)
             );
         }
 
@@ -146,29 +138,9 @@ namespace data_rogue_core
 
         private static void CreateAndRegisterSystems()
         {
-            MessageSystem = new MessageSystem();
+            SystemContainer = new SystemContainer();
 
-            EntityEngineSystem = new EntityEngine.EntityEngine(new DataStaticEntityLoader());
-
-            EventSystem = new EventSystem.EventSystem();
-
-            PositionSystem = new PositionSystem();
-            EntityEngineSystem.Register(PositionSystem);
-
-            Random = new RNG(DEBUG_SEED);
-
-            TimeSystem = new TimeSystem(BehaviourFactory, EventSystem);
-            EntityEngineSystem.Register(TimeSystem);
-
-            FighterSystem = new FighterSystem(EntityEngineSystem, MessageSystem, EventSystem, TimeSystem);
-            EntityEngineSystem.Register(FighterSystem);
-
-            PlayerControlSystem = new PlayerControlSystem(PositionSystem, EventSystem, TimeSystem);
-
-            BehaviourFactory = new BehaviourFactory(PositionSystem, EventSystem, Random);
-
-            PrototypeSystem = new PrototypeSystem(EntityEngineSystem, PositionSystem, BehaviourFactory);
-            EntityEngineSystem.Register(PrototypeSystem);
+            SystemContainer.CreateSystems(DEBUG_SEED);
         }
 
         private static void DisplayMainMenu()
@@ -205,12 +177,12 @@ namespace data_rogue_core
 
                 if (!ReferenceEquals(keyPress, null))
                 {
-                    EventSystem.Try(EventType.Input, null, keyPress);
+                    SystemContainer.EventSystem.Try(EventType.Input, null, keyPress);
                 }
 
-                while (!TimeSystem.WaitingForInput && ActivityStack.Count > 0 && ActivityStack.Peek().Type == ActivityType.Gameplay)
+                while (!SystemContainer.TimeSystem.WaitingForInput && ActivityStack.Count > 0 && ActivityStack.Peek().Type == ActivityType.Gameplay)
                 {
-                    TimeSystem.Tick();
+                    SystemContainer.TimeSystem.Tick();
                 }
             }
         }
@@ -228,7 +200,7 @@ namespace data_rogue_core
             {
                 Thread.CurrentThread.IsBackground = true;
 
-                WorldState = WorldGenerator.Create(Seed, EntityEngineSystem, PositionSystem, TimeSystem, PrototypeSystem, MessageSystem, BehaviourFactory, characterCreationForm);
+                WorldState = WorldGenerator.Create(SystemContainer, characterCreationForm);
 
                 ActivityStack.Pop();
 
@@ -243,7 +215,7 @@ namespace data_rogue_core
             {
                 Thread.CurrentThread.IsBackground = true;
 
-                WorldState = SaveSystem.Load(EntityEngineSystem, TimeSystem, PrototypeSystem, BehaviourFactory);
+                WorldState = SaveSystem.Load(SystemContainer);
 
                 ActivityStack.Pop();
 

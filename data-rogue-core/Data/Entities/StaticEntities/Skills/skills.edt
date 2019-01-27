@@ -1,0 +1,8 @@
+﻿"Test Skill"
+[Prototype]
+Name: Skill:Test
+Singleton: true
+[SkillScript]
+Script: {
+	SystemContainer.MessageSystem:Write('Hello world')
+}

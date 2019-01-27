@@ -4,6 +4,7 @@ using data_rogue_core.Forms;
 using data_rogue_core.Menus;
 using data_rogue_core.Renderers.ConsoleRenderers;
 using data_rogue_core.Systems;
+using data_rogue_core.Systems.Interfaces;
 using RLNET;
 
 namespace data_rogue_core.EventSystem.Rules
@@ -12,9 +13,9 @@ namespace data_rogue_core.EventSystem.Rules
     {
         private IPlayerControlSystem PlayerControlSystem;
 
-        public InputHandlerRule(IPlayerControlSystem playerControlSystem)
+        public InputHandlerRule(ISystemContainer systemContainer)
         {
-            PlayerControlSystem = playerControlSystem;
+            PlayerControlSystem = systemContainer.PlayerControlSystem;
         }
 
         public EventTypeList EventTypes => new EventTypeList { EventType.Input };

@@ -8,11 +8,11 @@ namespace data_rogue_core.Maps.MapGenCommands
     {
         public MapGenCommandType CommandType => MapGenCommandType.Entity;
 
-        public void Execute(Map map, IEntityEngine entityEngineSystem, IPrototypeSystem prototypeSystem, MapGenCommand command, Vector offsetVector)
+        public void Execute(ISystemContainer systemContainer, Map map, MapGenCommand command, Vector offsetVector)
         {
             var coordinate = new MapCoordinate(map.MapKey, offsetVector + command.Vector);
 
-            prototypeSystem.CreateAt(command.Parameters, coordinate);
+            systemContainer.PrototypeSystem.CreateAt(command.Parameters, coordinate);
         }
     }
 }

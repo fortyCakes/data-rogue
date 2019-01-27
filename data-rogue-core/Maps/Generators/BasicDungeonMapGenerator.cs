@@ -25,10 +25,10 @@ namespace data_rogue_core.Maps.Generators
         private IEntity wallCell;
         private IEntity floorCell;
 
-        public BasicDungeonMapGenerator(IEntityEngine engine, IPrototypeSystem prototypeSystem)
+        public BasicDungeonMapGenerator(ISystemContainer systemContainer)
         {
-            Engine = engine;
-            PrototypeSystem = prototypeSystem;
+            Engine = systemContainer.EntityEngine;
+            PrototypeSystem = systemContainer.PrototypeSystem;
         }
 
         public Map Generate(string mapName, IRandom random)

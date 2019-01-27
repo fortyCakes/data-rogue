@@ -7,6 +7,7 @@ using data_rogue_core.EntityEngine;
 using data_rogue_core.EventSystem;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems;
+using data_rogue_core.Systems.Interfaces;
 using FluentAssertions;
 using NSubstitute;
 using NUnit.Framework;
@@ -16,47 +17,57 @@ namespace data_rogue_core.UnitTests.Data
     [TestFixture]
     partial class EntitySerializerTests
     {
-        private IEntityEngine _entityEngineSystem;
+        private const string TEST_SCRIPT = @"function Activate (sender)
+    MessageSystem:Write('Hello world')
+end";
+
+        private IEntityEngine entityEngine;
         private IPositionSystem PositionSystem;
         private IEventSystem EventSystem;
         private BehaviourFactory BehaviourFactory;
         private IRandom Random;
+        private SystemContainer SystemContainer;
 
         [SetUp]
         public void SetUp()
         {
-            PositionSystem = Substitute.For<IPositionSystem>();
-            EventSystem = Substitute.For<IEventSystem>();
-            Random = Substitute.For<IRandom>();
-            BehaviourFactory = new BehaviourFactory(PositionSystem, EventSystem, Random);
+            SystemContainer = new SystemContainer();
 
-            _entityEngineSystem = Substitute.For<IEntityEngine>();
-            _entityEngineSystem.New(Arg.Any<string>(), Arg.Any<IEntityComponent[]>()).ReturnsForAnyArgs(callInfo =>
+            SystemContainer.PositionSystem = Substitute.For<IPositionSystem>();
+            SystemContainer.EventSystem = Substitute.For<IEventSystem>();
+            SystemContainer.Random = Substitute.For<IRandom>();
+            SystemContainer.BehaviourFactory = new BehaviourFactory(PositionSystem, EventSystem, Random);
+
+            entityEngine = Substitute.For<IEntityEngine>();
+            entityEngine.New(Arg.Any<string>(), Arg.Any<IEntityComponent[]>()).ReturnsForAnyArgs(callInfo =>
             {
                 var entity = new Entity(0, "entity", callInfo.ArgAt<IEntityComponent[]>(1));
                 entity.Name = callInfo.ArgAt<string>(0);
                 return entity;
             });
 
-            _entityEngineSystem.Load(Arg.Any<uint>(), Arg.Any<Entity>()).ReturnsForAnyArgs(callInfo =>
+            entityEngine.Load(Arg.Any<uint>(), Arg.Any<Entity>()).ReturnsForAnyArgs(callInfo =>
             {
  
                 var entity = callInfo.ArgAt<Entity>(1);
                 
                 return entity;
             });
-            _entityEngineSystem.ComponentTypes.ReturnsForAnyArgs(new[] { typeof(Appearance), typeof(Position), typeof(Stairs), typeof(MoveToPlayerBehaviour) });
+            entityEngine.ComponentTypes.ReturnsForAnyArgs(new[] { typeof(Appearance), typeof(Position), typeof(Stairs), typeof(MoveToPlayerBehaviour), typeof(SkillScript) });
+
+            SystemContainer.EntityEngine = entityEngine;
         }
 
         [Test]
         [TestCase(0)]
         [TestCase(1)]
         [TestCase(2)]
+        [TestCase(3)]
         public void TestEntity_Deserialize_MatchesTestEntity(int testCase)
         {
             string testData = LoadSerializedData(testCase);
 
-            var entity = new List<Entity> { EntitySerializer.Deserialize(testData, _entityEngineSystem, BehaviourFactory) };
+            var entity = new List<Entity> { EntitySerializer.Deserialize(SystemContainer, testData) };
 
             var expected = new List<Entity> { GetTestEntity(testCase) };
 
@@ -67,6 +78,7 @@ namespace data_rogue_core.UnitTests.Data
         [TestCase(0)]
         [TestCase(1)]
         [TestCase(2)]
+        [TestCase(3)]
         public void TestEntity_Serialize_MatchesSerializedData(int testCase)
         {
             var testEntity = GetTestEntity(testCase);
@@ -83,7 +95,7 @@ namespace data_rogue_core.UnitTests.Data
         {
             var multipleSerialised = LoadFile("EntitySystem/TestData/ExpectedSerialization_MultipleEntities.txt");
 
-            var entities = EntitySerializer.DeserializeMultiple(multipleSerialised, _entityEngineSystem, BehaviourFactory);
+            var entities = EntitySerializer.DeserializeMultiple(SystemContainer, multipleSerialised);
 
             var expected = new List<Entity>
             {
@@ -132,7 +144,13 @@ namespace data_rogue_core.UnitTests.Data
                 new Stairs() { Destination = null, Direction = StairDirection.Down}
             });
 
-            return new[] { testEntity0, testEntity1, testEntity2 };
+            var testEntity3 = new Entity(1, "Test Skill", new IEntityComponent[]
+            {
+                new SkillScript() {Script = TEST_SCRIPT},
+                new Position() { MapCoordinate = new MapCoordinate("TestMapKey", 1, 1)}
+            });
+
+            return new[] { testEntity0, testEntity1, testEntity2, testEntity3 };
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using data_rogue_core.EntityEngine;
+using data_rogue_core.Systems.Interfaces;
 using data_rogue_core.Utils;
 using System.Linq;
 using System.Text;
@@ -32,7 +33,7 @@ namespace data_rogue_core
             return stringBuilder.ToString();
         }
 
-        public static SaveState Deserialize(string serialized, IEntityEngine entityEngineSystem)
+        public static SaveState Deserialize(string serialized)
         {
             var lines = serialized.SplitLines();
 

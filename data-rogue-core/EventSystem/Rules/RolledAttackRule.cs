@@ -1,10 +1,7 @@
 ﻿using System.Drawing;
-using System.Linq;
 using data_rogue_core.Components;
 using data_rogue_core.EntityEngine;
 using data_rogue_core.EventSystem.EventData;
-using data_rogue_core.Maps;
-using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
 using data_rogue_core.Utils;
 
@@ -12,14 +9,14 @@ namespace data_rogue_core.EventSystem.Rules
 {
     class RolledAttackRule : IEventRule
     {
-        private readonly IRandom _random;
+        private readonly IRandom random;
 
-        public RolledAttackRule(IEntityEngine engine, IRandom random, IEventSystem eventRuleSystem, IMessageSystem messageSystem)
+        public RolledAttackRule(ISystemContainer systemContainer)
         {
-            _random = random;
-            EntityEngine = engine;
-            EventRuleSystem = eventRuleSystem;
-            MessageSystem = messageSystem;
+            random = systemContainer.Random;
+            EntityEngine = systemContainer.EntityEngine;
+            EventRuleSystem = systemContainer.EventSystem;
+            MessageSystem = systemContainer.MessageSystem;
         }
 
         public EventTypeList EventTypes => new EventTypeList{ EventType.Attack };
@@ -42,8 +39,8 @@ namespace data_rogue_core.EventSystem.Rules
             var attackStat = EventRuleSystem.GetStat(sender, Stat.Agility);
             var defenceStat = EventRuleSystem.GetStat(defender, Stat.Agility);
 
-            var attackRoll = _random.StatCheck(attackStat);
-            var defenceRoll = _random.StatCheck(defenceStat);
+            var attackRoll = random.StatCheck(attackStat);
+            var defenceRoll = random.StatCheck(defenceStat);
 
             bool hit = attackRoll >= defenceRoll;
 

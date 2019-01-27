@@ -6,15 +6,16 @@ using data_rogue_core.EntityEngine;
 using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems;
+using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.EventSystem.Rules
 {
     class EnemiesInViewAddTensionRule : IEventRule
     {
-        public EnemiesInViewAddTensionRule(IEntityEngine engine, IPositionSystem positionSystem)
+        public EnemiesInViewAddTensionRule(ISystemContainer systemContainer)
         {
-            EntityEngine = engine;
-            PositionSystem = positionSystem;
+            EntityEngine = systemContainer.EntityEngine;
+            PositionSystem = systemContainer.PositionSystem;
         }
 
         public EventTypeList EventTypes => new EventTypeList{ EventType.GetStat };

@@ -1,0 +1,9 @@
+﻿"Test Skill":1
+[SkillScript]
+Script: {
+function Activate (sender)
+    MessageSystem:Write('Hello world')
+end
+}
+[Position]
+MapCoordinate: Key: TestMapKey, X: 1, Y: 1

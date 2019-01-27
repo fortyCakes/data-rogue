@@ -9,10 +9,10 @@ namespace data_rogue_core.EventSystem.Rules
 {
     class TiltDamageRule : IEventRule
     {
-        public TiltDamageRule(IEventSystem eventRuleSystem, IMessageSystem messageSystem)
+        public TiltDamageRule(ISystemContainer systemContainer)
         {
-            EventRuleSystem = eventRuleSystem;
-            MessageSystem = messageSystem;
+            EventRuleSystem = systemContainer.EventSystem;
+            MessageSystem = systemContainer.MessageSystem;
         }
 
         public EventTypeList EventTypes => new EventTypeList{ EventType.Damage };

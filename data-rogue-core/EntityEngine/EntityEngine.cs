@@ -1,5 +1,6 @@
 ﻿using data_rogue_core.Behaviours;
 using data_rogue_core.Components;
+using data_rogue_core.Systems.Interfaces;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -77,7 +78,7 @@ namespace data_rogue_core.EntityEngine
             Systems.Add(system);
         }
 
-        public void Initialise(IBehaviourFactory behaviourFactory)
+        public void Initialise(ISystemContainer systemContainer)
         {
             EntityKey = 0;
             AllEntities = new List<Entity>();
@@ -86,7 +87,7 @@ namespace data_rogue_core.EntityEngine
                 system.Initialise();
             }
 
-            StaticEntityLoader.Load(this, behaviourFactory);
+            StaticEntityLoader.Load(systemContainer);
 
             AllEntities.ForEach(e => e.IsStatic = true);
         }

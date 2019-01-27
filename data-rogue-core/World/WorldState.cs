@@ -8,11 +8,11 @@ namespace data_rogue_core
 {
     public class WorldState
     {
-        public WorldState(IEntityEngine entityEngineSystem, ITimeSystem timeSystem, string seed)
+        public WorldState(ISystemContainer systemContainer)
         {
-            EntityEngineSystem = entityEngineSystem;
-            TimeSystem = timeSystem;
-            Seed = seed;
+            EntityEngineSystem = systemContainer.EntityEngine;
+            TimeSystem = systemContainer.TimeSystem;
+            Seed = systemContainer.Seed;
         }
 
         public MapCollection Maps = new MapCollection();

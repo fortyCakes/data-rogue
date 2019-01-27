@@ -11,9 +11,9 @@ namespace data_rogue_core.EventSystem.Rules
 {
     class SpendTimeRule : IEventRule
     {
-        public SpendTimeRule(ITimeSystem timeSystem)
+        public SpendTimeRule(ISystemContainer systemContainer)
         {
-            TimeSystem = timeSystem;
+            TimeSystem = systemContainer.TimeSystem;
         }
 
         public EventTypeList EventTypes => new EventTypeList{ EventType.SpendTime };

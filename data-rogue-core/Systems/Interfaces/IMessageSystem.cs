@@ -6,7 +6,7 @@ namespace data_rogue_core.Systems.Interfaces
 {
     public interface IMessageSystem : IInitialisableSystem
     {
-        void Write(string message, Color color);
+        void Write(string message, Color? color = null);
 
         List<Message> AllMessages { get; }
 

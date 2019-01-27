@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text;
 using data_rogue_core.Behaviours;
 using data_rogue_core.EntityEngine;
+using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.Data
 {
@@ -24,17 +25,17 @@ namespace data_rogue_core.Data
             this.Id = entityId;
         }
 
-        public Entity Build(IEntityEngine engine, IBehaviourFactory behaviourFactory)
+        public Entity Build(ISystemContainer systemContainer)
         {
-            var components = Components.Select(c => ComponentSerializer.Deserialize(c.ToString(), engine, behaviourFactory, 0)).ToArray();
+            var components = Components.Select(c => ComponentSerializer.Deserialize(systemContainer, c.ToString(), 0)).ToArray();
 
             if (Id.HasValue)
             {
-                return engine.Load(Id.Value, new Entity(Id.Value, Name, components));
+                return systemContainer.EntityEngine.Load(Id.Value, new Entity(Id.Value, Name, components));
             }
             else
             {
-                return engine.New(Name, components);
+                return systemContainer.EntityEngine.New(Name, components);
             }
         }
     }

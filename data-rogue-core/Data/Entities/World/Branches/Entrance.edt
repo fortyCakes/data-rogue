@@ -1,6 +1,6 @@
 ﻿"Branch:Entrance"
 [Prototype]
-Name: "Branch:Entrance"
+Name: Branch:Entrance
 [Branch]
 BranchName: Branch:Entrance
 GenerationType: Entrance
@@ -8,7 +8,7 @@ Depth: 2
 
 "Branch:Dungeon"
 [Prototype]
-Name: "Branch:Dungeon"
+Name: Branch:Dungeon
 [Branch]
 BranchName: Branch:Dungeon
 GenerationType: Dungeon

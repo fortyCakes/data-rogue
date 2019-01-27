@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using data_rogue_core.Behaviours;
 using data_rogue_core.Systems;
+using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.EntityEngine
 {
@@ -27,6 +28,6 @@ namespace data_rogue_core.EntityEngine
 
         List<T> GetAll<T>() where T : IEntityComponent;
 
-        void Initialise(IBehaviourFactory behaviourFactory);
+        void Initialise(ISystemContainer behaviourFactory);
     }
 }

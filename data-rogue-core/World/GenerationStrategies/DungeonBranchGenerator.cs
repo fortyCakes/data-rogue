@@ -16,9 +16,9 @@ namespace data_rogue_core
     {
         public override string GenerationType => "Dungeon";
 
-        protected override List<Map> GenerateMaps(Branch branchDefinition, IEntityEngine engine, IPrototypeSystem prototypeSystem)
+        protected override List<Map> GenerateMaps(ISystemContainer systemContainer, Branch branchDefinition)
         {
-            var mapgen = new BasicDungeonMapGenerator(engine, prototypeSystem);
+            var mapgen = new BasicDungeonMapGenerator(systemContainer);
 
             var generatedBranchMaps = new List<Map>();
 
@@ -32,28 +32,28 @@ namespace data_rogue_core
             return generatedBranchMaps;
         }
 
-        protected override void CreateEntities(GeneratedBranch generatedBranch, Branch branch, IEntityEngine engine, IPositionSystem position, IPrototypeSystem prototypeSystem, string seed)
+        protected override void CreateEntities(ISystemContainer systemContainer, GeneratedBranch generatedBranch, Branch branch)
         {
-            PlaceDefaultEntrancePortal(generatedBranch, branch, engine, position, prototypeSystem);
+            PlaceDefaultEntrancePortal(systemContainer, generatedBranch, branch);
 
-            PlaceStairs(generatedBranch, engine, position, prototypeSystem);
+            PlaceStairs(systemContainer, generatedBranch);
 
-            PlaceStairs(generatedBranch, engine, position, prototypeSystem);
+            PlaceStairs(systemContainer, generatedBranch);
 
-            PlaceStairs(generatedBranch, engine, position, prototypeSystem);
+            PlaceStairs(systemContainer, generatedBranch);
 
             foreach (var map in generatedBranch.Maps)
             {
                 for (int i = 0; i < 10; i++)
                 {
-                    PlaceMonster(map, position, prototypeSystem);
+                    PlaceMonster(systemContainer, map);
                 }
             }
         }
 
-        private void PlaceMonster(Map map, IPositionSystem positionSystem, IPrototypeSystem prototypeSystem)
+        private void PlaceMonster(ISystemContainer systemContainer, Map map)
         {
-            prototypeSystem.CreateAt("Monster:Goblin", EmptyPositionOn(map, positionSystem, prototypeSystem));
+            systemContainer.PrototypeSystem.CreateAt("Monster:Goblin", EmptyPositionOn(map, systemContainer));
         }
     }
 }

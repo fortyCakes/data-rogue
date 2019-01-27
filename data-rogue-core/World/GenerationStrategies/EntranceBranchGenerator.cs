@@ -17,15 +17,15 @@ namespace data_rogue_core
 
         public override string GenerationType => "Entrance";
 
-        protected override List<Map> GenerateMaps(Branch branchDefinition, IEntityEngine engine, IPrototypeSystem prototypeSystem)
+        protected override List<Map> GenerateMaps(ISystemContainer systemContainer, Branch branchDefinition)
         {
-            var entranceMap = new StaticMapGenerator(engine, prototypeSystem, "StaticMaps/entrance.map").Generate($"{branchDefinition.BranchName}:1", Random);
-            var entranceMap2 = new StaticMapGenerator(engine, prototypeSystem, "StaticMaps/entrance2.map").Generate($"{branchDefinition.BranchName}:2", Random);
+            var entranceMap = new StaticMapGenerator(systemContainer, "StaticMaps/entrance.map").Generate($"{branchDefinition.BranchName}:1", Random);
+            var entranceMap2 = new StaticMapGenerator(systemContainer, "StaticMaps/entrance2.map").Generate($"{branchDefinition.BranchName}:2", Random);
             var generatedBranchMaps = new List<Map> { entranceMap, entranceMap2 };
             return generatedBranchMaps;
         }
 
-        protected override void CreateEntities(GeneratedBranch generatedBranch, Branch branch, IEntityEngine engine, IPositionSystem positionSystem, IPrototypeSystem prototypeSystem, string seed)
+        protected override void CreateEntities(ISystemContainer systemContainer, GeneratedBranch generatedBranch, Branch branch)
         {
             // none
         }

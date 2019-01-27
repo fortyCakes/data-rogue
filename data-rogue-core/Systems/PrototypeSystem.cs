@@ -38,7 +38,7 @@ namespace data_rogue_core.Systems
 
         public IEntity Create(string entityName)
         {
-            var entity = this.Entities.Single(e => e.Name == entityName);
+            var entity = this.Entities.Single(e => e.Get<Prototype>().Name == entityName);
 
             return MakeInstanceOf(entity);
         }

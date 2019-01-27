@@ -3,14 +3,15 @@ using data_rogue_core.Components;
 using data_rogue_core.EntityEngine;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems;
+using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.EventSystem.Rules
 {
     class PhysicalCollisionRule : IEventRule
     {
-        public PhysicalCollisionRule(IPositionSystem positionSystem)
+        public PhysicalCollisionRule(ISystemContainer systemContainer)
         {
-            PositionSystem = positionSystem;
+            PositionSystem = systemContainer.PositionSystem;
         }
 
         public EventTypeList EventTypes => new EventTypeList{ EventType.Move };

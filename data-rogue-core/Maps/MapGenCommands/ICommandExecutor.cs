@@ -7,6 +7,6 @@ namespace data_rogue_core.Maps.MapGenCommands
     {
         MapGenCommandType CommandType { get; }
 
-        void Execute(Map map, IEntityEngine entityEngineSystem, IPrototypeSystem prototypeSystem, MapGenCommand command, Vector offset);
+        void Execute(ISystemContainer systemContainer, Map map, MapGenCommand command, Vector offset);
     }
 }

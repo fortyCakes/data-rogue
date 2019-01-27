@@ -1,29 +1,19 @@
 ﻿using System;
-using System.Threading;
 using data_rogue_core.Activities;
 using data_rogue_core.Components;
 using data_rogue_core.EntityEngine;
 using data_rogue_core.Maps;
-using data_rogue_core.Menus;
-using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
-using RLNET;
 
 namespace data_rogue_core.EventSystem.Rules
 {
     public class BranchGeneratorRule : IEventRule
     {
-        private readonly IEntityEngine _engine;
-        private readonly IPositionSystem _positionSystem;
-        private readonly IPrototypeSystem _prototypeSystem;
-        private readonly string _seed;
+        private readonly ISystemContainer systemContainer;
 
-        public BranchGeneratorRule(IEntityEngine engine, IPositionSystem positionSystem, IPrototypeSystem prototypeSystem, string seed)
+        public BranchGeneratorRule(ISystemContainer systemContainer)
         {
-            _engine = engine;
-            _positionSystem = positionSystem;
-            _prototypeSystem = prototypeSystem;
-            _seed = seed;
+            this.systemContainer = systemContainer;
         }
 
         public EventTypeList EventTypes => new EventTypeList { EventType.UsePortal };
@@ -33,7 +23,7 @@ namespace data_rogue_core.EventSystem.Rules
         {
             var portal = eventData as Portal;
 
-            var branch = _engine.GetEntity(portal.BranchLink.Value).Get<Branch>();
+            var branch = systemContainer.EntityEngine.GetEntity(portal.BranchLink.Value).Get<Branch>();
 
             if (!branch.Generated)
             {
@@ -41,7 +31,7 @@ namespace data_rogue_core.EventSystem.Rules
 
                 var generator = BranchGeneratorFactory.GetGenerator(branch.GenerationType);
 
-                var generatedBranch = generator.Generate(branch, _engine, _positionSystem, _prototypeSystem, _seed);
+                var generatedBranch = generator.Generate(systemContainer, branch);
 
                 foreach (Map map in generatedBranch.Maps)
                 {

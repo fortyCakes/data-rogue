@@ -88,8 +88,23 @@ namespace data_rogue_core.Systems
                             UseStairs(StairDirection.Up);
                         }
                         break;
+                    case RLKey.Number1:
+                        if (keyPress.Shift)
+                        {
+
+                        }
+                        else
+                        {
+                            UseSkill(1);
+                        }
+                        break;
                 }
             }
+        }
+
+        private void UseSkill(int index)
+        {
+            EventSystem.Try(EventType.ActivateSkill, Game.WorldState.Player, new ActivateSkillEventData() { SkillIndex = index });
         }
 
         private void Wait(int ticks)

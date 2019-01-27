@@ -13,9 +13,12 @@ Priority: 0
 [Fighter]
 Health: 25/25
 Tilt: 0/100
-Aura: 0/500
+Aura: 100/500
 BaseAura: 100
 Muscle: 15
 Agility: 15
 [Description]
 Name: Player
+[KnownSkill]
+Skill: Skill:Test
+Order: 1

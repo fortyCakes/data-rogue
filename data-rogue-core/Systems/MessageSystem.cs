@@ -14,9 +14,11 @@ namespace data_rogue_core.Systems
             AllMessages = new List<Message>();
         }
 
-        public void Write(string message, Color color)
+        public void Write(string message, Color? color = null)
         {
-            AllMessages.Add(new Message{Text = message, Color = color});
+            if (!color.HasValue) color = Color.White;
+
+            AllMessages.Add(new Message{Text = message, Color = color.Value});
         }
 
         public List<Message> AllMessages { get; }

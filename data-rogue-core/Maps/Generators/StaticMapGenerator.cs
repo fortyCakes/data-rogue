@@ -6,21 +6,20 @@ namespace data_rogue_core.Maps.Generators
 {
     public class StaticMapGenerator : IMapGenerator
     {
-        public StaticMapGenerator(IEntityEngine entityEngineSystem, IPrototypeSystem prototypeSystem, string mapFile)
+        public StaticMapGenerator(ISystemContainer systemContainer, string mapFile)
         {
-            EntityEngineSystem = entityEngineSystem;
-            PrototypeSystem = prototypeSystem;
+            SystemContainer = systemContainer;
             MapFile = mapFile;
         }
 
-        public IEntityEngine EntityEngineSystem { get; }
-        public IPrototypeSystem PrototypeSystem { get; }
+        private ISystemContainer SystemContainer;
+
         public string MapFile { get; }
 
         public Map Generate(string mapName, IRandom random)
         {
             var mapData = DataFileLoader.LoadFile(MapFile);
-            var map = MapSerializer.Deserialize(mapData, EntityEngineSystem, PrototypeSystem, mapName);
+            var map = MapSerializer.Deserialize(SystemContainer, mapData, mapName);
 
             map.MapKey = new MapKey(mapName);
 

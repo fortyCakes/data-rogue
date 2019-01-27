@@ -5,6 +5,7 @@ using data_rogue_core.Behaviours;
 using data_rogue_core.EntityEngine;
 using data_rogue_core.EventSystem;
 using data_rogue_core.Systems;
+using data_rogue_core.Systems.Interfaces;
 using DataRogueWorldEditor.Editors;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -12,10 +13,8 @@ namespace DataRogueWorldEditor
 {
     public partial class frmMain : Form
     {
-        public PrototypeSystem PrototypeSystem { get; }
+        public ISystemContainer SystemContainer;
 
-        private IPositionSystem PositionSystem;
-        private IEventSystem EventSystem;
         private DockPanel dockPanel;
         private IEntityEngine EntityEngineSystem { get; } = new EntityEngine(new FolderEntityLoader());
 
@@ -23,15 +22,11 @@ namespace DataRogueWorldEditor
         {
             InitializeComponent();
 
-            PositionSystem = new PositionSystem();
-            EventSystem = new EventSystem();
-            
-            var behaviourFactory = new BehaviourFactory(PositionSystem, EventSystem, new RNG("whatever"));
+            SystemContainer = new SystemContainer();
 
-            EntityEngineSystem.Initialise(behaviourFactory);
+            SystemContainer.CreateSystems("EDITOR");
             
-            PrototypeSystem = new PrototypeSystem(EntityEngineSystem, null, behaviourFactory);
-            EntityEngineSystem.Register(PrototypeSystem);
+            
 
             dockPanel = new DockPanel();
             dockPanel.Dock = DockStyle.Fill;
@@ -41,7 +36,7 @@ namespace DataRogueWorldEditor
 
         private void OpenMapEditor(string filename)
         {
-            var frmMapEditor = new frmMapEditor(filename, EntityEngineSystem, PrototypeSystem);
+            var frmMapEditor = new frmMapEditor(SystemContainer, filename);
 
             frmMapEditor.Show(dockPanel, DockState.Document);
         }

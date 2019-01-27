@@ -57,6 +57,7 @@ namespace DataRogueWorldEditor.Editors
         private string _fileName;
         private bool _isDirty;
         private MapCoordinate _oldMapGenCoordinate;
+        private ISystemContainer SystemContainer;
 
         internal MapEditorTool SelectedTool
         {
@@ -103,21 +104,23 @@ namespace DataRogueWorldEditor.Editors
             }
         }
 
-        public frmMapEditor(string filename, IEntityEngine entityEngineSystem, IPrototypeSystem prototypeSystem)
+        public frmMapEditor(ISystemContainer systemContainer, string filename)
         {
+            SystemContainer = systemContainer;
+
             InitializeComponent();
 
             FileName = filename;
 
             if (string.IsNullOrEmpty(FileName))
             {
-                Map = new Map("new map key", prototypeSystem.Create("Cell:Wall"));
+                Map = new Map("new map key", SystemContainer.PrototypeSystem.Create("Cell:Wall"));
             }
             else
             {
                 var mapFileText = File.ReadAllText(FileName);
 
-                Map = MapSerializer.Deserialize(mapFileText, entityEngineSystem, prototypeSystem);
+                Map = MapSerializer.Deserialize(SystemContainer, mapFileText);
             }
 
             dgvCommands.AutoGenerateColumns = false;
@@ -133,8 +136,8 @@ namespace DataRogueWorldEditor.Editors
             RenderMap();
 
             SelectedTool = MapEditorTool.SetCell;
-            EntityEngineSystem = entityEngineSystem;
-            PrototypeSystem = prototypeSystem;
+            EntityEngineSystem = SystemContainer.EntityEngine;
+            PrototypeSystem = SystemContainer.PrototypeSystem;
         }
 
         private void SetOffsets()

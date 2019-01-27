@@ -5,12 +5,13 @@ using System.Windows.Forms;
 using data_rogue_core.Behaviours;
 using data_rogue_core.Data;
 using data_rogue_core.EntityEngine;
+using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core
 {
     public class FolderEntityLoader : BaseStaticEntityLoader
     {
-        public override void Load(IEntityEngine engine, IBehaviourFactory behaviourFactory)
+        public override void Load(ISystemContainer systemContainer)
         {
             string basePath;
 #if DEBUG
@@ -34,7 +35,7 @@ namespace data_rogue_core
             foreach (var file in edtFiles)
             {
                 var text = File.ReadAllText(file);
-                EntitySerializer.DeserializeMultiple(text, engine, behaviourFactory);
+                EntitySerializer.DeserializeMultiple(systemContainer, text);
             }
         }
     }

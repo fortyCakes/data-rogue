@@ -10,6 +10,7 @@
         Damage,
         Death,
         SpendTime,
-        GetStat
+        GetStat,
+        ActivateSkill
     }
 }

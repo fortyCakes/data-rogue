@@ -15,31 +15,31 @@ namespace data_rogue_core
 {
     public class WorldGenerator
     {
-        public static WorldState Create(string seed, IEntityEngine entityEngineSystem, IPositionSystem positionSystem, ITimeSystem timeSystem, IPrototypeSystem prototypeSystem, IMessageSystem messageSystem, IBehaviourFactory behaviourFactory, CharacterCreationForm characterCreationForm)
+        public static WorldState Create(ISystemContainer systemContainer, CharacterCreationForm characterCreationForm)
         {
-            messageSystem.Initialise();
+            systemContainer.MessageSystem.Initialise();
 
-            entityEngineSystem.Initialise(behaviourFactory);
+            systemContainer.EntityEngine.Initialise(systemContainer);
 
-            var world = new WorldState(entityEngineSystem, timeSystem, seed);
+            var world = new WorldState(systemContainer);
 
-            (new WorldEntityLoader()).Load(entityEngineSystem, behaviourFactory);
+            (new WorldEntityLoader()).Load(systemContainer);
 
-            var spawnPoint = CreateInitialMapAndGetSpawnPoint(seed, entityEngineSystem, positionSystem, prototypeSystem, world);
+            var spawnPoint = CreateInitialMapAndGetSpawnPoint(systemContainer, world);
 
-            AddPlayerToWorld(entityEngineSystem, world, spawnPoint, behaviourFactory, characterCreationForm);
+            AddPlayerToWorld(systemContainer, world, spawnPoint,  characterCreationForm);
 
             return world;
         }
 
-        private static MapCoordinate CreateInitialMapAndGetSpawnPoint(string seed, IEntityEngine entityEngineSystem, IPositionSystem positionSystem, IPrototypeSystem prototypeSystem, WorldState world)
+        private static MapCoordinate CreateInitialMapAndGetSpawnPoint(ISystemContainer systemContainer, WorldState world)
         {
-            var worldStructure = prototypeSystem.Create("World").Get<World>();
-            var initialBranchEntity = prototypeSystem.Create(worldStructure.InitialBranch);
+            var worldStructure = systemContainer.PrototypeSystem.Create("World").Get<World>();
+            var initialBranchEntity = systemContainer.PrototypeSystem.Create(worldStructure.InitialBranch);
                 
             var initialBranch = initialBranchEntity.Get<Branch>();
 
-            GenerateBranch(world, initialBranch, entityEngineSystem, positionSystem, prototypeSystem, seed);
+            GenerateBranch(systemContainer, world, initialBranch);
 
             var initialMap = world.Maps[new MapKey($"{initialBranch.BranchName}:1")];
 
@@ -58,11 +58,11 @@ namespace data_rogue_core
             return definedSpawnPoint.First().Key;
         }
 
-        public static void GenerateBranch(WorldState world, Branch branchDefinition, IEntityEngine entityEngineSystem, IPositionSystem positionSystem, IPrototypeSystem prototypeSystem, string seed)
+        public static void GenerateBranch(ISystemContainer systemContainer, WorldState world, Branch branchDefinition)
         {
             var branchGenerator = BranchGeneratorFactory.GetGenerator(branchDefinition.GenerationType);
 
-            GeneratedBranch branch = branchGenerator.Generate(branchDefinition, entityEngineSystem, positionSystem, prototypeSystem, seed);
+            GeneratedBranch branch = branchGenerator.Generate(systemContainer, branchDefinition);
 
             foreach (Map map in branch.Maps)
             {
@@ -70,9 +70,9 @@ namespace data_rogue_core
             }
         }
 
-        private static void AddPlayerToWorld(IEntityEngine entityEngineSystem, WorldState world, MapCoordinate spawnPoint, IBehaviourFactory behaviourFactory, CharacterCreationForm form)
+        private static void AddPlayerToWorld(ISystemContainer systemContainer, WorldState world, MapCoordinate spawnPoint, CharacterCreationForm form)
         {
-            var player = EntitySerializer.Deserialize(DataFileLoader.LoadFile(@"Entities\player.edt"), entityEngineSystem, behaviourFactory);
+            var player = EntitySerializer.Deserialize(systemContainer, DataFileLoader.LoadFile(@"Entities\player.edt"));
             player.Get<Position>().MapCoordinate = spawnPoint;
             player.Get<Description>().Name = form.Name;
 

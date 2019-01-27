@@ -6,6 +6,6 @@ namespace data_rogue_core.Renderers
 {
     public interface IGameplayRenderer : IRenderer
     {
-        void Render(WorldState worldState, IPositionSystem positionSystem, IMessageSystem messageSystem, IEventSystem eventSystem);
+        void Render(WorldState worldState, ISystemContainer systemContainer);
     }
 }

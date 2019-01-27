@@ -13,10 +13,10 @@ namespace data_rogue_core.EventSystem.Rules
         private readonly IPositionSystem positionSystem;
         private readonly IEventSystem eventRuleSystem;
 
-        public CompleteMoveRule(IPositionSystem positionSystem, IEventSystem eventRuleSystem)
+        public CompleteMoveRule(ISystemContainer systemContainer)
         {
-            this.positionSystem = positionSystem;
-            this.eventRuleSystem = eventRuleSystem;
+            positionSystem = systemContainer.PositionSystem;
+            eventRuleSystem = systemContainer.EventSystem;
         }
 
         public EventTypeList EventTypes => new EventTypeList{ EventType.Move };

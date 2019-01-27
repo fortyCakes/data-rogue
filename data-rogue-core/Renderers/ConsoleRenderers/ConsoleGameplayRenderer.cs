@@ -36,20 +36,20 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
         }
 
-        public void Render(WorldState world, IPositionSystem positionSystem, IMessageSystem messageSystem, IEventSystem eventSystem)
+        public void Render(WorldState world, ISystemContainer systemContainer)
         {
             Console.Clear();
 
-            if (ReferenceEquals(world, null) || ReferenceEquals(positionSystem, null))
+            if (ReferenceEquals(world, null) || ReferenceEquals(systemContainer.PositionSystem, null))
             {
                 return;
             }
 
-            RenderMap(world, positionSystem);
+            RenderMap(world, systemContainer);
 
-            RenderStats(world, eventSystem);
+            RenderStats(world, systemContainer);
 
-            RenderMessages(messageSystem);
+            RenderMessages(systemContainer);
 
             RenderLines(world.Player.Get<Fighter>().BrokenTicks > 0);
         }
@@ -71,11 +71,11 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             Console.Set(Console.Width - STATS_WIDTH - 1, Console.Height - MESSAGE_HEIGHT - 1, foreColor, backColor, 180);
         }
 
-        private void RenderMessages(IMessageSystem messageSystem)
+        private void RenderMessages(ISystemContainer systemContainer)
         {
             MessageConsole.Clear();
 
-            var messages = messageSystem.RecentMessages(15);
+            var messages = systemContainer.MessageSystem.RecentMessages(15);
             messages.Reverse();
 
             int y = 14;
@@ -87,7 +87,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             RLConsole.Blit(MessageConsole, 0, 0, MessageConsole.Width, MessageConsole.Height, Console, 0, Console.Height - 15);
         }
 
-        private void RenderStats(WorldState world, IEventSystem eventSystem)
+        private void RenderStats(WorldState world, ISystemContainer systemContainer)
         {
             StatsConsole.Clear();
 
@@ -106,7 +106,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             }
             else
             {
-                var tension = eventSystem.GetStat(player, Stat.Tension);
+                var tension = systemContainer.EventSystem.GetStat(player, Stat.Tension);
                 StatsConsole.Print(1, 9, $"Tension: {tension}", RLColor.White, RLColor.Black);
             }
 
@@ -121,6 +121,15 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             StatsConsole.Print(1, 12, mapname, RLColor.White, RLColor.Black);
 
             StatsConsole.Print(1, 14, $"Time: {world.TimeSystem.TimeString}", RLColor.White, RLColor.Black);
+
+            StatsConsole.Print(1, 16, $"Skills:", RLColor.White, RLColor.Black);
+
+            var skillsToPrint = player.Components.OfType<KnownSkill>().Where(s => s.Order > 0).OrderBy(s => s.Order).Take(5).ToList();
+
+            for(int i = 0; i < skillsToPrint.Count(); i++)
+            {
+                StatsConsole.Print(1, 17 + i, $"{i+1}: {skillsToPrint[i].Skill}", RLColor.White, RLColor.Black);
+            }
 
             RLConsole.Blit(StatsConsole, 0, 0, StatsConsole.Width, StatsConsole.Height, Console, Console.Width - 22, 0);
         }
@@ -160,7 +169,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             }
         }
 
-        private void RenderMap(WorldState world, IPositionSystem positionSystem)
+        private void RenderMap(WorldState world, ISystemContainer systemContainer)
         {
             MapConsole.Clear();
 
@@ -188,7 +197,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
                     var lookupX = cameraX - offsetX + x;
                     var lookupY = cameraY - offsetY + y;
 
-                    DrawCell(x, y, positionSystem, currentMap, lookupX, lookupY, playerFov);
+                    DrawCell(x, y, systemContainer.PositionSystem, currentMap, lookupX, lookupY, playerFov);
                 }
             }
 

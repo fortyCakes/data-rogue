@@ -16,7 +16,7 @@ namespace data_rogue_core.Activities
         }
         public void Render()
         {
-            Renderer.Render(Game.WorldState, Game.PositionSystem, Game.MessageSystem, Game.EventSystem);
+            Renderer.Render(Game.WorldState, Game.SystemContainer);
         }
     }
 }

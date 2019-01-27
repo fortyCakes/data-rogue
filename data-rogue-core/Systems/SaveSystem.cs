@@ -10,22 +10,24 @@ namespace data_rogue_core
 {
     public class SaveSystem
     {
-        public static WorldState Load(IEntityEngine entityEngineSystem, ITimeSystem timeSystem, IPrototypeSystem prototypeSystem, IBehaviourFactory behaviourFactory)
+        public static WorldState Load(ISystemContainer systemContainer)
         {
             var directoryName = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Saves");
             var fileName = Path.Combine(directoryName, "saveFile.sav");
 
-            var loadedState = SaveStateSerializer.Deserialize(File.ReadAllText(fileName), entityEngineSystem);
+            var loadedState = SaveStateSerializer.Deserialize(File.ReadAllText(fileName));
 
-            timeSystem.CurrentTime = loadedState.Time;
+            systemContainer.TimeSystem.CurrentTime = loadedState.Time;
 
-            var world = new WorldState(entityEngineSystem, timeSystem, loadedState.Seed);
+            systemContainer.Seed = loadedState.Seed;
 
-            entityEngineSystem.Initialise(behaviourFactory);
+            var world = new WorldState(systemContainer);
+
+            systemContainer.EntityEngine.Initialise(systemContainer);
 
             foreach (var savedEntity in loadedState.Entities)
             {
-                var entity = EntitySerializer.Deserialize(savedEntity, entityEngineSystem, behaviourFactory);
+                var entity = EntitySerializer.Deserialize(systemContainer, savedEntity);
                 if (entity.Name == "Player")
                 {
                     world.Player = entity;
@@ -34,7 +36,7 @@ namespace data_rogue_core
 
             foreach(var savedMap in loadedState.Maps)
             {
-                var map = MapSerializer.Deserialize(savedMap, entityEngineSystem, prototypeSystem);
+                var map = MapSerializer.Deserialize(systemContainer, savedMap);
 
                 world.Maps.Add(map.MapKey, map);
             }

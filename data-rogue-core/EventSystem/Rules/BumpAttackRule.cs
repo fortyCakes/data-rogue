@@ -9,10 +9,10 @@ namespace data_rogue_core.EventSystem.Rules
 {
     class BumpAttackRule : IEventRule
     {
-        public BumpAttackRule(IPositionSystem positionSystem,IFighterSystem fighterSystem)
+        public BumpAttackRule(ISystemContainer systemContainer)
         {
-            PositionSystem = positionSystem;
-            FighterSystem = fighterSystem;
+            PositionSystem = systemContainer.PositionSystem;
+            FighterSystem = systemContainer.FighterSystem;
         }
 
         public EventTypeList EventTypes => new EventTypeList{ EventType.Move };

@@ -1,6 +1,7 @@
 ﻿using data_rogue_core.Components;
 using data_rogue_core.EntityEngine;
 using data_rogue_core.Maps;
+using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
 using FluentAssertions;
 using NSubstitute;
@@ -12,22 +13,23 @@ namespace data_rogue_core.UnitTests.Maps
     [TestFixture]
     public class MapSerializerTests
     {
-        private EntityEngine.EntityEngine _entityEngine;
-        private IPrototypeSystem _prototypeSystem;
-        private IEntity _wallCell;
-        private IEntity _floorCell;
+        private ISystemContainer systemContainer;
+        private IEntity wallCell;
+        private IEntity floorCell;
 
         [SetUp]
         public void SetUp()
         {
-            _entityEngine = new EntityEngine.EntityEngine(new NullStaticEntityLoader());
-            _prototypeSystem = Substitute.For<IPrototypeSystem>();
+            systemContainer = new SystemContainer();
 
-            _wallCell = CreateCell('#', "Cell:Wall");
-            _prototypeSystem.Create("Cell:Wall").Returns(_wallCell);
+            systemContainer.EntityEngine = new EntityEngine.EntityEngine(new NullStaticEntityLoader());
+            systemContainer.PrototypeSystem = Substitute.For<IPrototypeSystem>();
 
-            _floorCell = CreateCell('.', "Cell:Empty");
-            _prototypeSystem.Create("Cell:Empty").Returns(_floorCell);
+            wallCell = CreateCell('#', "Cell:Wall");
+            systemContainer.PrototypeSystem.Create("Cell:Wall").Returns(wallCell);
+
+            floorCell = CreateCell('.', "Cell:Empty");
+            systemContainer.PrototypeSystem.Create("Cell:Empty").Returns(floorCell);
         }
 
         [Test]
@@ -53,7 +55,7 @@ namespace data_rogue_core.UnitTests.Maps
         {
             string serialisedText = LoadSerializedData(testCase);
 
-            var result = MapSerializer.Deserialize(serialisedText, _entityEngine, _prototypeSystem);
+            var result = MapSerializer.Deserialize(systemContainer, serialisedText);
 
             var reserialised = MapSerializer.Serialize(result);
 
@@ -79,24 +81,24 @@ namespace data_rogue_core.UnitTests.Maps
 
         private Map[] SetUpTestMaps()
         {
-            var testMap0 = new Map("testMapKey", _wallCell);
+            var testMap0 = new Map("testMapKey", wallCell);
 
-            testMap0.SetCellsInRange(-4, 3, -2, 2, _floorCell);
-            testMap0.SetCell(1, 1, _wallCell);
+            testMap0.SetCellsInRange(-4, 3, -2, 2, floorCell);
+            testMap0.SetCell(1, 1, wallCell);
 
             testMap0.SetSeen(new MapCoordinate("testMapKey", 0, 0));
             testMap0.SetSeen(new MapCoordinate("testMapKey", 1, 1));
 
-            var testMap1 = new Map("testMapKey2", _wallCell);
+            var testMap1 = new Map("testMapKey2", wallCell);
 
-            testMap1.SetCellsInRange(0, 11, 0, 4, _floorCell);
+            testMap1.SetCellsInRange(0, 11, 0, 4, floorCell);
 
             testMap1.RemoveCellsInRange(1, 2, 1, 1);
             testMap1.RemoveCellsInRange(5, 6, 2, 3);
 
-            var testMap2 = new Map("testMapKey3", _wallCell);
+            var testMap2 = new Map("testMapKey3", wallCell);
 
-            testMap2.SetCellsInRange(0, 11, 0, 4, _floorCell);
+            testMap2.SetCellsInRange(0, 11, 0, 4, floorCell);
             testMap2.RemoveCellsInRange(1, 2, 1, 1);
             testMap2.RemoveCellsInRange(5, 6, 2, 3);
 
@@ -112,7 +114,7 @@ namespace data_rogue_core.UnitTests.Maps
 
         private IEntity CreateCell(char glyph, string name)
         {
-             return _entityEngine.New(name,
+             return systemContainer.EntityEngine.New(name,
                 new Appearance { Glyph = glyph },
                 new Physical()
                 );
