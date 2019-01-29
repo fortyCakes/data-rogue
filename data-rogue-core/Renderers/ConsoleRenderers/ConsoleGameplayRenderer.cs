@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using data_rogue_core.Components;
 using data_rogue_core.Data;
-using data_rogue_core.EntityEngine;
 using data_rogue_core.EventSystem;
 using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.Maps;
-using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
 using data_rogue_core.Utils;
 using RLNET;
@@ -17,9 +13,8 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 {
     public class ConsoleGameplayRenderer : BaseConsoleRenderer, IGameplayRenderer
     {
-        private const bool DEBUG_SEAL = false;
-        private const int STATS_WIDTH = 22;
-        private const int MESSAGE_HEIGHT = 15;
+        public const int STATS_WIDTH = 22;
+        public const int MESSAGE_HEIGHT = 15;
 
         private RLConsole MapConsole { get; set; }
         private RLConsole StatsConsole { get; set; }
@@ -128,7 +123,8 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
             for(int i = 0; i < skillsToPrint.Count(); i++)
             {
-                StatsConsole.Print(1, 17 + i, $"{i+1}: {skillsToPrint[i].Skill}", RLColor.White, RLColor.Black);
+                var skillName = systemContainer.PrototypeSystem.Create(skillsToPrint[i].Skill).Get<Description>().Name;
+                StatsConsole.Print(1, 17 + i, $"{i+1}: {skillName}", RLColor.White, RLColor.Black);
             }
 
             RLConsole.Blit(StatsConsole, 0, 0, StatsConsole.Width, StatsConsole.Height, Console, Console.Width - 22, 0);
@@ -197,80 +193,11 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
                     var lookupX = cameraX - offsetX + x;
                     var lookupY = cameraY - offsetY + y;
 
-                    DrawCell(x, y, systemContainer.PositionSystem, currentMap, lookupX, lookupY, playerFov);
+                    MapRendererHelper.DrawCell(MapConsole, x, y, systemContainer.PositionSystem, currentMap, lookupX, lookupY, playerFov);
                 }
             }
 
             RLConsole.Blit(MapConsole, 0, 0, MapConsole.Width, MapConsole.Height, Console, 0, 0);
-        }
-
-        private void DrawCell(int x, int y, IPositionSystem positionSystem, Map currentMap, int lookupX, int lookupY, List<MapCoordinate> playerFov)
-        {
-            MapCoordinate coordinate = new MapCoordinate(currentMap.MapKey, lookupX, lookupY);
-            var backColor = RLColor.Black;
-
-            var isInFov = playerFov.Contains(coordinate) || DEBUG_SEAL;
-
-            Appearance appearance = null;
-
-           
-            var entity = positionSystem
-                .EntitiesAt(coordinate)
-                .OrderByDescending(a => a.Get<Appearance>().ZOrder)
-                .FirstOrDefault(e => isInFov || IsRemembered(currentMap, coordinate, e));
-
-            if (entity != null)
-            {
-                appearance = entity.Get<Appearance>();
-
-                if (entity.Has<Fighter>())
-                {
-                    var fighter = entity.Get<Fighter>();
-
-                    if (fighter.BrokenTicks > 0)
-                    {
-                        backColor = RLColor.Red;
-                    }
-                    else
-                    {
-                        backColor = Gradient(fighter.Tilt.Max, Color.Black, Color.Purple, fighter.Tilt.Current);
-                    }
-                }
-            }
-            else
-            {
-                appearance = new Appearance()
-                {
-                    Color = Color.Black,
-                    Glyph = ' ',
-                    ZOrder = 0
-                };
-
-                backColor = RLColor.Black;
-            }
-
-            var foreColor = isInFov ? appearance.Color.ToRLColor() : RLColor.Gray;
-            
-
-            MapConsole.Set(x, y, foreColor, backColor, appearance.Glyph);
-        }
-
-        private static bool IsRemembered(Map currentMap, MapCoordinate coordinate, IEntity e)
-        {
-            return currentMap.SeenCoordinates.Contains(coordinate) && e.Has<Memorable>();
-        }
-
-        private RLColor Gradient(int max, Color fromColor, Color toColor, int value)
-        {
-            var weight2 = (decimal)value / max;
-            var weight1 = 1 - weight2;
-
-            var color = Color.FromArgb(
-                red: (int)Math.Floor(fromColor.R * weight1 + toColor.R * weight2),
-                green: (int)Math.Floor(fromColor.G * weight1 + toColor.G * weight2),
-                blue: (int)Math.Floor(fromColor.B * weight1 + toColor.B * weight2));
-
-            return color.ToRLColor();
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using data_rogue_core.Components;
 using data_rogue_core.EntityEngine;
+using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.Maps
 {
@@ -108,6 +109,55 @@ namespace data_rogue_core.Maps
                     SetCell(new MapCoordinate(MapKey, x, y), cell);
                 }
             }
+        }
+
+        public HashSet<MapCoordinate> TargetableCellsFrom(MapCoordinate playerPosition, TargetingData targetingData)
+        {
+            var targetableCells = new HashSet<MapCoordinate>();
+
+            if (targetingData.ValidCells?.Any() == true)
+            {
+                foreach (var vector in targetingData.ValidCells)
+                {
+                    targetableCells.Add(playerPosition + vector);
+                }
+            }
+            else if (targetingData.Range.HasValue)
+            {
+                var range = targetingData.Range.Value;
+
+                if (range == 1)
+                {
+                    foreach (var vector in GetAdjacentCellVectors())
+                    {
+                        targetableCells.Add(playerPosition + vector);
+                    }
+                }
+
+                if (range > 1)
+                {
+                    for(int x = -range; x < range; x++)
+                        for (int y = -range; y < range; y++)
+                        {
+                            if (x * x + y * y < range * range)
+                            {
+                                targetableCells.Add(playerPosition + new Vector(x, y));
+                            }
+                        }
+                }
+            }
+
+            return targetableCells;
+        }
+
+        private static Vector[] GetAdjacentCellVectors()
+        {
+            return new[]
+                            {
+                    new Vector(-1, -1), new Vector(-1, 0), new Vector(-1, 1),
+                    new Vector(0, -1), new Vector(0, 1),
+                    new Vector(1, -1), new Vector(1, 0), new Vector(1, 1)
+                };
         }
 
         public void RemoveCellsInRange(int x1, int x2, int y1, int y2)

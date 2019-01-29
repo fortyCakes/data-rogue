@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace data_rogue_core.Systems.Interfaces
 {
-    public interface ISkillSystem : IInitialisableSystem
+    public interface ISkillSystem : ISystem, IInitialisableSystem
     {
         void Learn(IEntity learner, IEntity skill);
         void Forget(IEntity learner, IEntity skill);

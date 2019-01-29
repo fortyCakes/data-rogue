@@ -22,3 +22,6 @@ Name: Player
 [KnownSkill]
 Skill: Skill:Test
 Order: 1
+[KnownSkill]
+Skill: Skill:MagicMissile
+Order: 2

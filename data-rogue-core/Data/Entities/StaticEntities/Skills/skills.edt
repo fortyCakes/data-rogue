@@ -6,3 +6,23 @@ Singleton: true
 Script: {
 	SystemContainer.MessageSystem:Write('Hello world')
 }
+[Description]
+Name: Test Skill
+
+"Magic Missile"
+[Prototype]
+Name: Skill:MagicMissile
+Singleton: true
+[SkillScript]
+Script: {
+	withTarget(
+	function(arg)
+		SystemContainer.MessageSystem:Write('Recieved target at ' .. arg:ToString())
+	end)
+
+	targetingData = TargetingData()
+	targetingData.Range = 5
+	requestTarget(User, targetingData)
+}
+[Description]
+Name: Magic Missile

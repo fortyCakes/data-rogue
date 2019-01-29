@@ -40,6 +40,9 @@ namespace data_rogue_core.EventSystem.Rules
                 case ActivityType.Form:
                     (currentActivity.Data as Form)?.HandleKeyPress(keyPress);
                     break;
+                case ActivityType.Targeting:
+                    // TODO
+                    break;
             }
 
             return true;

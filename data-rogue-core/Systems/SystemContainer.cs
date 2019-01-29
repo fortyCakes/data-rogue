@@ -20,8 +20,10 @@ namespace data_rogue_core.Systems
         public ITimeSystem TimeSystem { get; set; }
         public IBehaviourFactory BehaviourFactory { get; set; }
         public IRandom Random { get; set; }
-        public ScriptExecutor ScriptExecutor { get; set; }
-        public SkillSystem SkillSystem { get; set; }
+        public IScriptExecutor ScriptExecutor { get; set; }
+        public ISkillSystem SkillSystem { get; set; }
+        public ITargetingSystem TargetingSystem { get; set; }
+
         public string Seed { get; set; }
 
         public void CreateSystems(string rngSeed)
@@ -57,6 +59,8 @@ namespace data_rogue_core.Systems
 
             Seed = rngSeed;
 
+            TargetingSystem = new TargetingSystem();
+
             Verify();
         }
 
@@ -77,6 +81,7 @@ namespace data_rogue_core.Systems
             Check(Random, "Random", msg, ref valid);
             Check(ScriptExecutor, "ScriptExecutor", msg, ref valid);
             Check(SkillSystem, "SkillSystem", msg, ref valid);
+            Check(TargetingSystem, "TargetingSystem", msg, ref valid);
 
             if (!valid)
                 throw new ContainerNotValidException(msg.ToString());

@@ -98,6 +98,46 @@ namespace data_rogue_core.Systems
                             UseSkill(1);
                         }
                         break;
+                    case RLKey.Number2:
+                        if (keyPress.Shift)
+                        {
+
+                        }
+                        else
+                        {
+                            UseSkill(2);
+                        }
+                        break;
+                    case RLKey.Number3:
+                        if (keyPress.Shift)
+                        {
+
+                        }
+                        else
+                        {
+                            UseSkill(3);
+                        }
+                        break;
+                    case RLKey.Number4:
+                        if (keyPress.Shift)
+                        {
+
+                        }
+                        else
+                        {
+                            UseSkill(4);
+                        }
+                        break;
+                    case RLKey.Number5:
+                        if (keyPress.Shift)
+                        {
+
+                        }
+                        else
+                        {
+                            UseSkill(5);
+                        }
+                        break;
                 }
             }
         }

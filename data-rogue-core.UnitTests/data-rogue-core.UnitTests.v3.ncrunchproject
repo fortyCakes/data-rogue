@@ -1,0 +1,8 @@
+﻿<ProjectConfiguration>
+  <Settings>
+    <CopyReferencedAssembliesToWorkspace>True</CopyReferencedAssembliesToWorkspace>
+    <HiddenComponentWarnings>
+      <Value>PostBuildEventDisabled</Value>
+    </HiddenComponentWarnings>
+  </Settings>
+</ProjectConfiguration>

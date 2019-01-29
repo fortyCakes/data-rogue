@@ -73,7 +73,8 @@ namespace data_rogue_core
                         {ActivityType.Gameplay, new ConsoleGameplayRenderer(_rootConsole)},
                         {ActivityType.Menu, new ConsoleMenuRenderer(_rootConsole)},
                         {ActivityType.StaticDisplay, new ConsoleStaticTextRenderer(_rootConsole)},
-                        {ActivityType.Form, new ConsoleFormRenderer(_rootConsole) }
+                        {ActivityType.Form, new ConsoleFormRenderer(_rootConsole) },
+                        {ActivityType.Targeting, new ConsoleTargetingRenderer(_rootConsole) }
                     };
                     break;
                 default:

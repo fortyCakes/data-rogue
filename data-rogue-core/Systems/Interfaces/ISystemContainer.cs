@@ -16,8 +16,9 @@ namespace data_rogue_core.Systems.Interfaces
         ITimeSystem TimeSystem {get; set;}
         IBehaviourFactory BehaviourFactory {get; set;}
         IRandom Random {get; set;}
-        ScriptExecutor ScriptExecutor {get; set;}
-        SkillSystem SkillSystem {get; set;}
+        IScriptExecutor ScriptExecutor {get; set;}
+        ISkillSystem SkillSystem {get; set;}
+        ITargetingSystem TargetingSystem { get; set; }
         string Seed { get; set; }
 
         void Verify();

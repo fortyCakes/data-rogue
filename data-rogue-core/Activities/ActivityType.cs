@@ -4,6 +4,7 @@
         Menu = 1,
         StaticDisplay = 2,
         Gameplay = 3,
-        Form = 4
+        Form = 4,
+        Targeting = 5
     }
 }

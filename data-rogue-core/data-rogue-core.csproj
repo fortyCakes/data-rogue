@@ -69,6 +69,7 @@
     <Compile Include="Activities\DeathScreenActivity.cs" />
     <Compile Include="Activities\FormActivity.cs" />
     <Compile Include="Activities\LoadingScreenActivity.cs" />
+    <Compile Include="Activities\TargetingActivity.cs" />
     <Compile Include="Behaviours\ActionResults.cs" />
     <Compile Include="Behaviours\BaseBehaviour.cs" />
     <Compile Include="Behaviours\BehaviourFactory.cs" />
@@ -128,10 +129,14 @@
     <Compile Include="Maps\MapGenCommands\EntityCommandExecutor.cs" />
     <Compile Include="Maps\MapGenCommands\ICommandExecutor.cs" />
     <Compile Include="Maps\MapGenCommands\MapGenCommand.cs" />
+    <Compile Include="Renderers\ConsoleRenderers\CellTargeting.cs" />
     <Compile Include="Renderers\ConsoleRenderers\ConsoleFormRenderer.cs" />
     <Compile Include="Forms\Form.cs" />
+    <Compile Include="Renderers\ConsoleRenderers\ConsoleTargetingRenderer.cs" />
+    <Compile Include="Renderers\ConsoleRenderers\MapRendererHelper.cs" />
     <Compile Include="Renderers\IFormRenderer.cs" />
     <Compile Include="EventSystem\EventData\ActivateSkillEventData.cs" />
+    <Compile Include="Renderers\ITargetingRenderer.cs" />
     <Compile Include="Systems\AStar.cs" />
     <Compile Include="Systems\FighterSystem.cs" />
     <Compile Include="Behaviours\IBehaviourFactory.cs" />
@@ -141,11 +146,13 @@
     <Compile Include="Data\Message.cs" />
     <Compile Include="Systems\Interfaces\ISkillSystem.cs" />
     <Compile Include="Systems\Interfaces\ISystemContainer.cs" />
+    <Compile Include="Systems\Interfaces\ITargetingSystem.cs" />
     <Compile Include="Systems\Interfaces\ITimeSystem.cs" />
     <Compile Include="Systems\SystemContainer.cs" />
     <Compile Include="Systems\IScriptExecutor.cs" />
     <Compile Include="Systems\ScriptExecutor.cs" />
     <Compile Include="Systems\SkillSystem.cs" />
+    <Compile Include="Systems\TargetingSystem.cs" />
     <Compile Include="Systems\TimeSystem.cs" />
     <Compile Include="Systems\MessageSystem.cs" />
     <Compile Include="Systems\IRandom.cs" />
