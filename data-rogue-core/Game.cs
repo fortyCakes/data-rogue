@@ -13,6 +13,7 @@ using data_rogue_core.Systems.Interfaces;
 using data_rogue_core.Forms.StaticForms;
 using data_rogue_core.EventSystem.Rules;
 using data_rogue_core.EventSystem;
+using data_rogue_core.EventSystem.EventData;
 
 namespace data_rogue_core
 {
@@ -175,16 +176,17 @@ namespace data_rogue_core
             if (!_leaving)
             {
                 RLKeyPress keyPress = _rootConsole.Keyboard.GetKeyPress();
+                RLMouse mouse = _rootConsole.Mouse;
+                InputEventData eventData = new InputEventData(keyPress, mouse);
 
-                if (!ReferenceEquals(keyPress, null))
-                {
-                    SystemContainer.EventSystem.Try(EventType.Input, null, keyPress);
-                }
+                SystemContainer.EventSystem.Try(EventType.Input, null, eventData);
 
-                while (!SystemContainer.TimeSystem.WaitingForInput && ActivityStack.Count > 0 && ActivityStack.Peek().Type == ActivityType.Gameplay)
+                while (WorldState != null && !SystemContainer.TimeSystem.WaitingForInput && ActivityStack.Count > 0 && ActivityStack.Peek().Type == ActivityType.Gameplay)
                 {
                     SystemContainer.TimeSystem.Tick();
                 }
+
+                
             }
         }
 
@@ -202,9 +204,6 @@ namespace data_rogue_core
                 Thread.CurrentThread.IsBackground = true;
 
                 WorldState = WorldGenerator.Create(SystemContainer, characterCreationForm);
-
-                ActivityStack.Pop();
-
             }).Start();
         }
 

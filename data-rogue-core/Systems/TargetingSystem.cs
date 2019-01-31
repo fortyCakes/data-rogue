@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using data_rogue_core.Renderers.ConsoleRenderers;
+using RLNET;
 
 namespace data_rogue_core.Systems
 {
@@ -22,6 +24,26 @@ namespace data_rogue_core.Systems
             {
                 GetTargetForNonPlayer(sender, data, callback);
             }
+        }
+
+        public void HandleMouseInput(RLMouse mouse)
+        {
+            var x = mouse.X;
+            var y = mouse.Y;
+
+            if (IsOnMap(x, y))
+            {
+                if (Game.ActivityStack.Peek() is TargetingActivity activity)
+                {
+                    activity.TargetingActivityData.CurrentTarget = new MapCoordinate(Game.WorldState.CameraPosition.Key, x, y);
+                }
+            }
+        }
+
+        private bool IsOnMap(int x, int y)
+        {
+            //TODO
+            return true;
         }
 
         private void GetTargetForPlayer(TargetingData data, Action<MapCoordinate> callback)

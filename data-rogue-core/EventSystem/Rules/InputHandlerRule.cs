@@ -1,5 +1,6 @@
 ﻿using data_rogue_core.Activities;
 using data_rogue_core.EntityEngine;
+using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.Forms;
 using data_rogue_core.Menus;
 using data_rogue_core.Renderers.ConsoleRenderers;
@@ -12,10 +13,12 @@ namespace data_rogue_core.EventSystem.Rules
     public class InputHandlerRule : IEventRule
     {
         private IPlayerControlSystem PlayerControlSystem;
+        private ITargetingSystem TargetingSystem;
 
         public InputHandlerRule(ISystemContainer systemContainer)
         {
             PlayerControlSystem = systemContainer.PlayerControlSystem;
+            TargetingSystem = systemContainer.TargetingSystem;
         }
 
         public EventTypeList EventTypes => new EventTypeList { EventType.Input };
@@ -23,7 +26,10 @@ namespace data_rogue_core.EventSystem.Rules
 
         public bool Apply(EventType type, IEntity sender, object eventData)
         {
-            RLKeyPress keyPress = (RLKeyPress)eventData;
+            var inputEventData = (InputEventData)eventData;
+
+            RLKeyPress keyPress = inputEventData.Keyboard;
+            RLMouse mouse = inputEventData.Mouse;
 
             IActivity currentActivity = Game.ActivityStack.Peek();
             switch (currentActivity.Type)
@@ -41,7 +47,7 @@ namespace data_rogue_core.EventSystem.Rules
                     (currentActivity.Data as Form)?.HandleKeyPress(keyPress);
                     break;
                 case ActivityType.Targeting:
-                    // TODO
+                    TargetingSystem.HandleMouseInput(mouse);
                     break;
             }
 

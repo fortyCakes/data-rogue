@@ -13,7 +13,7 @@ namespace data_rogue_core.Activities
         public bool RendersEntireSpace => false;
         public ITargetingRenderer Renderer { get; set; }
 
-        private TargetingActivityData TargetingActivityData;
+        public TargetingActivityData TargetingActivityData;
 
         public TargetingActivity(TargetingData targetingData, Action<MapCoordinate> callback, IRendererFactory rendererFactory)
         {

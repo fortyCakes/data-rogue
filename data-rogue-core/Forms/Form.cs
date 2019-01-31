@@ -33,6 +33,8 @@ namespace data_rogue_core.Forms
 
         public void HandleKeyPress(RLKeyPress keyPress)
         {
+            if (keyPress == null) return;
+
             var handled = false;
 
             if (Fields.ContainsKey(Selected))

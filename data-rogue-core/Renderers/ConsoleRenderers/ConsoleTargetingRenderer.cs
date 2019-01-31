@@ -46,16 +46,24 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
             RenderMap(world, systemContainer, targetingActivityData);
 
-            RenderStats(world, systemContainer);
+            RenderStats(world, systemContainer, targetingActivityData);
 
         }
 
-        private void RenderStats(WorldState world, ISystemContainer systemContainer)
+        private void RenderStats(WorldState world, ISystemContainer systemContainer, TargetingActivityData targetingActivityData)
         {
             StatsConsole.Clear();
 
             RLConsole.Blit(Console, Console.Width - 22, 0, StatsConsole.Width, StatsConsole.Height, StatsConsole, 0, 0);
 
+            if (targetingActivityData.CurrentTarget == null)
+            {
+                StatsConsole.Print(1, StatsConsole.Height - 20, $"Target: -", RLColor.White);
+            }
+            else
+            {
+                StatsConsole.Print(1, StatsConsole.Height - 20, $"Target: {targetingActivityData.CurrentTarget.X}, {targetingActivityData.CurrentTarget.Y}", RLColor.White);
+            }
 
             RLConsole.Blit(StatsConsole, 0, 0, StatsConsole.Width, StatsConsole.Height, Console, Console.Width - 22, 0);
         }

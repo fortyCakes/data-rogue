@@ -5,12 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RLNET;
 
 namespace data_rogue_core.Systems.Interfaces
 {
     public interface ITargetingSystem
     {
         void GetTarget(IEntity sender, TargetingData data, Action<MapCoordinate> callback);
+        void HandleMouseInput(RLMouse mouse);
     }
 
     public class TargetingData
