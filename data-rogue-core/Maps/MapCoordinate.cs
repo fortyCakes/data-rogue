@@ -106,5 +106,25 @@ namespace data_rogue_core.Maps
 
             return newCoordinate;
         }
+
+        public static Vector operator -(MapCoordinate from, MapCoordinate to)
+        {
+            if (from == null || to == null)
+            {
+                return null;
+            }
+
+            if (from?.Key != to?.Key)
+            {
+                return null;
+            }
+
+            var vector = new Vector(
+                x: to.X - from.X,
+                y: to.Y - from.Y
+                );
+
+            return vector;
+        }
     }
 }

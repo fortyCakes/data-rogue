@@ -3,6 +3,7 @@
     <CopyReferencedAssembliesToWorkspace>True</CopyReferencedAssembliesToWorkspace>
     <HiddenComponentWarnings>
       <Value>PostBuildEventDisabled</Value>
+      <Value>CopyReferencedAssembliesToWorkspaceIsOn</Value>
     </HiddenComponentWarnings>
   </Settings>
 </ProjectConfiguration>

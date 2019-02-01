@@ -10,6 +10,8 @@ namespace data_rogue_core.Activities
         public ActivityType Type => ActivityType.Targeting;
         public object Data => TargetingActivityData;
 
+        public MapCoordinate CurrentTarget => TargetingActivityData.CurrentTarget;
+
         public bool RendersEntireSpace => false;
         public ITargetingRenderer Renderer { get; set; }
 
@@ -22,12 +24,30 @@ namespace data_rogue_core.Activities
             TargetingActivityData = new TargetingActivityData
             {
                 TargetingData = targetingData,
-                CurrentTarget = null
+                CurrentTarget = null,
+                Callback = callback
             };
         }
         public void Render()
         {
             Renderer.Render(Game.WorldState, Game.SystemContainer, TargetingActivityData);
+        }
+
+        public void Complete()
+        {
+            if (CurrentTarget != null)
+            {
+                TargetingActivityData.Callback(CurrentTarget);
+            }
+            else
+            {
+                // Target OnCancel behaviour?
+            }
+
+            if (Game.ActivityStack.Peek() == this)
+            {
+                Game.ActivityStack.Pop();
+            }
         }
     }
 
@@ -35,5 +55,6 @@ namespace data_rogue_core.Activities
     {
         public TargetingData TargetingData { get; internal set; }
         public MapCoordinate CurrentTarget { get; internal set; }
+        public Action<MapCoordinate> Callback { get; set; }
     }
 }

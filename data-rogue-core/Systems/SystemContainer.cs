@@ -59,7 +59,7 @@ namespace data_rogue_core.Systems
 
             Seed = rngSeed;
 
-            TargetingSystem = new TargetingSystem();
+            TargetingSystem = new TargetingSystem(PositionSystem);
 
             Verify();
         }

@@ -15,6 +15,13 @@ namespace data_rogue_core.Systems
 {
     public class TargetingSystem : ITargetingSystem
     {
+        private IPositionSystem PositionSystem;
+
+        public TargetingSystem(IPositionSystem positionSystem)
+        {
+            PositionSystem = positionSystem;
+        }
+
         public void GetTarget(IEntity sender, TargetingData data, Action<MapCoordinate> callback)
         {
             if (sender.IsPlayer)
@@ -32,21 +39,31 @@ namespace data_rogue_core.Systems
             var x = mouse.X;
             var y = mouse.Y;
 
-            if (IsOnMap(x, y))
+            if (Game.ActivityStack.Peek() is TargetingActivity activity)
             {
-                if (Game.ActivityStack.Peek() is TargetingActivity activity)
-                {
-                    var gameplayRenderer = Game.RendererFactory.GetRendererFor(ActivityType.Gameplay) as IGameplayRenderer;
+                var gameplayRenderer = Game.RendererFactory.GetRendererFor(ActivityType.Gameplay) as IGameplayRenderer;
 
-                    activity.TargetingActivityData.CurrentTarget = gameplayRenderer.GetMapCoordinateFromMousePosition(Game.WorldState, x, y);
+                var hoveredLocation = gameplayRenderer.GetMapCoordinateFromMousePosition(Game.WorldState, x, y);
+
+                if (hoveredLocation != null)
+                {
+                    MapCoordinate playerPosition = PositionSystem.PositionOf(Game.WorldState.Player);
+
+                    if (activity.TargetingActivityData.TargetingData.TargetableCellsFrom(playerPosition).Contains(hoveredLocation))
+                    {
+                        activity.TargetingActivityData.CurrentTarget = hoveredLocation;
+                    }
+                    else
+                    {
+                        activity.TargetingActivityData.CurrentTarget = null;
+                    }
+                }
+
+                if (mouse.GetLeftClick())
+                {
+                    activity.Complete();
                 }
             }
-        }
-
-        private bool IsOnMap(int x, int y)
-        {
-            //TODO
-            return true;
         }
 
         private void GetTargetForPlayer(TargetingData data, Action<MapCoordinate> callback)

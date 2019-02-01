@@ -81,7 +81,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             MapCoordinate playerPosition = world.Player.Get<Position>().MapCoordinate;
             var playerFov = currentMap.FovFrom(playerPosition, 9);
 
-            var targetableCells = currentMap.TargetableCellsFrom(playerPosition, targetingActivityData.TargetingData);
+            var targetableCells = targetingActivityData.TargetingData.TargetableCellsFrom(playerPosition);
 
             var consoleWidth = MapConsole.Width;
             var consoleHeight = MapConsole.Height;
