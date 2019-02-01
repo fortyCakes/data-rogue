@@ -8,14 +8,18 @@ using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.EventSystem.Rules
 {
-    class ActivateSkillRule : IEventRule
+    class ActivateSkillWithAuraRule : IEventRule
     {
         private readonly ISkillSystem skillSystem;
+        private IPrototypeSystem prototypeSystem;
+        private IMessageSystem messageSystem;
 
-        public ActivateSkillRule(ISystemContainer systemContainer)
+        public ActivateSkillWithAuraRule(ISystemContainer systemContainer)
         {
             entityEngine = systemContainer.EntityEngine;
             skillSystem = systemContainer.SkillSystem;
+            prototypeSystem = systemContainer.PrototypeSystem;
+            messageSystem = systemContainer.MessageSystem;
         }
 
         public EventTypeList EventTypes => new EventTypeList{ EventType.ActivateSkill };
@@ -35,7 +39,23 @@ namespace data_rogue_core.EventSystem.Rules
             {
                 var skill = skills[index];
 
-                skillSystem.Use(sender, skill.Skill);
+                var skillDefinition = prototypeSystem.Create(skill.Skill).Get<SkillDefinition>();
+
+                var userAura = sender.Get<Fighter>().Aura;
+
+                if (userAura.Current >= skillDefinition.Cost)
+                {
+                    skillSystem.Use(sender, skill.Skill);
+                    userAura.Subtract(skillDefinition.Cost);
+                }
+                else
+                {
+                    if (sender.IsPlayer)
+                    {
+                        messageSystem.Write("You don't have enough Aura!");
+                    }
+                    return false;
+                }
 
                 return true;
             }

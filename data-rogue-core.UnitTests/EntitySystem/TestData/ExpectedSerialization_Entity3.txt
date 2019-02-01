@@ -1,5 +1,5 @@
 ﻿"Test Skill":1
-[SkillScript]
+[SkillDefinition]
 Script: {
 function Activate (sender)
     MessageSystem:Write('Hello world')

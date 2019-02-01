@@ -108,7 +108,7 @@ namespace data_rogue_core
                 new GetBaseStatRule(SystemContainer),
                 new TiltDamageRule(SystemContainer),
                 new EnemiesInViewAddTensionRule(SystemContainer),
-                new ActivateSkillRule(SystemContainer)
+                new ActivateSkillWithAuraRule(SystemContainer)
             );
         }
 

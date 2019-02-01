@@ -3,8 +3,9 @@ using data_rogue_core.EntityEngine;
 
 namespace data_rogue_core.Components
 {
-    public class SkillScript : IEntityComponent
+    public class SkillDefinition : IEntityComponent
     {
         public string Script;
+        public int Cost;
     }
 }

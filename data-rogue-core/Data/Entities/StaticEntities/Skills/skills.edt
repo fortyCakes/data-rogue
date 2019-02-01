@@ -2,7 +2,8 @@
 [Prototype]
 Name: Skill:ManaBolt
 Singleton: true
-[SkillScript]
+[SkillDefinition]
+Cost: 200
 Script: {
 	withTarget(
 	function(target)

@@ -54,7 +54,7 @@ namespace data_rogue_core.Systems
 
             ScriptExecutor = new ScriptExecutor(this);
 
-            SkillSystem = new SkillSystem(PrototypeSystem, ScriptExecutor);
+            SkillSystem = new SkillSystem(PrototypeSystem, ScriptExecutor, EventSystem);
             EntityEngine.Register(SkillSystem);
 
             Seed = rngSeed;
