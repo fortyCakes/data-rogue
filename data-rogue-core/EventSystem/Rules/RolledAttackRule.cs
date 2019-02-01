@@ -43,8 +43,6 @@ namespace data_rogue_core.EventSystem.Rules
             var defenceRoll = random.StatCheck(defenceStat);
 
             bool hit = attackRoll >= defenceRoll;
-
-            MessageSystem.Write($"{attackerDescription.Name} attacks {defenderDescription.Name}, rolls {attackRoll}/{attackStat} vs {defenceRoll}/{defenceStat}. {(hit ? "Hit" : "Miss")}", Color.White);
             
             return hit;
         }

@@ -5,6 +5,7 @@ using data_rogue_core.Activities;
 using data_rogue_core.Components;
 using data_rogue_core.EntityEngine;
 using data_rogue_core.EventSystem;
+using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.Maps;
 using data_rogue_core.Menus.StaticMenus;
 using data_rogue_core.Systems.Interfaces;
@@ -149,7 +150,7 @@ namespace data_rogue_core.Systems
 
         private void Wait(int ticks)
         {
-            EventSystem.Try(EventType.SpendTime, Game.WorldState.Player, ticks);
+            EventSystem.Try(EventType.SpendTime, Game.WorldState.Player, new SpendTimeEventData{Ticks = ticks});
         }
 
         private void UseStairs(StairDirection direction)

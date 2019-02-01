@@ -33,6 +33,12 @@ namespace data_rogue_core.EventSystem.Rules
                 case Stat.Agility:
                     data.Value = sender.Get<Fighter>().Agility;
                     break;
+                case Stat.Willpower:
+                    data.Value = sender.Get<Fighter>().Willpower;
+                    break;
+                case Stat.Intellect:
+                    data.Value = sender.Get<Fighter>().Intellect;
+                    break;
                 case Stat.Tension:
                     if (sender != Game.WorldState.Player)
                     {

@@ -10,7 +10,9 @@ namespace data_rogue_core.EventSystem.EventData
     {
         Muscle,
         Agility,
-        Tension
+        Tension,
+        Willpower,
+        Intellect
     }
 
     public class GetStatEventData

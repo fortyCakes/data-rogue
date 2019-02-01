@@ -18,5 +18,11 @@ namespace data_rogue_core.Utils
 
             return data.Value;
         }
+
+        public static decimal GetStatByName(this IEventSystem eventSystem, IEntity sender, string statName)
+        {
+            Stat stat = (Stat)Enum.Parse(typeof(Stat), statName);
+            return GetStat(eventSystem, sender, stat);
+        }
     }
 }

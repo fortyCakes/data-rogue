@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using data_rogue_core.Components;
 
 namespace data_rogue_core.EntityEngine
 {
@@ -50,5 +51,9 @@ namespace data_rogue_core.EntityEngine
         }
 
         public bool IsPlayer => Name == "Player";
+        public Fighter GetFighter()
+        {
+            return Get<Fighter>();
+        }
     }
 }

@@ -14,6 +14,9 @@ namespace data_rogue_core.Components
         public int Muscle;
         public int Agility;
 
+        public int Willpower;
+        public int Intellect;
+
         public int BrokenTicks = 0;
     }
 }

@@ -37,18 +37,30 @@ namespace data_rogue_core.Systems
             var attackingFighter = attacker.Get<Fighter>();
             var defendingFighter = defender.Get<Fighter>();
 
-            var attackerDescription = attacker.Get<Description>();
-            var defenderDescription = defender.Get<Description>();
-
             var hit = EventRuleSystem.Try(EventType.Attack, attacker, defender);
+
+            var msg = $"{attacker.Get<Description>().Name} attacks {defender.Get<Description>().Name}";
 
             if (hit)
             {
                 var baseDamage = attackingFighter.Muscle;
+                msg += $" and hits for {baseDamage} damage.";
+
                 EventRuleSystem.Try(EventType.Damage, defender, new DamageEventData{Damage = baseDamage});
             }
+            else
+            {
+                msg += $" and misses.";
+            }
 
-            EventRuleSystem.Try(EventType.SpendTime, attacker, 1000);
+            MessageSystem.Write(msg);
+
+            EventRuleSystem.Try(EventType.SpendTime, attacker, new SpendTimeEventData() {Ticks = 1000});
+        }
+
+        public IEnumerable<IEntity> GetEntitiesWithFighter(IEnumerable<IEntity> entities)
+        {
+            return entities.Where(e => Entities.Contains(e));
         }
     }
 }

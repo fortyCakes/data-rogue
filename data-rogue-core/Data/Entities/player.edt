@@ -17,11 +17,10 @@ Aura: 100/500
 BaseAura: 100
 Muscle: 15
 Agility: 15
+Willpower: 15
+Intellect: 15
 [Description]
 Name: Player
 [KnownSkill]
-Skill: Skill:Test
+Skill: Skill:ManaBolt
 Order: 1
-[KnownSkill]
-Skill: Skill:MagicMissile
-Order: 2

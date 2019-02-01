@@ -17,6 +17,8 @@ Aura: 0/0
 BaseAura: 0
 Muscle: 4
 Agility: 12
+Willpower: 8
+Intellect: 4
 [Description]
 Name: Goblin
 [Actor]

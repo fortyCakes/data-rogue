@@ -107,6 +107,7 @@
     <Compile Include="EventSystem\EventData\DamageEventData.cs" />
     <Compile Include="EventSystem\EventData\GetStatEventData.cs" />
     <Compile Include="EventSystem\EventData\InputEventData.cs" />
+    <Compile Include="EventSystem\EventData\SpendTimeEventData.cs" />
     <Compile Include="EventSystem\EventType.cs" />
     <Compile Include="EventSystem\IEventRule.cs" />
     <Compile Include="EventSystem\IEventSystem.cs" />

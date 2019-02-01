@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using data_rogue_core.Components;
 
 namespace data_rogue_core.EntityEngine
 {
@@ -14,5 +15,7 @@ namespace data_rogue_core.EntityEngine
         bool Has<T>() where T : IEntityComponent;
 
         bool IsPlayer { get; }
+
+        Fighter GetFighter();
     }
 }

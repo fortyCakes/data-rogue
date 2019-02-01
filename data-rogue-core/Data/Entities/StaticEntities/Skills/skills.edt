@@ -1,28 +1,49 @@
-﻿"Test Skill"
+﻿"Mana Bolt"
 [Prototype]
-Name: Skill:Test
-Singleton: true
-[SkillScript]
-Script: {
-	SystemContainer.MessageSystem:Write('Hello world')
-}
-[Description]
-Name: Test Skill
-
-"Magic Missile"
-[Prototype]
-Name: Skill:MagicMissile
+Name: Skill:ManaBolt
 Singleton: true
 [SkillScript]
 Script: {
 	withTarget(
-	function(arg)
-		SystemContainer.MessageSystem:Write('Recieved target at ' .. arg:ToString())
+	function(target)
+		willpower = SystemContainer.EventSystem:GetStatByName(User, 'Willpower')
+		targetEntities = SystemContainer.PositionSystem:EntitiesAt(target)
+		targetFighters = SystemContainer.FighterSystem:GetEntitiesWithFighter(targetEntities)
+
+		anyTargets = false
+
+		for defender in each(targetFighters) do
+			anyTargets = true
+
+			attackingFighter = User:GetFighter()
+			defendingFighter = defender:GetFighter()
+
+			hit = SystemContainer.EventSystem:Try(luanet.enum(EventType, 'Attack'), User, defender);
+
+			if hit then
+				damageData = DamageEventData()
+				damageData.Damage = willpower
+				SystemContainer.EventSystem:Try(luanet.enum(EventType, 'Damage'), defender, damageData)
+				SystemContainer.MessageSystem:Write('The mana bolt hits for ' .. willpower .. ' damage.')
+			else
+				SystemContainer.MessageSystem:Write('The mana bolt misses.')
+			end
+
+			
+		end
+		
+		if not anyTargets then
+			SystemContainer.MessageSystem:Write('The mana bolt strikes empty space.')
+		end
+
+		spendTime = SpendTimeEventData()
+		spendTime.Ticks = 1000
+		SystemContainer.EventSystem:Try(luanet.enum(EventType, 'SpendTime'), User, spendTime)
 	end)
 
 	targetingData = TargetingData()
-	targetingData.Range = 5
+	targetingData.Range = 10
 	requestTarget(User, targetingData)
 }
 [Description]
-Name: Magic Missile
+Name: Mana Bolt

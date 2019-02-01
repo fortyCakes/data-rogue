@@ -3,6 +3,7 @@ using System.Linq;
 using data_rogue_core.Behaviours;
 using data_rogue_core.Components;
 using data_rogue_core.EntityEngine;
+using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
@@ -25,7 +26,9 @@ namespace data_rogue_core.EventSystem.Rules
         {
             Actor actor = sender.Get<Actor>();
 
-            TimeSystem.SpendTicks(sender, (int)eventData);
+            var spendTimeEventData = (SpendTimeEventData) eventData;
+
+            TimeSystem.SpendTicks(sender, spendTimeEventData.Ticks);
             actor.HasActed = true;
             
             if (sender.Has<PlayerControlledBehaviour>())

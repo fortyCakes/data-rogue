@@ -8,9 +8,10 @@ namespace data_rogue_core.EventSystem
     public interface IEventSystem : IInitialisableSystem
     {
         bool Try(EventType eventType, IEntity sender, object eventData);
-
         void RegisterRule(IEventRule eventRule);
         void RegisterRules(params IEventRule[] rules);
+
+
     }
 
     public class EventTypeList : List<EventType>
