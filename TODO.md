@@ -4,16 +4,15 @@ BUGS
 
 0.1
 
+Magical attacks - hit chance based on magical stats
 Character creation stat assignment
 Resting
 Save message log
 Enemy display in stats window
-Skills/Magic (scriptable effects)
-	Gaining skills (how?)
+Gaining skills (how?)
 Items (getting and dropping)
 	Usable items
 	Equippable items
-Nonhostile monsters (factions)
 Randomised Monster spawning (from monster prototype tags)
 Randomised Item spawning (from item prototype tags)
 Rules from file
@@ -22,10 +21,11 @@ Separate out core from implementation
 	Aura and Tilt separation
 		Stat window rendering customisation
 		Map rendering customisation
-Remove RLNet dependencies from core?
+Remove RLNet dependencies from core
 
 0.2+
 
+Nonhostile monsters (factions)
 Monsters spawn with items and drop them
 "seen tiles" on the map editor
 Dropdown for entity selection
