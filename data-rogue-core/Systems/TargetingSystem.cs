@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using data_rogue_core.Renderers;
 using data_rogue_core.Renderers.ConsoleRenderers;
 using RLNET;
 
@@ -35,7 +36,9 @@ namespace data_rogue_core.Systems
             {
                 if (Game.ActivityStack.Peek() is TargetingActivity activity)
                 {
-                    activity.TargetingActivityData.CurrentTarget = new MapCoordinate(Game.WorldState.CameraPosition.Key, x, y);
+                    var gameplayRenderer = Game.RendererFactory.GetRendererFor(ActivityType.Gameplay) as IGameplayRenderer;
+
+                    activity.TargetingActivityData.CurrentTarget = gameplayRenderer.GetMapCoordinateFromMousePosition(Game.WorldState, x, y);
                 }
             }
         }

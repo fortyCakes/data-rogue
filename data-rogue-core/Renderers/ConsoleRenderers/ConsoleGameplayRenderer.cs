@@ -49,6 +49,26 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             RenderLines(world.Player.Get<Fighter>().BrokenTicks > 0);
         }
 
+        public MapCoordinate GetMapCoordinateFromMousePosition(WorldState world, int x, int y)
+        {
+            if (IsOnMap(x, y))
+            {
+                var lookupX = world.CameraPosition.X - MapConsole.Width / 2 + x;
+                var lookupY = world.CameraPosition.Y - MapConsole.Height / 2 + y;
+
+                return new MapCoordinate(world.CameraPosition.Key, lookupX, lookupY);
+            }
+
+            return null;
+        }
+
+        private bool IsOnMap(int x, int y)
+        {
+            var mapWidth = MapConsole.Width;
+            var mapHeight = MapConsole.Height;
+            return x >= 0 && x < mapWidth && y >= 0 && y < mapHeight;
+        }
+
         private void RenderLines(bool alert)
         {
             var foreColor = alert? RLColor.Red : RLColor.White;
