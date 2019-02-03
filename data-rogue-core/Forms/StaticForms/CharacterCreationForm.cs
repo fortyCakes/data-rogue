@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using data_rogue_core.Activities;
 using data_rogue_core.Forms;
 using data_rogue_core.Menus.StaticMenus;
@@ -16,10 +17,25 @@ namespace data_rogue_core.Forms.StaticForms
         public static Dictionary<string, FormData> StaticFields => new Dictionary<string, FormData>
         {
             {"Name", new FormData (FormDataType.Text, "Rodney",1) },
-            {"Class", new MultipleChoiceFormData("Warrior", 2, new List<object> { "Warrior", "Wizard" }) }
+            {"Class", new MultipleChoiceFormData("Warrior", 2, new List<object> { "Warrior", "Wizard" }) },
+            {"Stats", new StatsFormData(3, 50, new List<FormStatInformation>
+            {
+                new FormStatInformation("Muscle", 5, 10, 20),
+                new FormStatInformation("Agility", 5, 10, 20),
+                new FormStatInformation("Intellect", 5, 10, 20),
+                new FormStatInformation("Willpower", 5, 10, 20),
+            } ) }
         };
 
         public string Name => Fields["Name"].Value.ToString();
+
+        public int Muscle => (Fields["Stats"] as StatsFormData).GetStat("Muscle");
+
+        public int Agility => (Fields["Stats"] as StatsFormData).GetStat("Agility");
+
+        public int Intellect => (Fields["Stats"] as StatsFormData).GetStat("Intellect");
+
+        public int Willpower => (Fields["Stats"] as StatsFormData).GetStat("Willpower");
 
         public static FormActivity GetCharacterCreationActivity()
         {

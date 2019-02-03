@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using data_rogue_core.Components;
 using data_rogue_core.EntityEngine;
 using data_rogue_core.EventSystem.EventData;
@@ -28,7 +29,9 @@ namespace data_rogue_core.EventSystem.Rules
 
         public bool Apply(EventType type, IEntity sender, object eventData)
         {
-            var defender = (IEntity) eventData;
+            var data = eventData as AttackEventData;
+
+            var defender = data.Defender;
 
             var attackerFighter = sender.Get<Fighter>();
             var defenderFighter = defender.Get<Fighter>();
@@ -36,15 +39,43 @@ namespace data_rogue_core.EventSystem.Rules
             var attackerDescription = sender.Get<Description>();
             var defenderDescription = defender.Get<Description>();
 
-            var attackStat = EventRuleSystem.GetStat(sender, Stat.Agility);
-            var defenceStat = EventRuleSystem.GetStat(defender, Stat.Agility);
+            var attackStat = GetAttackStat(sender, data.AttackType);
+            var defenceStat = GetDefenceStat(sender, data.AttackType);
 
-            var attackRoll = random.StatCheck(attackStat);
+            var attackRoll = Math.Max(random.StatCheck(attackStat), random.StatCheck(attackStat));
             var defenceRoll = random.StatCheck(defenceStat);
 
             bool hit = attackRoll >= defenceRoll;
             
             return hit;
         }
+
+        private decimal GetAttackStat(IEntity entity, AttackType attackType)
+        {
+            switch(attackType)
+            {
+                case AttackType.Physical:
+                    return EventRuleSystem.GetStat(entity, Stat.Agility);
+                case AttackType.Magical:
+                    return EventRuleSystem.GetStat(entity, Stat.Intellect);
+                default:
+                    throw new NotImplementedException();
+            }
+        }
+
+        private decimal GetDefenceStat(IEntity entity, AttackType attackType)
+        {
+            switch (attackType)
+            {
+                case AttackType.Physical:
+                    return EventRuleSystem.GetStat(entity, Stat.Agility);
+                case AttackType.Magical:
+                    return EventRuleSystem.GetStat(entity, Stat.Agility);
+                default:
+                    throw new NotImplementedException();
+            }
+        }
+
+
     }
 }

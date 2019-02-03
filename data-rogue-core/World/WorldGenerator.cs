@@ -76,6 +76,13 @@ namespace data_rogue_core
             player.Get<Position>().MapCoordinate = spawnPoint;
             player.Get<Description>().Name = form.Name;
 
+            var fighter = player.Get<Fighter>();
+
+            fighter.Agility = form.Agility;
+            fighter.Muscle = form.Muscle;
+            fighter.Intellect = form.Intellect;
+            fighter.Willpower = form.Willpower;
+
             world.Player = player;
         }
     }

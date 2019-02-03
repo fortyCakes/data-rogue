@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Linq;
 using data_rogue_core.Forms;
+using data_rogue_core.Forms.StaticForms;
+using data_rogue_core.Utils;
 using RLNET;
 
 namespace data_rogue_core.Renderers.ConsoleRenderers
@@ -23,7 +26,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
             RenderButtons(form);
 
-            RenderMenuItems(form);
+            RenderFormControls(form);
 
             RenderLines();
         }
@@ -37,7 +40,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             }
         }
 
-        private void RenderMenuItems(Form form)
+        private void RenderFormControls(Form form)
         {
             // For now I will recklessly assume all of the controls fit on the form
 
@@ -45,12 +48,13 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
             foreach(var field in form.Fields)
             {
-                RenderSingleControl(ref yCoordinate, field.Key, field.Value, form.Selected == field.Key);
+                RenderSingleControl(ref yCoordinate, field.Key, field.Value, form.FormSelection);
             }
         }
 
-        private void RenderSingleControl(ref int yCoordinate, string fieldName, FormData formData, bool selected)
+        private void RenderSingleControl(ref int yCoordinate, string fieldName, FormData formData, FormSelection selection)
         {
+            var selected = selection.SelectedItem == fieldName;
             var foreColor = selected ? RLColor.Cyan : RLColor.White;
 
             switch (formData.FormDataType)
@@ -71,6 +75,34 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
                     Console.Set(fieldName.Length + 32, yCoordinate, foreColor, null, selected ? 26 : 0);
                     Console.Print(fieldName.Length + 31, yCoordinate, "]", foreColor);
 
+                    yCoordinate += 2;
+                    break;
+                case FormDataType.StatArray:
+                    var statsFormData = formData as StatsFormData;
+                    var stats = statsFormData.Stats;
+
+                    Console.Print(1, yCoordinate, fieldName + ": ", foreColor);
+                    Console.Print(fieldName.Length + 7, yCoordinate, "[     /     ]", foreColor);
+                    Console.Print(fieldName.Length + 9, yCoordinate, statsFormData.CurrentTotalStat.ToString().PadLeft(4), foreColor);
+                    Console.Print(fieldName.Length + 14, yCoordinate, statsFormData.MaxTotalStat.ToString().PadRight(4), foreColor);
+                    yCoordinate += 1;
+                    var longestStat = stats.Max(s => s.statName.Length);
+
+                    foreach(var stat in stats)
+                    {
+                        var statSelected = selection.SubItem == stat.statName;
+                        var statForeColor = statSelected ? RLColor.Cyan : RLColor.White;
+
+                        Console.Print(2, yCoordinate, (stat.statName + ": ").PadRight(longestStat+2), statForeColor);
+                        Console.Print(2 + longestStat + 2, yCoordinate, "-", statSelected ? RLColor.Red : RLColor.White);
+                        Console.Print(2 + longestStat + 4, yCoordinate, stat.statValue.ToString().PadBoth(4), statForeColor);
+                        Console.Print(2 + longestStat + 10, yCoordinate, "+", statSelected ? RLColor.Green : RLColor.White);
+
+                        yCoordinate += 1;
+                    }
+
+                    yCoordinate += 1;
+
                     break;
                 default:
                     throw new NotImplementedException();
@@ -88,7 +120,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
                 if (form.Buttons.HasFlag(flag))
                 {
-                    RenderSingleButton(ref xCoordinate, flag.ToString(), form.Selected == flag.ToString());
+                    RenderSingleButton(ref xCoordinate, flag.ToString(), form.FormSelection.SelectedItem == flag.ToString());
                 }
             }
 

@@ -58,11 +58,11 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
             if (targetingActivityData.CurrentTarget == null)
             {
-                StatsConsole.Print(1, StatsConsole.Height - 20, $"Target: -", RLColor.White);
+                StatsConsole.Print(1, StatsConsole.Height - 15, $"Target: -", RLColor.White);
             }
             else
             {
-                StatsConsole.Print(1, StatsConsole.Height - 20, $"Target: {targetingActivityData.CurrentTarget.X}, {targetingActivityData.CurrentTarget.Y}", RLColor.White);
+                StatsConsole.Print(1, StatsConsole.Height - 15, $"Target: {targetingActivityData.CurrentTarget.X}, {targetingActivityData.CurrentTarget.Y}", RLColor.White);
             }
 
             RLConsole.Blit(StatsConsole, 0, 0, StatsConsole.Width, StatsConsole.Height, Console, Console.Width - 22, 0);

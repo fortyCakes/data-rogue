@@ -22,10 +22,6 @@ namespace data_rogue_core.UnitTests.Data
 end";
 
         private IEntityEngine entityEngine;
-        private IPositionSystem PositionSystem;
-        private IEventSystem EventSystem;
-        private BehaviourFactory BehaviourFactory;
-        private IRandom Random;
         private SystemContainer SystemContainer;
 
         [SetUp]
@@ -36,7 +32,7 @@ end";
             SystemContainer.PositionSystem = Substitute.For<IPositionSystem>();
             SystemContainer.EventSystem = Substitute.For<IEventSystem>();
             SystemContainer.Random = Substitute.For<IRandom>();
-            SystemContainer.BehaviourFactory = new BehaviourFactory(PositionSystem, EventSystem, Random);
+            SystemContainer.BehaviourFactory = new BehaviourFactory(SystemContainer.PositionSystem, SystemContainer.EventSystem, SystemContainer.Random);
 
             entityEngine = Substitute.For<IEntityEngine>();
             entityEngine.New(Arg.Any<string>(), Arg.Any<IEntityComponent[]>()).ReturnsForAnyArgs(callInfo =>
@@ -131,7 +127,7 @@ end";
         {
             var testEntity0 = new Entity(0, "TestEntity", new IEntityComponent[] {
                 new Appearance() { Glyph = '£', Color = Color.FromArgb(255, 0, 0)},
-                new MoveToPlayerBehaviour(PositionSystem, EventSystem) { Priority = 100 }
+                new MoveToPlayerBehaviour(SystemContainer.PositionSystem, SystemContainer.EventSystem) { Priority = 100 }
             });
 
             var testEntity1 = new Entity(1, "EntityWithPosition", new[]

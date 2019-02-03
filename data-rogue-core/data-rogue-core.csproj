@@ -104,6 +104,8 @@
     <Compile Include="EntityEngine\EntityEngine.cs" />
     <Compile Include="EntityEngine\EntitySerializer.cs" />
     <Compile Include="EntityEngine\ICustomFieldSerialization.cs" />
+    <Compile Include="EventSystem\EventData\AttackEventData.cs" />
+    <Compile Include="EventSystem\EventData\AttackType.cs" />
     <Compile Include="EventSystem\EventData\DamageEventData.cs" />
     <Compile Include="EventSystem\EventData\GetStatEventData.cs" />
     <Compile Include="EventSystem\EventData\InputEventData.cs" />
@@ -120,14 +122,17 @@
     <Compile Include="EventSystem\Rules\PlayerDeathRule.cs" />
     <Compile Include="EventSystem\Rules\SpendTimeRule.cs" />
     <Compile Include="EventSystem\Rules\PeopleDieWhenTheyAreKilledRule.cs" />
-    <Compile Include="EventSystem\Rules\AlwaysHitAttackRule.cs" />
     <Compile Include="EventSystem\Rules\BranchGeneratorRule.cs" />
     <Compile Include="EventSystem\Rules\BumpAttackRule.cs" />
     <Compile Include="EventSystem\Rules\DealDamageRule.cs" />
     <Compile Include="Forms\FormData.cs" />
     <Compile Include="Forms\FormDataType.cs" />
+    <Compile Include="Forms\FormSelection.cs" />
+    <Compile Include="Forms\MultipleChoiceFormData.cs" />
     <Compile Include="Forms\StaticForms\CharacterCreationForm.cs" />
     <Compile Include="Forms\FormButton.cs" />
+    <Compile Include="Forms\StatInformation.cs" />
+    <Compile Include="Forms\StatsFormData.cs" />
     <Compile Include="Maps\Generators\BasicDungeonMapGenerator.cs" />
     <Compile Include="Maps\MapGenCommands\MapGenCommandExecutorFactory.cs" />
     <Compile Include="Maps\MapGenCommands\EntityCommandExecutor.cs" />
@@ -265,7 +270,7 @@
     <None Include="Data\Entities\StaticEntities\Props\portal.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Data\Entities\StaticEntities\Skills\skills.edt">
+    <None Include="Data\Entities\StaticEntities\Skills\manabolt.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Content Include="Images\Tileset\Alloy_curses_12x12.png">

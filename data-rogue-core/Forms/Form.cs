@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using data_rogue_core.Forms;
+using data_rogue_core.Forms.StaticForms;
 using data_rogue_core.Utils;
 using RLNET;
 
@@ -20,7 +21,7 @@ namespace data_rogue_core.Forms
 
         private List<string> ButtonNames => Buttons.GetFlags().Select(s => s.ToString()).ToList();
 
-        public string Selected { get; set; } = "";
+        public FormSelection FormSelection { get; set; } = new FormSelection();
 
         public Form(string title, FormButton buttons, FormButtonSelected onSelectCallback, Dictionary<string, FormData> fields)
         {
@@ -28,7 +29,7 @@ namespace data_rogue_core.Forms
             OnSelectCallback = onSelectCallback;
             Fields = fields;
 
-            Selected = Fields.First().Key;
+            SelectField(Fields.First().Key, true);
         }
 
         public void HandleKeyPress(RLKeyPress keyPress)
@@ -37,9 +38,9 @@ namespace data_rogue_core.Forms
 
             var handled = false;
 
-            if (Fields.ContainsKey(Selected))
+            if (Fields.ContainsKey(FormSelection.SelectedItem))
             {
-                var selectedFormData = Fields[Selected];
+                var selectedFormData = Fields[FormSelection.SelectedItem];
                 switch (selectedFormData.FormDataType)
                 {
                     case FormDataType.Text:
@@ -47,6 +48,9 @@ namespace data_rogue_core.Forms
                         break;
                     case FormDataType.MultipleChoice:
                         handled = HandleKeyPress_MultipleChoice(keyPress, selectedFormData);
+                        break;
+                    case FormDataType.StatArray:
+                        handled = HandleKeyPress_StatArray(keyPress, selectedFormData, FormSelection.SubItem);
                         break;
                     default:
                         throw new NotImplementedException();
@@ -76,6 +80,22 @@ namespace data_rogue_core.Forms
             }
             
             
+        }
+
+        private bool HandleKeyPress_StatArray(RLKeyPress keyPress, FormData selectedFormData, string subItem)
+        {
+            if (keyPress.Key == RLKey.Right)
+            {
+                ((StatsFormData)selectedFormData).ChangeStat(subItem, increase: true);
+                return true;
+            }
+            if (keyPress.Key == RLKey.Left)
+            {
+                ((StatsFormData)selectedFormData).ChangeStat(subItem, increase: false);
+                return true;
+            }
+
+            return false;
         }
 
         private bool HandleKeyPress_MultipleChoice(RLKeyPress keyPress, FormData selectedFormData)
@@ -125,14 +145,20 @@ namespace data_rogue_core.Forms
 
         private void MoveUp()
         {
-            if (Selected == Fields.First().Key)
+            if (FieldIsSelected() && Fields[FormSelection.SelectedItem].HasSubFields)
             {
-                Selected = GetFirstButton();
+                var done = TryMoveUpSubItem();
+                if (done) return;
+            }
+
+            if (FormSelection.SelectedItem == Fields.First().Key)
+            {
+                SelectField(GetFirstButton(), false);
                 return;
             }
-            else if (Enum.GetNames(typeof(FormButton)).Contains(Selected))
+            else if (Enum.GetNames(typeof(FormButton)).Contains(FormSelection.SelectedItem))
             {
-                Selected = Fields.Last().Key;
+                SelectField(Fields.Last().Key, false);
             }
             else
             {
@@ -140,16 +166,84 @@ namespace data_rogue_core.Forms
             }
         }
 
+        private void SelectField(string field, bool fromAbove)
+        {
+            FormSelection.SelectedItem = field;
+
+            if (FieldIsSelected())
+            {
+                var selectedField = Fields[field];
+
+                if (selectedField.HasSubFields)
+                {
+                    if (fromAbove)
+                    {
+                        FormSelection.SubItem = selectedField.GetSubItems().First();
+                    }
+                    else
+                    {
+                        FormSelection.SubItem = selectedField.GetSubItems().Last();
+                    }
+                }
+            }
+        }
+
+        private bool TryMoveUpSubItem()
+        {
+            var subItem = FormSelection.SubItem;
+
+            var subItems = Fields[FormSelection.SelectedItem].GetSubItems();
+
+            var index = subItems.IndexOf(subItem);
+
+            if (index == 0) return false;
+
+            SelectSubItem(subItems[index - 1]);
+
+            return true;
+        }
+
+        private bool TryMoveDownSubItem()
+        {
+            var subItem = FormSelection.SubItem;
+
+            var subItems = Fields[FormSelection.SelectedItem].GetSubItems();
+
+            var index = subItems.IndexOf(subItem);
+
+            if (index == subItems.Count() - 1) return false;
+
+            SelectSubItem(subItems[index + 1]);
+
+            return true;
+        }
+
+        private void SelectSubItem(string subItem)
+        {
+            FormSelection.SubItem = subItem;
+        }
+
+        private bool FieldIsSelected()
+        {
+            return !ButtonNames.Contains(FormSelection.SelectedItem);
+        }
+
         private void MoveDown()
         {
-            if (Selected == Fields.Last().Key)
+            if (FieldIsSelected() && Fields[FormSelection.SelectedItem].HasSubFields)
             {
-                Selected = GetFirstButton();
+                var done = TryMoveDownSubItem();
+                if (done) return;
+            }
+
+            if (FormSelection.SelectedItem == Fields.Last().Key)
+            {
+                SelectField(GetFirstButton(), true);
                 return;
             }
-            else if (Enum.GetNames(typeof(FormButton)).Contains(Selected))
+            else if (Enum.GetNames(typeof(FormButton)).Contains(FormSelection.SelectedItem))
             {
-                Selected = Fields.First().Key;
+                SelectField(Fields.First().Key, true);
             }
             else
             {
@@ -159,11 +253,11 @@ namespace data_rogue_core.Forms
 
         private void MoveLeft()
         {
-            if (Selected == ButtonNames.First())
+            if (FormSelection.SelectedItem == ButtonNames.First())
             {
-                Selected = ButtonNames.Last();
+                SelectField(ButtonNames.Last(), false);
             }
-            else if (ButtonNames.Contains(Selected))
+            else if (ButtonNames.Contains(FormSelection.SelectedItem))
             {
                 MoveButtonIndex(-1);
             }
@@ -171,18 +265,18 @@ namespace data_rogue_core.Forms
 
         private void MoveButtonIndex(int move)
         {
-            var currentIndex = ButtonNames.IndexOf(ButtonNames.Single(f => f == Selected));
+            var currentIndex = ButtonNames.IndexOf(ButtonNames.Single(f => f == FormSelection.SelectedItem));
 
-            Selected = ButtonNames[currentIndex + move];
+            SelectField(ButtonNames[currentIndex + move], false);
         }
 
         private void MoveRight()
         {
-            if (Selected == ButtonNames.Last())
+            if (FormSelection.SelectedItem == ButtonNames.Last())
             {
-                Selected = ButtonNames.First();
+                SelectField(ButtonNames.First(), false);
             }
-            else if (ButtonNames.Contains(Selected))
+            else if (ButtonNames.Contains(FormSelection.SelectedItem))
             {
                 MoveButtonIndex(+1);
             }
@@ -190,9 +284,9 @@ namespace data_rogue_core.Forms
 
         private void Select()
         {
-            if (ButtonNames.Contains(Selected))
+            if (ButtonNames.Contains(FormSelection.SelectedItem))
             {
-                OnSelectCallback((FormButton)Enum.Parse(typeof(FormButton), Selected), this);
+                OnSelectCallback((FormButton)Enum.Parse(typeof(FormButton), FormSelection.SelectedItem), this);
             }
             else
             {
@@ -202,9 +296,9 @@ namespace data_rogue_core.Forms
 
         private void MoveIndex(int move)
         {
-            var currentIndex = FieldsKeyList.IndexOf(Selected);
+            var currentIndex = FieldsKeyList.IndexOf(FormSelection.SelectedItem);
 
-            Selected = FieldsKeyList[currentIndex + move];
+            SelectField(FieldsKeyList[currentIndex + move], move > 0);
         }
 
         private string GetFirstButton()

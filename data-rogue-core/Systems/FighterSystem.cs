@@ -37,7 +37,9 @@ namespace data_rogue_core.Systems
             var attackingFighter = attacker.Get<Fighter>();
             var defendingFighter = defender.Get<Fighter>();
 
-            var hit = EventRuleSystem.Try(EventType.Attack, attacker, defender);
+            var attackData = new AttackEventData { Defender = defender };
+
+            var hit = EventRuleSystem.Try(EventType.Attack, attacker, attackData);
 
             var msg = $"{attacker.Get<Description>().Name} attacks {defender.Get<Description>().Name}";
 

@@ -4,8 +4,7 @@ BUGS
 
 0.1
 
-Magical attacks - hit chance based on magical stats
-Character creation stat assignment
+-Character creation stat assignment
 Resting
 Save message log
 Enemy display in stats window

@@ -3,7 +3,7 @@
 Name: Skill:ManaBolt
 Singleton: true
 [SkillDefinition]
-Cost: 200
+Cost: 50
 Script: {
 	withTarget(
 	function(target)
@@ -19,13 +19,19 @@ Script: {
 			attackingFighter = User:GetFighter()
 			defendingFighter = defender:GetFighter()
 
-			hit = SystemContainer.EventSystem:Try(luanet.enum(EventType, 'Attack'), User, defender);
+			attackData = AttackEventData()
+			attackData.Defender = defender
+			attackData.AttackType = luanet.enum(AttackType, 'Magical')
+
+			hit = SystemContainer.EventSystem:Try(luanet.enum(EventType, 'Attack'), User, attackData);
 
 			if hit then
 				damageData = DamageEventData()
 				damageData.Damage = willpower
+				damageData.Overwhelming = true
+
 				SystemContainer.EventSystem:Try(luanet.enum(EventType, 'Damage'), defender, damageData)
-				SystemContainer.MessageSystem:Write('The mana bolt hits for ' .. willpower .. ' damage.')
+				SystemContainer.MessageSystem:Write('The mana bolt hits!')
 			else
 				SystemContainer.MessageSystem:Write('The mana bolt misses.')
 			end

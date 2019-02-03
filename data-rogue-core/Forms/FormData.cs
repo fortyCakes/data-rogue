@@ -16,34 +16,12 @@ namespace data_rogue_core.Forms
             Value = value;
             Order = order;
         }
-    }
 
-    public class MultipleChoiceFormData : FormData
-    {
-        public MultipleChoiceFormData(object value, int order, List<object> validValues) : base(FormDataType.MultipleChoice, value, order)
+        public bool HasSubFields { get; internal set; } = false;
+
+        public virtual List<string> GetSubItems()
         {
-            ValidValues = validValues;
-        }
-
-        public List<object> ValidValues { get; }
-
-        public void ChangeSelection(int change)
-        {
-            var index = ValidValues.IndexOf(Value);
-
-            index += change;
-
-            while (index > ValidValues.Count - 1)
-            {
-                index -= ValidValues.Count;
-            }
-
-            while (index < 0)
-            {
-                index += ValidValues.Count;
-            }
-
-            Value = ValidValues[index];
+            return new List<string>();
         }
     }
 }

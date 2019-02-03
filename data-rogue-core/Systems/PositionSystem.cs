@@ -14,7 +14,12 @@ namespace data_rogue_core.Systems
 
         public IEnumerable<IEntity> EntitiesAt(MapCoordinate coordinate)
         {
-            foreach(var entity in Entities)
+            return EntitiesAt_Internal(coordinate).ToList();
+        }
+
+        private IEnumerable<IEntity> EntitiesAt_Internal(MapCoordinate coordinate)
+        {
+            foreach (var entity in Entities)
             {
                 Position entityPosition = entity.Get<Position>();
                 if (entityPosition.MapCoordinate.Equals(coordinate))

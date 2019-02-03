@@ -41,6 +41,8 @@ namespace data_rogue_core.EventSystem.Rules
 
             if (newTilt > fighter.Tilt.Max)
             {
+                tiltDamage = fighter.Tilt.Max - fighter.Tilt.Current;
+
                 causedBreak = true;
 
                 var tiltOver = newTilt - fighter.Tilt.Max;
@@ -64,6 +66,9 @@ namespace data_rogue_core.EventSystem.Rules
             }
 
             MessageSystem.Write(msg, Color.DarkCyan);
+
+            if (data.Overwhelming && data.Damage > 0)
+                return true;
 
             return false;
         }
