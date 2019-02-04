@@ -4,8 +4,7 @@ BUGS
 
 0.1
 
--Character creation stat assignment
-Resting
+-Resting
 Save message log
 Enemy display in stats window
 Gaining skills (how?)
@@ -24,13 +23,14 @@ Remove RLNet dependencies from core
 
 0.2+
 
+Monsters with skills
+	Monsters with targeting
 Nonhostile monsters (factions)
 Monsters spawn with items and drop them
 "seen tiles" on the map editor
 Dropdown for entity selection
 Dropdown for cell selection
-Mouse support
-	Descriptions
+Mouseover descriptions
 Vault based map gen
 Mapgen visualiser (debug menu)
 Better tunneler
@@ -38,7 +38,7 @@ Animation system
 Tiles renderer
 Use item on item
 Use item on entity
-Audio system
+Audio system (beep boop)
 Random item generation
 Traps
 Encounter based map population

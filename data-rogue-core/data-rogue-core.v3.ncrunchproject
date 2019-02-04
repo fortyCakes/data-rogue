@@ -2,6 +2,7 @@
   <Settings>
     <HiddenComponentWarnings>
       <Value>PostBuildEventDisabled</Value>
+      <Value>AssemblyReferenceToBuildOutputDirectory</Value>
     </HiddenComponentWarnings>
   </Settings>
 </ProjectConfiguration>
