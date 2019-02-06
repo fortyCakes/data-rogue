@@ -92,6 +92,16 @@ namespace data_rogue_core.EntityEngine
             AllEntities.ForEach(e => e.IsStatic = true);
         }
 
+        public void AddComponent(IEntity entity, IEntityComponent component)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveComponent(IEntity entity, IEntityComponent component)
+        {
+            throw new NotImplementedException();
+        }
+
         public Entity Load(uint EntityId, Entity entity)
         {
             AllEntities.Add(entity);

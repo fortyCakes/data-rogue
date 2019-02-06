@@ -7,6 +7,9 @@ ZOrder: 9999
 Passable: false
 Transparent: true
 [Actor]
+[PlayerRestBehaviour]
+Priority: 1
+Resting: false
 [PlayerControlledBehaviour]
 Priority: 0
 [Position]

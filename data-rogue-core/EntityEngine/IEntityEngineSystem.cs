@@ -29,5 +29,8 @@ namespace data_rogue_core.EntityEngine
         List<T> GetAll<T>() where T : IEntityComponent;
 
         void Initialise(ISystemContainer behaviourFactory);
+
+        void AddComponent(IEntity entity, IEntityComponent component);
+        void RemoveComponent(IEntity entity, IEntityComponent component);
     }
 }

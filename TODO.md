@@ -4,7 +4,6 @@ BUGS
 
 0.1
 
--Resting
 Save message log
 Enemy display in stats window
 Gaining skills (how?)

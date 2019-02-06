@@ -47,7 +47,7 @@ namespace data_rogue_core.Systems
 
             PlayerControlSystem = new PlayerControlSystem(PositionSystem, EventSystem, TimeSystem);
 
-            BehaviourFactory = new BehaviourFactory(PositionSystem, EventSystem, Random);
+            BehaviourFactory = new BehaviourFactory(PositionSystem, EventSystem, Random, MessageSystem);
 
             PrototypeSystem = new PrototypeSystem(EntityEngine, PositionSystem, BehaviourFactory);
             EntityEngine.Register(PrototypeSystem);

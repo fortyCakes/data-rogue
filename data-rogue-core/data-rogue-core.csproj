@@ -76,6 +76,7 @@
     <Compile Include="Behaviours\BaseBehaviour.cs" />
     <Compile Include="Behaviours\BehaviourFactory.cs" />
     <Compile Include="Behaviours\IBehaviour.cs" />
+    <Compile Include="Behaviours\PlayerRestBehaviour.cs" />
     <Compile Include="Behaviours\TestBehaviour.cs" />
     <Compile Include="Behaviours\MoveToPlayerBehaviour.cs" />
     <Compile Include="Behaviours\RandomlyMoveBehaviour.cs" />

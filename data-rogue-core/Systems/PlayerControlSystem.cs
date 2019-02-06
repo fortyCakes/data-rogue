@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using data_rogue_core.Activities;
+using data_rogue_core.Behaviours;
 using data_rogue_core.Components;
 using data_rogue_core.EntityEngine;
 using data_rogue_core.EventSystem;
@@ -150,7 +151,10 @@ namespace data_rogue_core.Systems
 
         private void BeginRest()
         {
-            throw new NotImplementedException();
+            IEntity player = Game.WorldState.Player;
+
+            player.Get<PlayerRestBehaviour>().Resting = true;
+            Wait(1000);
         }
 
         private void UseSkill(int index)
