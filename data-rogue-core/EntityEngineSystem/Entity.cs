@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using data_rogue_core.Components;
 
-namespace data_rogue_core.EntityEngine
+namespace data_rogue_core.EntityEngineSystem
 {
     public class Entity : IEntity
     {
@@ -26,7 +26,7 @@ namespace data_rogue_core.EntityEngine
             return Components.Any(t => t.GetType() == typeof(T));
         }
 
-        internal bool HasAll(IEnumerable<Type> systemComponents)
+        public bool HasAll(SystemComponents systemComponents)
         {
             return systemComponents.All(sc => Components.Any(c => c.GetType() == sc));
         }

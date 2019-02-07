@@ -6,13 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace data_rogue_core.EntityEngine
+namespace data_rogue_core.EntityEngineSystem
 {
     public static class EntitySerializer
     {
         private const string ENTITY_NAME_PATTERN = "^\"(.*)\"";
 
-        public static string Serialize(Entity entity)
+        public static string Serialize(IEntity entity)
         {
             var stringBuilder = new StringBuilder();
 
@@ -26,7 +26,7 @@ namespace data_rogue_core.EntityEngine
             return stringBuilder.ToString();
         }
 
-        public static List<Entity> DeserializeMultiple(ISystemContainer systemContainer, string input)
+        public static List<IEntity> DeserializeMultiple(ISystemContainer systemContainer, string input)
         {
             var entityTexts = SplitIntoEntities(input);
 
@@ -60,7 +60,7 @@ namespace data_rogue_core.EntityEngine
             }
         }
 
-        public static Entity Deserialize(ISystemContainer systemContainer, string input)
+        public static IEntity Deserialize(ISystemContainer systemContainer, string input)
         {
             var lines = input.SplitLines();
 

@@ -2,7 +2,11 @@
 [Appearance]
 Color: #FF0000
 Glyph: £
+[MoveToPlayerBehaviour]
+Priority: 100
 "TestEntity":0
 [Appearance]
 Color: #FF0000
 Glyph: £
+[MoveToPlayerBehaviour]
+Priority: 100

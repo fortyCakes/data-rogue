@@ -1,5 +1,5 @@
 ﻿using data_rogue_core.Components;
-using data_rogue_core.EntityEngine;
+using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
@@ -22,7 +22,7 @@ namespace data_rogue_core.UnitTests.Maps
         {
             systemContainer = new SystemContainer();
 
-            systemContainer.EntityEngine = new EntityEngine.EntityEngine(new NullStaticEntityLoader());
+            systemContainer.EntityEngine = new EntityEngineSystem.EntityEngine(new NullStaticEntityLoader());
             systemContainer.PrototypeSystem = Substitute.For<IPrototypeSystem>();
 
             wallCell = CreateCell('#', "Cell:Wall");

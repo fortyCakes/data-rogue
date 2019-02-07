@@ -1,13 +1,15 @@
 ﻿using System.Collections.Generic;
 using data_rogue_core.Components;
 
-namespace data_rogue_core.EntityEngine
+namespace data_rogue_core.EntityEngineSystem
 {
     public interface IEntity
     {
         uint EntityId { get; }
 
         string Name { get; }
+
+        bool IsStatic { get; set; }
 
         List<IEntityComponent> Components { get; }
 
@@ -17,5 +19,8 @@ namespace data_rogue_core.EntityEngine
         bool IsPlayer { get; }
 
         Fighter GetFighter();
+        bool HasAll(SystemComponents systemComponents);
+
+        bool HasNone(SystemComponents systemComponents);
     }
 }

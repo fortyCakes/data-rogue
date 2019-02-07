@@ -9,7 +9,7 @@ using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace data_rogue_core.EntityEngine
+namespace data_rogue_core.EntityEngineSystem
 {
     public static class ComponentSerializer
     {

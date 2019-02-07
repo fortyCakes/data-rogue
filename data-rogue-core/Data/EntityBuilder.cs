@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using data_rogue_core.EntityEngine;
+using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.Data
@@ -24,7 +24,7 @@ namespace data_rogue_core.Data
             this.Id = entityId;
         }
 
-        public Entity Build(ISystemContainer systemContainer)
+        public IEntity Build(ISystemContainer systemContainer)
         {
             var components = Components.Select(c => ComponentSerializer.Deserialize(systemContainer, c.ToString(), 0)).ToArray();
 

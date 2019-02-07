@@ -2,9 +2,9 @@
 using System.IO;
 using System.Reflection;
 
-namespace data_rogue_core.EntityEngine
+namespace data_rogue_core.EntityEngineSystem
 {
-    public abstract class BaseStaticEntityLoader
+    public abstract class BaseStaticEntityLoader : IStaticEntityLoader
     {
         public abstract void Load(ISystemContainer systemContainer);
 

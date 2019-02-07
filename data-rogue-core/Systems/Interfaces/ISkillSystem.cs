@@ -1,4 +1,4 @@
-﻿using data_rogue_core.EntityEngine;
+﻿using data_rogue_core.EntityEngineSystem;
 
 namespace data_rogue_core.Systems.Interfaces
 {

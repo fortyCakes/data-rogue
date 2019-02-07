@@ -1,5 +1,5 @@
 ﻿using data_rogue_core.Behaviours;
-using data_rogue_core.EntityEngine;
+using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.EventSystem;
 using data_rogue_core.Systems.Interfaces;
 using System;
@@ -30,7 +30,7 @@ namespace data_rogue_core.Systems
         {
             MessageSystem = new MessageSystem();
 
-            EntityEngine = new EntityEngine.EntityEngine(new DataStaticEntityLoader());
+            EntityEngine = new EntityEngineSystem.EntityEngine(new DataStaticEntityLoader());
 
             EventSystem = new EventSystem.EventSystem();
 

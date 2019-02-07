@@ -3,7 +3,7 @@ using System.Drawing;
 using System.IO;
 using data_rogue_core.Behaviours;
 using data_rogue_core.Components;
-using data_rogue_core.EntityEngine;
+using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.EventSystem;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems;
@@ -62,9 +62,9 @@ end";
         {
             string testData = LoadSerializedData(testCase);
 
-            var entity = new List<Entity> { EntitySerializer.Deserialize(SystemContainer, testData) };
+            var entity = new List<IEntity> { EntitySerializer.Deserialize(SystemContainer, testData) };
 
-            var expected = new List<Entity> { GetTestEntity(testCase) };
+            var expected = new List<IEntity> { GetTestEntity(testCase) };
 
             entity.Should().BeEquivalentTo(expected, options => options.Using(new EntityListEquivalence()));
         }
@@ -88,7 +88,7 @@ end";
         [Test]
         public void DeserializeMultiple_ReturnsMultipleEntities()
         {
-            var multipleSerialised = LoadFile("EntitySystem/TestData/ExpectedSerialization_MultipleEntities.txt");
+            var multipleSerialised = LoadFile("EntityEngineSystem/TestData/ExpectedSerialization_MultipleEntities.txt");
 
             var entities = EntitySerializer.DeserializeMultiple(SystemContainer, multipleSerialised);
 
@@ -104,7 +104,7 @@ end";
 
         private static string LoadSerializedData(int index)
         {
-            return LoadFile($"EntitySystem/TestData/ExpectedSerialization_Entity{index}.txt");
+            return LoadFile($"EntityEngineSystem/TestData/ExpectedSerialization_Entity{index}.txt");
         }
 
         private static string LoadFile(string fileName)

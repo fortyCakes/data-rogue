@@ -1,5 +1,5 @@
 ﻿using data_rogue_core.Behaviours;
-using data_rogue_core.EntityEngine;
+using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.EventSystem;
 
 namespace data_rogue_core.Systems.Interfaces

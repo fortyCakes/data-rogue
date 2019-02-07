@@ -1,5 +1,5 @@
 ﻿using System;
-using data_rogue_core.EntityEngine;
+using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.EventSystem;
 using data_rogue_core.EventSystem.EventData;
 

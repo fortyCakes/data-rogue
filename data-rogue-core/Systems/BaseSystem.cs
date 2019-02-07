@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using data_rogue_core.EntityEngine;
+using data_rogue_core.EntityEngineSystem;
 
 namespace data_rogue_core.Systems
 {
@@ -13,6 +13,11 @@ namespace data_rogue_core.Systems
         public void RemoveEntity(IEntity entity)
         {
             Entities.Remove(entity);
+        }
+
+        public bool HasEntity(IEntity entity)
+        {
+            return Entities.Contains(entity);
         }
 
         public abstract SystemComponents RequiredComponents { get; }

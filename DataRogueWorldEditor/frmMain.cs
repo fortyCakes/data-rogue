@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using data_rogue_core;
-using data_rogue_core.EntityEngine;
+using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
 using DataRogueWorldEditor.Editors;

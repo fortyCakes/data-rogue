@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using data_rogue_core.Components;
-using data_rogue_core.EntityEngine;
+using data_rogue_core.EntityEngineSystem;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;

@@ -1,4 +1,4 @@
-﻿using data_rogue_core.EntityEngine;
+﻿using data_rogue_core.EntityEngineSystem;
 using System;
 using System.Text.RegularExpressions;
 
