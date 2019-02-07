@@ -1,5 +1,4 @@
-﻿using data_rogue_core.Behaviours;
-using data_rogue_core.Data;
+﻿using data_rogue_core.Data;
 using data_rogue_core.Systems.Interfaces;
 using data_rogue_core.Utils;
 using System.Collections.Generic;

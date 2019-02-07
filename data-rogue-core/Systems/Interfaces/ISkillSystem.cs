@@ -1,9 +1,4 @@
 ﻿using data_rogue_core.EntityEngine;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace data_rogue_core.Systems.Interfaces
 {

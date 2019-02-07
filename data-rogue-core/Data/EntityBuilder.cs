@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using data_rogue_core.Behaviours;
 using data_rogue_core.EntityEngine;
 using data_rogue_core.Systems.Interfaces;
 

@@ -1,5 +1,4 @@
-﻿using data_rogue_core.Behaviours;
-using data_rogue_core.Systems.Interfaces;
+﻿using data_rogue_core.Systems.Interfaces;
 using System.IO;
 using System.Reflection;
 

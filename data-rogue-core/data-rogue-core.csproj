@@ -201,7 +201,7 @@
     <Compile Include="Maps\Map.cs" />
     <Compile Include="EntityEngine\Entity.cs" />
     <Compile Include="EntityEngine\IEntity.cs" />
-    <Compile Include="EntityEngine\IEntityEngineSystem.cs" />
+    <Compile Include="EntityEngine\IEntityEngine.cs" />
     <Compile Include="Maps\MapSaveCell.cs" />
     <Compile Include="Systems\SaveSystem.cs" />
     <Compile Include="Data\SaveState.cs" />

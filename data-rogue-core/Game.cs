@@ -4,8 +4,6 @@ using data_rogue_core.Renderers;
 using RLNET;
 using System.Threading;
 using data_rogue_core.Activities;
-using data_rogue_core.Behaviours;
-using data_rogue_core.EntityEngine;
 using data_rogue_core.Menus.StaticMenus;
 using data_rogue_core.Renderers.ConsoleRenderers;
 using data_rogue_core.Systems;

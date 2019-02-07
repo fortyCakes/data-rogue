@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace data_rogue_core.Maps
+﻿namespace data_rogue_core.Maps
 {
     public class Vector
     {

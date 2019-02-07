@@ -2,12 +2,6 @@
 using data_rogue_core.Maps;
 using data_rogue_core.Systems.Interfaces;
 using NLua;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using data_rogue_core.EventSystem.EventData;
 
 namespace data_rogue_core.Systems
 {

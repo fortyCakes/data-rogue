@@ -2,10 +2,6 @@
 using data_rogue_core.EntityEngine;
 using data_rogue_core.Systems.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using data_rogue_core.EventSystem;
 
 namespace data_rogue_core.Systems

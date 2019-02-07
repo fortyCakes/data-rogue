@@ -4,12 +4,8 @@ using data_rogue_core.EntityEngine;
 using data_rogue_core.Maps;
 using System;
 using System.Linq;
-using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
-using data_rogue_core.Forms;
-using data_rogue_core.Menus.StaticMenus;
 using data_rogue_core.Forms.StaticForms;
-using data_rogue_core.Behaviours;
 
 namespace data_rogue_core
 {

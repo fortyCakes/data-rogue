@@ -1,6 +1,4 @@
-﻿using System;
-using data_rogue_core.EntityEngine;
-using data_rogue_core.Systems.Interfaces;
+﻿using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.Maps.MapGenCommands
 {

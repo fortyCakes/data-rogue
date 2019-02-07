@@ -3,7 +3,6 @@ using data_rogue_core.EntityEngine;
 using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.Forms;
 using data_rogue_core.Menus;
-using data_rogue_core.Renderers.ConsoleRenderers;
 using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
 using RLNET;

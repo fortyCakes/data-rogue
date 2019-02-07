@@ -1,10 +1,6 @@
 ﻿using data_rogue_core.EntityEngine;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace data_rogue_core.Data
 {

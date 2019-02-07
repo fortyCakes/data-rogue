@@ -1,6 +1,4 @@
-﻿using data_rogue_core.EntityEngine;
-using data_rogue_core.Systems.Interfaces;
-using data_rogue_core.Utils;
+﻿using data_rogue_core.Utils;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;

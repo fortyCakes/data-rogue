@@ -2,16 +2,12 @@
 using data_rogue_core.EntityEngine;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems.Interfaces;
-using DataRogueWorldEditor.Controls;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Appearance = data_rogue_core.Components.Appearance;
 

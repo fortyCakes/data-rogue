@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using data_rogue_core.Activities;
-using data_rogue_core.Forms;
 using data_rogue_core.Menus.StaticMenus;
 
 namespace data_rogue_core.Forms.StaticForms

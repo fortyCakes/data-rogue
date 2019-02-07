@@ -1,9 +1,7 @@
-﻿using data_rogue_core.Behaviours;
-using data_rogue_core.EntityEngine;
+﻿using data_rogue_core.EntityEngine;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems.Interfaces;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 
 namespace data_rogue_core

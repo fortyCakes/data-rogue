@@ -1,5 +1,4 @@
 ﻿using data_rogue_core.Data;
-using data_rogue_core.EntityEngine;
 using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.Maps.Generators

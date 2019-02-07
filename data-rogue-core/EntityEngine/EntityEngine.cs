@@ -1,5 +1,4 @@
-﻿using data_rogue_core.Behaviours;
-using data_rogue_core.Components;
+﻿using data_rogue_core.Components;
 using data_rogue_core.Systems.Interfaces;
 using Newtonsoft.Json;
 using System;

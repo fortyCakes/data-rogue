@@ -1,14 +1,8 @@
 ﻿using data_rogue_core.Components;
 using data_rogue_core.EntityEngine;
-using data_rogue_core.Maps;
 using data_rogue_core.Systems.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using data_rogue_core.EventSystem;
 using data_rogue_core.EventSystem.EventData;
 

@@ -1,6 +1,4 @@
-﻿using data_rogue_core.Forms;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace data_rogue_core.Forms
 {

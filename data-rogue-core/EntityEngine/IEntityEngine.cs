@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using data_rogue_core.Behaviours;
-using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.EntityEngine

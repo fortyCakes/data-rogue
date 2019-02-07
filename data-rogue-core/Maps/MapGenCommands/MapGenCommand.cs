@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace data_rogue_core.Maps
+﻿namespace data_rogue_core.Maps
 {
     public class MapGenCommand
     {

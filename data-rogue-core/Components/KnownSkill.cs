@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using data_rogue_core.EntityEngine;
+﻿using data_rogue_core.EntityEngine;
 
 namespace data_rogue_core.Components
 {
