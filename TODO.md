@@ -1,6 +1,6 @@
 BUGS
 
--
+Message log gains empty lines
 
 0.1
 
@@ -14,11 +14,11 @@ Randomised Monster spawning (from monster prototype tags)
 Randomised Item spawning (from item prototype tags)
 Rules from file
 Dependency injection for rules and behaviours
-Separate out core from implementation
+Separate out core from implementation (!)
 	Aura and Tilt separation
 		Stat window rendering customisation
 		Map rendering customisation
-Remove RLNet dependencies from core
+Remove RLNet dependencies from core (!)
 
 0.2+
 

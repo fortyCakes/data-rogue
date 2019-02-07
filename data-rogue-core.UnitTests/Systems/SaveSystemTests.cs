@@ -82,6 +82,7 @@ namespace data_rogue_core.UnitTests.Data
                 Seed = "TestSeed",
                 Maps = new List<string> { MapSerializer.Serialize(GetTestMap(0))},
                 Entities = new List<string>() { EntitySerializer.Serialize( GetTestEntity(0))},
+                Messages =  new List<string> { "This is a test message"},
                 Time = 42
             } ;
         }

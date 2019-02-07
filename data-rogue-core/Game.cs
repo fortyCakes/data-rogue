@@ -34,6 +34,7 @@ namespace data_rogue_core
 
         private static RLRootConsole _rootConsole;
         private static bool _leaving = false;
+        public static bool Loading { get; set; } = false;
 
         public static void Main()
         {
@@ -171,7 +172,7 @@ namespace data_rogue_core
 
         private static void OnRootConsoleUpdate(object sender, UpdateEventArgs e)
         {
-            if (!_leaving)
+            if (!_leaving && !Loading)
             {
                 RLKeyPress keyPress = _rootConsole.Keyboard.GetKeyPress();
                 RLMouse mouse = _rootConsole.Mouse;
@@ -187,6 +188,7 @@ namespace data_rogue_core
                 
             }
         }
+
 
         public static void CreateCharacter()
         {
@@ -213,7 +215,11 @@ namespace data_rogue_core
             {
                 Thread.CurrentThread.IsBackground = true;
 
+                Loading = true;
+
                 WorldState = SaveSystem.Load(SystemContainer);
+
+                Loading = false;
 
                 ActivityStack.Pop();
 

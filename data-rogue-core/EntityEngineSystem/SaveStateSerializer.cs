@@ -28,6 +28,12 @@ namespace data_rogue_core
                 stringBuilder.Append(map);
             }
 
+            stringBuilder.AppendLine("===== MESSAGES =====");
+            foreach (var message in state.Messages)
+            {
+                stringBuilder.AppendLine(message);
+            }
+
             return stringBuilder.ToString();
         }
 
@@ -73,6 +79,12 @@ namespace data_rogue_core
             {
                 var line = lines[lineIndex];
 
+                if (line == "===== MESSAGES =====")
+                {
+                    lineIndex++;
+                    break;
+                }
+
                 var mapStartMatch = Regex.Match(line, MAP_START_PATTERN);
 
                 if (mapStartMatch.Success)
@@ -85,6 +97,16 @@ namespace data_rogue_core
             }
 
             AddMapIfNotEmpty(state, textBuilder);
+
+            for (; lineIndex < lines.Length; lineIndex++)
+            {
+                var line = lines[lineIndex];
+
+                if (!string.IsNullOrWhiteSpace(line))
+                {
+                    state.Messages.Add(line);
+                }
+        }
 
             return state;
         }

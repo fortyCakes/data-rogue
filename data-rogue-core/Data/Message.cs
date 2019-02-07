@@ -6,5 +6,10 @@ namespace data_rogue_core.Data
     {
         public string Text { get; set; }
         public Color Color { get; set; }
+
+        public override string ToString()
+        {
+            return ColorTranslator.ToHtml(Color) + ":" + Text;
+        }
     }
 }

@@ -2,6 +2,7 @@
 using System.Linq;
 using data_rogue_core.Maps;
 using data_rogue_core.Components;
+using data_rogue_core.Data;
 using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core
@@ -12,6 +13,7 @@ namespace data_rogue_core
         {
             EntityEngineSystem = systemContainer.EntityEngine;
             TimeSystem = systemContainer.TimeSystem;
+            MessageSystem = systemContainer.MessageSystem;
             Seed = systemContainer.Seed;
         }
 
@@ -19,12 +21,12 @@ namespace data_rogue_core
 
         public IEntity Player;
 
-        //public Map CurrentMap => Maps[Player.Get<Position>().MapCoordinate.Key];
-
         public MapCoordinate CameraPosition => Player.Get<Position>().MapCoordinate;
 
-        public IEntityEngine EntityEngineSystem { get; private set; }
+        public IEntityEngine EntityEngineSystem { get; }
         public ITimeSystem TimeSystem { get; }
+
+        public IMessageSystem MessageSystem { get; }
         public string Seed { get; }
 
         public SaveState GetSaveState()
@@ -33,7 +35,8 @@ namespace data_rogue_core
             {
                 Entities = EntityEngineSystem.MutableEntities.Select(e => EntitySerializer.Serialize(e)).ToList(),
                 Maps = Maps.AllMaps.Select(m => MapSerializer.Serialize(m)).ToList(),
-                Time = TimeSystem.CurrentTime
+                Time = TimeSystem.CurrentTime,
+                Messages = MessageSystem.AllMessages.Select(m => MessageSerializer.Serialize(m)).ToList()
             };
         }
     }

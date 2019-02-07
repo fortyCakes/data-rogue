@@ -236,6 +236,7 @@
     <Compile Include="World\GenerationStrategies\IBranchGenerator.cs" />
     <Compile Include="Maps\Generators\IMapGenerator.cs" />
     <Compile Include="EntityEngineSystem\WorldEntityLoader.cs" />
+    <Compile Include="Data\MessageSerializer.cs" />
     <Compile Include="World\WorldGenerator.cs" />
     <Compile Include="World\WorldState.cs" />
   </ItemGroup>

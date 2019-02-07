@@ -3,6 +3,7 @@ using data_rogue_core.Maps;
 using data_rogue_core.Systems.Interfaces;
 using System.IO;
 using System.Reflection;
+using data_rogue_core.Data;
 
 namespace data_rogue_core
 {
@@ -37,6 +38,13 @@ namespace data_rogue_core
                 var map = MapSerializer.Deserialize(systemContainer, savedMap);
 
                 world.Maps.Add(map.MapKey, map);
+            }
+
+            foreach (var savedMessage in loadedState.Messages)
+            {
+                var message = MessageSerializer.Deserialize(savedMessage);
+
+                systemContainer.MessageSystem.AllMessages.Add(message);
             }
 
             return world;
