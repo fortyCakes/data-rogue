@@ -31,7 +31,7 @@ end";
             SystemContainer.PositionSystem = Substitute.For<IPositionSystem>();
             SystemContainer.EventSystem = Substitute.For<IEventSystem>();
             SystemContainer.Random = Substitute.For<IRandom>();
-            SystemContainer.BehaviourFactory = new BehaviourFactory(SystemContainer.PositionSystem, SystemContainer.EventSystem, SystemContainer.Random);
+            SystemContainer.BehaviourFactory = new BehaviourFactory(SystemContainer.PositionSystem, SystemContainer.EventSystem, SystemContainer.Random, SystemContainer.MessageSystem);
 
             entityEngine = Substitute.For<IEntityEngine>();
             entityEngine.New(Arg.Any<string>(), Arg.Any<IEntityComponent[]>()).ReturnsForAnyArgs(callInfo =>
