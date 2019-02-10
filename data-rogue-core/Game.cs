@@ -204,6 +204,8 @@ namespace data_rogue_core
                 Thread.CurrentThread.IsBackground = true;
 
                 WorldState = WorldGenerator.Create(SystemContainer, characterCreationForm);
+
+                ActivityStack.Pop();
             }).Start();
         }
 

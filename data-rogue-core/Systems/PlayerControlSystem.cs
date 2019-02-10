@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 using data_rogue_core.Activities;
 using data_rogue_core.Behaviours;
@@ -8,6 +9,7 @@ using data_rogue_core.EventSystem;
 using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.Maps;
 using data_rogue_core.Menus.StaticMenus;
+using data_rogue_core.Renderers;
 using data_rogue_core.Systems.Interfaces;
 using RLNET;
 
@@ -19,6 +21,8 @@ namespace data_rogue_core.Systems
         private readonly IPositionSystem PositionSystem;
         private readonly IEventSystem EventSystem;
         private readonly ITimeSystem TimeSystem;
+
+        public IEntity HoveredEntity { get; private set; }
 
         public PlayerControlSystem(IPositionSystem positionSystem, IEventSystem eventRuleSystem, ITimeSystem timeSystem)
         {
@@ -226,6 +230,38 @@ namespace data_rogue_core.Systems
             var vector = new Vector(x, y);
 
             EventSystem.Try(EventType.Move, player, vector);
+        }
+
+        public void HandleMouseInput(RLMouse mouse)
+        {
+            var x = mouse.X;
+            var y = mouse.Y;
+
+            if (Game.ActivityStack.Peek() is GameplayActivity activity)
+            {
+                var gameplayRenderer = Game.RendererFactory.GetRendererFor(ActivityType.Gameplay) as IGameplayRenderer;
+
+                var hoveredLocation = gameplayRenderer.GetMapCoordinateFromMousePosition(Game.WorldState, x, y);
+
+                if (hoveredLocation == null)
+                {
+                    SetHoveredEntity(null);
+                }
+                else
+                {
+                    var visibleEntitiesAtLocation = PositionSystem.EntitiesAt(hoveredLocation).Where(e => e.Has<Appearance>());
+
+                    var topEntity = visibleEntitiesAtLocation.OrderByDescending(e => e.Get<Appearance>().ZOrder).FirstOrDefault();
+
+                    SetHoveredEntity(topEntity);
+                }
+            }
+                    
+        }
+
+        private void SetHoveredEntity(IEntity topEntity)
+        {
+            HoveredEntity = topEntity;
         }
     }
 }

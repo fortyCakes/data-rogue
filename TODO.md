@@ -1,17 +1,15 @@
 BUGS
 
-Message log gains empty lines
+-
 
 0.1
 
-Save message log
-Enemy display in stats window
-Gaining skills (how?)
 Items (getting and dropping)
 	Usable items
 	Equippable items
 Randomised Monster spawning (from monster prototype tags)
 Randomised Item spawning (from item prototype tags)
+Cancelling a skill / spend aura after skill is completed
 Rules from file
 Dependency injection for rules and behaviours
 Separate out core from implementation (!)
@@ -22,6 +20,7 @@ Remove RLNet dependencies from core (!)
 
 0.2+
 
+Gaining skills (how?)
 Monsters with skills
 	Monsters with targeting
 Nonhostile monsters (factions)

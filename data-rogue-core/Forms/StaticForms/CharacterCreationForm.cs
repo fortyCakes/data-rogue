@@ -47,8 +47,8 @@ namespace data_rogue_core.Forms.StaticForms
             switch(button)
             {
                 case FormButton.Ok:
-                    Game.ActivityStack.Pop();
                     Game.StartNewGame(characterCreationForm);
+                    Game.ActivityStack.Pop();
                     break;
                 case FormButton.Cancel:
                     Game.ActivityStack.Pop();

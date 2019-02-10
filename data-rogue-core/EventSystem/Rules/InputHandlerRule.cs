@@ -41,6 +41,7 @@ namespace data_rogue_core.EventSystem.Rules
                     return false;
                 case ActivityType.Gameplay:
                     PlayerControlSystem.HandleKeyPress(keyPress);
+                    PlayerControlSystem.HandleMouseInput(mouse);
                     break;
                 case ActivityType.Form:
                     (currentActivity.Data as Form)?.HandleKeyPress(keyPress);

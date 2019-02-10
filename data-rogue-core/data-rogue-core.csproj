@@ -143,6 +143,7 @@
     <Compile Include="Renderers\ConsoleRenderers\CellTargeting.cs" />
     <Compile Include="Renderers\ConsoleRenderers\ConsoleFormRenderer.cs" />
     <Compile Include="Forms\Form.cs" />
+    <Compile Include="Renderers\ConsoleRenderers\ConsoleRendererHelper.cs" />
     <Compile Include="Renderers\ConsoleRenderers\ConsoleTargetingRenderer.cs" />
     <Compile Include="Renderers\ConsoleRenderers\MapRendererHelper.cs" />
     <Compile Include="Renderers\IFormRenderer.cs" />

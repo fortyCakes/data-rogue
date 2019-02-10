@@ -36,6 +36,13 @@ namespace data_rogue_core.EntityEngineSystem
             return (T)Components.SingleOrDefault(t => t.GetType() == typeof(T));
         }
 
+        public T TryGet<T>() where T : class, IEntityComponent
+        {
+            if (Has<T>()) return Get<T>();
+
+            return null;
+        }
+
         public override string ToString()
         {
             var componentTypeList = string.Join(",", Components.Select(c => c.GetType().Name));
