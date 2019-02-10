@@ -4,7 +4,7 @@ namespace data_rogue_core.Components
 {
     public class Inventory : IEntityComponent
     {
-        int Capacity;
-        EntityReferenceList Contents;
+        public int Capacity;
+        public EntityReferenceList Contents = new EntityReferenceList();
     }
 }

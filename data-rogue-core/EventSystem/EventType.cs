@@ -11,6 +11,8 @@
         Death,
         SpendTime,
         GetStat,
-        ActivateSkill
+        ActivateSkill,
+        PickUpItem,
+        DropItem
     }
 }

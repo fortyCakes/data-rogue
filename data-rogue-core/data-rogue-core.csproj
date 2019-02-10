@@ -114,6 +114,7 @@
     <Compile Include="EventSystem\EventData\DamageEventData.cs" />
     <Compile Include="EventSystem\EventData\GetStatEventData.cs" />
     <Compile Include="EventSystem\EventData\InputEventData.cs" />
+    <Compile Include="EventSystem\EventData\ItemEventData.cs" />
     <Compile Include="EventSystem\EventData\SpendTimeEventData.cs" />
     <Compile Include="EventSystem\EventType.cs" />
     <Compile Include="EventSystem\IEventRule.cs" />
@@ -155,6 +156,7 @@
     <Compile Include="Systems\AStar.cs" />
     <Compile Include="Systems\FighterSystem.cs" />
     <Compile Include="Behaviours\IBehaviourFactory.cs" />
+    <Compile Include="Systems\Interfaces\IItemSystem.cs" />
     <Compile Include="Systems\Interfaces\IFighterSystem.cs" />
     <Compile Include="Systems\Interfaces\IMessageSystem.cs" />
     <Compile Include="Systems\Interfaces\IPrototypeSystem.cs" />
@@ -163,14 +165,15 @@
     <Compile Include="Systems\Interfaces\ISystemContainer.cs" />
     <Compile Include="Systems\Interfaces\ITargetingSystem.cs" />
     <Compile Include="Systems\Interfaces\ITimeSystem.cs" />
+    <Compile Include="Systems\ItemSystem.cs" />
     <Compile Include="Systems\SystemContainer.cs" />
-    <Compile Include="Systems\IScriptExecutor.cs" />
+    <Compile Include="Systems\Interfaces\IScriptExecutor.cs" />
     <Compile Include="Systems\ScriptExecutor.cs" />
     <Compile Include="Systems\SkillSystem.cs" />
     <Compile Include="Systems\TargetingSystem.cs" />
     <Compile Include="Systems\TimeSystem.cs" />
     <Compile Include="Systems\MessageSystem.cs" />
-    <Compile Include="Systems\IRandom.cs" />
+    <Compile Include="Systems\Interfaces\IRandom.cs" />
     <Compile Include="Maps\Generators\StaticMapGenerator.cs" />
     <Compile Include="Maps\MapSerializer.cs" />
     <Compile Include="Maps\Matrix.cs" />

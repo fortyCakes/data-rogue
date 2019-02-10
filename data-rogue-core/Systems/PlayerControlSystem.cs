@@ -18,23 +18,27 @@ namespace data_rogue_core.Systems
     public class PlayerControlSystem : IPlayerControlSystem
     {
 
-        private readonly IPositionSystem PositionSystem;
-        private readonly IEventSystem EventSystem;
-        private readonly ITimeSystem TimeSystem;
+        private readonly IPositionSystem positionSystem;
+        private readonly IEventSystem eventSystem;
+        private readonly IMessageSystem messageSystem;
+        private readonly ITimeSystem timeSystem;
+        private readonly IItemSystem itemSystem;
 
         public MapCoordinate HoveredCoordinate { get; private set; }
 
-        public PlayerControlSystem(IPositionSystem positionSystem, IEventSystem eventRuleSystem, ITimeSystem timeSystem)
+        public PlayerControlSystem(IPositionSystem positionSystem, IEventSystem eventSystem, ITimeSystem timeSystem, IItemSystem itemSystem, IMessageSystem messageSystem)
         {
-            TimeSystem = timeSystem;
-            PositionSystem = positionSystem;
-            EventSystem = eventRuleSystem;
+            this.timeSystem = timeSystem;
+            this.itemSystem = itemSystem;
+            this.positionSystem = positionSystem;
+            this.eventSystem = eventSystem;
+            this.messageSystem = messageSystem;
         }
 
 
         public void HandleKeyPress(RLKeyPress keyPress)
         {
-            if (TimeSystem.WaitingForInput && keyPress != null)
+            if (timeSystem.WaitingForInput && keyPress != null)
             {
                 switch (keyPress.Key)
                 {
@@ -77,6 +81,16 @@ namespace data_rogue_core.Systems
                         if (keyPress.Shift)
                         {
                             BeginRest();
+                        }
+                        break;
+                    case RLKey.G:
+                        if (keyPress.Shift)
+                        {
+
+                        }
+                        else
+                        {
+                            GetItem();
                         }
                         break;
                     case RLKey.Escape:
@@ -152,6 +166,34 @@ namespace data_rogue_core.Systems
             }
         }
 
+        private void GetItem()
+        {
+            IEntity player = Game.WorldState.Player;
+            var playerMapCoordinate = player.Get<Position>().MapCoordinate;
+
+            var items = positionSystem.EntitiesAt(playerMapCoordinate)
+                .Except(new[] { player })
+                .Where(e => e.Has<Item>())
+                .OrderBy(e => e.EntityId);
+
+            var firstItem = items.First();
+
+            var eventData = new PickupItemEventData { Item = firstItem };
+
+            var ok = eventSystem.Try(EventType.PickUpItem, player, eventData);
+
+            if (ok)
+            {
+                var inventory = player.Get<Inventory>();
+
+                itemSystem.MoveToInventory(firstItem, inventory);
+
+                messageSystem.Write($"You pick up the {firstItem.Get<Description>().Name}.");
+
+                eventSystem.Try(EventType.SpendTime, player, new SpendTimeEventData { Ticks = 1000 });
+            }
+        }
+
         private void BeginRest()
         {
             IEntity player = Game.WorldState.Player;
@@ -162,12 +204,12 @@ namespace data_rogue_core.Systems
 
         private void UseSkill(int index)
         {
-            EventSystem.Try(EventType.ActivateSkill, Game.WorldState.Player, new ActivateSkillEventData() { SkillIndex = index });
+            eventSystem.Try(EventType.ActivateSkill, Game.WorldState.Player, new ActivateSkillEventData() { SkillIndex = index });
         }
 
         private void Wait(int ticks)
         {
-            EventSystem.Try(EventType.SpendTime, Game.WorldState.Player, new SpendTimeEventData{Ticks = ticks});
+            eventSystem.Try(EventType.SpendTime, Game.WorldState.Player, new SpendTimeEventData{Ticks = ticks});
         }
 
         private void UseStairs(StairDirection direction)
@@ -175,7 +217,7 @@ namespace data_rogue_core.Systems
             IEntity player = Game.WorldState.Player;
             var playerMapCoordinate = player.Get<Position>().MapCoordinate;
 
-            var stairs = PositionSystem
+            var stairs = positionSystem
                 .EntitiesAt(playerMapCoordinate)
                 .Where(e => e.Has<Stairs>())
                 .Select(e => e.Get<Stairs>())
@@ -183,14 +225,14 @@ namespace data_rogue_core.Systems
 
             if (stairs != null && stairs.Direction == direction)
             {
-                if (EventSystem.Try(EventType.ChangeFloor, player, direction))
+                if (eventSystem.Try(EventType.ChangeFloor, player, direction))
                 {
                     player.Get<Position>().MapCoordinate = stairs.Destination;
                 }
             }
             else
             {
-                var portal = PositionSystem
+                var portal = positionSystem
                     .EntitiesAt(playerMapCoordinate)
                     .Where(e => e.Has<Portal>())
                     .Select(e => e.Get<Portal>())
@@ -198,7 +240,7 @@ namespace data_rogue_core.Systems
 
                 if (portal != null)
                 {
-                    if (EventSystem.Try(EventType.UsePortal, player, portal))
+                    if (eventSystem.Try(EventType.UsePortal, player, portal))
                     {
                         player.Get<Position>().MapCoordinate = portal.Destination;
                     }
@@ -229,7 +271,7 @@ namespace data_rogue_core.Systems
             var player = Game.WorldState.Player;
             var vector = new Vector(x, y);
 
-            EventSystem.Try(EventType.Move, player, vector);
+            eventSystem.Try(EventType.Move, player, vector);
         }
 
         public void HandleMouseInput(RLMouse mouse)

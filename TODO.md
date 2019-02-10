@@ -4,9 +4,13 @@ BUGS
 
 0.1
 
-Items (getting and dropping)
-	Usable items
-	Equippable items
+Items
+	/ Pick up items from floor
+	Drop items (menu)
+	Use items
+	Equip items
+	Equipped items boost stats
+	Enforce inventory capacity
 Randomised Monster spawning (from monster prototype tags)
 Randomised Item spawning (from item prototype tags)
 Cancelling a skill / spend aura after skill is completed

@@ -32,5 +32,7 @@ namespace data_rogue_core.EntityEngineSystem
         void RemoveComponent(IEntity entity, IEntityComponent component);
         IEntity GetEntityWithName(string testEntity);
         IEnumerable<IEntity> GetEntitiesWithName(string testEntity);
+        
+        void RemoveComponent<T>(IEntity item) where T : IEntityComponent;
     }
 }
