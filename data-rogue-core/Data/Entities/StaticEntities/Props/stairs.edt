@@ -10,6 +10,8 @@ Color: #aaaaaa
 ZOrder: 1
 [Position]
 [Memorable]
+[Description]
+Name: Stairs Down
 
 "Props:StairsUp"
 [Stairs]
@@ -23,3 +25,5 @@ Color: #aaaaaa
 ZOrder: 1
 [Position]
 [Memorable]
+[Description]
+Name: Stairs Up
