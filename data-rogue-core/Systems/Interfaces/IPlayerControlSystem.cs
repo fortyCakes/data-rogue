@@ -1,4 +1,5 @@
 ﻿using data_rogue_core.EntityEngineSystem;
+using data_rogue_core.Maps;
 using RLNET;
 
 namespace data_rogue_core.Systems
@@ -8,6 +9,6 @@ namespace data_rogue_core.Systems
         void HandleKeyPress(RLKeyPress keyPress);
         void HandleMouseInput(RLMouse mouse);
 
-        IEntity HoveredEntity { get; }
+        MapCoordinate HoveredCoordinate { get; }
     }
 }

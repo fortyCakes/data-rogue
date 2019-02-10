@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using data_rogue_core.Components;
 using data_rogue_core.Data;
@@ -40,9 +41,9 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
                 return;
             }
 
-            RenderMap(world, systemContainer);
+            RenderMap(world, systemContainer, out var playerFov);
 
-            RenderStats(world, systemContainer);
+            RenderStats(world, systemContainer, playerFov);
 
             RenderMessages(systemContainer);
 
@@ -102,7 +103,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             RLConsole.Blit(MessageConsole, 0, 0, MessageConsole.Width, MessageConsole.Height, Console, 0, Console.Height - 15);
         }
 
-        private void RenderStats(WorldState world, ISystemContainer systemContainer)
+        private void RenderStats(WorldState world, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
             StatsConsole.Clear();
 
@@ -148,20 +149,23 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
                 StatsConsole.Print(1, 17 + i, $"{i+1}: {skillName}", RLColor.White, RLColor.Black);
             }
 
-            if (systemContainer.PlayerControlSystem.HoveredEntity != null)
+            var hoveredCoordinate = systemContainer.PlayerControlSystem.HoveredCoordinate;
+
+            if  (hoveredCoordinate != null && playerFov.Contains(hoveredCoordinate))
             {
-                ConsoleRendererHelper.DisplayEntitySummary(StatsConsole, 0, 50, systemContainer.PlayerControlSystem.HoveredEntity);
+                var entities = systemContainer.PositionSystem.EntitiesAt(hoveredCoordinate);
+
+                var hoveredEntity = entities.Where(e => e.Has<Appearance>()).OrderByDescending(e => e.Get<Appearance>().ZOrder).First();
+
+                ConsoleRendererHelper.DisplayEntitySummary(StatsConsole, 0, 50, hoveredEntity);
             }
 
 
             RLConsole.Blit(StatsConsole, 0, 0, StatsConsole.Width, StatsConsole.Height, Console, Console.Width - 22, 0);
         }
-
         
 
-        
-
-        private void RenderMap(WorldState world, ISystemContainer systemContainer)
+        private void RenderMap(WorldState world, ISystemContainer systemContainer, out List<MapCoordinate> playerFov)
         {
             MapConsole.Clear();
 
@@ -170,7 +174,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             var cameraY = world.CameraPosition.Y;
 
             MapCoordinate playerPosition = world.Player.Get<Position>().MapCoordinate;
-            var playerFov = currentMap.FovFrom(playerPosition, 9);
+            playerFov = currentMap.FovFrom(playerPosition, 9);
             foreach (var coordinate in playerFov)
             {
                 currentMap.SetSeen(coordinate);

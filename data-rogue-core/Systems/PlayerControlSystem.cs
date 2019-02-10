@@ -22,7 +22,7 @@ namespace data_rogue_core.Systems
         private readonly IEventSystem EventSystem;
         private readonly ITimeSystem TimeSystem;
 
-        public IEntity HoveredEntity { get; private set; }
+        public MapCoordinate HoveredCoordinate { get; private set; }
 
         public PlayerControlSystem(IPositionSystem positionSystem, IEventSystem eventRuleSystem, ITimeSystem timeSystem)
         {
@@ -243,25 +243,14 @@ namespace data_rogue_core.Systems
 
                 var hoveredLocation = gameplayRenderer.GetMapCoordinateFromMousePosition(Game.WorldState, x, y);
 
-                if (hoveredLocation == null)
-                {
-                    SetHoveredEntity(null);
-                }
-                else
-                {
-                    var visibleEntitiesAtLocation = PositionSystem.EntitiesAt(hoveredLocation).Where(e => e.Has<Appearance>());
-
-                    var topEntity = visibleEntitiesAtLocation.OrderByDescending(e => e.Get<Appearance>().ZOrder).FirstOrDefault();
-
-                    SetHoveredEntity(topEntity);
-                }
+                SetHoveredLocation(hoveredLocation);
             }
                     
         }
 
-        private void SetHoveredEntity(IEntity topEntity)
+        private void SetHoveredLocation(MapCoordinate mapCoordinate)
         {
-            HoveredEntity = topEntity;
+            HoveredCoordinate = mapCoordinate;
         }
     }
 }
