@@ -27,3 +27,5 @@ Name: Player
 [KnownSkill]
 Skill: Skill:ManaBolt
 Order: 1
+[Inventory]
+Capacity: 26

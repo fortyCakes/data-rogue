@@ -82,7 +82,10 @@
     <Compile Include="Behaviours\RandomlyMoveBehaviour.cs" />
     <Compile Include="Behaviours\PlayerControlledBehaviour.cs" />
     <Compile Include="Components\Description.cs" />
+    <Compile Include="Components\EntityReferenceList.cs" />
     <Compile Include="Components\Fighter.cs" />
+    <Compile Include="Components\Inventory.cs" />
+    <Compile Include="Components\Item.cs" />
     <Compile Include="Components\KnownSkill.cs" />
     <Compile Include="Components\Learner.cs" />
     <Compile Include="Components\Portal.cs" />
@@ -275,6 +278,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\Entities\StaticEntities\Skills\manabolt.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Entities\StaticEntities\Items\Junk.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Content Include="Images\Tileset\Alloy_curses_12x12.png">
