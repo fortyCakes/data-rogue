@@ -23,7 +23,7 @@ namespace data_rogue_core.EventSystem.Rules
         {
             if (IsPlayer(sender))
             {
-                Game.ActivityStack.Push(MainMenu.GetMainMenu());
+                Game.ActivityStack.Push(new MenuActivity(new MainMenu(), Game.RendererFactory));
                 Game.ActivityStack.Push(new DeathScreenActivity(Game.RendererFactory));
             }
 

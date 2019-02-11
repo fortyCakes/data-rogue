@@ -6,5 +6,6 @@ namespace data_rogue_core.Systems
     public interface IItemSystem : ISystem, IInitialisableSystem
     {
         void MoveToInventory(IEntity item, Inventory inventory);
+        void DropItemFromInventory(IEntity item);
     }
 }

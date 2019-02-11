@@ -52,7 +52,7 @@ namespace data_rogue_core.Forms.StaticForms
                     break;
                 case FormButton.Cancel:
                     Game.ActivityStack.Pop();
-                    Game.ActivityStack.Push(MainMenu.GetMainMenu());
+                    Game.ActivityStack.Push(new MenuActivity(new MainMenu(), Game.RendererFactory));
                     break;
                 default:
                     throw new ApplicationException("Unknown form button");

@@ -49,7 +49,7 @@ namespace data_rogue_core.Systems
             ItemSystem = new ItemSystem(EntityEngine);
             EntityEngine.Register(ItemSystem);
 
-            PlayerControlSystem = new PlayerControlSystem(PositionSystem, EventSystem, TimeSystem, ItemSystem, MessageSystem);
+            PlayerControlSystem = new PlayerControlSystem(this);
 
             BehaviourFactory = new BehaviourFactory(PositionSystem, EventSystem, Random, MessageSystem);
 

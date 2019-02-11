@@ -46,6 +46,7 @@ Traps
 Encounter based map population
 View message log scrollback
 Remembered state of altered map tiles (e.g. when tile is dug out of player's FoV)
+Move RendererFactory into ActivityStack
 
 1.0+
 

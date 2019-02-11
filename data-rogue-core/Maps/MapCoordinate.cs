@@ -1,9 +1,10 @@
 ﻿using data_rogue_core.EntityEngineSystem;
+using System;
 using System.Text.RegularExpressions;
 
 namespace data_rogue_core.Maps
 {
-    public class MapCoordinate : ICustomFieldSerialization
+    public class MapCoordinate : ICustomFieldSerialization, ICloneable
     {
         public MapKey Key;
         public int X;
@@ -80,6 +81,12 @@ namespace data_rogue_core.Maps
 
             return a.Equals(b);
         }
+
+        public object Clone()
+        {
+            return new MapCoordinate { X = X, Y = Y, Key = Key };
+        }
+
 
         public static bool operator !=(MapCoordinate a, MapCoordinate b)
         {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using data_rogue_core.Components;
 using data_rogue_core.EntityEngineSystem;
+using data_rogue_core.Maps;
 
 namespace data_rogue_core.Systems
 {
@@ -37,6 +38,36 @@ namespace data_rogue_core.Systems
             {
                 throw new ApplicationException($"Could not remove item {item} from a location");
             }
+        }
+
+        public void DropItemFromInventory(IEntity item)
+        {
+            var inventory = GetInventoryContaining(item);
+
+            if (inventory != null)
+            {
+                inventory.Contents.Remove(item);
+
+                var owner = GetInventoryOwner(inventory);
+                var position = owner.Get<Position>();
+
+                entityEngine.AddComponent(item, new Position { MapCoordinate = (MapCoordinate)position.MapCoordinate.Clone() });
+            }
+            else
+            {
+                throw new Exception("Can't drop item: Item is not in an inventory");
+            }
+
+        }
+
+        private Inventory GetInventoryContaining(IEntity item)
+        {
+            return AllInventories.SingleOrDefault(inv => inv.Contents.Contains(item));
+        }
+
+        private IEntity GetInventoryOwner(Inventory inventory)
+        {
+            return Entities.Single(e => e.Components.Contains(inventory));
         }
 
         private bool TryRemoveItemFromMap(IEntity item)

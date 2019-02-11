@@ -146,7 +146,7 @@ namespace data_rogue_core
 
         private static void DisplayMainMenu()
         {
-            ActivityStack.Push(MainMenu.GetMainMenu());
+            ActivityStack.Push(new MenuActivity(new MainMenu(), RendererFactory));
         }
 
         private static void OnRootConsoleRender(object sender, UpdateEventArgs e)

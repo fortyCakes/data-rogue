@@ -144,6 +144,9 @@
     <Compile Include="Maps\MapGenCommands\EntityCommandExecutor.cs" />
     <Compile Include="Maps\MapGenCommands\ICommandExecutor.cs" />
     <Compile Include="Maps\MapGenCommands\MapGenCommand.cs" />
+    <Compile Include="EventSystem\EventData\DropItemEventData.cs" />
+    <Compile Include="Menus\DynamicMenus\InventoryMenu.cs" />
+    <Compile Include="Menus\MenuAction.cs" />
     <Compile Include="Renderers\ConsoleRenderers\CellTargeting.cs" />
     <Compile Include="Renderers\ConsoleRenderers\ConsoleFormRenderer.cs" />
     <Compile Include="Forms\Form.cs" />
