@@ -1,4 +1,5 @@
-﻿using data_rogue_core.Menus;
+﻿using System.Linq;
+using data_rogue_core.Menus;
 using RLNET;
 
 namespace data_rogue_core.Renderers.ConsoleRenderers
@@ -13,9 +14,41 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
         {
             Console.Clear();
 
-            Console.Print(1, 1, menu.MenuName, RLColor.White);
-            Console.Print(1, 2, new string('-', menu.MenuName.Length), RLColor.White);
+            PrintTitleBar(menu);
 
+            PrintActions(menu);
+
+            PrintItems(menu);
+        }
+
+        private void PrintActions(Menu menu)
+        {
+            var width = Console.Width;
+
+            var textLength = 2 + menu.AvailableActions.Sum(a => a.ToString().Length + 1);
+
+            var x = width - textLength - 1;
+
+            Console.Print(x, 0, "[", RLColor.White);
+            
+
+            foreach (var action in menu.AvailableActions)
+            {
+                x++;
+
+                var foreColor = action == menu.SelectedAction ? RLColor.White : RLColor.Gray;
+
+                string actionName = action.ToString();
+                Console.Print(x, 0, actionName, foreColor);
+                x += actionName.Length;
+                Console.Print(x, 0, "|", RLColor.White);
+            }
+
+            Console.Print(x, 0, "]", RLColor.White);
+        }
+
+        private void PrintItems(Menu menu)
+        {
             int availableHeight = Console.Height - 6; // Two for top/bottom border, two for title and underline, one for pagination
             int selectedIndex = menu.SelectedIndex;
             int itemCount = menu.MenuItems.Count;
@@ -29,7 +62,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
                 if (displayIndex < itemCount)
                 {
                     MenuItem item = menu.MenuItems[displayIndex];
-                    Console.Print(2, menuOffset + i, item.Text, item.Enabled? RLColor.White : RLColor.Gray);
+                    Console.Print(2, menuOffset + i, item.Text, item.Enabled ? RLColor.White : RLColor.Gray);
                 }
 
                 if (displayIndex == selectedIndex)
@@ -42,6 +75,12 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             {
                 Console.Print(1, 3 + availableHeight, $"(page {page} of {pageCount})", RLColor.White);
             }
+        }
+
+        private void PrintTitleBar(Menu menu)
+        {
+            Console.Print(1, 1, menu.MenuName, RLColor.White);
+            Console.Print(1, 2, new string('-', menu.MenuName.Length), RLColor.White);
         }
     }
 }

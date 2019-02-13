@@ -27,6 +27,30 @@ namespace data_rogue_core.Menus
             OnSelectCallback = onSelectCallback;
             SelectedItem = MenuItems.FirstOrDefault();
         }
+        public virtual void HandleKeyPress(RLKeyPress keyPress)
+        {
+            if (keyPress != null)
+            {
+                switch (keyPress.Key)
+                {
+                    case RLKey.Up:
+                        Previous();
+                        break;
+                    case RLKey.Down:
+                        Next();
+                        break;
+                    case RLKey.Enter:
+                        Select();
+                        break;
+                    case RLKey.Right:
+                        NextAction();
+                        break;
+                    case RLKey.Left:
+                        PreviousAction();
+                        break;
+                }
+            }
+        }
 
         private void Next()
         {
@@ -58,22 +82,31 @@ namespace data_rogue_core.Menus
             }
         }
 
-        public virtual void HandleKeyPress(RLKeyPress keyPress)
+        private void PreviousAction()
         {
-            if (keyPress != null)
+            var index = AvailableActions.IndexOf(SelectedAction);
+
+            if (index == 0)
             {
-                switch (keyPress.Key)
-                {
-                    case RLKey.Up:
-                        Previous();
-                        break;
-                    case RLKey.Down:
-                        Next();
-                        break;
-                    case RLKey.Enter:
-                        Select();
-                        break;
-                }
+                SelectedAction = AvailableActions[AvailableActions.Count - 1];
+            }
+            else
+            {
+                SelectedAction = AvailableActions[index - 1];
+            }
+        }
+
+        private void NextAction()
+        {
+            var index = AvailableActions.IndexOf(SelectedAction);
+
+            if (index == AvailableActions.Count - 1)
+            {
+                SelectedAction = AvailableActions[0];
+            }
+            else
+            {
+                SelectedAction = AvailableActions[index + 1];
             }
         }
     }

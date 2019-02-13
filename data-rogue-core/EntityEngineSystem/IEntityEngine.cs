@@ -9,6 +9,8 @@ namespace data_rogue_core.EntityEngineSystem
         IEnumerable<Type> ComponentTypes { get; }
 
         void Destroy(uint entityId);
+        void Destroy(IEntity item);
+
         IEntity New(string Name, params IEntityComponent[] components);
 
         IEntity GetEntity(uint entityId);
@@ -34,5 +36,6 @@ namespace data_rogue_core.EntityEngineSystem
         IEnumerable<IEntity> GetEntitiesWithName(string testEntity);
         
         void RemoveComponent<T>(IEntity item) where T : IEntityComponent;
+        
     }
 }

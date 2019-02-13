@@ -81,6 +81,11 @@ namespace data_rogue_core.EntityEngineSystem
             entity = null;
         }
 
+        public void Destroy(IEntity entity)
+        {
+            Destroy(entity.EntityId);
+        }
+
         public void Register(ISystem system)
         {
             _systems.Add(system);

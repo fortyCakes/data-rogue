@@ -3,6 +3,7 @@
     public enum MenuAction
     {
         Select,
-        Drop
+        Drop,
+        Use
     }
 }

@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace data_rogue_core.Data
 {
-    public class StatCounter : ICustomFieldSerialization
+    public class Counter : ICustomFieldSerialization
     {
         public int Current;
         public int Max;

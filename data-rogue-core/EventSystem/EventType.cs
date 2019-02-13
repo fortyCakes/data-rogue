@@ -13,6 +13,8 @@
         GetStat,
         ActivateSkill,
         PickUpItem,
-        DropItem
+        DropItem,
+        UseItem,
+        ConsumableRunOut
     }
 }

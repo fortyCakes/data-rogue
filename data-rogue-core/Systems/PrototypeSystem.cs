@@ -92,10 +92,10 @@ namespace data_rogue_core.Systems
 
                 foreach (FieldInfo fieldInfo in componentType.GetFields())
                 {
-                    if (fieldInfo.FieldType == typeof(StatCounter))
+                    if (fieldInfo.FieldType == typeof(Counter))
                     {
-                        StatCounter oldValue = (StatCounter)fieldInfo.GetValue(component);
-                        fieldInfo.SetValue(newComponent, new StatCounter { Current = oldValue.Current, Max = oldValue.Max });
+                        Counter oldValue = (Counter)fieldInfo.GetValue(component);
+                        fieldInfo.SetValue(newComponent, new Counter { Current = oldValue.Current, Max = oldValue.Max });
                     }
                     else
                     {

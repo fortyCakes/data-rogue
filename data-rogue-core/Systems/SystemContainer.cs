@@ -29,6 +29,8 @@ namespace data_rogue_core.Systems
 
         public void CreateSystems(string rngSeed)
         {
+            ScriptExecutor = new ScriptExecutor(this);
+
             MessageSystem = new MessageSystem();
 
             EntityEngine = new EntityEngine(new DataStaticEntityLoader());
@@ -46,9 +48,6 @@ namespace data_rogue_core.Systems
             FighterSystem = new FighterSystem(EntityEngine, MessageSystem, EventSystem, TimeSystem);
             EntityEngine.Register(FighterSystem);
 
-            ItemSystem = new ItemSystem(EntityEngine);
-            EntityEngine.Register(ItemSystem);
-
             PlayerControlSystem = new PlayerControlSystem(this);
 
             BehaviourFactory = new BehaviourFactory(PositionSystem, EventSystem, Random, MessageSystem);
@@ -56,7 +55,8 @@ namespace data_rogue_core.Systems
             PrototypeSystem = new PrototypeSystem(EntityEngine, PositionSystem, BehaviourFactory);
             EntityEngine.Register(PrototypeSystem);
 
-            ScriptExecutor = new ScriptExecutor(this);
+            ItemSystem = new ItemSystem(EntityEngine, PrototypeSystem, ScriptExecutor, MessageSystem, EventSystem);
+            EntityEngine.Register(ItemSystem);
 
             SkillSystem = new SkillSystem(PrototypeSystem, ScriptExecutor, EventSystem);
             EntityEngine.Register(SkillSystem);
@@ -86,6 +86,7 @@ namespace data_rogue_core.Systems
             Check(ScriptExecutor, "ScriptExecutor", msg, ref valid);
             Check(SkillSystem, "SkillSystem", msg, ref valid);
             Check(TargetingSystem, "TargetingSystem", msg, ref valid);
+            Check(ItemSystem, "ItemSystem", msg, ref valid);
 
             if (!valid)
                 throw new ContainerNotValidException(msg.ToString());
@@ -96,7 +97,7 @@ namespace data_rogue_core.Systems
             if (toCheck == null)
             {
                 valid = false;
-                msg.AppendLine($"{fieldName} is null");
+                msg.AppendLine($"SystemContainer not valid: {fieldName} is null");
             }
         }
     }

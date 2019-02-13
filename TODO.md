@@ -15,6 +15,7 @@ Randomised Monster spawning (from monster prototype tags)
 Randomised Item spawning (from item prototype tags)
 Cancelling a skill / spend aura after skill is completed
 Rules from file
+Work out spending time - where should it be?
 Dependency injection for rules and behaviours
 Separate out core from implementation (!)
 	Aura and Tilt separation

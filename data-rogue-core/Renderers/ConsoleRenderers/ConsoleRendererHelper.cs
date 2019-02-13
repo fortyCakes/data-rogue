@@ -30,7 +30,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             }
         }
 
-        public static void PrintBar(RLConsole console, int x, int y, int length, string name, StatCounter counter, RLColor color)
+        public static void PrintBar(RLConsole console, int x, int y, int length, string name, Counter counter, RLColor color)
         {
             if (counter.Max == 0)
             {

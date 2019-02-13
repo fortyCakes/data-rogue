@@ -1,0 +1,25 @@
+﻿"Potion of Minor Healing"
+[Description]
+Name: Potion of Minor Healing
+[Prototype]
+Name: Item:PotionHealing1
+Singleton: false
+[Appearance]
+Glyph: !
+Color: #FF0000
+[Position]
+[Item]
+UseScript: Script: Minor Healing
+[Consumable]
+Uses: 1/1
+
+"Script: MinorHealing"
+[Prototype]
+Name: Script: Minor Healing
+Singleton: true
+[Script]
+Text: {
+	fighter = User:GetFighter()
+	fighter.Health:Add(10);
+	SystemContainer.MessageSystem:Write(User:GetDescription().Name .. ' drinks the potion of minor healing and is healed for 10 health.')
+}

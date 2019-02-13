@@ -7,5 +7,7 @@ namespace data_rogue_core.Systems
     {
         void MoveToInventory(IEntity item, Inventory inventory);
         void DropItemFromInventory(IEntity item);
+        void Use(IEntity user, IEntity item);
+        void DestroyItem(IEntity item);
     }
 }

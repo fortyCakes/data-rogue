@@ -16,7 +16,7 @@ namespace data_rogue_core.Menus.DynamicMenus
     {
         private ISystemContainer systemContainer;
 
-        public override List<MenuAction> AvailableActions { get; set; } = new List<MenuAction> { MenuAction.Drop };
+        public override List<MenuAction> AvailableActions { get; set; } = new List<MenuAction> { MenuAction.Drop, MenuAction.Use };
 
         public InventoryMenu(ISystemContainer systemContainer, Inventory inventory) : base("Inventory", GetCallback(systemContainer), GetInventoryMenuItems(systemContainer, inventory))
         {
@@ -51,15 +51,25 @@ namespace data_rogue_core.Menus.DynamicMenus
                 return;
             }
 
-            switch(selectedAction)
+            var item = systemContainer.EntityEngine.GetEntity((uint)selectedItem.Value);
+
+            switch (selectedAction)
             {
                 case MenuAction.Drop:
-                    var item = systemContainer.EntityEngine.GetEntity((uint)selectedItem.Value);
+                    
                     if (systemContainer.EventSystem.Try(EventType.DropItem, Game.WorldState.Player, new DropItemEventData { Item = item }))
                     {
                         systemContainer.ItemSystem.DropItemFromInventory(item);
                         systemContainer.MessageSystem.Write($"You drop the {item.Get<Description>().Name}.");
                         systemContainer.EventSystem.Try(EventType.SpendTime, Game.WorldState.Player, new SpendTimeEventData { Ticks = 1000 });
+                    }
+
+                    Game.ActivityStack.Pop();
+                    break;
+                case MenuAction.Use:
+                    if (systemContainer.EventSystem.Try(EventType.UseItem, Game.WorldState.Player, new DropItemEventData {Item = item}))
+                    {
+                        systemContainer.ItemSystem.Use(Game.WorldState.Player, item);
                     }
 
                     Game.ActivityStack.Pop();

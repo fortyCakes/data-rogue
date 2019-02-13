@@ -101,7 +101,7 @@
     <Compile Include="Data\BranchLinkEnd.cs" />
     <Compile Include="Components\World.cs" />
     <Compile Include="Data\EntityBuilder.cs" />
-    <Compile Include="Data\StatCounter.cs" />
+    <Compile Include="Data\Counter.cs" />
     <Compile Include="EntityEngineSystem\IStaticEntityLoader.cs" />
     <Compile Include="EntityEngineSystem\SaveStateSerializer.cs" />
     <Compile Include="EntityEngineSystem\BaseStaticEntityLoader.cs" />
@@ -254,6 +254,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Data\Entities\player.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Entities\StaticEntities\Items\PotionMinorHealing.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\Entities\StaticEntities\Monsters\goblin.edt">

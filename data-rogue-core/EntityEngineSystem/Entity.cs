@@ -62,5 +62,10 @@ namespace data_rogue_core.EntityEngineSystem
         {
             return Get<Fighter>();
         }
+
+        public Description GetDescription()
+        {
+            return Get<Description>();
+        }
     }
 }
