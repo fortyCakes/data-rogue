@@ -4,12 +4,11 @@ BUGS
 
 0.1
 
-Items
-	/ Pick up items from floor
-	Drop items (menu)
-	Use items
+Equipment
+	Equipment slots
 	Equip items
 	Equipped items boost stats
+	Equipped items can proc effects (e.g. on hit)
 	Enforce inventory capacity
 Randomised Monster spawning (from monster prototype tags)
 Randomised Item spawning (from item prototype tags)
