@@ -16,12 +16,12 @@ namespace data_rogue_core.Menus.DynamicMenus
     {
         private ISystemContainer systemContainer;
 
-        public override List<MenuAction> AvailableActions { get; set; } = new List<MenuAction> { MenuAction.Drop, MenuAction.Use };
+        public override List<MenuAction> AvailableActions { get; set; } = new List<MenuAction> { MenuAction.Use, MenuAction.Drop };
 
         public InventoryMenu(ISystemContainer systemContainer, Inventory inventory) : base("Inventory", GetCallback(systemContainer), GetInventoryMenuItems(systemContainer, inventory))
         {
             this.systemContainer = systemContainer;
-            this.SelectedAction = MenuAction.Drop;
+            this.SelectedAction = MenuAction.Use;
         }
 
         private static MenuItem[] GetInventoryMenuItems(ISystemContainer systemContainer, Inventory inventory)
