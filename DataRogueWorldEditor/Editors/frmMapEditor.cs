@@ -110,7 +110,7 @@ namespace DataRogueWorldEditor.Editors
 
             if (string.IsNullOrEmpty(FileName))
             {
-                Map = new Map("new map key", SystemContainer.PrototypeSystem.Create("Cell:Wall"));
+                Map = new Map("new map key", SystemContainer.PrototypeSystem.Get("Cell:Wall"));
             }
             else
             {
@@ -207,7 +207,7 @@ namespace DataRogueWorldEditor.Editors
 
             Map.MapKey = new MapKey(txtMapKey.Text);
 
-            Map.DefaultCell = PrototypeSystem.Create(txtDefaultCell.Text);
+            Map.DefaultCell = PrototypeSystem.Get(txtDefaultCell.Text);
 
             var serialisedMap = MapSerializer.Serialize(Map);
 
@@ -348,7 +348,7 @@ namespace DataRogueWorldEditor.Editors
 
             if (string.IsNullOrEmpty(cellName)) return;
 
-            var entity = PrototypeSystem.Create(cellName);
+            var entity = PrototypeSystem.Get(cellName);
 
             PaintingWithCell = entity;
         }

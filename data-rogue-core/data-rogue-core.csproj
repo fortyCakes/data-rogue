@@ -88,6 +88,7 @@
     <Compile Include="Components\Portal.cs" />
     <Compile Include="Components\Memorable.cs" />
     <Compile Include="Components\Prototype.cs" />
+    <Compile Include="Components\Script.cs" />
     <Compile Include="Components\SkillDefinition.cs" />
     <Compile Include="Components\Stairs.cs" />
     <Compile Include="Components\Branch.cs" />

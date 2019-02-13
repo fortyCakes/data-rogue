@@ -35,11 +35,15 @@ namespace data_rogue_core.Systems
 
         public void Use(IEntity user, string skillName)
         {
-            var skill = prototypeSystem.Create(skillName);
+            var skill = prototypeSystem.Get(skillName);
 
-            var script = skill.Get<SkillDefinition>().Script;
+            var scriptName = skill.Get<SkillDefinition>().ScriptName;
 
-            scriptExecutor.Execute(user, script);
+            var script = prototypeSystem.Get(scriptName);
+
+            var scriptText = script.Get<Script>().Text;
+
+            scriptExecutor.Execute(user, scriptText);
         }
     }
 }

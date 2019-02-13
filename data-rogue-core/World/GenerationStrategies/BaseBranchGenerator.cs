@@ -93,9 +93,9 @@ namespace data_rogue_core
                 var portalEntity = Random.PickOne(potentialPortals);
                 var thisPortal = portalEntity.Get<Portal>();
 
-                thisPortal.BranchLink = prototypeSystem.Create(thatEnd.Branch).EntityId;
+                thisPortal.BranchLink = prototypeSystem.Get(thatEnd.Branch).EntityId;
 
-                var destinationBranch = prototypeSystem.Create(link.Value.Branch).Get<Branch>();
+                var destinationBranch = prototypeSystem.Get(link.Value.Branch).Get<Branch>();
 
                 thisEnd.Location = portalEntity.Get<Position>().MapCoordinate;
 
@@ -193,7 +193,7 @@ namespace data_rogue_core
 
         protected MapCoordinate EmptyPositionOn(Map firstLayer, ISystemContainer systemContainer)
         {
-            var emptyCell = systemContainer.PrototypeSystem.Create("Cell:Empty");
+            var emptyCell = systemContainer.PrototypeSystem.Get("Cell:Empty");
 
             var emptyPositions = firstLayer.Cells
                 .Where(c => c.Value == emptyCell)

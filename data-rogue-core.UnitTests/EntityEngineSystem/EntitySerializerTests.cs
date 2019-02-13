@@ -48,7 +48,7 @@ end";
                 
                 return entity;
             });
-            entityEngine.ComponentTypes.ReturnsForAnyArgs(new[] { typeof(Appearance), typeof(Position), typeof(Stairs), typeof(MoveToPlayerBehaviour), typeof(SkillDefinition) });
+            entityEngine.ComponentTypes.ReturnsForAnyArgs(new[] { typeof(Appearance), typeof(Position), typeof(Stairs), typeof(MoveToPlayerBehaviour), typeof(Script) });
 
             SystemContainer.EntityEngine = entityEngine;
         }
@@ -141,7 +141,7 @@ end";
 
             var testEntity3 = new Entity(1, "Test Skill", new IEntityComponent[]
             {
-                new SkillDefinition() {Script = TEST_SCRIPT},
+                new Script() {Text = TEST_SCRIPT},
                 new Position() { MapCoordinate = new MapCoordinate("TestMapKey", 1, 1)}
             });
 

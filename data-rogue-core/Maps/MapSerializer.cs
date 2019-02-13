@@ -94,7 +94,7 @@ namespace data_rogue_core.Maps
             var leftX = int.Parse(coordinateMatch.Groups[1].Value);
             var topY = int.Parse(coordinateMatch.Groups[2].Value);
 
-            IEntity defaultCell = systemContainer.PrototypeSystem.Create(defaultCellName);
+            IEntity defaultCell = systemContainer.PrototypeSystem.Get(defaultCellName);
 
             var lineIndex = 3;
 
@@ -195,7 +195,7 @@ namespace data_rogue_core.Maps
             {
                 char glyph = match.Groups[1].Value.First();
                 string entityName = match.Groups[2].Value.Trim();
-                IEntity entity = systemContainer.PrototypeSystem.Create(entityName);
+                IEntity entity = systemContainer.PrototypeSystem.Get(entityName);
 
                 cellsInMap.Add(glyph, entity);
 

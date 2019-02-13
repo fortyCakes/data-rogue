@@ -46,8 +46,8 @@ namespace data_rogue_core.Systems
 
         private void RegisterHandlers(Lua state)
         {
-            state.RegisterFunction("withTarget", this, GetType().GetMethod("SetTargetHandler"));
-            state.RegisterFunction("requestTarget", this, GetType().GetMethod("RequestTarget"));
+            state.RegisterFunction("withTarget", this, GetType().GetMethod(nameof(SetTargetHandler)));
+            state.RegisterFunction("requestTarget", this, GetType().GetMethod(nameof(RequestTarget)));
         }
 
         private void RegisterValues(IEntity user, Lua state)

@@ -26,10 +26,10 @@ namespace data_rogue_core.UnitTests.Maps
             systemContainer.PrototypeSystem = Substitute.For<IPrototypeSystem>();
 
             wallCell = CreateCell('#', "Cell:Wall");
-            systemContainer.PrototypeSystem.Create("Cell:Wall").Returns(wallCell);
+            systemContainer.PrototypeSystem.Get("Cell:Wall").Returns(wallCell);
 
             floorCell = CreateCell('.', "Cell:Empty");
-            systemContainer.PrototypeSystem.Create("Cell:Empty").Returns(floorCell);
+            systemContainer.PrototypeSystem.Get("Cell:Empty").Returns(floorCell);
         }
 
         [Test]

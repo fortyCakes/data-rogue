@@ -30,8 +30,8 @@ namespace data_rogue_core
 
         private static MapCoordinate CreateInitialMapAndGetSpawnPoint(ISystemContainer systemContainer, WorldState world)
         {
-            var worldStructure = systemContainer.PrototypeSystem.Create("World").Get<World>();
-            var initialBranchEntity = systemContainer.PrototypeSystem.Create(worldStructure.InitialBranch);
+            var worldStructure = systemContainer.PrototypeSystem.Get("World").Get<World>();
+            var initialBranchEntity = systemContainer.PrototypeSystem.Get(worldStructure.InitialBranch);
                 
             var initialBranch = initialBranchEntity.Get<Branch>();
 

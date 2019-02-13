@@ -5,11 +5,11 @@ namespace data_rogue_core.Systems.Interfaces
 {
     public interface IPrototypeSystem : ISystem 
     {
-        IEntity Create(string entityName);
+        IEntity Get(string entityName);
 
-        IEntity Create(IEntity entity);
+        IEntity Get(IEntity entity);
 
-        IEntity Create(int entityId);
+        IEntity Get(int entityId);
 
         IEntity CreateAt(string entityName, MapCoordinate mapCoordinate);
 

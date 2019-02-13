@@ -30,8 +30,8 @@ namespace data_rogue_core.Maps.Generators
         {
             Random = random;
 
-            wallCell = PrototypeSystem.Create("Cell:Wall");
-            floorCell = PrototypeSystem.Create("Cell:Empty");
+            wallCell = PrototypeSystem.Get("Cell:Wall");
+            floorCell = PrototypeSystem.Get("Cell:Empty");
 
             var map = new Map(mapName, wallCell);
 

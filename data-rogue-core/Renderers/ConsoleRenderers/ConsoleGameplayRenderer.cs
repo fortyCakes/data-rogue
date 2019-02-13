@@ -141,7 +141,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
             for(int i = 0; i < skillsToPrint.Count(); i++)
             {
-                var skillName = systemContainer.PrototypeSystem.Create(skillsToPrint[i].Skill).Get<Description>().Name;
+                var skillName = systemContainer.PrototypeSystem.Get(skillsToPrint[i].Skill).Get<Description>().Name;
                 StatsConsole.Print(1, 17 + i, $"{i+1}: {skillName}", RLColor.White, RLColor.Black);
             }
 

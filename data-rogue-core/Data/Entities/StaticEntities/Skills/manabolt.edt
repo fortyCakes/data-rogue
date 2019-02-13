@@ -4,7 +4,16 @@ Name: Skill:ManaBolt
 Singleton: true
 [SkillDefinition]
 Cost: 50
-Script: {
+ScriptName: Script: Mana Bolt
+[Description]
+Name: Mana Bolt
+
+"Script: Mana Bolt"
+[Prototype]
+Name: Script: Mana Bolt
+Singleton: true
+[Script]
+Text: {
 	withTarget(
 	function(target)
 		willpower = SystemContainer.EventSystem:GetStatByName(User, 'Willpower')
@@ -52,5 +61,3 @@ Script: {
 	targetingData.Range = 10
 	requestTarget(User, targetingData)
 }
-[Description]
-Name: Mana Bolt

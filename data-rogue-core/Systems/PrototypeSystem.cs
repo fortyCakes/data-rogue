@@ -27,42 +27,42 @@ namespace data_rogue_core.Systems
         public IPositionSystem PositionSystem;
         private IBehaviourFactory BehaviourFactory;
 
-        public IEntity Create(int entityId)
+        public IEntity Get(int entityId)
         {
             var entity = this.Entities.Single(e => e.EntityId == entityId);
 
             return MakeInstanceOf(entity);
         }
 
-        public IEntity Create(string entityName)
+        public IEntity Get(string entityName)
         {
             var entity = this.Entities.Single(e => e.Get<Prototype>().Name == entityName);
 
             return MakeInstanceOf(entity);
         }
 
-        public IEntity Create(IEntity entity)
+        public IEntity Get(IEntity entity)
         {
             return MakeInstanceOf(entity);
         }
 
         public IEntity CreateAt(string entityName, MapCoordinate mapCoordinate)
         {
-            var entity = Create(entityName);
+            var entity = Get(entityName);
             PositionSystem.SetPosition(entity, mapCoordinate);
             return entity;
         }
 
         public IEntity CreateAt(IEntity entity, MapCoordinate mapCoordinate)
         {
-            var newEntity = Create(entity);
+            var newEntity = Get(entity);
             PositionSystem.SetPosition(newEntity, mapCoordinate);
             return newEntity;
         }
 
         public IEntity CreateAt(int entityId, MapCoordinate mapCoordinate)
         {
-            var entity = Create(entityId);
+            var entity = Get(entityId);
             PositionSystem.SetPosition(entity, mapCoordinate);
             return entity;
         }
