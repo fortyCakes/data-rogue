@@ -114,6 +114,11 @@ namespace data_rogue_core.EntityEngineSystem
             RecheckSystemRegistration(entity);
         }
 
+        public void RemoveComponent<T>(IEntity entity) where T : IEntityComponent
+        {
+            RemoveComponent(entity, entity.Get<T>());
+        }
+
         public IEntity Load(uint EntityId, IEntity entity)
         {
             _allEntities.Add(entity);

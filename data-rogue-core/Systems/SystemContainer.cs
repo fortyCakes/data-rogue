@@ -23,6 +23,7 @@ namespace data_rogue_core.Systems
         public IScriptExecutor ScriptExecutor { get; set; }
         public ISkillSystem SkillSystem { get; set; }
         public ITargetingSystem TargetingSystem { get; set; }
+        public IItemSystem ItemSystem { get; set; }
 
         public string Seed { get; set; }
 
@@ -30,7 +31,7 @@ namespace data_rogue_core.Systems
         {
             MessageSystem = new MessageSystem();
 
-            EntityEngine = new EntityEngineSystem.EntityEngine(new DataStaticEntityLoader());
+            EntityEngine = new EntityEngine(new DataStaticEntityLoader());
 
             EventSystem = new EventSystem.EventSystem();
 
@@ -45,7 +46,10 @@ namespace data_rogue_core.Systems
             FighterSystem = new FighterSystem(EntityEngine, MessageSystem, EventSystem, TimeSystem);
             EntityEngine.Register(FighterSystem);
 
-            PlayerControlSystem = new PlayerControlSystem(PositionSystem, EventSystem, TimeSystem);
+            ItemSystem = new ItemSystem(EntityEngine);
+            EntityEngine.Register(ItemSystem);
+
+            PlayerControlSystem = new PlayerControlSystem(this);
 
             BehaviourFactory = new BehaviourFactory(PositionSystem, EventSystem, Random, MessageSystem);
 

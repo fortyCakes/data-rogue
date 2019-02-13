@@ -40,6 +40,8 @@ namespace data_rogue_core
                 world.Maps.Add(map.MapKey, map);
             }
 
+            systemContainer.MessageSystem.Initialise();
+
             foreach (var savedMessage in loadedState.Messages)
             {
                 var message = MessageSerializer.Deserialize(savedMessage);

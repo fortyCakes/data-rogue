@@ -19,6 +19,7 @@ namespace data_rogue_core.Systems.Interfaces
         IScriptExecutor ScriptExecutor {get; set;}
         ISkillSystem SkillSystem {get; set;}
         ITargetingSystem TargetingSystem { get; set; }
+        IItemSystem ItemSystem { get; set; }
         string Seed { get; set; }
 
         void Verify();

@@ -12,7 +12,7 @@ namespace data_rogue_core.Data
 
         public static Message Deserialize(string text)
         {
-            var match = Regex.Match(text, "(.*): (.*)");
+            var match = Regex.Match(text, "(.*):(.*)");
 
             var color = match.Groups[1].Value;
 

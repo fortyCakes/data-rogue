@@ -7,7 +7,7 @@ using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.Systems
 {
-    public class MessageSystem : IInitialisableSystem ,IMessageSystem
+    public class MessageSystem : IInitialisableSystem , IMessageSystem
     {
         public MessageSystem()
         {

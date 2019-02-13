@@ -1,6 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using data_rogue_core.Components;
 using data_rogue_core.Data;
+using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems.Interfaces;
@@ -24,8 +27,8 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             var consoleHeight = Console.Height;
 
             MapConsole = new RLConsole(consoleWidth - STATS_WIDTH - 1, consoleHeight - MESSAGE_HEIGHT - 1);
-            StatsConsole = new RLConsole(STATS_WIDTH, consoleHeight - MESSAGE_HEIGHT - 1);
-            MessageConsole = new RLConsole(consoleWidth, MESSAGE_HEIGHT);
+            StatsConsole = new RLConsole(STATS_WIDTH, consoleHeight - 1);
+            MessageConsole = new RLConsole(consoleWidth - STATS_WIDTH - 1, MESSAGE_HEIGHT);
 
         }
 
@@ -38,9 +41,9 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
                 return;
             }
 
-            RenderMap(world, systemContainer);
+            RenderMap(world, systemContainer, out var playerFov);
 
-            RenderStats(world, systemContainer);
+            RenderStats(world, systemContainer, playerFov);
 
             RenderMessages(systemContainer);
 
@@ -100,7 +103,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             RLConsole.Blit(MessageConsole, 0, 0, MessageConsole.Width, MessageConsole.Height, Console, 0, Console.Height - 15);
         }
 
-        private void RenderStats(WorldState world, ISystemContainer systemContainer)
+        private void RenderStats(WorldState world, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
             StatsConsole.Clear();
 
@@ -110,9 +113,10 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             StatsConsole.Print(1,1, player.Get<Description>().Name, RLColor.White, RLColor.Black);
             StatsConsole.Print(1,2, " the (TITLE)", RLColor.White, RLColor.Black);
 
-            PrintBar(StatsConsole, 1, 4, STATS_WIDTH - 2, "hp", fighter.Health, RLColor.Red);
-            PrintBar(StatsConsole, 1, 6, STATS_WIDTH - 2, "aura", fighter.Aura, RLColor.Yellow);
-            PrintBar(StatsConsole, 1, 8, STATS_WIDTH - 2, "tilt", fighter.Tilt, RLColor.Magenta);
+            ConsoleRendererHelper.PrintBar(StatsConsole, 1, 4, STATS_WIDTH - 2, "hp", fighter.Health, RLColor.Red);
+            ConsoleRendererHelper.PrintBar(StatsConsole, 1, 6, STATS_WIDTH - 2, "aura", fighter.Aura, RLColor.Yellow);
+            ConsoleRendererHelper.PrintBar(StatsConsole, 1, 8, STATS_WIDTH - 2, "tilt", fighter.Tilt, RLColor.Magenta);
+
             if (fighter.BrokenTicks > 0)
             {
                 StatsConsole.Print(1, 9, $" DEFENCE BREAK {((decimal)fighter.BrokenTicks/100).ToString("F2")} ", RLColor.White, RLColor.Red);
@@ -145,45 +149,23 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
                 StatsConsole.Print(1, 17 + i, $"{i+1}: {skillName}", RLColor.White, RLColor.Black);
             }
 
+            var hoveredCoordinate = systemContainer.PlayerControlSystem.HoveredCoordinate;
+
+            if  (hoveredCoordinate != null && playerFov.Contains(hoveredCoordinate))
+            {
+                var entities = systemContainer.PositionSystem.EntitiesAt(hoveredCoordinate);
+
+                var hoveredEntity = entities.Where(e => e.Has<Appearance>()).OrderByDescending(e => e.Get<Appearance>().ZOrder).First();
+
+                ConsoleRendererHelper.DisplayEntitySummary(StatsConsole, 0, 50, hoveredEntity);
+            }
+
+
             RLConsole.Blit(StatsConsole, 0, 0, StatsConsole.Width, StatsConsole.Height, Console, Console.Width - 22, 0);
         }
+        
 
-        private void PrintBar(RLConsole console, int x, int y, int length, string name, StatCounter counter, RLColor color)
-        {
-            var counterStart = name.Length + 2;
-            var counterText = counter.ToString();
-
-            for (int i = 0; i < length; i++)
-            {
-                char glyph = ' ';
-
-                if (i < name.Length)
-                {
-                    glyph = name[i];
-                }
-                else if (i == name.Length)
-                {
-                    glyph = ':';
-                }
-                else if (i >= counterStart && i < counterStart + counterText.Length)
-                {
-                    glyph = counterText[i - counterStart];
-                }
-
-                if ((decimal)i / length < (decimal)counter.Current / counter.Max)
-                {
-                    console.Set(x + i, y, RLColor.Black, color, glyph);
-                }
-                else
-                {
-                    console.Set(x + i, y, color, RLColor.Black, glyph);
-                }
-
-                
-            }
-        }
-
-        private void RenderMap(WorldState world, ISystemContainer systemContainer)
+        private void RenderMap(WorldState world, ISystemContainer systemContainer, out List<MapCoordinate> playerFov)
         {
             MapConsole.Clear();
 
@@ -192,7 +174,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             var cameraY = world.CameraPosition.Y;
 
             MapCoordinate playerPosition = world.Player.Get<Position>().MapCoordinate;
-            var playerFov = currentMap.FovFrom(playerPosition, 9);
+            playerFov = currentMap.FovFrom(playerPosition, 9);
             foreach (var coordinate in playerFov)
             {
                 currentMap.SetSeen(coordinate);

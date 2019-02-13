@@ -1,0 +1,11 @@
+﻿"Junk"
+[Description]
+Name: Junk
+[Prototype]
+Name: Item:Junk
+Singleton: false
+[Appearance]
+Glyph: %
+Color: #6B4D46
+[Position]
+[Item]

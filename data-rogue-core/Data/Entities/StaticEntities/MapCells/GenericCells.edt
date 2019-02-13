@@ -10,6 +10,8 @@ Transparent: true
 Name: Cell:Empty
 Singleton: true
 [Memorable]
+[Description]
+Name: Floor
 
 "Cell:SpawnPoint"
 [SpawnPoint]
@@ -24,6 +26,8 @@ Transparent: true
 Name: Cell:SpawnPoint
 Singleton: true
 [Memorable]
+[Description]
+Name: Floor
 
 "Cell:Wall"
 [Appearance]
@@ -37,6 +41,8 @@ Transparent: false
 Name: Cell:Wall
 Singleton: true
 [Memorable]
+[Description]
+Name: Wall
 
 "Cell:Boulder"
 [Appearance]
@@ -50,3 +56,5 @@ Transparent: false
 Name: Cell:Boulder
 Singleton: true
 [Memorable]
+[Description]
+Name: Boulder

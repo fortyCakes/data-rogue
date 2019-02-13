@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using data_rogue_core.Components;
 
 namespace data_rogue_core.EntityEngineSystem
@@ -22,5 +23,7 @@ namespace data_rogue_core.EntityEngineSystem
         bool HasAll(SystemComponents systemComponents);
 
         bool HasNone(SystemComponents systemComponents);
+
+        T TryGet<T>() where T : class, IEntityComponent;
     }
 }

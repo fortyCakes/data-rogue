@@ -146,7 +146,7 @@ namespace data_rogue_core
 
         private static void DisplayMainMenu()
         {
-            ActivityStack.Push(MainMenu.GetMainMenu());
+            ActivityStack.Push(new MenuActivity(new MainMenu(), RendererFactory));
         }
 
         private static void OnRootConsoleRender(object sender, UpdateEventArgs e)
@@ -204,6 +204,8 @@ namespace data_rogue_core
                 Thread.CurrentThread.IsBackground = true;
 
                 WorldState = WorldGenerator.Create(SystemContainer, characterCreationForm);
+
+                ActivityStack.Pop();
             }).Start();
         }
 

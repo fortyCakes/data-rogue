@@ -23,8 +23,8 @@ namespace DataRogueWorldEditor
             SystemContainer = new SystemContainer();
 
             SystemContainer.CreateSystems("EDITOR");
-            
-            
+
+            SystemContainer.EntityEngine.Initialise(SystemContainer);
 
             dockPanel = new DockPanel();
             dockPanel.Dock = DockStyle.Fill;

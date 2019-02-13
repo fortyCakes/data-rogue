@@ -26,11 +26,13 @@ namespace data_rogue_core.EntityEngineSystem
 
         IEnumerable<T> GetAll<T>(bool includePrototypes = false) where T : IEntityComponent;
 
-        void Initialise(ISystemContainer behaviourFactory);
+        void Initialise(ISystemContainer systemContainer);
 
         void AddComponent(IEntity entity, IEntityComponent component);
         void RemoveComponent(IEntity entity, IEntityComponent component);
         IEntity GetEntityWithName(string testEntity);
         IEnumerable<IEntity> GetEntitiesWithName(string testEntity);
+        
+        void RemoveComponent<T>(IEntity item) where T : IEntityComponent;
     }
 }

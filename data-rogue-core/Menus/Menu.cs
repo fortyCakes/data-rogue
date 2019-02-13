@@ -9,12 +9,15 @@ namespace data_rogue_core.Menus
         public string MenuName { get; set; }
 
         public List<MenuItem> MenuItems { get; private set; }
+        public virtual List<MenuAction> AvailableActions { get; set; } = new List<MenuAction> { MenuAction.Select };
 
-        public delegate void MenuItemSelected(MenuItem selectedItem);
+        public delegate void MenuItemSelected(MenuItem selectedItem, MenuAction selectedAction);
 
         private MenuItemSelected OnSelectCallback;
 
-        public MenuItem SelectedItem { get; private set; }
+        public MenuItem SelectedItem { get; protected set; }
+        public MenuAction SelectedAction { get; protected set; }
+
         public int SelectedIndex => MenuItems.IndexOf(SelectedItem);
 
         public Menu(string menuName, MenuItemSelected onSelectCallback, params MenuItem[] items)
@@ -51,11 +54,11 @@ namespace data_rogue_core.Menus
         {
             if (SelectedItem.Enabled)
             {
-                OnSelectCallback?.Invoke(SelectedItem);
+                OnSelectCallback?.Invoke(SelectedItem, SelectedAction);
             }
         }
 
-        public void HandleKeyPress(RLKeyPress keyPress)
+        public virtual void HandleKeyPress(RLKeyPress keyPress)
         {
             if (keyPress != null)
             {

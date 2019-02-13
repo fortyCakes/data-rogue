@@ -2,20 +2,19 @@
 
 namespace data_rogue_core.Menus.StaticMenus
 {
-    public static class MainMenu
+    public class MainMenu : Menu
     {
-        public static MenuActivity GetMainMenu()
+        public MainMenu() : base(
+            "Main Menu", 
+            HandleMainMenuSelection, 
+            new MenuItem("New Game"),
+            new MenuItem("Load Game"),
+            new MenuItem("Quit"))
         {
-            var menu = new Menu("Main Menu", HandleMainMenuSelection,
-                new MenuItem("New Game"),
-                new MenuItem("Load Game"),
-                new MenuItem("Quit")
-            );
 
-            return new MenuActivity(menu, Game.RendererFactory);
         }
 
-        public static void HandleMainMenuSelection(MenuItem item)
+        public static void HandleMainMenuSelection(MenuItem item, MenuAction menuAction)
         {
             switch(item.Text)
             {
