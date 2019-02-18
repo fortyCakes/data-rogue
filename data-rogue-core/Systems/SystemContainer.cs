@@ -24,6 +24,7 @@ namespace data_rogue_core.Systems
         public ISkillSystem SkillSystem { get; set; }
         public ITargetingSystem TargetingSystem { get; set; }
         public IItemSystem ItemSystem { get; set; }
+        public IEquipmentSystem EquipmentSystem { get; set; }
 
         public string Seed { get; set; }
 
@@ -65,6 +66,8 @@ namespace data_rogue_core.Systems
 
             TargetingSystem = new TargetingSystem(PositionSystem);
 
+            EquipmentSystem = new EquipmentSystem(this);
+
             Verify();
         }
 
@@ -87,6 +90,7 @@ namespace data_rogue_core.Systems
             Check(SkillSystem, "SkillSystem", msg, ref valid);
             Check(TargetingSystem, "TargetingSystem", msg, ref valid);
             Check(ItemSystem, "ItemSystem", msg, ref valid);
+            Check(EquipmentSystem, "EquipmentSystem", msg, ref valid);
 
             if (!valid)
                 throw new ContainerNotValidException(msg.ToString());

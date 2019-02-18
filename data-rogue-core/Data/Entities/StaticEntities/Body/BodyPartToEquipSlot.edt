@@ -1,0 +1,34 @@
+﻿"EquipmentMappings"
+[Prototype]
+Name: EquipmentMappings
+Singleton: true
+[EquipmentMapping]
+BodyPart: Head
+Slot: Head
+[EquipmentMapping]
+BodyPart: Head
+Slot: Neck
+[EquipmentMapping]
+BodyPart: Torso
+Slot: Chest
+[EquipmentMapping]
+BodyPart: Arms
+Slot: Hand
+[EquipmentMapping]
+BodyPart: Arms
+Slot: Hand
+[EquipmentMapping]
+BodyPart: Arms
+Slot: Ring
+[EquipmentMapping]
+BodyPart: Arms
+Slot: Ring
+[EquipmentMapping]
+BodyPart: Legs
+Slot: Legs
+[EquipmentMapping]
+BodyPart: Legs
+Slot: Boots
+[EquipmentMapping]
+BodyPart: Arms
+Slot: Gloves

@@ -20,6 +20,7 @@ namespace data_rogue_core.Systems.Interfaces
         ISkillSystem SkillSystem {get; set;}
         ITargetingSystem TargetingSystem { get; set; }
         IItemSystem ItemSystem { get; set; }
+        IEquipmentSystem EquipmentSystem { get; set; }
         string Seed { get; set; }
 
         void Verify();

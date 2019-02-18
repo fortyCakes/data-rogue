@@ -81,10 +81,17 @@
     <Compile Include="Behaviours\MoveToPlayerBehaviour.cs" />
     <Compile Include="Behaviours\RandomlyMoveBehaviour.cs" />
     <Compile Include="Behaviours\PlayerControlledBehaviour.cs" />
+    <Compile Include="Components\Equipment.cs" />
+    <Compile Include="Components\BodyPartLocation.cs" />
+    <Compile Include="Components\BodyPartType.cs" />
+    <Compile Include="Components\Consumable.cs" />
     <Compile Include="Components\Description.cs" />
     <Compile Include="Components\EntityReferenceList.cs" />
+    <Compile Include="Components\EquipmentMapping.cs" />
+    <Compile Include="Components\EquipmentSlot.cs" />
     <Compile Include="Components\Fighter.cs" />
     <Compile Include="Components\Inventory.cs" />
+    <Compile Include="Components\BodyPart.cs" />
     <Compile Include="Components\Item.cs" />
     <Compile Include="Components\KnownSkill.cs" />
     <Compile Include="Components\Learner.cs" />
@@ -110,6 +117,7 @@
     <Compile Include="EntityEngineSystem\EntityEngine.cs" />
     <Compile Include="EntityEngineSystem\EntitySerializer.cs" />
     <Compile Include="EntityEngineSystem\ICustomFieldSerialization.cs" />
+    <Compile Include="EventSystem\EventData\EquipItemEventData.cs" />
     <Compile Include="EventSystem\EventData\AttackEventData.cs" />
     <Compile Include="EventSystem\EventData\AttackType.cs" />
     <Compile Include="EventSystem\EventData\DamageEventData.cs" />
@@ -158,8 +166,10 @@
     <Compile Include="EventSystem\EventData\ActivateSkillEventData.cs" />
     <Compile Include="Renderers\ITargetingRenderer.cs" />
     <Compile Include="Systems\AStar.cs" />
+    <Compile Include="Systems\EquipmentSystem.cs" />
     <Compile Include="Systems\FighterSystem.cs" />
     <Compile Include="Behaviours\IBehaviourFactory.cs" />
+    <Compile Include="Systems\Interfaces\IEquipmentSystem.cs" />
     <Compile Include="Systems\Interfaces\IItemSystem.cs" />
     <Compile Include="Systems\Interfaces\IFighterSystem.cs" />
     <Compile Include="Systems\Interfaces\IMessageSystem.cs" />
@@ -254,6 +264,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Data\Entities\player.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Entities\StaticEntities\Body\BodyPartToEquipSlot.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\Entities\StaticEntities\Items\PotionMinorHealing.edt">

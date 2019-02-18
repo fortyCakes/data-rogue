@@ -29,3 +29,11 @@ Skill: Skill:ManaBolt
 Order: 1
 [Inventory]
 Capacity: 26
+[BodyPart]
+Type = Torso
+[BodyPart]
+Type = Head
+[BodyPart]
+Type = Arms
+[BodyPart]
+Type = Legs

@@ -15,6 +15,8 @@
         PickUpItem,
         DropItem,
         UseItem,
-        ConsumableRunOut
+        ConsumableRunOut,
+        EquipItem,
+        UnequipItem
     }
 }
