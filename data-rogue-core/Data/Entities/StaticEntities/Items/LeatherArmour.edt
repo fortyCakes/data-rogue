@@ -1,0 +1,13 @@
+﻿"Leather Armour"
+[Description]
+Name: Leather Armour
+[Prototype]
+Name: Item:LeatherArmour
+Singleton: false
+[Appearance]
+Glyph: (
+Color: #6B4D46
+[Position]
+[Item]
+[Equippable]
+Slot: Chest
