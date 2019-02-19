@@ -269,6 +269,9 @@
     <None Include="Data\Entities\StaticEntities\Body\BodyPartToEquipSlot.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Entities\StaticEntities\Items\LeatherArmour.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\Entities\StaticEntities\Items\PotionMinorHealing.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
