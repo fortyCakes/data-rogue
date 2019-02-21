@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace data_rogue_core.Components
+namespace data_rogue_core.EntityEngineSystem
 {
     public class EntityReferenceList : IList<uint>, ICustomFieldSerialization
     {

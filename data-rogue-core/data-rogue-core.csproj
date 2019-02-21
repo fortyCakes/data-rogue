@@ -86,7 +86,8 @@
     <Compile Include="Components\BodyPartType.cs" />
     <Compile Include="Components\Consumable.cs" />
     <Compile Include="Components\Description.cs" />
-    <Compile Include="Components\EntityReferenceList.cs" />
+    <Compile Include="EntityEngineSystem\EntityMappingList.cs" />
+    <Compile Include="EntityEngineSystem\EntityReferenceList.cs" />
     <Compile Include="Components\EquipmentMapping.cs" />
     <Compile Include="Components\EquipmentSlot.cs" />
     <Compile Include="Components\Fighter.cs" />

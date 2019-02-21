@@ -6,6 +6,6 @@ namespace data_rogue_core.Components
 {
     public class Equipment : IEntityComponent
     {
-        public EntityReferenceList EquippedItems;
+        public EquipmentMappingList EquippedItems;
     }
 }

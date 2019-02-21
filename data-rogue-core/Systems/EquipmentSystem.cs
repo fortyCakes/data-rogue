@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using data_rogue_core.Components;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.EventSystem;
@@ -31,20 +29,20 @@ namespace data_rogue_core.Systems
 
             if (ok)
             {
-                bool slotsAvailable = HasSufficientEmptySlots(entity, equipment);
+                EquipmentSlotDetails slot = GetEmptySlotFor(entity, equipment);
 
-                if (!slotsAvailable && HasExactSlotsFor(entity, equipment))
+                if (slot == null && HasExactSlotFor(entity, equipment))
                 {
-                    slotsAvailable = UnequipItemsInSlots(entity, equipment);
+                    slot = UnequipItemInSlot(entity, equipment);
                 }
 
-                if (slotsAvailable)
+                if (slot != null)
                 {
                     var equip = entity.Get<Equipment>();
 
                     inventory.Contents.Remove(equipment);
 
-                    equip.EquippedItems.Add(equipment);
+                    equip.EquippedItems.Add(new EquipmentMappingListItem { Slot = slot, EquipmentId = equipment.EntityId });
                 }
                 else
                 {
@@ -57,58 +55,33 @@ namespace data_rogue_core.Systems
         {
             var equip = entity.Get<Equipment>();
 
-            var hasItem = equip.EquippedItems.Contains(equipment);
+            var equipDetails = equip.EquippedItems.SingleOrDefault(eq => eq.EquipmentId == equipment.EntityId);
 
-            var ok = hasItem && systemContainer.EventSystem.Try(EventType.UnequipItem, entity, new EquipItemEventData { Equipment = equipment });
+            var ok = equipDetails != null && systemContainer.EventSystem.Try(EventType.UnequipItem, entity, new EquipItemEventData { Equipment = equipment });
 
             if (ok)
             {
                 var inventory = entity.Get<Inventory>();
 
-                equip.EquippedItems.Remove(equipment);
+                equip.EquippedItems.Remove(equipDetails);
 
                 inventory.Contents.Add(equipment);
             }
         }
 
-        private bool UnequipItemsInSlots(IEntity entity, IEntity equipment)
+        private EquipmentSlotDetails UnequipItemInSlot(IEntity entity, IEntity equipment)
         {
             throw new NotImplementedException();
         }
 
-        private bool HasExactSlotsFor(IEntity entity, IEntity equipment)
+        private bool HasExactSlotFor(IEntity entity, IEntity equipment)
         {
             throw new NotImplementedException();
         }
 
-        private bool HasSufficientEmptySlots(IEntity entity, IEntity equipment)
+        private EquipmentSlotDetails GetEmptySlotFor(IEntity entity, IEntity equipment)
         {
-            var entitySlots = GetEquipmentSlots(entity);
-            var currentlyUsedSlots = GetCurrentlyUsedSlots(entity);
-
-            var availableSlots = new Dictionary<EquipmentSlot, int>();
-
-            foreach (var kvp in currentlyUsedSlots)
-            {
-                int available = 0;
-                entitySlots.TryGetValue(kvp.Key, out available);
-
-                available = Math.Max(0, available - kvp.Value);
-
-                availableSlots[kvp.Key] = available;
-            }
-
-            var requiredSlots = GetRequiredSlots(equipment);
-
-            foreach (var requirement in requiredSlots)
-            {
-                int available = 0;
-                availableSlots.TryGetValue(requirement.Key, out available);
-
-                if (available < requirement.Value) return false;
-            }
-
-            return true;
+            throw new NotImplementedException();
         }
 
         private Dictionary<EquipmentSlot, int> GetCurrentlyUsedSlots(IEntity entity)
