@@ -4,7 +4,7 @@ default:Cell:Wall
 10,0: Entity(Props:StairsDown)
 9,1: Entity(Item:Junk)
 10,1: Entity(Item:PotionHealing1)
-11,1: Entity(Item:Junk)
+11,1: Entity(Item:LeatherArmour)
 .:Cell:Empty
 ,:Cell:SpawnPoint
 #:Cell:Wall

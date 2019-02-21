@@ -37,3 +37,4 @@ Type = Head
 Type = Arms
 [BodyPart]
 Type = Legs
+[Equipped]

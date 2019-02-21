@@ -17,7 +17,7 @@ namespace data_rogue_core.Systems
             this.systemContainer = systemContainer;
         }
        
-        public override SystemComponents RequiredComponents => new SystemComponents {typeof(Equipment)};
+        public override SystemComponents RequiredComponents => new SystemComponents {typeof(Equipped)};
         public override SystemComponents ForbiddenComponents => new SystemComponents {typeof(Prototype)};
         public void Equip(IEntity entity, IEntity equipment)
         {
@@ -38,7 +38,7 @@ namespace data_rogue_core.Systems
 
                 if (slot != null)
                 {
-                    var equip = entity.Get<Equipment>();
+                    var equip = entity.Get<Equipped>();
 
                     inventory.Contents.Remove(equipment);
 
@@ -53,7 +53,7 @@ namespace data_rogue_core.Systems
 
         public void Unequip(IEntity entity, IEntity equipment)
         {
-            var equip = entity.Get<Equipment>();
+            var equip = entity.Get<Equipped>();
 
             var equipDetails = equip.EquippedItems.SingleOrDefault(eq => eq.EquipmentId == equipment.EntityId);
 
@@ -81,20 +81,23 @@ namespace data_rogue_core.Systems
 
         private EquipmentSlotDetails GetEmptySlotFor(IEntity entity, IEntity equipment)
         {
-            throw new NotImplementedException();
+            var neededSlot = equipment.Get<Equipment>().EquipmentSlot;
+
+            List<EquipmentSlotDetails> slots = GetEquipmentSlots(entity).Where(e => e.Key == neededSlot).SelectMany(e => e.Value).ToList();
+
+            List<EquipmentSlotDetails> usedSlots = GetUsedEquipmentSlots(entity);
+
+            slots.RemoveAll(e => usedSlots.Contains(e));
+
+            return slots.FirstOrDefault();
         }
 
-        private Dictionary<EquipmentSlot, int> GetCurrentlyUsedSlots(IEntity entity)
+        private List<EquipmentSlotDetails> GetUsedEquipmentSlots(IEntity entity)
         {
             throw new NotImplementedException();
         }
 
-        private Dictionary<EquipmentSlot, int> GetRequiredSlots(IEntity equipment)
-        {
-            throw new NotImplementedException();
-        }
-
-        private Dictionary<EquipmentSlot, int> GetEquipmentSlots(IEntity entity)
+        private Dictionary<EquipmentSlot, List<EquipmentSlotDetails>> GetEquipmentSlots(IEntity entity)
         {
             throw new NotImplementedException();
         }

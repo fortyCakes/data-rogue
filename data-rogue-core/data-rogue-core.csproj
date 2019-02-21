@@ -81,11 +81,11 @@
     <Compile Include="Behaviours\MoveToPlayerBehaviour.cs" />
     <Compile Include="Behaviours\RandomlyMoveBehaviour.cs" />
     <Compile Include="Behaviours\PlayerControlledBehaviour.cs" />
-    <Compile Include="Components\Equipment.cs" />
     <Compile Include="Components\BodyPartLocation.cs" />
     <Compile Include="Components\BodyPartType.cs" />
     <Compile Include="Components\Consumable.cs" />
     <Compile Include="Components\Description.cs" />
+    <Compile Include="Components\Equipped.cs" />
     <Compile Include="EntityEngineSystem\EntityMappingList.cs" />
     <Compile Include="EntityEngineSystem\EntityReferenceList.cs" />
     <Compile Include="Components\EquipmentMapping.cs" />
