@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using data_rogue_core.Components;
+using data_rogue_core.Data;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.EventSystem;
 using data_rogue_core.Systems.Interfaces;
@@ -10,6 +11,8 @@ namespace data_rogue_core.Systems
 {
     public class EquipmentSystem : BaseSystem, IEquipmentSystem
     {
+        private const string EQUIPMENT_MAPPINGS = "EquipmentMappings";
+
         private ISystemContainer systemContainer;
 
         public EquipmentSystem(ISystemContainer systemContainer)
@@ -69,6 +72,26 @@ namespace data_rogue_core.Systems
             }
         }
 
+        public Dictionary<EquipmentSlot, List<EquipmentSlotDetails>> GetEquipmentSlots(IEntity entity)
+        {
+            var slots = new Dictionary<EquipmentSlot, List<EquipmentSlotDetails>>();
+
+            var bodyParts = entity.Components.OfType<BodyPart>();
+            var mappings = systemContainer.PrototypeSystem.Get(EQUIPMENT_MAPPINGS).Components.OfType<EquipmentMapping>();
+
+            foreach (var bodyPart in bodyParts)
+            {
+                var mappedSlots = mappings.Where(s => s.BodyPart == bodyPart.Type).Select(m => m.Slot);
+
+                foreach (var slot in mappedSlots)
+                {
+                    AddToSlotsDictionary(slots, slot, bodyPart);
+                }
+            }
+
+            return slots;
+        }
+
         private EquipmentSlotDetails UnequipItemInSlot(IEntity entity, IEntity equipment)
         {
             throw new NotImplementedException();
@@ -76,7 +99,16 @@ namespace data_rogue_core.Systems
 
         private bool HasExactSlotFor(IEntity entity, IEntity equipment)
         {
-            throw new NotImplementedException();
+            var neededSlot = equipment.Get<Equipment>().EquipmentSlot;
+
+            var slots = GetEquipmentSlots(entity);
+
+            if (slots.ContainsKey(neededSlot) && slots[neededSlot].Count == 1)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         private EquipmentSlotDetails GetEmptySlotFor(IEntity entity, IEntity equipment)
@@ -94,12 +126,36 @@ namespace data_rogue_core.Systems
 
         private List<EquipmentSlotDetails> GetUsedEquipmentSlots(IEntity entity)
         {
-            throw new NotImplementedException();
+            return entity.Get<Equipped>().EquippedItems.Select(e => e.Slot).ToList();
         }
 
-        private Dictionary<EquipmentSlot, List<EquipmentSlotDetails>> GetEquipmentSlots(IEntity entity)
+        private static void AddToSlotsDictionary(Dictionary<EquipmentSlot, List<EquipmentSlotDetails>> slots, EquipmentSlot slot, BodyPart bodyPart)
         {
-            throw new NotImplementedException();
+            if (slots.ContainsKey(slot))
+            {
+                EquipmentSlotDetails equipDetails = CreateEquipmentSlotDetails(bodyPart, slots[slot].Count);
+
+                slots[slot].Add(equipDetails);
+            }
+            else
+            {
+                EquipmentSlotDetails equipDetails = CreateEquipmentSlotDetails(bodyPart, 0);
+
+                slots[slot] = new List<EquipmentSlotDetails> {equipDetails};
+            }
+        }
+
+        private static EquipmentSlotDetails CreateEquipmentSlotDetails(BodyPart bodyPart, int index)
+        {
+            Dictionary<EquipmentSlot, List<EquipmentSlotDetails>> slots;
+            EquipmentSlot slot;
+            var equipDetails = new EquipmentSlotDetails
+            {
+                BodyPartLocation = bodyPart.Location,
+                BodyPartType = bodyPart.Type,
+                Index = index
+            };
+            return equipDetails;
         }
     }
 }

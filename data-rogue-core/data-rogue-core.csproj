@@ -86,7 +86,8 @@
     <Compile Include="Components\Consumable.cs" />
     <Compile Include="Components\Description.cs" />
     <Compile Include="Components\Equipped.cs" />
-    <Compile Include="EntityEngineSystem\EntityMappingList.cs" />
+    <Compile Include="Data\EquipmentMappingListItem.cs" />
+    <Compile Include="Data\EquipmentSlotDetails.cs" />
     <Compile Include="EntityEngineSystem\EntityReferenceList.cs" />
     <Compile Include="Components\EquipmentMapping.cs" />
     <Compile Include="Components\EquipmentSlot.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="Components\World.cs" />
     <Compile Include="Data\EntityBuilder.cs" />
     <Compile Include="Data\Counter.cs" />
+    <Compile Include="Data\EquipmentMappingList.cs" />
     <Compile Include="EntityEngineSystem\IStaticEntityLoader.cs" />
     <Compile Include="EntityEngineSystem\SaveStateSerializer.cs" />
     <Compile Include="EntityEngineSystem\BaseStaticEntityLoader.cs" />
@@ -267,7 +269,7 @@
     <None Include="Data\Entities\player.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Data\Entities\StaticEntities\Body\BodyPartToEquipSlot.edt">
+    <None Include="Data\Entities\StaticEntities\Body\EquipmentMappings.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\Entities\StaticEntities\Items\LeatherArmour.edt">
