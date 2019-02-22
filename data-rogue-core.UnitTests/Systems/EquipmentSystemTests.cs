@@ -25,6 +25,9 @@ namespace data_rogue_core.UnitTests.Systems
             systemContainer.EventSystem = Substitute.For<IEventSystem>();
             systemContainer.EventSystem.Try(Arg.Any<EventType>(), null, null).ReturnsForAnyArgs(true);
 
+            entityEngine = Substitute.For<IEntityEngine>();
+            systemContainer.EntityEngine = entityEngine;
+
             SetUpTestMappings();
 
             equipmentSystem = new EquipmentSystem(systemContainer);
@@ -33,6 +36,7 @@ namespace data_rogue_core.UnitTests.Systems
         private IEquipmentSystem equipmentSystem;
         private SystemContainer systemContainer;
         private IPrototypeSystem prototypeSystem;
+        private IEntityEngine entityEngine;
 
         [Test]
         public void GetEquipmentSlots_WithMapping_ReturnsMappedSlots()
@@ -90,6 +94,8 @@ namespace data_rogue_core.UnitTests.Systems
         {
             var entity = GetTestEntity();
             var item = GetTestHelm(3);
+
+            entityEngine.GetEntity(3).Returns(item);
 
             entity.Get<Inventory>().Contents.Add(item);
 

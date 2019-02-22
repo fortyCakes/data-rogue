@@ -94,7 +94,24 @@ namespace data_rogue_core.Systems
 
         private EquipmentSlotDetails UnequipItemInSlot(IEntity entity, IEntity equipment)
         {
-            throw new NotImplementedException();
+            var neededSlot = equipment.Get<Equipment>().EquipmentSlot;
+
+            var slot = GetEquipmentSlots(entity)[neededSlot].Single();
+
+            var equippedItem = GetEquippedItem(entity, slot);
+
+            Unequip(entity, equippedItem);
+
+            return slot;
+        }
+
+        private IEntity GetEquippedItem(IEntity entity, EquipmentSlotDetails slot)
+        {
+            var equipped = entity.Get<Equipped>();
+
+            var equippedItemId = equipped.EquippedItems.Single(e => e.Slot == slot).EquipmentId;
+
+            return systemContainer.EntityEngine.GetEntity(equippedItemId);
         }
 
         private bool HasExactSlotFor(IEntity entity, IEntity equipment)
