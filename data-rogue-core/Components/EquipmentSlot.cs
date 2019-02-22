@@ -6,7 +6,9 @@
         Neck,
         Chest,
         Legs,
-        Glove,
-        Hand
+        Gloves,
+        Hand,
+        Ring,
+        Boots
     }
 }

@@ -16,7 +16,7 @@ namespace data_rogue_core.Menus.DynamicMenus
     {
         private ISystemContainer systemContainer;
 
-        public override List<MenuAction> AvailableActions { get; set; } = new List<MenuAction> { MenuAction.Use, MenuAction.Drop };
+        public override List<MenuAction> AvailableActions { get; set; } = new List<MenuAction> { MenuAction.Use, MenuAction.Drop, MenuAction.Equip };
 
         public InventoryMenu(ISystemContainer systemContainer, Inventory inventory) : base("Inventory", GetCallback(systemContainer), GetInventoryMenuItems(systemContainer, inventory))
         {
@@ -61,7 +61,7 @@ namespace data_rogue_core.Menus.DynamicMenus
                     {
                         systemContainer.ItemSystem.DropItemFromInventory(item);
                         systemContainer.MessageSystem.Write($"You drop the {item.Get<Description>().Name}.");
-                        systemContainer.EventSystem.Try(EventType.SpendTime, Game.WorldState.Player, new SpendTimeEventData { Ticks = 1000 });
+                        SpendATurn(systemContainer);
                     }
 
                     Game.ActivityStack.Pop();
@@ -74,10 +74,28 @@ namespace data_rogue_core.Menus.DynamicMenus
 
                     Game.ActivityStack.Pop();
                     break;
+                case MenuAction.Equip:
+                    if (item.Has<Equipment>())
+                    {
+                        var done = systemContainer.EquipmentSystem.Equip(Game.WorldState.Player, item);
+
+                        if (done)
+                        {
+                            SpendATurn(systemContainer);
+                            Game.ActivityStack.Pop();
+                            systemContainer.MessageSystem.Write($"You equip the {item.DescriptionName}.");
+                        }
+                    }
+
+                    break;
                 default:
                     throw new ApplicationException("Unknown MenuAction in InventoryMenu");
             }
         }
-        
+
+        private static void SpendATurn(ISystemContainer systemContainer)
+        {
+            systemContainer.EventSystem.Try(EventType.SpendTime, Game.WorldState.Player, new SpendTimeEventData { Ticks = 1000 });
+        }
     }
 }

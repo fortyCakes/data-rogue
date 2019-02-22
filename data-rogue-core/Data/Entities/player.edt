@@ -30,11 +30,11 @@ Order: 1
 [Inventory]
 Capacity: 26
 [BodyPart]
-Type = Torso
+Type: Torso
 [BodyPart]
-Type = Head
+Type: Head
 [BodyPart]
-Type = Arms
+Type: Arms
 [BodyPart]
-Type = Legs
+Type: Legs
 [Equipped]

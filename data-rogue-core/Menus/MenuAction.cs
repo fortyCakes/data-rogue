@@ -4,6 +4,8 @@
     {
         Select,
         Drop,
-        Use
+        Use,
+        Equip,
+        Unequip
     }
 }

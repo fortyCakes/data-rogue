@@ -22,7 +22,8 @@ namespace data_rogue_core.Systems
        
         public override SystemComponents RequiredComponents => new SystemComponents {typeof(Equipped)};
         public override SystemComponents ForbiddenComponents => new SystemComponents {typeof(Prototype)};
-        public void Equip(IEntity entity, IEntity equipment)
+
+        public bool Equip(IEntity entity, IEntity equipment)
         {
             var inventory = entity.Get<Inventory>();
 
@@ -49,12 +50,16 @@ namespace data_rogue_core.Systems
                 }
                 else
                 {
-                    // Can't equip that.
+                    return false;
                 }
+
+                return true;
             }
+
+            return false;
         }
 
-        public void Unequip(IEntity entity, IEntity equipment)
+        public bool Unequip(IEntity entity, IEntity equipment)
         {
             var equip = entity.Get<Equipped>();
 
@@ -69,7 +74,11 @@ namespace data_rogue_core.Systems
                 equip.EquippedItems.Remove(equipDetails);
 
                 inventory.Contents.Add(equipment);
+
+                return true;
             }
+
+            return false;
         }
 
         public Dictionary<EquipmentSlot, List<EquipmentSlotDetails>> GetEquipmentSlots(IEntity entity)
@@ -90,6 +99,20 @@ namespace data_rogue_core.Systems
             }
 
             return slots;
+        }
+
+        public List<IEntity> GetEquippedItems(IEntity equippedEntity)
+        {
+            var equipped = equippedEntity.Get<Equipped>();
+
+            return equipped.EquippedItems.Select(e => systemContainer.EntityEngine.GetEntity(e.EquipmentId)).ToList();
+        }
+
+        public IEntity GetItemInSlot(IEntity equippedEntity, EquipmentSlotDetails slot)
+        {
+            var equipped = equippedEntity.Get<Equipped>();
+
+            return equipped.EquippedItems.Where(e => e.Slot == slot).Select(i => systemContainer.EntityEngine.GetEntity(i.EquipmentId)).SingleOrDefault();
         }
 
         private EquipmentSlotDetails UnequipItemInSlot(IEntity entity, IEntity equipment)

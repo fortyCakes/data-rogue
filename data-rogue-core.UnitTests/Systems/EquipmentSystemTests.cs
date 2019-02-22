@@ -22,7 +22,8 @@ namespace data_rogue_core.UnitTests.Systems
             prototypeSystem = Substitute.For<IPrototypeSystem>();
             systemContainer.PrototypeSystem = prototypeSystem;
 
-            systemContainer.EventSystem = Substitute.For<IEventSystem>();
+            eventSystem = Substitute.For<IEventSystem>();
+            systemContainer.EventSystem = eventSystem;
             systemContainer.EventSystem.Try(Arg.Any<EventType>(), null, null).ReturnsForAnyArgs(true);
 
             entityEngine = Substitute.For<IEntityEngine>();
@@ -31,18 +32,21 @@ namespace data_rogue_core.UnitTests.Systems
             SetUpTestMappings();
 
             equipmentSystem = new EquipmentSystem(systemContainer);
+
+            entity = GetTestEntity();
         }
+
+        private IEntity entity;
 
         private IEquipmentSystem equipmentSystem;
         private SystemContainer systemContainer;
         private IPrototypeSystem prototypeSystem;
         private IEntityEngine entityEngine;
+        private IEventSystem eventSystem;
 
         [Test]
         public void GetEquipmentSlots_WithMapping_ReturnsMappedSlots()
         {
-            var entity = GetTestEntity();
-
             var result = equipmentSystem.GetEquipmentSlots(entity);
 
             var expected = new Dictionary<EquipmentSlot, List<EquipmentSlotDetails>>
@@ -74,12 +78,11 @@ namespace data_rogue_core.UnitTests.Systems
         [Test]
         public void Equip_HasSlotAndNothingEquipped_AddsToEquipped()
         {
-            var entity = GetTestEntity();
-            var item = GetTestHelm(3);
+            var item = GiveHelmTestItem(3);
 
-            entity.Get<Inventory>().Contents.Add(item);
+            var result = equipmentSystem.Equip(entity, item);
 
-            equipmentSystem.Equip(entity, item);
+            result.Should().BeTrue();
 
             var expected = new EquipmentMappingList
             {
@@ -90,21 +93,32 @@ namespace data_rogue_core.UnitTests.Systems
         }
 
         [Test]
+        public void Equip_EquipItemEventFails_DoesNotEquip()
+        {
+            var item = GiveHelmTestItem(3);
+            eventSystem.Try(EventType.EquipItem, entity, Arg.Any<object>()).Returns(false);
+
+            var result = equipmentSystem.Equip(entity, item);
+
+            result.Should().BeFalse();
+
+            var expected = new EquipmentMappingList {};
+
+            entity.Get<Equipped>().EquippedItems.Should().BeEquivalentTo(expected);
+        }
+
+        [Test]
         public void Equip_HasSlotAndSomethingEquipped_SingleSlot_ReplacesEquippedAndPutsOldInInventory()
         {
-            var entity = GetTestEntity();
-            var item = GetTestHelm(3);
-
-            entityEngine.GetEntity(3).Returns(item);
-
-            entity.Get<Inventory>().Contents.Add(item);
+            var item = GiveHelmTestItem(3);
 
             equipmentSystem.Equip(entity, item);
 
-            var newItem = GetTestHelm(4);
-            entity.Get<Inventory>().Contents.Add(newItem);
+            var newItem = GiveHelmTestItem(4);
 
-            equipmentSystem.Equip(entity, newItem);
+            var result = equipmentSystem.Equip(entity, newItem);
+
+            result.Should().BeTrue();
 
             var expected = new EquipmentMappingList
             {
@@ -121,14 +135,13 @@ namespace data_rogue_core.UnitTests.Systems
         [Test]
         public void Equip_HasNoSlotFor_DoesNotEquipAndRemainsInInventory()
         {
-            var entity = GetTestEntity();
-            var item = GetTestHelm(3);
+            var item = GiveHelmTestItem(3);
 
             prototypeSystem.Get("EquipmentMappings").Returns(new Entity(1, "EquipmentMappings", new IEntityComponent[0]));
 
-            entity.Get<Inventory>().Contents.Add(item);
+            var result = equipmentSystem.Equip(entity, item);
 
-            equipmentSystem.Equip(entity, item);
+            result.Should().BeFalse();
 
             var expected = new EquipmentMappingList();
 
@@ -142,15 +155,13 @@ namespace data_rogue_core.UnitTests.Systems
         [Test]
         public void Equip_HasMultipleSlots_EquipsInEmptyOnes()
         {
-            var entity = GetTestEntity();
-            var item1 = GetTestHandItem(3);
-            var item2 = GetTestHandItem(4);
-
-            entity.Get<Inventory>().Contents.Add(item1);
-            entity.Get<Inventory>().Contents.Add(item2);
+            var item1 = GiveHandTestItem(3);
+            var item2 = GiveHandTestItem(4);
 
             equipmentSystem.Equip(entity, item1);
-            equipmentSystem.Equip(entity, item2);
+            var result = equipmentSystem.Equip(entity, item2);
+
+            result.Should().BeTrue();
 
             var expected = new EquipmentMappingList{
                 new EquipmentMappingListItem {EquipmentId = item1.EntityId, Slot = new EquipmentSlotDetails {BodyPartType = BodyPartType.Arms, BodyPartLocation = BodyPartLocation.Main, Index = 0}},
@@ -167,18 +178,15 @@ namespace data_rogue_core.UnitTests.Systems
         [Test]
         public void Equip_HasMultipleFullSlots_DoesNotEquip()
         {
-            var entity = GetTestEntity();
-            var item1 = GetTestHandItem(3);
-            var item2 = GetTestHandItem(4);
-            var item3 = GetTestHandItem(5);
-
-            entity.Get<Inventory>().Contents.Add(item1);
-            entity.Get<Inventory>().Contents.Add(item2);
-            entity.Get<Inventory>().Contents.Add(item3);
+            var item1 = GiveHandTestItem(3);
+            var item2 = GiveHandTestItem(4);
+            var item3 = GiveHandTestItem(5);
 
             equipmentSystem.Equip(entity, item1);
             equipmentSystem.Equip(entity, item2);
-            equipmentSystem.Equip(entity, item3);
+            var result = equipmentSystem.Equip(entity, item3);
+
+            result.Should().BeFalse();
 
             var expected = new EquipmentMappingList{
                 new EquipmentMappingListItem {EquipmentId = item1.EntityId, Slot = new EquipmentSlotDetails {BodyPartType = BodyPartType.Arms, BodyPartLocation = BodyPartLocation.Main, Index = 0}},
@@ -192,20 +200,109 @@ namespace data_rogue_core.UnitTests.Systems
             entity.Get<Inventory>().Contents.Should().BeEquivalentTo(expectedInventory);
         }
 
-        private static IEntity GetTestHelm(uint entityId)
+        [Test]
+        public void GetEquippedItems_ReturnsEquippedItems()
         {
-            return new Entity(entityId, "TestHelm", new IEntityComponent[]
+            var item1 = GiveHandTestItem(3);
+            var item2 = GiveHandTestItem(4);
+
+            equipmentSystem.Equip(entity, item1);
+            equipmentSystem.Equip(entity, item2);
+
+            var result = equipmentSystem.GetEquippedItems(entity);
+
+            var expected = new List<IEntity>
+            {
+                item1,
+                item2
+            };
+
+            result.Should().BeEquivalentTo(expected);
+        }
+
+        [Test]
+        public void Unequip_ReturnsItemToInventory()
+        {
+            var item1 = GiveHandTestItem(3);
+            equipmentSystem.Equip(entity, item1);
+
+            var result = equipmentSystem.Unequip(entity, item1);
+
+            result.Should().BeTrue();
+
+            var equippedItems = equipmentSystem.GetEquippedItems(entity);
+
+            var expected = new List<IEntity> { };
+
+            equippedItems.Should().BeEquivalentTo(expected);
+        }
+
+        [Test]
+        public void Unequip_UnequipEventFails_DoesNotUnequip()
+        {
+            var item1 = GiveHandTestItem(3);
+            equipmentSystem.Equip(entity, item1);
+
+            eventSystem.Try(EventType.UnequipItem, entity, Arg.Any<object>()).Returns(false);
+
+            var result = equipmentSystem.Unequip(entity, item1);
+
+            result.Should().BeFalse();
+
+            var equippedItems = equipmentSystem.GetEquippedItems(entity);
+
+            var expected = new List<IEntity> { item1 };
+
+            equippedItems.Should().BeEquivalentTo(expected);
+        }
+
+        [Test]
+        public void GetItemInSlot_ItemIsInSlot_ReturnsItem()
+        {
+            var item1 = GiveHandTestItem(3);
+            equipmentSystem.Equip(entity, item1);
+
+            var slot = new EquipmentSlotDetails { BodyPartLocation = BodyPartLocation.Main, BodyPartType = BodyPartType.Arms, Index = 0 };
+
+            var result = equipmentSystem.GetItemInSlot(entity, slot);
+
+            result.Should().Be(item1);
+        }
+
+        [Test]
+        public void GetItemInSlot_SlotEmpty_ReturnsNull()
+        {
+            var result = equipmentSystem.GetItemInSlot(entity, new EquipmentSlotDetails { BodyPartType = BodyPartType.Legs });
+
+            result.Should().BeNull();
+        }
+
+        private IEntity GiveHelmTestItem(uint entityId)
+        {
+            var item = new Entity(entityId, "TestHelm", new IEntityComponent[]
             {
                 new Equipment() {EquipmentSlot = EquipmentSlot.Head}
             });
+
+            entityEngine.GetEntity(entityId).Returns(item);
+
+            entity.Get<Inventory>().Contents.Add(item);
+
+            return item;
         }
 
-        private static IEntity GetTestHandItem(uint entityId)
+        private IEntity GiveHandTestItem(uint entityId)
         {
-            return new Entity(entityId, "TestHandItem", new IEntityComponent[]
+            var item = new Entity(entityId, "TestHandItem", new IEntityComponent[]
             {
                 new Equipment() {EquipmentSlot = EquipmentSlot.Hand}
             });
+
+            entityEngine.GetEntity(entityId).Returns(item);
+
+            entity.Get<Inventory>().Contents.Add(item);
+
+            return item;
         }
 
         private void SetUpTestMappings()

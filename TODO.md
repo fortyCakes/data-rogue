@@ -5,11 +5,11 @@ BUGS
 0.1
 
 Equipment
-	Equipment slots
-	Equip items
+	/ Equipment slots
+	/ Equip items
 	Equipped items boost stats
 	Equipped items can proc effects (e.g. on hit)
-	Enforce inventory capacity
+Enforce inventory capacity
 Randomised Monster spawning (from monster prototype tags)
 Randomised Item spawning (from item prototype tags)
 Cancelling a skill / spend aura after skill is completed
@@ -32,6 +32,7 @@ Monsters spawn with items and drop them
 "seen tiles" on the map editor
 Dropdown for entity selection
 Dropdown for cell selection
+Key binding
 Mouseover descriptions
 Vault based map gen
 Mapgen visualiser (debug menu)

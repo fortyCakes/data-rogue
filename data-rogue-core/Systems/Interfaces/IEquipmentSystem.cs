@@ -11,10 +11,14 @@ namespace data_rogue_core.Systems.Interfaces
 {
     public interface IEquipmentSystem: ISystem, IInitialisableSystem
     {
-        void Equip(IEntity entity, IEntity equipment);
+        bool Equip(IEntity entity, IEntity equipment);
 
-        void Unequip(IEntity entity, IEntity equipment);
+        bool Unequip(IEntity entity, IEntity equipment);
 
         Dictionary<EquipmentSlot, List<EquipmentSlotDetails>> GetEquipmentSlots(IEntity entity);
+
+        List<IEntity> GetEquippedItems(IEntity equippedEntity);
+
+        IEntity GetItemInSlot(IEntity equippedEntity, EquipmentSlotDetails slot);
     }
 }

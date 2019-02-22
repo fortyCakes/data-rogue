@@ -95,6 +95,16 @@ namespace data_rogue_core.Systems
                             ShowInventory();
                         }
                         break;
+                    case RLKey.E:
+                        if (keyPress.Shift)
+                        {
+
+                        }
+                        else
+                        {
+                            ShowEquipment();
+                        }
+                        break;
                     case RLKey.Escape:
                         Game.ActivityStack.Push(new MenuActivity(new MainMenu(), Game.RendererFactory));
                         break;
@@ -166,6 +176,13 @@ namespace data_rogue_core.Systems
                         break;
                 }
             }
+        }
+
+        private void ShowEquipment()
+        {
+            IEntity player = Game.WorldState.Player;
+
+            Game.ActivityStack.Push(new MenuActivity(new EquipmentMenu(systemContainer, player), Game.RendererFactory));
         }
 
         private void ShowInventory()
