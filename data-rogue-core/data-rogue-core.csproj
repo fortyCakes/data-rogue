@@ -85,6 +85,7 @@
     <Compile Include="Components\BodyPartType.cs" />
     <Compile Include="Components\Consumable.cs" />
     <Compile Include="Components\Description.cs" />
+    <Compile Include="Components\Enchantment.cs" />
     <Compile Include="Components\Equipped.cs" />
     <Compile Include="Data\EquipmentMappingListItem.cs" />
     <Compile Include="Data\EquipmentSlotDetails.cs" />
@@ -132,6 +133,7 @@
     <Compile Include="EventSystem\IEventRule.cs" />
     <Compile Include="EventSystem\IEventSystem.cs" />
     <Compile Include="EventSystem\Rules\ActivateSkillWithAuraRule.cs" />
+    <Compile Include="EventSystem\Rules\ApplyStatBoostEnchantmentRule.cs" />
     <Compile Include="EventSystem\Rules\EnemiesInViewAddTensionRule.cs" />
     <Compile Include="EventSystem\Rules\TiltDamageRule.cs" />
     <Compile Include="EventSystem\Rules\GetBaseStatRule.cs" />

@@ -6,7 +6,11 @@
         Agility,
         Tension,
         Willpower,
-        Intellect
+        Intellect,
+        MeleeAccuracy,
+        MagicalAccuracy,
+        Dodge,
+        MeleeBlock
     }
 
     public class GetStatEventData
