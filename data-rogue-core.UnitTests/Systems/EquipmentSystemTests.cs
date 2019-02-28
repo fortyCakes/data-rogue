@@ -58,7 +58,7 @@ namespace data_rogue_core.UnitTests.Systems
                     }
                 },
                 {
-                    EquipmentSlot.Glove, new List<EquipmentSlotDetails>
+                    EquipmentSlot.Gloves, new List<EquipmentSlotDetails>
                     {
                         new EquipmentSlotDetails {BodyPartLocation = BodyPartLocation.Main, BodyPartType = BodyPartType.Arms, Index = 0}
                     }
@@ -264,15 +264,41 @@ namespace data_rogue_core.UnitTests.Systems
 
             var slot = new EquipmentSlotDetails { BodyPartLocation = BodyPartLocation.Main, BodyPartType = BodyPartType.Arms, Index = 0 };
 
-            var result = equipmentSystem.GetItemInSlot(entity, slot);
+            var result = equipmentSystem.GetItemInSlot(entity, EquipmentSlot.Hand, slot);
 
             result.Should().Be(item1);
         }
 
         [Test]
+        public void GetItemInSlot_ItemInSlotOnSameBodyPart_ReturnsNull()
+        {
+            var item1 = GiveHandTestItem(3);
+            equipmentSystem.Equip(entity, item1);
+
+            var slot = new EquipmentSlotDetails { BodyPartLocation = BodyPartLocation.Main, BodyPartType = BodyPartType.Arms, Index = 0 };
+
+            var result = equipmentSystem.GetItemInSlot(entity, EquipmentSlot.Gloves, slot);
+
+            result.Should().BeNull();
+        }
+
+        [Test]
+        public void GetItemInSlot_ItemInOtherSlot_ReturnsNull()
+        {
+            var item1 = GiveHandTestItem(3);
+            equipmentSystem.Equip(entity, item1);
+
+            var slot = new EquipmentSlotDetails { BodyPartLocation = BodyPartLocation.Main, BodyPartType = BodyPartType.Arms, Index = 1 };
+
+            var result = equipmentSystem.GetItemInSlot(entity, EquipmentSlot.Hand, slot);
+
+            result.Should().BeNull();
+        }
+
+        [Test]
         public void GetItemInSlot_SlotEmpty_ReturnsNull()
         {
-            var result = equipmentSystem.GetItemInSlot(entity, new EquipmentSlotDetails { BodyPartType = BodyPartType.Legs });
+            var result = equipmentSystem.GetItemInSlot(entity, EquipmentSlot.Hand, new EquipmentSlotDetails { BodyPartType = BodyPartType.Legs });
 
             result.Should().BeNull();
         }
@@ -312,7 +338,7 @@ namespace data_rogue_core.UnitTests.Systems
                 new EquipmentMapping {BodyPart = BodyPartType.Head, Slot = EquipmentSlot.Head},
                 new EquipmentMapping {BodyPart = BodyPartType.Arms, Slot = EquipmentSlot.Hand},
                 new EquipmentMapping {BodyPart = BodyPartType.Arms, Slot = EquipmentSlot.Hand},
-                new EquipmentMapping {BodyPart = BodyPartType.Arms, Slot = EquipmentSlot.Glove}
+                new EquipmentMapping {BodyPart = BodyPartType.Arms, Slot = EquipmentSlot.Gloves}
             });
 
             prototypeSystem.Get("EquipmentMappings").Returns(mappings);

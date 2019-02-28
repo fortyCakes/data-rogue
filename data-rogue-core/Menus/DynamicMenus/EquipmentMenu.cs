@@ -36,7 +36,7 @@ namespace data_rogue_core.Menus.DynamicMenus
 
         private static MenuItem ConvertItemToMenuItem(EquipmentSlot slot, EquipmentSlotDetails slotDetails, ISystemContainer systemContainer, IEntity equippedEntity)
         {
-            var item = systemContainer.EquipmentSystem.GetItemInSlot(equippedEntity, slotDetails);
+            var item = systemContainer.EquipmentSystem.GetItemInSlot(equippedEntity, slot, slotDetails);
 
             string slotDescription = GetSlotDescription(slotDetails, slot);
 
@@ -45,11 +45,10 @@ namespace data_rogue_core.Menus.DynamicMenus
 
         private static string GetSlotDescription(EquipmentSlotDetails slot, EquipmentSlot slotName)
         {
-            var partString = slot.BodyPartType.ToString();
-            var equipmentString = " " + slotName.ToString();
+            var equipmentString = slotName.ToString();
             var indexString = slot.Index == 0 ? "" : $" {slot.Index + 1}";
 
-            return partString + equipmentString + indexString;
+            return equipmentString + indexString;
         }
 
         private static MenuItemSelected GetCallback(ISystemContainer systemContainer)

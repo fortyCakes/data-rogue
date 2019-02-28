@@ -2,7 +2,7 @@
 [Prototype]
 Name: Skill:ManaBolt
 Singleton: true
-[SkillDefinition]
+[Skill]
 Cost: 50
 ScriptName: Script: Mana Bolt
 [Description]

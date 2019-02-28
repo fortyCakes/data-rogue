@@ -3,10 +3,6 @@ using data_rogue_core.EventSystem.EventData;
 
 namespace data_rogue_core.Components
 {
-    public abstract class Enchantment : IEntityComponent
-    {
-        public string Name;
-    }
 
     public class StatBoostEnchantment : Enchantment
     {

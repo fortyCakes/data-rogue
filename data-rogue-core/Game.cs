@@ -108,7 +108,8 @@ namespace data_rogue_core
                 new TiltDamageRule(SystemContainer),
                 new EnemiesInViewAddTensionRule(SystemContainer),
                 new ActivateSkillWithAuraRule(SystemContainer),
-                new ApplyStatBoostEnchantmentRule(SystemContainer)
+                new ApplyStatBoostEnchantmentRule(SystemContainer),
+                new ApplyProcEnchantmentRule(SystemContainer, EventType.Attack)
             );
         }
 

@@ -7,22 +7,23 @@ using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.EventSystem.Rules
 {
-    public class ApplyStatBoostEnchantmentRule : IEventRule
+    public class ApplyProcEnchantmentRule : IEventRule
     {
-        public ApplyStatBoostEnchantmentRule(ISystemContainer systemContainer)
+        public ApplyProcEnchantmentRule(ISystemContainer systemContainer, EventType eventType)
         {
             this.systemContainer = systemContainer;
+            this.eventType = eventType;
         }
 
-        public EventTypeList EventTypes => new EventTypeList{ EventType.GetStat };
-        public int RuleOrder => 1;
+        public EventType eventType;
+
+        public EventTypeList EventTypes => new EventTypeList{ eventType };
+        public int RuleOrder => int.MinValue;
 
         private ISystemContainer systemContainer { get; }
 
         public bool Apply(EventType type, IEntity sender, object eventData)
         {
-            var data = eventData as GetStatEventData;
-
             if (!sender.Has<Equipped>()) return true;
 
             var equipped = sender.Get<Equipped>();
@@ -32,16 +33,21 @@ namespace data_rogue_core.EventSystem.Rules
                 var id = equippedItem.EquipmentId;
                 var item = systemContainer.EntityEngine.GetEntity(id);
 
-                foreach(var boost in item.Components.OfType<StatBoostEnchantment>())
+                foreach(var enchantment in item.Components.OfType<ProcEnchantment>())
                 {
-                    if (boost.Stat == data.Stat)
+                    if (enchantment.EventType == eventType && ProcRoll(enchantment))
                     {
-                        data.Value += boost.Value;
+                        systemContainer.ScriptExecutor.ExecuteByName(sender, enchantment.ScriptName);
                     }
                 }
             }
 
             return true;
+        }
+
+        private bool ProcRoll(ProcEnchantment enchantment)
+        {
+            return enchantment.ProcChance >= 100 || systemContainer.Random.Between(1, 100) <= enchantment.ProcChance;
         }
     }
 }

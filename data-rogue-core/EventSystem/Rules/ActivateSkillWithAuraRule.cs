@@ -37,7 +37,7 @@ namespace data_rogue_core.EventSystem.Rules
             {
                 var skill = skills[index];
 
-                var skillDefinition = prototypeSystem.Get(skill.Skill).Get<SkillDefinition>();
+                var skillDefinition = prototypeSystem.Get(skill.Skill).Get<Skill>();
 
                 var userAura = sender.Get<Fighter>().Aura;
 

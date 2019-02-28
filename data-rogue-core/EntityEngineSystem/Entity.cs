@@ -10,7 +10,7 @@ namespace data_rogue_core.EntityEngineSystem
         public uint EntityId { get; }
 
         public string Name { get; set; } = "";
-        public string DescriptionName => Get<Description>().Name;
+        public string DescriptionName => Get<Description>()?.Name;
 
         public bool IsStatic { get; set; } = false;
 

@@ -1,0 +1,30 @@
+﻿"Vampiric Blade"
+[Description]
+Name: Vampiric Blade
+[Prototype]
+Name: Item:VampiricBlade
+Singleton: false
+[Appearance]
+Glyph: \
+Color: #990000
+[Position]
+[Item]
+Power: 5
+[Equipment]
+EquipmentSlot: Hand
+[ProcEnchantment]
+Name: Vampiric
+ProcChance: 50
+EventType: Attack
+ScriptName: Script: Vampiric Heal
+
+"Script: VampiricHeal"
+[Prototype]
+Name: Script: Vampiric Heal
+Singleton: true
+[Script]
+Text: {
+	fighter = User:GetFighter()
+	fighter.Health:Add(10);
+	SystemContainer.MessageSystem:Write(User:GetDescription().Name .. ' is healed for 10 health by their vampiric blade.')
+}

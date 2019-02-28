@@ -19,6 +19,6 @@ namespace data_rogue_core.Systems.Interfaces
 
         List<IEntity> GetEquippedItems(IEntity equippedEntity);
 
-        IEntity GetItemInSlot(IEntity equippedEntity, EquipmentSlotDetails slot);
+        IEntity GetItemInSlot(IEntity equippedEntity, EquipmentSlot slot, EquipmentSlotDetails slotDetails);
     }
 }

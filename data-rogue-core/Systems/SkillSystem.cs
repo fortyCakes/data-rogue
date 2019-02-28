@@ -12,7 +12,7 @@ namespace data_rogue_core.Systems
         private readonly IScriptExecutor scriptExecutor;
         private readonly IEventSystem eventSystem;
 
-        public override SystemComponents RequiredComponents => new SystemComponents() { typeof(SkillDefinition) };
+        public override SystemComponents RequiredComponents => new SystemComponents() { typeof(Skill) };
 
         public override SystemComponents ForbiddenComponents => new SystemComponents();
 
@@ -37,7 +37,7 @@ namespace data_rogue_core.Systems
         {
             var skill = prototypeSystem.Get(skillName);
 
-            var scriptName = skill.Get<SkillDefinition>().ScriptName;
+            var scriptName = skill.Get<Skill>().ScriptName;
 
             var script = prototypeSystem.Get(scriptName);
 

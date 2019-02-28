@@ -108,11 +108,11 @@ namespace data_rogue_core.Systems
             return equipped.EquippedItems.Select(e => systemContainer.EntityEngine.GetEntity(e.EquipmentId)).ToList();
         }
 
-        public IEntity GetItemInSlot(IEntity equippedEntity, EquipmentSlotDetails slot)
+        public IEntity GetItemInSlot(IEntity equippedEntity, EquipmentSlot slot, EquipmentSlotDetails slotDetails)
         {
             var equipped = equippedEntity.Get<Equipped>();
 
-            return equipped.EquippedItems.Where(e => e.Slot == slot).Select(i => systemContainer.EntityEngine.GetEntity(i.EquipmentId)).SingleOrDefault();
+            return equipped.EquippedItems.Where(e => e.Slot == slotDetails).Select(i => systemContainer.EntityEngine.GetEntity(i.EquipmentId)).Where(i => i.Get<Equipment>().EquipmentSlot == slot).SingleOrDefault();
         }
 
         private EquipmentSlotDetails UnequipItemInSlot(IEntity entity, IEntity equipment)

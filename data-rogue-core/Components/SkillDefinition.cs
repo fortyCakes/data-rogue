@@ -2,7 +2,7 @@
 
 namespace data_rogue_core.Components
 {
-    public class SkillDefinition : IEntityComponent
+    public class Skill : IEntityComponent
     {
         public string ScriptName;
         public int Cost;

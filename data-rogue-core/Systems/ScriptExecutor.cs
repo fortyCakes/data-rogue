@@ -1,4 +1,5 @@
-﻿using data_rogue_core.EntityEngineSystem;
+﻿using data_rogue_core.Components;
+using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems.Interfaces;
 using NLua;
@@ -30,6 +31,13 @@ namespace data_rogue_core.Systems
             SetupEnumeration(state);
 
             state.DoString(script);
+        }
+
+        public void ExecuteByName(IEntity user, string scriptName)
+        {
+            var scriptEntity = systemContainer.PrototypeSystem.Get(scriptName);
+            var script = scriptEntity.Get<Script>().Text;
+            Execute(user, script);
         }
 
         private static void SetupEnumeration(Lua state)
