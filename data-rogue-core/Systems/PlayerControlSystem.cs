@@ -215,11 +215,14 @@ namespace data_rogue_core.Systems
                 {
                     var inventory = player.Get<Inventory>();
 
-                    systemContainer.ItemSystem.MoveToInventory(firstItem, inventory);
+                    var done = systemContainer.ItemSystem.MoveToInventory(firstItem, inventory);
 
-                    systemContainer.MessageSystem.Write($"You pick up the {firstItem.Get<Description>().Name}.");
+                    if (done)
+                    {
+                        systemContainer.MessageSystem.Write($"You pick up the {firstItem.Get<Description>().Name}.");
 
-                    systemContainer.EventSystem.Try(EventType.SpendTime, player, new SpendTimeEventData { Ticks = 1000 });
+                        systemContainer.EventSystem.Try(EventType.SpendTime, player, new SpendTimeEventData { Ticks = 1000 });
+                    }
                 }
             }
         }

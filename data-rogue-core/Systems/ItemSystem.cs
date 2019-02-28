@@ -32,7 +32,7 @@ namespace data_rogue_core.Systems
             this.eventSystem = eventSystem;
         }
 
-        public void MoveToInventory(IEntity item, Inventory inventory)
+        public bool MoveToInventory(IEntity item, Inventory inventory)
         {
             var hasRemovedItemFromSomewhere = false;
 
@@ -40,17 +40,26 @@ namespace data_rogue_core.Systems
 
             hasRemovedItemFromSomewhere |= TryRemoveItemFromCurrentInventory(item);
 
-            if (hasRemovedItemFromSomewhere)
+            var hasSpace = inventory.Capacity > inventory.Contents.Count();
+
+            if (hasRemovedItemFromSomewhere && hasSpace)
             {
                 inventory.Contents.Add(item);
             }
             else
             {
-                throw new ApplicationException($"Could not remove item {item} from a location");
+                if (!hasSpace)
+                {
+                    messageSystem.Write("Couldn't add the item to the inventory because the inventory is full.");
+                }
+
+                return false;
             }
+
+            return true;
         }
 
-        public void DropItemFromInventory(IEntity item)
+        public bool DropItemFromInventory(IEntity item)
         {
             var inventory = GetInventoryContaining(item);
 
@@ -65,12 +74,13 @@ namespace data_rogue_core.Systems
             }
             else
             {
-                throw new Exception("Can't drop item: Item is not in an inventory");
+                return false;
             }
 
+            return true;
         }
 
-        public void Use(IEntity user, IEntity item)
+        public bool Use(IEntity user, IEntity item)
         {
             var scriptName = item.Get<Item>().UseScript;
 
@@ -86,6 +96,8 @@ namespace data_rogue_core.Systems
                 var itemName = item.Get<Description>().Name;
                 messageSystem.Write($"{userName} tries to use {itemName}. Nothing interesting happens.");
             }
+
+            return true;
         }
 
         private void ExecuteItemScript(IEntity user, string scriptName)
@@ -115,7 +127,7 @@ namespace data_rogue_core.Systems
             }
         }
 
-        public void DestroyItem(IEntity item)
+        public bool DestroyItem(IEntity item)
         {
             var inventory = GetInventoryContaining(item);
 
@@ -125,6 +137,8 @@ namespace data_rogue_core.Systems
             }
 
             entityEngine.Destroy(item);
+
+            return true;
         }
 
         private Inventory GetInventoryContaining(IEntity item)

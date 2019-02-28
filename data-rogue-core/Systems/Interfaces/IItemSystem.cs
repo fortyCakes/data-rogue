@@ -5,9 +5,9 @@ namespace data_rogue_core.Systems
 {
     public interface IItemSystem : ISystem, IInitialisableSystem
     {
-        void MoveToInventory(IEntity item, Inventory inventory);
-        void DropItemFromInventory(IEntity item);
-        void Use(IEntity user, IEntity item);
-        void DestroyItem(IEntity item);
+        bool MoveToInventory(IEntity item, Inventory inventory);
+        bool DropItemFromInventory(IEntity item);
+        bool Use(IEntity user, IEntity item);
+        bool DestroyItem(IEntity item);
     }
 }

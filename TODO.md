@@ -4,12 +4,6 @@ BUGS
 
 0.1
 
-Equipment
-	/ Equipment slots
-	/ Equip items
-	Equipped items boost stats
-	Equipped items can proc effects (e.g. on hit)
-Enforce inventory capacity
 Randomised Monster spawning (from monster prototype tags)
 Randomised Item spawning (from item prototype tags)
 Cancelling a skill / spend aura after skill is completed
