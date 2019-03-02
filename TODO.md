@@ -4,13 +4,15 @@ BUGS
 
 0.1
 
+Gaining skills (from items for now)
+Gold and XP
 Randomised Monster spawning (from monster prototype tags)
 Randomised Item spawning (from item prototype tags)
-Cancelling a skill / spend aura after skill is completed
 Rules from file
 Work out spending time - where should it be?
 Dependency injection for rules and behaviours
 Separate out core from implementation (!)
+	Make Player entity not special (don't allow access from global state)
 	Aura and Tilt separation
 		Stat window rendering customisation
 		Map rendering customisation
@@ -18,7 +20,6 @@ Remove RLNet dependencies from core (!)
 
 0.2+
 
-Gaining skills (how?)
 Monsters with skills
 	Monsters with targeting
 Nonhostile monsters (factions)
