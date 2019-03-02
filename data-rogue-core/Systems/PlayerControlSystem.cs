@@ -237,7 +237,16 @@ namespace data_rogue_core.Systems
 
         private void UseSkill(int index)
         {
-            systemContainer.EventSystem.Try(EventType.ActivateSkill, Game.WorldState.Player, new ActivateSkillEventData() { SkillIndex = index });
+            IEntity player = Game.WorldState.Player;
+
+            var skill = systemContainer.SkillSystem.GetKnownSkillByIndex(player, index);
+
+            var ok = systemContainer.EventSystem.Try(EventType.SelectSkill, player, new ActivateSkillEventData() { SkillName = skill.Skill });
+
+            if (ok)
+            {
+                systemContainer.SkillSystem.Use(player, skill.Skill);
+            }
         }
 
         private void Wait(int ticks)

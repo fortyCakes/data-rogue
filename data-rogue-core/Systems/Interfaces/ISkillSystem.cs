@@ -1,4 +1,5 @@
-﻿using data_rogue_core.EntityEngineSystem;
+﻿using data_rogue_core.Components;
+using data_rogue_core.EntityEngineSystem;
 
 namespace data_rogue_core.Systems.Interfaces
 {
@@ -8,5 +9,6 @@ namespace data_rogue_core.Systems.Interfaces
         void Forget(IEntity learner, IEntity skill);
 
         void Use(IEntity user, string skillName);
+        KnownSkill GetKnownSkillByIndex(IEntity entity, int index);
     }
 }

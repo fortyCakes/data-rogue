@@ -107,9 +107,11 @@ namespace data_rogue_core
                 new GetBaseStatRule(SystemContainer),
                 new TiltDamageRule(SystemContainer),
                 new EnemiesInViewAddTensionRule(SystemContainer),
-                new ActivateSkillWithAuraRule(SystemContainer),
+                new CheckEnoughAuraToActivateSkillRule(SystemContainer),
                 new ApplyStatBoostEnchantmentRule(SystemContainer),
-                new ApplyProcEnchantmentRule(SystemContainer, EventType.Attack)
+                new ApplyProcEnchantmentRule(SystemContainer, EventType.Attack),
+                new SpendAuraOnCompleteSkillRule(SystemContainer),
+                new SpendTimeOnCompleteSkillRule(SystemContainer)
             );
         }
 

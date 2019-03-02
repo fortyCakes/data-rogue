@@ -59,7 +59,7 @@ namespace data_rogue_core.Systems
             ItemSystem = new ItemSystem(EntityEngine, PrototypeSystem, ScriptExecutor, MessageSystem, EventSystem);
             EntityEngine.Register(ItemSystem);
 
-            SkillSystem = new SkillSystem(PrototypeSystem, ScriptExecutor, EventSystem);
+            SkillSystem = new SkillSystem(this);
             EntityEngine.Register(SkillSystem);
 
             Seed = rngSeed;

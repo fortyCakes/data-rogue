@@ -3,6 +3,7 @@ using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems.Interfaces;
 using NLua;
+using System;
 
 namespace data_rogue_core.Systems
 {
@@ -11,6 +12,8 @@ namespace data_rogue_core.Systems
         public delegate void TargetCallback(MapCoordinate targetedCell);
         private TargetCallback targetCallback;
 
+        private Action onCompleteAction = null;
+
         public readonly ISystemContainer systemContainer;
 
         public ScriptExecutor (ISystemContainer systemContainer)
@@ -18,8 +21,15 @@ namespace data_rogue_core.Systems
             this.systemContainer = systemContainer;
         }
 
-        public void Execute(IEntity user, string script)
+        public void Execute(IEntity user, string script, Action onComplete)
         {
+            if (onCompleteAction != null)
+            {
+                throw new ApplicationException("Can only await completion of one script at a time in ScriptExecutor");
+            }
+
+            onCompleteAction = onComplete;
+
             Lua state = new Lua();
 
             RegisterHandlers(state);
@@ -33,11 +43,11 @@ namespace data_rogue_core.Systems
             state.DoString(script);
         }
 
-        public void ExecuteByName(IEntity user, string scriptName)
+        public void ExecuteByName(IEntity user, string scriptName, Action onComplete)
         {
             var scriptEntity = systemContainer.PrototypeSystem.Get(scriptName);
             var script = scriptEntity.Get<Script>().Text;
-            Execute(user, script);
+            Execute(user, script, onComplete);
         }
 
         private static void SetupEnumeration(Lua state)
@@ -56,6 +66,7 @@ namespace data_rogue_core.Systems
         {
             state.RegisterFunction("withTarget", this, GetType().GetMethod(nameof(SetTargetHandler)));
             state.RegisterFunction("requestTarget", this, GetType().GetMethod(nameof(RequestTarget)));
+            state.RegisterFunction("onComplete", this, GetType().GetMethod(nameof(Complete)));
         }
 
         private void RegisterValues(IEntity user, Lua state)
@@ -70,6 +81,12 @@ namespace data_rogue_core.Systems
             state.DoString("import ('data-rogue-core', 'data_rogue_core.Systems.Interfaces')");
             state.DoString("import ('data-rogue-core', 'data_rogue_core.EventSystem')");
             state.DoString("import ('data-rogue-core', 'data_rogue_core.EventSystem.EventData')");
+        }
+
+        public void Complete()
+        {
+            onCompleteAction?.Invoke();
+            onCompleteAction = null;
         }
 
         public void SetTargetHandler(TargetCallback callback)

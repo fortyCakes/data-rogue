@@ -11,12 +11,13 @@
         Death,
         SpendTime,
         GetStat,
-        ActivateSkill,
+        SelectSkill,
         PickUpItem,
         DropItem,
         UseItem,
         ConsumableRunOut,
         EquipItem,
-        UnequipItem
+        UnequipItem,
+        CompleteSkill
     }
 }

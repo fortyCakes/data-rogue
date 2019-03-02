@@ -45,16 +45,13 @@ Text: {
 				SystemContainer.MessageSystem:Write('The mana bolt misses.')
 			end
 
-			
 		end
-		
+
 		if not anyTargets then
 			SystemContainer.MessageSystem:Write('The mana bolt strikes empty space.')
 		end
 
-		spendTime = SpendTimeEventData()
-		spendTime.Ticks = 1000
-		SystemContainer.EventSystem:Try(luanet.enum(EventType, 'SpendTime'), User, spendTime)
+		onComplete()
 	end)
 
 	targetingData = TargetingData()

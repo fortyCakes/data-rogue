@@ -5,7 +5,7 @@ using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.EventSystem.Rules
 {
-    class PeopleDieWhenTheyAreKilledRule : IEventRule
+    public class PeopleDieWhenTheyAreKilledRule : IEventRule
     {
         public PeopleDieWhenTheyAreKilledRule(ISystemContainer systemContainer)
         {
