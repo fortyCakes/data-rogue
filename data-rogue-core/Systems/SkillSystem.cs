@@ -49,7 +49,9 @@ namespace data_rogue_core.Systems
             else
             {
                 systemContainer.MessageSystem.Write($"{learner.DescriptionName} learns {skill.DescriptionName}!");
-                systemContainer.EntityEngine.AddComponent(learner, new KnownSkill { Order = knownSkills.Max(k => k.Order) + 1, Skill = skill.Get<Prototype>().Name });
+                var newOrder = knownSkills.Any() ? knownSkills.Max(k => k.Order) + 1 : 1;
+
+                systemContainer.EntityEngine.AddComponent(learner, new KnownSkill { Order = newOrder, Skill = skill.Get<Prototype>().Name });
             }
         }
 
