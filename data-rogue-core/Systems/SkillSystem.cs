@@ -22,7 +22,20 @@ namespace data_rogue_core.Systems
 
         public void Forget(IEntity learner, IEntity skill)
         {
-            throw new NotImplementedException();
+            var knownSkills = learner.Components.OfType<KnownSkill>();
+
+            var knownSkill = knownSkills.SingleOrDefault(k => k.Skill == skill.Get<Prototype>().Name);
+
+            if (knownSkill != null)
+            {
+                var index = knownSkill.Order;
+                systemContainer.EntityEngine.RemoveComponent(learner, knownSkill);
+                knownSkills.Where(k => k.Order > index).ToList().ForEach(k => k.Order--);
+            }
+            else
+            {
+                systemContainer.MessageSystem.Write($"{learner.DescriptionName} doesn't know {skill.DescriptionName} so they can't forget it.");
+            }
         }
 
         public void Learn(IEntity learner, IEntity skill)
