@@ -21,8 +21,8 @@ namespace data_rogue_core.EntityEngineSystem
 
         bool IsPlayer { get; }
 
-        Fighter GetFighter();
-        Description GetDescription();
+        IEntityComponent Get(string typeName);
+
         bool HasAll(SystemComponents systemComponents);
 
         bool HasNone(SystemComponents systemComponents);

@@ -21,7 +21,7 @@ namespace data_rogue_core.Systems
             this.systemContainer = systemContainer;
         }
 
-        public void Execute(IEntity user, string script, Action onComplete)
+        public void Execute(IEntity user, string script, IEntity withEntity, Action onComplete)
         {
             if (onCompleteAction != null)
             {
@@ -34,7 +34,7 @@ namespace data_rogue_core.Systems
 
             RegisterHandlers(state);
 
-            RegisterValues(user, state);
+            RegisterValues(user, state, withEntity);
 
             DoImports(state);
 
@@ -43,11 +43,11 @@ namespace data_rogue_core.Systems
             state.DoString(script);
         }
 
-        public void ExecuteByName(IEntity user, string scriptName, Action onComplete)
+        public void ExecuteByName(IEntity user, string scriptName, IEntity withEntity, Action onComplete)
         {
             var scriptEntity = systemContainer.PrototypeSystem.Get(scriptName);
             var script = scriptEntity.Get<Script>().Text;
-            Execute(user, script, onComplete);
+            Execute(user, script, withEntity, onComplete);
         }
 
         private static void SetupEnumeration(Lua state)
@@ -69,10 +69,11 @@ namespace data_rogue_core.Systems
             state.RegisterFunction("onComplete", this, GetType().GetMethod(nameof(Complete)));
         }
 
-        private void RegisterValues(IEntity user, Lua state)
+        private void RegisterValues(IEntity user, Lua state, IEntity withEntity)
         {
             state["SystemContainer"] = systemContainer;
             state["User"] = user;
+            state["Entity"] = withEntity;
         }
 
         private static void DoImports(Lua state)

@@ -60,14 +60,10 @@ namespace data_rogue_core.EntityEngineSystem
         }
 
         public bool IsPlayer => Name == "Player";
-        public Fighter GetFighter()
-        {
-            return Get<Fighter>();
-        }
 
-        public Description GetDescription()
+        public IEntityComponent Get(string typeName)
         {
-            return Get<Description>();
+            return Components.Where(c => c.GetType().Name == typeName).SingleOrDefault();
         }
     }
 }

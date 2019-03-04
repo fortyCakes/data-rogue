@@ -37,7 +37,7 @@ namespace data_rogue_core.UnitTests.Systems
         public void Execute_EmptyScript_Works()
         {
             
-            ScriptExecutor.Execute(TestEntity, "");
+            ScriptExecutor.Execute(TestEntity, "", null);
         }
 
         [Test]
@@ -45,7 +45,7 @@ namespace data_rogue_core.UnitTests.Systems
         {
             SystemContainer.MessageSystem = Substitute.For<IMessageSystem>();
 
-            ScriptExecutor.Execute(TestEntity, "SystemContainer.MessageSystem:Write('test')");
+            ScriptExecutor.Execute(TestEntity, "SystemContainer.MessageSystem:Write('test')", null);
 
             SystemContainer.MessageSystem.Received(1).Write("test");
         }
@@ -56,9 +56,11 @@ namespace data_rogue_core.UnitTests.Systems
             SystemContainer.MessageSystem = Substitute.For<IMessageSystem>();
             SystemContainer.TargetingSystem = Substitute.For<ITargetingSystem>();
 
+            var mapCoordinate = new MapCoordinate(new MapKey("test map key"), new Vector(0, 0));
+
             SystemContainer.TargetingSystem
                 .WhenForAnyArgs(a => a.GetTarget(Arg.Any<IEntity>(), Arg.Any<TargetingData>(), Arg.Any<Action<MapCoordinate>>()))
-                .Do(a => a.ArgAt<Action<MapCoordinate>>(2).Invoke(new MapCoordinate(new MapKey("test map key"), new Vector(0, 0))));
+                .Do(a => a.ArgAt<Action<MapCoordinate>>(2).Invoke(mapCoordinate));
 
 
             var script = @"
@@ -70,9 +72,9 @@ namespace data_rogue_core.UnitTests.Systems
                 requestTarget(User, TargetingData())
             ";
 
-            ScriptExecutor.Execute(TestEntity, script);
+            ScriptExecutor.Execute(TestEntity, script, null);
 
-            SystemContainer.MessageSystem.Received(1).Write("Recieved target at Key: test map key, X: 0, Y: 0");
+            SystemContainer.MessageSystem.Received(1).Write("Recieved target at " + mapCoordinate.ToString());
         }
 
     }

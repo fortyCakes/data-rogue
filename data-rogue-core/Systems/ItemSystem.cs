@@ -86,7 +86,7 @@ namespace data_rogue_core.Systems
 
             if (!string.IsNullOrEmpty(scriptName))
             {
-                ExecuteItemScript(user, scriptName);
+                ExecuteItemScript(user, scriptName, item);
 
                 ApplyConsumption(item);
             }
@@ -100,13 +100,13 @@ namespace data_rogue_core.Systems
             return true;
         }
 
-        private void ExecuteItemScript(IEntity user, string scriptName)
+        private void ExecuteItemScript(IEntity user, string scriptName, IEntity item)
         {
             var script = prototypeSystem.Get(scriptName);
 
             var scriptText = script.Get<Script>().Text;
 
-            scriptExecutor.Execute(user, scriptText);
+            scriptExecutor.Execute(user, scriptText, item);
         }
 
         private void ApplyConsumption(IEntity item)

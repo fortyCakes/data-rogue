@@ -37,7 +37,7 @@ namespace data_rogue_core.EventSystem.Rules
                 {
                     if (enchantment.EventType == eventType && ProcRoll(enchantment))
                     {
-                        systemContainer.ScriptExecutor.ExecuteByName(sender, enchantment.ScriptName);
+                        systemContainer.ScriptExecutor.ExecuteByName(sender, enchantment.ScriptName, item);
                     }
                 }
             }

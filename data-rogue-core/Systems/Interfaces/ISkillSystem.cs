@@ -10,5 +10,7 @@ namespace data_rogue_core.Systems.Interfaces
 
         void Use(IEntity user, string skillName);
         KnownSkill GetKnownSkillByIndex(IEntity entity, int index);
+
+        IEntity GetSkillFromKnown(KnownSkill knownSkill);
     }
 }

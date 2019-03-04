@@ -241,11 +241,14 @@ namespace data_rogue_core.Systems
 
             var skill = systemContainer.SkillSystem.GetKnownSkillByIndex(player, index);
 
-            var ok = systemContainer.EventSystem.Try(EventType.SelectSkill, player, new ActivateSkillEventData() { SkillName = skill.Skill });
-
-            if (ok)
+            if (skill != null)
             {
-                systemContainer.SkillSystem.Use(player, skill.Skill);
+                var ok = systemContainer.EventSystem.Try(EventType.SelectSkill, player, new ActivateSkillEventData() { SkillName = skill.Skill });
+
+                if (ok)
+                {
+                    systemContainer.SkillSystem.Use(player, skill.Skill);
+                }
             }
         }
 

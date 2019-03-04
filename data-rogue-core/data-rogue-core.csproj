@@ -281,6 +281,9 @@
     <None Include="Data\Entities\StaticEntities\Body\EquipmentMappings.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Entities\StaticEntities\Items\BookOfSkill.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\Entities\StaticEntities\Items\VampiricBlade.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

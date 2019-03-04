@@ -27,7 +27,17 @@ namespace data_rogue_core.Systems
 
         public void Learn(IEntity learner, IEntity skill)
         {
-            throw new NotImplementedException();
+            var knownSkills = learner.Components.OfType<KnownSkill>();
+
+            if (knownSkills.Any(k => k.Skill == skill.Get<Prototype>().Name))
+            {
+                systemContainer.MessageSystem.Write($"{learner.DescriptionName} already knows {skill.DescriptionName}.");
+            }
+            else
+            {
+                systemContainer.MessageSystem.Write($"{learner.DescriptionName} learns {skill.DescriptionName}!");
+                systemContainer.EntityEngine.AddComponent(learner, new KnownSkill { Order = knownSkills.Max(k => k.Order) + 1, Skill = skill.Get<Prototype>().Name });
+            }
         }
 
         public void Use(IEntity user, string skillName)
@@ -45,7 +55,7 @@ namespace data_rogue_core.Systems
             // Construct a new one rather than using the one in container so that it doesn't use up the onComplete slot.
             var scriptExecutor = new ScriptExecutor(systemContainer);
 
-            scriptExecutor.Execute(user, scriptText, onCompleteAction);
+            scriptExecutor.Execute(user, scriptText, skill, onCompleteAction);
         }
 
         public void onComplete(IEntity user, IEntity skill)
@@ -59,10 +69,15 @@ namespace data_rogue_core.Systems
 
             if (skills.Count >= index)
             {
-                return skills[index-1];
+                return skills[index - 1];
             }
 
             return null;
+        }
+
+        public IEntity GetSkillFromKnown(KnownSkill knownSkill)
+        {
+            return systemContainer.PrototypeSystem.Get(knownSkill.Skill);
         }
     }
 }

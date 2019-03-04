@@ -24,7 +24,7 @@ Name: Script: Vampiric Heal
 Singleton: true
 [Script]
 Text: {
-	fighter = User:GetFighter()
+	fighter = User:Get('Fighter')
 	fighter.Health:Add(10);
 	SystemContainer.MessageSystem:Write(User:GetDescription().Name .. ' is healed for 10 health by their vampiric blade.')
 }

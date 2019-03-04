@@ -19,7 +19,7 @@ Name: Script: Minor Healing
 Singleton: true
 [Script]
 Text: {
-	fighter = User:GetFighter()
+	fighter = User:Get('Fighter')
 	fighter.Health:Add(10);
-	SystemContainer.MessageSystem:Write(User:GetDescription().Name .. ' drinks the potion of minor healing and is healed for 10 health.')
+	SystemContainer.MessageSystem:Write(User:Get('Description').Name .. ' drinks the potion of minor healing and is healed for 10 health.')
 }

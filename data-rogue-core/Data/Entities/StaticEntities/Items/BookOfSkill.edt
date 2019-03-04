@@ -1,0 +1,49 @@
+﻿"Book of Test Skill"
+[Description]
+Name: Book of Test Skill
+[Prototype]
+Name: Item:BookSkillTest
+Singleton: false
+[Appearance]
+Glyph: ?
+Color: #FFAA00
+[Position]
+[Item]
+UseScript: Script: Learn Skill
+[Consumable]
+Uses: 1/1
+[KnownSkill]
+Skill: Skill:Test
+Order: 1
+
+"Script: Learn Skill"
+[Prototype]
+Name: Script: Learn Skill
+Singleton: true
+[Script]
+Text: {
+	SystemContainer.MessageSystem:Write(User:Get('Description').Name .. ' reads the ' .. Entity:Get('Description').Name .. '.');
+
+	knownSkill = Entity:Get('KnownSkill');
+
+	skill = SystemContainer.SkillSystem:GetSkillFromKnown(knownSkill);
+
+	SystemContainer.SkillSystem:Learn(User, skill);
+}
+
+"Test Skill"
+[Prototype]
+Name: Skill:Test
+[Skill]
+Cost: 20
+ScriptName: Script: TestSkill
+[Description]
+Name: Test Skill
+
+"Test Skill Script"
+[Prototype]
+Name: Script: TestSkill
+[Script]
+Text: {
+	SystemContainer.MessageSystem:Write('Test skill activated.')
+}
