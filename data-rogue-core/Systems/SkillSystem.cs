@@ -65,7 +65,7 @@ namespace data_rogue_core.Systems
 
             var scriptText = script.Get<Script>().Text;
 
-            var onCompleteAction = new Action(() => onComplete(user, skill));
+            var onCompleteAction = new Action(() => OnComplete(user, skill));
 
             // Construct a new one rather than using the one in container so that it doesn't use up the onComplete slot.
             var scriptExecutor = new ScriptExecutor(systemContainer);
@@ -73,7 +73,7 @@ namespace data_rogue_core.Systems
             scriptExecutor.Execute(user, scriptText, skill, onCompleteAction);
         }
 
-        public void onComplete(IEntity user, IEntity skill)
+        public void OnComplete(IEntity user, IEntity skill)
         {
             systemContainer.EventSystem.Try(EventType.CompleteSkill, user, new CompleteSkillEventData { SkillName = skill.Get<Prototype>().Name });
         }
