@@ -4,6 +4,7 @@ using data_rogue_core.Components;
 using data_rogue_core.Data;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.EventSystem;
+using data_rogue_core.Maps;
 using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
 using FluentAssertions;
@@ -22,22 +23,9 @@ namespace data_rogue_core.UnitTests.Systems
 
             systemContainer = new SystemContainer();
 
-            prototypeSystem = Substitute.For<IPrototypeSystem>();
-            systemContainer.PrototypeSystem = prototypeSystem;
+            systemContainer.CreateSystems("test");
 
-            eventSystem = Substitute.For<IEventSystem>();
-            systemContainer.EventSystem = eventSystem;
-            systemContainer.EventSystem.Try(Arg.Any<EventType>(), null, null).ReturnsForAnyArgs(true);
-
-            entityEngine = Substitute.For<IEntityEngine>();
-            systemContainer.EntityEngine = entityEngine;
-
-            messageSystem = Substitute.For<IMessageSystem>();
-            systemContainer.MessageSystem = messageSystem;
-
-            itemSystem = new ItemSystem(entityEngine, prototypeSystem, scriptExecutor, messageSystem, eventSystem);
-
-            itemSystem.Initialise();
+            systemContainer.EntityEngine.Initialise(systemContainer);
 
             entity = GetTestEntity();
             inventory = entity.Get<Inventory>();
@@ -48,7 +36,7 @@ namespace data_rogue_core.UnitTests.Systems
         private IEntity entity;
         private Inventory inventory;
 
-        private IItemSystem itemSystem;
+        private IItemSystem itemSystem => systemContainer.ItemSystem;
         private SystemContainer systemContainer;
         private IPrototypeSystem prototypeSystem;
         private IEntityEngine entityEngine;
@@ -88,6 +76,115 @@ namespace data_rogue_core.UnitTests.Systems
             inventory.Contents.Should().BeEquivalentTo(expected);
         }
 
+        [Test]
+        public void DropItemFromInventory_HasItem_Drops()
+        {
+            var item = GetTestItem();
+
+            itemSystem.MoveToInventory(item, inventory);
+
+            var result = itemSystem.DropItemFromInventory(item);
+
+            result.Should().BeTrue();
+            item.Has<Position>().Should().BeTrue();
+        }
+
+        [Test]
+        public void DropItemFromInventory_NotInInventory_CantDrop()
+        {
+            var item = GetTestItem();
+
+            var result = itemSystem.DropItemFromInventory(item);
+
+            result.Should().BeFalse();
+        }
+
+        [Test]
+        public void TransferWealth_BothHaveWealth_Transfers()
+        {
+            var entity1 = GetTestEntity();
+            var entity2 = GetTestEntity();
+
+            entity1.Get<Wealth>().Amount = 10;
+
+            var result = systemContainer.ItemSystem.TransferWealth(entity1, entity2, "TestCurrency", 2);
+
+            result.Should().BeTrue();
+
+            systemContainer.ItemSystem.CheckWealth(entity1, "TestCurrency").Should().Be(8);
+            systemContainer.ItemSystem.CheckWealth(entity2, "TestCurrency").Should().Be(2);
+        }
+
+        [Test]
+        public void TransferWealth_DoesntHaveEnough_Fails()
+        {
+            var entity1 = GetTestEntity();
+            var entity2 = GetTestEntity();
+
+            entity1.Get<Wealth>().Amount = 10;
+
+            var result = systemContainer.ItemSystem.TransferWealth(entity1, entity2, "TestCurrency", 100);
+
+            result.Should().BeFalse();
+
+            systemContainer.ItemSystem.CheckWealth(entity1, "TestCurrency").Should().Be(10);
+            systemContainer.ItemSystem.CheckWealth(entity2, "TestCurrency").Should().Be(0);
+        }
+
+        [Test]
+        public void TransferWealth_DoesntHaveWealth_Fails()
+        {
+            var entity1 = GetTestEntity();
+            var entity2 = GetTestEntity();
+
+            systemContainer.EntityEngine.RemoveComponent(entity1, entity1.Get<Wealth>());
+
+            var result = systemContainer.ItemSystem.TransferWealth(entity1, entity2, "TestCurrency", 100);
+
+            result.Should().BeFalse();
+
+            systemContainer.ItemSystem.CheckWealth(entity1, "TestCurrency").Should().Be(0);
+            systemContainer.ItemSystem.CheckWealth(entity2, "TestCurrency").Should().Be(0);
+        }
+
+        [Test]
+        public void RemoveWealth_HasWealth_RemovesWealth()
+        {
+            entity.Get<Wealth>().Amount = 10;
+
+            var result = systemContainer.ItemSystem.RemoveWealth(entity, "TestCurrency", 5);
+
+            result.Should().BeTrue();
+
+            systemContainer.ItemSystem.CheckWealth(entity, "TestCurrency").Should().Be(5);
+        }
+
+        [Test]
+        public void RemoveWealth_InsufficientWealth_Fails()
+        {
+            entity.Get<Wealth>().Amount = 2;
+
+            var result = systemContainer.ItemSystem.RemoveWealth(entity, "TestCurrency", 5);
+
+            result.Should().BeFalse();
+
+            systemContainer.ItemSystem.CheckWealth(entity, "TestCurrency").Should().Be(2);
+
+        }
+
+        [Test]
+        public void RemoveWealth_DoesntHaveWealth_Fails()
+        {
+            systemContainer.EntityEngine.RemoveComponent(entity, entity.Get<Wealth>());
+
+            var result = systemContainer.ItemSystem.RemoveWealth(entity, "TestCurrency", 5);
+
+            result.Should().BeFalse();
+
+            systemContainer.ItemSystem.CheckWealth(entity, "TestCurrency").Should().Be(0);
+
+        }
+
         private IEntity GetTestItem(string itemName = null, bool hasPosition = true)
         {
             var components = new List<IEntityComponent>() { new Item() };
@@ -98,12 +195,15 @@ namespace data_rogue_core.UnitTests.Systems
                 components.Add(new Position());
             }
 
-            return new Entity(entityId, itemName ?? $"Item{entityId++}", components.ToArray());
+            return systemContainer.EntityEngine.New(itemName ?? $"Item{entityId++}", components.ToArray());
         }
 
         private IEntity GetTestEntity(int capacity = 2)
         {
-            return new Entity(entityId++, "Inventory", new[] { new Inventory { Capacity = capacity, Contents = new EntityReferenceList() } });
+            return systemContainer.EntityEngine.New("Inventory", 
+                new Inventory { Capacity = capacity, Contents = new EntityReferenceList() },
+                new Position { MapCoordinate = new MapCoordinate()},
+                new Wealth { Currency="TestCurrency"});
         }
     }
 }

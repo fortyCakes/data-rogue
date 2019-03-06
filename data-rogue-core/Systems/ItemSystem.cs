@@ -175,5 +175,56 @@ namespace data_rogue_core.Systems
 
             return false;
         }
+
+        public bool TransferWealth(IEntity sender, IEntity reciever, string currency, int amount)
+        {
+            var from = GetWealthByCurrency(sender, currency);
+            var to = GetWealthByCurrency(reciever, currency);
+
+            if (from == null || from.Amount < amount)
+            {
+                return false;
+            }
+            
+            if (reciever == null)
+            {
+                entityEngine.AddComponent(reciever, new Wealth { Currency = currency, Amount = 0 });
+                to = GetWealthByCurrency(reciever, currency);
+            }
+
+            from.Amount -= amount;
+            to.Amount += amount;
+
+            if (from.Amount == 0)
+            {
+                entityEngine.RemoveComponent(sender, from);
+            }
+
+            return true;
+        }
+
+        private static Wealth GetWealthByCurrency(IEntity entity, string currency)
+        {
+            return entity.Components.OfType<Wealth>().SingleOrDefault(w => w.Currency == currency);
+        }
+
+        public bool RemoveWealth(IEntity entity, string currency, int amount)
+        {
+            var wealth = GetWealthByCurrency(entity, currency);
+
+            if (wealth == null || wealth.Amount < amount)
+            {
+                return false;
+            }
+
+            wealth.Amount -= amount;
+
+            return true;
+        }
+
+        public int CheckWealth(IEntity entity, string currency)
+        {
+            return entity.Components.OfType<Wealth>().SingleOrDefault(w => w.Currency == currency)?.Amount ?? 0;
+        }
     }
 }

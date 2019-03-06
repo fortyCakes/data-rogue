@@ -4,13 +4,17 @@ BUGS
 
 0.1
 
-Gold and XP
+Gold
+	/ Wealth management system
+	Calls to system when wealth picked up
+XP
 Randomised Monster spawning (from monster prototype tags)
 Randomised Item spawning (from item prototype tags)
 Rules from file
 Work out spending time - where should it be?
 Dependency injection for rules and behaviours
 Separate out core from implementation (!)
+	Make stats generic
 	Make Player entity not special (don't allow access from global state)
 	Aura and Tilt separation
 		Stat window rendering customisation
@@ -19,6 +23,7 @@ Remove RLNet dependencies from core (!)
 
 0.2+
 
+Picking up items: multiple items per file
 Monsters with skills
 	Monsters with targeting
 Nonhostile monsters (factions)

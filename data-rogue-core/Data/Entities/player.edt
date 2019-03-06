@@ -28,6 +28,7 @@ Name: Player
 Skill: Skill:ManaBolt
 Order: 1
 [Wealth]
+Currency: Gold
 Amount: 0
 [Inventory]
 Capacity: 26

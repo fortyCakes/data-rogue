@@ -7,6 +7,7 @@ default:Cell:Wall
 11,1: Entity(Item:LeatherArmour)
 12,1: Entity(Item:VampiricBlade)
 13,1: Entity(Item:BookSkillTest)
+12,0: Entity(Item:PileOfGold)
 .:Cell:Empty
 ,:Cell:SpawnPoint
 #:Cell:Wall
