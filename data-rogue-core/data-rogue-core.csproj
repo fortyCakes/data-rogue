@@ -89,6 +89,7 @@
     <Compile Include="Components\Enchantments\ProcEnchantment.cs" />
     <Compile Include="Components\Enchantments\StatBoostEnchantment.cs" />
     <Compile Include="Components\Equipped.cs" />
+    <Compile Include="Components\Wealth.cs" />
     <Compile Include="Data\EquipmentMappingListItem.cs" />
     <Compile Include="Data\EquipmentSlotDetails.cs" />
     <Compile Include="EntityEngineSystem\EntityReferenceList.cs" />

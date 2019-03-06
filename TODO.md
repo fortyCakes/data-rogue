@@ -4,7 +4,6 @@ BUGS
 
 0.1
 
-Gaining skills (from items for now)
 Gold and XP
 Randomised Monster spawning (from monster prototype tags)
 Randomised Item spawning (from item prototype tags)
@@ -38,6 +37,7 @@ Use item on item
 Use item on entity
 Audio system (beep boop)
 Random item generation
+Shops
 Traps
 Encounter based map population
 View message log scrollback

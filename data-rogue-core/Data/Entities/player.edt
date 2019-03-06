@@ -27,6 +27,8 @@ Name: Player
 [KnownSkill]
 Skill: Skill:ManaBolt
 Order: 1
+[Wealth]
+Amount: 0
 [Inventory]
 Capacity: 26
 [BodyPart]
