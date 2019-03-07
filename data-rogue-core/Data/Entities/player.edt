@@ -13,6 +13,9 @@ Resting: false
 [PlayerControlledBehaviour]
 Priority: 0
 [Position]
+[Experience]
+Level: 1
+Amount: 0
 [Fighter]
 Health: 25/25
 Tilt: 0/100

@@ -31,7 +31,7 @@ namespace data_rogue_core.EventSystem.Rules
 
             if (fighter.Health.Current <= 0)
             {
-                EventRuleSystem.Try(EventType.Death, sender, null);
+                EventRuleSystem.Try(EventType.Death, sender, new DeathEventData { Killer = data.DamagedBy });
             }
 
             return true;

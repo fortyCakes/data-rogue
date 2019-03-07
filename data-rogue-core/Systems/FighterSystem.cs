@@ -42,7 +42,7 @@ namespace data_rogue_core.Systems
                 var baseDamage = attackingFighter.Muscle;
                 msg += $" and hits for {baseDamage} damage.";
 
-                EventRuleSystem.Try(EventType.Damage, defender, new DamageEventData{Damage = baseDamage});
+                EventRuleSystem.Try(EventType.Damage, defender, new DamageEventData{Damage = baseDamage, DamagedBy = attacker});
             }
             else
             {

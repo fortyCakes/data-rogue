@@ -18,6 +18,8 @@
         ConsumableRunOut,
         EquipItem,
         UnequipItem,
-        CompleteSkill
+        CompleteSkill,
+        PickUpWealth,
+        GainXP
     }
 }

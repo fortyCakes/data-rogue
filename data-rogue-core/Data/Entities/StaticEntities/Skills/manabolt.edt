@@ -38,6 +38,7 @@ Text: {
 				damageData = DamageEventData()
 				damageData.Damage = willpower
 				damageData.Overwhelming = true
+				damageData.DamagedBy = User
 
 				SystemContainer.EventSystem:Try(luanet.enum(EventType, 'Damage'), defender, damageData)
 				SystemContainer.MessageSystem:Write('The mana bolt hits!')

@@ -11,4 +11,9 @@ namespace data_rogue_core.EventSystem.EventData
     {
         public IEntity Item { get; internal set; }
     }
+
+    public class PickupWealthEventData
+    {
+        public IEntity Item { get; internal set; }
+    }
 }

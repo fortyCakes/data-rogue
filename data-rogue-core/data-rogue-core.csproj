@@ -89,6 +89,7 @@
     <Compile Include="Components\Enchantments\ProcEnchantment.cs" />
     <Compile Include="Components\Enchantments\StatBoostEnchantment.cs" />
     <Compile Include="Components\Equipped.cs" />
+    <Compile Include="Components\Experience.cs" />
     <Compile Include="Components\Wealth.cs" />
     <Compile Include="Data\EquipmentMappingListItem.cs" />
     <Compile Include="Data\EquipmentSlotDetails.cs" />
@@ -125,6 +126,7 @@
     <Compile Include="EntityEngineSystem\EntitySerializer.cs" />
     <Compile Include="EntityEngineSystem\ICustomFieldSerialization.cs" />
     <Compile Include="EventSystem\EventData\CompleteSkillEventData.cs" />
+    <Compile Include="EventSystem\EventData\DeathEventData.cs" />
     <Compile Include="EventSystem\EventData\EquipItemEventData.cs" />
     <Compile Include="EventSystem\EventData\AttackEventData.cs" />
     <Compile Include="EventSystem\EventData\AttackType.cs" />
@@ -139,7 +141,11 @@
     <Compile Include="EventSystem\Rules\ApplyProcEnchantmentRule.cs" />
     <Compile Include="EventSystem\Rules\ApplyStatBoostEnchantmentRule.cs" />
     <Compile Include="EventSystem\Rules\CheckEnoughAuraToActivateSkillRule.cs" />
+    <Compile Include="EventSystem\Rules\DoXpGainRule.cs" />
     <Compile Include="EventSystem\Rules\EnemiesInViewAddTensionRule.cs" />
+    <Compile Include="EventSystem\Rules\GainSingleXPOnKillRule.cs" />
+    <Compile Include="EventSystem\EventData\GainXPEventData.cs" />
+    <Compile Include="EventSystem\Rules\LevelUpOnXPGainRule.cs" />
     <Compile Include="EventSystem\Rules\SpendAuraOnCompleteSkillRule.cs" />
     <Compile Include="EventSystem\Rules\SpendTimeOnCompleteSkillRule.cs" />
     <Compile Include="EventSystem\Rules\TiltDamageRule.cs" />
@@ -152,6 +158,7 @@
     <Compile Include="EventSystem\Rules\BranchGeneratorRule.cs" />
     <Compile Include="EventSystem\Rules\BumpAttackRule.cs" />
     <Compile Include="EventSystem\Rules\DealDamageRule.cs" />
+    <Compile Include="EventSystem\Rules\XpGainMessageRule.cs" />
     <Compile Include="Forms\FormData.cs" />
     <Compile Include="Forms\FormDataType.cs" />
     <Compile Include="Forms\FormSelection.cs" />

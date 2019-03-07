@@ -11,6 +11,7 @@ namespace data_rogue_core.Systems
         bool DestroyItem(IEntity item);
 
         bool TransferWealth(IEntity sender, IEntity reciever, string currency, int amount);
+        bool AddWealth(IEntity entity, string currency, int amount);
         bool RemoveWealth(IEntity entity, string currency, int amount);
         int CheckWealth(IEntity entity, string currency);
     }

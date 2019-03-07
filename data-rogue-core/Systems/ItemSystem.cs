@@ -222,6 +222,21 @@ namespace data_rogue_core.Systems
             return true;
         }
 
+        public bool AddWealth(IEntity entity, string currency, int amount)
+        {
+            var wealth = GetWealthByCurrency(entity, currency);
+
+            if (wealth == null)
+            {
+                wealth = new Wealth { Currency = currency, Amount = 0 };
+                entityEngine.AddComponent(entity, wealth);
+            }
+
+            wealth.Amount += amount;
+
+            return true;
+        }
+
         public int CheckWealth(IEntity entity, string currency)
         {
             return entity.Components.OfType<Wealth>().SingleOrDefault(w => w.Currency == currency)?.Amount ?? 0;

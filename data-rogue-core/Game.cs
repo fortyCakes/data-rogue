@@ -111,7 +111,11 @@ namespace data_rogue_core
                 new ApplyStatBoostEnchantmentRule(SystemContainer),
                 new ApplyProcEnchantmentRule(SystemContainer, EventType.Attack),
                 new SpendAuraOnCompleteSkillRule(SystemContainer),
-                new SpendTimeOnCompleteSkillRule(SystemContainer)
+                new SpendTimeOnCompleteSkillRule(SystemContainer),
+                new DoXpGainRule(),
+                new XpGainMessageRule(SystemContainer),
+                new LevelUpOnXPGainRule(SystemContainer),
+                new GainSingleXPOnKillRule(SystemContainer)
             );
         }
 

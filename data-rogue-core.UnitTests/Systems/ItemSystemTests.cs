@@ -185,6 +185,28 @@ namespace data_rogue_core.UnitTests.Systems
 
         }
 
+        [Test]
+        public void AddWealth_DoesntHaveWealth_Adds()
+        {
+            systemContainer.EntityEngine.RemoveComponent(entity, entity.Get<Wealth>());
+
+            var result = systemContainer.ItemSystem.AddWealth(entity, "TestCurrency", 5);
+
+            result.Should().BeTrue();
+
+            systemContainer.ItemSystem.CheckWealth(entity, "TestCurrency").Should().Be(5);
+        }
+
+        [Test]
+        public void AddWealth_HasWealth_Adds()
+        {
+            var result = systemContainer.ItemSystem.AddWealth(entity, "TestCurrency", 5);
+
+            result.Should().BeTrue();
+
+            systemContainer.ItemSystem.CheckWealth(entity, "TestCurrency").Should().Be(5);
+        }
+
         private IEntity GetTestItem(string itemName = null, bool hasPosition = true)
         {
             var components = new List<IEntityComponent>() { new Item() };

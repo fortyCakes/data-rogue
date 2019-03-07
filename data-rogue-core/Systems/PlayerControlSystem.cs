@@ -200,28 +200,48 @@ namespace data_rogue_core.Systems
 
             var items = systemContainer.PositionSystem.EntitiesAt(playerMapCoordinate)
                 .Except(new[] { player })
-                .Where(e => e.Has<Item>())
+                .Where(e => e.Has<Item>() || e.Has<Wealth>())
                 .OrderBy(e => e.EntityId);
 
             var firstItem = items.FirstOrDefault();
 
             if (firstItem != null)
             {
-                var eventData = new PickupItemEventData { Item = firstItem };
-
-                var ok = systemContainer.EventSystem.Try(EventType.PickUpItem, player, eventData);
-
-                if (ok)
+                if (firstItem.Has<Wealth>())
                 {
-                    var inventory = player.Get<Inventory>();
+                    var wealth = firstItem.Get<Wealth>();
 
-                    var done = systemContainer.ItemSystem.MoveToInventory(firstItem, inventory);
+                    var eventData = new PickupWealthEventData { Item = firstItem };
 
-                    if (done)
+                    var ok = systemContainer.EventSystem.Try(EventType.PickUpWealth, player, eventData);
+
+                    if (ok)
                     {
-                        systemContainer.MessageSystem.Write($"You pick up the {firstItem.Get<Description>().Name}.");
+                        systemContainer.MessageSystem.Write($"You pick up {wealth.Amount} {wealth.Currency}.");
 
-                        systemContainer.EventSystem.Try(EventType.SpendTime, player, new SpendTimeEventData { Ticks = 1000 });
+                        systemContainer.ItemSystem.TransferWealth(firstItem, player, wealth.Currency, wealth.Amount);
+
+                        systemContainer.EntityEngine.Destroy(firstItem);
+                    }
+                }
+                else
+                {
+                    var eventData = new PickupItemEventData { Item = firstItem };
+
+                    var ok = systemContainer.EventSystem.Try(EventType.PickUpItem, player, eventData);
+
+                    if (ok)
+                    {
+                        var inventory = player.Get<Inventory>();
+
+                        var done = systemContainer.ItemSystem.MoveToInventory(firstItem, inventory);
+
+                        if (done)
+                        {
+                            systemContainer.MessageSystem.Write($"You pick up the {firstItem.Get<Description>().Name}.");
+
+                            systemContainer.EventSystem.Try(EventType.SpendTime, player, new SpendTimeEventData { Ticks = 1000 });
+                        }
                     }
                 }
             }

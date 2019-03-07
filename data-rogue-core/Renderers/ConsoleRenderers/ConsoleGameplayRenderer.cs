@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using data_rogue_core.Components;
 using data_rogue_core.Data;
@@ -139,7 +140,9 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
             StatsConsole.Print(1, 14, $"Time: {world.TimeSystem.TimeString}", RLColor.White, RLColor.Black);
 
-            StatsConsole.Print(1, 16, $"Skills:", RLColor.White, RLColor.Black);
+            StatsConsole.Print(1, 16, $"Gold: {systemContainer.ItemSystem.CheckWealth(player, "Gold")}", Color.Gold.ToRLColor());
+
+            StatsConsole.Print(1, 17, $"Skills:", RLColor.White, RLColor.Black);
 
             var skillsToPrint = player.Components.OfType<KnownSkill>().Where(s => s.Order > 0).OrderBy(s => s.Order).Take(5).ToList();
 

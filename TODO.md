@@ -4,14 +4,11 @@ BUGS
 
 0.1
 
-Gold
-	/ Wealth management system
-	Calls to system when wealth picked up
 XP
 Randomised Monster spawning (from monster prototype tags)
 Randomised Item spawning (from item prototype tags)
 Rules from file
-Work out spending time - where should it be?
+Work out spending time - where should it be? "Action" system?
 Dependency injection for rules and behaviours
 Separate out core from implementation (!)
 	Make stats generic

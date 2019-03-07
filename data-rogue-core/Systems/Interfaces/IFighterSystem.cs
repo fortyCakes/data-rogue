@@ -5,7 +5,7 @@ namespace data_rogue_core.Systems.Interfaces
 {
     public interface IFighterSystem : ISystem
     {
-        void BasicAttack(IEntity sender, IEntity defender);
+        void BasicAttack(IEntity attacker, IEntity defender);
 
         IEnumerable<IEntity> GetEntitiesWithFighter(IEnumerable<IEntity> entities);
     }
