@@ -24,7 +24,7 @@ namespace data_rogue_core.World.GenerationStrategies
 
             foreach(var map in generatedBranch.Maps)
             {
-                FillMap(map, systemContainer, branch, step, power, monsterList, random);
+                FillMap(map, systemContainer, step, power, monsterList, random);
 
                 power += step.PowerIncrement;
             }
@@ -72,7 +72,7 @@ namespace data_rogue_core.World.GenerationStrategies
             return entity.Components.OfType<Biome>().Select(b => b.Name);
         }
 
-        private void FillMap(Map map, ISystemContainer systemContainer, IEntity branch, EntityGenerationStrategy step, int power, MonsterList monsterList, IRandom random)
+        private void FillMap(Map map, ISystemContainer systemContainer, EntityGenerationStrategy step, int power, MonsterList monsterList, IRandom random)
         {
             var mapSize = map.Cells.Count;
 
@@ -80,32 +80,35 @@ namespace data_rogue_core.World.GenerationStrategies
 
             for (int i = 0; i< numberOfMonsters; i++)
             {
-                SpawnMonster(map, systemContainer, branch, step, power, monsterList, 25, random);
+                SpawnMonster(map, systemContainer, power, monsterList, random);
             }
         }
 
-        private void SpawnMonster(Map map, ISystemContainer systemContainer, IEntity branch, EntityGenerationStrategy step, int power, MonsterList monsterList, int retries, IRandom random)
+        private void SpawnMonster(Map map, ISystemContainer systemContainer, int power, MonsterList monsterList, IRandom random)
         {
+            int retries = 25;
+
+            MapCoordinate emptyLocation = null;
+            IEntity monster = null;
+
             for (int i = 0; i < retries; i++)
             {
-                if (TrySpawnMonster(map, systemContainer, branch, step, power, monsterList, random))
-                    continue;
+                emptyLocation = map.GetQuickEmptyPosition(systemContainer.PrototypeSystem, systemContainer.PositionSystem, random);
+
+                if (emptyLocation != null) break;
             }
-        }
 
-        private bool TrySpawnMonster(Map map, ISystemContainer systemContainer, IEntity branch, EntityGenerationStrategy step, int power, MonsterList monsterList, IRandom random)
-        {
-            var emptyLocation = map.GetQuickEmptyPosition(systemContainer.PrototypeSystem, systemContainer.PositionSystem, random);
+            for (int i = 0; i < retries; i++)
+            {
+                var randomPower = power + random.Between(-5, 3);
+                monster = PickMonsterToSpawn(monsterList, randomPower, random);
 
-            var randomPower = power + random.Between(-5, 3);
+                if (monster != null) break;
+            }
 
-            var monster = PickMonsterToSpawn(monsterList, randomPower, random);
-
-            if (emptyLocation == null || monster == null) return false;
+            if (emptyLocation == null || monster == null) return;
 
             systemContainer.PrototypeSystem.CreateAt(monster, emptyLocation);
-
-            return true;
         }
 
         private IEntity PickMonsterToSpawn(MonsterList monsterList, int power, IRandom random)
