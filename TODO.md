@@ -4,7 +4,6 @@ BUGS
 
 0.1
 
-Randomised Item spawning (from item prototype tags)
 Rules from file
 Work out spending time - where should it be? "Action" system?
 Dependency injection for rules and behaviours

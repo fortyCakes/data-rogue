@@ -10,4 +10,8 @@ Name: Dungeon
 [EntityGenerationStrategy]
 EntityGenerationType: BiomeBasedMonsterGeneration
 BasePower: 0
-Density: 0.0075
+Density: 0.01
+[EntityGenerationStrategy]
+EntityGenerationType: RandomItemGeneration
+BasePower: 0
+Density: 0.01

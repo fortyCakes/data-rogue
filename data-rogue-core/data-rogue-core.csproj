@@ -274,6 +274,7 @@
     <Compile Include="Maps\Vector.cs" />
     <Compile Include="World\BranchGeneratorFactory.cs" />
     <Compile Include="World\EntityGeneratorFactory.cs" />
+    <Compile Include="World\GenerationStrategies\ItemGeneration\RandomItemGeneration.cs" />
     <Compile Include="World\GenerationStrategies\MonsterGeneration\BiomeBasedMonsterGeneration.cs" />
     <Compile Include="World\GenerationStrategies\IEntityGenerator.cs" />
     <Compile Include="World\GenerationStrategies\MapGeneration\BaseBranchGenerator.cs" />

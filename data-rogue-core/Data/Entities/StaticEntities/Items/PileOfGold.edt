@@ -11,3 +11,5 @@ Color: #f4b642
 [Wealth]
 Currency: Gold
 Amount: 100
+[Item]
+ItemLevel: 1

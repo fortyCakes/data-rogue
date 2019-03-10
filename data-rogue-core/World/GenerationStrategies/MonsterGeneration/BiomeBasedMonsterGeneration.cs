@@ -37,7 +37,7 @@ namespace data_rogue_core.World.GenerationStrategies
 
             var monsters = systemContainer.EntityEngine
                 .AllEntities
-                .Where(e => e.HasAll(new SystemComponents { typeof(Biome), typeof(Fighter)}))
+                .Where(e => e.HasAll(new SystemComponents { typeof(Biome), typeof(Fighter), typeof(Prototype)}))
                 .Where(e => HasMatchingBiome(branch, e));
 
             foreach(var monster in monsters)

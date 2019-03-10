@@ -6,5 +6,6 @@ namespace data_rogue_core.Components
     {
         public string UseScript;
         public int Power = 0;
+        public int ItemLevel = 0;
     }
 }

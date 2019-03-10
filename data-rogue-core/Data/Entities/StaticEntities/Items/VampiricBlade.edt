@@ -10,6 +10,7 @@ Color: #990000
 [Position]
 [Item]
 Power: 5
+ItemLevel: 5
 [Equipment]
 EquipmentSlot: Hand
 [ProcEnchantment]

@@ -10,6 +10,7 @@ Color: #FFAA00
 [Position]
 [Item]
 UseScript: Script: Learn Skill
+ItemLevel: -9999
 [Consumable]
 Uses: 1/1
 [KnownSkill]

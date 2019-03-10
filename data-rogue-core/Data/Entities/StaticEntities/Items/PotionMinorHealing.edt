@@ -9,6 +9,7 @@ Glyph: !
 Color: #FF0000
 [Position]
 [Item]
+ItemLevel: 1
 UseScript: Script: Minor Healing
 [Consumable]
 Uses: 1/1

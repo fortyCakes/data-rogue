@@ -10,5 +10,6 @@ Color: #6B4D46
 [Position]
 [Item]
 Power: 5
+ItemLevel: 1
 [Equipment]
 EquipmentSlot: Chest
