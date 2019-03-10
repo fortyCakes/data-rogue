@@ -1,10 +1,11 @@
-﻿using System;
+﻿using data_rogue_core.World.GenerationStrategies;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace data_rogue_core
 {
-    public static class BranchGeneratorFactory
+    public static class MapGeneratorFactory
     {
         public static List<IBranchGenerator> BranchGenerators =>
             AppDomain

@@ -26,5 +26,5 @@ Singleton: true
 Text: {
 	fighter = User:Get('Fighter')
 	fighter.Health:Add(10);
-	SystemContainer.MessageSystem:Write(User:GetDescription().Name .. ' is healed for 10 health by their vampiric blade.')
+	SystemContainer.MessageSystem:Write(User:Get('Description').Name .. ' is healed for 10 health by their vampiric blade.')
 }

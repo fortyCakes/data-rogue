@@ -3,18 +3,5 @@
 Name: Branch:Entrance
 [Branch]
 BranchName: Branch:Entrance
-GenerationType: Entrance
+MapGenerationType: Entrance
 Depth: 2
-
-"Branch:Dungeon"
-[Prototype]
-Name: Branch:Dungeon
-[Branch]
-BranchName: Branch:Dungeon
-GenerationType: Dungeon
-Depth: 5
-
-"BranchLink:EntranceToDungeon"
-[BranchLink]
-From: BranchLinkEnd: Branch:Entrance 2-2
-To: BranchLinkEnd: Branch:Dungeon 1-1

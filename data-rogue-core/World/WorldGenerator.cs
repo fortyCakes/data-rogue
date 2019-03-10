@@ -9,7 +9,7 @@ using data_rogue_core.Forms.StaticForms;
 
 namespace data_rogue_core
 {
-    public class WorldGenerator
+    public static class WorldGenerator
     {
         public static WorldState Create(ISystemContainer systemContainer, CharacterCreationForm characterCreationForm)
         {
@@ -30,14 +30,12 @@ namespace data_rogue_core
 
         private static MapCoordinate CreateInitialMapAndGetSpawnPoint(ISystemContainer systemContainer, WorldState world)
         {
-            var worldStructure = systemContainer.PrototypeSystem.Get("World").Get<World>();
+            var worldStructure = systemContainer.PrototypeSystem.Get("World").Get<Components.World>();
             var initialBranchEntity = systemContainer.PrototypeSystem.Get(worldStructure.InitialBranch);
-                
-            var initialBranch = initialBranchEntity.Get<Branch>();
 
-            GenerateBranch(systemContainer, world, initialBranch);
+            GenerateBranch(systemContainer, world, initialBranchEntity);
 
-            var initialMap = world.Maps[new MapKey($"{initialBranch.BranchName}:1")];
+            var initialMap = world.Maps[new MapKey($"{initialBranchEntity.Get<Branch>().BranchName}:1")];
 
             return GetSpawnPoint(initialMap);
         }
@@ -54,11 +52,11 @@ namespace data_rogue_core
             return definedSpawnPoint.First().Key;
         }
 
-        public static void GenerateBranch(ISystemContainer systemContainer, WorldState world, Branch branchDefinition)
+        public static void GenerateBranch(ISystemContainer systemContainer, WorldState world, IEntity branchEntity)
         {
-            var branchGenerator = BranchGeneratorFactory.GetGenerator(branchDefinition.GenerationType);
+            var branchGenerator = MapGeneratorFactory.GetGenerator(branchEntity.Get<Branch>().MapGenerationType);
 
-            GeneratedBranch branch = branchGenerator.Generate(systemContainer, branchDefinition);
+            GeneratedBranch branch = branchGenerator.Generate(systemContainer, branchEntity);
 
             foreach (Map map in branch.Maps)
             {

@@ -23,15 +23,16 @@ namespace data_rogue_core.EventSystem.Rules
         {
             var portal = eventData as Portal;
 
-            var branch = systemContainer.EntityEngine.GetEntity(portal.BranchLink.Value).Get<Branch>();
+            var branchEntity = systemContainer.EntityEngine.GetEntity(portal.BranchLink.Value);
+            var branch = branchEntity.Get<Branch>();
 
             if (!branch.Generated)
             {
                 Game.ActivityStack.Push(new StaticTextActivity("Generating branch...", Game.RendererFactory));
 
-                var generator = BranchGeneratorFactory.GetGenerator(branch.GenerationType);
+                var generator = MapGeneratorFactory.GetGenerator(branch.MapGenerationType);
 
-                var generatedBranch = generator.Generate(systemContainer, branch);
+                var generatedBranch = generator.Generate(systemContainer, branchEntity);
 
                 foreach (Map map in generatedBranch.Maps)
                 {

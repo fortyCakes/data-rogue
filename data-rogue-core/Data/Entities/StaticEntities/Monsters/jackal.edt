@@ -1,30 +1,30 @@
-﻿"Monster:Goblin"
+﻿"Monster:Jackal"
 [Prototype]
-Name: Monster:Goblin
+Name: Monster:Jackal
 Singleton: false
 [Biome]
 Name: Dungeon
 [Challenge]
 ChallengeRating: 1
 [Appearance]
-Glyph: g
-Color: #aaffaa
+Glyph: d
+Color: #654321
 ZOrder: 10
 [Position]
 [Physical]
 Passable: false
 Transparent: true
 [Fighter]
-Health: 1/1
-Tilt: 0/20
+Health: 2/2
+Tilt: 0/10
 Aura: 0/0
 BaseAura: 0
-Muscle: 4
-Agility: 12
-Willpower: 8
-Intellect: 4
+Muscle: 6
+Agility: 10
+Willpower: 3
+Intellect: 2
 [Description]
-Name: Goblin
+Name: Jackal
 [Actor]
 [MoveToPlayerBehaviour]
 Priority: 0

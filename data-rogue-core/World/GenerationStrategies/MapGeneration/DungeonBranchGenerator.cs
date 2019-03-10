@@ -3,11 +3,14 @@ using data_rogue_core.Maps;
 using data_rogue_core.Maps.Generators;
 using System.Collections.Generic;
 using data_rogue_core.Systems.Interfaces;
+using data_rogue_core.EntityEngineSystem;
+using data_rogue_core.Utils;
 
 namespace data_rogue_core
 {
     public class DungeonBranchGenerator: BaseBranchGenerator
     {
+
         public override string GenerationType => "Dungeon";
 
         protected override List<Map> GenerateMaps(ISystemContainer systemContainer, Branch branchDefinition)
@@ -26,8 +29,12 @@ namespace data_rogue_core
             return generatedBranchMaps;
         }
 
-        protected override void CreateEntities(ISystemContainer systemContainer, GeneratedBranch generatedBranch, Branch branch)
+        protected override void CreateEntities(ISystemContainer systemContainer, GeneratedBranch generatedBranch, IEntity branchEntity)
         {
+            base.CreateEntities(systemContainer, generatedBranch, branchEntity);
+
+            var branch = branchEntity.Get<Branch>();
+
             PlaceDefaultEntrancePortal(systemContainer, generatedBranch, branch);
 
             PlaceStairs(systemContainer, generatedBranch);
@@ -35,19 +42,6 @@ namespace data_rogue_core
             PlaceStairs(systemContainer, generatedBranch);
 
             PlaceStairs(systemContainer, generatedBranch);
-
-            foreach (var map in generatedBranch.Maps)
-            {
-                for (int i = 0; i < 10; i++)
-                {
-                    PlaceMonster(systemContainer, map);
-                }
-            }
-        }
-
-        private void PlaceMonster(ISystemContainer systemContainer, Map map)
-        {
-            systemContainer.PrototypeSystem.CreateAt("Monster:Goblin", EmptyPositionOn(map, systemContainer));
         }
     }
 }

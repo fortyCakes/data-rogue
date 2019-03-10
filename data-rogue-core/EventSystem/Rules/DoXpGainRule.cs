@@ -19,6 +19,11 @@ namespace data_rogue_core.EventSystem.Rules
 
             var experience = sender.Get<Experience>();
 
+            if (experience == null)
+            {
+                return false;
+            }
+
             experience.Amount += data.Amount;
 
             return true;

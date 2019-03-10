@@ -187,15 +187,12 @@ namespace data_rogue_core.Systems
 
         private static EquipmentSlotDetails CreateEquipmentSlotDetails(BodyPart bodyPart, int index)
         {
-            Dictionary<EquipmentSlot, List<EquipmentSlotDetails>> slots;
-            EquipmentSlot slot;
-            var equipDetails = new EquipmentSlotDetails
+            return new EquipmentSlotDetails
             {
                 BodyPartLocation = bodyPart.Location,
                 BodyPartType = bodyPart.Type,
                 Index = index
             };
-            return equipDetails;
         }
     }
 }

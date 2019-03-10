@@ -1,4 +1,5 @@
 ﻿using data_rogue_core.Components;
+using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core
@@ -7,6 +8,6 @@ namespace data_rogue_core
     {
         string GenerationType { get; }
 
-        GeneratedBranch Generate(ISystemContainer systemContainer, Branch branchDefinition);
+        GeneratedBranch Generate(ISystemContainer systemContainer, IEntity branchEntity);
     }
 }

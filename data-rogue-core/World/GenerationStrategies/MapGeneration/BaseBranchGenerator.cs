@@ -6,29 +6,30 @@ using System.Collections.Generic;
 using System.Linq;
 using data_rogue_core.Maps.MapGenCommands;
 using data_rogue_core.Systems.Interfaces;
+using data_rogue_core.World.GenerationStrategies;
+using data_rogue_core.Utils;
 
 namespace data_rogue_core
 {
     public abstract class BaseBranchGenerator : IBranchGenerator
-    {
-        
+    {        
         public abstract string GenerationType { get; }
 
         protected abstract List<Map> GenerateMaps(ISystemContainer systemContainer, Branch branchDefinition);
 
-        protected abstract void CreateEntities(ISystemContainer systemContainer, GeneratedBranch generatedBranch, Branch branch);
-
         protected IRandom Random { get; set; }
 
-        public GeneratedBranch Generate(ISystemContainer systemContainer, Branch branch)
+        public GeneratedBranch Generate(ISystemContainer systemContainer, IEntity branchEntity)
         {
+            var branch = branchEntity.Get<Branch>();
+
             Random = new RNG(systemContainer.Seed + branch.BranchName);
 
             var generatedBranchMaps = GenerateMaps(systemContainer, branch);
 
             var generatedBranch = new GeneratedBranch() { Maps = generatedBranchMaps };
 
-            CreateEntities(systemContainer, generatedBranch, branch);
+            CreateEntities(systemContainer, generatedBranch, branchEntity);
             ExecuteMapGenCommands(systemContainer, generatedBranch, branch);
 
             Map previousMap = null;
@@ -47,6 +48,18 @@ namespace data_rogue_core
             branch.Generated = true;
 
             return generatedBranch;
+        }
+
+        protected virtual void CreateEntities(ISystemContainer systemContainer, GeneratedBranch generatedBranch, IEntity branchEntity)
+        {
+            var entityGenerationSteps = branchEntity.Components.OfType<EntityGenerationStrategy>();
+
+            foreach(var step in entityGenerationSteps)
+            {
+                var generator = EntityGeneratorFactory.GetGenerator(step.EntityGenerationType);
+
+                generator.Generate(systemContainer, generatedBranch, branchEntity, step, Random);
+            }
         }
 
         protected virtual void AddBranchPortals(ISystemContainer systemContainer, GeneratedBranch generatedBranch, Branch branch)
@@ -175,8 +188,8 @@ namespace data_rogue_core
         protected void PlaceStairSet(ISystemContainer systemContainer, Map previousMap, Map map)
         {
 
-            var downStairsCoordinate = EmptyPositionOn(previousMap, systemContainer);
-            var upStairsCoordinate = EmptyPositionOn(map, systemContainer);
+            var downStairsCoordinate = previousMap.GetEmptyPosition(systemContainer.PrototypeSystem, systemContainer.PositionSystem, Random);
+            var upStairsCoordinate = map.GetEmptyPosition(systemContainer.PrototypeSystem, systemContainer.PositionSystem, Random);
 
             var downStairs = systemContainer.PrototypeSystem.CreateAt("Props:StairsDown", downStairsCoordinate);
             var upStairs = systemContainer.PrototypeSystem.CreateAt("Props:StairsUp", upStairsCoordinate);
@@ -186,21 +199,11 @@ namespace data_rogue_core
         {
             var firstLayer = generatedBranch.Maps.First();
 
-            MapCoordinate emptyPosition = EmptyPositionOn(firstLayer, systemContainer);
+            MapCoordinate emptyPosition = firstLayer.GetEmptyPosition(systemContainer.PrototypeSystem, systemContainer.PositionSystem, Random);
 
             systemContainer.PrototypeSystem.CreateAt("Props:Portal", emptyPosition);
         }
 
-        protected MapCoordinate EmptyPositionOn(Map firstLayer, ISystemContainer systemContainer)
-        {
-            var emptyCell = systemContainer.PrototypeSystem.Get("Cell:Empty");
-
-            var emptyPositions = firstLayer.Cells
-                .Where(c => c.Value == emptyCell)
-                .Where(c => !systemContainer.PositionSystem.Any(c.Key))
-                .ToList();
-            var emptyPosition = Random.PickOne(emptyPositions).Key;
-            return emptyPosition;
-        }
+        
     }
 }

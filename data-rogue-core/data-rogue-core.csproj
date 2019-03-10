@@ -81,6 +81,7 @@
     <Compile Include="Behaviours\MoveToPlayerBehaviour.cs" />
     <Compile Include="Behaviours\RandomlyMoveBehaviour.cs" />
     <Compile Include="Behaviours\PlayerControlledBehaviour.cs" />
+    <Compile Include="Components\Biome.cs" />
     <Compile Include="Components\BodyPartLocation.cs" />
     <Compile Include="Components\BodyPartType.cs" />
     <Compile Include="Components\Consumable.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Components\Enchantments\Enchantment.cs" />
     <Compile Include="Components\Enchantments\ProcEnchantment.cs" />
     <Compile Include="Components\Enchantments\StatBoostEnchantment.cs" />
+    <Compile Include="Components\EntityGenerationStrategy.cs" />
     <Compile Include="Components\Equipped.cs" />
     <Compile Include="Components\Experience.cs" />
     <Compile Include="Components\Wealth.cs" />
@@ -216,6 +218,7 @@
     <Compile Include="Systems\PrototypeSystem.cs" />
     <Compile Include="Utils\EventRuleSystemExtensions.cs" />
     <Compile Include="Utils\FlagsExtensions.cs" />
+    <Compile Include="Utils\MapExtensions.cs" />
     <Compile Include="Utils\StringExtensions.cs" />
     <Compile Include="Utils\WordWrap.cs" />
     <Compile Include="Menus\StaticMenus\MainMenu.cs" />
@@ -270,14 +273,17 @@
     <Compile Include="Systems\PositionSystem.cs" />
     <Compile Include="Maps\Vector.cs" />
     <Compile Include="World\BranchGeneratorFactory.cs" />
-    <Compile Include="World\GenerationStrategies\BaseBranchGenerator.cs" />
-    <Compile Include="World\GenerationStrategies\DungeonBranchGenerator.cs" />
+    <Compile Include="World\EntityGeneratorFactory.cs" />
+    <Compile Include="World\GenerationStrategies\MonsterGeneration\BiomeBasedMonsterGeneration.cs" />
+    <Compile Include="World\GenerationStrategies\IEntityGenerator.cs" />
+    <Compile Include="World\GenerationStrategies\MapGeneration\BaseBranchGenerator.cs" />
+    <Compile Include="World\GenerationStrategies\MapGeneration\DungeonBranchGenerator.cs" />
     <Compile Include="World\GenerationStrategies\GeneratedBranch.cs" />
-    <Compile Include="World\GenerationStrategies\EntranceBranchGenerator.cs" />
     <Compile Include="World\GenerationStrategies\IBranchGenerator.cs" />
     <Compile Include="Maps\Generators\IMapGenerator.cs" />
     <Compile Include="EntityEngineSystem\WorldEntityLoader.cs" />
     <Compile Include="Data\MessageSerializer.cs" />
+    <Compile Include="World\GenerationStrategies\MapGeneration\EntranceBranchGenerator.cs" />
     <Compile Include="World\WorldGenerator.cs" />
     <Compile Include="World\WorldState.cs" />
   </ItemGroup>
@@ -304,10 +310,19 @@
     <None Include="Data\Entities\StaticEntities\Items\PotionMinorHealing.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Entities\StaticEntities\Monsters\jackal.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\Entities\StaticEntities\Monsters\goblin.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\Entities\StaticEntities\Props\stairs.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Entities\World\Branches\BranchLinks.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Entities\World\Branches\Dungeon.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\Entities\World\World.edt">

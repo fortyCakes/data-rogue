@@ -4,14 +4,12 @@ BUGS
 
 0.1
 
-XP
-Randomised Monster spawning (from monster prototype tags)
 Randomised Item spawning (from item prototype tags)
 Rules from file
 Work out spending time - where should it be? "Action" system?
 Dependency injection for rules and behaviours
 Separate out core from implementation (!)
-	Make stats generic
+	Make stats window defined in data
 	Make Player entity not special (don't allow access from global state)
 	Aura and Tilt separation
 		Stat window rendering customisation

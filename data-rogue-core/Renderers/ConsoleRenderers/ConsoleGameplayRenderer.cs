@@ -112,7 +112,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             var fighter = player.Get<Fighter>();
 
             StatsConsole.Print(1,1, player.Get<Description>().Name, RLColor.White, RLColor.Black);
-            StatsConsole.Print(1,2, " the (TITLE)", RLColor.White, RLColor.Black);
+            StatsConsole.Print(1,2, " the Adventurer", RLColor.White, RLColor.Black);
 
             ConsoleRendererHelper.PrintBar(StatsConsole, 1, 4, STATS_WIDTH - 2, "hp", fighter.Health, RLColor.Red);
             ConsoleRendererHelper.PrintBar(StatsConsole, 1, 6, STATS_WIDTH - 2, "aura", fighter.Aura, RLColor.Yellow);

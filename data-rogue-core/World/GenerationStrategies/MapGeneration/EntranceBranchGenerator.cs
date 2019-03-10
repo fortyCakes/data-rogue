@@ -15,13 +15,8 @@ namespace data_rogue_core
         {
             var entranceMap = new StaticMapGenerator(systemContainer, "StaticMaps/entrance.map").Generate($"{branchDefinition.BranchName}:1", Random);
             var entranceMap2 = new StaticMapGenerator(systemContainer, "StaticMaps/entrance2.map").Generate($"{branchDefinition.BranchName}:2", Random);
-            var generatedBranchMaps = new List<Map> { entranceMap, entranceMap2 };
-            return generatedBranchMaps;
-        }
 
-        protected override void CreateEntities(ISystemContainer systemContainer, GeneratedBranch generatedBranch, Branch branch)
-        {
-            // none
+            return new List<Map> { entranceMap, entranceMap2 };
         }
     }
 }

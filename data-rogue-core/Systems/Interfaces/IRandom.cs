@@ -9,7 +9,7 @@ namespace data_rogue_core
         void Seed(string seed);
         int Between(int min, int max);
 
-        T PickOne<T>(List<T> items);
+        T PickOne<T>(IList<T> items);
 
         decimal StatCheck(decimal attackStat);
     }
@@ -38,7 +38,7 @@ namespace data_rogue_core
             return _random.Next(min, max+1);
         }
 
-        public T PickOne<T>(List<T> items)
+        public T PickOne<T>(IList<T> items)
         {
             var max = items.Count();
             var index = Between(1, max) - 1;

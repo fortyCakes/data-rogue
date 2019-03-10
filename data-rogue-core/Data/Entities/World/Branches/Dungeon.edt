@@ -1,0 +1,13 @@
+﻿"Branch:Dungeon"
+[Prototype]
+Name: Branch:Dungeon
+[Branch]
+BranchName: Branch:Dungeon
+MapGenerationType: Dungeon
+Depth: 5
+[Biome]
+Name: Dungeon
+[EntityGenerationStrategy]
+EntityGenerationType: BiomeBasedMonsterGeneration
+BasePower: 0
+Density: 0.0075

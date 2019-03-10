@@ -1,0 +1,4 @@
+﻿"BranchLink:EntranceToDungeon"
+[BranchLink]
+From: BranchLinkEnd: Branch:Entrance 2-2
+To: BranchLinkEnd: Branch:Dungeon 1-1

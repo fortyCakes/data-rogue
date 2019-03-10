@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using data_rogue_core.Components;
-using data_rogue_core.Data;
 using data_rogue_core.EntityEngineSystem;
-using data_rogue_core.EventSystem;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems;
-using data_rogue_core.Systems.Interfaces;
 using FluentAssertions;
-using NSubstitute;
 using NUnit.Framework;
 
 namespace data_rogue_core.UnitTests.Systems
@@ -38,11 +33,6 @@ namespace data_rogue_core.UnitTests.Systems
 
         private IItemSystem itemSystem => systemContainer.ItemSystem;
         private SystemContainer systemContainer;
-        private IPrototypeSystem prototypeSystem;
-        private IEntityEngine entityEngine;
-        private IEventSystem eventSystem;
-        private IScriptExecutor scriptExecutor;
-        private IMessageSystem messageSystem;
 
         [Test]
         public void MoveItemToInventory_AddsToInventory()
