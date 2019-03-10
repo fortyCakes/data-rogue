@@ -4,7 +4,7 @@ BUGS
 
 0.1
 
-Rules from file
+Combat maths - make equipment work
 Work out spending time - where should it be? "Action" system?
 Dependency injection for rules and behaviours
 Separate out core from implementation (!)
@@ -22,6 +22,7 @@ Monsters with skills
 	Monsters with targeting
 Nonhostile monsters (factions)
 Monsters spawn with items and drop them
+Rules from file (for monster/cell interactions)
 "seen tiles" on the map editor
 Dropdown for entity selection
 Dropdown for cell selection
