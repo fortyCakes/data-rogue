@@ -4,8 +4,6 @@ BUGS
 
 0.1
 
-Removal of global Game object
-Loading screens and generation on background threads
 Combat maths - make equipment work
 Work out spending time - where should it be? "Action" system?
 Dependency injection for rules and behaviours
@@ -19,6 +17,8 @@ Remove RLNet dependencies from core (!)
 
 0.2+
 
+Smooth rendering while resting
+Loading screens and generation on background threads
 Picking up items: multiple items per file
 Monsters with skills
 	Monsters with targeting
