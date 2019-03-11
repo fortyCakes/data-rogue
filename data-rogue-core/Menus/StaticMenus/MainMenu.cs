@@ -1,42 +1,47 @@
 ﻿using data_rogue_core.Activities;
 using data_rogue_core.Systems.Interfaces;
 using System;
+using data_rogue_core.Forms.StaticForms;
 
 namespace data_rogue_core.Menus.StaticMenus
 {
     public class MainMenu : Menu
     {
-        public MainMenu(IActivitySystem activitySystem) : base(
+        private readonly IPlayerSystem _playerSystem;
+        private readonly ISaveSystem _saveSystem;
+        private readonly IRendererSystem _rendererSystem;
+
+        public MainMenu(IActivitySystem activitySystem, IPlayerSystem playerSystem, ISaveSystem saveSystem, IRendererSystem rendererSystem) : base(
             activitySystem,
-            "Main Menu", 
-            HandleMainMenuSelection,
+            "Main Menu",
+            null,
             new MenuItem("New Game"),
             new MenuItem("Load Game"),
             new MenuItem("Quit"))
         {
-
+            _playerSystem = playerSystem;
+            _saveSystem = saveSystem;
+            _rendererSystem = rendererSystem;
+            OnSelectCallback += HandleMainMenuSelection;
         }
 
-        public static MenuItemSelected CallSelectionHandler(IActivitySystem activitySystem)
-        {
-            return (MenuItem item, MenuAction menuAction) => HandleMainMenuSelection(activitySystem, item, menuAction);
-        }
 
-        public static void HandleMainMenuSelection(IActivitySystem activitySystem, MenuItem item, MenuAction menuAction)
+
+        public void HandleMainMenuSelection(MenuItem item, MenuAction menuAction)
         {
             switch(item.Text)
             {
                 case "Quit":
-                    activitySystem.Pop();
-                    Game.Quit();
+                    _activitySystem.Pop();
+                    _rendererSystem.QuitAction();
                     break;
                 case "New Game":
-                    activitySystem.Pop();
-                    Game.CreateCharacter();
+                    _activitySystem.Pop();
+                    _playerSystem.StartCharacterCreation();
                     break;
                 case "Load Game":
-                    activitySystem.Pop();
-                    Game.LoadGame();
+                    _activitySystem.Pop();
+                    _saveSystem.Load();
                     break;
 
             }

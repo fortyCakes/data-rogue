@@ -14,5 +14,6 @@ namespace data_rogue_core.Systems.Interfaces
         IEntity Player { get; set; }
 
         bool IsPlayer(IEntity sender);
+        void StartCharacterCreation();
     }
 }

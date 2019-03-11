@@ -14,7 +14,7 @@ namespace data_rogue_core.Menus
 
         public delegate void MenuItemSelected(MenuItem selectedItem, MenuAction selectedAction);
 
-        private MenuItemSelected OnSelectCallback;
+        protected MenuItemSelected OnSelectCallback;
         protected readonly IActivitySystem _activitySystem;
 
         public MenuItem SelectedItem { get; protected set; }
@@ -26,7 +26,7 @@ namespace data_rogue_core.Menus
         {
             MenuItems = new List<MenuItem>(items);
             MenuName = menuName;
-            OnSelectCallback = onSelectCallback;
+            OnSelectCallback += onSelectCallback;
             SelectedItem = MenuItems.FirstOrDefault();
             _activitySystem = activitySystem;
         }

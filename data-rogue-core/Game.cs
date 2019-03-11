@@ -20,8 +20,6 @@ namespace data_rogue_core
         public GraphicsMode GraphicsMode = GraphicsMode.Console;
         public IRendererFactory RendererFactory { get; set; }
 
-        public WorldState WorldState;
-
         public ISystemContainer SystemContainer;
 
         private const int SCREEN_WIDTH = 100;
@@ -150,11 +148,13 @@ namespace data_rogue_core
             SystemContainer = new SystemContainer();
 
             SystemContainer.CreateSystems(DEBUG_SEED);
+
+            SystemContainer.RendererSystem.QuitAction = Quit;
         }
 
         private void DisplayMainMenu()
         {
-            SystemContainer.ActivitySystem.Push(new MenuActivity(new MainMenu(SystemContainer.ActivitySystem), RendererFactory));
+            SystemContainer.ActivitySystem.Push(new MenuActivity(new MainMenu(SystemContainer.ActivitySystem, SystemContainer.PlayerSystem, SystemContainer.SaveSystem, SystemContainer.RendererSystem), RendererFactory));
         }
 
         private void OnRootConsoleRender(object sender, UpdateEventArgs e)
@@ -188,50 +188,11 @@ namespace data_rogue_core
 
                 SystemContainer.EventSystem.Try(EventType.Input, null, eventData);
 
-                while (WorldState != null && !SystemContainer.TimeSystem.WaitingForInput && SystemContainer.ActivitySystem.ActivityStack.Count > 0 && SystemContainer.ActivitySystem.Peek().Type == ActivityType.Gameplay)
+                while (!SystemContainer.TimeSystem.WaitingForInput && SystemContainer.ActivitySystem.ActivityStack.Count > 0 && SystemContainer.ActivitySystem.Peek().Type == ActivityType.Gameplay)
                 {
                     SystemContainer.TimeSystem.Tick();
                 }
             }
-        }
-
-
-        public void CreateCharacter()
-        {
-            SystemContainer.ActivitySystem.Push(CharacterCreationForm.GetCharacterCreationActivity());
-        }
-
-        public void StartNewGame(CharacterCreationForm characterCreationForm)
-        {
-            DisplayLoadingScreen("Generating world...");
-
-            new Thread(() =>
-            {
-                Thread.CurrentThread.IsBackground = true;
-
-                WorldState = WorldGenerator.Create(SystemContainer, characterCreationForm);
-
-                SystemContainer.ActivitySystem.Pop();
-            }).Start();
-        }
-
-        public void LoadGame()
-        {
-            DisplayLoadingScreen("Loading save file...");
-
-            new Thread(() =>
-            {
-                Thread.CurrentThread.IsBackground = true;
-
-                Loading = true;
-
-                WorldState = SaveSystem.Load(SystemContainer);
-
-                Loading = false;
-
-                SystemContainer.ActivitySystem.Pop();
-
-            }).Start();
         }
 
         public void DisplayLoadingScreen(string text)

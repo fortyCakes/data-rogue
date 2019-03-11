@@ -28,6 +28,8 @@ namespace data_rogue_core.Systems.Interfaces
         IRendererSystem RendererSystem { get; set; }
         IMapSystem MapSystem { get; set; }
 
+        ISaveSystem SaveSystem {get;set;}
+
         void Verify();
         void CreateSystems(string rngSeed);
     }

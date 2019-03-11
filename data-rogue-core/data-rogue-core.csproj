@@ -190,6 +190,7 @@
     <Compile Include="Systems\ActivitySystem.cs" />
     <Compile Include="Systems\Interfaces\IMapSystem.cs" />
     <Compile Include="Systems\Interfaces\IRendererSystem.cs" />
+    <Compile Include="Systems\Interfaces\ISaveSystem.cs" />
     <Compile Include="Systems\MapSystem.cs" />
     <Compile Include="Systems\RendererSystem.cs" />
     <Compile Include="Utils\AStar.cs" />
@@ -294,7 +295,6 @@
     <Compile Include="Data\MessageSerializer.cs" />
     <Compile Include="World\GenerationStrategies\MapGeneration\EntranceBranchGenerator.cs" />
     <Compile Include="World\WorldGenerator.cs" />
-    <Compile Include="World\WorldState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -30,6 +30,8 @@ namespace data_rogue_core.Systems
         public IMapSystem MapSystem { get; set; }
         public IRendererSystem RendererSystem { get; set; }
 
+        public ISaveSystem SaveSystem { get; set; }
+
         public string Seed { get; set; }
 
         public void CreateSystems(string rngSeed)
@@ -37,9 +39,9 @@ namespace data_rogue_core.Systems
             ScriptExecutor = new ScriptExecutor(this);
 
             MessageSystem = new MessageSystem();
-            PlayerSystem = new PlayerSystem();
-            MapSystem = new MapSystem();
             ActivitySystem = new ActivitySystem();
+            PlayerSystem = new PlayerSystem(ActivitySystem);
+            MapSystem = new MapSystem();
 
             EntityEngine = new EntityEngine(new DataStaticEntityLoader());
 
@@ -59,7 +61,7 @@ namespace data_rogue_core.Systems
 
             PlayerControlSystem = new PlayerControlSystem(this);
 
-            BehaviourFactory = new BehaviourFactory(PositionSystem, EventSystem, Random, MessageSystem);
+            BehaviourFactory = new BehaviourFactory(PositionSystem, EventSystem, Random, MessageSystem, PlayerSystem, MapSystem);
 
             PrototypeSystem = new PrototypeSystem(EntityEngine, PositionSystem, BehaviourFactory);
             EntityEngine.Register(PrototypeSystem);
@@ -77,6 +79,8 @@ namespace data_rogue_core.Systems
             EquipmentSystem = new EquipmentSystem(this);
 
             RendererSystem = new RendererSystem(PlayerSystem);
+
+            SaveSystem = new SaveSystem(this);
 
             Verify();
         }
@@ -103,6 +107,9 @@ namespace data_rogue_core.Systems
             Check(EquipmentSystem, "EquipmentSystem", msg, ref valid);
             Check(ActivitySystem, "ActivitySystem", msg, ref valid);
             Check(PlayerSystem, "PlayerSystem", msg, ref valid);
+            Check(MapSystem, "MapSystem", msg, ref valid);
+            Check(RendererSystem, "RendererSystem", msg, ref valid);
+            Check(SaveSystem, "SaveSystem", msg, ref valid);
 
             if (!valid)
                 throw new ContainerNotValidException(msg.ToString());

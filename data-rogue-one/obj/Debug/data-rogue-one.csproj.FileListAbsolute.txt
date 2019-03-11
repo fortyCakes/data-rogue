@@ -1,2 +1,4 @@
 C:\Users\Lex\source\repos\fortyCakes\data-rogue\data-rogue-one\obj\Debug\data-rogue-one.csprojAssemblyReference.cache
 C:\Users\Lex\source\repos\fortyCakes\data-rogue\data-rogue-one\obj\Debug\data-rogue-one.csproj.CoreCompileInputs.cache
+C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-one\obj\Debug\data-rogue-one.csprojAssemblyReference.cache
+C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-one\obj\Debug\data-rogue-one.csproj.CoreCompileInputs.cache
