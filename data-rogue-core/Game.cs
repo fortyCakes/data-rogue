@@ -18,7 +18,6 @@ namespace data_rogue_core
     public class Game
     {
         public GraphicsMode GraphicsMode = GraphicsMode.Console;
-        public IRendererFactory RendererFactory { get; set; }
 
         public ISystemContainer SystemContainer;
 
@@ -80,7 +79,7 @@ namespace data_rogue_core
                     throw new ApplicationException($"Renderers not found for graphics mode {GraphicsMode}.");
             }
 
-            RendererFactory = new RendererFactory(renderers);
+            SystemContainer.RendererSystem.RendererFactory = new RendererFactory(renderers);
         }
 
         private void RunRootConsole()
@@ -123,7 +122,7 @@ namespace data_rogue_core
         {
             SystemContainer.ActivitySystem.Initialise();
 
-            SystemContainer.ActivitySystem.Push(new GameplayActivity(RendererFactory));
+            SystemContainer.ActivitySystem.Push(new GameplayActivity(SystemContainer.RendererSystem.RendererFactory));
 
             DisplayLoadingScreen("Loading...");
         }
@@ -154,7 +153,7 @@ namespace data_rogue_core
 
         private void DisplayMainMenu()
         {
-            SystemContainer.ActivitySystem.Push(new MenuActivity(new MainMenu(SystemContainer.ActivitySystem, SystemContainer.PlayerSystem, SystemContainer.SaveSystem, SystemContainer.RendererSystem), RendererFactory));
+            SystemContainer.ActivitySystem.Push(new MenuActivity(new MainMenu(SystemContainer.ActivitySystem, SystemContainer.PlayerSystem, SystemContainer.SaveSystem, SystemContainer.RendererSystem), SystemContainer.RendererSystem.RendererFactory));
         }
 
         private void OnRootConsoleRender(object sender, UpdateEventArgs e)
@@ -197,7 +196,7 @@ namespace data_rogue_core
 
         public void DisplayLoadingScreen(string text)
         {
-            SystemContainer.ActivitySystem.Push(new LoadingScreenActivity(text, RendererFactory));
+            SystemContainer.ActivitySystem.Push(new LoadingScreenActivity(text, SystemContainer.RendererSystem.RendererFactory));
         }
 
         public void Quit()

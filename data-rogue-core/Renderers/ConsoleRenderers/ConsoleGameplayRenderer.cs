@@ -35,7 +35,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
         {
             Console.Clear();
 
-            if ( ReferenceEquals(systemContainer.PositionSystem, null))
+            if (ReferenceEquals(systemContainer?.PlayerSystem?.Player, null))
             {
                 return;
             }

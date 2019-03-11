@@ -9,5 +9,6 @@ namespace data_rogue_core
         void Save();
 
         void Load();
+        SaveState GetSaveState();
     }
 }

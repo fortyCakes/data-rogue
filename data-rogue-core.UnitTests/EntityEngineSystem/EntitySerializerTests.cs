@@ -31,7 +31,7 @@ end";
             SystemContainer.PositionSystem = Substitute.For<IPositionSystem>();
             SystemContainer.EventSystem = Substitute.For<IEventSystem>();
             SystemContainer.Random = Substitute.For<IRandom>();
-            SystemContainer.BehaviourFactory = new BehaviourFactory(SystemContainer.PositionSystem, SystemContainer.EventSystem, SystemContainer.Random, SystemContainer.MessageSystem);
+            SystemContainer.BehaviourFactory = new BehaviourFactory(SystemContainer.PositionSystem, SystemContainer.EventSystem, SystemContainer.Random, SystemContainer.MessageSystem, SystemContainer.PlayerSystem, SystemContainer.MapSystem);
 
             entityEngine = Substitute.For<IEntityEngine>();
             entityEngine.New(Arg.Any<string>(), Arg.Any<IEntityComponent[]>()).ReturnsForAnyArgs(callInfo =>
@@ -126,7 +126,7 @@ end";
         {
             var testEntity0 = new Entity(0, "TestEntity", new IEntityComponent[] {
                 new Appearance() { Glyph = '£', Color = Color.FromArgb(255, 0, 0)},
-                new MoveToPlayerBehaviour(SystemContainer.PositionSystem, SystemContainer.EventSystem) { Priority = 100 }
+                new MoveToPlayerBehaviour(SystemContainer.PositionSystem, SystemContainer.EventSystem, SystemContainer.PlayerSystem, SystemContainer.MapSystem) { Priority = 100 }
             });
 
             var testEntity1 = new Entity(1, "EntityWithPosition", new[]

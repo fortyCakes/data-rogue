@@ -1,132 +1,106 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using data_rogue_core.Components;
+using data_rogue_core.Data;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
 using FluentAssertions;
-using NSubstitute;
 using NUnit.Framework;
 
-namespace data_rogue_core.UnitTests.Data
+namespace data_rogue_core.UnitTests.Systems
 {
     [TestFixture]
-    class SaveStateTests
+    public class SaveSystemTests
     {
-        private ISystemContainer systemContainer;
-        private IEntity wallCell;
-        private IEntity floorCell;
-
+        private ISystemContainer _systemContainer;
+        private ISaveSystem _saveSystem;
 
         [SetUp]
         public void SetUp()
         {
-            systemContainer = new SystemContainer();
-            systemContainer.EntityEngine = new EntityEngineSystem.EntityEngine(Substitute.For<BaseStaticEntityLoader>());
+            _systemContainer = new SystemContainer();
+            _systemContainer.CreateSystems("Test");
+            _systemContainer.EntityEngine.Initialise(_systemContainer);
 
-            wallCell = CreateCell('#', "Cell:Wall");
-            floorCell = CreateCell('.', "Cell:Empty");
+            _systemContainer.MapSystem.Initialise();
+
+            _saveSystem = _systemContainer.SaveSystem;
         }
 
         [Test]
-        [TestCase(0)]
-        public void TestSaveState_Deserialize_MatchesTestSaveState(int testCase)
+        public void SaveSystem_GetSaveState_NoData_ReturnsBlankSaveState()
         {
-            string testData = LoadSerializedData(testCase);
+            var result = _saveSystem.GetSaveState();
 
-            var entity = SaveStateSerializer.Deserialize(testData);
+            var expected = GetBlankSaveState();
 
-            var expected = GetTestSaveState(testCase);
-
-            entity.Should().BeEquivalentTo(expected);
+            result.Should().BeEquivalentTo(expected);
         }
 
         [Test]
-        [TestCase(0)]
-        public void SaveState_Serialize_MatchesSerializedData(int testCase)
+        public void SaveSystem_GetSaveState_WithEntity_ReturnsSaveStateWithSerialisedEntity()
         {
-            var testEntity = GetTestSaveState(testCase);
+            var entity = _systemContainer.EntityEngine.New("New Entity");
 
-            var serialised = SaveStateSerializer.Serialize(testEntity);
+            var result = _saveSystem.GetSaveState();
 
-            var expected = LoadSerializedData(testCase);
+            var expected = EntitySerializer.Serialize(entity);
 
-            serialised.Should().BeEquivalentTo(expected);
+            result.Entities.Single().Should().Be(expected);
         }
 
-        private static string LoadSerializedData(int index)
+        [Test]
+        public void SaveSystem_GetSaveState_WithMap_ReturnsSaveStateWithSerialisedMap()
         {
-            return LoadFile($"Systems/TestData/ExpectedSerialization_SaveState{index}.txt");
+            var map = new Map("key", _systemContainer.EntityEngine.New("Map Cell", new Appearance(), new Physical()));
+
+            _systemContainer.MapSystem.MapCollection.Add(map.MapKey, map);
+
+            var result = _saveSystem.GetSaveState();
+
+            var expected = MapSerializer.Serialize(map);
+
+            result.Maps.Single().Should().Be(expected);
         }
 
-        private static string LoadFile(string fileName)
+        [Test]
+        public void SaveSystem_SerialisesCurrentTime()
         {
-            var testFolder = TestContext.CurrentContext.TestDirectory;
+            _systemContainer.TimeSystem.CurrentTime = 3;
+            
+            var result = _saveSystem.GetSaveState();
 
-            var expectedFile = Path.Combine(testFolder, fileName);
-
-            var serialisedText = File.ReadAllText(expectedFile);
-            return serialisedText;
+            result.Time.Should().Be(3);
         }
 
-        private Entity GetTestEntity(int entity)
+        [Test]
+        public void SaveSystem_WithMessage_SerialisesMessage()
         {
-            return SetUpTestEntities()[entity];
+            var message = new Message {Text = "message", Color = Color.AliceBlue};
+
+            _systemContainer.MessageSystem.Write(message.Text, message.Color);
+
+            var result = _saveSystem.GetSaveState();
+
+            result.Messages.Single().Should().Be(MessageSerializer.Serialize(message));
         }
 
-        private SaveState GetTestSaveState(int saveState)
+        private static SaveState GetBlankSaveState()
         {
-            return new SaveState() {
-                Seed = "TestSeed",
-                Maps = new List<string> { MapSerializer.Serialize(GetTestMap(0))},
-                Entities = new List<string>() { EntitySerializer.Serialize( GetTestEntity(0))},
-                Messages =  new List<string> { "This is a test message"},
-                Time = 42
-            } ;
-        }
-
-        private Map GetTestMap(int v)
-        {
-            return SetUpTestMaps()[v];
-        }
-
-        private Entity[] SetUpTestEntities()
-        {
-            var testEntity0 = new Entity(3, "TestEntity", new[] {
-                new Appearance() { Glyph = '£', Color = Color.FromArgb(255, 0, 0)
-                }});
-            var testEntity1 = new Entity(4, "TestEntity2", new[] {
-                new Appearance() { Glyph = '£', Color = Color.FromArgb(255, 0, 0)
-                }});
-
-            return new[] { testEntity0, testEntity1 };
-        }
-
-        private Map[] SetUpTestMaps()
-        {
-            var testMap0 = new Map("TestMapKey", wallCell);
-
-            testMap0.SetCellsInRange(-4, 3, -2, 2, floorCell);
-            testMap0.SetCell(1, 1, wallCell);
-
-            var testMap1 = new Map("TestMapKey2", wallCell);
-
-            testMap1.SetCellsInRange(0, 11, 0, 4, floorCell);
-
-            testMap1.RemoveCellsInRange(1, 2, 1, 1);
-            testMap1.RemoveCellsInRange(5, 6, 2, 3);
-
-            return new[] { testMap0, testMap1 };
-        }
-
-        private IEntity CreateCell(char glyph, string name)
-        {
-            return systemContainer.EntityEngine.New(name,
-               new Appearance { Glyph = glyph },
-               new Physical()
-               );
+            return new SaveState
+            {
+                Entities = new List<string>(),
+                Maps = new List<string>(),
+                Messages = new List<string>(),
+                Seed = null,
+                Time = 0
+            };
         }
     }
 }

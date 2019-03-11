@@ -79,6 +79,7 @@
     <Compile Include="EntityEngineSystem\EntityEngineTests.cs" />
     <Compile Include="Systems\EquipmentSystemTests.cs" />
     <Compile Include="Systems\ItemSystemTests.cs" />
+    <Compile Include="Systems\SaveStateSerializerTests.cs" />
     <Compile Include="Systems\SaveSystemTests.cs" />
     <Compile Include="Systems\ScriptExecutorTests.cs" />
     <Compile Include="Systems\SkillSystemTests.cs" />
@@ -142,9 +143,5 @@
     <Error Condition="!Exists('..\packages\KeraLua.1.0.4\build\net45\KeraLua.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\KeraLua.1.0.4\build\net45\KeraLua.targets'))" />
   </Target>
   <Import Project="..\packages\MSTest.TestAdapter.1.2.1\build\net45\MSTest.TestAdapter.targets" Condition="Exists('..\packages\MSTest.TestAdapter.1.2.1\build\net45\MSTest.TestAdapter.targets')" />
-  <PropertyGroup>
-    <PostBuildEvent>
-xcopy /s /y "C:\Users\Lex\source\repos\fortyCakes\data-rogue\packages\NLua.1.3.2.1\lib\native\*.*" "$(TargetDir)"</PostBuildEvent>
-  </PropertyGroup>
   <Import Project="..\packages\KeraLua.1.0.4\build\net45\KeraLua.targets" Condition="Exists('..\packages\KeraLua.1.0.4\build\net45\KeraLua.targets')" />
 </Project>

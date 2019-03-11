@@ -18,7 +18,7 @@ namespace data_rogue_core.Menus.DynamicMenus
 
         public override List<MenuAction> AvailableActions { get; set; } = new List<MenuAction> { MenuAction.Use, MenuAction.Drop, MenuAction.Equip };
 
-        public InventoryMenu(ISystemContainer systemContainer, Inventory inventory) : base("Inventory", GetCallback(systemContainer), GetInventoryMenuItems(systemContainer, inventory))
+        public InventoryMenu(ISystemContainer systemContainer, Inventory inventory) : base(systemContainer.ActivitySystem, "Inventory", GetCallback(systemContainer), GetInventoryMenuItems(systemContainer, inventory))
         {
             this.systemContainer = systemContainer;
             this.SelectedAction = MenuAction.Use;

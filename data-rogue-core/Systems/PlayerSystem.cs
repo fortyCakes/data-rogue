@@ -25,10 +25,5 @@ namespace data_rogue_core.Systems
         {
             return sender == Player;
         }
-
-        public void StartCharacterCreation()
-        {
-            _activitySystem.Push(CharacterCreationForm.GetCharacterCreationActivity());
-        }
     }
 }

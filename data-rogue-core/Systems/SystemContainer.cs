@@ -43,6 +43,8 @@ namespace data_rogue_core.Systems
             PlayerSystem = new PlayerSystem(ActivitySystem);
             MapSystem = new MapSystem();
 
+            RendererSystem = new RendererSystem(PlayerSystem);
+
             EntityEngine = new EntityEngine(new DataStaticEntityLoader());
 
             EventSystem = new EventSystem.EventSystem();
@@ -74,11 +76,10 @@ namespace data_rogue_core.Systems
 
             Seed = rngSeed;
 
-            TargetingSystem = new TargetingSystem(this);
 
             EquipmentSystem = new EquipmentSystem(this);
 
-            RendererSystem = new RendererSystem(PlayerSystem);
+            TargetingSystem = new TargetingSystem(this);
 
             SaveSystem = new SaveSystem(this);
 

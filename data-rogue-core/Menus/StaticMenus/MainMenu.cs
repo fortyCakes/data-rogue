@@ -37,7 +37,7 @@ namespace data_rogue_core.Menus.StaticMenus
                     break;
                 case "New Game":
                     _activitySystem.Pop();
-                    _playerSystem.StartCharacterCreation();
+                    StartCharacterCreation();
                     break;
                 case "Load Game":
                     _activitySystem.Pop();
@@ -45,6 +45,11 @@ namespace data_rogue_core.Menus.StaticMenus
                     break;
 
             }
+        }
+
+        private void StartCharacterCreation()
+        {
+            _activitySystem.Push(CharacterCreationForm.GetCharacterCreationActivity(_activitySystem, _rendererSystem, _saveSystem, _playerSystem));
         }
     }
 }

@@ -15,14 +15,15 @@ namespace data_rogue_core.Menus.DynamicMenus
 {
     public class EquipmentMenu : Menu
     {
-        private ISystemContainer systemContainer;
+        private ISystemContainer _systemContainer;
 
         public override List<MenuAction> AvailableActions { get; set; } = new List<MenuAction> { MenuAction.Unequip };
 
-        public EquipmentMenu(ISystemContainer systemContainer, IEntity equippedEntity) : base("Equipment", GetCallback(systemContainer), GetEquipmentMenuItems(systemContainer, equippedEntity))
+        public EquipmentMenu(ISystemContainer systemContainer, IEntity equippedEntity) : base(systemContainer.ActivitySystem, "Equipment", null, GetEquipmentMenuItems(systemContainer, equippedEntity))
         {
-            this.systemContainer = systemContainer;
-            this.SelectedAction = MenuAction.Unequip;
+            _systemContainer = systemContainer;
+            SelectedAction = MenuAction.Unequip;
+            OnSelectCallback += DoEquipmentStuff;
         }
 
         private static MenuItem[] GetEquipmentMenuItems(ISystemContainer systemContainer, IEntity equippedEntity)
@@ -51,31 +52,26 @@ namespace data_rogue_core.Menus.DynamicMenus
             return equipmentString + indexString;
         }
 
-        private static MenuItemSelected GetCallback(ISystemContainer systemContainer)
-        {
-            return (item, action) => DoEquipmentStuff(systemContainer, item, action);
-        }
-
-        private static void DoEquipmentStuff(ISystemContainer systemContainer, MenuItem selectedItem, MenuAction selectedAction)
+        private void DoEquipmentStuff(MenuItem selectedItem, MenuAction selectedAction)
         {
             if (selectedItem.Text == "Cancel")
             {
-                systemContainer.ActivitySystem.Pop();
+                _systemContainer.ActivitySystem.Pop();
                 return;
             }
 
-            var item = systemContainer.EntityEngine.GetEntity((uint)selectedItem.Value);
+            var item = _systemContainer.EntityEngine.GetEntity((uint)selectedItem.Value);
 
             switch (selectedAction)
             {
                 case MenuAction.Unequip:
-                    var done = systemContainer.EquipmentSystem.Unequip(systemContainer.PlayerSystem.Player, item);
+                    var done = _systemContainer.EquipmentSystem.Unequip(_systemContainer.PlayerSystem.Player, item);
 
                     if (done)
                     {
-                        SpendATurn(systemContainer);
-                        systemContainer.ActivitySystem.Pop();
-                        systemContainer.MessageSystem.Write($"You unequip the {item.DescriptionName}.");
+                        SpendATurn();
+                        _systemContainer.ActivitySystem.Pop();
+                        _systemContainer.MessageSystem.Write($"You unequip the {item.DescriptionName}.");
                     }
 
                     break;
@@ -84,9 +80,9 @@ namespace data_rogue_core.Menus.DynamicMenus
             }
         }
 
-        private static void SpendATurn(ISystemContainer systemContainer)
+        private void SpendATurn()
         {
-            systemContainer.EventSystem.Try(EventType.SpendTime, systemContainer.PlayerSystem.Player, new SpendTimeEventData { Ticks = 1000 });
+            _systemContainer.EventSystem.Try(EventType.SpendTime, _systemContainer.PlayerSystem.Player, new SpendTimeEventData { Ticks = 1000 });
         }
     }
 }

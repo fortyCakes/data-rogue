@@ -47,6 +47,12 @@ namespace data_rogue_core.EntityEngineSystem
 
         public void Deserialize(string value)
         {
+            if (string.IsNullOrEmpty(value))
+            {
+                _internalList = new List<uint>();
+                return;
+            }
+
             var splits = value.Split(',');
 
             _internalList = new List<uint>(splits.Select(s => uint.Parse(s)));

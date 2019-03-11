@@ -5,7 +5,10 @@ using System.IO;
 using System.Reflection;
 using data_rogue_core.Data;
 using System;
+using System.Drawing;
+using System.Linq;
 using data_rogue_core.Forms.StaticForms;
+using data_rogue_core.Systems;
 
 namespace data_rogue_core
 {
@@ -69,6 +72,13 @@ namespace data_rogue_core
             var directoryName = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Saves");
             var fileName = Path.Combine(directoryName, "saveFile.sav");
 
+            Save(fileName);
+        }
+
+        public void Save(string fileName)
+        {
+            var directoryName = Path.GetDirectoryName(fileName);
+
             if (!Directory.Exists(directoryName))
             {
                 Directory.CreateDirectory(directoryName);
@@ -77,17 +87,19 @@ namespace data_rogue_core
             var saveState = GetSaveState();
 
             File.WriteAllText(fileName, SaveStateSerializer.Serialize(saveState));
+
+            _systemContainer.MessageSystem.Write("Saved!", Color.Blue);
         }
 
-        private SaveState GetSaveState()
+        public SaveState GetSaveState()
         {
-            //return new SaveState
-            //{
-            //    Entities = EntityEngineSystem.MutableEntities.Select(e => EntitySerializer.Serialize(e)).ToList(),
-            //    Maps = mapSystem.MapCollection.AllMaps.Select(m => MapSerializer.Serialize(m)).ToList(),
-            //    Time = TimeSystem.CurrentTime,
-            //    Messages = MessageSystem.AllMessages.Select(m => MessageSerializer.Serialize(m)).ToList()
-            //};
+            return new SaveState
+            {
+                Entities = _systemContainer.EntityEngine.MutableEntities.Select(e => EntitySerializer.Serialize(e)).ToList(),
+                Maps = _systemContainer.MapSystem.MapCollection.AllMaps.Select(m => MapSerializer.Serialize(m)).ToList(),
+                Time = _systemContainer.TimeSystem.CurrentTime,
+                Messages = _systemContainer.MessageSystem.AllMessages.Select(m => MessageSerializer.Serialize(m)).ToList()
+            };
         }
     }
 }
