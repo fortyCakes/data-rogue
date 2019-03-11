@@ -8,15 +8,15 @@ namespace data_rogue_core.EventSystem.Rules
 {
     class GetBaseStatRule : IEventRule
     {
+        private readonly IPlayerSystem _playerSystem;
+
         public GetBaseStatRule(ISystemContainer systemContainer)
         {
-            EntityEngine = systemContainer.EntityEngine;
+            _playerSystem = systemContainer.PlayerSystem;
         }
 
         public EventTypeList EventTypes => new EventTypeList{ EventType.GetStat };
         public int RuleOrder => int.MaxValue;
-
-        private IEntityEngine EntityEngine { get; }
 
         public bool Apply(EventType type, IEntity sender, object eventData)
         {
@@ -37,7 +37,7 @@ namespace data_rogue_core.EventSystem.Rules
                     data.Value = sender.Get<Fighter>().Intellect;
                     break;
                 case Stat.Tension:
-                    if (sender != Game.WorldState.Player)
+                    if (sender != _playerSystem.Player)
                     {
                         throw new ApplicationException("Only the Player can check tension.");
                     }

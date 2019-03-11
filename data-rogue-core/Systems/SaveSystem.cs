@@ -4,6 +4,7 @@ using data_rogue_core.Systems.Interfaces;
 using System.IO;
 using System.Reflection;
 using data_rogue_core.Data;
+using System;
 
 namespace data_rogue_core
 {
@@ -22,6 +23,8 @@ namespace data_rogue_core
 
             var world = new WorldState(systemContainer);
 
+            systemContainer.MapSystem.Initialise();
+
             systemContainer.EntityEngine.Initialise(systemContainer);
 
             foreach (var savedEntity in loadedState.Entities)
@@ -29,7 +32,7 @@ namespace data_rogue_core
                 var entity = EntitySerializer.Deserialize(systemContainer, savedEntity);
                 if (entity.Name == "Player")
                 {
-                    world.Player = entity;
+                    systemContainer.PlayerSystem.Player = entity;
                 }
             }
 
@@ -37,7 +40,7 @@ namespace data_rogue_core
             {
                 var map = MapSerializer.Deserialize(systemContainer, savedMap);
 
-                world.Maps.Add(map.MapKey, map);
+                systemContainer.MapSystem.MapCollection.Add(map.MapKey, map);
             }
 
             systemContainer.MessageSystem.Initialise();
@@ -52,7 +55,7 @@ namespace data_rogue_core
             return world;
         }
 
-        public static void Save(WorldState world)
+        public static void Save()
         {
             var directoryName = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Saves");
             var fileName = Path.Combine(directoryName, "saveFile.sav");
@@ -62,9 +65,14 @@ namespace data_rogue_core
                 Directory.CreateDirectory(directoryName);
             }
 
-            var saveState = world.GetSaveState();
+            var saveState = GetSaveState();
 
             File.WriteAllText(fileName, SaveStateSerializer.Serialize(saveState));
+        }
+
+        private static SaveState GetSaveState()
+        {
+            throw new NotImplementedException();
         }
     }
 }

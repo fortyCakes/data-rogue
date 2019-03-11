@@ -13,15 +13,19 @@ namespace data_rogue_core.EventSystem.Rules
     {
         public EnemiesInViewAddTensionRule(ISystemContainer systemContainer)
         {
-            EntityEngine = systemContainer.EntityEngine;
-            PositionSystem = systemContainer.PositionSystem;
+            _positionSystem = systemContainer.PositionSystem;
+            _mapSystem = systemContainer.MapSystem;
+            _playerSystem = systemContainer.PlayerSystem;
+            _rendererSystem = systemContainer.RendererSystem;
         }
 
         public EventTypeList EventTypes => new EventTypeList{ EventType.GetStat };
         public int RuleOrder => 100;
-
-        private IEntityEngine EntityEngine { get; }
-        public IPositionSystem PositionSystem { get; }
+        
+        private readonly IPositionSystem _positionSystem;
+        private readonly IMapSystem _mapSystem;
+        private readonly IPlayerSystem _playerSystem;
+        private readonly IRendererSystem _rendererSystem;
 
         public bool Apply(EventType type, IEntity sender, object eventData)
         {
@@ -43,15 +47,14 @@ namespace data_rogue_core.EventSystem.Rules
 
         private IEnumerable<IEntity> GetEnemiesInFov()
         {
-            var world = Game.WorldState;
-            var currentMap = world.Maps[world.CameraPosition.Key];
+            var currentMap = _mapSystem.MapCollection[_rendererSystem.CameraPosition.Key];
 
-            MapCoordinate playerPosition = world.Player.Get<Position>().MapCoordinate;
+            MapCoordinate playerPosition = _playerSystem.Player.Get<Position>().MapCoordinate;
             var playerFov = currentMap.FovFrom(playerPosition, 9);
 
             foreach(MapCoordinate coord in playerFov)
             {
-                var entities = PositionSystem.EntitiesAt(coord);
+                var entities = _positionSystem.EntitiesAt(coord);
 
                 foreach(var entity in entities)
                 {
@@ -63,9 +66,9 @@ namespace data_rogue_core.EventSystem.Rules
             }
         }
 
-        private static bool IsEnemy(IEntity entity)
+        private bool IsEnemy(IEntity entity)
         {
-            return entity.Has<Actor>() && entity != Game.WorldState.Player;
+            return entity.Has<Actor>() && entity != _playerSystem.Player;
         }
     }
 }

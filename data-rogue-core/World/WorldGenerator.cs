@@ -15,6 +15,8 @@ namespace data_rogue_core
         {
             systemContainer.MessageSystem.Initialise();
 
+            systemContainer.MapSystem.Initialise();
+
             systemContainer.EntityEngine.Initialise(systemContainer);
 
             var world = new WorldState(systemContainer);
@@ -35,7 +37,7 @@ namespace data_rogue_core
 
             GenerateBranch(systemContainer, world, initialBranchEntity);
 
-            var initialMap = world.Maps[new MapKey($"{initialBranchEntity.Get<Branch>().BranchName}:1")];
+            var initialMap = systemContainer.MapSystem.MapCollection[new MapKey($"{initialBranchEntity.Get<Branch>().BranchName}:1")];
 
             return GetSpawnPoint(initialMap);
         }
@@ -60,7 +62,7 @@ namespace data_rogue_core
 
             foreach (Map map in branch.Maps)
             {
-                world.Maps.AddMap(map);
+                systemContainer.MapSystem.MapCollection.AddMap(map);
             }
         }
 
@@ -77,7 +79,7 @@ namespace data_rogue_core
             fighter.Intellect = form.Intellect;
             fighter.Willpower = form.Willpower;
 
-            world.Player = player;
+            systemContainer.PlayerSystem.Player = player;
         }
     }
 }

@@ -15,14 +15,16 @@ namespace data_rogue_core.Systems
     class TimeSystem : BaseSystem, ITimeSystem
     {
         private MapKey ActiveMapKey;
+        private readonly IPlayerSystem _playerSystem;
 
         public IBehaviourFactory BehaviourFactory { get; }
         public IEventSystem EventSystem { get; }
 
-        public TimeSystem(IBehaviourFactory behaviourFactory, IEventSystem eventSystem)
+        public TimeSystem(IBehaviourFactory behaviourFactory, IEventSystem eventSystem, IPlayerSystem playerSystem)
         {
             BehaviourFactory = behaviourFactory;
             EventSystem = eventSystem;
+            _playerSystem = playerSystem;
         }
 
         public new void Initialise()
@@ -44,7 +46,7 @@ namespace data_rogue_core.Systems
         {
             CurrentTime++;
 
-            ActiveMapKey = Game.WorldState.Player.Get<Position>().MapCoordinate.Key;
+            ActiveMapKey = _playerSystem.Player.Get<Position>().MapCoordinate.Key;
 
             if (Entities != null)
             {

@@ -44,7 +44,7 @@ namespace data_rogue_core.Systems
                         if (keyPress.Shift)
                         {
                             Save();
-                            Game.ActivityStack.Push(new StaticTextActivity("Saved", Game.RendererFactory));
+                            systemContainer.ActivitySystem.Push(new StaticTextActivity("Saved", systemContainer.RendererSystem.RendererFactory));
                         }
                         else
                         {
@@ -106,7 +106,7 @@ namespace data_rogue_core.Systems
                         }
                         break;
                     case RLKey.Escape:
-                        Game.ActivityStack.Push(new MenuActivity(new MainMenu(), Game.RendererFactory));
+                        systemContainer.ActivitySystem.Push(new MenuActivity(new MainMenu(systemContainer.ActivitySystem), systemContainer.RendererSystem.RendererFactory));
                         break;
                     case RLKey.Period:
                         if (keyPress.Shift)
@@ -180,22 +180,22 @@ namespace data_rogue_core.Systems
 
         private void ShowEquipment()
         {
-            IEntity player = Game.WorldState.Player;
+            IEntity player = systemContainer.PlayerSystem.Player;
 
-            Game.ActivityStack.Push(new MenuActivity(new EquipmentMenu(systemContainer, player), Game.RendererFactory));
+            systemContainer.ActivitySystem.Push(new MenuActivity(new EquipmentMenu(systemContainer, player), systemContainer.RendererSystem.RendererFactory));
         }
 
         private void ShowInventory()
         {
-            IEntity player = Game.WorldState.Player;
+            IEntity player = systemContainer.PlayerSystem.Player;
             var inventory = player.Get<Inventory>();
 
-            Game.ActivityStack.Push(new MenuActivity(new InventoryMenu(systemContainer, inventory), Game.RendererFactory));
+            systemContainer.ActivitySystem.Push(new MenuActivity(new InventoryMenu(systemContainer, inventory), systemContainer.RendererSystem.RendererFactory));
         }
 
         private void GetItem()
         {
-            IEntity player = Game.WorldState.Player;
+            IEntity player = systemContainer.PlayerSystem.Player;
             var playerMapCoordinate = player.Get<Position>().MapCoordinate;
 
             var items = systemContainer.PositionSystem.EntitiesAt(playerMapCoordinate)
@@ -249,7 +249,7 @@ namespace data_rogue_core.Systems
 
         private void BeginRest()
         {
-            IEntity player = Game.WorldState.Player;
+            IEntity player = systemContainer.PlayerSystem.Player;
 
             player.Get<PlayerRestBehaviour>().Resting = true;
             Wait(1000);
@@ -257,7 +257,7 @@ namespace data_rogue_core.Systems
 
         private void UseSkill(int index)
         {
-            IEntity player = Game.WorldState.Player;
+            IEntity player = systemContainer.PlayerSystem.Player;
 
             var skill = systemContainer.SkillSystem.GetKnownSkillByIndex(player, index);
 
@@ -274,12 +274,12 @@ namespace data_rogue_core.Systems
 
         private void Wait(int ticks)
         {
-            systemContainer.EventSystem.Try(EventType.SpendTime, Game.WorldState.Player, new SpendTimeEventData{Ticks = ticks});
+            systemContainer.EventSystem.Try(EventType.SpendTime, systemContainer.PlayerSystem.Player, new SpendTimeEventData{Ticks = ticks});
         }
 
         private void UseStairs(StairDirection direction)
         {
-            IEntity player = Game.WorldState.Player;
+            IEntity player = systemContainer.PlayerSystem.Player;
             var playerMapCoordinate = player.Get<Position>().MapCoordinate;
 
             var stairs = systemContainer.PositionSystem
@@ -315,12 +315,12 @@ namespace data_rogue_core.Systems
 
         private void DebugChangeFloor(int change)
         {
-            var playerMapCoordinate = Game.WorldState.Player.Get<Position>().MapCoordinate;
+            var playerMapCoordinate = systemContainer.PlayerSystem.Player.Get<Position>().MapCoordinate;
 
             var match = Regex.Match(playerMapCoordinate.Key.Key, "^(.*):([0-9]*)$");
 
             string newMap = $"{match.Groups[1].Value}:{int.Parse(match.Groups[2].Value) + change}";
-            if (Game.WorldState.Maps.Any(m => m.Key.Key == newMap))
+            if (systemContainer.MapSystem.MapCollection.Any(m => m.Key.Key == newMap))
             {
                 playerMapCoordinate.Key = new MapKey(newMap);
             }
@@ -328,12 +328,12 @@ namespace data_rogue_core.Systems
 
         private void Save()
         {
-            SaveSystem.Save(Game.WorldState);
+            SaveSystem.Save();
         }
 
         private void MovePlayer(int x, int y)
         {
-            var player = Game.WorldState.Player;
+            var player = systemContainer.PlayerSystem.Player;
             var vector = new Vector(x, y);
 
             systemContainer.EventSystem.Try(EventType.Move, player, vector);
@@ -344,11 +344,11 @@ namespace data_rogue_core.Systems
             var x = mouse.X;
             var y = mouse.Y;
 
-            if (Game.ActivityStack.Peek() is GameplayActivity activity)
+            if (systemContainer.ActivitySystem.Peek() is GameplayActivity activity)
             {
-                var gameplayRenderer = Game.RendererFactory.GetRendererFor(ActivityType.Gameplay) as IGameplayRenderer;
+                var gameplayRenderer = systemContainer.RendererSystem.RendererFactory.GetRendererFor(ActivityType.Gameplay) as IGameplayRenderer;
 
-                var hoveredLocation = gameplayRenderer.GetMapCoordinateFromMousePosition(Game.WorldState, x, y);
+                var hoveredLocation = gameplayRenderer.GetMapCoordinateFromMousePosition(systemContainer.RendererSystem.CameraPosition, x, y);
 
                 SetHoveredLocation(hoveredLocation);
             }

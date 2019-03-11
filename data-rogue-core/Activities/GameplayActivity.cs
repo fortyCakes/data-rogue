@@ -1,4 +1,5 @@
 ﻿using data_rogue_core.Renderers;
+using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.Activities
 {
@@ -14,9 +15,10 @@ namespace data_rogue_core.Activities
         {
             Renderer = (IGameplayRenderer)rendererFactory.GetRendererFor(Type);
         }
-        public void Render()
+
+        public void Render(ISystemContainer systemContainer)
         {
-            Renderer.Render(Game.WorldState, Game.SystemContainer);
+            Renderer.Render(systemContainer);
         }
     }
 }

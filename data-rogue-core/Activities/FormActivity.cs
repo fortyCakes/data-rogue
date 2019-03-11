@@ -2,6 +2,7 @@
 using data_rogue_core.Renderers;
 using data_rogue_core.Forms;
 using data_rogue_core.Renderers.ConsoleRenderers;
+using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.Activities
 {
@@ -20,7 +21,7 @@ namespace data_rogue_core.Activities
             Renderer = (IFormRenderer)rendererFactory.GetRendererFor(Type);
         }
         
-        public void Render()
+        public void Render(ISystemContainer systemContainer)
         {
             Renderer.Render(Form);
         }

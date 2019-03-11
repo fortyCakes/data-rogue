@@ -1,12 +1,15 @@
 ﻿using data_rogue_core.Activities;
+using data_rogue_core.Systems.Interfaces;
+using System;
 
 namespace data_rogue_core.Menus.StaticMenus
 {
     public class MainMenu : Menu
     {
-        public MainMenu() : base(
+        public MainMenu(IActivitySystem activitySystem) : base(
+            activitySystem,
             "Main Menu", 
-            HandleMainMenuSelection, 
+            HandleMainMenuSelection,
             new MenuItem("New Game"),
             new MenuItem("Load Game"),
             new MenuItem("Quit"))
@@ -14,20 +17,25 @@ namespace data_rogue_core.Menus.StaticMenus
 
         }
 
-        public static void HandleMainMenuSelection(MenuItem item, MenuAction menuAction)
+        public static MenuItemSelected CallSelectionHandler(IActivitySystem activitySystem)
+        {
+            return (MenuItem item, MenuAction menuAction) => HandleMainMenuSelection(activitySystem, item, menuAction);
+        }
+
+        public static void HandleMainMenuSelection(IActivitySystem activitySystem, MenuItem item, MenuAction menuAction)
         {
             switch(item.Text)
             {
                 case "Quit":
-                    Game.ActivityStack.Pop();
+                    activitySystem.Pop();
                     Game.Quit();
                     break;
                 case "New Game":
-                    Game.ActivityStack.Pop();
+                    activitySystem.Pop();
                     Game.CreateCharacter();
                     break;
                 case "Load Game":
-                    Game.ActivityStack.Pop();
+                    activitySystem.Pop();
                     Game.LoadGame();
                     break;
 

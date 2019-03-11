@@ -25,6 +25,10 @@ namespace data_rogue_core.Systems
         public ITargetingSystem TargetingSystem { get; set; }
         public IItemSystem ItemSystem { get; set; }
         public IEquipmentSystem EquipmentSystem { get; set; }
+        public IPlayerSystem PlayerSystem { get; set; }
+        public IActivitySystem ActivitySystem { get; set; }
+        public IMapSystem MapSystem { get; set; }
+        public IRendererSystem RendererSystem { get; set; }
 
         public string Seed { get; set; }
 
@@ -33,17 +37,21 @@ namespace data_rogue_core.Systems
             ScriptExecutor = new ScriptExecutor(this);
 
             MessageSystem = new MessageSystem();
+            PlayerSystem = new PlayerSystem();
+            MapSystem = new MapSystem();
+            ActivitySystem = new ActivitySystem();
 
             EntityEngine = new EntityEngine(new DataStaticEntityLoader());
 
             EventSystem = new EventSystem.EventSystem();
 
-            PositionSystem = new PositionSystem();
+
+            PositionSystem = new PositionSystem(MapSystem);
             EntityEngine.Register(PositionSystem);
 
             Random = new RNG(rngSeed);
 
-            TimeSystem = new TimeSystem(BehaviourFactory, EventSystem);
+            TimeSystem = new TimeSystem(BehaviourFactory, EventSystem, PlayerSystem);
             EntityEngine.Register(TimeSystem);
 
             FighterSystem = new FighterSystem(EntityEngine, MessageSystem, EventSystem, TimeSystem);
@@ -64,9 +72,11 @@ namespace data_rogue_core.Systems
 
             Seed = rngSeed;
 
-            TargetingSystem = new TargetingSystem(PositionSystem);
+            TargetingSystem = new TargetingSystem(this);
 
             EquipmentSystem = new EquipmentSystem(this);
+
+            RendererSystem = new RendererSystem(PlayerSystem);
 
             Verify();
         }
@@ -91,6 +101,8 @@ namespace data_rogue_core.Systems
             Check(TargetingSystem, "TargetingSystem", msg, ref valid);
             Check(ItemSystem, "ItemSystem", msg, ref valid);
             Check(EquipmentSystem, "EquipmentSystem", msg, ref valid);
+            Check(ActivitySystem, "ActivitySystem", msg, ref valid);
+            Check(PlayerSystem, "PlayerSystem", msg, ref valid);
 
             if (!valid)
                 throw new ContainerNotValidException(msg.ToString());

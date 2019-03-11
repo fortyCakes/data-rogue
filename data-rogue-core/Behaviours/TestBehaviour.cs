@@ -4,6 +4,7 @@ using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.EventSystem;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems;
+using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.Behaviours
 {
@@ -11,26 +12,30 @@ namespace data_rogue_core.Behaviours
     {
         public string Memory;
 
-        private readonly IPositionSystem positionSystem;
-        private readonly IEventSystem eventRuleSystem;
+        private readonly IPositionSystem _positionSystem;
+        private readonly IEventSystem _eventRuleSystem;
+        private readonly IPlayerSystem _playerSystem;
+        private readonly IMapSystem _mapSystem;
 
-        public TestBehaviour(IPositionSystem positionSystem, IEventSystem eventRuleSystem)
+        public TestBehaviour(IPositionSystem positionSystem, IEventSystem eventRuleSystem, IPlayerSystem playerSystem, IMapSystem mapSystem)
         {
-            this.positionSystem = positionSystem;
-            this.eventRuleSystem = eventRuleSystem;
+            _positionSystem = positionSystem;
+            _eventRuleSystem = eventRuleSystem;
+            _playerSystem = playerSystem;
+            _mapSystem = mapSystem;
         }
 
         public override BehaviourResult Act(IEntity entity)
         {
             var position = entity.Get<Position>().MapCoordinate;
-            var playerPosition = positionSystem.PositionOf(Game.WorldState.Player);
+            var playerPosition = _positionSystem.PositionOf(_playerSystem.Player);
 
-            var monsterFov = Game.WorldState.Maps[position.Key].FovFrom(position, 9);
+            var monsterFov = _mapSystem.MapCollection[position.Key].FovFrom(position, 9);
 
             if (monsterFov.Contains(playerPosition))
             {
 
-                var path = positionSystem.Path(position, playerPosition);
+                var path = _positionSystem.Path(position, playerPosition);
 
                 if (path != null)
                 {
@@ -42,7 +47,7 @@ namespace data_rogue_core.Behaviours
                     if (targetPosition.Y > position.Y) vector.Y = 1;
                     if (targetPosition.Y < position.Y) vector.Y = -1;
 
-                    eventRuleSystem.Try(EventType.Move, entity, vector);
+                    _eventRuleSystem.Try(EventType.Move, entity, vector);
                 }
 
                 return new BehaviourResult();

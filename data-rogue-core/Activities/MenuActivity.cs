@@ -1,5 +1,6 @@
 ﻿using data_rogue_core.Menus;
 using data_rogue_core.Renderers;
+using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.Activities
 {
@@ -18,7 +19,7 @@ namespace data_rogue_core.Activities
 
         public IMenuRenderer Renderer { get; set; }
 
-        public void Render()
+        public void Render(ISystemContainer systemContainer)
         {
             Renderer.Render(Menu);
         }

@@ -47,7 +47,7 @@ namespace data_rogue_core.Menus.DynamicMenus
         {
             if (selectedItem.Text == "Cancel")
             {
-                Game.ActivityStack.Pop();
+                systemContainer.ActivitySystem.Pop();
                 return;
             }
 
@@ -57,32 +57,32 @@ namespace data_rogue_core.Menus.DynamicMenus
             {
                 case MenuAction.Drop:
                     
-                    if (systemContainer.EventSystem.Try(EventType.DropItem, Game.WorldState.Player, new DropItemEventData { Item = item }))
+                    if (systemContainer.EventSystem.Try(EventType.DropItem, systemContainer.PlayerSystem.Player, new DropItemEventData { Item = item }))
                     {
                         systemContainer.ItemSystem.DropItemFromInventory(item);
                         systemContainer.MessageSystem.Write($"You drop the {item.Get<Description>().Name}.");
                         SpendATurn(systemContainer);
                     }
 
-                    Game.ActivityStack.Pop();
+                    systemContainer.ActivitySystem.Pop();
                     break;
                 case MenuAction.Use:
-                    if (systemContainer.EventSystem.Try(EventType.UseItem, Game.WorldState.Player, new DropItemEventData {Item = item}))
+                    if (systemContainer.EventSystem.Try(EventType.UseItem, systemContainer.PlayerSystem.Player, new DropItemEventData {Item = item}))
                     {
-                        systemContainer.ItemSystem.Use(Game.WorldState.Player, item);
+                        systemContainer.ItemSystem.Use(systemContainer.PlayerSystem.Player, item);
                     }
 
-                    Game.ActivityStack.Pop();
+                    systemContainer.ActivitySystem.Pop();
                     break;
                 case MenuAction.Equip:
                     if (item.Has<Equipment>())
                     {
-                        var done = systemContainer.EquipmentSystem.Equip(Game.WorldState.Player, item);
+                        var done = systemContainer.EquipmentSystem.Equip(systemContainer.PlayerSystem.Player, item);
 
                         if (done)
                         {
                             SpendATurn(systemContainer);
-                            Game.ActivityStack.Pop();
+                            systemContainer.ActivitySystem.Pop();
                             systemContainer.MessageSystem.Write($"You equip the {item.DescriptionName}.");
                         }
                     }
@@ -95,7 +95,7 @@ namespace data_rogue_core.Menus.DynamicMenus
 
         private static void SpendATurn(ISystemContainer systemContainer)
         {
-            systemContainer.EventSystem.Try(EventType.SpendTime, Game.WorldState.Player, new SpendTimeEventData { Ticks = 1000 });
+            systemContainer.EventSystem.Try(EventType.SpendTime, systemContainer.PlayerSystem.Player, new SpendTimeEventData { Ticks = 1000 });
         }
     }
 }

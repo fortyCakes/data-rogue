@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using data_rogue_core.Systems.Interfaces;
 using RLNET;
 
 namespace data_rogue_core.Menus
@@ -14,18 +15,20 @@ namespace data_rogue_core.Menus
         public delegate void MenuItemSelected(MenuItem selectedItem, MenuAction selectedAction);
 
         private MenuItemSelected OnSelectCallback;
+        protected readonly IActivitySystem _activitySystem;
 
         public MenuItem SelectedItem { get; protected set; }
         public MenuAction SelectedAction { get; protected set; }
 
         public int SelectedIndex => MenuItems.IndexOf(SelectedItem);
 
-        public Menu(string menuName, MenuItemSelected onSelectCallback, params MenuItem[] items)
+        public Menu(IActivitySystem activitySystem , string menuName, MenuItemSelected onSelectCallback, params MenuItem[] items)
         {
             MenuItems = new List<MenuItem>(items);
             MenuName = menuName;
             OnSelectCallback = onSelectCallback;
             SelectedItem = MenuItems.FirstOrDefault();
+            _activitySystem = activitySystem;
         }
         public virtual void HandleKeyPress(RLKeyPress keyPress)
         {

@@ -60,7 +60,7 @@ namespace data_rogue_core.Menus.DynamicMenus
         {
             if (selectedItem.Text == "Cancel")
             {
-                Game.ActivityStack.Pop();
+                systemContainer.ActivitySystem.Pop();
                 return;
             }
 
@@ -69,12 +69,12 @@ namespace data_rogue_core.Menus.DynamicMenus
             switch (selectedAction)
             {
                 case MenuAction.Unequip:
-                    var done = systemContainer.EquipmentSystem.Unequip(Game.WorldState.Player, item);
+                    var done = systemContainer.EquipmentSystem.Unequip(systemContainer.PlayerSystem.Player, item);
 
                     if (done)
                     {
                         SpendATurn(systemContainer);
-                        Game.ActivityStack.Pop();
+                        systemContainer.ActivitySystem.Pop();
                         systemContainer.MessageSystem.Write($"You unequip the {item.DescriptionName}.");
                     }
 
@@ -86,7 +86,7 @@ namespace data_rogue_core.Menus.DynamicMenus
 
         private static void SpendATurn(ISystemContainer systemContainer)
         {
-            systemContainer.EventSystem.Try(EventType.SpendTime, Game.WorldState.Player, new SpendTimeEventData { Ticks = 1000 });
+            systemContainer.EventSystem.Try(EventType.SpendTime, systemContainer.PlayerSystem.Player, new SpendTimeEventData { Ticks = 1000 });
         }
     }
 }
