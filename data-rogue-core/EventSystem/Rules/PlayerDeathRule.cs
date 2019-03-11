@@ -7,32 +7,31 @@ namespace data_rogue_core.EventSystem.Rules
 {
     class PlayerDeathRule : IEventRule
     {
+
         public PlayerDeathRule(ISystemContainer systemContainer)
         {
-            EntityEngine = systemContainer.EntityEngine;
-            MessageSystem = systemContainer.MessageSystem;
+            this.systemContainer = systemContainer;
         }
 
         public EventTypeList EventTypes => new EventTypeList{ EventType.Death };
         public int RuleOrder => 0;
 
-        private IEntityEngine EntityEngine { get; }
-        public IMessageSystem MessageSystem { get; }
+        private readonly ISystemContainer systemContainer;
 
         public bool Apply(EventType type, IEntity sender, object eventData)
         {
-            if (IsPlayer(sender))
+            if (systemContainer.PlayerSystem.IsPlayer(sender))
             {
-                Game.ActivityStack.Push(new MenuActivity(new MainMenu(), Game.RendererFactory));
-                Game.ActivityStack.Push(new DeathScreenActivity(Game.RendererFactory));
+                systemContainer.ActivitySystem.Push(new MenuActivity(new MainMenu(
+                        systemContainer.ActivitySystem,
+                        systemContainer.PlayerSystem,
+                        systemContainer.SaveSystem,
+                        systemContainer.RendererSystem
+                    ), systemContainer.RendererSystem.RendererFactory));
+                systemContainer.ActivitySystem.Push(new DeathScreenActivity(systemContainer.RendererSystem.RendererFactory, systemContainer));
             }
 
             return true;
-        }
-
-        private static bool IsPlayer(IEntity sender)
-        {
-            return sender == Game.WorldState.Player;
         }
     }
 }

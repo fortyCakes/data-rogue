@@ -2,7 +2,23 @@
 [Description]
 Name: Leather Armour
 [Prototype]
-Name: Item:LeatherArmour
+Name: Item:LeatherArmourChest
+Singleton: false
+[Appearance]
+Glyph: (
+Color: #6B4D46
+[Position]
+[Item]
+Power: 8
+ItemLevel: 1
+[Equipment]
+EquipmentSlot: Chest
+
+"Leather Chaps"
+[Description]
+Name: Leather Chaps
+[Prototype]
+Name: Item:LeatherArmourLegs
 Singleton: false
 [Appearance]
 Glyph: (
@@ -12,4 +28,52 @@ Color: #6B4D46
 Power: 5
 ItemLevel: 1
 [Equipment]
-EquipmentSlot: Chest
+EquipmentSlot: Legs
+
+"Leather Helmet"
+[Description]
+Name: Leather Helmet
+[Prototype]
+Name: Item:LeatherArmourHead
+Singleton: false
+[Appearance]
+Glyph: (
+Color: #6B4D46
+[Position]
+[Item]
+Power: 5
+ItemLevel: 1
+[Equipment]
+EquipmentSlot: Head
+
+"Leather Gloves"
+[Description]
+Name: Leather Gloves
+[Prototype]
+Name: Item:LeatherArmourGloves
+Singleton: false
+[Appearance]
+Glyph: (
+Color: #6B4D46
+[Position]
+[Item]
+Power: 3
+ItemLevel: 1
+[Equipment]
+EquipmentSlot: Gloves
+
+"Leather Boots"
+[Description]
+Name: Leather Boots
+[Prototype]
+Name: Item:LeatherArmourBoots
+Singleton: false
+[Appearance]
+Glyph: (
+Color: #6B4D46
+[Position]
+[Item]
+Power: 3
+ItemLevel: 1
+[Equipment]
+EquipmentSlot: Boots

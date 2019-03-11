@@ -5,6 +5,6 @@ namespace data_rogue_core.Renderers
 {
     public interface ITargetingRenderer : IRenderer
     {
-        void Render(WorldState worldState, ISystemContainer systemContainer, TargetingActivityData targetingActivityData);
+        void Render(ISystemContainer systemContainer, TargetingActivityData targetingActivityData);
     }
 }

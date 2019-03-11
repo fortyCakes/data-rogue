@@ -11,13 +11,15 @@ namespace data_rogue_core.EventSystem.Rules
 {
     public class InputHandlerRule : IEventRule
     {
-        private IPlayerControlSystem PlayerControlSystem;
-        private ITargetingSystem TargetingSystem;
+        private IPlayerControlSystem _playerControlSystem;
+        private ITargetingSystem _targetingSystem;
+        private IActivitySystem _activitySystem;
 
         public InputHandlerRule(ISystemContainer systemContainer)
         {
-            PlayerControlSystem = systemContainer.PlayerControlSystem;
-            TargetingSystem = systemContainer.TargetingSystem;
+            _playerControlSystem = systemContainer.PlayerControlSystem;
+            _targetingSystem = systemContainer.TargetingSystem;
+            _activitySystem = systemContainer.ActivitySystem;
         }
 
         public EventTypeList EventTypes => new EventTypeList { EventType.Input };
@@ -30,24 +32,24 @@ namespace data_rogue_core.EventSystem.Rules
             RLKeyPress keyPress = inputEventData.Keyboard;
             RLMouse mouse = inputEventData.Mouse;
 
-            IActivity currentActivity = Game.ActivityStack.Peek();
+            IActivity currentActivity = _activitySystem.Peek();
             switch (currentActivity.Type)
             {
                 case ActivityType.Menu:
                     (currentActivity.Data as Menu)?.HandleKeyPress(keyPress);
                     break;
                 case ActivityType.StaticDisplay:
-                    Game.ActivityStack.Pop();
+                    _activitySystem.Pop();
                     return false;
                 case ActivityType.Gameplay:
-                    PlayerControlSystem.HandleKeyPress(keyPress);
-                    PlayerControlSystem.HandleMouseInput(mouse);
+                    _playerControlSystem.HandleKeyPress(keyPress);
+                    _playerControlSystem.HandleMouseInput(mouse);
                     break;
                 case ActivityType.Form:
                     (currentActivity.Data as Form)?.HandleKeyPress(keyPress);
                     break;
                 case ActivityType.Targeting:
-                    TargetingSystem.HandleMouseInput(mouse);
+                    _targetingSystem.HandleMouseInput(mouse);
                     break;
             }
 

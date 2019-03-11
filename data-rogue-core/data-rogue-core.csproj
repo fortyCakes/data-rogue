@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{2C899088-9F23-4411-BAD7-E175A886C67C}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>data_rogue_core</RootNamespace>
     <AssemblyName>data-rogue-core</AssemblyName>
@@ -39,15 +39,15 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="KeraLua, Version=1.0.3.0, Culture=neutral, PublicKeyToken=6a194c04b9c89217, processorArchitecture=MSIL">
-      <HintPath>..\packages\KeraLua.1.0.3\lib\net45\KeraLua.dll</HintPath>
+    <Reference Include="KeraLua, Version=1.0.4.0, Culture=neutral, PublicKeyToken=6a194c04b9c89217, processorArchitecture=MSIL">
+      <HintPath>..\packages\KeraLua.1.0.4\lib\net45\KeraLua.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NLua, Version=1.4.4.0, Culture=neutral, PublicKeyToken=6a194c04b9c89217, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLua.1.4.4\lib\net45\NLua.dll</HintPath>
+    <Reference Include="NLua, Version=1.4.5.0, Culture=neutral, PublicKeyToken=6a194c04b9c89217, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLua.1.4.5\lib\net45\NLua.dll</HintPath>
     </Reference>
     <Reference Include="OpenTK, Version=2.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
       <HintPath>..\packages\OpenTK.2.0.0\lib\net20\OpenTK.dll</HintPath>
@@ -187,14 +187,22 @@
     <Compile Include="Renderers\IFormRenderer.cs" />
     <Compile Include="EventSystem\EventData\ActivateSkillEventData.cs" />
     <Compile Include="Renderers\ITargetingRenderer.cs" />
-    <Compile Include="Systems\AStar.cs" />
+    <Compile Include="Systems\ActivitySystem.cs" />
+    <Compile Include="Systems\Interfaces\IMapSystem.cs" />
+    <Compile Include="Systems\Interfaces\IRendererSystem.cs" />
+    <Compile Include="Systems\Interfaces\ISaveSystem.cs" />
+    <Compile Include="Systems\MapSystem.cs" />
+    <Compile Include="Systems\RendererSystem.cs" />
+    <Compile Include="Utils\AStar.cs" />
     <Compile Include="Systems\EquipmentSystem.cs" />
     <Compile Include="Systems\FighterSystem.cs" />
     <Compile Include="Behaviours\IBehaviourFactory.cs" />
+    <Compile Include="Systems\Interfaces\IActivitySystem.cs" />
     <Compile Include="Systems\Interfaces\IEquipmentSystem.cs" />
     <Compile Include="Systems\Interfaces\IItemSystem.cs" />
     <Compile Include="Systems\Interfaces\IFighterSystem.cs" />
     <Compile Include="Systems\Interfaces\IMessageSystem.cs" />
+    <Compile Include="Systems\Interfaces\IPlayerSystem.cs" />
     <Compile Include="Systems\Interfaces\IPrototypeSystem.cs" />
     <Compile Include="Data\Message.cs" />
     <Compile Include="Systems\Interfaces\ISkillSystem.cs" />
@@ -202,6 +210,7 @@
     <Compile Include="Systems\Interfaces\ITargetingSystem.cs" />
     <Compile Include="Systems\Interfaces\ITimeSystem.cs" />
     <Compile Include="Systems\ItemSystem.cs" />
+    <Compile Include="Systems\PlayerSystem.cs" />
     <Compile Include="Systems\SystemContainer.cs" />
     <Compile Include="Systems\Interfaces\IScriptExecutor.cs" />
     <Compile Include="Systems\ScriptExecutor.cs" />
@@ -286,7 +295,6 @@
     <Compile Include="Data\MessageSerializer.cs" />
     <Compile Include="World\GenerationStrategies\MapGeneration\EntranceBranchGenerator.cs" />
     <Compile Include="World\WorldGenerator.cs" />
-    <Compile Include="World\WorldState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -372,12 +380,12 @@
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
-  <Import Project="..\packages\KeraLua.1.0.3\build\net45\KeraLua.targets" Condition="Exists('..\packages\KeraLua.1.0.3\build\net45\KeraLua.targets')" />
+  <Import Project="..\packages\KeraLua.1.0.4\build\net45\KeraLua.targets" Condition="Exists('..\packages\KeraLua.1.0.4\build\net45\KeraLua.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\KeraLua.1.0.3\build\net45\KeraLua.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\KeraLua.1.0.3\build\net45\KeraLua.targets'))" />
+    <Error Condition="!Exists('..\packages\KeraLua.1.0.4\build\net45\KeraLua.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\KeraLua.1.0.4\build\net45\KeraLua.targets'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

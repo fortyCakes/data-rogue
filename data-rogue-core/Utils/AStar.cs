@@ -4,7 +4,7 @@ using System.Linq;
 using data_rogue_core.Components;
 using data_rogue_core.Maps;
 
-namespace data_rogue_core.Systems
+namespace data_rogue_core.Utils
 {
     public static class AStar
     {

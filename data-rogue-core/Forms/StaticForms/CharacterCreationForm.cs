@@ -2,14 +2,23 @@
 using System.Collections.Generic;
 using data_rogue_core.Activities;
 using data_rogue_core.Menus.StaticMenus;
+using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.Forms.StaticForms
 {
     public class CharacterCreationForm : Form
     {
-        public CharacterCreationForm() : base("Character Creation", FormButton.Ok | FormButton.Cancel,
-                HandleCharacterCreationFormSelection, StaticFields)
+        private readonly IRendererSystem _rendererSystem;
+        private readonly ISaveSystem _saveSystem;
+        private readonly IPlayerSystem _playerSystem;
+
+        public CharacterCreationForm(IActivitySystem activitySystem, IRendererSystem rendererSystem, ISaveSystem saveSystem, IPlayerSystem playerSystem) : base(activitySystem, "Character Creation", FormButton.Ok | FormButton.Cancel,
+                null, StaticFields)
         {
+            _rendererSystem = rendererSystem;
+            _saveSystem = saveSystem;
+            _playerSystem = playerSystem;
+            OnSelectCallback += HandleCharacterCreationFormSelection;
         }
 
         public static Dictionary<string, FormData> StaticFields => new Dictionary<string, FormData>
@@ -35,24 +44,24 @@ namespace data_rogue_core.Forms.StaticForms
 
         public int Willpower => (Fields["Stats"] as StatsFormData).GetStat("Willpower");
 
-        public static FormActivity GetCharacterCreationActivity()
+        public static FormActivity GetCharacterCreationActivity(IActivitySystem activitySystem, IRendererSystem rendererSystem, ISaveSystem saveSystem, IPlayerSystem playerSystem)
         {
-            return new FormActivity(new CharacterCreationForm(), Game.RendererFactory);
+            return new FormActivity(new CharacterCreationForm(activitySystem, rendererSystem, saveSystem, playerSystem), rendererSystem.RendererFactory);
         }
 
-        public static void HandleCharacterCreationFormSelection(FormButton button, Form form)
+        public void HandleCharacterCreationFormSelection(FormButton button, Form form)
         {
             var characterCreationForm = (CharacterCreationForm)form;
 
             switch(button)
             {
                 case FormButton.Ok:
-                    Game.StartNewGame(characterCreationForm);
-                    Game.ActivityStack.Pop();
+                    _saveSystem.Create(characterCreationForm);
+                    _activitySystem.Pop();
                     break;
                 case FormButton.Cancel:
-                    Game.ActivityStack.Pop();
-                    Game.ActivityStack.Push(new MenuActivity(new MainMenu(), Game.RendererFactory));
+                    _activitySystem.Pop();
+                    _activitySystem.Push(new MenuActivity(new MainMenu(_activitySystem, _playerSystem, _saveSystem, _rendererSystem), _rendererSystem.RendererFactory));
                     break;
                 default:
                     throw new ApplicationException("Unknown form button");

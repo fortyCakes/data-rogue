@@ -4,10 +4,12 @@ BUGS
 
 0.1
 
+Removal of global Game object
+Loading screens and generation on background threads
 Combat maths - make equipment work
 Work out spending time - where should it be? "Action" system?
 Dependency injection for rules and behaviours
-Separate out core from implementation (!)
+Separate out core from implementation
 	Make stats window defined in data
 	Make Player entity not special (don't allow access from global state)
 	Aura and Tilt separation

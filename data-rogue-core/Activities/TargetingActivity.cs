@@ -13,12 +13,19 @@ namespace data_rogue_core.Activities
         public MapCoordinate CurrentTarget => TargetingActivityData.CurrentTarget;
 
         public bool RendersEntireSpace => false;
+
+        private IRendererFactory rendererFactory;
+        private IActivitySystem activitySystem;
+
         public ITargetingRenderer Renderer { get; set; }
 
         public TargetingActivityData TargetingActivityData;
 
-        public TargetingActivity(TargetingData targetingData, Action<MapCoordinate> callback, IRendererFactory rendererFactory)
+        public TargetingActivity(TargetingData targetingData, Action<MapCoordinate> callback, ISystemContainer systemContainer)
         {
+            this.rendererFactory = systemContainer.RendererSystem.RendererFactory;
+            this.activitySystem = systemContainer.ActivitySystem;
+
             Renderer = (ITargetingRenderer)rendererFactory.GetRendererFor(Type);
 
             TargetingActivityData = new TargetingActivityData
@@ -28,9 +35,10 @@ namespace data_rogue_core.Activities
                 Callback = callback
             };
         }
-        public void Render()
+
+        public void Render(ISystemContainer systemContainer)
         {
-            Renderer.Render(Game.WorldState, Game.SystemContainer, TargetingActivityData);
+            Renderer.Render(systemContainer, TargetingActivityData);
         }
 
         public void Complete()
@@ -44,9 +52,9 @@ namespace data_rogue_core.Activities
                 // Target OnCancel behaviour?
             }
 
-            if (Game.ActivityStack.Peek() == this)
+            if (activitySystem.Peek() == this)
             {
-                Game.ActivityStack.Pop();
+                activitySystem.Pop();
             }
         }
     }

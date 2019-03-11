@@ -28,20 +28,20 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
         }
 
-        public void Render(WorldState world, ISystemContainer systemContainer, TargetingActivityData targetingActivityData)
+        public void Render(ISystemContainer systemContainer, TargetingActivityData targetingActivityData)
         {
-            if (ReferenceEquals(world, null) || ReferenceEquals(systemContainer.PositionSystem, null))
+            if (ReferenceEquals(systemContainer.PositionSystem, null))
             {
                 return;
             }
 
-            RenderMap(world, systemContainer, targetingActivityData);
+            RenderMap(systemContainer, targetingActivityData);
 
-            RenderStats(world, systemContainer, targetingActivityData);
+            RenderStats(systemContainer, targetingActivityData);
 
         }
 
-        private void RenderStats(WorldState world, ISystemContainer systemContainer, TargetingActivityData targetingActivityData)
+        private void RenderStats(ISystemContainer systemContainer, TargetingActivityData targetingActivityData)
         {
             StatsConsole.Clear();
 
@@ -59,17 +59,19 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             RLConsole.Blit(StatsConsole, 0, 0, StatsConsole.Width, StatsConsole.Height, Console, Console.Width - 22, 0);
         }
 
-        private void RenderMap(WorldState world, ISystemContainer systemContainer, TargetingActivityData targetingActivityData)
+        private void RenderMap(ISystemContainer systemContainer, TargetingActivityData targetingActivityData)
         {
             MapConsole.Clear();
 
             RLConsole.Blit(Console, 0, 0, MapConsole.Width, MapConsole.Height, MapConsole, 0, 0);
 
-            var currentMap = world.Maps[world.CameraPosition.Key];
-            var cameraX = world.CameraPosition.X;
-            var cameraY = world.CameraPosition.Y;
+            var cameraPosition = systemContainer.RendererSystem.CameraPosition;
 
-            MapCoordinate playerPosition = world.Player.Get<Position>().MapCoordinate;
+            var currentMap = systemContainer.MapSystem.MapCollection[cameraPosition.Key];
+            var cameraX = cameraPosition.X;
+            var cameraY = cameraPosition.Y;
+
+            MapCoordinate playerPosition = systemContainer.PlayerSystem.Player.Get<Position>().MapCoordinate;
             var playerFov = currentMap.FovFrom(playerPosition, 9);
 
             var targetableCells = targetingActivityData.TargetingData.TargetableCellsFrom(playerPosition);

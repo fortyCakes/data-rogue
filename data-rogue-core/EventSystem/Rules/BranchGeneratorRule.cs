@@ -9,37 +9,37 @@ namespace data_rogue_core.EventSystem.Rules
 {
     public class BranchGeneratorRule : IEventRule
     {
-        private readonly ISystemContainer systemContainer;
+        private readonly ISystemContainer _systemContainer;
 
         public BranchGeneratorRule(ISystemContainer systemContainer)
         {
-            this.systemContainer = systemContainer;
+            _systemContainer = systemContainer;
         }
 
         public EventTypeList EventTypes => new EventTypeList { EventType.UsePortal };
-        public int RuleOrder => Int32.MinValue;
+        public int RuleOrder => int.MinValue;
 
         public bool Apply(EventType type, IEntity sender, object eventData)
         {
             var portal = eventData as Portal;
 
-            var branchEntity = systemContainer.EntityEngine.GetEntity(portal.BranchLink.Value);
+            var branchEntity = _systemContainer.EntityEngine.GetEntity(portal.BranchLink.Value);
             var branch = branchEntity.Get<Branch>();
 
             if (!branch.Generated)
             {
-                Game.ActivityStack.Push(new StaticTextActivity("Generating branch...", Game.RendererFactory));
+                _systemContainer.ActivitySystem.Push(new StaticTextActivity("Generating branch...", _systemContainer.RendererSystem.RendererFactory));
 
                 var generator = MapGeneratorFactory.GetGenerator(branch.MapGenerationType);
 
-                var generatedBranch = generator.Generate(systemContainer, branchEntity);
+                var generatedBranch = generator.Generate(_systemContainer, branchEntity);
 
                 foreach (Map map in generatedBranch.Maps)
                 {
-                    Game.WorldState.Maps.AddMap(map);
+                    _systemContainer.MapSystem.MapCollection.AddMap(map);
                 }
 
-                Game.ActivityStack.Pop();
+                _systemContainer.ActivitySystem.Pop();
             }
 
             return true;

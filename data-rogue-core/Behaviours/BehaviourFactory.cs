@@ -12,26 +12,28 @@ namespace data_rogue_core.Behaviours
         private IEventSystem _eventRuleSystem;
         private IRandom _random;
         private IMessageSystem _messageSystem;
-
+        private IPlayerSystem _playerSystem;
+        private IMapSystem _mapSystem;
 
         private Dictionary<Type, Func<IBehaviour>> constructors;
-        
 
-        public BehaviourFactory(IPositionSystem positionSystem, IEventSystem eventRuleSystem, IRandom random, IMessageSystem messageSystem)
+        public BehaviourFactory(IPositionSystem positionSystem, IEventSystem eventRuleSystem, IRandom random, IMessageSystem messageSystem, IPlayerSystem playerSystem, IMapSystem mapSystem)
         {
             _positionSystem = positionSystem;
             _eventRuleSystem = eventRuleSystem;
             _random = random;
             _messageSystem = messageSystem;
+            _playerSystem = playerSystem;
+            _mapSystem = mapSystem;
 
             constructors = new Dictionary<Type, Func<IBehaviour>>()
             {
                 { typeof(PlayerControlledBehaviour), () => new PlayerControlledBehaviour() },
-                { typeof(MoveToPlayerBehaviour), () => new MoveToPlayerBehaviour(_positionSystem, _eventRuleSystem) },
+                { typeof(MoveToPlayerBehaviour), () => new MoveToPlayerBehaviour(_positionSystem, _eventRuleSystem, _playerSystem, _mapSystem) },
                 { typeof(RandomlyMoveBehaviour), () => new RandomlyMoveBehaviour(_positionSystem, _eventRuleSystem, _random) },
                 { typeof(PlayerRestBehaviour), () => new PlayerRestBehaviour(_eventRuleSystem, _messageSystem) },
 
-                { typeof(TestBehaviour), () => new TestBehaviour(_positionSystem, _eventRuleSystem) },
+                { typeof(TestBehaviour), () => new TestBehaviour(_positionSystem, _eventRuleSystem, _playerSystem, _mapSystem) },
             };
         }
 

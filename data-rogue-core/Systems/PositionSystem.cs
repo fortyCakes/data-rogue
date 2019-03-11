@@ -3,11 +3,20 @@ using System.Linq;
 using data_rogue_core.Components;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Maps;
+using data_rogue_core.Systems.Interfaces;
+using data_rogue_core.Utils;
 
 namespace data_rogue_core.Systems
 {
     public class PositionSystem : BaseSystem, IPositionSystem
     {
+        private readonly IMapSystem _mapSystem;
+
+        public PositionSystem(IMapSystem mapSystem)
+        {
+            _mapSystem = mapSystem;
+        }
+
         public override SystemComponents RequiredComponents => new SystemComponents { typeof(Position) };
         public override SystemComponents ForbiddenComponents => new SystemComponents { typeof(Prototype) };
 
@@ -27,7 +36,7 @@ namespace data_rogue_core.Systems
                 }
             }
 
-            var cell = Game.WorldState.Maps[coordinate.Key].CellAt(coordinate.X, coordinate.Y);
+            var cell = _mapSystem.MapCollection[coordinate.Key].CellAt(coordinate.X, coordinate.Y);
             yield return cell;
         }
 
@@ -74,7 +83,7 @@ namespace data_rogue_core.Systems
                 return null;
             }
 
-            var map = Game.WorldState.Maps[origin.Key];
+            var map = _mapSystem.MapCollection[origin.Key];
 
             return AStar.Path(map, origin, destination);
         }

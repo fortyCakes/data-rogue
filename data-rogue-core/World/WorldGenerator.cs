@@ -11,31 +11,29 @@ namespace data_rogue_core
 {
     public static class WorldGenerator
     {
-        public static WorldState Create(ISystemContainer systemContainer, CharacterCreationForm characterCreationForm)
+        public static void Create(ISystemContainer systemContainer, CharacterCreationForm characterCreationForm)
         {
             systemContainer.MessageSystem.Initialise();
 
-            systemContainer.EntityEngine.Initialise(systemContainer);
+            systemContainer.MapSystem.Initialise();
 
-            var world = new WorldState(systemContainer);
+            systemContainer.EntityEngine.Initialise(systemContainer);
 
             (new WorldEntityLoader()).Load(systemContainer);
 
-            var spawnPoint = CreateInitialMapAndGetSpawnPoint(systemContainer, world);
+            var spawnPoint = CreateInitialMapAndGetSpawnPoint(systemContainer);
 
-            AddPlayerToWorld(systemContainer, world, spawnPoint,  characterCreationForm);
-
-            return world;
+            AddPlayerToWorld(systemContainer, spawnPoint, characterCreationForm);
         }
 
-        private static MapCoordinate CreateInitialMapAndGetSpawnPoint(ISystemContainer systemContainer, WorldState world)
+        private static MapCoordinate CreateInitialMapAndGetSpawnPoint(ISystemContainer systemContainer)
         {
             var worldStructure = systemContainer.PrototypeSystem.Get("World").Get<Components.World>();
             var initialBranchEntity = systemContainer.PrototypeSystem.Get(worldStructure.InitialBranch);
 
-            GenerateBranch(systemContainer, world, initialBranchEntity);
+            GenerateBranch(systemContainer, initialBranchEntity);
 
-            var initialMap = world.Maps[new MapKey($"{initialBranchEntity.Get<Branch>().BranchName}:1")];
+            var initialMap = systemContainer.MapSystem.MapCollection[new MapKey($"{initialBranchEntity.Get<Branch>().BranchName}:1")];
 
             return GetSpawnPoint(initialMap);
         }
@@ -52,7 +50,7 @@ namespace data_rogue_core
             return definedSpawnPoint.First().Key;
         }
 
-        public static void GenerateBranch(ISystemContainer systemContainer, WorldState world, IEntity branchEntity)
+        public static void GenerateBranch(ISystemContainer systemContainer, IEntity branchEntity)
         {
             var branchGenerator = MapGeneratorFactory.GetGenerator(branchEntity.Get<Branch>().MapGenerationType);
 
@@ -60,11 +58,11 @@ namespace data_rogue_core
 
             foreach (Map map in branch.Maps)
             {
-                world.Maps.AddMap(map);
+                systemContainer.MapSystem.MapCollection.AddMap(map);
             }
         }
 
-        private static void AddPlayerToWorld(ISystemContainer systemContainer, WorldState world, MapCoordinate spawnPoint, CharacterCreationForm form)
+        private static void AddPlayerToWorld(ISystemContainer systemContainer, MapCoordinate spawnPoint, CharacterCreationForm form)
         {
             var player = EntitySerializer.Deserialize(systemContainer, DataFileLoader.LoadFile(@"Entities\player.edt"));
             player.Get<Position>().MapCoordinate = spawnPoint;
@@ -77,7 +75,7 @@ namespace data_rogue_core
             fighter.Intellect = form.Intellect;
             fighter.Willpower = form.Willpower;
 
-            world.Player = player;
+            systemContainer.PlayerSystem.Player = player;
         }
     }
 }

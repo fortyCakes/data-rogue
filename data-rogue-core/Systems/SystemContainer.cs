@@ -25,6 +25,12 @@ namespace data_rogue_core.Systems
         public ITargetingSystem TargetingSystem { get; set; }
         public IItemSystem ItemSystem { get; set; }
         public IEquipmentSystem EquipmentSystem { get; set; }
+        public IPlayerSystem PlayerSystem { get; set; }
+        public IActivitySystem ActivitySystem { get; set; }
+        public IMapSystem MapSystem { get; set; }
+        public IRendererSystem RendererSystem { get; set; }
+
+        public ISaveSystem SaveSystem { get; set; }
 
         public string Seed { get; set; }
 
@@ -33,17 +39,23 @@ namespace data_rogue_core.Systems
             ScriptExecutor = new ScriptExecutor(this);
 
             MessageSystem = new MessageSystem();
+            ActivitySystem = new ActivitySystem();
+            PlayerSystem = new PlayerSystem(ActivitySystem);
+            MapSystem = new MapSystem();
+
+            RendererSystem = new RendererSystem(PlayerSystem);
 
             EntityEngine = new EntityEngine(new DataStaticEntityLoader());
 
             EventSystem = new EventSystem.EventSystem();
 
-            PositionSystem = new PositionSystem();
+
+            PositionSystem = new PositionSystem(MapSystem);
             EntityEngine.Register(PositionSystem);
 
             Random = new RNG(rngSeed);
 
-            TimeSystem = new TimeSystem(BehaviourFactory, EventSystem);
+            TimeSystem = new TimeSystem(BehaviourFactory, EventSystem, PlayerSystem);
             EntityEngine.Register(TimeSystem);
 
             FighterSystem = new FighterSystem(EntityEngine, MessageSystem, EventSystem, TimeSystem);
@@ -51,7 +63,7 @@ namespace data_rogue_core.Systems
 
             PlayerControlSystem = new PlayerControlSystem(this);
 
-            BehaviourFactory = new BehaviourFactory(PositionSystem, EventSystem, Random, MessageSystem);
+            BehaviourFactory = new BehaviourFactory(PositionSystem, EventSystem, Random, MessageSystem, PlayerSystem, MapSystem);
 
             PrototypeSystem = new PrototypeSystem(EntityEngine, PositionSystem, BehaviourFactory);
             EntityEngine.Register(PrototypeSystem);
@@ -64,9 +76,12 @@ namespace data_rogue_core.Systems
 
             Seed = rngSeed;
 
-            TargetingSystem = new TargetingSystem(PositionSystem);
 
             EquipmentSystem = new EquipmentSystem(this);
+
+            TargetingSystem = new TargetingSystem(this);
+
+            SaveSystem = new SaveSystem(this);
 
             Verify();
         }
@@ -91,6 +106,11 @@ namespace data_rogue_core.Systems
             Check(TargetingSystem, "TargetingSystem", msg, ref valid);
             Check(ItemSystem, "ItemSystem", msg, ref valid);
             Check(EquipmentSystem, "EquipmentSystem", msg, ref valid);
+            Check(ActivitySystem, "ActivitySystem", msg, ref valid);
+            Check(PlayerSystem, "PlayerSystem", msg, ref valid);
+            Check(MapSystem, "MapSystem", msg, ref valid);
+            Check(RendererSystem, "RendererSystem", msg, ref valid);
+            Check(SaveSystem, "SaveSystem", msg, ref valid);
 
             if (!valid)
                 throw new ContainerNotValidException(msg.ToString());

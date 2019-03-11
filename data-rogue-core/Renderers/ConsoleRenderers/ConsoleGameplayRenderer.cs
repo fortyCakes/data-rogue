@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using data_rogue_core.Components;
 using data_rogue_core.Data;
-using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems.Interfaces;
@@ -33,32 +31,32 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
         }
 
-        public void Render(WorldState world, ISystemContainer systemContainer)
+        public void Render(ISystemContainer systemContainer)
         {
             Console.Clear();
 
-            if (ReferenceEquals(world, null) || ReferenceEquals(systemContainer.PositionSystem, null))
+            if (ReferenceEquals(systemContainer?.PlayerSystem?.Player, null))
             {
                 return;
             }
 
-            RenderMap(world, systemContainer, out var playerFov);
+            RenderMap(systemContainer, out var playerFov);
 
-            RenderStats(world, systemContainer, playerFov);
+            RenderStats(systemContainer, playerFov);
 
             RenderMessages(systemContainer);
 
-            RenderLines(world.Player.Get<Fighter>().BrokenTicks > 0);
+            RenderLines(systemContainer.PlayerSystem.Player.Get<Fighter>().BrokenTicks > 0);
         }
 
-        public MapCoordinate GetMapCoordinateFromMousePosition(WorldState world, int x, int y)
+        public MapCoordinate GetMapCoordinateFromMousePosition(MapCoordinate cameraPosition, int x, int y)
         {
             if (IsOnMap(x, y))
             {
-                var lookupX = world.CameraPosition.X - MapConsole.Width / 2 + x;
-                var lookupY = world.CameraPosition.Y - MapConsole.Height / 2 + y;
+                var lookupX = cameraPosition.X - MapConsole.Width / 2 + x;
+                var lookupY = cameraPosition.Y - MapConsole.Height / 2 + y;
 
-                return new MapCoordinate(world.CameraPosition.Key, lookupX, lookupY);
+                return new MapCoordinate(cameraPosition.Key, lookupX, lookupY);
             }
 
             return null;
@@ -104,11 +102,11 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             RLConsole.Blit(MessageConsole, 0, 0, MessageConsole.Width, MessageConsole.Height, Console, 0, Console.Height - 15);
         }
 
-        private void RenderStats(WorldState world, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        private void RenderStats(ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
             StatsConsole.Clear();
 
-            var player = world.Player;
+            var player = systemContainer.PlayerSystem.Player;
             var fighter = player.Get<Fighter>();
 
             StatsConsole.Print(1,1, player.Get<Description>().Name, RLColor.White, RLColor.Black);
@@ -138,7 +136,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
             StatsConsole.Print(1, 12, mapname, RLColor.White, RLColor.Black);
 
-            StatsConsole.Print(1, 14, $"Time: {world.TimeSystem.TimeString}", RLColor.White, RLColor.Black);
+            StatsConsole.Print(1, 14, $"Time: {systemContainer.TimeSystem.TimeString}", RLColor.White, RLColor.Black);
 
             StatsConsole.Print(1, 16, $"Gold: {systemContainer.ItemSystem.CheckWealth(player, "Gold")}", Color.Gold.ToRLColor());
 
@@ -168,15 +166,17 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
         }
         
 
-        private void RenderMap(WorldState world, ISystemContainer systemContainer, out List<MapCoordinate> playerFov)
+        private void RenderMap(ISystemContainer systemContainer, out List<MapCoordinate> playerFov)
         {
             MapConsole.Clear();
 
-            var currentMap = world.Maps[world.CameraPosition.Key];
-            var cameraX = world.CameraPosition.X;
-            var cameraY = world.CameraPosition.Y;
+            var cameraPosition = systemContainer.RendererSystem.CameraPosition;
 
-            MapCoordinate playerPosition = world.Player.Get<Position>().MapCoordinate;
+            var currentMap = systemContainer.MapSystem.MapCollection[cameraPosition.Key];
+            var cameraX = cameraPosition.X;
+            var cameraY = cameraPosition.Y;
+
+            MapCoordinate playerPosition = systemContainer.PlayerSystem.Player.Get<Position>().MapCoordinate;
             playerFov = currentMap.FovFrom(playerPosition, 9);
             foreach (var coordinate in playerFov)
             {

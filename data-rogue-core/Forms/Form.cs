@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using data_rogue_core.Forms.StaticForms;
+using data_rogue_core.Systems.Interfaces;
 using data_rogue_core.Utils;
 using RLNET;
 
@@ -9,9 +10,10 @@ namespace data_rogue_core.Forms
 {
     public class Form
     {
+        protected readonly IActivitySystem _activitySystem;
         public string Title { get; }
         public FormButton Buttons { get; }
-        public FormButtonSelected OnSelectCallback { get; }
+        public FormButtonSelected OnSelectCallback { get; protected set; }
         public Dictionary<string, FormData> Fields { get; set; }
 
         private List<string> FieldsKeyList => Fields.OrderBy(f => f.Value.Order).Select(f => f.Key).ToList();
@@ -22,8 +24,9 @@ namespace data_rogue_core.Forms
 
         public FormSelection FormSelection { get; set; } = new FormSelection();
 
-        public Form(string title, FormButton buttons, FormButtonSelected onSelectCallback, Dictionary<string, FormData> fields)
+        public Form(IActivitySystem activitySystem, string title, FormButton buttons, FormButtonSelected onSelectCallback, Dictionary<string, FormData> fields)
         {
+            _activitySystem = activitySystem;
             Buttons = buttons;
             OnSelectCallback = onSelectCallback;
             Fields = fields;

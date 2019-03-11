@@ -15,30 +15,28 @@ using data_rogue_core.EventSystem.EventData;
 
 namespace data_rogue_core
 {
-    public static class Game
+    public class Game
     {
-        public static ActivityStack ActivityStack;
-        public static GraphicsMode GraphicsMode = GraphicsMode.Console;
-        public static IRendererFactory RendererFactory { get; set; }
+        public GraphicsMode GraphicsMode = GraphicsMode.Console;
 
-        public static WorldState WorldState;
-
-        public static ISystemContainer SystemContainer;
+        public ISystemContainer SystemContainer;
 
         private const int SCREEN_WIDTH = 100;
         private const int SCREEN_HEIGHT = 70;
 
         private const string DEBUG_SEED = "DEBUG";
 
-        public static string Seed => DEBUG_SEED;
+        public string Seed => DEBUG_SEED;
 
-        private static RLRootConsole _rootConsole;
-        private static bool _leaving = false;
-        public static bool Loading { get; set; } = false;
+        private RLRootConsole _rootConsole;
+        private bool _leaving = false;
+        public bool Loading { get; set; } = false;
 
-        public static void Main()
+        public void Run()
         {
             SetupRootConsole();
+
+            CreateAndRegisterSystems();
 
             InitialiseRenderers();
 
@@ -49,7 +47,7 @@ namespace data_rogue_core
             RunRootConsole();
         }
 
-        private static void SetupRootConsole()
+        private void SetupRootConsole()
         {
             string fontFileName = "Images\\Tileset\\Alloy_curses_12x12.png";
             string consoleTitle = "data-rogue-core";
@@ -62,7 +60,7 @@ namespace data_rogue_core
 
         }
 
-        private static void InitialiseRenderers()
+        private void InitialiseRenderers()
         {
             Dictionary<ActivityType, IRenderer> renderers;
             switch(GraphicsMode)
@@ -81,15 +79,15 @@ namespace data_rogue_core
                     throw new ApplicationException($"Renderers not found for graphics mode {GraphicsMode}.");
             }
 
-            RendererFactory = new RendererFactory(renderers);
+            SystemContainer.RendererSystem.RendererFactory = new RendererFactory(renderers);
         }
 
-        private static void RunRootConsole()
+        private void RunRootConsole()
         {
             _rootConsole.Run();
         }
 
-        private static void InitialiseRules()
+        private void InitialiseRules()
         {
             SystemContainer.EventSystem.Initialise();
 
@@ -120,48 +118,49 @@ namespace data_rogue_core
         }
 
 
-        private static void InitialiseState()
+        private void InitialiseState()
         {
-            ActivityStack = new ActivityStack();
+            SystemContainer.ActivitySystem.Initialise();
 
-            ActivityStack.Push(new GameplayActivity(RendererFactory));
+            SystemContainer.ActivitySystem.Push(new GameplayActivity(SystemContainer.RendererSystem.RendererFactory));
 
             DisplayLoadingScreen("Loading...");
         }
         
-        private static void StartDataLoad()
+        private void StartDataLoad()
         {
             new Thread(() =>
             {
                 Thread.CurrentThread.IsBackground = true;
 
-                CreateAndRegisterSystems();
                 InitialiseRules();
 
-                ActivityStack.Pop();
+                SystemContainer.ActivitySystem.Pop();
                 DisplayMainMenu();
 
             }).Start();
         }
 
 
-        private static void CreateAndRegisterSystems()
+        private void CreateAndRegisterSystems()
         {
             SystemContainer = new SystemContainer();
 
             SystemContainer.CreateSystems(DEBUG_SEED);
+
+            SystemContainer.RendererSystem.QuitAction = Quit;
         }
 
-        private static void DisplayMainMenu()
+        private void DisplayMainMenu()
         {
-            ActivityStack.Push(new MenuActivity(new MainMenu(), RendererFactory));
+            SystemContainer.ActivitySystem.Push(new MenuActivity(new MainMenu(SystemContainer.ActivitySystem, SystemContainer.PlayerSystem, SystemContainer.SaveSystem, SystemContainer.RendererSystem), SystemContainer.RendererSystem.RendererFactory));
         }
 
-        private static void OnRootConsoleRender(object sender, UpdateEventArgs e)
+        private void OnRootConsoleRender(object sender, UpdateEventArgs e)
         {
             Stack<IActivity> renderStack = new Stack<IActivity>();
 
-            foreach (IActivity activity in ActivityStack)
+            foreach (IActivity activity in SystemContainer.ActivitySystem.ActivityStack)
             {
                 renderStack.Push(activity);
                 if (activity.RendersEntireSpace)
@@ -172,13 +171,13 @@ namespace data_rogue_core
 
             foreach (IActivity activity in renderStack)
             {
-                activity.Render();
+                activity.Render(SystemContainer);
             }
 
             _rootConsole.Draw();
         }
 
-        private static void OnRootConsoleUpdate(object sender, UpdateEventArgs e)
+        private void OnRootConsoleUpdate(object sender, UpdateEventArgs e)
         {
             if (!_leaving && !Loading)
             {
@@ -188,60 +187,19 @@ namespace data_rogue_core
 
                 SystemContainer.EventSystem.Try(EventType.Input, null, eventData);
 
-                while (WorldState != null && !SystemContainer.TimeSystem.WaitingForInput && ActivityStack.Count > 0 && ActivityStack.Peek().Type == ActivityType.Gameplay)
+                while (!SystemContainer.TimeSystem.WaitingForInput && SystemContainer.ActivitySystem.ActivityStack.Count > 0 && SystemContainer.ActivitySystem.Peek().Type == ActivityType.Gameplay)
                 {
                     SystemContainer.TimeSystem.Tick();
                 }
-
-                
             }
         }
 
-
-        public static void CreateCharacter()
+        public void DisplayLoadingScreen(string text)
         {
-            ActivityStack.Push(CharacterCreationForm.GetCharacterCreationActivity());
+            SystemContainer.ActivitySystem.Push(new LoadingScreenActivity(text, SystemContainer.RendererSystem.RendererFactory));
         }
 
-        public static void StartNewGame(CharacterCreationForm characterCreationForm)
-        {
-            DisplayLoadingScreen("Generating world...");
-
-            new Thread(() =>
-            {
-                Thread.CurrentThread.IsBackground = true;
-
-                WorldState = WorldGenerator.Create(SystemContainer, characterCreationForm);
-
-                ActivityStack.Pop();
-            }).Start();
-        }
-
-        public static void LoadGame()
-        {
-            DisplayLoadingScreen("Loading save file...");
-
-            new Thread(() =>
-            {
-                Thread.CurrentThread.IsBackground = true;
-
-                Loading = true;
-
-                WorldState = SaveSystem.Load(SystemContainer);
-
-                Loading = false;
-
-                ActivityStack.Pop();
-
-            }).Start();
-        }
-
-        public static void DisplayLoadingScreen(string text)
-        {
-            ActivityStack.Push(new LoadingScreenActivity(text, RendererFactory));
-        }
-
-        public static void Quit()
+        public void Quit()
         {
             _leaving = true;
             _rootConsole.Close();

@@ -5,7 +5,7 @@ namespace data_rogue_core.Renderers
 {
     public interface IGameplayRenderer : IRenderer
     {
-        void Render(WorldState worldState, ISystemContainer systemContainer);
-        MapCoordinate GetMapCoordinateFromMousePosition(WorldState world, int x, int y);
+        void Render(ISystemContainer systemContainer);
+        MapCoordinate GetMapCoordinateFromMousePosition(MapCoordinate cameraPosition, int x, int y);
     }
 }

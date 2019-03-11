@@ -37,6 +37,13 @@ namespace data_rogue_core.Data
 
         public void Deserialize(string value)
         {
+            items = new List<EquipmentMappingListItem>();
+
+            if (string.IsNullOrEmpty(value))
+            {
+                return;
+            }
+
             var splits = value.Split(',');
 
             foreach (string s in splits)

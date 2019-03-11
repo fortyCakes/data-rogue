@@ -10,11 +10,17 @@ namespace data_rogue_core.Systems
 {
     public class TargetingSystem : ITargetingSystem
     {
-        private IPositionSystem PositionSystem;
+        private IPositionSystem _positionSystem;
+        private IActivitySystem _activitySystem;
+        private IRendererSystem _rendererSystem;
+        private ISystemContainer _systemContainer;
 
-        public TargetingSystem(IPositionSystem positionSystem)
+        public TargetingSystem(ISystemContainer systemContainer)
         {
-            PositionSystem = positionSystem;
+            _positionSystem = systemContainer.PositionSystem;
+            _activitySystem = systemContainer.ActivitySystem;
+            _rendererSystem = systemContainer.RendererSystem;
+            _systemContainer = systemContainer;
         }
 
         public void GetTarget(IEntity sender, TargetingData data, Action<MapCoordinate> callback)
@@ -34,15 +40,15 @@ namespace data_rogue_core.Systems
             var x = mouse.X;
             var y = mouse.Y;
 
-            if (Game.ActivityStack.Peek() is TargetingActivity activity)
+            if (_activitySystem.Peek() is TargetingActivity activity)
             {
-                var gameplayRenderer = Game.RendererFactory.GetRendererFor(ActivityType.Gameplay) as IGameplayRenderer;
+                var gameplayRenderer = _rendererSystem.RendererFactory.GetRendererFor(ActivityType.Gameplay) as IGameplayRenderer;
 
-                var hoveredLocation = gameplayRenderer.GetMapCoordinateFromMousePosition(Game.WorldState, x, y);
+                var hoveredLocation = gameplayRenderer.GetMapCoordinateFromMousePosition(_systemContainer.RendererSystem.CameraPosition, x, y);
 
                 if (hoveredLocation != null)
                 {
-                    MapCoordinate playerPosition = PositionSystem.PositionOf(Game.WorldState.Player);
+                    MapCoordinate playerPosition = _positionSystem.PositionOf(_systemContainer.PlayerSystem.Player);
 
                     if (activity.TargetingActivityData.TargetingData.TargetableCellsFrom(playerPosition).Contains(hoveredLocation))
                     {
@@ -63,9 +69,9 @@ namespace data_rogue_core.Systems
 
         private void GetTargetForPlayer(TargetingData data, Action<MapCoordinate> callback)
         {
-            var activity = new TargetingActivity(data, callback, Game.RendererFactory);
+            var activity = new TargetingActivity(data, callback, _systemContainer);
 
-            Game.ActivityStack.Push(activity);
+            _activitySystem.Push(activity);
         }
 
         private void GetTargetForNonPlayer(IEntity sender, TargetingData data, Action<MapCoordinate> callback)
