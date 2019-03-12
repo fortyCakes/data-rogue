@@ -93,6 +93,7 @@
     <Compile Include="Components\Equipped.cs" />
     <Compile Include="Components\Experience.cs" />
     <Compile Include="Components\Wealth.cs" />
+    <Compile Include="DataRogueGame.cs" />
     <Compile Include="Data\EquipmentMappingListItem.cs" />
     <Compile Include="Data\EquipmentSlotDetails.cs" />
     <Compile Include="EntityEngineSystem\EntityReferenceList.cs" />
@@ -273,7 +274,6 @@
     <Compile Include="Menus\MenuItem.cs" />
     <Compile Include="Activities\ActivityStack.cs" />
     <Compile Include="Utils\ColorExtensions.cs" />
-    <Compile Include="Game.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Systems\BaseSystem.cs" />
     <Compile Include="Systems\Interfaces\IPlayerControlSystem.cs" />
