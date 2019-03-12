@@ -10,48 +10,51 @@ namespace data_rogue_core.Systems
 {
     public class FighterSystem : BaseSystem, IFighterSystem
     {
-        public override SystemComponents RequiredComponents => new SystemComponents { typeof(Fighter) };
+        public override SystemComponents RequiredComponents => new SystemComponents { typeof(TiltFighter) };
         public override SystemComponents ForbiddenComponents => new SystemComponents { typeof(Prototype) };
 
-        public FighterSystem(IEntityEngine engine, IMessageSystem messageSystem, IEventSystem eventRuleSystem, ITimeSystem timeSystem)
+        private readonly IStatSystem _statSystem;
+
+        public FighterSystem(IEntityEngine engine, IMessageSystem messageSystem, IEventSystem eventRuleSystem, ITimeSystem timeSystem, IStatSystem statSystem)
         {
-            Engine = engine;
-            MessageSystem = messageSystem;
-            EventRuleSystem = eventRuleSystem;
-            TimeSystem = timeSystem;
+            _engine = engine;
+            _messageSystem = messageSystem;
+            this._eventRuleSystem = eventRuleSystem;
+            this._timeSystem = timeSystem;
+            _statSystem = statSystem;
         }
 
-        public IEntityEngine Engine { get; }
-        public IMessageSystem MessageSystem { get; }
-        public IEventSystem EventRuleSystem { get; }
-        public ITimeSystem TimeSystem { get; }
+        public IEntityEngine _engine;
+        public IMessageSystem _messageSystem;
+        public IEventSystem _eventRuleSystem;
+        public ITimeSystem _timeSystem;
 
         public void BasicAttack(IEntity attacker, IEntity defender)
         {
-            var attackingFighter = attacker.Get<Fighter>();
-            var defendingFighter = defender.Get<Fighter>();
+            var attackingFighter = attacker.Get<TiltFighter>();
+            var defendingFighter = defender.Get<TiltFighter>();
 
             var attackData = new AttackEventData { Defender = defender };
 
-            var hit = EventRuleSystem.Try(EventType.Attack, attacker, attackData);
+            var hit = _eventRuleSystem.Try(EventType.Attack, attacker, attackData);
 
             var msg = $"{attacker.Get<Description>().Name} attacks {defender.Get<Description>().Name}";
 
             if (hit)
             {
-                var baseDamage = attackingFighter.Muscle;
+                var baseDamage = _statSystem.GetStat(attacker, "Muscle");
                 msg += $" and hits for {baseDamage} damage.";
 
-                EventRuleSystem.Try(EventType.Damage, defender, new DamageEventData{Damage = baseDamage, DamagedBy = attacker});
+                _eventRuleSystem.Try(EventType.Damage, defender, new DamageEventData{Damage = baseDamage, DamagedBy = attacker});
             }
             else
             {
                 msg += $" and misses.";
             }
 
-            MessageSystem.Write(msg);
+            _messageSystem.Write(msg);
 
-            EventRuleSystem.Try(EventType.SpendTime, attacker, new SpendTimeEventData() {Ticks = 1000});
+            _eventRuleSystem.Try(EventType.SpendTime, attacker, new SpendTimeEventData() {Ticks = 1000});
         }
 
         public IEnumerable<IEntity> GetEntitiesWithFighter(IEnumerable<IEntity> entities)

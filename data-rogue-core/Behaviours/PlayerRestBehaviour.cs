@@ -27,16 +27,17 @@ namespace data_rogue_core.Behaviours
                 return new BehaviourResult { Acted = false };
             }
 
-            if (EventSystem.GetStat(entity, Stat.Tension) > 0)
+            if (EventSystem.GetStat(entity, "Tension") > 0)
             {
                 MessageSystem.Write("Your rest is interrupted!");
                 Resting = false;
                 return new BehaviourResult { Acted = false };
             }
 
-            var fighter = entity.Get<Fighter>();
+            var tilt = entity.Get<TiltFighter>();
+            var aura = entity.Get<AuraFighter>();
 
-            if (fighter.Tilt.Current == 0 && fighter.Aura.Current == fighter.BaseAura && fighter.BrokenTicks == 0)
+            if (tilt.Tilt.Current == 0 && aura.Aura.Current == aura.BaseAura && tilt.BrokenTicks == 0)
             {
                 MessageSystem.Write("You finish resting.");
                 Resting = false;

@@ -23,7 +23,7 @@ namespace data_rogue_core.EventSystem.Rules
 
         public bool Apply(EventType type, IEntity sender, object eventData)
         {
-            var fighter = sender.Get<Fighter>();
+            var fighter = sender.Get<TiltFighter>();
             var data = eventData as DamageEventData;
 
             var tiltMissing = fighter.Tilt.Max - fighter.Tilt.Current;

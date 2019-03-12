@@ -68,12 +68,11 @@ namespace data_rogue_core
             player.Get<Position>().MapCoordinate = spawnPoint;
             player.Get<Description>().Name = form.Name;
 
-            var fighter = player.Get<Fighter>();
+            systemContainer.StatSystem.SetStat(player, nameof(form.Muscle), form.Muscle);
+            systemContainer.StatSystem.SetStat(player, nameof(form.Agility), form.Agility);
+            systemContainer.StatSystem.SetStat(player, nameof(form.Intellect), form.Intellect);
+            systemContainer.StatSystem.SetStat(player, nameof(form.Willpower), form.Willpower);
 
-            fighter.Agility = form.Agility;
-            fighter.Muscle = form.Muscle;
-            fighter.Intellect = form.Intellect;
-            fighter.Willpower = form.Willpower;
 
             systemContainer.PlayerSystem.Player = player;
         }

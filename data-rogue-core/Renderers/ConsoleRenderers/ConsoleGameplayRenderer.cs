@@ -46,7 +46,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
             RenderMessages(systemContainer);
 
-            RenderLines(systemContainer.PlayerSystem.Player.Get<Fighter>().BrokenTicks > 0);
+            RenderLines(systemContainer.PlayerSystem.Player.Get<TiltFighter>().BrokenTicks > 0);
         }
 
         public MapCoordinate GetMapCoordinateFromMousePosition(MapCoordinate cameraPosition, int x, int y)
@@ -107,22 +107,24 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             StatsConsole.Clear();
 
             var player = systemContainer.PlayerSystem.Player;
-            var fighter = player.Get<Fighter>();
+            var fighter = player.Get<Health>();
+            var tilt = player.Get<TiltFighter>();
+            var aura = player.Get<AuraFighter>();
 
             StatsConsole.Print(1,1, player.Get<Description>().Name, RLColor.White, RLColor.Black);
             StatsConsole.Print(1,2, " the Adventurer", RLColor.White, RLColor.Black);
 
-            ConsoleRendererHelper.PrintBar(StatsConsole, 1, 4, STATS_WIDTH - 2, "hp", fighter.Health, RLColor.Red);
-            ConsoleRendererHelper.PrintBar(StatsConsole, 1, 6, STATS_WIDTH - 2, "aura", fighter.Aura, RLColor.Yellow);
-            ConsoleRendererHelper.PrintBar(StatsConsole, 1, 8, STATS_WIDTH - 2, "tilt", fighter.Tilt, RLColor.Magenta);
+            ConsoleRendererHelper.PrintBar(StatsConsole, 1, 4, STATS_WIDTH - 2, "hp", fighter.HP, RLColor.Red);
+            ConsoleRendererHelper.PrintBar(StatsConsole, 1, 6, STATS_WIDTH - 2, "aura", aura.Aura, RLColor.Yellow);
+            ConsoleRendererHelper.PrintBar(StatsConsole, 1, 8, STATS_WIDTH - 2, "tilt", tilt.Tilt, RLColor.Magenta);
 
-            if (fighter.BrokenTicks > 0)
+            if (tilt.BrokenTicks > 0)
             {
-                StatsConsole.Print(1, 9, $" DEFENCE BREAK {((decimal)fighter.BrokenTicks/100).ToString("F2")} ", RLColor.White, RLColor.Red);
+                StatsConsole.Print(1, 9, $" DEFENCE BREAK {((decimal)tilt.BrokenTicks/100).ToString("F2")} ", RLColor.White, RLColor.Red);
             }
             else
             {
-                var tension = systemContainer.EventSystem.GetStat(player, Stat.Tension);
+                var tension = systemContainer.EventSystem.GetStat(player, "Tension");
                 StatsConsole.Print(1, 9, $"Tension: {tension}", RLColor.White, RLColor.Black);
             }
 

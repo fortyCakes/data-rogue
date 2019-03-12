@@ -6,7 +6,7 @@ namespace data_rogue_core.Components
 
     public class StatBoostEnchantment : Enchantment
     {
-        public Stat Stat;
+        public string Stat;
         public decimal Value;
     }
 }

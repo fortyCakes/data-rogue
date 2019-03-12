@@ -44,7 +44,7 @@ namespace data_rogue_core.EventSystem.Rules
 
         private static bool IsFighter(IEntity e)
         {
-            return e.Has<Fighter>();
+            return e.Has<TiltFighter>();
         }
     }
 }

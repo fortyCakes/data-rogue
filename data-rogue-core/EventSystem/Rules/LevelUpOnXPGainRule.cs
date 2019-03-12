@@ -35,12 +35,12 @@ namespace data_rogue_core.EventSystem.Rules
             {
                 experience.Level++;
 
-                var fighter = sender.Get<Fighter>();
+                var fighter = sender.Get<TiltFighter>();
 
-                fighter.Agility += 2;
-                fighter.Intellect += 2;
-                fighter.Willpower += 2;
-                fighter.Muscle += 2;
+                systemContainer.StatSystem.IncreaseStat(sender, "Agility", 2);
+                systemContainer.StatSystem.IncreaseStat(sender, "Intellect", 2);
+                systemContainer.StatSystem.IncreaseStat(sender, "Willpower", 2);
+                systemContainer.StatSystem.IncreaseStat(sender, "Muscle", 2);
 
                 systemContainer.MessageSystem.Write($"Level up! {sender.DescriptionName} is now level {experience.Level}.");
             }

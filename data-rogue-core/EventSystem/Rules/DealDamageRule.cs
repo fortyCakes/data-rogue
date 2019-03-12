@@ -22,14 +22,14 @@ namespace data_rogue_core.EventSystem.Rules
 
         public bool Apply(EventType type, IEntity sender, object eventData)
         {
-            var fighter = sender.Get<Fighter>();
+            var health = sender.Get<Health>();
             var data = eventData as DamageEventData;
 
-            fighter.Health.Subtract(data.Damage);
+            health.HP.Subtract(data.Damage);
 
             MessageSystem.Write($"{sender.Get<Description>().Name} takes {data.Damage} damage.", Color.White);
 
-            if (fighter.Health.Current <= 0)
+            if (health.HP.Current <= 0)
             {
                 EventRuleSystem.Try(EventType.Death, sender, new DeathEventData { Killer = data.DamagedBy });
             }

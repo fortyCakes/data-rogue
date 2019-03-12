@@ -31,7 +31,7 @@ namespace data_rogue_core.EventSystem.Rules
 
             var skillDefinition = prototypeSystem.Get(data.SkillName).Get<Skill>();
 
-            var userAura = sender.Get<Fighter>().Aura;
+            var userAura = sender.Get<AuraFighter>().Aura;
 
             if (userAura.Current < skillDefinition.Cost)
             {

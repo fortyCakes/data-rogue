@@ -32,8 +32,8 @@ namespace data_rogue_core.EventSystem.Rules
 
             var defender = data.Defender;
 
-            var attackerFighter = sender.Get<Fighter>();
-            var defenderFighter = defender.Get<Fighter>();
+            var attackerFighter = sender.Get<TiltFighter>();
+            var defenderFighter = defender.Get<TiltFighter>();
 
             var attackerDescription = sender.Get<Description>();
             var defenderDescription = defender.Get<Description>();
@@ -54,9 +54,9 @@ namespace data_rogue_core.EventSystem.Rules
             switch(attackType)
             {
                 case AttackType.Physical:
-                    return EventRuleSystem.GetStat(entity, Stat.Agility);
+                    return EventRuleSystem.GetStat(entity, "Agility");
                 case AttackType.Magical:
-                    return EventRuleSystem.GetStat(entity, Stat.Intellect);
+                    return EventRuleSystem.GetStat(entity, "Intellect");
                 default:
                     throw new NotImplementedException();
             }
@@ -67,9 +67,9 @@ namespace data_rogue_core.EventSystem.Rules
             switch (attackType)
             {
                 case AttackType.Physical:
-                    return EventRuleSystem.GetStat(entity, Stat.Agility);
+                    return EventRuleSystem.GetStat(entity, "Agility");
                 case AttackType.Magical:
-                    return EventRuleSystem.GetStat(entity, Stat.Agility);
+                    return EventRuleSystem.GetStat(entity, "Agility");
                 default:
                     throw new NotImplementedException();
             }

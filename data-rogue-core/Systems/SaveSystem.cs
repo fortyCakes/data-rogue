@@ -4,7 +4,6 @@ using data_rogue_core.Systems.Interfaces;
 using System.IO;
 using System.Reflection;
 using data_rogue_core.Data;
-using System;
 using System.Drawing;
 using System.Linq;
 using data_rogue_core.Forms.StaticForms;

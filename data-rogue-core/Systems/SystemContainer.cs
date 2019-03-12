@@ -29,7 +29,7 @@ namespace data_rogue_core.Systems
         public IActivitySystem ActivitySystem { get; set; }
         public IMapSystem MapSystem { get; set; }
         public IRendererSystem RendererSystem { get; set; }
-
+        public IStatSystem StatSystem { get; set; }
         public ISaveSystem SaveSystem { get; set; }
 
         public string Seed { get; set; }
@@ -37,18 +37,19 @@ namespace data_rogue_core.Systems
         public void CreateSystems(string rngSeed)
         {
             ScriptExecutor = new ScriptExecutor(this);
+            EventSystem = new EventSystem.EventSystem();
 
             MessageSystem = new MessageSystem();
             ActivitySystem = new ActivitySystem();
             PlayerSystem = new PlayerSystem(ActivitySystem);
             MapSystem = new MapSystem();
 
+
             RendererSystem = new RendererSystem(PlayerSystem);
 
             EntityEngine = new EntityEngine(new DataStaticEntityLoader());
 
-            EventSystem = new EventSystem.EventSystem();
-
+            StatSystem = new StatSystem(EntityEngine);
 
             PositionSystem = new PositionSystem(MapSystem);
             EntityEngine.Register(PositionSystem);
@@ -58,7 +59,7 @@ namespace data_rogue_core.Systems
             TimeSystem = new TimeSystem(BehaviourFactory, EventSystem, PlayerSystem);
             EntityEngine.Register(TimeSystem);
 
-            FighterSystem = new FighterSystem(EntityEngine, MessageSystem, EventSystem, TimeSystem);
+            FighterSystem = new FighterSystem(EntityEngine, MessageSystem, EventSystem, TimeSystem, StatSystem);
             EntityEngine.Register(FighterSystem);
 
             PlayerControlSystem = new PlayerControlSystem(this);
@@ -111,6 +112,7 @@ namespace data_rogue_core.Systems
             Check(MapSystem, "MapSystem", msg, ref valid);
             Check(RendererSystem, "RendererSystem", msg, ref valid);
             Check(SaveSystem, "SaveSystem", msg, ref valid);
+            Check(StatSystem, "StatSystem", msg, ref valid);
 
             if (!valid)
                 throw new ContainerNotValidException(msg.ToString());

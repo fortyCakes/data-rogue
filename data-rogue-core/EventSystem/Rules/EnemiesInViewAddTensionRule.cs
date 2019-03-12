@@ -33,7 +33,7 @@ namespace data_rogue_core.EventSystem.Rules
 
             switch (data.Stat)
             {
-                case Stat.Tension:
+                case "Tension":
 
                     var enemies = GetEnemiesInFov();
 
