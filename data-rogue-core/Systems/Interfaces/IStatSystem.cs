@@ -6,7 +6,7 @@ namespace data_rogue_core
 
     public interface IStatSystem
     {
-        int GetStat(IEntity entity, string statName);
+        int GetEntityStat(IEntity entity, string statName);
 
         void SetStat(IEntity entity, string statName, int value);
         void IncreaseStat(IEntity entity, string statName, int value);

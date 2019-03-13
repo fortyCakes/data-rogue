@@ -14,7 +14,7 @@ namespace data_rogue_core
             _engine = engine;
         }
 
-        public int GetStat(IEntity entity, string statName)
+        public int GetEntityStat(IEntity entity, string statName)
         {
             return GetStatComponent(entity, statName)?.Value ?? 0;
         }

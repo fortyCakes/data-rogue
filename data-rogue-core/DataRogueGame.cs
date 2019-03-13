@@ -115,7 +115,8 @@ namespace data_rogue_core
                 new DoXpGainRule(),
                 new XpGainMessageRule(SystemContainer),
                 new LevelUpOnXPGainRule(SystemContainer),
-                new GainSingleXPOnKillRule(SystemContainer)
+                new GainSingleXPOnKillRule(SystemContainer),
+                new ApplyEquipmentStatsRule(SystemContainer)
             );
         }
 

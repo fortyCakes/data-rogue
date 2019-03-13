@@ -116,7 +116,9 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
             ConsoleRendererHelper.PrintBar(StatsConsole, 1, 4, STATS_WIDTH - 2, "hp", fighter.HP, RLColor.Red);
             ConsoleRendererHelper.PrintBar(StatsConsole, 1, 6, STATS_WIDTH - 2, "aura", aura.Aura, RLColor.Yellow);
-            ConsoleRendererHelper.PrintBar(StatsConsole, 1, 8, STATS_WIDTH - 2, "tilt", tilt.Tilt, RLColor.Magenta);
+            var tension = systemContainer.EventSystem.GetStat(player, "Tension");
+            StatsConsole.Print(1, 7, $"Tension: {tension}", RLColor.White, RLColor.Black);
+
 
             if (tilt.BrokenTicks > 0)
             {
@@ -124,32 +126,37 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             }
             else
             {
-                var tension = systemContainer.EventSystem.GetStat(player, "Tension");
-                StatsConsole.Print(1, 9, $"Tension: {tension}", RLColor.White, RLColor.Black);
+
+                ConsoleRendererHelper.PrintBar(StatsConsole, 1, 9, STATS_WIDTH - 2, "tilt", tilt.Tilt, RLColor.Magenta);
             }
 
-            StatsConsole.Print(1, 11, "Location:", RLColor.White, RLColor.Black);
+            ConsoleRendererHelper.PrintStat(StatsConsole, 1, 10, "Armour", (int)systemContainer.EventSystem.GetStat(player, "AC"), RLColor.White);
+            ConsoleRendererHelper.PrintStat(StatsConsole, 1, 11, "Evasion", (int)systemContainer.EventSystem.GetStat(player, "EV"), RLColor.White);
+            ConsoleRendererHelper.PrintStat(StatsConsole, 1, 12, "Block", (int)systemContainer.EventSystem.GetStat(player, "SH"), RLColor.White);
+            ConsoleRendererHelper.PrintStat(StatsConsole, 1, 13, "Aegis", 0, RLColor.LightBlue);
 
-            var mapname = player.Get<Position>().MapCoordinate.Key.Key.ToString();
+            StatsConsole.Print(1, 15, "Location:", RLColor.White, RLColor.Black);
+
+            var mapname = player.Get<Position>().MapCoordinate.Key.Key;
             if (mapname.StartsWith("Branch:"))
             {
                 mapname = mapname.Substring(7);
             }
 
-            StatsConsole.Print(1, 12, mapname, RLColor.White, RLColor.Black);
+            StatsConsole.Print(1, 16, mapname, RLColor.White, RLColor.Black);
 
-            StatsConsole.Print(1, 14, $"Time: {systemContainer.TimeSystem.TimeString}", RLColor.White, RLColor.Black);
+            StatsConsole.Print(1, 18, $"Time: {systemContainer.TimeSystem.TimeString}", RLColor.White, RLColor.Black);
 
-            StatsConsole.Print(1, 16, $"Gold: {systemContainer.ItemSystem.CheckWealth(player, "Gold")}", Color.Gold.ToRLColor());
+            StatsConsole.Print(1, 20, $"Gold: {systemContainer.ItemSystem.CheckWealth(player, "Gold")}", Color.Gold.ToRLColor());
 
-            StatsConsole.Print(1, 17, $"Skills:", RLColor.White, RLColor.Black);
+            StatsConsole.Print(1, 21, $"Skills:", RLColor.White, RLColor.Black);
 
             var skillsToPrint = player.Components.OfType<KnownSkill>().Where(s => s.Order > 0).OrderBy(s => s.Order).Take(5).ToList();
 
             for(int i = 0; i < skillsToPrint.Count(); i++)
             {
                 var skillName = systemContainer.PrototypeSystem.Get(skillsToPrint[i].Skill).Get<Description>().Name;
-                StatsConsole.Print(1, 17 + i, $"{i+1}: {skillName}", RLColor.White, RLColor.Black);
+                StatsConsole.Print(1, 21 + i, $"{i+1}: {skillName}", RLColor.White, RLColor.Black);
             }
 
             var hoveredCoordinate = systemContainer.PlayerControlSystem.HoveredCoordinate;

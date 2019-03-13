@@ -144,6 +144,7 @@
     <Compile Include="EventSystem\EventType.cs" />
     <Compile Include="EventSystem\IEventRule.cs" />
     <Compile Include="EventSystem\IEventSystem.cs" />
+    <Compile Include="EventSystem\Rules\ApplyEquipmentStatsRule.cs" />
     <Compile Include="EventSystem\Rules\ApplyProcEnchantmentRule.cs" />
     <Compile Include="EventSystem\Rules\ApplyStatBoostEnchantmentRule.cs" />
     <Compile Include="EventSystem\Rules\CheckEnoughAuraToActivateSkillRule.cs" />

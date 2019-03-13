@@ -42,7 +42,7 @@ namespace data_rogue_core.Systems
 
             if (hit)
             {
-                var baseDamage = _statSystem.GetStat(attacker, "Muscle");
+                var baseDamage = _statSystem.GetEntityStat(attacker, "Muscle");
                 msg += $" and hits for {baseDamage} damage.";
 
                 _eventRuleSystem.Try(EventType.Damage, defender, new DamageEventData{Damage = baseDamage, DamagedBy = attacker});

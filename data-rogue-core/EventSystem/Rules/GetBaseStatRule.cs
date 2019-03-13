@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq;
-using data_rogue_core.Components;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.Systems.Interfaces;
@@ -10,10 +8,12 @@ namespace data_rogue_core.EventSystem.Rules
     class GetBaseStatRule : IEventRule
     {
         private readonly IPlayerSystem _playerSystem;
+        private readonly IStatSystem _statSystem;
 
         public GetBaseStatRule(ISystemContainer systemContainer)
         {
             _playerSystem = systemContainer.PlayerSystem;
+            _statSystem = systemContainer.StatSystem;
         }
 
         public EventTypeList EventTypes => new EventTypeList{ EventType.GetStat };
@@ -33,7 +33,7 @@ namespace data_rogue_core.EventSystem.Rules
                     data.Value = 0;
                     break;
                 default:
-                    data.Value = sender.Components.OfType<Stat>().Single(s => s.Name == data.Stat).Value;
+                    data.Value = _statSystem.GetEntityStat(sender, data.Stat);
                     break;
             }
 

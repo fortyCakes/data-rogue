@@ -1,4 +1,5 @@
-﻿using data_rogue_core.Components;
+﻿using System;
+using data_rogue_core.Components;
 using data_rogue_core.Data;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Utils;
@@ -79,6 +80,11 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
 
             }
+        }
+
+        internal static void PrintStat(RLConsole statsConsole, int x, int y, string statName, int value, RLColor color)
+        {
+            statsConsole.Print(x, y, $"{statName}: {value}", color);
         }
     }
 }

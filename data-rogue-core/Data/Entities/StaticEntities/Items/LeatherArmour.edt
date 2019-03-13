@@ -13,6 +13,12 @@ Power: 8
 ItemLevel: 1
 [Equipment]
 EquipmentSlot: Chest
+[Stat]
+Name: AC
+Value: 3
+[Stat]
+Name: EV
+Value: -1
 
 "Leather Chaps"
 [Description]
@@ -29,6 +35,12 @@ Power: 5
 ItemLevel: 1
 [Equipment]
 EquipmentSlot: Legs
+[Stat]
+Name: AC
+Value: 3
+[Stat]
+Name: EV
+Value: -1
 
 "Leather Helmet"
 [Description]
@@ -45,6 +57,12 @@ Power: 5
 ItemLevel: 1
 [Equipment]
 EquipmentSlot: Head
+[Stat]
+Name: AC
+Value: 1
+[Stat]
+Name: EV
+Value: 0
 
 "Leather Gloves"
 [Description]
@@ -61,6 +79,12 @@ Power: 3
 ItemLevel: 1
 [Equipment]
 EquipmentSlot: Gloves
+[Stat]
+Name: AC
+Value: 1
+[Stat]
+Name: EV
+Value: 0
 
 "Leather Boots"
 [Description]
@@ -77,3 +101,9 @@ Power: 3
 ItemLevel: 1
 [Equipment]
 EquipmentSlot: Boots
+[Stat]
+Name: AC
+Value: 1
+[Stat]
+Name: EV
+Value: 0

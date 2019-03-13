@@ -57,13 +57,13 @@ namespace data_rogue_core.UnitTests.Systems
         {
             statSystem.SetStat(entity, TEST_STAT, 10);
 
-            statSystem.GetStat(entity, TEST_STAT).Should().Be(10);
+            statSystem.GetEntityStat(entity, TEST_STAT).Should().Be(10);
         }
 
         [Test]
         public void GetStat_NoStat_ReturnsZero()
         {
-            statSystem.GetStat(entity, TEST_STAT).Should().Be(0);
+            statSystem.GetEntityStat(entity, TEST_STAT).Should().Be(0);
         }
 
         [Test]
@@ -71,7 +71,7 @@ namespace data_rogue_core.UnitTests.Systems
         {
             statSystem.IncreaseStat(entity, TEST_STAT, 10);
 
-            statSystem.GetStat(entity, TEST_STAT).Should().Be(10);
+            statSystem.GetEntityStat(entity, TEST_STAT).Should().Be(10);
         }
 
         [Test]
@@ -83,7 +83,7 @@ namespace data_rogue_core.UnitTests.Systems
 
             statSystem.IncreaseStat(entity, TEST_STAT, 10);
 
-            statSystem.GetStat(entity, TEST_STAT).Should().Be(15);
+            statSystem.GetEntityStat(entity, TEST_STAT).Should().Be(15);
         }
 
         private IEntity GetTestEntity()
