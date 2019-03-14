@@ -34,7 +34,7 @@ namespace data_rogue_core.Systems
             var attackingFighter = attacker.Get<TiltFighter>();
             var defendingFighter = defender.Get<TiltFighter>();
 
-            var attackData = new AttackEventData { Defender = defender };
+            var attackData = new AttackEventData {Defender = defender};
 
             var hit = _eventRuleSystem.Try(EventType.Attack, attacker, attackData);
 
@@ -45,7 +45,7 @@ namespace data_rogue_core.Systems
                 var baseDamage = _statSystem.GetEntityStat(attacker, "Muscle");
                 msg += $" and hits for {baseDamage} damage.";
 
-                _eventRuleSystem.Try(EventType.Damage, defender, new DamageEventData{Damage = baseDamage, DamagedBy = attacker});
+                _eventRuleSystem.Try(EventType.Damage, defender, new DamageEventData {Damage = baseDamage, DamagedBy = attacker});
             }
             else
             {
@@ -56,6 +56,12 @@ namespace data_rogue_core.Systems
 
             _eventRuleSystem.Try(EventType.SpendTime, attacker, new SpendTimeEventData() {Ticks = 1000});
         }
+
+        public bool Attack(IEntity attacker, IEntity defender, string attackType = null, string attackDamage = null, string[] attackTags = null)
+        {
+            throw new System.NotImplementedException();
+        }
+
 
         public IEnumerable<IEntity> GetEntitiesWithFighter(IEnumerable<IEntity> entities)
         {

@@ -1,11 +1,11 @@
 ﻿"Vampiric Blade"
 [Description]
-Name: Vampiric Blade
+Name: Bronze Sword of Vampirism
 [Prototype]
-Name: Item:VampiricBlade
+Name: Item:BronzeSwordVampire
 Singleton: false
 [Appearance]
-Glyph: \
+Glyph: ]
 Color: #990000
 [Position]
 [Item]
@@ -17,6 +17,20 @@ Name: Vampiric
 ProcChance: 50
 EventType: Attack
 ScriptName: Script: Vampiric Heal
+[Weapon]
+Class: Heavy
+[Stat]
+Name: EV
+Value: -1
+[Stat]
+Name: SH
+Value: 4
+[Stat]
+Name: Accuracy
+Value: 25
+[Stat]
+Name: Damage
+Value: 10
 
 "Script: VampiricHeal"
 [Prototype]
