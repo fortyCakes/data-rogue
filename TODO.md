@@ -6,6 +6,7 @@ BUGS
 
 Combat maths - make equipment work
 	Apply combat stats (block chances)
+		Roll accuracy and store on the attack data
 	New items by tier
 Work out spending time - where should it be? "Action" system?
 Ranged and magic weapons
@@ -19,6 +20,7 @@ Separate out core from implementation
 		Stat window rendering customisation
 		Map rendering customisation
 Remove RLNet dependencies from core (!)
+Event system rework: separate pre- and post-event rules
 
 0.2+
 
