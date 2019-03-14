@@ -59,6 +59,18 @@ namespace data_rogue_core.Systems
 
         public bool Attack(IEntity attacker, IEntity defender, string attackType = null, string attackDamage = null, string[] attackTags = null)
         {
+            // Get attacker's weapon
+
+            // Create attack event data (type, weapon, accuracy, damage, tags)
+
+            // Run Attack event
+
+            // If hit, run damage event
+
+            // Describe attack based on returned event data
+
+            // Spend time
+
             throw new System.NotImplementedException();
         }
 
