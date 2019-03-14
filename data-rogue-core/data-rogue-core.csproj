@@ -307,6 +307,9 @@
     <None Include="Data\Entities\StaticEntities\Items\BookOfSkill.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Entities\StaticEntities\Items\BronzeArmour.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\Entities\StaticEntities\Items\PileOfGold.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
