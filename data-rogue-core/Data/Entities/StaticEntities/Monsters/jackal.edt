@@ -14,15 +14,22 @@ ZOrder: 10
 [Physical]
 Passable: false
 Transparent: true
-[Fighter]
-Health: 2/2
+[Health]
+HP: 2/2
+[TiltFighter]
 Tilt: 0/10
-Aura: 0/0
-BaseAura: 0
-Muscle: 6
-Agility: 10
-Willpower: 3
-Intellect: 2
+[Stat]
+Name: Muscle
+Value: 6
+[Stat]
+Name: Agility
+Value: 10
+[Stat]
+Name: Willpower
+Value: 3
+[Stat]
+Name: Intellect
+Value: 2
 [Description]
 Name: Jackal
 [Actor]

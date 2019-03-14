@@ -16,15 +16,25 @@ Priority: 0
 [Experience]
 Level: 1
 Amount: 0
-[Fighter]
-Health: 25/25
-Tilt: 0/100
+[AuraFighter]
 Aura: 100/500
 BaseAura: 100
-Muscle: 15
-Agility: 15
-Willpower: 15
-Intellect: 15
+[Health]
+HP: 25/25
+[TiltFighter]
+Tilt: 0/100
+[Stat]
+Name: Muscle
+Value: 15
+[Stat]
+Name: Agility
+Value: 15
+[Stat]
+Name: Willpower
+Value: 15
+[Stat]
+Name: Intellect
+Value: 15
 [Description]
 Name: Player
 [KnownSkill]

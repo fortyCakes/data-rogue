@@ -11,9 +11,9 @@ namespace data_rogue_one
     {
         static void Main(string[] args)
         {
-            var theGame = new Game();
+            var theGame = new DataRogueGame();
 
-            theGame.Run();
+            theGame.Run(DataRogueGame.DEBUG_SEED);
         }
     }
 }

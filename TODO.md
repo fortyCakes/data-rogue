@@ -5,8 +5,13 @@ BUGS
 0.1
 
 Combat maths - make equipment work
+	Apply combat stats (block chances)
+	New items by tier
 Work out spending time - where should it be? "Action" system?
-Dependency injection for rules and behaviours
+Ranged and magic weapons
+	"fire" command
+	Apply combat stat (aegis)
+Dependency injection? for rules and behaviours
 Separate out core from implementation
 	Make stats window defined in data
 	Make Player entity not special (don't allow access from global state)

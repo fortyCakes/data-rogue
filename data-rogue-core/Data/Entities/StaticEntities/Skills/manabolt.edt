@@ -16,7 +16,7 @@ Singleton: true
 Text: {
 	withTarget(
 	function(target)
-		willpower = SystemContainer.EventSystem:GetStatByName(User, 'Willpower')
+		willpower = SystemContainer.EventSystem:GetStat(User, 'Willpower')
 		targetEntities = SystemContainer.PositionSystem:EntitiesAt(target)
 		targetFighters = SystemContainer.FighterSystem:GetEntitiesWithFighter(targetEntities)
 

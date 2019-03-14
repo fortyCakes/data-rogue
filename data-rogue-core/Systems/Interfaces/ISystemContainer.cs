@@ -7,6 +7,9 @@ namespace data_rogue_core.Systems.Interfaces
 {
     public interface ISystemContainer
     {
+
+        string Seed { get; set; }
+
         IEntityEngine EntityEngine {get; set;}
         IEventSystem EventSystem {get; set;}
         IPositionSystem PositionSystem {get; set;}
@@ -24,11 +27,10 @@ namespace data_rogue_core.Systems.Interfaces
         IEquipmentSystem EquipmentSystem { get; set; }
         IPlayerSystem PlayerSystem { get; set; }
         IActivitySystem ActivitySystem { get; set; }
-        string Seed { get; set; }
         IRendererSystem RendererSystem { get; set; }
         IMapSystem MapSystem { get; set; }
-
         ISaveSystem SaveSystem {get;set;}
+        IStatSystem StatSystem { get; }
 
         void Verify();
         void CreateSystems(string rngSeed);

@@ -83,6 +83,7 @@
     <Compile Include="Systems\SaveSystemTests.cs" />
     <Compile Include="Systems\ScriptExecutorTests.cs" />
     <Compile Include="Systems\SkillSystemTests.cs" />
+    <Compile Include="Systems\StatSystemTests.cs" />
     <Compile Include="Systems\SystemContainerTests.cs" />
     <Compile Include="TestHelpers\EntityListEquivalence.cs" />
   </ItemGroup>

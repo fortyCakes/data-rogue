@@ -1,5 +1,4 @@
 ﻿using System;
-using data_rogue_core.Components;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.Systems.Interfaces;
@@ -9,10 +8,12 @@ namespace data_rogue_core.EventSystem.Rules
     class GetBaseStatRule : IEventRule
     {
         private readonly IPlayerSystem _playerSystem;
+        private readonly IStatSystem _statSystem;
 
         public GetBaseStatRule(ISystemContainer systemContainer)
         {
             _playerSystem = systemContainer.PlayerSystem;
+            _statSystem = systemContainer.StatSystem;
         }
 
         public EventTypeList EventTypes => new EventTypeList{ EventType.GetStat };
@@ -24,19 +25,7 @@ namespace data_rogue_core.EventSystem.Rules
 
             switch (data.Stat)
             {
-                case Stat.Muscle:
-                    data.Value = sender.Get<Fighter>().Muscle;
-                    break;
-                case Stat.Agility:
-                    data.Value = sender.Get<Fighter>().Agility;
-                    break;
-                case Stat.Willpower:
-                    data.Value = sender.Get<Fighter>().Willpower;
-                    break;
-                case Stat.Intellect:
-                    data.Value = sender.Get<Fighter>().Intellect;
-                    break;
-                case Stat.Tension:
+                case "Tension":
                     if (sender != _playerSystem.Player)
                     {
                         throw new ApplicationException("Only the Player can check tension.");
@@ -44,7 +33,8 @@ namespace data_rogue_core.EventSystem.Rules
                     data.Value = 0;
                     break;
                 default:
-                    throw new ApplicationException($"Could not resolve stat {data.Stat.ToString()}");
+                    data.Value = _statSystem.GetEntityStat(sender, data.Stat);
+                    break;
             }
 
             return true;

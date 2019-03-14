@@ -60,9 +60,9 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             {
                 appearance = entity.Get<Appearance>();
 
-                if (entity.Has<Fighter>())
+                if (entity.Has<TiltFighter>())
                 {
-                    var fighter = entity.Get<Fighter>();
+                    var fighter = entity.Get<TiltFighter>();
 
                     if (fighter.BrokenTicks > 0)
                     {

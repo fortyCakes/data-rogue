@@ -145,9 +145,9 @@ namespace data_rogue_core.EntityEngineSystem
             return _allEntities.Where(e => e.Name == entityName);
         }
 
-        public IEntity GetEntityWithName(string v)
+        public IEntity GetEntityWithName(string entityName)
         {
-            return GetEntitiesWithName(v).Single();
+            return GetEntitiesWithName(entityName).Single();
         }
 
         public IEnumerable<IEntity> EntitiesWith<T>(bool includePrototypes = false) where T: IEntityComponent

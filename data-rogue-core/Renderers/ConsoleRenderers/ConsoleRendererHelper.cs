@@ -1,4 +1,5 @@
-﻿using data_rogue_core.Components;
+﻿using System;
+using data_rogue_core.Components;
 using data_rogue_core.Data;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Utils;
@@ -20,13 +21,23 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
             console.Print(x + 3, y + 0, name, RLColor.White);
 
-            var fighter = hoveredEntity.TryGet<Fighter>();
+            var tilt = hoveredEntity.TryGet<TiltFighter>();
+            var health = hoveredEntity.TryGet<Health>();
+            var aura = hoveredEntity.TryGet<AuraFighter>();
 
-            if (fighter != null)
+            if (tilt != null)
             {
-                PrintBar(console, x + 1, y + 3, console.Width - 2, "hp", fighter.Health, RLColor.Red);
-                PrintBar(console, x + 1, y + 5, console.Width - 2, "aura", fighter.Aura, RLColor.Yellow);
-                PrintBar(console, x + 1, y + 7, console.Width - 2, "tilt", fighter.Tilt, RLColor.Magenta);
+                PrintBar(console, x + 1, y + 7, console.Width - 2, "tilt", tilt.Tilt, RLColor.Magenta);
+            }
+
+            if (health != null)
+            {
+                PrintBar(console, x + 1, y + 3, console.Width - 2, "hp", health.HP, RLColor.Red);
+            }
+
+            if (aura != null)
+            {
+                PrintBar(console, x + 1, y + 5, console.Width - 2, "aura", aura.Aura, RLColor.Yellow);
             }
         }
 
@@ -69,6 +80,11 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
 
             }
+        }
+
+        internal static void PrintStat(RLConsole statsConsole, int x, int y, string statName, int value, RLColor color)
+        {
+            statsConsole.Print(x, y, $"{statName}: {value}", color);
         }
     }
 }

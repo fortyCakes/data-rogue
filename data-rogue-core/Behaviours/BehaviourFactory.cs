@@ -37,14 +37,14 @@ namespace data_rogue_core.Behaviours
             };
         }
 
-        public IBehaviour Get(Type type)
+        public IBehaviour Get(Type behaviourType)
         {
-            if (!constructors.ContainsKey(type))
+            if (!constructors.ContainsKey(behaviourType))
             {
                 throw new Exception("Behaviour type not found in BehaviourFactory.");
             }
 
-            return constructors[type]();
+            return constructors[behaviourType]();
             
         }
     }

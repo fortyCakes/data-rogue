@@ -54,9 +54,9 @@ namespace data_rogue_core.EntityEngineSystem
 
         }
 
-        public bool HasNone(SystemComponents forbiddenComponents)
+        public bool HasNone(SystemComponents systemComponents)
         {
-            return !forbiddenComponents.Any(fc => Components.Any(c => c.GetType() == fc));
+            return !systemComponents.Any(fc => Components.Any(c => c.GetType() == fc));
         }
 
         public bool IsPlayer => Name == "Player";

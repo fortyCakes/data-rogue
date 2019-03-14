@@ -11,7 +11,7 @@ namespace data_rogue_core
 
         T PickOne<T>(IList<T> items);
 
-        decimal StatCheck(decimal attackStat);
+        decimal StatCheck(decimal statLevel);
     }
 
     public class RNG : IRandom
@@ -45,9 +45,9 @@ namespace data_rogue_core
             return items[index];
         }
 
-        public decimal StatCheck(decimal input)
+        public decimal StatCheck(decimal statLevel)
         {
-            return Between((int)Math.Ceiling(input / 2), 128 + (int)Math.Ceiling(input * 1 / 4));
+            return Between((int)Math.Ceiling(statLevel / 2), 128 + (int)Math.Ceiling(statLevel * 1 / 4));
         }
     }
 }

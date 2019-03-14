@@ -39,7 +39,7 @@ namespace data_rogue_core.Systems
 
         public ulong CurrentTime { get; set; }
 
-        public override SystemComponents RequiredComponents => new SystemComponents { typeof(Actor), typeof(Fighter) };
+        public override SystemComponents RequiredComponents => new SystemComponents { typeof(Actor), typeof(TiltFighter) };
         public override SystemComponents ForbiddenComponents => new SystemComponents { typeof(Prototype) };
 
         public void Tick()
@@ -54,7 +54,7 @@ namespace data_rogue_core.Systems
 
                 foreach (var entity in entitiesAtStartOfTick)
                 {
-                    if (entity.Has<Fighter>())
+                    if (entity.Has<TiltFighter>())
                     {
                         TickFighter(entity);
                     }
@@ -84,21 +84,21 @@ namespace data_rogue_core.Systems
 
         private void TickFighter(IEntity entity)
         {
-            var fighter = entity.Get<Fighter>();
-
-            UpdateTilt(fighter);
+            UpdateTilt(entity.Get<TiltFighter>());
 
             if (AuraTick)
             {
-                UpdateAura(entity, fighter);
+                UpdateAura(entity);
             }
         }
 
-        private void UpdateAura(IEntity entity, Fighter fighter)
+        private void UpdateAura(IEntity entity)
         {
+            var fighter = entity.Get<AuraFighter>();
+
             if (entity.IsPlayer)
             {
-                var tension = EventSystem.GetStat(entity, Stat.Tension);
+                var tension = EventSystem.GetStat(entity, "Tension");
 
                 if (tension > 0)
                 {
@@ -120,7 +120,7 @@ namespace data_rogue_core.Systems
             }
         }
 
-        private void UpdateTilt(Fighter fighter)
+        private void UpdateTilt(TiltFighter fighter)
         {
             if (fighter.BrokenTicks > 0)
             {

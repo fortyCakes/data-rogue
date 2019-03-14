@@ -14,15 +14,22 @@ ZOrder: 10
 [Physical]
 Passable: false
 Transparent: true
-[Fighter]
-Health: 1/1
+[Health]
+HP: 1/1
+[TiltFighter]
 Tilt: 0/20
-Aura: 0/0
-BaseAura: 0
-Muscle: 4
-Agility: 12
-Willpower: 8
-Intellect: 4
+[Stat]
+Name: Muscle
+Value: 4
+[Stat]
+Name: Agility
+Value: 12
+[Stat]
+Name: Willpower
+Value: 8
+[Stat]
+Name: Intellect
+Value: 4
 [Description]
 Name: Goblin
 [Actor]

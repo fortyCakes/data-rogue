@@ -15,25 +15,27 @@ using data_rogue_core.EventSystem.EventData;
 
 namespace data_rogue_core
 {
-    public class Game
+    public class DataRogueGame
     {
         public GraphicsMode GraphicsMode = GraphicsMode.Console;
 
         public ISystemContainer SystemContainer;
 
-        private const int SCREEN_WIDTH = 100;
-        private const int SCREEN_HEIGHT = 70;
+        private const int CONSOLE_SCREEN_WIDTH = 100;
+        private const int CONSOLE_SCREEN_HEIGHT = 70;
 
-        private const string DEBUG_SEED = "DEBUG";
+        public const string DEBUG_SEED = "DEBUG";
 
-        public string Seed => DEBUG_SEED;
+        public string Seed { get; set; }
 
         private RLRootConsole _rootConsole;
         private bool _leaving = false;
         public bool Loading { get; set; } = false;
 
-        public void Run()
+        public void Run(string seed)
         {
+            Seed = seed;
+
             SetupRootConsole();
 
             CreateAndRegisterSystems();
@@ -52,7 +54,7 @@ namespace data_rogue_core
             string fontFileName = "Images\\Tileset\\Alloy_curses_12x12.png";
             string consoleTitle = "data-rogue-core";
 
-            _rootConsole = new RLRootConsole(fontFileName, SCREEN_WIDTH, SCREEN_HEIGHT, 12, 12, 1, consoleTitle);
+            _rootConsole = new RLRootConsole(fontFileName, CONSOLE_SCREEN_WIDTH, CONSOLE_SCREEN_HEIGHT, 12, 12, 1, consoleTitle);
 
             _rootConsole.Update += OnRootConsoleUpdate;
             _rootConsole.Render += OnRootConsoleRender;
@@ -113,7 +115,8 @@ namespace data_rogue_core
                 new DoXpGainRule(),
                 new XpGainMessageRule(SystemContainer),
                 new LevelUpOnXPGainRule(SystemContainer),
-                new GainSingleXPOnKillRule(SystemContainer)
+                new GainSingleXPOnKillRule(SystemContainer),
+                new ApplyEquipmentStatsRule(SystemContainer)
             );
         }
 

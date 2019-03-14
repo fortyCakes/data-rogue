@@ -81,6 +81,7 @@
     <Compile Include="Behaviours\MoveToPlayerBehaviour.cs" />
     <Compile Include="Behaviours\RandomlyMoveBehaviour.cs" />
     <Compile Include="Behaviours\PlayerControlledBehaviour.cs" />
+    <Compile Include="Components\AuraFighter.cs" />
     <Compile Include="Components\Biome.cs" />
     <Compile Include="Components\BodyPartLocation.cs" />
     <Compile Include="Components\BodyPartType.cs" />
@@ -92,13 +93,16 @@
     <Compile Include="Components\EntityGenerationStrategy.cs" />
     <Compile Include="Components\Equipped.cs" />
     <Compile Include="Components\Experience.cs" />
+    <Compile Include="Components\Health.cs" />
+    <Compile Include="Components\Stat.cs" />
+    <Compile Include="Components\TiltFighter.cs" />
     <Compile Include="Components\Wealth.cs" />
+    <Compile Include="DataRogueGame.cs" />
     <Compile Include="Data\EquipmentMappingListItem.cs" />
     <Compile Include="Data\EquipmentSlotDetails.cs" />
     <Compile Include="EntityEngineSystem\EntityReferenceList.cs" />
     <Compile Include="Components\EquipmentMapping.cs" />
     <Compile Include="Components\EquipmentSlot.cs" />
-    <Compile Include="Components\Fighter.cs" />
     <Compile Include="Components\Inventory.cs" />
     <Compile Include="Components\BodyPart.cs" />
     <Compile Include="Components\Item.cs" />
@@ -140,6 +144,7 @@
     <Compile Include="EventSystem\EventType.cs" />
     <Compile Include="EventSystem\IEventRule.cs" />
     <Compile Include="EventSystem\IEventSystem.cs" />
+    <Compile Include="EventSystem\Rules\ApplyEquipmentStatsRule.cs" />
     <Compile Include="EventSystem\Rules\ApplyProcEnchantmentRule.cs" />
     <Compile Include="EventSystem\Rules\ApplyStatBoostEnchantmentRule.cs" />
     <Compile Include="EventSystem\Rules\CheckEnoughAuraToActivateSkillRule.cs" />
@@ -191,8 +196,10 @@
     <Compile Include="Systems\Interfaces\IMapSystem.cs" />
     <Compile Include="Systems\Interfaces\IRendererSystem.cs" />
     <Compile Include="Systems\Interfaces\ISaveSystem.cs" />
+    <Compile Include="Systems\Interfaces\IStatSystem.cs" />
     <Compile Include="Systems\MapSystem.cs" />
     <Compile Include="Systems\RendererSystem.cs" />
+    <Compile Include="Systems\StatSystem.cs" />
     <Compile Include="Utils\AStar.cs" />
     <Compile Include="Systems\EquipmentSystem.cs" />
     <Compile Include="Systems\FighterSystem.cs" />
@@ -273,7 +280,6 @@
     <Compile Include="Menus\MenuItem.cs" />
     <Compile Include="Activities\ActivityStack.cs" />
     <Compile Include="Utils\ColorExtensions.cs" />
-    <Compile Include="Game.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Systems\BaseSystem.cs" />
     <Compile Include="Systems\Interfaces\IPlayerControlSystem.cs" />
