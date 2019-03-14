@@ -9,6 +9,7 @@ Combat maths - make equipment work
 		Roll accuracy and store on the attack data
 	New items by tier
 Work out spending time - where should it be? "Action" system?
+Ordering of messages on kill
 Ranged and magic weapons
 	"fire" command
 	Apply combat stat (aegis)

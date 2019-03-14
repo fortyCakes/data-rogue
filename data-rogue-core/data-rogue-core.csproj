@@ -313,13 +313,19 @@
     <None Include="Data\Entities\StaticEntities\Items\BookOfSkill.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Entities\StaticEntities\Items\T1Weapons.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Entities\StaticEntities\Items\T1HeavyArmour.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\Entities\StaticEntities\Items\PileOfGold.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\Entities\StaticEntities\Items\VampiricBlade.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Data\Entities\StaticEntities\Items\LeatherArmour.edt">
+    <None Include="Data\Entities\StaticEntities\Items\T1LightArmour.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\Entities\StaticEntities\Items\PotionMinorHealing.edt">

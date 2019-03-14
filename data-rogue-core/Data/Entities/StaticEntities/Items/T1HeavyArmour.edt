@@ -1,0 +1,104 @@
+﻿"Bronze Armour"
+[Description]
+Name: Bronze Armour
+[Prototype]
+Name: Item:BronzeArmourChest
+Singleton: false
+[Appearance]
+Glyph: [
+Color: #6B4D46
+[Position]
+[Item]
+ItemLevel: 1
+[Equipment]
+EquipmentSlot: Chest
+[Stat]
+Name: AC
+Value: 5
+[Stat]
+Name: EV
+Value: -3
+
+"Bronze Platelegs"
+[Description]
+Name: Bronze Platelegs
+[Prototype]
+Name: Item:BronzeArmourLegs
+Singleton: false
+[Appearance]
+Glyph: [
+Color: #6B4D46
+[Position]
+[Item]
+ItemLevel: 1
+[Equipment]
+EquipmentSlot: Legs
+[Stat]
+Name: AC
+Value: 5
+[Stat]
+Name: EV
+Value: -3
+
+"Bronze Helmet"
+[Description]
+Name: Bronze Helmet
+[Prototype]
+Name: Item:BronzeArmourHead
+Singleton: false
+[Appearance]
+Glyph: [
+Color: #6B4D46
+[Position]
+[Item]
+ItemLevel: 1
+[Equipment]
+EquipmentSlot: Head
+[Stat]
+Name: AC
+Value: 2
+[Stat]
+Name: EV
+Value: -1
+
+"Bronze Gloves"
+[Description]
+Name: Bronze Gauntlets
+[Prototype]
+Name: Item:BronzeArmourGloves
+Singleton: false
+[Appearance]
+Glyph: [
+Color: #6B4D46
+[Position]
+[Item]
+ItemLevel: 1
+[Equipment]
+EquipmentSlot: Gloves
+[Stat]
+Name: AC
+Value: 2
+[Stat]
+Name: EV
+Value: -1
+
+"Bronze Boots"
+[Description]
+Name: Bronze Boots
+[Prototype]
+Name: Item:BronzeArmourBoots
+Singleton: false
+[Appearance]
+Glyph: [
+Color: #6B4D46
+[Position]
+[Item]
+ItemLevel: 1
+[Equipment]
+EquipmentSlot: Boots
+[Stat]
+Name: AC
+Value: 2
+[Stat]
+Name: EV
+Value: -1

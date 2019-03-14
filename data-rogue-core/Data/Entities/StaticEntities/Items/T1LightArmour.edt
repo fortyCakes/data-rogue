@@ -9,7 +9,6 @@ Glyph: (
 Color: #6B4D46
 [Position]
 [Item]
-Power: 8
 ItemLevel: 1
 [Equipment]
 EquipmentSlot: Chest
@@ -31,7 +30,6 @@ Glyph: (
 Color: #6B4D46
 [Position]
 [Item]
-Power: 5
 ItemLevel: 1
 [Equipment]
 EquipmentSlot: Legs
@@ -53,7 +51,6 @@ Glyph: (
 Color: #6B4D46
 [Position]
 [Item]
-Power: 5
 ItemLevel: 1
 [Equipment]
 EquipmentSlot: Head
@@ -75,7 +72,6 @@ Glyph: (
 Color: #6B4D46
 [Position]
 [Item]
-Power: 3
 ItemLevel: 1
 [Equipment]
 EquipmentSlot: Gloves
@@ -97,7 +93,6 @@ Glyph: (
 Color: #6B4D46
 [Position]
 [Item]
-Power: 3
 ItemLevel: 1
 [Equipment]
 EquipmentSlot: Boots
