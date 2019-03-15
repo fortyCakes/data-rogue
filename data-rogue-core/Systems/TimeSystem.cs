@@ -158,11 +158,6 @@ namespace data_rogue_core.Systems
                         WaitingForInput = true;
                         break;
                     }
-                    else if (actionResult.Acted)
-                    {
-                        actor.HasActed = true;
-                        break;
-                    }
                     else if (actor.HasActed)
                     {
                         break;
