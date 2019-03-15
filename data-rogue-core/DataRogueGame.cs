@@ -8,7 +8,6 @@ using data_rogue_core.Menus.StaticMenus;
 using data_rogue_core.Renderers.ConsoleRenderers;
 using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
-using data_rogue_core.Forms.StaticForms;
 using data_rogue_core.EventSystem.Rules;
 using data_rogue_core.EventSystem;
 using data_rogue_core.EventSystem.EventData;
@@ -32,7 +31,7 @@ namespace data_rogue_core
         private bool _leaving = false;
         public bool Loading { get; set; } = false;
 
-        public void Run(string seed)
+        public void Run(string seed, List<Type> eventRules)
         {
             Seed = seed;
 
@@ -44,7 +43,7 @@ namespace data_rogue_core
 
             InitialiseState();
 
-            StartDataLoad();
+            StartDataLoad(eventRules);
 
             RunRootConsole();
         }
@@ -89,35 +88,13 @@ namespace data_rogue_core
             _rootConsole.Run();
         }
 
-        private void InitialiseRules()
+        private void InitialiseRules(List<Type> eventRules)
         {
             SystemContainer.EventSystem.Initialise();
 
-            SystemContainer.EventSystem.RegisterRules(
-                new InputHandlerRule(SystemContainer),
-                new PhysicalCollisionRule(SystemContainer),
-                new BumpAttackRule(SystemContainer),
-                new BranchGeneratorRule(SystemContainer),
-                new RolledAttackRule(SystemContainer),
-                new DealDamageRule(SystemContainer),
-                new PeopleDieWhenTheyAreKilledRule(SystemContainer),
-                new SpendTimeRule(SystemContainer),
-                new PlayerDeathRule(SystemContainer),
-                new CompleteMoveRule(SystemContainer),
-                new GetBaseStatRule(SystemContainer),
-                new TiltDamageRule(SystemContainer),
-                new EnemiesInViewAddTensionRule(SystemContainer),
-                new CheckEnoughAuraToActivateSkillRule(SystemContainer),
-                new ApplyStatBoostEnchantmentRule(SystemContainer),
-                new ApplyProcEnchantmentRule(SystemContainer, EventType.Attack),
-                new SpendAuraOnCompleteSkillRule(SystemContainer),
-                new SpendTimeOnCompleteSkillRule(SystemContainer),
-                new DoXpGainRule(),
-                new XpGainMessageRule(SystemContainer),
-                new LevelUpOnXPGainRule(SystemContainer),
-                new GainSingleXPOnKillRule(SystemContainer),
-                new ApplyEquipmentStatsRule(SystemContainer)
-            );
+            SystemContainer.EventSystem.RegisterRules(EventRuleFactory.CreateRules(SystemContainer, eventRules));
+
+            SystemContainer.EventSystem.RegisterRule(new ApplyProcEnchantmentRule(SystemContainer, EventType.Attack));
         }
 
 
@@ -130,13 +107,13 @@ namespace data_rogue_core
             DisplayLoadingScreen("Loading...");
         }
         
-        private void StartDataLoad()
+        private void StartDataLoad(List<Type> eventRules)
         {
             new Thread(() =>
             {
                 Thread.CurrentThread.IsBackground = true;
 
-                InitialiseRules();
+                InitialiseRules(eventRules);
 
                 SystemContainer.ActivitySystem.Pop();
                 DisplayMainMenu();

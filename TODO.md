@@ -1,13 +1,13 @@
 BUGS
 
--
+Enemies seem to do multiple behaviours in one turn?
 
 0.1
 
 Combat maths - make equipment work
-	Apply combat stats (block chances)
-		Roll accuracy and store on the attack data
-	New items by tier
+	/Apply combat stats (block chances)
+	/	Roll accuracy and store on the attack data
+	Rework tiering for roll maths
 Work out spending time - where should it be? "Action" system?
 Ordering of messages on kill
 Ranged and magic weapons

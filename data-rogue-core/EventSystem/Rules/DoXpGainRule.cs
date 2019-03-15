@@ -13,6 +13,11 @@ namespace data_rogue_core.EventSystem.Rules
 
         public int RuleOrder => 0;
 
+        public DoXpGainRule(ISystemContainer systemContainer)
+        {
+
+        }
+
         public bool Apply(EventType type, IEntity sender, object eventData)
         {
             var data = eventData as GainXPEventData;

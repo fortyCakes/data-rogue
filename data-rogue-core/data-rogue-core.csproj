@@ -131,6 +131,8 @@
     <Compile Include="EntityEngineSystem\EntityEngine.cs" />
     <Compile Include="EntityEngineSystem\EntitySerializer.cs" />
     <Compile Include="EntityEngineSystem\ICustomFieldSerialization.cs" />
+    <Compile Include="EventSystem\EventData\DefenceEventData.cs" />
+    <Compile Include="EventSystem\EventRuleFactory.cs" />
     <Compile Include="EventSystem\EventData\CompleteSkillEventData.cs" />
     <Compile Include="EventSystem\EventData\DeathEventData.cs" />
     <Compile Include="EventSystem\EventData\EquipItemEventData.cs" />
@@ -144,20 +146,28 @@
     <Compile Include="EventSystem\EventType.cs" />
     <Compile Include="EventSystem\IEventRule.cs" />
     <Compile Include="EventSystem\IEventSystem.cs" />
+    <Compile Include="EventSystem\Rules\ApplyDefenceRule.cs" />
     <Compile Include="EventSystem\Rules\ApplyEquipmentStatsRule.cs" />
+    <Compile Include="EventSystem\Rules\ApplyHitOrMissedAttackRule.cs" />
     <Compile Include="EventSystem\Rules\ApplyProcEnchantmentRule.cs" />
     <Compile Include="EventSystem\Rules\ApplyStatBoostEnchantmentRule.cs" />
     <Compile Include="EventSystem\Rules\CheckEnoughAuraToActivateSkillRule.cs" />
+    <Compile Include="EventSystem\Rules\DisplayMessageOnXPGainRule.cs" />
     <Compile Include="EventSystem\Rules\DoXpGainRule.cs" />
     <Compile Include="EventSystem\Rules\EnemiesInViewAddTensionRule.cs" />
     <Compile Include="EventSystem\Rules\GainSingleXPOnKillRule.cs" />
     <Compile Include="EventSystem\EventData\GainXPEventData.cs" />
     <Compile Include="EventSystem\Rules\LevelUpOnXPGainRule.cs" />
+    <Compile Include="EventSystem\Rules\RollAccuracyOnAttackRule.cs" />
+    <Compile Include="EventSystem\Rules\SetAccuracyOnAttackRule.cs" />
+    <Compile Include="EventSystem\Rules\SetAttackClassOnAttackRule.cs" />
+    <Compile Include="EventSystem\Rules\SetDamageOnAttackRule.cs" />
+    <Compile Include="EventSystem\Rules\SetSpeedOnAttackRule.cs" />
+    <Compile Include="EventSystem\Rules\SetWeaponOnAttackRule.cs" />
     <Compile Include="EventSystem\Rules\SpendAuraOnCompleteSkillRule.cs" />
+    <Compile Include="EventSystem\Rules\SpendTimeOnAttackRule.cs" />
     <Compile Include="EventSystem\Rules\SpendTimeOnCompleteSkillRule.cs" />
-    <Compile Include="EventSystem\Rules\TiltDamageRule.cs" />
     <Compile Include="EventSystem\Rules\GetBaseStatRule.cs" />
-    <Compile Include="EventSystem\Rules\RolledAttackRule.cs" />
     <Compile Include="EventSystem\Rules\CompleteMoveRule.cs" />
     <Compile Include="EventSystem\Rules\PlayerDeathRule.cs" />
     <Compile Include="EventSystem\Rules\SpendTimeRule.cs" />
@@ -165,7 +175,9 @@
     <Compile Include="EventSystem\Rules\BranchGeneratorRule.cs" />
     <Compile Include="EventSystem\Rules\BumpAttackRule.cs" />
     <Compile Include="EventSystem\Rules\DealDamageRule.cs" />
-    <Compile Include="EventSystem\Rules\XpGainMessageRule.cs" />
+    <Compile Include="EventSystem\Rules\TryApplyBlockOnAttackRule.cs" />
+    <Compile Include="EventSystem\Rules\TryApplyDodgeOnAttackRule.cs" />
+    <Compile Include="EventSystem\Rules\TryApplyTankOnAttackRule.cs" />
     <Compile Include="Forms\FormData.cs" />
     <Compile Include="Forms\FormDataType.cs" />
     <Compile Include="Forms\FormSelection.cs" />
@@ -338,6 +350,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\Entities\StaticEntities\Props\stairs.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Entities\StaticEntities\Unarmed.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\Entities\World\Branches\BranchLinks.edt">

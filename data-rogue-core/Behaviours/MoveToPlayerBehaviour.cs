@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using data_rogue_core.Components;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.EventSystem;
@@ -27,6 +28,11 @@ namespace data_rogue_core.Behaviours
         {
             var position = entity.Get<Position>().MapCoordinate;
             var playerPosition = _positionSystem.PositionOf(_playerSystem.Player);
+
+            if (Math.Abs(position.X - playerPosition.X) > 9 || Math.Abs(position.Y - playerPosition.Y) > 9)
+            {
+                return new BehaviourResult { Acted = false };
+            }
 
             var monsterFov = _mapSystem.MapCollection[position.Key].FovFrom(position, 9);
 

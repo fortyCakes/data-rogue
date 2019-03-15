@@ -7,11 +7,11 @@ using data_rogue_core.Systems.Interfaces;
 namespace data_rogue_core.EventSystem.Rules
 {
 
-    public class XpGainMessageRule : IEventRule
+    public class DisplayMessageOnXPGainRule : IEventRule
     {
         private ISystemContainer systemContainer;
 
-        public XpGainMessageRule(ISystemContainer systemContainer)
+        public DisplayMessageOnXPGainRule(ISystemContainer systemContainer)
         {
             this.systemContainer = systemContainer;
         }
@@ -24,7 +24,10 @@ namespace data_rogue_core.EventSystem.Rules
         {
             var data = eventData as GainXPEventData;
 
-            systemContainer.MessageSystem.Write($"{sender.DescriptionName} gains {data.Amount} XP.", Color.Green);
+            if (systemContainer.PlayerSystem.IsPlayer(sender))
+            {
+                systemContainer.MessageSystem.Write($"{sender.DescriptionName} gains {data.Amount} XP.", Color.Green);
+            }
 
             return true;
         }

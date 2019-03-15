@@ -147,7 +147,7 @@ namespace data_rogue_core.Systems
 
             var behaviours = GetBehaviours(entity);
 
-            foreach (IBehaviour behaviour in behaviours)
+            foreach (IBehaviour behaviour in behaviours.OrderByDescending(b => b.BehaviourPriority))
             {
                 if (behaviour != null)
                 {
@@ -156,6 +156,11 @@ namespace data_rogue_core.Systems
                     if (actionResult.WaitForInput)
                     {
                         WaitingForInput = true;
+                        break;
+                    }
+                    else if (actionResult.Acted)
+                    {
+                        actor.HasActed = true;
                         break;
                     }
                     else if (actor.HasActed)

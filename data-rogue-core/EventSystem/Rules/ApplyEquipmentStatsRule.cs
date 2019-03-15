@@ -29,7 +29,7 @@ namespace data_rogue_core.EventSystem.Rules
 
             foreach(var equippedItem in equipped.EquippedItems)
             {
-                var item = systemContainer.EntityEngine.GetEntity(equippedItem.EquipmentId);
+                var item = systemContainer.EntityEngine.Get(equippedItem.EquipmentId);
 
                 data.Value += systemContainer.StatSystem.GetEntityStat(item, data.Stat);
             }

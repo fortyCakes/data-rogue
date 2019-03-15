@@ -15,7 +15,7 @@ namespace data_rogue_core.EntityEngineSystem
 
         IEntity New(string name, params IEntityComponent[] components);
 
-        IEntity GetEntity(uint entityId);
+        IEntity Get(uint entityId);
 
         IEntity Load(uint EntityId, IEntity entity);
 

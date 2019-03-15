@@ -30,7 +30,7 @@ namespace data_rogue_core.EventSystem.Rules
             foreach(var equippedItem in equipped.EquippedItems)
             {
                 var id = equippedItem.EquipmentId;
-                var item = systemContainer.EntityEngine.GetEntity(id);
+                var item = systemContainer.EntityEngine.Get(id);
 
                 foreach(var boost in item.Components.OfType<StatBoostEnchantment>())
                 {

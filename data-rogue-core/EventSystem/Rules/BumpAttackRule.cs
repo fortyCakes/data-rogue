@@ -7,7 +7,7 @@ using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.EventSystem.Rules
 {
-    class BumpAttackRule : IEventRule
+    public class BumpAttackRule : IEventRule
     {
         public BumpAttackRule(ISystemContainer systemContainer)
         {

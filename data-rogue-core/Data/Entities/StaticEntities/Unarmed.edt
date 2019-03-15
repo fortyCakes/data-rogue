@@ -1,0 +1,20 @@
+﻿"Unarmed"
+[Description]
+Name: Unarmed
+[Prototype]
+Name: Item:UnarmedWeapon
+Singleton: true
+[Weapon]
+Class: Light
+[Stat]
+Name: SH
+Value: 4
+[Stat]
+Name: Accuracy
+Value: 30
+[Stat]
+Name: Damage
+Value: 4
+[Stat]
+Name: Speed
+Value: 700

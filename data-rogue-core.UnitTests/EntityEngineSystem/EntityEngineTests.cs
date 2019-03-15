@@ -53,7 +53,7 @@ namespace data_rogue_core.UnitTests.Systems
         {
             var testEntity = engine.New("Test Entity");
 
-            var result = engine.GetEntity(testEntity.EntityId);
+            var result = engine.Get(testEntity.EntityId);
 
             result.Should().Be(testEntity);
         }

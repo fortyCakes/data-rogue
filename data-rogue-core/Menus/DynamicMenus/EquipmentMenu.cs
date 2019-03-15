@@ -60,7 +60,7 @@ namespace data_rogue_core.Menus.DynamicMenus
                 return;
             }
 
-            var item = _systemContainer.EntityEngine.GetEntity((uint)selectedItem.Value);
+            var item = _systemContainer.EntityEngine.Get((uint)selectedItem.Value);
 
             switch (selectedAction)
             {

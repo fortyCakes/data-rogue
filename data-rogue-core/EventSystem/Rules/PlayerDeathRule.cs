@@ -5,9 +5,8 @@ using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.EventSystem.Rules
 {
-    class PlayerDeathRule : IEventRule
+    public class PlayerDeathRule : IEventRule
     {
-
         public PlayerDeathRule(ISystemContainer systemContainer)
         {
             this.systemContainer = systemContainer;

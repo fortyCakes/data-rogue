@@ -310,7 +310,7 @@ namespace data_rogue_core.UnitTests.Systems
                 new Equipment() {EquipmentSlot = EquipmentSlot.Head}
             });
 
-            entityEngine.GetEntity(entityId).Returns(item);
+            entityEngine.Get(entityId).Returns(item);
 
             entity.Get<Inventory>().Contents.Add(item);
 
@@ -324,7 +324,7 @@ namespace data_rogue_core.UnitTests.Systems
                 new Equipment() {EquipmentSlot = EquipmentSlot.Hand}
             });
 
-            entityEngine.GetEntity(entityId).Returns(item);
+            entityEngine.Get(entityId).Returns(item);
 
             entity.Get<Inventory>().Contents.Add(item);
 

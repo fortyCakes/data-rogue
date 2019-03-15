@@ -66,7 +66,7 @@ namespace data_rogue_core.EntityEngineSystem
 
         public void Destroy(uint entityId)
         {
-            var entity = GetEntity(entityId);
+            var entity = Get(entityId);
 
             _allEntities.Remove(entity);
 
@@ -135,7 +135,7 @@ namespace data_rogue_core.EntityEngineSystem
             return entity;
         }
 
-        public IEntity GetEntity(uint entityId)
+        public IEntity Get(uint entityId)
         {
             return _allEntities.Single(e => e.EntityId == entityId);
         }

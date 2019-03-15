@@ -105,14 +105,14 @@ namespace data_rogue_core.Systems
         {
             var equipped = equippedEntity.Get<Equipped>();
 
-            return equipped.EquippedItems.Select(e => systemContainer.EntityEngine.GetEntity(e.EquipmentId)).ToList();
+            return equipped.EquippedItems.Select(e => systemContainer.EntityEngine.Get(e.EquipmentId)).ToList();
         }
 
         public IEntity GetItemInSlot(IEntity equippedEntity, EquipmentSlot slot, EquipmentSlotDetails slotDetails)
         {
             var equipped = equippedEntity.Get<Equipped>();
 
-            return equipped.EquippedItems.Where(e => e.Slot == slotDetails).Select(i => systemContainer.EntityEngine.GetEntity(i.EquipmentId)).Where(i => i.Get<Equipment>().EquipmentSlot == slot).SingleOrDefault();
+            return equipped.EquippedItems.Where(e => e.Slot == slotDetails).Select(i => systemContainer.EntityEngine.Get(i.EquipmentId)).Where(i => i.Get<Equipment>().EquipmentSlot == slot).SingleOrDefault();
         }
 
         private EquipmentSlotDetails UnequipItemInSlot(IEntity entity, IEntity equipment)
@@ -134,7 +134,7 @@ namespace data_rogue_core.Systems
 
             var equippedItemId = equipped.EquippedItems.Single(e => e.Slot == slot).EquipmentId;
 
-            return systemContainer.EntityEngine.GetEntity(equippedItemId);
+            return systemContainer.EntityEngine.Get(equippedItemId);
         }
 
         private bool HasExactSlotFor(IEntity entity, IEntity equipment)

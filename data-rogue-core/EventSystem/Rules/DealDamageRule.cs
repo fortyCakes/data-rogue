@@ -6,7 +6,7 @@ using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.EventSystem.Rules
 {
-    class DealDamageRule : IEventRule
+    public class DealDamageRule : IEventRule
     {
         public DealDamageRule(ISystemContainer systemContainer)
         {

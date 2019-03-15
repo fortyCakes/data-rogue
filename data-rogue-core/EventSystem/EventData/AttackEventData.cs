@@ -4,7 +4,19 @@ namespace data_rogue_core.EventSystem.EventData
 {
     public class AttackEventData
     {
+        public IEntity Attacker;
         public IEntity Defender;
-        public AttackType AttackType = AttackType.Physical;
+        public string AttackClass;
+        public int? Speed;
+        public int? Accuracy;
+        public int? Damage;
+        public int? AttackRoll;
+
+        public IEntity Weapon;
+
+        public bool IsAction = true;
+
+        public string[] Tags;
+        public string SuccessfulDefenceType;
     }
 }

@@ -24,7 +24,7 @@ Value: 30
 Name: Damage
 Value: 6
 [Stat]
-Name: AttackSpeed
+Name: Speed
 Value: 700
 
 "Bronze Sword"
@@ -56,7 +56,7 @@ Value: 25
 Name: Damage
 Value: 10
 [Stat]
-Name: AttackSpeed
+Name: Speed
 Value: 1000
 
 "Wooden Shield"

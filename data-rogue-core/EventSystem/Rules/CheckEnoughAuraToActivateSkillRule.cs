@@ -6,7 +6,7 @@ using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.EventSystem.Rules
 {
-    class CheckEnoughAuraToActivateSkillRule : IEventRule
+    public class CheckEnoughAuraToActivateSkillRule : IEventRule
     {
         private readonly ISkillSystem skillSystem;
         private IPrototypeSystem prototypeSystem;

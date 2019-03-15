@@ -7,23 +7,29 @@ using data_rogue_core.Systems.Interfaces;
 namespace data_rogue_core.EventSystem.Rules
 {
 
-    public class SpendTimeOnCompleteSkillRule : IEventRule
+    public class SpendTimeOnAttackRule: IEventRule
     {
         private ISystemContainer systemContainer;
 
-        public SpendTimeOnCompleteSkillRule(ISystemContainer systemContainer)
+        public SpendTimeOnAttackRule(ISystemContainer systemContainer)
         {
             this.systemContainer = systemContainer;
         }
 
-        public EventTypeList EventTypes => new EventTypeList { EventType.CompleteSkill };
-        public int RuleOrder => 0;
+        public EventTypeList EventTypes => new EventTypeList { EventType.Attack };
+        public int RuleOrder => -100;
 
         public bool Apply(EventType type, IEntity sender, object eventData)
         {
-            systemContainer.EventSystem.Try(EventType.SpendTime, sender, new SpendTimeEventData { Ticks = 1000 });
+            var data = eventData as AttackEventData;
+
+            if (data.IsAction)
+            {
+                systemContainer.EventSystem.Try(EventType.SpendTime, sender, new SpendTimeEventData { Ticks = data.Speed.Value });
+            }
 
             return true;
         }
     }
+
 }

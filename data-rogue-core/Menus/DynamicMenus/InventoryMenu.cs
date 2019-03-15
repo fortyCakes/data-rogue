@@ -33,7 +33,7 @@ namespace data_rogue_core.Menus.DynamicMenus
 
         private static MenuItem ConvertItemToMenuItem(uint itemId, IEntityEngine entityEngine)
         {
-            var item = entityEngine.GetEntity(itemId);
+            var item = entityEngine.Get(itemId);
 
             return new MenuItem(item.Get<Description>().Name, item.EntityId);
         }
@@ -51,7 +51,7 @@ namespace data_rogue_core.Menus.DynamicMenus
                 return;
             }
 
-            var item = systemContainer.EntityEngine.GetEntity((uint)selectedItem.Value);
+            var item = systemContainer.EntityEngine.Get((uint)selectedItem.Value);
 
             switch (selectedAction)
             {

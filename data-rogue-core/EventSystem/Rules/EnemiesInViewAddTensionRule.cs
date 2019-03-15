@@ -9,7 +9,7 @@ using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.EventSystem.Rules
 {
-    class EnemiesInViewAddTensionRule : IEventRule
+    public class EnemiesInViewAddTensionRule : IEventRule
     {
         public EnemiesInViewAddTensionRule(ISystemContainer systemContainer)
         {

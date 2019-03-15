@@ -7,7 +7,7 @@ using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.EventSystem.Rules
 {
-    class CompleteMoveRule : IEventRule
+    public class CompleteMoveRule : IEventRule
     {
         private readonly IPositionSystem positionSystem;
         private readonly IEventSystem eventRuleSystem;

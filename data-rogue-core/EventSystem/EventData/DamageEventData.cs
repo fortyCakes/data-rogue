@@ -6,8 +6,7 @@ namespace data_rogue_core.EventSystem.EventData
     {
         public int Damage { get; set; }
 
-        public bool Overwhelming = false;
-
         public IEntity DamagedBy;
+        internal bool Absorbed;
     }
 }

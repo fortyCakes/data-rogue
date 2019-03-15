@@ -41,6 +41,9 @@ namespace data_rogue_core
         public T PickOne<T>(IList<T> items)
         {
             var max = items.Count();
+
+            if (max == 1) return items[0];
+
             var index = Between(1, max) - 1;
             return items[index];
         }

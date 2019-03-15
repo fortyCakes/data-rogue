@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using data_rogue_core.EventSystem;
 using data_rogue_core.EventSystem.EventData;
+using System;
 
 namespace data_rogue_core.Systems
 {
@@ -31,49 +32,35 @@ namespace data_rogue_core.Systems
 
         public void BasicAttack(IEntity attacker, IEntity defender)
         {
-            var attackingFighter = attacker.Get<TiltFighter>();
-            var defendingFighter = defender.Get<TiltFighter>();
+            var baseDamage = _statSystem.GetEntityStat(attacker, "Muscle");
 
-            var attackData = new AttackEventData {Defender = defender};
-
-            var hit = _eventRuleSystem.Try(EventType.Attack, attacker, attackData);
-
-            var msg = $"{attacker.Get<Description>().Name} attacks {defender.Get<Description>().Name}";
-
-            if (hit)
-            {
-                var baseDamage = _statSystem.GetEntityStat(attacker, "Muscle");
-                msg += $" and hits for {baseDamage} damage.";
-
-                _eventRuleSystem.Try(EventType.Damage, defender, new DamageEventData {Damage = baseDamage, DamagedBy = attacker});
-            }
-            else
-            {
-                msg += $" and misses.";
-            }
-
-            _messageSystem.Write(msg);
-
-            _eventRuleSystem.Try(EventType.SpendTime, attacker, new SpendTimeEventData() {Ticks = 1000});
+            var hit = Attack(attacker, defender, attackDamage: baseDamage);
         }
 
-        public bool Attack(IEntity attacker, IEntity defender, string attackType = null, string attackDamage = null, string[] attackTags = null)
+        public bool Attack(IEntity attacker, IEntity defender, string attackClass = null, int? attackDamage = null, string[] attackTags = null, bool isAction = true)
         {
-            // Get attacker's weapon
+            var attack = new AttackEventData
+            {
+                Attacker = attacker,
+                Defender = defender,
+                AttackClass = attackClass,
+                Damage = attackDamage,
+                Tags = attackTags,
+                IsAction = isAction
+            };
 
-            // Create attack event data (type, weapon, accuracy, damage, tags)
-
-            // Run Attack event
+            return _eventRuleSystem.Try(EventType.Attack, attacker, attack);
+            
 
             // If hit, run damage event
 
             // Describe attack based on returned event data
-
-            // Spend time
-
-            throw new System.NotImplementedException();
         }
 
+        private IEntity GetAttackWeapon(IEntity attacker)
+        {
+            throw new NotImplementedException();
+        }
 
         public IEnumerable<IEntity> GetEntitiesWithFighter(IEnumerable<IEntity> entities)
         {

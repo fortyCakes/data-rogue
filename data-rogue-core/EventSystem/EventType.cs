@@ -20,6 +20,7 @@
         UnequipItem,
         CompleteSkill,
         PickUpWealth,
-        GainXP
+        GainXP,
+        Defence
     }
 }
