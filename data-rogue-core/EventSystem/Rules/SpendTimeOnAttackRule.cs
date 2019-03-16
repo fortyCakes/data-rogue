@@ -17,7 +17,7 @@ namespace data_rogue_core.EventSystem.Rules
         }
 
         public EventTypeList EventTypes => new EventTypeList { EventType.Attack };
-        public int RuleOrder => -100;
+        public int RuleOrder => 1;
 
         public bool Apply(EventType type, IEntity sender, object eventData)
         {
