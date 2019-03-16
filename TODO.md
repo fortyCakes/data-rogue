@@ -1,7 +1,5 @@
 BUGS
 
-Enemies seem to do multiple behaviours in one turn?
-
 0.1
 
 Combat maths - make equipment work
