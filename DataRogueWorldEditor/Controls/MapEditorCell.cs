@@ -26,7 +26,7 @@ namespace DataRogueWorldEditor.Controls
 
         private void lblGlyph_Click(object sender, EventArgs e)
         {
-            this.OnClick(e);
+            OnClick(e);
         }
     }
 }

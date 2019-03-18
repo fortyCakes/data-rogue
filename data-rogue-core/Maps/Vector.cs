@@ -20,7 +20,7 @@
                 return false;
             }
 
-            return this.Equals(other);
+            return Equals(other);
         }
 
         protected bool Equals(Vector other)

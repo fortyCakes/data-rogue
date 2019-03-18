@@ -1,6 +1,5 @@
 ﻿using data_rogue_core.Components;
 using data_rogue_core.EntityEngineSystem;
-using System;
 using System.Linq;
 
 namespace data_rogue_core

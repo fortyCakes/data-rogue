@@ -15,13 +15,13 @@ namespace data_rogue_core.Data
 
         public EntityBuilder(string entityName)
         {
-            this.Name = entityName;
+            Name = entityName;
         }
 
         public EntityBuilder(string entityName, uint entityId)
         {
-            this.Name = entityName;
-            this.Id = entityId;
+            Name = entityName;
+            Id = entityId;
         }
 
         public IEntity Build(ISystemContainer systemContainer)

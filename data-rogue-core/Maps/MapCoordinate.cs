@@ -56,7 +56,7 @@ namespace data_rogue_core.Maps
 
         public string Serialize()
         {
-            return this.ToString();
+            return ToString();
         }
 
         public void Deserialize(string value)

@@ -136,7 +136,7 @@ namespace data_rogue_core.Maps
 
         public List<MapCoordinate> FovFrom(MapCoordinate mapCoordinate, int range)
         {
-            if (mapCoordinate.Key != this.MapKey)
+            if (mapCoordinate.Key != MapKey)
             {
                 return new List<MapCoordinate>();
             }

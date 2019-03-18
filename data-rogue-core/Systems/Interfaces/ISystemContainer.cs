@@ -1,7 +1,6 @@
 ﻿using data_rogue_core.Behaviours;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.EventSystem;
-using data_rogue_core.Renderers;
 
 namespace data_rogue_core.Systems.Interfaces
 {

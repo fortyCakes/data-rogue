@@ -6,9 +6,6 @@ using data_rogue_core.Systems.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace data_rogue_core.Menus.DynamicMenus
 {
@@ -21,7 +18,7 @@ namespace data_rogue_core.Menus.DynamicMenus
         public InventoryMenu(ISystemContainer systemContainer, Inventory inventory) : base(systemContainer.ActivitySystem, "Inventory", GetCallback(systemContainer), GetInventoryMenuItems(systemContainer, inventory))
         {
             this.systemContainer = systemContainer;
-            this.SelectedAction = MenuAction.Use;
+            SelectedAction = MenuAction.Use;
         }
 
         private static MenuItem[] GetInventoryMenuItems(ISystemContainer systemContainer, Inventory inventory)

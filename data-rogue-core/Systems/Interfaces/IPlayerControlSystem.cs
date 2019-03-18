@@ -1,5 +1,4 @@
-﻿using data_rogue_core.EntityEngineSystem;
-using data_rogue_core.Maps;
+﻿using data_rogue_core.Maps;
 using RLNET;
 
 namespace data_rogue_core.Systems

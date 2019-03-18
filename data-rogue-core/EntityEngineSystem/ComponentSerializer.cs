@@ -172,7 +172,7 @@ namespace data_rogue_core.EntityEngineSystem
         {
             // deal with normal scenarios
             if (argument == null) return true;
-            if (object.Equals(argument, default(T))) return true;
+            if (Equals(argument, default(T))) return true;
 
             // deal with non-null nullables
             Type methodType = typeof(T);

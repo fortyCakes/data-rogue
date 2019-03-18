@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using data_rogue_core.Components;
+﻿using data_rogue_core.Components;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.Systems.Interfaces;
@@ -13,7 +12,7 @@ namespace data_rogue_core.EventSystem.Rules
 
         public SetAttackClassOnAttackRule(ISystemContainer systemContainer)
         {
-            this._systemContainer = systemContainer;
+            _systemContainer = systemContainer;
         }
 
         public EventTypeList EventTypes => new EventTypeList { EventType.Attack };

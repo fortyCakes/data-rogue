@@ -19,7 +19,7 @@ namespace data_rogue_core.Data
 
         public string Serialize()
         {
-            return this.ToString();
+            return ToString();
         }
 
         public override string ToString()
