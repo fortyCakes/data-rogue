@@ -8,7 +8,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
         public BaseConsoleRenderer(RLConsole console)
         {
-            this.Console = console;
+            Console = console;
         }
     }
 }

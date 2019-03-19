@@ -11,7 +11,7 @@
         {
             this.statName = statName;
             this.minStat = minStat;
-            this.statValue = startStat;
+            statValue = startStat;
             this.maxStat = maxStat;
         }
 

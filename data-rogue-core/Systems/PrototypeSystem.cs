@@ -29,14 +29,14 @@ namespace data_rogue_core.Systems
 
         public IEntity Get(int entityId)
         {
-            var entity = this.Entities.Single(e => e.EntityId == entityId);
+            var entity = Entities.Single(e => e.EntityId == entityId);
 
             return MakeInstanceOf(entity);
         }
 
         public IEntity Get(string entityName)
         {
-            var entity = this.Entities.Single(e => e.Get<Prototype>().Name == entityName);
+            var entity = Entities.Single(e => e.Get<Prototype>().Name == entityName);
 
             return MakeInstanceOf(entity);
         }

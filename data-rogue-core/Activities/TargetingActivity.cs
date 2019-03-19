@@ -23,8 +23,8 @@ namespace data_rogue_core.Activities
 
         public TargetingActivity(TargetingData targetingData, Action<MapCoordinate> callback, ISystemContainer systemContainer)
         {
-            this.rendererFactory = systemContainer.RendererSystem.RendererFactory;
-            this.activitySystem = systemContainer.ActivitySystem;
+            rendererFactory = systemContainer.RendererSystem.RendererFactory;
+            activitySystem = systemContainer.ActivitySystem;
 
             Renderer = (ITargetingRenderer)rendererFactory.GetRendererFor(Type);
 

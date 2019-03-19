@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using data_rogue_core.EventSystem;
 using data_rogue_core.EventSystem.EventData;
-using System;
 
 namespace data_rogue_core.Systems
 {
@@ -20,8 +19,8 @@ namespace data_rogue_core.Systems
         {
             _engine = engine;
             _messageSystem = messageSystem;
-            this._eventRuleSystem = eventRuleSystem;
-            this._timeSystem = timeSystem;
+            _eventRuleSystem = eventRuleSystem;
+            _timeSystem = timeSystem;
             _statSystem = statSystem;
         }
 
@@ -50,16 +49,6 @@ namespace data_rogue_core.Systems
             };
 
             return _eventRuleSystem.Try(EventType.Attack, attacker, attack);
-            
-
-            // If hit, run damage event
-
-            // Describe attack based on returned event data
-        }
-
-        private IEntity GetAttackWeapon(IEntity attacker)
-        {
-            throw new NotImplementedException();
         }
 
         public IEnumerable<IEntity> GetEntitiesWithFighter(IEnumerable<IEntity> entities)

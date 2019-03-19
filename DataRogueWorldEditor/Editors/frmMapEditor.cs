@@ -168,7 +168,7 @@ namespace DataRogueWorldEditor.Editors
 
         private void SetTabTitle()
         {
-            this.Text = Path.GetFileName(FileName) + (IsDirty ? "*" : "");
+            Text = Path.GetFileName(FileName) + (IsDirty ? "*" : "");
         }
 
         private void btnMap_Click(object sender, EventArgs e)

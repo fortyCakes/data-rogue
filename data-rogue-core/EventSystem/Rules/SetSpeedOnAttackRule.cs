@@ -11,7 +11,7 @@ namespace data_rogue_core.EventSystem.Rules
 
         public SetSpeedOnAttackRule(ISystemContainer systemContainer)
         {
-            this._systemContainer = systemContainer;
+            _systemContainer = systemContainer;
         }
 
         public EventTypeList EventTypes => new EventTypeList { EventType.Attack };

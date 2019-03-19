@@ -24,7 +24,7 @@ namespace data_rogue_core.UnitTests.Data
         public void SetUp()
         {
             systemContainer = new SystemContainer();
-            systemContainer.EntityEngine = new EntityEngineSystem.EntityEngine(Substitute.For<BaseStaticEntityLoader>());
+            systemContainer.EntityEngine = new EntityEngine(Substitute.For<BaseStaticEntityLoader>());
 
             wallCell = CreateCell('#', "Cell:Wall");
             floorCell = CreateCell('.', "Cell:Empty");

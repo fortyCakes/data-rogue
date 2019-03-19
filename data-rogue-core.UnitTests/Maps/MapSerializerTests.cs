@@ -22,7 +22,7 @@ namespace data_rogue_core.UnitTests.Maps
         {
             systemContainer = new SystemContainer();
 
-            systemContainer.EntityEngine = new EntityEngineSystem.EntityEngine(new NullStaticEntityLoader());
+            systemContainer.EntityEngine = new EntityEngine(new NullStaticEntityLoader());
             systemContainer.PrototypeSystem = Substitute.For<IPrototypeSystem>();
 
             wallCell = CreateCell('#', "Cell:Wall");

@@ -18,7 +18,7 @@ namespace data_rogue_core.Menus.DynamicMenus
         public InventoryMenu(ISystemContainer systemContainer, Inventory inventory) : base(systemContainer.ActivitySystem, "Inventory", GetCallback(systemContainer), GetInventoryMenuItems(systemContainer, inventory))
         {
             this.systemContainer = systemContainer;
-            this.SelectedAction = MenuAction.Use;
+            SelectedAction = MenuAction.Use;
         }
 
         private static MenuItem[] GetInventoryMenuItems(ISystemContainer systemContainer, Inventory inventory)

@@ -7,7 +7,7 @@ namespace data_rogue_core.Maps
     {
         public void AddMap(Map map)
         {
-            this.Add(map.MapKey, map);
+            Add(map.MapKey, map);
         }
 
         public List<Map> AllMaps { get => Keys.Select(k => this[k]).ToList(); }
