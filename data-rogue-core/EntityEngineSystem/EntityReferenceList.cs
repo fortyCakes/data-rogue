@@ -1,5 +1,4 @@
-﻿using data_rogue_core.EntityEngineSystem;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 

@@ -1,10 +1,6 @@
-﻿using data_rogue_core;
-using data_rogue_core.EventSystem.Rules;
+﻿using data_rogue_core.EventSystem.Rules;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace data_rogue_one
 {
@@ -15,13 +11,12 @@ namespace data_rogue_one
         {
             get
             {
-                return new List<Type> {
-                    typeof(InputHandlerRule),
+                var list = new List<Type> {
                     typeof(PhysicalCollisionRule),
                     typeof(BumpAttackRule),
                     typeof(BranchGeneratorRule),
                     typeof(SetAttackClassOnAttackRule),
-                    typeof(SpendTimeOnAttackRule),
+                    typeof(SpendTimeOnActionRule),
                     typeof(SetDamageOnAttackRule),
                     typeof(SetWeaponOnAttackRule),
                     typeof(DealDamageRule),
@@ -52,6 +47,10 @@ namespace data_rogue_one
                     typeof(ApplyHitOrMissedAttackRule),
                     typeof(AddAgilityToEvasionRule)
                 };
+
+                list.AddRange(ApplyActionRule.AllActionRules);
+
+                return list;
             }
         }
     }

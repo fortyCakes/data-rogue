@@ -1,6 +1,4 @@
-﻿using data_rogue_core.Activities;
-using data_rogue_core.Systems.Interfaces;
-using System;
+﻿using data_rogue_core.Systems.Interfaces;
 using data_rogue_core.Forms.StaticForms;
 
 namespace data_rogue_core.Menus.StaticMenus

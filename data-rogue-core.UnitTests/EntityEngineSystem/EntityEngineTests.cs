@@ -6,7 +6,6 @@ using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Systems;
 using FluentAssertions;
 using NSubstitute;
-using NSubstitute.Extensions;
 using NUnit.Framework;
 
 namespace data_rogue_core.UnitTests.Systems

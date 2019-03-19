@@ -94,6 +94,8 @@
     <Compile Include="Components\Equipped.cs" />
     <Compile Include="Components\Experience.cs" />
     <Compile Include="Components\Health.cs" />
+    <Compile Include="Components\KeyBinding.cs" />
+    <Compile Include="Data\KeyCombination.cs" />
     <Compile Include="Components\Stat.cs" />
     <Compile Include="Components\TiltFighter.cs" />
     <Compile Include="Components\Wealth.cs" />
@@ -131,6 +133,7 @@
     <Compile Include="EntityEngineSystem\EntityEngine.cs" />
     <Compile Include="EntityEngineSystem\EntitySerializer.cs" />
     <Compile Include="EntityEngineSystem\ICustomFieldSerialization.cs" />
+    <Compile Include="EventSystem\EventData\ActionType.cs" />
     <Compile Include="EventSystem\EventData\DefenceEventData.cs" />
     <Compile Include="EventSystem\EventRuleFactory.cs" />
     <Compile Include="EventSystem\EventData\CompleteSkillEventData.cs" />
@@ -146,9 +149,18 @@
     <Compile Include="EventSystem\EventType.cs" />
     <Compile Include="EventSystem\IEventRule.cs" />
     <Compile Include="EventSystem\IEventSystem.cs" />
+    <Compile Include="EventSystem\Rules\Actions\EnterAction.cs" />
+    <Compile Include="EventSystem\Rules\Actions\EquipmentMenuAction.cs" />
+    <Compile Include="EventSystem\Rules\Actions\GetItemAction.cs" />
+    <Compile Include="EventSystem\Rules\Actions\InventoryMenuAction.cs" />
+    <Compile Include="EventSystem\Rules\Actions\MeleeAttackAction.cs" />
+    <Compile Include="EventSystem\Rules\Actions\MoveAction.cs" />
+    <Compile Include="EventSystem\Rules\Actions\RestAction.cs" />
+    <Compile Include="EventSystem\Rules\Actions\SaveAction.cs" />
     <Compile Include="EventSystem\Rules\ApplyDefenceRule.cs" />
     <Compile Include="EventSystem\Rules\ApplyEquipmentStatsRule.cs" />
     <Compile Include="EventSystem\Rules\ApplyHitOrMissedAttackRule.cs" />
+    <Compile Include="EventSystem\Rules\Actions\ApplyActionRule.cs" />
     <Compile Include="EventSystem\Rules\ApplyProcEnchantmentRule.cs" />
     <Compile Include="EventSystem\Rules\ApplyStatBoostEnchantmentRule.cs" />
     <Compile Include="EventSystem\Rules\CheckEnoughAuraToActivateSkillRule.cs" />
@@ -165,7 +177,7 @@
     <Compile Include="EventSystem\Rules\SetSpeedOnAttackRule.cs" />
     <Compile Include="EventSystem\Rules\SetWeaponOnAttackRule.cs" />
     <Compile Include="EventSystem\Rules\SpendAuraOnCompleteSkillRule.cs" />
-    <Compile Include="EventSystem\Rules\SpendTimeOnAttackRule.cs" />
+    <Compile Include="EventSystem\Rules\SpendTimeOnActionRule.cs" />
     <Compile Include="EventSystem\Rules\SpendTimeOnCompleteSkillRule.cs" />
     <Compile Include="EventSystem\Rules\GetBaseStatRule.cs" />
     <Compile Include="EventSystem\Rules\CompleteMoveRule.cs" />
@@ -204,6 +216,7 @@
     <Compile Include="Renderers\IFormRenderer.cs" />
     <Compile Include="EventSystem\EventData\ActivateSkillEventData.cs" />
     <Compile Include="Renderers\ITargetingRenderer.cs" />
+    <Compile Include="EventSystem\EventData\ActionEventData.cs" />
     <Compile Include="Systems\ActivitySystem.cs" />
     <Compile Include="Systems\Interfaces\IMapSystem.cs" />
     <Compile Include="Systems\Interfaces\IRendererSystem.cs" />
@@ -283,7 +296,6 @@
     <Compile Include="EntityEngineSystem\SystemComponents.cs" />
     <Compile Include="EventSystem\EventRuleSystem.cs" />
     <Compile Include="EventSystem\RuleBook.cs" />
-    <Compile Include="EventSystem\Rules\InputHandlerRule.cs" />
     <Compile Include="EventSystem\Rules\PhysicalCollisionRule.cs" />
     <Compile Include="Maps\MapCollection.cs" />
     <Compile Include="Renderers\ConsoleRenderers\ConsoleGameplayRenderer.cs" />
@@ -316,6 +328,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Data\Entities\StaticEntities\keybindings.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\Entities\player.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

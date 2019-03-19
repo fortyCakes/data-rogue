@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-
-namespace data_rogue_core.Menus
+﻿namespace data_rogue_core.Menus
 {
     public class MenuItem
     {

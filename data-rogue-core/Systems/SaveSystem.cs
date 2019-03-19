@@ -7,7 +7,6 @@ using data_rogue_core.Data;
 using System.Drawing;
 using System.Linq;
 using data_rogue_core.Forms.StaticForms;
-using data_rogue_core.Systems;
 
 namespace data_rogue_core
 {

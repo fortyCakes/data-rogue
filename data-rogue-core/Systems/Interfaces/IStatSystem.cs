@@ -1,5 +1,4 @@
 ﻿using data_rogue_core.EntityEngineSystem;
-using data_rogue_core.Forms.StaticForms;
 
 namespace data_rogue_core
 {

@@ -30,11 +30,11 @@ namespace data_rogue_core.Systems
         public IEventSystem _eventRuleSystem;
         public ITimeSystem _timeSystem;
 
-        public void BasicAttack(IEntity attacker, IEntity defender)
+        public bool BasicAttack(IEntity attacker, IEntity defender)
         {
             var baseDamage = _statSystem.GetEntityStat(attacker, "Muscle");
 
-            var hit = Attack(attacker, defender, attackDamage: baseDamage);
+            return Attack(attacker, defender, attackDamage: baseDamage);
         }
 
         public bool Attack(IEntity attacker, IEntity defender, string attackClass = null, int? attackDamage = null, string[] attackTags = null, bool isAction = true)

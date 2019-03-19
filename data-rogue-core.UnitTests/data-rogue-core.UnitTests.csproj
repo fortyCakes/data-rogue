@@ -79,6 +79,7 @@
     <Compile Include="EntityEngineSystem\EntityEngineTests.cs" />
     <Compile Include="Systems\EquipmentSystemTests.cs" />
     <Compile Include="Systems\ItemSystemTests.cs" />
+    <Compile Include="Systems\PlayerControlSystemTests.cs" />
     <Compile Include="Systems\SaveStateSerializerTests.cs" />
     <Compile Include="Systems\SaveSystemTests.cs" />
     <Compile Include="Systems\ScriptExecutorTests.cs" />

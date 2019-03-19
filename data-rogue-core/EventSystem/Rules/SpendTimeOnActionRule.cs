@@ -1,5 +1,4 @@
-﻿using data_rogue_core.Components;
-using data_rogue_core.EntityEngineSystem;
+﻿using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
@@ -7,23 +6,23 @@ using data_rogue_core.Systems.Interfaces;
 namespace data_rogue_core.EventSystem.Rules
 {
 
-    public class SpendTimeOnAttackRule: IEventRule
+    public class SpendTimeOnActionRule: IEventRule
     {
         private ISystemContainer systemContainer;
 
-        public SpendTimeOnAttackRule(ISystemContainer systemContainer)
+        public SpendTimeOnActionRule(ISystemContainer systemContainer)
         {
             this.systemContainer = systemContainer;
         }
 
-        public EventTypeList EventTypes => new EventTypeList { EventType.Attack };
-        public int RuleOrder => 1;
+        public EventTypeList EventTypes => new EventTypeList { EventType.Action };
+        public int RuleOrder => int.MinValue;
 
         public bool Apply(EventType type, IEntity sender, object eventData)
         {
-            var data = eventData as AttackEventData;
+            var data = eventData as ActionEventData;
 
-            if (data.IsAction)
+            if (data.Speed.Value > 0)
             {
                 systemContainer.EventSystem.Try(EventType.SpendTime, sender, new SpendTimeEventData { Ticks = data.Speed.Value });
             }

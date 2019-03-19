@@ -1,5 +1,4 @@
-﻿using data_rogue_core.EntityEngineSystem;
-using data_rogue_core.EventSystem;
+﻿using data_rogue_core.EventSystem;
 
 namespace data_rogue_core.Components
 {

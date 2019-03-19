@@ -1,11 +1,4 @@
-﻿using data_rogue_core.Activities;
-using data_rogue_core.EntityEngineSystem;
-using data_rogue_core.Maps;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using data_rogue_core.EntityEngineSystem;
 
 namespace data_rogue_core.Systems.Interfaces
 {

@@ -1,7 +1,6 @@
 ﻿using System.Drawing;
 using data_rogue_core.Components;
 using data_rogue_core.EntityEngineSystem;
-using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.EventSystem.Rules

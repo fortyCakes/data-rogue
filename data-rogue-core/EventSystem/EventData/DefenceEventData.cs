@@ -1,6 +1,4 @@
-﻿using data_rogue_core.EntityEngineSystem;
-
-namespace data_rogue_core.EventSystem.EventData
+﻿namespace data_rogue_core.EventSystem.EventData
 {
 
     public class DefenceEventData

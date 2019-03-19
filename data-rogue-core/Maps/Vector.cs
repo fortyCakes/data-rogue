@@ -1,4 +1,6 @@
-﻿namespace data_rogue_core.Maps
+﻿using System;
+
+namespace data_rogue_core.Maps
 {
     public class Vector
     {
@@ -52,6 +54,16 @@
             if (ReferenceEquals(thatVector, null)) return false;
 
             return thisVector.Equals(thatVector);
+        }
+
+        public static Vector Parse(string parameters)
+        {
+            var splits = parameters.Split(',');
+
+            var x = int.Parse(splits[0]);
+            var y = int.Parse(splits[1]);
+
+            return new Vector(x, y);
         }
 
         public static bool operator !=(Vector thisVector, Vector thatVector)
