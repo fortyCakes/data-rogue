@@ -5,7 +5,6 @@ BUGS
 0.1
 
 Ordering of messages on kill
-Morgue file format
 Ranged and magic weapons
 	"fire" command
 	Apply combat stat (aegis)
@@ -21,6 +20,7 @@ Event system rework: separate pre- and post-event rules
 
 0.2+
 
+Morgue file format and death screen
 Dependency injection? for rules and behaviours
 Finish importing all tiers of base items
 Smooth rendering while resting
