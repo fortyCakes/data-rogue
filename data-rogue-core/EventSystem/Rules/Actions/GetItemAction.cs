@@ -59,11 +59,11 @@ namespace data_rogue_core.EventSystem.Rules
                         if (done)
                         {
                             _systemContainer.MessageSystem.Write($"{sender.DescriptionName} picks up the {firstItem.Get<Description>().Name}.");
-
-                            _systemContainer.EventSystem.Try(EventType.SpendTime, sender, new SpendTimeEventData { Ticks = 1000 });
                         }
                     }
                 }
+
+                return true;
             }
 
             return false;
