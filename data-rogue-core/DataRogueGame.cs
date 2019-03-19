@@ -165,7 +165,7 @@ namespace data_rogue_core
 
                 SystemContainer.PlayerControlSystem.HandleInput(keyPress, _rootConsole.Mouse);
 
-                while (!SystemContainer.TimeSystem.WaitingForInput && SystemContainer.ActivitySystem.ActivityStack.Count > 0 && SystemContainer.ActivitySystem.Peek().Type == ActivityType.Gameplay)
+                while (!SystemContainer.TimeSystem.WaitingForInput && SystemContainer.ActivitySystem.ActivityStack.Count > 0 && SystemContainer.ActivitySystem.Peek().Type == ActivityType.Gameplay && !_leaving)
                 {
                     SystemContainer.TimeSystem.Tick();
                 }

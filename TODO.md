@@ -8,6 +8,8 @@ Combat maths - make equipment work
 	/ Rework tiering for roll maths
 	Insert items into data files
 Work out spending time - where should it be? "Action" system?
+	/ Action system for player controls
+	Behaviours driven by actions
 Ordering of messages on kill
 Ranged and magic weapons
 	"fire" command
