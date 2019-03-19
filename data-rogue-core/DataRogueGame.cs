@@ -10,7 +10,7 @@ using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
 using data_rogue_core.EventSystem.Rules;
 using data_rogue_core.EventSystem;
-using data_rogue_core.EventSystem.EventData;
+using data_rogue_core.Components;
 
 namespace data_rogue_core
 {
@@ -161,13 +161,11 @@ namespace data_rogue_core
         {
             if (!_leaving && !Loading)
             {
-                RLKeyPress keyPress = _rootConsole.Keyboard.GetKeyPress();
-                RLMouse mouse = _rootConsole.Mouse;
-                InputEventData eventData = new InputEventData(keyPress, mouse);
+                var keyPress = KeyCombination.FromRLKeyPress(_rootConsole.Keyboard.GetKeyPress());
 
-                SystemContainer.EventSystem.Try(EventType.Input, null, eventData);
+                SystemContainer.PlayerControlSystem.HandleInput(keyPress, _rootConsole.Mouse);
 
-                while (!SystemContainer.TimeSystem.WaitingForInput && SystemContainer.ActivitySystem.ActivityStack.Count > 0 && SystemContainer.ActivitySystem.Peek().Type == ActivityType.Gameplay)
+                while (!SystemContainer.TimeSystem.WaitingForInput && SystemContainer.ActivitySystem.ActivityStack.Count > 0 && SystemContainer.ActivitySystem.Peek().Type == ActivityType.Gameplay && !_leaving)
                 {
                     SystemContainer.TimeSystem.Tick();
                 }

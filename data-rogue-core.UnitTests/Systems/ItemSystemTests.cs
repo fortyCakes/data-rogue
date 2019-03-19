@@ -20,8 +20,6 @@ namespace data_rogue_core.UnitTests.Systems
 
             systemContainer.CreateSystems("test");
 
-            systemContainer.EntityEngine.Initialise(systemContainer);
-
             entity = GetTestEntity();
             inventory = entity.Get<Inventory>();
         }

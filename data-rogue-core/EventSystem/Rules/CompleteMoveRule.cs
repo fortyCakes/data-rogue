@@ -24,7 +24,7 @@ namespace data_rogue_core.EventSystem.Rules
 
         public bool Apply(EventType type, IEntity sender, object eventData)
         {
-            positionSystem.Move(sender.Get<Position>(), (Vector)eventData);
+            positionSystem.Move(sender, (Vector)eventData);
             eventRuleSystem.Try(EventType.SpendTime, sender, new SpendTimeEventData(){Ticks = 1000});
 
             return true;

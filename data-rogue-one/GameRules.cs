@@ -11,13 +11,12 @@ namespace data_rogue_one
         {
             get
             {
-                return new List<Type> {
-                    typeof(InputHandlerRule),
+                var list = new List<Type> {
                     typeof(PhysicalCollisionRule),
                     typeof(BumpAttackRule),
                     typeof(BranchGeneratorRule),
                     typeof(SetAttackClassOnAttackRule),
-                    typeof(SpendTimeOnAttackRule),
+                    typeof(SpendTimeOnActionRule),
                     typeof(SetDamageOnAttackRule),
                     typeof(SetWeaponOnAttackRule),
                     typeof(DealDamageRule),
@@ -38,7 +37,7 @@ namespace data_rogue_one
                     typeof(ApplyEquipmentStatsRule),
                     typeof(SetSpeedOnAttackRule),
                     typeof(SetAccuracyOnAttackRule),
-                    typeof(RollAccuracyOnAttackRule),
+                    typeof(UnrolledAccuracyRule),
                     typeof(TryApplyBlockOnAttackRule),
                     typeof(TryApplyDodgeOnAttackRule),
                     typeof(TryApplyTankOnAttackRule),
@@ -46,8 +45,13 @@ namespace data_rogue_one
                     typeof(ApplyDodgeDefenceRule),
                     typeof(ApplyTankDefenceRule),
                     typeof(ApplyHitOrMissedAttackRule),
-                    typeof(AddAgilityToEvasionRule)
+                    typeof(AddAgilityToEvasionRule),
+                    typeof(DefaultSpeedRule)
                 };
+
+                list.AddRange(ApplyActionRule.AllActionRules);
+
+                return list;
             }
         }
     }

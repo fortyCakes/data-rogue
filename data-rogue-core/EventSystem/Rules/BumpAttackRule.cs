@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using data_rogue_core.Components;
 using data_rogue_core.EntityEngineSystem;
+using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
@@ -9,32 +10,38 @@ namespace data_rogue_core.EventSystem.Rules
 {
     public class BumpAttackRule : IEventRule
     {
+        private IEventSystem _eventSystem;
+        private IPositionSystem _positionSystem;
+        private IFighterSystem _fighterSystem;
+
         public BumpAttackRule(ISystemContainer systemContainer)
         {
-            PositionSystem = systemContainer.PositionSystem;
-            FighterSystem = systemContainer.FighterSystem;
+            _positionSystem = systemContainer.PositionSystem;
+            _fighterSystem = systemContainer.FighterSystem;
+            _eventSystem = systemContainer.EventSystem;
         }
 
         public EventTypeList EventTypes => new EventTypeList{ EventType.Move };
         public int RuleOrder => 1;
 
-        public IPositionSystem PositionSystem { get; }
-        private IFighterSystem FighterSystem { get; }
 
         public bool Apply(EventType type, IEntity sender, object eventData)
         {
             if (IsFighter(sender))
             {
                 var vector = (Vector) eventData;
-                var targetCoordinate = sender.Get<Position>().MapCoordinate + vector;
+                var targetCoordinate = _positionSystem.PositionOf(sender) + vector;
 
-                var entitiesAtPosition = PositionSystem.EntitiesAt(targetCoordinate);
+                var entitiesAtPosition = _positionSystem.EntitiesAt(targetCoordinate);
 
                 if (entitiesAtPosition.Any(IsFighter))
                 {
                     var defender = entitiesAtPosition.Single(e => IsFighter(e));
 
-                    FighterSystem.BasicAttack(sender, defender);
+                    var action = new ActionEventData { Action = ActionType.MeleeAttack, Parameters = $"{sender.EntityId},{defender.EntityId}", Speed = null, KeyPress = null };
+
+                    _eventSystem.Try(EventType.Action, sender, action);
+
                     return false;
                 }
             }

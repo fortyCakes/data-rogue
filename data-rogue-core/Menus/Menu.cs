@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using data_rogue_core.EventSystem.EventData;
+using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
-using RLNET;
 
 namespace data_rogue_core.Menus
 {
@@ -30,27 +31,32 @@ namespace data_rogue_core.Menus
             SelectedItem = MenuItems.FirstOrDefault();
             _activitySystem = activitySystem;
         }
-        public virtual void HandleKeyPress(RLKeyPress keyPress)
+        public virtual void HandleAction(ActionEventData action)
         {
-            if (keyPress != null)
+            if (action != null)
             {
-                switch (keyPress.Key)
+                if (action.Action == ActionType.Move)
                 {
-                    case RLKey.Up:
-                        Previous();
-                        break;
-                    case RLKey.Down:
-                        Next();
-                        break;
-                    case RLKey.Enter:
-                        Select();
-                        break;
-                    case RLKey.Right:
-                        NextAction();
-                        break;
-                    case RLKey.Left:
-                        PreviousAction();
-                        break;
+                    switch (action.Parameters)
+                    {
+                        case "0,-1":
+                            Previous();
+                            break;
+                        case "0,1":
+                            Next();
+                            break;
+                        case "1,0":
+                            NextAction();
+                            break;
+                        case "-1,0":
+                            PreviousAction();
+                            break;
+                    }
+                }
+
+                if (action.Action == ActionType.Select)
+                {
+                    Select();
                 }
             }
         }

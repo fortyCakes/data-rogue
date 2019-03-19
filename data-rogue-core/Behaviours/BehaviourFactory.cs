@@ -32,8 +32,6 @@ namespace data_rogue_core.Behaviours
                 { typeof(MoveToPlayerBehaviour), () => new MoveToPlayerBehaviour(_positionSystem, _eventRuleSystem, _playerSystem, _mapSystem) },
                 { typeof(RandomlyMoveBehaviour), () => new RandomlyMoveBehaviour(_positionSystem, _eventRuleSystem, _random) },
                 { typeof(PlayerRestBehaviour), () => new PlayerRestBehaviour(_eventRuleSystem, _messageSystem) },
-
-                { typeof(TestBehaviour), () => new TestBehaviour(_positionSystem, _eventRuleSystem, _playerSystem, _mapSystem) },
             };
         }
 

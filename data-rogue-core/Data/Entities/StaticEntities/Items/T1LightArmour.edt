@@ -14,7 +14,7 @@ ItemLevel: 1
 EquipmentSlot: Chest
 [Stat]
 Name: AC
-Value: 3
+Value: 2
 [Stat]
 Name: EV
 Value: -1
@@ -35,7 +35,7 @@ ItemLevel: 1
 EquipmentSlot: Legs
 [Stat]
 Name: AC
-Value: 3
+Value: 2
 [Stat]
 Name: EV
 Value: -1

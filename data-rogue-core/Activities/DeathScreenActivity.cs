@@ -21,7 +21,9 @@ namespace data_rogue_core.Activities
                 stringBuilder.AppendLine();
                 stringBuilder.AppendLine($"Time: {systemContainer.TimeSystem.CurrentTime} aut");
 
-                return stringBuilder.ToString();
+                var text = stringBuilder.ToString();
+
+                return text.Replace("\r", "");
             }
         }
         public IStaticTextRenderer Renderer { get; }

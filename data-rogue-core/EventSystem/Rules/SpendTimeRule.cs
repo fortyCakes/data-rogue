@@ -20,12 +20,9 @@ namespace data_rogue_core.EventSystem.Rules
 
         public bool Apply(EventType type, IEntity sender, object eventData)
         {
-            Actor actor = sender.Get<Actor>();
-
             var spendTimeEventData = (SpendTimeEventData) eventData;
 
             TimeSystem.SpendTicks(sender, spendTimeEventData.Ticks);
-            actor.HasActed = true;
             
             if (sender.Has<PlayerControlledBehaviour>())
             {

@@ -1,0 +1,62 @@
+﻿"KeyBindings"
+[Prototype]
+Name: KeyBindings
+Singleton: true
+[KeyBinding]
+Key: Up
+Action: Move(0,-1)
+[KeyBinding]
+Key: Down
+Action: Move(0,1)
+[KeyBinding]
+Key: Left
+Action: Move(-1,0)
+[KeyBinding]
+Key: Right
+Action: Move(1,0)
+[KeyBinding]
+Key: Y
+Action: Move(-1,-1)
+[KeyBinding]
+Key: U
+Action: Move(1,-1)
+[KeyBinding]
+Key: B
+Action: Move(-1,1)
+[KeyBinding]
+Key: N
+Action: Move(1,1)
+[KeyBinding]
+Key: Shift+S
+Action: Save
+[KeyBinding]
+Key: I
+Action: InventoryMenu
+[KeyBinding]
+Key: Escape
+Action: EscapeMenu
+[KeyBinding]
+Key: 5
+Action: Rest
+[KeyBinding]
+Key: Z
+Action: SkillMenu
+[KeyBinding]
+Key: E
+Action: EquipmentMenu
+[KeyBinding]
+Key: Period
+Action: Wait(1)
+[KeyBinding]
+Key: Shift+Period
+Action: Enter(Down)
+[KeyBinding]
+Key: Shift+Comma
+Action: Enter(Up)
+[KeyBinding]
+Key: Enter
+Action: Select
+[KeyBinding]
+Key: G
+Action: GetItem
+

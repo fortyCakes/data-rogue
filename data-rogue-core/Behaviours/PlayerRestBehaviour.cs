@@ -2,6 +2,7 @@
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.EventSystem;
 using data_rogue_core.EventSystem.EventData;
+using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
 using data_rogue_core.Utils;
 
@@ -20,18 +21,18 @@ namespace data_rogue_core.Behaviours
             MessageSystem = messageSystem;
         }
 
-        public override BehaviourResult Act(IEntity entity)
+        public override ActionEventData ChooseAction(IEntity entity)
         {
             if (!Resting)
             {
-                return new BehaviourResult { Acted = false };
+                return null;
             }
 
             if (EventSystem.GetStat(entity, "Tension") > 0)
             {
                 MessageSystem.Write("Your rest is interrupted!");
                 Resting = false;
-                return new BehaviourResult { Acted = false };
+                return null;
             }
 
             var tilt = entity.Get<TiltFighter>();
@@ -41,13 +42,10 @@ namespace data_rogue_core.Behaviours
             {
                 MessageSystem.Write("You finish resting.");
                 Resting = false;
-                return new BehaviourResult { Acted = false };
+                return null;
             }
 
-            SpendTimeEventData time = new SpendTimeEventData {Ticks = 1000};
-            EventSystem.Try(EventType.SpendTime, entity, time);
-
-            return new BehaviourResult();
+            return new ActionEventData {Action = ActionType.Wait, Speed = 1000};
         }
 
     }

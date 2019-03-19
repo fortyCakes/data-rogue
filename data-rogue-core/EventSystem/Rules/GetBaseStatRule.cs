@@ -60,7 +60,7 @@ namespace data_rogue_core.EventSystem.Rules
 
             if (data.Stat == "EV")
             {
-                data.Value += _systemContainer.EventSystem.GetStat(sender, "Agility");
+                data.Value += _systemContainer.EventSystem.GetStat(sender, "Agility") * 1.5m;
             }
 
             return true;

@@ -62,8 +62,6 @@ namespace data_rogue_core.Systems
             FighterSystem = new FighterSystem(EntityEngine, MessageSystem, EventSystem, TimeSystem, StatSystem);
             EntityEngine.Register(FighterSystem);
 
-            PlayerControlSystem = new PlayerControlSystem(this);
-
             BehaviourFactory = new BehaviourFactory(PositionSystem, EventSystem, Random, MessageSystem, PlayerSystem, MapSystem);
 
             PrototypeSystem = new PrototypeSystem(EntityEngine, PositionSystem, BehaviourFactory);
@@ -77,12 +75,16 @@ namespace data_rogue_core.Systems
 
             Seed = rngSeed;
 
+            PlayerControlSystem = new PlayerControlSystem(this);
 
             EquipmentSystem = new EquipmentSystem(this);
 
             TargetingSystem = new TargetingSystem(this);
 
             SaveSystem = new SaveSystem(this);
+
+            EntityEngine.Initialise(this);
+            PlayerControlSystem.Initialise();
 
             Verify();
         }

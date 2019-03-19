@@ -50,7 +50,7 @@ namespace data_rogue_core
 
         public decimal StatCheck(decimal statLevel)
         {
-            return Between((int)Math.Ceiling(statLevel / 2), 128 + (int)Math.Ceiling(statLevel * 1 / 4));
+            return statLevel + Between(1,20);
         }
     }
 }

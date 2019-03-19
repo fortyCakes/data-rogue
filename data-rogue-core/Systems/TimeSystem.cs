@@ -15,14 +15,14 @@ namespace data_rogue_core.Systems
     {
         private MapKey ActiveMapKey;
         private readonly IPlayerSystem _playerSystem;
+        private IEventSystem _eventSystem;
 
         public IBehaviourFactory BehaviourFactory { get; }
-        public IEventSystem EventSystem { get; }
 
         public TimeSystem(IBehaviourFactory behaviourFactory, IEventSystem eventSystem, IPlayerSystem playerSystem)
         {
             BehaviourFactory = behaviourFactory;
-            EventSystem = eventSystem;
+            _eventSystem = eventSystem;
             _playerSystem = playerSystem;
         }
 
@@ -97,7 +97,7 @@ namespace data_rogue_core.Systems
 
             if (entity.IsPlayer)
             {
-                var tension = EventSystem.GetStat(entity, "Tension");
+                var tension = _eventSystem.GetStat(entity, "Tension");
 
                 if (tension > 0)
                 {
@@ -142,31 +142,32 @@ namespace data_rogue_core.Systems
         {
             var actor = entity.Get<Actor>();
 
-            actor.HasActed = false;
-
             var behaviours = GetBehaviours(entity);
 
             foreach (IBehaviour behaviour in behaviours.OrderByDescending(b => b.BehaviourPriority))
             {
-                if (behaviour != null)
+                var chosenAction = behaviour.ChooseAction(entity);
+                
+                if (chosenAction != null)
                 {
-                    var actionResult = behaviour.Act(entity);
-
-                    if (actionResult.WaitForInput)
+                    if (chosenAction.Action == ActionType.WaitForInput)
                     {
                         WaitingForInput = true;
                         break;
                     }
-                    else if (actor.HasActed)
-                    {
-                        break;
-                    }
+
+                    _eventSystem.Try(EventType.Action, entity, chosenAction);
+                }
+
+                if (actor.NextTick > CurrentTime)
+                {
+                    break;
                 }
             }
 
             if (actor.NextTick <= CurrentTime)
             {
-                actor.NextTick = CurrentTime + 1;
+                actor.NextTick = CurrentTime + 1000;
             }
         }
 

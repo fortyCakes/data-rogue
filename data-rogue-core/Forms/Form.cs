@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.Forms.StaticForms;
+using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
 using data_rogue_core.Utils;
-using RLNET;
+using OpenTK.Input;
 
 namespace data_rogue_core.Forms
 {
@@ -34,9 +36,9 @@ namespace data_rogue_core.Forms
             SelectField(Fields.First().Key, true);
         }
 
-        public void HandleKeyPress(RLKeyPress keyPress)
+        public void HandleAction(ActionEventData action)
         {
-            if (keyPress == null) return;
+            if (action == null) return;
 
             var handled = false;
 
@@ -46,13 +48,13 @@ namespace data_rogue_core.Forms
                 switch (selectedFormData.FormDataType)
                 {
                     case FormDataType.Text:
-                        handled = HandleKeyPress_Text(keyPress, selectedFormData);
+                        handled = HandleAction_Text(action, selectedFormData);
                         break;
                     case FormDataType.MultipleChoice:
-                        handled = HandleKeyPress_MultipleChoice(keyPress, selectedFormData);
+                        handled = HandleAction_MultipleChoice(action, selectedFormData);
                         break;
                     case FormDataType.StatArray:
-                        handled = HandleKeyPress_StatArray(keyPress, selectedFormData, FormSelection.SubItem);
+                        handled = HandleAction_StatArray(action, selectedFormData, FormSelection.SubItem);
                         break;
                     default:
                         throw new NotImplementedException();
@@ -61,37 +63,42 @@ namespace data_rogue_core.Forms
 
             if (!handled)
             {
-                switch (keyPress.Key)
+                if (action.Action == ActionType.Move)
                 {
-                    case RLKey.Up:
-                        MoveUp();
-                        break;
-                    case RLKey.Down:
-                        MoveDown();
-                        break;
-                    case RLKey.Left:
-                        MoveLeft();
-                        break;
-                    case RLKey.Right:
-                        MoveRight();
-                        break;
-                    case RLKey.Enter:
-                        Select();
-                        break;
+                    switch (action.Parameters)
+                    {
+                        case "0,-1":
+                            MoveUp();
+                            break;
+                        case "0,1":
+                            MoveDown();
+                            break;
+                        case "1,0":
+                            MoveRight();
+                            break;
+                        case "-1,0":
+                            MoveLeft();
+                            break;
+                    }
+                }
+
+                if (action.Action == ActionType.Select)
+                {
+                    Select();
                 }
             }
             
             
         }
 
-        private bool HandleKeyPress_StatArray(RLKeyPress keyPress, FormData selectedFormData, string subItem)
+        private bool HandleAction_StatArray(ActionEventData action, FormData selectedFormData, string subItem)
         {
-            if (keyPress.Key == RLKey.Right)
+            if (ActionIsMoveRight(action))
             {
                 ((StatsFormData)selectedFormData).ChangeStat(subItem, increase: true);
                 return true;
             }
-            if (keyPress.Key == RLKey.Left)
+            if (ActionIsMoveLeft(action))
             {
                 ((StatsFormData)selectedFormData).ChangeStat(subItem, increase: false);
                 return true;
@@ -100,14 +107,24 @@ namespace data_rogue_core.Forms
             return false;
         }
 
-        private bool HandleKeyPress_MultipleChoice(RLKeyPress keyPress, FormData selectedFormData)
+        private static bool ActionIsMoveLeft(ActionEventData action)
         {
-            if (keyPress.Key == RLKey.Right)
+            return action.Action == ActionType.Move && action.Parameters == "-1,0";
+        }
+
+        private static bool ActionIsMoveRight(ActionEventData action)
+        {
+            return action.Action == ActionType.Move && action.Parameters == "1,0";
+        }
+
+        private bool HandleAction_MultipleChoice(ActionEventData action, FormData selectedFormData)
+        {
+            if (ActionIsMoveRight(action))
             {
                 ((MultipleChoiceFormData)selectedFormData).ChangeSelection(+1);
                 return true;
             }
-            if (keyPress.Key == RLKey.Left)
+            if (ActionIsMoveLeft(action))
             {
                 ((MultipleChoiceFormData)selectedFormData).ChangeSelection(-1);
                 return true;
@@ -116,21 +133,21 @@ namespace data_rogue_core.Forms
             return false;
         }
 
-        private bool HandleKeyPress_Text(RLKeyPress keyPress, FormData selectedFormData)
+        private bool HandleAction_Text(ActionEventData action, FormData selectedFormData)
         {
-            if (keyPress.Key >= RLKey.A && keyPress.Key <= RLKey.Z || keyPress.Key == RLKey.Space)
+            if (action.KeyPress.Key >= Key.A && action.KeyPress.Key <= Key.Z || action.KeyPress.Key == Key.Space)
             {
                 if (selectedFormData.Value.ToString().Length < 29)
                 {
-                    var key = keyPress.Key == RLKey.Space ? " " : keyPress.Key.ToString();
+                    var key = action.KeyPress.Key == Key.Space ? " " : action.KeyPress.Key.ToString();
 
-                    selectedFormData.Value += keyPress.Shift ? key.ToUpper() : key.ToLower();
+                    selectedFormData.Value += action.KeyPress.Shift ? key.ToUpper() : key.ToLower();
                 }
 
                 return true;
             }
 
-            if (keyPress.Key == RLKey.BackSpace)
+            if (action.KeyPress.Key == Key.BackSpace)
             {
                 string text = (string)selectedFormData.Value;
 

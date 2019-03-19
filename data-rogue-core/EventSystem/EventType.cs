@@ -2,7 +2,6 @@
 {
     public enum EventType
     {
-        Input,
         Move,
         ChangeFloor,
         UsePortal,
@@ -21,6 +20,7 @@
         CompleteSkill,
         PickUpWealth,
         GainXP,
-        Defence
+        Defence,
+        Action
     }
 }

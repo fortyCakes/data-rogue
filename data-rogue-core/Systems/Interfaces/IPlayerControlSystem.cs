@@ -1,12 +1,12 @@
-﻿using data_rogue_core.Maps;
+﻿using data_rogue_core.Components;
+using data_rogue_core.Maps;
 using RLNET;
 
 namespace data_rogue_core.Systems
 {
-    public interface IPlayerControlSystem 
+    public interface IPlayerControlSystem : IInitialisableSystem
     {
-        void HandleKeyPress(RLKeyPress keyPress);
-        void HandleMouseInput(RLMouse mouse);
+        void HandleInput(KeyCombination keyPress, RLMouse mouse);
 
         MapCoordinate HoveredCoordinate { get; }
     }
