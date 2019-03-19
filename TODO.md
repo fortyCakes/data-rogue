@@ -1,10 +1,11 @@
 BUGS
 
-BumpAttack is broken?
+-
 
 0.1
 
 Ordering of messages on kill
+Morgue file format
 Ranged and magic weapons
 	"fire" command
 	Apply combat stat (aegis)
