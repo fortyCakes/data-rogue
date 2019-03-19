@@ -5,11 +5,11 @@ using data_rogue_core.Systems.Interfaces;
 namespace data_rogue_core.EventSystem.Rules
 {
 
-    public class RollAccuracyOnAttackRule : IEventRule
+    public class UnrolledAccuracyRule : IEventRule
     {
         private ISystemContainer _systemContainer;
 
-        public RollAccuracyOnAttackRule(ISystemContainer systemContainer)
+        public UnrolledAccuracyRule(ISystemContainer systemContainer)
         {
             _systemContainer = systemContainer;
         }
@@ -23,7 +23,7 @@ namespace data_rogue_core.EventSystem.Rules
 
             if (data.AttackRoll == null)
             {
-                data.AttackRoll = (int)_systemContainer.Random.StatCheck((decimal)data.Accuracy);
+                data.AttackRoll = data.Accuracy.Value;
             }
 
             return true;

@@ -10,6 +10,7 @@
         Enter,
         Move,
         EquipmentMenu,
-        GetItem
+        GetItem,
+        WaitForInput
     }
 }

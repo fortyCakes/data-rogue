@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.EventSystem;
+using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems;
 
@@ -20,16 +21,14 @@ namespace data_rogue_core.Behaviours
             _random = random;
         }
 
-        public override BehaviourResult Act(IEntity entity)
+        public override ActionEventData ChooseAction(IEntity entity)
         {
             var isXMove = _random.PickOne(new List<bool>{true, false});
             var move = _random.PickOne(new List<int> {-1, 1});
 
             var vector = new Vector(isXMove ? move : 0, !isXMove ? move : 0);
 
-            _eventRuleSystem.Try(EventType.Move, entity, vector);
-
-            return new BehaviourResult();
+            return new ActionEventData { Action = ActionType.Move, Parameters = vector.ToString() };
         }
     }
 }

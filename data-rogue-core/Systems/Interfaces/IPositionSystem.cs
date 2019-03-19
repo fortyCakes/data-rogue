@@ -13,6 +13,8 @@ namespace data_rogue_core.Systems
         MapCoordinate PositionOf(IEntity entity);
         void Move(Position position, Vector vector);
 
+        void Move(IEntity entity, Vector vector);
+
         void SetPosition(IEntity entity, MapCoordinate mapCoordinate);
         void SetPosition(Position position, MapCoordinate mapCoordinate);
         bool Any(MapCoordinate key);

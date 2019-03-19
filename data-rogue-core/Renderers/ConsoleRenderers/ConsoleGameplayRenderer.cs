@@ -136,7 +136,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
             StatsConsole.Print(1, 15, "Location:", RLColor.White, RLColor.Black);
 
-            var mapname = player.Get<Position>().MapCoordinate.Key.Key;
+            var mapname = systemContainer.PositionSystem.PositionOf(player).Key.Key;
             if (mapname.StartsWith("Branch:"))
             {
                 mapname = mapname.Substring(7);
@@ -184,7 +184,8 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             var cameraX = cameraPosition.X;
             var cameraY = cameraPosition.Y;
 
-            MapCoordinate playerPosition = systemContainer.PlayerSystem.Player.Get<Position>().MapCoordinate;
+            MapCoordinate playerPosition = systemContainer.PositionSystem.PositionOf(systemContainer.PlayerSystem.Player);
+
             playerFov = currentMap.FovFrom(playerPosition, 9);
             foreach (var coordinate in playerFov)
             {

@@ -98,3 +98,6 @@ C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-one\bin\Debug\Data\Entit
 C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-one\bin\Debug\Data\Entities\StaticEntities\Items\T1HeavyArmour.edt
 C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-one\bin\Debug\Data\Entities\StaticEntities\Items\T1LightArmour.edt
 C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-one\bin\Debug\Data\Entities\StaticEntities\Unarmed.edt
+C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-one\bin\Debug\Data\Entities\StaticEntities\Items\T2HeavyArmour.edt
+C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-one\bin\Debug\Data\Entities\StaticEntities\Items\T2LightArmour.edt
+C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-one\bin\Debug\Data\Entities\StaticEntities\Items\T2Weapons.edt

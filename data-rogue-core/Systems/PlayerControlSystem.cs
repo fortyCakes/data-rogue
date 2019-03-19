@@ -280,7 +280,7 @@ namespace data_rogue_core.Systems
             var x = mouse.X;
             var y = mouse.Y;
 
-            if (_systemContainer.ActivitySystem.Peek() is GameplayActivity activity)
+            if (_systemContainer.ActivitySystem.Peek() is GameplayActivity activity && _systemContainer.PlayerSystem.Player != null)
             {
                 var gameplayRenderer = _systemContainer.RendererSystem.RendererFactory.GetRendererFor(ActivityType.Gameplay) as IGameplayRenderer;
 

@@ -1,20 +1,14 @@
 BUGS
 
+BumpAttack is broken?
+
 0.1
 
-Combat maths - make equipment work
-	/Apply combat stats (block chances)
-	/	Roll accuracy and store on the attack data
-	/ Rework tiering for roll maths
-	Insert items into data files
-Work out spending time - where should it be? "Action" system?
-	/ Action system for player controls
-	Behaviours driven by actions
 Ordering of messages on kill
 Ranged and magic weapons
 	"fire" command
 	Apply combat stat (aegis)
-Dependency injection? for rules and behaviours
+Caching positions in PositionSystem
 Separate out core from implementation
 	Make stats window defined in data
 	Make Player entity not special (don't allow access from global state)
@@ -26,9 +20,11 @@ Event system rework: separate pre- and post-event rules
 
 0.2+
 
+Dependency injection? for rules and behaviours
+Finish importing all tiers of base items
 Smooth rendering while resting
 Loading screens and generation on background threads
-Picking up items: multiple items per file
+Picking up items: multiple items per tile
 Monsters with skills
 	Monsters with targeting
 Nonhostile monsters (factions)

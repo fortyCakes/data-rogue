@@ -32,7 +32,7 @@ namespace data_rogue_core.Maps
 
         public override string ToString()
         {
-            return $"X: {X}, Y: {Y}";
+            return $"{X},{Y}";
         }
 
         public override int GetHashCode()

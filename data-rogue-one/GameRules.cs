@@ -37,7 +37,7 @@ namespace data_rogue_one
                     typeof(ApplyEquipmentStatsRule),
                     typeof(SetSpeedOnAttackRule),
                     typeof(SetAccuracyOnAttackRule),
-                    typeof(RollAccuracyOnAttackRule),
+                    typeof(UnrolledAccuracyRule),
                     typeof(TryApplyBlockOnAttackRule),
                     typeof(TryApplyDodgeOnAttackRule),
                     typeof(TryApplyTankOnAttackRule),
@@ -45,7 +45,8 @@ namespace data_rogue_one
                     typeof(ApplyDodgeDefenceRule),
                     typeof(ApplyTankDefenceRule),
                     typeof(ApplyHitOrMissedAttackRule),
-                    typeof(AddAgilityToEvasionRule)
+                    typeof(AddAgilityToEvasionRule),
+                    typeof(DefaultSpeedRule)
                 };
 
                 list.AddRange(ApplyActionRule.AllActionRules);

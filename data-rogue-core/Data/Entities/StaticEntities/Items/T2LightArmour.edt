@@ -1,15 +1,15 @@
-﻿"Bronze Armour"
+﻿"Hide Armour"
 [Description]
-Name: Bronze Armour
+Name: Hide Armour
 [Prototype]
-Name: Item:BronzeArmourChest
+Name: Item:HideArmourChest
 Singleton: false
 [Appearance]
-Glyph: [
+Glyph: (
 Color: #6B4D46
 [Position]
 [Item]
-ItemLevel: 1
+ItemLevel: 3
 [Equipment]
 EquipmentSlot: Chest
 [Stat]
@@ -17,20 +17,20 @@ Name: AC
 Value: 3
 [Stat]
 Name: EV
-Value: -3
+Value: -1
 
-"Bronze Platelegs"
+"Hide Chaps"
 [Description]
-Name: Bronze Platelegs
+Name: Hide Chaps
 [Prototype]
-Name: Item:BronzeArmourLegs
+Name: Item:HideArmourLegs
 Singleton: false
 [Appearance]
-Glyph: [
+Glyph: (
 Color: #6B4D46
 [Position]
 [Item]
-ItemLevel: 1
+ItemLevel: 3
 [Equipment]
 EquipmentSlot: Legs
 [Stat]
@@ -38,41 +38,41 @@ Name: AC
 Value: 3
 [Stat]
 Name: EV
-Value: -3
+Value: -1
 
-"Bronze Helmet"
+"Hide Helmet"
 [Description]
-Name: Bronze Helmet
+Name: Hide Helmet
 [Prototype]
-Name: Item:BronzeArmourHead
+Name: Item:HideArmourHead
 Singleton: false
 [Appearance]
-Glyph: [
+Glyph: (
 Color: #6B4D46
 [Position]
 [Item]
-ItemLevel: 1
+ItemLevel: 3
 [Equipment]
 EquipmentSlot: Head
 [Stat]
 Name: AC
-Value: 3
+Value: 2
 [Stat]
 Name: EV
-Value: -1
+Value: 0
 
-"Bronze Gloves"
+"Hide Gloves"
 [Description]
-Name: Bronze Gauntlets
+Name: Hide Gloves
 [Prototype]
-Name: Item:BronzeArmourGloves
+Name: Item:HideArmourGloves
 Singleton: false
 [Appearance]
-Glyph: [
+Glyph: (
 Color: #6B4D46
 [Position]
 [Item]
-ItemLevel: 1
+ItemLevel: 3
 [Equipment]
 EquipmentSlot: Gloves
 [Stat]
@@ -80,23 +80,20 @@ Name: AC
 Value: 2
 [Stat]
 Name: EV
-Value: -1
-[Stat]
-Name: SH
-Value: 1
+Value: 0
 
-"Bronze Boots"
+"Hide Boots"
 [Description]
-Name: Bronze Boots
+Name: Hide Boots
 [Prototype]
-Name: Item:BronzeArmourBoots
+Name: Item:HideArmourBoots
 Singleton: false
 [Appearance]
-Glyph: [
+Glyph: (
 Color: #6B4D46
 [Position]
 [Item]
-ItemLevel: 1
+ItemLevel: 3
 [Equipment]
 EquipmentSlot: Boots
 [Stat]
@@ -104,4 +101,4 @@ Name: AC
 Value: 2
 [Stat]
 Name: EV
-Value: -1
+Value: 0

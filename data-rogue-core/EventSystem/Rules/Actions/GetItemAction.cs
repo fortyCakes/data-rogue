@@ -18,7 +18,7 @@ namespace data_rogue_core.EventSystem.Rules
 
         public override bool ApplyInternal(IEntity sender, ActionEventData eventData)
         {
-            var senderMapCoordinate = sender.Get<Position>().MapCoordinate;
+            var senderMapCoordinate = _systemContainer.PositionSystem.PositionOf(sender);
 
             var items = _systemContainer.PositionSystem.EntitiesAt(senderMapCoordinate)
                 .Except(new[] { sender })

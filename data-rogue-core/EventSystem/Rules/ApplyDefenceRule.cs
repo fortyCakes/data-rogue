@@ -43,9 +43,9 @@ namespace data_rogue_core.EventSystem.Rules
 
             var defence = _systemContainer.EventSystem.GetStat(defender, _statName);
 
-            var defenceRoll = _systemContainer.Random.StatCheck((decimal)defence);
+            var defenceRoll = _systemContainer.Random.StatCheck(defence);
 
-            if (defenceRoll > data.ForAttack.AttackRoll)
+            if (defenceRoll > data.ForAttack.AttackRoll || defenceRoll == defence + 20)
             {
                 return true;
             }

@@ -1,4 +1,5 @@
 ﻿using data_rogue_core.EntityEngineSystem;
+using data_rogue_core.Systems;
 
 namespace data_rogue_core.Behaviours
 {
@@ -7,6 +8,6 @@ namespace data_rogue_core.Behaviours
         public int Priority;
         public int BehaviourPriority => Priority;
 
-        public abstract BehaviourResult Act(IEntity entity);
+        public abstract ActionEventData ChooseAction(IEntity entity);
     }
 }

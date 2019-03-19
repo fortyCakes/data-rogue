@@ -32,7 +32,7 @@ namespace data_rogue_core.EventSystem.Rules
             {
                 if (_systemContainer.EventSystem.Try(EventType.ChangeFloor, sender, direction))
                 {
-                    sender.Get<Position>().MapCoordinate = stairs.Destination;
+                    _systemContainer.PositionSystem.SetPosition(sender, stairs.Destination);
                 }
             }
             else
@@ -47,7 +47,7 @@ namespace data_rogue_core.EventSystem.Rules
                 {
                     if (_systemContainer.EventSystem.Try(EventType.UsePortal, sender, portal))
                     {
-                        sender.Get<Position>().MapCoordinate = portal.Destination;
+                        _systemContainer.PositionSystem.SetPosition(sender, portal.Destination);
                     }
                 }
             }

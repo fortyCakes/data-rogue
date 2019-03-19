@@ -1,15 +1,15 @@
-﻿"Bronze Dagger"
+﻿"Iron Dagger"
 [Description]
-Name: Bronze Dagger
+Name: Iron Dagger
 [Prototype]
-Name: Item:BronzeDagger
+Name: Item:IronDagger
 Singleton: false
 [Appearance]
 Glyph: ]
 Color: #6B4D46
 [Position]
 [Item]
-ItemLevel: 1
+ItemLevel: 3
 [Equipment]
 EquipmentSlot: Hand
 [Weapon]
@@ -19,23 +19,23 @@ Name: Accuracy
 Value: 30
 [Stat]
 Name: Damage
-Value: 6
+Value: 10
 [Stat]
 Name: Speed
 Value: 700
 
-"Bronze Sword"
+"Iron Sword"
 [Description]
-Name: Bronze Sword
+Name: Iron Sword
 [Prototype]
-Name: Item:BronzeSword
+Name: Item:IronSword
 Singleton: false
 [Appearance]
 Glyph: ]
 Color: #6B4D46
 [Position]
 [Item]
-ItemLevel: 1
+ItemLevel: 3
 [Equipment]
 EquipmentSlot: Hand
 [Weapon]
@@ -48,12 +48,12 @@ Name: Accuracy
 Value: 30
 [Stat]
 Name: Damage
-Value: 11
+Value: 16
 [Stat]
 Name: Speed
 Value: 1000
 
-"Wooden Shield"
+"Iron Shield"
 [Description]
 Name: Wooden Shield
 [Prototype]
@@ -64,7 +64,7 @@ Glyph: [
 Color: #6B4D46
 [Position]
 [Item]
-ItemLevel: 1
+ItemLevel: 3
 [Equipment]
 EquipmentSlot: Hand
 [Stat]
@@ -72,4 +72,4 @@ Name: EV
 Value: -1
 [Stat]
 Name: SH
-Value: 9
+Value: 12

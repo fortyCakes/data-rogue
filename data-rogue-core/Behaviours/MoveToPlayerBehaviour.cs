@@ -3,6 +3,7 @@ using System.Linq;
 using data_rogue_core.Components;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.EventSystem;
+using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
@@ -24,14 +25,14 @@ namespace data_rogue_core.Behaviours
             _mapSystem = mapSystem;
         }
 
-        public override BehaviourResult Act(IEntity entity)
+        public override ActionEventData ChooseAction(IEntity entity)
         {
             var position = entity.Get<Position>().MapCoordinate;
             var playerPosition = _positionSystem.PositionOf(_playerSystem.Player);
 
             if (Math.Abs(position.X - playerPosition.X) > 9 || Math.Abs(position.Y - playerPosition.Y) > 9)
             {
-                return new BehaviourResult { Acted = false };
+                return null;
             }
 
             var monsterFov = _mapSystem.MapCollection[position.Key].FovFrom(position, 9);
@@ -51,15 +52,11 @@ namespace data_rogue_core.Behaviours
                     if (targetPosition.Y > position.Y) vector.Y = 1;
                     if (targetPosition.Y < position.Y) vector.Y = -1;
 
-                    _eventRuleSystem.Try(EventType.Move, entity, vector);
+                    return new ActionEventData { Action = ActionType.Move, Parameters = vector.ToString() };
                 }
+            }
 
-                return new BehaviourResult();
-            }
-            else
-            {
-                return new BehaviourResult{Acted = false};
-            }
+            return null;
         }
     }
 }

@@ -77,7 +77,6 @@
     <Compile Include="Behaviours\BehaviourFactory.cs" />
     <Compile Include="Behaviours\IBehaviour.cs" />
     <Compile Include="Behaviours\PlayerRestBehaviour.cs" />
-    <Compile Include="Behaviours\TestBehaviour.cs" />
     <Compile Include="Behaviours\MoveToPlayerBehaviour.cs" />
     <Compile Include="Behaviours\RandomlyMoveBehaviour.cs" />
     <Compile Include="Behaviours\PlayerControlledBehaviour.cs" />
@@ -149,6 +148,7 @@
     <Compile Include="EventSystem\EventType.cs" />
     <Compile Include="EventSystem\IEventRule.cs" />
     <Compile Include="EventSystem\IEventSystem.cs" />
+    <Compile Include="EventSystem\Rules\Actions\DefaultSpeedRule.cs" />
     <Compile Include="EventSystem\Rules\Actions\EnterAction.cs" />
     <Compile Include="EventSystem\Rules\Actions\EquipmentMenuAction.cs" />
     <Compile Include="EventSystem\Rules\Actions\GetItemAction.cs" />
@@ -170,7 +170,7 @@
     <Compile Include="EventSystem\Rules\GainSingleXPOnKillRule.cs" />
     <Compile Include="EventSystem\EventData\GainXPEventData.cs" />
     <Compile Include="EventSystem\Rules\LevelUpOnXPGainRule.cs" />
-    <Compile Include="EventSystem\Rules\RollAccuracyOnAttackRule.cs" />
+    <Compile Include="EventSystem\Rules\UnrolledAccuracyRule.cs" />
     <Compile Include="EventSystem\Rules\SetAccuracyOnAttackRule.cs" />
     <Compile Include="EventSystem\Rules\SetAttackClassOnAttackRule.cs" />
     <Compile Include="EventSystem\Rules\SetDamageOnAttackRule.cs" />
@@ -328,6 +328,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Data\Entities\StaticEntities\Items\T2HeavyArmour.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Entities\StaticEntities\Items\T2LightArmour.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Entities\StaticEntities\Items\T2Weapons.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\Entities\StaticEntities\keybindings.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

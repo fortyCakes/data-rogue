@@ -1,83 +1,83 @@
-﻿"Bronze Armour"
+﻿"Iron Armour"
 [Description]
-Name: Bronze Armour
+Name: Iron Armour
 [Prototype]
-Name: Item:BronzeArmourChest
+Name: Item:IronArmourChest
 Singleton: false
 [Appearance]
 Glyph: [
 Color: #6B4D46
 [Position]
 [Item]
-ItemLevel: 1
+ItemLevel: 3
 [Equipment]
 EquipmentSlot: Chest
 [Stat]
 Name: AC
-Value: 3
+Value: 4
 [Stat]
 Name: EV
 Value: -3
 
-"Bronze Platelegs"
+"Iron Platelegs"
 [Description]
-Name: Bronze Platelegs
+Name: Iron Platelegs
 [Prototype]
-Name: Item:BronzeArmourLegs
+Name: Item:IronArmourLegs
 Singleton: false
 [Appearance]
 Glyph: [
 Color: #6B4D46
 [Position]
 [Item]
-ItemLevel: 1
+ItemLevel: 3
 [Equipment]
 EquipmentSlot: Legs
 [Stat]
 Name: AC
-Value: 3
+Value: 4
 [Stat]
 Name: EV
 Value: -3
 
-"Bronze Helmet"
+"Iron Helmet"
 [Description]
-Name: Bronze Helmet
+Name: Iron Helmet
 [Prototype]
-Name: Item:BronzeArmourHead
+Name: Item:IronArmourHead
 Singleton: false
 [Appearance]
 Glyph: [
 Color: #6B4D46
 [Position]
 [Item]
-ItemLevel: 1
+ItemLevel: 3
 [Equipment]
 EquipmentSlot: Head
 [Stat]
 Name: AC
-Value: 3
+Value: 4
 [Stat]
 Name: EV
 Value: -1
 
-"Bronze Gloves"
+"Iron Gloves"
 [Description]
-Name: Bronze Gauntlets
+Name: Iron Gauntlets
 [Prototype]
-Name: Item:BronzeArmourGloves
+Name: Item:IronArmourGloves
 Singleton: false
 [Appearance]
 Glyph: [
 Color: #6B4D46
 [Position]
 [Item]
-ItemLevel: 1
+ItemLevel: 3
 [Equipment]
 EquipmentSlot: Gloves
 [Stat]
 Name: AC
-Value: 2
+Value: 3
 [Stat]
 Name: EV
 Value: -1
@@ -85,23 +85,23 @@ Value: -1
 Name: SH
 Value: 1
 
-"Bronze Boots"
+"Iron Boots"
 [Description]
-Name: Bronze Boots
+Name: Iron Boots
 [Prototype]
-Name: Item:BronzeArmourBoots
+Name: Item:IronArmourBoots
 Singleton: false
 [Appearance]
 Glyph: [
 Color: #6B4D46
 [Position]
 [Item]
-ItemLevel: 1
+ItemLevel: 3
 [Equipment]
 EquipmentSlot: Boots
 [Stat]
 Name: AC
-Value: 2
+Value: 3
 [Stat]
 Name: EV
 Value: -1
