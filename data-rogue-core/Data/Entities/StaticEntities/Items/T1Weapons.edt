@@ -96,6 +96,7 @@ ItemLevel: 1
 [Ammunition]
 AmmunitionType: Arrow
 [Stackable]
+StacksWith: Arrow
 
 "Wooden Shield"
 [Description]

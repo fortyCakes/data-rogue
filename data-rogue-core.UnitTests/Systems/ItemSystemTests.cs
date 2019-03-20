@@ -196,19 +196,30 @@ namespace data_rogue_core.UnitTests.Systems
         }
 
         [Test]
-        public void StackableItems_Work()
+        public void StackableItems_GetNewStackableItem_AlreadyHaveSome_StacksAddTogether()
         {
-            Assert.Fail();
+            var item = GetTestItem(stackable: true);
+            var item2 = GetTestItem(stackable: true);
+
+            systemContainer.ItemSystem.MoveToInventory(item, inventory);
+            systemContainer.ItemSystem.MoveToInventory(item2, inventory);
+
+            inventory.Contents.Should().NotContain(item2.EntityId);
+            item.Get<Stackable>().StackSize.Should().Be(2);
         }
 
-        private IEntity GetTestItem(string itemName = null, bool hasPosition = true)
+        private IEntity GetTestItem(string itemName = null, bool hasPosition = true, bool stackable = false)
         {
             var components = new List<IEntityComponent>() { new Item() };
 
             if (hasPosition)
             {
-
                 components.Add(new Position());
+            }
+
+            if (stackable)
+            {
+                components.Add(new Stackable());
             }
 
             return systemContainer.EntityEngine.New(itemName ?? $"Item{entityId++}", components.ToArray());
