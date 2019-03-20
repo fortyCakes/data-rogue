@@ -46,7 +46,7 @@ namespace data_rogue_core.EventSystem.Rules
 
             if (damaged)
             {
-                DescribeSuccessfulAttack(data, messageContext);
+                DescribeSuccessfulAttack(data, messageContext, damageData.Damage);
             }
             else
             {
@@ -63,11 +63,11 @@ namespace data_rogue_core.EventSystem.Rules
             }
         }
 
-        private void DescribeSuccessfulAttack(AttackEventData data, DeferredMessageContext messageContext)
+        private void DescribeSuccessfulAttack(AttackEventData data, DeferredMessageContext messageContext, int actualDamage)
         {
             string message = GetBaseAttackMessage(data);
 
-            message += $" and hits for {data.Damage} damage.";
+            message += $" and hits for {actualDamage} damage.";
 
             messageContext.SetMessage(message);
         }
