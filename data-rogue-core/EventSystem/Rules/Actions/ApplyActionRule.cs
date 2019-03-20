@@ -18,7 +18,9 @@ namespace data_rogue_core.EventSystem.Rules
             typeof(RestAction),
             typeof(EquipmentMenuAction),
             typeof(InventoryMenuAction),
-            typeof(GetItemAction)
+            typeof(GetItemAction),
+            typeof(SkillMenuAction),
+            typeof(UseSkillAction)
         };
 
         protected ISystemContainer _systemContainer;

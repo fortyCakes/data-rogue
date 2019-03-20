@@ -11,6 +11,9 @@
         Move,
         EquipmentMenu,
         GetItem,
-        WaitForInput
+        WaitForInput,
+        EscapeMenu,
+        SkillMenu,
+        UseSkill
     }
 }

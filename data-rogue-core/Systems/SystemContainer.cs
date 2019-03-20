@@ -76,11 +76,11 @@ namespace data_rogue_core.Systems
 
             Seed = rngSeed;
 
-            PlayerControlSystem = new PlayerControlSystem(this);
-
             EquipmentSystem = new EquipmentSystem(this);
 
             TargetingSystem = new TargetingSystem(this);
+
+            PlayerControlSystem = new PlayerControlSystem(this);
 
             SaveSystem = new SaveSystem(this);
 

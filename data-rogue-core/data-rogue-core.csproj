@@ -157,6 +157,7 @@
     <Compile Include="EventSystem\Rules\Actions\MoveAction.cs" />
     <Compile Include="EventSystem\Rules\Actions\RestAction.cs" />
     <Compile Include="EventSystem\Rules\Actions\SaveAction.cs" />
+    <Compile Include="EventSystem\Rules\Actions\SkillMenuAction.cs" />
     <Compile Include="EventSystem\Rules\ApplyDefenceRule.cs" />
     <Compile Include="EventSystem\Rules\ApplyEquipmentStatsRule.cs" />
     <Compile Include="EventSystem\Rules\ApplyHitOrMissedAttackRule.cs" />
@@ -205,6 +206,7 @@
     <Compile Include="Maps\MapGenCommands\ICommandExecutor.cs" />
     <Compile Include="Maps\MapGenCommands\MapGenCommand.cs" />
     <Compile Include="EventSystem\EventData\DropItemEventData.cs" />
+    <Compile Include="Menus\DynamicMenus\SkillMenu.cs" />
     <Compile Include="Menus\DynamicMenus\EquipmentMenu.cs" />
     <Compile Include="Menus\DynamicMenus\InventoryMenu.cs" />
     <Compile Include="Menus\MenuAction.cs" />

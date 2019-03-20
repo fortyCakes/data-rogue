@@ -4,6 +4,7 @@
 
 == 0.1 ==
 
+- skill menu
 - Ranged and magic weapons
 - 	"fire" command
 - 	Apply combat stat (aegis)

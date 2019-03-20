@@ -31,7 +31,6 @@ namespace data_rogue_one
                     typeof(SpendAuraOnCompleteSkillRule),
                     typeof(SpendTimeOnCompleteSkillRule),
                     typeof(DoXpGainRule),
-                    typeof(DisplayMessageOnXPGainRule),
                     typeof(LevelUpOnXPGainRule),
                     typeof(GainSingleXPOnKillRule),
                     typeof(ApplyEquipmentStatsRule),

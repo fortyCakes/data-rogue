@@ -27,8 +27,6 @@ namespace data_rogue_core.EventSystem.Rules
 
             health.HP.Subtract(data.Damage);
 
-            MessageSystem.Write($"{sender.Get<Description>().Name} takes {data.Damage} damage.", Color.White);
-
             if (health.HP.Current <= 0)
             {
                 EventRuleSystem.Try(EventType.Death, sender, new DeathEventData { Killer = data.DamagedBy });
