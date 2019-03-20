@@ -78,7 +78,7 @@ namespace data_rogue_core.EntityEngineSystem
                 }
             }
 
-            entity = null;
+            entity.Removed = true;
         }
 
         public void Destroy(IEntity entity)

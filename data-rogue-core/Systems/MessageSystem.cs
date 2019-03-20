@@ -38,7 +38,7 @@ namespace data_rogue_core.Systems
 
         public DeferredMessageContext DeferredMessage()
         {
-            var message = new Message();
+            var message = new Message {Color = Color.White};
             AllMessages.Add(message);
 
             return new DeferredMessageContext(message, m => AllMessages.Remove(m));

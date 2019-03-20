@@ -12,6 +12,7 @@ namespace data_rogue_core.EntityEngineSystem
         public string Name { get; set; } = "";
         public string DescriptionName => Get<Description>()?.Name;
 
+        public bool Removed { get; set; } = false;
         public bool IsStatic { get; set; } = false;
 
         public List<IEntityComponent> Components { get; set; } = new List<IEntityComponent>();

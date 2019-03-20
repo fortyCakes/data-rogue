@@ -10,6 +10,8 @@ namespace data_rogue_core.EntityEngineSystem
 
         string DescriptionName { get; }
 
+        bool Removed { get; set; }
+
         bool IsStatic { get; set; }
 
         List<IEntityComponent> Components { get; }

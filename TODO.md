@@ -1,6 +1,6 @@
 == BUGS ==
 
-- Issue when entity dies while "on the stack" for TimeSystem
+- 
 
 == 0.1 ==
 

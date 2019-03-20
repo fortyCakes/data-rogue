@@ -54,14 +54,17 @@ namespace data_rogue_core.Systems
 
                 foreach (var entity in entitiesAtStartOfTick)
                 {
-                    if (entity.Has<TiltFighter>())
+                    if (!entity.Removed)
                     {
-                        TickFighter(entity);
-                    }
+                        if (entity.Has<TiltFighter>())
+                        {
+                            TickFighter(entity);
+                        }
 
-                    if (entity.Get<Actor>().NextTick <= CurrentTime)
-                    {
-                        Act(entity);
+                        if (entity.Get<Actor>().NextTick <= CurrentTime)
+                        {
+                            Act(entity);
+                        }
                     }
                 }
             }
