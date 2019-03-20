@@ -1,6 +1,6 @@
 == BUGS ==
 
-- 
+- mana bolt script is broken
 
 == 0.1 ==
 
