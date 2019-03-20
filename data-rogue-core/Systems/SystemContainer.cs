@@ -5,6 +5,7 @@ using data_rogue_core.Systems.Interfaces;
 using System;
 using System.Runtime.Serialization;
 using System.Text;
+using data_rogue_core.Utils;
 
 namespace data_rogue_core.Systems
 {
@@ -51,7 +52,7 @@ namespace data_rogue_core.Systems
 
             StatSystem = new StatSystem(EntityEngine);
 
-            PositionSystem = new PositionSystem(MapSystem);
+            PositionSystem = new PositionSystem(MapSystem, EntityEngine, new AStarPathfindingAlgorithm());
             EntityEngine.Register(PositionSystem);
 
             Random = new RNG(rngSeed);

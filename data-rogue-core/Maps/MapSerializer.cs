@@ -14,7 +14,7 @@ namespace data_rogue_core.Maps
         private const char DEFAULT_CELL_GLYPH = ' ';
         private const char GLYPH_SEPARATOR = ':';
 
-        public static string Serialize(Map map)
+        public static string Serialize(IMap map)
         {
             var stringBuilder = new StringBuilder();
 
@@ -209,7 +209,7 @@ namespace data_rogue_core.Maps
             return Regex.Match(input, pattern).Groups[1].Value;
         }
 
-        public static Dictionary<string, char> GetMapGlyphs(Map map)
+        public static Dictionary<string, char> GetMapGlyphs(IMap map)
         {
             var mapGlyphs = new Dictionary<string, char>();
 

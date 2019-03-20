@@ -199,6 +199,7 @@
     <Compile Include="Forms\StatInformation.cs" />
     <Compile Include="Forms\StatsFormData.cs" />
     <Compile Include="Maps\Generators\BasicDungeonMapGenerator.cs" />
+    <Compile Include="Maps\IMap.cs" />
     <Compile Include="Maps\MapGenCommands\MapGenCommandExecutorFactory.cs" />
     <Compile Include="Maps\MapGenCommands\EntityCommandExecutor.cs" />
     <Compile Include="Maps\MapGenCommands\ICommandExecutor.cs" />
@@ -225,7 +226,7 @@
     <Compile Include="Systems\MapSystem.cs" />
     <Compile Include="Systems\RendererSystem.cs" />
     <Compile Include="Systems\StatSystem.cs" />
-    <Compile Include="Utils\AStar.cs" />
+    <Compile Include="Utils\AStarPathfindingAlgorithm.cs" />
     <Compile Include="Systems\EquipmentSystem.cs" />
     <Compile Include="Systems\FighterSystem.cs" />
     <Compile Include="Behaviours\IBehaviourFactory.cs" />
@@ -259,6 +260,7 @@
     <Compile Include="Systems\PrototypeSystem.cs" />
     <Compile Include="Utils\EventRuleSystemExtensions.cs" />
     <Compile Include="Utils\FlagsExtensions.cs" />
+    <Compile Include="Utils\IPathfindingAlgorithm.cs" />
     <Compile Include="Utils\MapExtensions.cs" />
     <Compile Include="Utils\StringExtensions.cs" />
     <Compile Include="Utils\WordWrap.cs" />

@@ -30,7 +30,7 @@ namespace data_rogue_core.EventSystem.Rules
             if (IsFighter(sender))
             {
                 var vector = (Vector) eventData;
-                var targetCoordinate = _positionSystem.PositionOf(sender) + vector;
+                var targetCoordinate = _positionSystem.CoordinateOf(sender) + vector;
 
                 var entitiesAtPosition = _positionSystem.EntitiesAt(targetCoordinate);
 

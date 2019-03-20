@@ -49,7 +49,7 @@ namespace data_rogue_core.EventSystem.Rules
         {
             var currentMap = _mapSystem.MapCollection[_rendererSystem.CameraPosition.Key];
 
-            MapCoordinate playerPosition = _positionSystem.PositionOf(_playerSystem.Player);
+            MapCoordinate playerPosition = _positionSystem.CoordinateOf(_playerSystem.Player);
             var playerFov = currentMap.FovFrom(playerPosition, 9);
 
             foreach(MapCoordinate coord in playerFov)

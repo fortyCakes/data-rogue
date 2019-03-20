@@ -6,7 +6,7 @@ using data_rogue_core.Maps;
 
 namespace data_rogue_core.Utils
 {
-    public static class AStar
+    public class AStarPathfindingAlgorithm : IPathfindingAlgorithm
     {
         private class AStarLocation
         {
@@ -25,7 +25,7 @@ namespace data_rogue_core.Utils
             }
         }
 
-        public static IEnumerable<MapCoordinate> Path(Map map, MapCoordinate origin, MapCoordinate destination)
+        public IEnumerable<MapCoordinate> Path(IMap map, MapCoordinate origin, MapCoordinate destination)
         {
             AStarLocation current = null;
 
@@ -102,7 +102,7 @@ namespace data_rogue_core.Utils
         }
         
 
-        private static IEnumerable<AStarLocation> GetPassableAdjacentSquares(AStarLocation current, Map map)
+        private static IEnumerable<AStarLocation> GetPassableAdjacentSquares(AStarLocation current, IMap map)
         {
             var x = current.X;
             var y = current.Y;
@@ -122,7 +122,7 @@ namespace data_rogue_core.Utils
             return proposedLocations.Where(loc => IsPassable(map, loc));
         }
 
-        private static bool IsPassable(Map map, AStarLocation location)
+        private static bool IsPassable(IMap map, AStarLocation location)
         {
             var coordinate = new MapCoordinate(map.MapKey, location.X, location.Y);
 

@@ -71,7 +71,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             var cameraX = cameraPosition.X;
             var cameraY = cameraPosition.Y;
 
-            MapCoordinate playerPosition = systemContainer.PositionSystem.PositionOf(systemContainer.PlayerSystem.Player);
+            MapCoordinate playerPosition = systemContainer.PositionSystem.CoordinateOf(systemContainer.PlayerSystem.Player);
             var playerFov = currentMap.FovFrom(playerPosition, 9);
 
             var targetableCells = targetingActivityData.TargetingData.TargetableCellsFrom(playerPosition);

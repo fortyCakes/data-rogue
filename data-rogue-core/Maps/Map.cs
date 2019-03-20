@@ -6,15 +6,15 @@ using data_rogue_core.EntityEngineSystem;
 
 namespace data_rogue_core.Maps
 {
-    public class Map
+    public class Map : IMap
     {
         public MapKey MapKey { get; set; }
 
         public IEntity DefaultCell { get; set; }
 
-        public Dictionary<MapCoordinate, IEntity> Cells = new Dictionary<MapCoordinate, IEntity>();
+        public Dictionary<MapCoordinate, IEntity> Cells { get; set; } = new Dictionary<MapCoordinate, IEntity>();
 
-        public HashSet<MapCoordinate> SeenCoordinates = new HashSet<MapCoordinate>();
+        public HashSet<MapCoordinate> SeenCoordinates { get; set; } = new HashSet<MapCoordinate>();
 
         public List<MapGenCommand> MapGenCommands { get; set; } = new List<MapGenCommand>();
 

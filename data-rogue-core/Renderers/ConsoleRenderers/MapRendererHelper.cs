@@ -12,7 +12,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 {
     public static class MapRendererHelper
     {
-        public static void DrawCell(RLConsole mapConsole, int x, int y, IPositionSystem positionSystem, Map currentMap, int lookupX, int lookupY, List<MapCoordinate> playerFov, CellTargeting cellTargeting = CellTargeting.None)
+        public static void DrawCell(RLConsole mapConsole, int x, int y, IPositionSystem positionSystem, IMap currentMap, int lookupX, int lookupY, List<MapCoordinate> playerFov, CellTargeting cellTargeting = CellTargeting.None)
         {
             MapCoordinate coordinate = new MapCoordinate(currentMap.MapKey, lookupX, lookupY);
             var backColor = RLColor.Black;
@@ -46,7 +46,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             return backColor;
         }
 
-        public static Appearance GetAppearanceAt(IPositionSystem positionSystem, Map currentMap, MapCoordinate coordinate, ref RLColor backColor, bool isInFov)
+        public static Appearance GetAppearanceAt(IPositionSystem positionSystem, IMap currentMap, MapCoordinate coordinate, ref RLColor backColor, bool isInFov)
         {
             Appearance appearance = null;
 
@@ -89,7 +89,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             return appearance;
         }
 
-        private static bool IsRemembered(Map currentMap, MapCoordinate coordinate, IEntity e)
+        private static bool IsRemembered(IMap currentMap, MapCoordinate coordinate, IEntity e)
         {
             return currentMap.SeenCoordinates.Contains(coordinate) && e.Has<Memorable>();
         }

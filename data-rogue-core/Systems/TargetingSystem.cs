@@ -48,7 +48,7 @@ namespace data_rogue_core.Systems
 
                 if (hoveredLocation != null)
                 {
-                    MapCoordinate playerPosition = _positionSystem.PositionOf(_systemContainer.PlayerSystem.Player);
+                    MapCoordinate playerPosition = _positionSystem.CoordinateOf(_systemContainer.PlayerSystem.Player);
 
                     if (activity.TargetingActivityData.TargetingData.TargetableCellsFrom(playerPosition).Contains(hoveredLocation))
                     {

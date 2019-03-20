@@ -24,7 +24,7 @@ namespace data_rogue_core.EventSystem.Rules
             if (IsSolid(sender))
             {
                 var vector = (Vector) eventData;
-                var targetCoordinate = PositionSystem.PositionOf(sender) + vector;
+                var targetCoordinate = PositionSystem.CoordinateOf(sender) + vector;
 
                 var entitiesAtPosition = PositionSystem.EntitiesAt(targetCoordinate);
 

@@ -38,7 +38,7 @@ namespace data_rogue_core
             return GetSpawnPoint(initialMap);
         }
 
-        private static MapCoordinate GetSpawnPoint(Map initialMap)
+        private static MapCoordinate GetSpawnPoint(IMap initialMap)
         {
             var definedSpawnPoint = initialMap.Cells.Where(c => c.Value.Has<SpawnPoint>());
 

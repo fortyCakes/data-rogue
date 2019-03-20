@@ -8,15 +8,11 @@ namespace data_rogue_core.Systems
     public interface IPositionSystem : ISystem
     {
         IEnumerable<IEntity> EntitiesAt(MapCoordinate coordinate);
-        IEnumerable<IEntity> EntitiesAt(MapKey mapKey, int X, int Y);
-
-        MapCoordinate PositionOf(IEntity entity);
-        void Move(Position position, Vector vector);
-
+        IEnumerable<IEntity> EntitiesAt(MapKey mapKey, int x, int y);
+        MapCoordinate CoordinateOf(IEntity entity);
         void Move(IEntity entity, Vector vector);
-
         void SetPosition(IEntity entity, MapCoordinate mapCoordinate);
-        void SetPosition(Position position, MapCoordinate mapCoordinate);
+        void RemovePosition(IEntity entity);
         bool Any(MapCoordinate key);
         IEnumerable<MapCoordinate> Path(MapCoordinate origin, MapCoordinate destination);
     }

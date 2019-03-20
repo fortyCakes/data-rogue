@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using data_rogue_core.Components;
 using data_rogue_core.EntityEngineSystem;
@@ -11,10 +12,14 @@ namespace data_rogue_core.Systems
     public class PositionSystem : BaseSystem, IPositionSystem
     {
         private readonly IMapSystem _mapSystem;
+        private readonly IEntityEngine _engine;
+        private readonly IPathfindingAlgorithm _pathfindingAlgorithm;
 
-        public PositionSystem(IMapSystem mapSystem)
+        public PositionSystem(IMapSystem mapSystem, IEntityEngine engine, IPathfindingAlgorithm pathfindingAlgorithm)
         {
             _mapSystem = mapSystem;
+            _engine = engine;
+            _pathfindingAlgorithm = pathfindingAlgorithm;
         }
 
         public override SystemComponents RequiredComponents => new SystemComponents { typeof(Position) };
@@ -40,19 +45,26 @@ namespace data_rogue_core.Systems
             yield return cell;
         }
 
-        public MapCoordinate PositionOf(IEntity entity)
+        public MapCoordinate CoordinateOf(IEntity entity)
         {
-            return entity.Get<Position>().MapCoordinate;
+            return entity.Get<Position>()?.MapCoordinate;
         }
 
-        public void Move(Position position, Vector vector)
+        private void Move(Position position, Vector vector)
         {
             position.Move(vector);
         }
 
         public void Move(IEntity entity, Vector vector)
         {
-            Move(entity.Get<Position>(), vector);
+            var position = entity.Get<Position>();
+
+            if (position == null)
+            {
+                throw new InvalidOperationException("Can't move an entity that doesn't have a Position");
+            }
+
+            Move(position, vector);
         }
 
         public IEnumerable<IEntity> EntitiesAt(MapKey mapKey, int X, int Y)
@@ -62,12 +74,30 @@ namespace data_rogue_core.Systems
 
         public void SetPosition(IEntity entity, MapCoordinate mapCoordinate)
         {
-            SetPosition(entity.Get<Position>(), mapCoordinate);
+            Position position = entity.Get<Position>();
+
+            if (position == null)
+            {
+                position = new Position();
+                _engine.AddComponent(entity, position);
+            }
+
+            SetPosition(position, mapCoordinate);
         }
 
         public void SetPosition(Position position, MapCoordinate mapCoordinate)
         {
             position.MapCoordinate = mapCoordinate;
+        }
+
+        public void RemovePosition(IEntity entity)
+        {
+            Position position = entity.Get<Position>();
+
+            if (position != null)
+            {
+                _engine.RemoveComponent(entity, position);
+            }
         }
 
         public bool Any(MapCoordinate key)
@@ -85,7 +115,7 @@ namespace data_rogue_core.Systems
 
             var map = _mapSystem.MapCollection[origin.Key];
 
-            return AStar.Path(map, origin, destination);
+            return _pathfindingAlgorithm.Path(map, origin, destination);
         }
     }
 }

@@ -1,0 +1,35 @@
+﻿using System.Collections.Generic;
+using data_rogue_core.EntityEngineSystem;
+
+namespace data_rogue_core.Maps
+{
+    public interface IMap
+    {
+        int BottomY { get; }
+        IEntity DefaultCell { get; set; }
+        uint DefaultCellId { get; }
+        int LeftX { get; }
+        List<MapGenCommand> MapGenCommands { get; set; }
+        MapKey MapKey { get; set; }
+        Vector Origin { get; }
+        int RightX { get; }
+        int TopY { get; }
+
+        Dictionary<MapCoordinate, IEntity> Cells { get; set; }
+        HashSet<MapCoordinate> SeenCoordinates { get; set; }
+
+        IEntity CellAt(int lookupX, int lookupY);
+        IEntity CellAt(MapCoordinate coordinate);
+        bool CellExists(int x, int y);
+        void ClearCell(MapCoordinate coordinate);
+        List<MapCoordinate> FovFrom(MapCoordinate mapCoordinate, int range);
+        void RemoveCell(int x, int y);
+        void RemoveCell(MapCoordinate mapCoordinate);
+        void RemoveCellsInRange(int x1, int x2, int y1, int y2);
+        void SetCell(int x, int y, IEntity cell);
+        void SetCell(MapCoordinate coordinate, IEntity cell);
+        void SetCellsInRange(int x1, int x2, int y1, int y2, IEntity cell);
+        void SetSeen(int x, int y, bool seen = true);
+        void SetSeen(MapCoordinate coordinate, bool seen = true);
+    }
+}
