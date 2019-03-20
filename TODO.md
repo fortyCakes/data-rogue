@@ -4,9 +4,6 @@
 
 == 0.1 ==
 
-- Caching positions in PositionSystem
--	Add tests to position system
--	Add caching
 - Ordering of messages on kill
 - 	"Deferred message" with disposable message context
 - Ranged and magic weapons
@@ -20,6 +17,8 @@
 - 		Map rendering customisation
 - Move RendererFactory into ActivityStack
 - Remove RLNet dependencies from core (!)
+- Decouple dataloading from test entity engine
+-	In fact generally decouple the system testing, don't create a full systemcontainer
 - Event system rework: separate pre- and post-event rules
 
 == 0.1.5 ==

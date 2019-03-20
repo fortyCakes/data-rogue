@@ -11,65 +11,78 @@ namespace data_rogue_core.Systems
 {
     public class PositionSystem : BaseSystem, IPositionSystem
     {
+        private readonly IEntityEngine _entityEngine;
         private readonly IMapSystem _mapSystem;
-        private readonly IEntityEngine _engine;
         private readonly IPathfindingAlgorithm _pathfindingAlgorithm;
 
-        public PositionSystem(IMapSystem mapSystem, IEntityEngine engine, IPathfindingAlgorithm pathfindingAlgorithm)
+        private EntityCache _entityCache;
+        private Dictionary<IEntity, MapCoordinate> _positionCache;
+
+        public PositionSystem(IMapSystem mapSystem, IEntityEngine entityEngine, IPathfindingAlgorithm pathfindingAlgorithm)
         {
             _mapSystem = mapSystem;
-            _engine = engine;
+            _entityEngine = entityEngine;
             _pathfindingAlgorithm = pathfindingAlgorithm;
         }
 
-        public override SystemComponents RequiredComponents => new SystemComponents { typeof(Position) };
-        public override SystemComponents ForbiddenComponents => new SystemComponents { typeof(Prototype) };
+        public override SystemComponents RequiredComponents => new SystemComponents {typeof(Position)};
+        public override SystemComponents ForbiddenComponents => new SystemComponents {typeof(Prototype)};
 
         public IEnumerable<IEntity> EntitiesAt(MapCoordinate coordinate)
         {
             return EntitiesAt_Internal(coordinate).ToList();
         }
 
-        private IEnumerable<IEntity> EntitiesAt_Internal(MapCoordinate coordinate)
+        public override void Initialise()
         {
-            foreach (var entity in Entities)
-            {
-                Position entityPosition = entity.Get<Position>();
-                if (entityPosition.MapCoordinate.Equals(coordinate))
-                {
-                    yield return entity;
-                }
-            }
+            base.Initialise();
+            _positionCache = new Dictionary<IEntity, MapCoordinate>();
+            _entityCache = new EntityCache();
+        }
 
-            var cell = _mapSystem.MapCollection[coordinate.Key].CellAt(coordinate.X, coordinate.Y);
-            yield return cell;
+        public override void AddEntity(IEntity entity)
+        {
+            base.AddEntity(entity);
+            AddToCache(entity);
+        }
+
+        private void AddToCache(IEntity entity)
+        {
+            _positionCache.Add(entity, entity.Get<Position>().MapCoordinate);
+            _entityCache.Add(entity.Get<Position>().MapCoordinate, entity);
+        }
+
+        public override void RemoveEntity(IEntity entity)
+        {
+            base.RemoveEntity(entity);
+            RemoveFromCache(entity);
+        }
+
+        private void RemoveFromCache(IEntity entity)
+        {
+            _positionCache.Remove(entity);
+            _entityCache.Remove(entity);
         }
 
         public MapCoordinate CoordinateOf(IEntity entity)
         {
-            return entity.Get<Position>()?.MapCoordinate;
-        }
+            if (_positionCache.ContainsKey(entity)) return _positionCache[entity];
 
-        private void Move(Position position, Vector vector)
-        {
-            position.Move(vector);
+            return null;
         }
 
         public void Move(IEntity entity, Vector vector)
         {
-            var position = entity.Get<Position>();
+            Position position = entity.Get<Position>();
 
-            if (position == null)
-            {
-                throw new InvalidOperationException("Can't move an entity that doesn't have a Position");
-            }
+            if (position == null) throw new InvalidOperationException("Can't move an entity that doesn't have a Position");
 
-            Move(position, vector);
+            Move(entity, position, vector);
         }
 
-        public IEnumerable<IEntity> EntitiesAt(MapKey mapKey, int X, int Y)
+        public IEnumerable<IEntity> EntitiesAt(MapKey mapKey, int x, int y)
         {
-            return EntitiesAt(new MapCoordinate(mapKey, X, Y));
+            return EntitiesAt(new MapCoordinate(mapKey, x, y));
         }
 
         public void SetPosition(IEntity entity, MapCoordinate mapCoordinate)
@@ -78,44 +91,72 @@ namespace data_rogue_core.Systems
 
             if (position == null)
             {
-                position = new Position();
-                _engine.AddComponent(entity, position);
+                position = new Position {MapCoordinate = mapCoordinate};
+                _entityEngine.AddComponent(entity, position);
             }
 
-            SetPosition(position, mapCoordinate);
-        }
-
-        public void SetPosition(Position position, MapCoordinate mapCoordinate)
-        {
-            position.MapCoordinate = mapCoordinate;
+            SetPosition(entity, position, mapCoordinate);
         }
 
         public void RemovePosition(IEntity entity)
         {
             Position position = entity.Get<Position>();
 
-            if (position != null)
-            {
-                _engine.RemoveComponent(entity, position);
-            }
+            if (position != null) _entityEngine.RemoveComponent(entity, position);
+
+            RemoveFromCache(entity);
         }
 
         public bool Any(MapCoordinate key)
         {
-            return Entities.Any(e => e.Get<Position>().MapCoordinate == key);
+            return _entityCache.ContainsKey(key) && _entityCache[key].Count > 0;
         }
 
         public IEnumerable<MapCoordinate> Path(MapCoordinate origin, MapCoordinate destination)
         {
-            if (origin.Key != destination.Key)
-            {
-                // on different levels
-                return null;
-            }
+            if (origin.Key != destination.Key) return null;
 
-            var map = _mapSystem.MapCollection[origin.Key];
+            IMap map = _mapSystem.MapCollection[origin.Key];
 
             return _pathfindingAlgorithm.Path(map, origin, destination);
+        }
+
+        private IEnumerable<IEntity> EntitiesAt_Internal(MapCoordinate coordinate)
+        {
+            if (_entityCache.ContainsKey(coordinate))
+            {
+                foreach (var entity in _entityCache[coordinate])
+                {
+                    yield return entity;
+                }
+            }
+
+            IEntity cell = _mapSystem.MapCollection[coordinate.Key].CellAt(coordinate.X, coordinate.Y);
+            yield return cell;
+        }
+
+        private void Move(IEntity entity, Position position, Vector vector)
+        {
+            MapCoordinate oldMapCoordinate = position.MapCoordinate;
+
+            position.Move(vector);
+
+            UpdateCache(entity, position.MapCoordinate, oldMapCoordinate);
+        }
+
+        private void UpdateCache(IEntity entity, MapCoordinate mapCoordinate, MapCoordinate oldMapCoordinate)
+        {
+            _positionCache[entity] = mapCoordinate;
+            _entityCache.UpdatePosition(entity, mapCoordinate, oldMapCoordinate);
+        }
+
+        private void SetPosition(IEntity entity, Position position, MapCoordinate mapCoordinate)
+        {
+            MapCoordinate oldMapCoordinate = position.MapCoordinate;
+
+            position.MapCoordinate = mapCoordinate;
+
+            UpdateCache(entity, mapCoordinate, oldMapCoordinate);
         }
     }
 }

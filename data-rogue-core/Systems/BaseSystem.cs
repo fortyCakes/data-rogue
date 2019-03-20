@@ -5,12 +5,12 @@ namespace data_rogue_core.Systems
 {
     public abstract class BaseSystem : ISystem
     {
-        public void AddEntity(IEntity entity)
+        public virtual void AddEntity(IEntity entity)
         {
             Entities.Add(entity);
         }
 
-        public void RemoveEntity(IEntity entity)
+        public virtual void RemoveEntity(IEntity entity)
         {
             Entities.Remove(entity);
         }
@@ -26,7 +26,7 @@ namespace data_rogue_core.Systems
 
         public List<IEntity> Entities { get; set; }
 
-        public void Initialise()
+        public virtual void Initialise()
         {
             Entities = new List<IEntity>();
         }

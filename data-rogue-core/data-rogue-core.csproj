@@ -219,6 +219,7 @@
     <Compile Include="Renderers\ITargetingRenderer.cs" />
     <Compile Include="EventSystem\EventData\ActionEventData.cs" />
     <Compile Include="Systems\ActivitySystem.cs" />
+    <Compile Include="Systems\EntityCache.cs" />
     <Compile Include="Systems\Interfaces\IMapSystem.cs" />
     <Compile Include="Systems\Interfaces\IRendererSystem.cs" />
     <Compile Include="Systems\Interfaces\ISaveSystem.cs" />
