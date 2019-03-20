@@ -195,6 +195,12 @@ namespace data_rogue_core.UnitTests.Systems
             systemContainer.ItemSystem.CheckWealth(entity, "TestCurrency").Should().Be(5);
         }
 
+        [Test]
+        public void StackableItems_Work()
+        {
+            Assert.Fail();
+        }
+
         private IEntity GetTestItem(string itemName = null, bool hasPosition = true)
         {
             var components = new List<IEntityComponent>() { new Item() };

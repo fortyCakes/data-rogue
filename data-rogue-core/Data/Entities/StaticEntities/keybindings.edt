@@ -59,4 +59,7 @@ Action: Select
 [KeyBinding]
 Key: G
 Action: GetItem
+[KeyBinding]
+Key: F
+Action: RangedAttack
 

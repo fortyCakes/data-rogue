@@ -80,6 +80,7 @@
     <Compile Include="Behaviours\MoveToPlayerBehaviour.cs" />
     <Compile Include="Behaviours\RandomlyMoveBehaviour.cs" />
     <Compile Include="Behaviours\PlayerControlledBehaviour.cs" />
+    <Compile Include="Components\Ammunition.cs" />
     <Compile Include="Components\AuraFighter.cs" />
     <Compile Include="Components\Biome.cs" />
     <Compile Include="Components\BodyPartLocation.cs" />
@@ -154,6 +155,7 @@
     <Compile Include="EventSystem\Rules\Actions\InventoryMenuAction.cs" />
     <Compile Include="EventSystem\Rules\Actions\MeleeAttackAction.cs" />
     <Compile Include="EventSystem\Rules\Actions\MoveAction.cs" />
+    <Compile Include="EventSystem\Rules\Actions\RangedAttackAction.cs" />
     <Compile Include="EventSystem\Rules\Actions\RestAction.cs" />
     <Compile Include="EventSystem\Rules\Actions\SaveAction.cs" />
     <Compile Include="EventSystem\Rules\Actions\SkillMenuAction.cs" />

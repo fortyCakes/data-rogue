@@ -13,6 +13,7 @@ namespace data_rogue_core.EventSystem.Rules
         {
             typeof(MoveAction),
             typeof(MeleeAttackAction),
+            typeof(RangedAttackAction),
             typeof(SaveAction),
             typeof(EnterAction),
             typeof(RestAction),
