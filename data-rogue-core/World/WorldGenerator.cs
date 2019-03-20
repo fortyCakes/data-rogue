@@ -65,7 +65,7 @@ namespace data_rogue_core
         private static void AddPlayerToWorld(ISystemContainer systemContainer, MapCoordinate spawnPoint, CharacterCreationForm form)
         {
             var player = EntitySerializer.Deserialize(systemContainer, DataFileLoader.LoadFile(@"Entities\player.edt"));
-            player.Get<Position>().MapCoordinate = spawnPoint;
+            systemContainer.PositionSystem.SetPosition(player, spawnPoint);
             player.Get<Description>().Name = form.Name;
 
             systemContainer.StatSystem.SetStat(player, nameof(form.Muscle), form.Muscle);

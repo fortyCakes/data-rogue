@@ -202,7 +202,7 @@ namespace data_rogue_core.UnitTests.Systems
             if (hasPosition)
             {
 
-                components.Add(new Position {MapCoordinate = new MapCoordinate("TestMap", 0, 0)});
+                components.Add(new Position());
             }
 
             return systemContainer.EntityEngine.New(itemName ?? $"Item{entityId++}", components.ToArray());
@@ -212,7 +212,7 @@ namespace data_rogue_core.UnitTests.Systems
         {
             return systemContainer.EntityEngine.New("Inventory", 
                 new Inventory { Capacity = capacity, Contents = new EntityReferenceList() },
-                new Position { MapCoordinate = new MapCoordinate("Test Map", 0, 0)},
+                new Position { MapCoordinate = new MapCoordinate("TEST_MAP", 0, 0)},
                 new Wealth { Currency="TestCurrency"});
         }
     }

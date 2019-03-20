@@ -1,6 +1,7 @@
 ﻿using System;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.EventSystem.EventData;
+using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.EventSystem.Rules
@@ -21,20 +22,23 @@ namespace data_rogue_core.EventSystem.Rules
         public bool Apply(EventType type, IEntity sender, object eventData)
         {
             var data = eventData as AttackEventData;
+            using (var messageContext = _systemContainer.MessageSystem.DeferredMessage())
+            {
 
-            if (data.SuccessfulDefenceType == null)
-            {
-                OnHit(data);
-                return true;
-            }
-            else
-            {
-                OnMiss(data);
-                return false;
+                if (data.SuccessfulDefenceType == null)
+                {
+                    OnHit(data, messageContext);
+                    return true;
+                }
+                else
+                {
+                    OnMiss(data, messageContext);
+                    return false;
+                }
             }
         }
 
-        private void OnHit(AttackEventData data)
+        private void OnHit(AttackEventData data, DeferredMessageContext messageContext)
         {
             var damageData = new DamageEventData { Damage = data.Damage.Value, DamagedBy = data.Attacker};
 
@@ -42,7 +46,7 @@ namespace data_rogue_core.EventSystem.Rules
 
             if (damaged)
             {
-                DescribeSuccessfulAttack(data);
+                DescribeSuccessfulAttack(data, messageContext);
             }
             else
             {
@@ -55,25 +59,25 @@ namespace data_rogue_core.EventSystem.Rules
                     data.SuccessfulDefenceType = "NoDamage";
                 }
 
-                DescribeMissedAttack(data);
+                DescribeMissedAttack(data, messageContext);
             }
         }
 
-        private void DescribeSuccessfulAttack(AttackEventData data)
+        private void DescribeSuccessfulAttack(AttackEventData data, DeferredMessageContext messageContext)
         {
             string message = GetBaseAttackMessage(data);
 
             message += $" and hits for {data.Damage} damage.";
 
-            _systemContainer.MessageSystem.Write(message);
+            messageContext.SetMessage(message);
         }
 
-        private void OnMiss(AttackEventData data)
+        private void OnMiss(AttackEventData data, DeferredMessageContext messageContext)
         {
-            DescribeMissedAttack(data);
+            DescribeMissedAttack(data, messageContext);
         }
 
-        private void DescribeMissedAttack(AttackEventData data)
+        private void DescribeMissedAttack(AttackEventData data, DeferredMessageContext messageContext)
         {
             string message = GetBaseAttackMessage(data);
 
@@ -98,7 +102,7 @@ namespace data_rogue_core.EventSystem.Rules
                     throw new ApplicationException("Unknown defence type in DescribeMissedAttack");
             }
 
-            _systemContainer.MessageSystem.Write(message);
+            messageContext.SetMessage(message);
         }
 
         private static string GetBaseAttackMessage(AttackEventData data)

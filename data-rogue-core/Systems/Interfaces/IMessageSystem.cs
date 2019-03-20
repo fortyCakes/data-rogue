@@ -13,5 +13,7 @@ namespace data_rogue_core.Systems.Interfaces
         List<Message> AllMessages { get; }
 
         List<Message> RecentMessages(int messages);
+
+        DeferredMessageContext DeferredMessage();
     }
 }

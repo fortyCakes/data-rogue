@@ -35,5 +35,38 @@ namespace data_rogue_core.Systems
         {
             AllMessages.Clear();
         }
+
+        public DeferredMessageContext DeferredMessage()
+        {
+            var message = new Message();
+            AllMessages.Add(message);
+
+            return new DeferredMessageContext(message, m => AllMessages.Remove(m));
+        }
+    }
+
+    public class DeferredMessageContext : IDisposable
+    {
+        private Message Message;
+        private readonly Action<Message> _ifUnused;
+
+        public DeferredMessageContext(Message message, Action<Message> ifUnused)
+        {
+            Message = message;
+            _ifUnused = ifUnused;
+        }
+
+        public void Dispose()
+        {
+            if (string.IsNullOrEmpty(Message.Text))
+            {
+                _ifUnused(Message);
+            }
+        }
+
+        public void SetMessage(string message)
+        {
+            Message.Text = message;
+        }
     }
 }

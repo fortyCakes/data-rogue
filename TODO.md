@@ -1,11 +1,9 @@
 == BUGS ==
 
-- 
+- Issue when entity dies while "on the stack" for TimeSystem
 
 == 0.1 ==
 
-- Ordering of messages on kill
-- 	"Deferred message" with disposable message context
 - Ranged and magic weapons
 - 	"fire" command
 - 	Apply combat stat (aegis)

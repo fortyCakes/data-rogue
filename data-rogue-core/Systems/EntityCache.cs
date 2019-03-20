@@ -8,6 +8,8 @@ namespace data_rogue_core.Systems
     {
         public void Add(MapCoordinate mapCoordinate, IEntity entity)
         {
+            if (mapCoordinate == null) return;
+
             if (ContainsKey(mapCoordinate))
             {
                 this[mapCoordinate].Add(entity);
@@ -42,13 +44,17 @@ namespace data_rogue_core.Systems
 
         public void UpdatePosition(IEntity entity, MapCoordinate mapCoordinate, MapCoordinate oldMapCoordinate)
         {
-            this[oldMapCoordinate].Remove(entity);
-            Add(mapCoordinate, entity);
-
-            if (this[oldMapCoordinate].Count == 0)
+            if (oldMapCoordinate != null)
             {
-                Remove(oldMapCoordinate);
+                this[oldMapCoordinate].Remove(entity);
+
+                if (this[oldMapCoordinate].Count == 0)
+                {
+                    Remove(oldMapCoordinate);
+                }
             }
+
+            Add(mapCoordinate, entity);
         }
     }
 }

@@ -27,10 +27,13 @@ namespace data_rogue_core.Behaviours
 
         public override ActionEventData ChooseAction(IEntity entity)
         {
-            var position = entity.Get<Position>().MapCoordinate;
+            var position = _positionSystem.CoordinateOf(entity);
             var playerPosition = _positionSystem.CoordinateOf(_playerSystem.Player);
 
-            if (Math.Abs(position.X - playerPosition.X) > 9 || Math.Abs(position.Y - playerPosition.Y) > 9)
+            if (position == null || 
+                playerPosition == null || 
+                Math.Abs(position.X - playerPosition.X) > 9 || 
+                Math.Abs(position.Y - playerPosition.Y) > 9)
             {
                 return null;
             }
