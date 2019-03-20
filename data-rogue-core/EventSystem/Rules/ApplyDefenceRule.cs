@@ -3,11 +3,12 @@ using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.Systems.Interfaces;
 using data_rogue_core.Utils;
+using System.Collections.Generic;
 
 namespace data_rogue_core.EventSystem.Rules
 {
 
-    public class ApplyDefenceRule: IEventRule
+    public abstract class ApplyDefenceRule: IEventRule
     {
         private ISystemContainer _systemContainer;
         private readonly string _defenceName;
@@ -21,6 +22,7 @@ namespace data_rogue_core.EventSystem.Rules
         }
 
         public EventTypeList EventTypes => new EventTypeList { EventType.Defence };
+        public abstract List<string> ValidAttackClasses { get; }
         public int RuleOrder => 488;
 
         public bool Apply(EventType type, IEntity sender, object eventData)
@@ -30,6 +32,12 @@ namespace data_rogue_core.EventSystem.Rules
             if (data.DefenceType != _defenceName)
             {
                 // Don't try to apply it
+                return true;
+            }
+
+            var attackClass = data.ForAttack.AttackClass;
+            if (!ValidAttackClasses.Contains(attackClass))
+            {
                 return true;
             }
 
@@ -56,6 +64,8 @@ namespace data_rogue_core.EventSystem.Rules
 
     public class ApplyTankDefenceRule : ApplyDefenceRule
     {
+        public override List<string> ValidAttackClasses => new List<string> { "Heavy", "Light", "Blast", "Launcher", "Thrown" };
+
         public ApplyTankDefenceRule(ISystemContainer systemContainer) : base(systemContainer, "AC", "Tank")
         {
         }
@@ -63,6 +73,8 @@ namespace data_rogue_core.EventSystem.Rules
 
     public class ApplyDodgeDefenceRule : ApplyDefenceRule
     {
+        public override List<string> ValidAttackClasses => new List<string> { "Heavy", "Light", "Bolt", "Launcher", "Thrown" };
+
         public ApplyDodgeDefenceRule(ISystemContainer systemContainer) : base(systemContainer, "EV", "Dodge")
         {
         }
@@ -70,6 +82,8 @@ namespace data_rogue_core.EventSystem.Rules
 
     public class ApplyBlockDefenceRule : ApplyDefenceRule
     {
+        public override List<string> ValidAttackClasses => new List<string> { "Heavy", "Light", "Bolt", "Blast", "Launcher", "Thrown" };
+
         public ApplyBlockDefenceRule(ISystemContainer systemContainer) : base(systemContainer, "SH", "Block")
         {
         }

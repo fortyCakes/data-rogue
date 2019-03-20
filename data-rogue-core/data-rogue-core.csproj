@@ -139,7 +139,6 @@
     <Compile Include="EventSystem\EventData\DeathEventData.cs" />
     <Compile Include="EventSystem\EventData\EquipItemEventData.cs" />
     <Compile Include="EventSystem\EventData\AttackEventData.cs" />
-    <Compile Include="EventSystem\EventData\AttackType.cs" />
     <Compile Include="EventSystem\EventData\DamageEventData.cs" />
     <Compile Include="EventSystem\EventData\GetStatEventData.cs" />
     <Compile Include="EventSystem\EventData\InputEventData.cs" />
@@ -171,6 +170,7 @@
     <Compile Include="EventSystem\Rules\GainSingleXPOnKillRule.cs" />
     <Compile Include="EventSystem\EventData\GainXPEventData.cs" />
     <Compile Include="EventSystem\Rules\LevelUpOnXPGainRule.cs" />
+    <Compile Include="EventSystem\Rules\RandomiseDamageRule.cs" />
     <Compile Include="EventSystem\Rules\UnrolledAccuracyRule.cs" />
     <Compile Include="EventSystem\Rules\SetAccuracyOnAttackRule.cs" />
     <Compile Include="EventSystem\Rules\SetAttackClassOnAttackRule.cs" />

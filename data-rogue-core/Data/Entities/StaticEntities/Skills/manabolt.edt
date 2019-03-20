@@ -29,22 +29,15 @@ Text: {
 			defendingFighter = defender:Get('Fighter')
 
 			attackData = AttackEventData()
+			attackData.Attacker = User
 			attackData.Defender = defender
-			attackData.AttackType = luanet.enum(AttackType, 'Magical')
+			attackData.AttackClass = 'Bolt'
+			attackData.IsAction = false
+			attackData.Damage = willpower
+			attackData.Accuracy = 40
+			attackData.AttackName = 'Mana Bolt'
 
 			hit = SystemContainer.EventSystem:Try(luanet.enum(EventType, 'Attack'), User, attackData);
-
-			if hit then
-				damageData = DamageEventData()
-				damageData.Damage = willpower
-				damageData.Overwhelming = true
-				damageData.DamagedBy = User
-
-				SystemContainer.EventSystem:Try(luanet.enum(EventType, 'Damage'), defender, damageData)
-				SystemContainer.MessageSystem:Write('The mana bolt hits!')
-			else
-				SystemContainer.MessageSystem:Write('The mana bolt misses.')
-			end
 
 		end
 

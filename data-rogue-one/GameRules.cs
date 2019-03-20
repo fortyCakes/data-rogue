@@ -45,7 +45,8 @@ namespace data_rogue_one
                     typeof(ApplyTankDefenceRule),
                     typeof(ApplyHitOrMissedAttackRule),
                     typeof(AddAgilityToEvasionRule),
-                    typeof(DefaultSpeedRule)
+                    typeof(DefaultSpeedRule),
+                    typeof(RandomiseDamageRule)
                 };
 
                 list.AddRange(ApplyActionRule.AllActionRules);

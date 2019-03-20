@@ -110,7 +110,14 @@ namespace data_rogue_core.EventSystem.Rules
             var attackerName = data.Attacker.DescriptionName;
             var defenderName = data.Defender.DescriptionName;
             
-            return $"{attackerName} attacks {defenderName}";
+            var stem = $"{attackerName} attacks {defenderName}";
+
+            if (string.IsNullOrEmpty(data.AttackName))
+            {
+                return stem;
+            }
+
+            return $"{stem} with {data.AttackName}";
         }
     }
 }
