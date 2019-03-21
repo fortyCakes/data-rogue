@@ -101,3 +101,6 @@ C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-one\bin\Debug\Data\Entit
 C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-one\bin\Debug\Data\Entities\StaticEntities\Items\T2HeavyArmour.edt
 C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-one\bin\Debug\Data\Entities\StaticEntities\Items\T2LightArmour.edt
 C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-one\bin\Debug\Data\Entities\StaticEntities\Items\T2Weapons.edt
+C:\Users\Lex\source\repos\fortyCakes\data-rogue\data-rogue-one\bin\Debug\Data\Entities\StaticEntities\Items\T2HeavyArmour.edt
+C:\Users\Lex\source\repos\fortyCakes\data-rogue\data-rogue-one\bin\Debug\Data\Entities\StaticEntities\Items\T2LightArmour.edt
+C:\Users\Lex\source\repos\fortyCakes\data-rogue\data-rogue-one\bin\Debug\Data\Entities\StaticEntities\Items\T2Weapons.edt

@@ -17,6 +17,7 @@ namespace data_rogue_core.EventSystem.EventData
         public bool IsAction = true;
 
         public string[] Tags;
+        public string AttackName;
         public string SuccessfulDefenceType;
     }
 }

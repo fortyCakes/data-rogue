@@ -53,6 +53,51 @@ Value: 11
 Name: Speed
 Value: 1000
 
+"Wooden Bow"
+[Description]
+Name: Wooden Bow
+[Prototype]
+Name: Item:WoodenBow
+Singleton: false
+[Appearance]
+Glyph: ]
+Color: #6B4D46
+[Position]
+[Item]
+ItemLevel: 1
+[Equipment]
+EquipmentSlot: Hand
+[Weapon]
+Class: Launcher
+[RequiresAmmunition]
+AmmunitionType: Arrow
+[Stat]
+Name: Accuracy
+Value: 30
+[Stat]
+Name: Damage
+Value: 10
+[Stat]
+Name: Speed
+Value: 700
+
+"Arrow"
+[Description]
+Name: Arrow
+[Prototype]
+Name: Item:Arrow
+Singleton: false
+[Appearance]
+Glyph: ]
+Color: #6B4D46
+[Position]
+[Item]
+ItemLevel: 1
+[Ammunition]
+AmmunitionType: Arrow
+[Stackable]
+StacksWith: Arrow
+
 "Wooden Shield"
 [Description]
 Name: Wooden Shield

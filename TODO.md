@@ -1,10 +1,10 @@
 == BUGS ==
 
-- mana bolt script is broken
+- 
 
 == 0.1 ==
 
-- skill menu
+- Stackable items
 - Ranged and magic weapons
 - 	"fire" command
 - 	Apply combat stat (aegis)

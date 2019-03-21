@@ -80,6 +80,7 @@
     <Compile Include="Behaviours\MoveToPlayerBehaviour.cs" />
     <Compile Include="Behaviours\RandomlyMoveBehaviour.cs" />
     <Compile Include="Behaviours\PlayerControlledBehaviour.cs" />
+    <Compile Include="Components\Ammunition.cs" />
     <Compile Include="Components\AuraFighter.cs" />
     <Compile Include="Components\Biome.cs" />
     <Compile Include="Components\BodyPartLocation.cs" />
@@ -139,7 +140,6 @@
     <Compile Include="EventSystem\EventData\DeathEventData.cs" />
     <Compile Include="EventSystem\EventData\EquipItemEventData.cs" />
     <Compile Include="EventSystem\EventData\AttackEventData.cs" />
-    <Compile Include="EventSystem\EventData\AttackType.cs" />
     <Compile Include="EventSystem\EventData\DamageEventData.cs" />
     <Compile Include="EventSystem\EventData\GetStatEventData.cs" />
     <Compile Include="EventSystem\EventData\InputEventData.cs" />
@@ -155,6 +155,7 @@
     <Compile Include="EventSystem\Rules\Actions\InventoryMenuAction.cs" />
     <Compile Include="EventSystem\Rules\Actions\MeleeAttackAction.cs" />
     <Compile Include="EventSystem\Rules\Actions\MoveAction.cs" />
+    <Compile Include="EventSystem\Rules\Actions\RangedAttackAction.cs" />
     <Compile Include="EventSystem\Rules\Actions\RestAction.cs" />
     <Compile Include="EventSystem\Rules\Actions\SaveAction.cs" />
     <Compile Include="EventSystem\Rules\Actions\SkillMenuAction.cs" />
@@ -171,6 +172,7 @@
     <Compile Include="EventSystem\Rules\GainSingleXPOnKillRule.cs" />
     <Compile Include="EventSystem\EventData\GainXPEventData.cs" />
     <Compile Include="EventSystem\Rules\LevelUpOnXPGainRule.cs" />
+    <Compile Include="EventSystem\Rules\RandomiseDamageRule.cs" />
     <Compile Include="EventSystem\Rules\UnrolledAccuracyRule.cs" />
     <Compile Include="EventSystem\Rules\SetAccuracyOnAttackRule.cs" />
     <Compile Include="EventSystem\Rules\SetAttackClassOnAttackRule.cs" />

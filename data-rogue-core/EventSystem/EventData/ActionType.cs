@@ -14,6 +14,7 @@
         WaitForInput,
         EscapeMenu,
         SkillMenu,
-        UseSkill
+        UseSkill,
+        RangedAttack
     }
 }

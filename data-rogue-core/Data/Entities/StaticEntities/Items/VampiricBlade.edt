@@ -27,7 +27,7 @@ Name: SH
 Value: 4
 [Stat]
 Name: Accuracy
-Value: 25
+Value: 30
 [Stat]
 Name: Damage
 Value: 10
@@ -38,7 +38,7 @@ Name: Script: Vampiric Heal
 Singleton: true
 [Script]
 Text: {
-	fighter = User:Get('Fighter')
-	fighter.Health:Add(10);
+	health = User:Get('Health')
+	health.HP:Add(10);
 	SystemContainer.MessageSystem:Write(User:Get('Description').Name .. ' is healed for 10 health by their vampiric blade.')
 }

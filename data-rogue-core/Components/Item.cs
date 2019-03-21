@@ -12,4 +12,10 @@ namespace data_rogue_core.Components
     {
         public string Class;
     }
+
+    public class Stackable:IEntityComponent
+    {
+        public int StackSize = 1;
+        public string StacksWith;
+    }
 }
