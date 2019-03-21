@@ -10,10 +10,10 @@
 - 	Apply combat stat (aegis)
 - Separate out core from implementation
 - 	Make stats window defined in data
-- 	Make Player entity not special (don't allow access from global state)
-- 	Aura and Tilt separation
-- 		Stat window rendering customisation
-- 		Map rendering customisation
+- 	Aura and Tilt separation 
+-		(remove AuraFighter/TiltFighter?)
+-		Stat window rendering customisation
+-		Map rendering customisation
 - Move RendererFactory into ActivityStack
 - Remove RLNet dependencies from core (!)
 - Decouple dataloading from test entity engine
