@@ -1,6 +1,6 @@
 # BUGS
 
-- 
+(empty) 
 
 # 0.1
 
@@ -63,6 +63,6 @@
 
 # 1.0+
 
-- Stock of monsters
-- Stock of items
-- Stock of vaults
+- [ ] Stock of monsters
+- [ ] Stock of items
+- [ ] Stock of vaults
