@@ -43,7 +43,7 @@ namespace data_rogue_core.Systems
 
             if (hasRemovedItemFromSomewhere && hasSpace)
             {
-                inventory.Contents.Add(item);
+                AddItemToInventory(item, inventory);
             }
             else
             {
@@ -58,13 +58,60 @@ namespace data_rogue_core.Systems
             return true;
         }
 
+        private void AddItemToInventory(IEntity item, Inventory inventory)
+        {
+            bool addedToStack = false;
+
+            if (item.Has<Stackable>())
+            {
+                foreach (var itemId in inventory.Contents)
+                {
+                    var itemInInventory = entityEngine.Get(itemId);
+                    if (itemInInventory.Has<Stackable>() && itemInInventory.Get<Stackable>().StacksWith == item.Get<Stackable>().StacksWith)
+                    {
+                        itemInInventory.Get<Stackable>().StackSize += item.Get<Stackable>().StackSize;
+                        DestroyItem(item);
+                        addedToStack = true;
+                    }
+                }
+            }
+
+            if (!addedToStack)
+            {
+                inventory.Contents.Add(item);
+            }
+           
+        }
+
         public bool DropItemFromInventory(IEntity item)
         {
             var inventory = GetInventoryContaining(item);
 
             if (inventory != null)
+            { 
+                DropItemToMap(item, inventory);
+
+                return RemoveItemFromInventory(item);
+            }
+
+            return false;
+        }
+
+        private void DropItemToMap(IEntity item, Inventory inventory)
+        {
+            var owner = GetInventoryOwner(inventory);
+            var position = owner.Get<Position>();
+
+            entityEngine.AddComponent(item, new Position {MapCoordinate = (MapCoordinate) position.MapCoordinate.Clone()});
+        }
+
+        public bool RemoveItemFromInventory(IEntity item)
+        {
+            var inventory = GetInventoryContaining(item);
+
+            if (inventory != null)
             {
-                inventory.Contents.Remove(item);
+                RemoveSingleItemFromInventory(item, inventory);
 
                 var owner = GetInventoryOwner(inventory);
                 var position = owner.Get<Position>();
@@ -77,6 +124,27 @@ namespace data_rogue_core.Systems
             }
 
             return true;
+        }
+
+        private void RemoveSingleItemFromInventory(IEntity item, Inventory inventory)
+        {
+            if (item.Has<Stackable>())
+            {
+                var stack = item.Get<Stackable>();
+
+                if (stack.StackSize > 1)
+                {
+                    stack.StackSize--;
+                }
+                else
+                {
+                    inventory.Contents.Remove(item);
+                }
+            }
+            else
+            {
+                inventory.Contents.Remove(item);
+            }
         }
 
         public bool Use(IEntity user, IEntity item)

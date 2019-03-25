@@ -14,5 +14,6 @@ namespace data_rogue_core.Systems
         bool AddWealth(IEntity entity, string currency, int amount);
         bool RemoveWealth(IEntity entity, string currency, int amount);
         int CheckWealth(IEntity entity, string currency);
+        bool RemoveItemFromInventory(IEntity item);
     }
 }

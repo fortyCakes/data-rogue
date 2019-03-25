@@ -1,5 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 using data_rogue_core.Components;
+using data_rogue_core.Data;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems;
@@ -19,6 +23,8 @@ namespace data_rogue_core.UnitTests.Systems
             systemContainer = new SystemContainer();
 
             systemContainer.CreateSystems("test");
+
+            systemContainer.EventSystem.Initialise();
 
             entity = GetTestEntity();
             inventory = entity.Get<Inventory>();
@@ -206,6 +212,118 @@ namespace data_rogue_core.UnitTests.Systems
 
             inventory.Contents.Should().NotContain(item2.EntityId);
             item.Get<Stackable>().StackSize.Should().Be(2);
+        }
+
+        [Test]
+        public void StackableItems_RemoveStackableItem_HaveOne_RemovesFromInventory()
+        {
+            var item = GetTestItem(stackable: true);
+            item.Get<Stackable>().StackSize = 1;
+
+            systemContainer.ItemSystem.MoveToInventory(item, inventory);
+
+            systemContainer.ItemSystem.RemoveItemFromInventory(item);
+
+            inventory.Contents.Should().NotContain(item.EntityId);
+        }
+
+        [Test]
+        public void StackableItems_RemoveStackableItem_HaveMoreThanOne_ReducesStack()
+        {
+            var item = GetTestItem(stackable: true);
+            item.Get<Stackable>().StackSize = 2;
+
+            systemContainer.ItemSystem.MoveToInventory(item, inventory);
+
+            systemContainer.ItemSystem.RemoveItemFromInventory(item);
+
+            inventory.Contents.Should().Contain(item.EntityId);
+            item.Get<Stackable>().StackSize.Should().Be(1);
+        }
+
+        [Test]
+        public void Use_CallsScriptExecutorWithItemScript()
+        {
+            var item = GetTestItem();
+            item.Get<Item>().UseScript = "TestScript";
+
+            var guid = Guid.NewGuid().ToString();
+
+            GenerateTestScript(guid);
+
+            systemContainer.ItemSystem.Use(entity, item);
+
+            systemContainer.MessageSystem.AllMessages.Single().Should().BeEquivalentTo(
+                new Message {Text = guid, Color = Color.White});
+        }
+
+
+        [Test]
+        public void Use_Consumable_UsesRemaining_DecreasesUses()
+        {
+            var item = GetTestItem();
+            item.Get<Item>().UseScript = "TestScript";
+            systemContainer.EntityEngine.AddComponent(item, new Consumable {Uses = new Counter{Current = 2, Max = 2}});
+
+            var guid = Guid.NewGuid().ToString();
+
+            GenerateTestScript(guid);
+
+            systemContainer.ItemSystem.Use(entity, item);
+
+            item.Get<Consumable>().Uses.ToString().Should().Be("1/2");
+        }
+
+        [Test]
+        public void Use_Consumable_NoUsesRemaining_DestroysItem()
+        {
+            var item = GetTestItem();
+            systemContainer.ItemSystem.MoveToInventory(item, inventory);
+
+            item.Get<Item>().UseScript = "TestScript";
+            systemContainer.EntityEngine.AddComponent(item, new Consumable { Uses = new Counter { Current = 1, Max = 2 } });
+
+            var guid = Guid.NewGuid().ToString();
+
+            GenerateTestScript(guid);
+
+            systemContainer.ItemSystem.Use(entity, item);
+
+            inventory.Contents.Should().BeEmpty();
+        }
+
+        [Test]
+        public void Use_ItemIsNotUsable_PrintsNothingInterestingMessage()
+        {
+            var item = GetTestItem();
+
+            systemContainer.EntityEngine.AddComponent(entity, new Description { Name = "Test User" });
+            systemContainer.EntityEngine.AddComponent(item, new Description { Name = "Test Item" });
+
+            systemContainer.ItemSystem.Use(entity, item);
+
+            var result = systemContainer.MessageSystem.AllMessages.Single();
+
+            result.Should().BeEquivalentTo(new Message {Color = Color.White, Text = "Test User tries to use Test Item. Nothing interesting happens." });
+        }
+
+        [Test]
+        public void Destroy_ItemIsInInventory_RemovesReference()
+        {
+            var item = GetTestItem();
+
+            systemContainer.ItemSystem.MoveToInventory(item, inventory);
+
+            systemContainer.ItemSystem.DestroyItem(item);
+
+            inventory.Contents.Should().BeEmpty();
+        }
+
+        private void GenerateTestScript(string testMessage = "")
+        {
+            systemContainer.EntityEngine.New("TestScript",
+                new Prototype { Name = "TestScript", Singleton = true },
+                new Script { Text = $"SystemContainer.MessageSystem:Write('{testMessage}')" });
         }
 
         private IEntity GetTestItem(string itemName = null, bool hasPosition = true, bool stackable = false)

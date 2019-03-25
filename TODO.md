@@ -4,8 +4,8 @@
 
 # 0.1
 
-- [ ] Stackable items
 - [ ] Ranged and magic weapons
+  - [X] Stackable items
   - [ ] "fire" command
   - [ ] Apply combat stat (aegis)
 - [ ] Separate out core from implementation
