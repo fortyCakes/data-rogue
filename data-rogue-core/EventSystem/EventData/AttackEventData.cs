@@ -14,7 +14,7 @@ namespace data_rogue_core.EventSystem.EventData
 
         public IEntity Weapon;
 
-        public bool IsAction = true;
+        public bool SpendTime = true;
 
         public string[] Tags;
         public string AttackName;

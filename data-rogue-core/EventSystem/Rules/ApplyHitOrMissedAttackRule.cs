@@ -22,6 +22,12 @@ namespace data_rogue_core.EventSystem.Rules
         public bool Apply(EventType type, IEntity sender, object eventData)
         {
             var data = eventData as AttackEventData;
+
+            if (data.SpendTime)
+            {
+                _systemContainer.EventSystem.Try(EventType.SpendTime, sender, new SpendTimeEventData { Ticks = data.Speed.Value });
+            }
+
             using (var messageContext = _systemContainer.MessageSystem.DeferredMessage())
             {
 

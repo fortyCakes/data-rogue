@@ -308,5 +308,12 @@ namespace data_rogue_core.Systems
         {
             return entity.Components.OfType<Wealth>().SingleOrDefault(w => w.Currency == currency)?.Amount ?? 0;
         }
+
+        public List<IEntity> GetInventory(IEntity entity)
+        {
+            if (!entity.Has<Inventory>()) return null;
+
+            return entity.Get<Inventory>().Contents.Select(i => entityEngine.Get(i)).ToList();
+        }
     }
 }

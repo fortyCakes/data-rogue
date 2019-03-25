@@ -6,7 +6,8 @@
 
 - [ ] Ranged and magic weapons
   - [X] Stackable items
-  - [ ] "fire" command
+    - [ ] Show stack size in inventory
+  - [X] "fire" command
   - [ ] Apply combat stat (aegis)
 - [ ] Separate out core from implementation
   - [ ] Make stats window defined in data
@@ -26,6 +27,7 @@
 
 # 0.2
 
+- [ ] Attack describer
 - [ ] Morgue file format and death screen
 - [ ] Dependency injection? for rules and behaviours
 - [ ] Finish importing all tiers of base items

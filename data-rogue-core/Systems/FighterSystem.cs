@@ -36,7 +36,7 @@ namespace data_rogue_core.Systems
             return Attack(attacker, defender, attackDamage: baseDamage);
         }
 
-        public bool Attack(IEntity attacker, IEntity defender, string attackClass = null, int? attackDamage = null, string[] attackTags = null, bool isAction = true)
+        public bool Attack(IEntity attacker, IEntity defender, string attackClass = null, int? attackDamage = null, string[] attackTags = null, bool spendTime = true, IEntity weapon = null)
         {
             var attack = new AttackEventData
             {
@@ -45,7 +45,8 @@ namespace data_rogue_core.Systems
                 AttackClass = attackClass,
                 Damage = attackDamage,
                 Tags = attackTags,
-                IsAction = isAction
+                SpendTime = spendTime,
+                Weapon = weapon
             };
 
             return _eventRuleSystem.Try(EventType.Attack, attacker, attack);

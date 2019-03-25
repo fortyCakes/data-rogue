@@ -32,13 +32,13 @@ namespace data_rogue_core.EventSystem.Rules
             if (data.DefenceType != _defenceName)
             {
                 // Don't try to apply it
-                return true;
+                return false;
             }
 
             var attackClass = data.ForAttack.AttackClass;
             if (!ValidAttackClasses.Contains(attackClass))
             {
-                return true;
+                return false;
             }
 
             var defender = data.ForAttack.Defender;

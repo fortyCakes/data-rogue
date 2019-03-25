@@ -1,5 +1,6 @@
 ﻿using data_rogue_core.Components;
 using data_rogue_core.EntityEngineSystem;
+using System.Collections.Generic;
 
 namespace data_rogue_core.Systems
 {
@@ -15,5 +16,6 @@ namespace data_rogue_core.Systems
         bool RemoveWealth(IEntity entity, string currency, int amount);
         int CheckWealth(IEntity entity, string currency);
         bool RemoveItemFromInventory(IEntity item);
+        List<IEntity> GetInventory(IEntity sender);
     }
 }

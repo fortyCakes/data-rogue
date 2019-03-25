@@ -32,7 +32,7 @@ Text: {
 			attackData.Attacker = User
 			attackData.Defender = defender
 			attackData.AttackClass = 'Bolt'
-			attackData.IsAction = false
+			attackData.SpendTime = false
 			attackData.Damage = willpower
 			attackData.Accuracy = 40
 			attackData.AttackName = 'Mana Bolt'
