@@ -1,10 +1,8 @@
 # BUGS
-======
 
 - 
 
 # 0.1
-=====
 
 - Stackable items
 - Ranged and magic weapons
@@ -23,12 +21,10 @@
 - Event system rework: separate pre- and post-event rules
 
 # 0.1.5
-=======
 
 - Tiles renderer
 
 # 0.2
-=====
 
 - Morgue file format and death screen
 - Dependency injection? for rules and behaviours
@@ -66,7 +62,6 @@
 - Remembered state of altered map tiles (e.g. when tile is dug out of player's FoV) - ghost images
 
 # 1.0+
-======
 
 - Stock of monsters
 - Stock of items
