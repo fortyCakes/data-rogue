@@ -132,7 +132,11 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             ConsoleRendererHelper.PrintStat(StatsConsole, 1, 10, "Armour", (int)systemContainer.EventSystem.GetStat(player, "AC"), RLColor.White);
             ConsoleRendererHelper.PrintStat(StatsConsole, 1, 11, "Evasion", (int)systemContainer.EventSystem.GetStat(player, "EV"), RLColor.White);
             ConsoleRendererHelper.PrintStat(StatsConsole, 1, 12, "Block", (int)systemContainer.EventSystem.GetStat(player, "SH"), RLColor.White);
-            ConsoleRendererHelper.PrintStat(StatsConsole, 1, 13, "Aegis", 0, RLColor.LightBlue);
+
+            var currentAegis = (int)systemContainer.EventSystem.GetStat(player, "CurrentAegisLevel");
+            var maxAegis = (int)systemContainer.EventSystem.GetStat(player, "Aegis");
+
+            ConsoleRendererHelper.PrintBar(StatsConsole, 1, 13, STATS_WIDTH - 2, "Aegis", new Counter { Current = currentAegis, Max = maxAegis }, RLColor.LightBlue);
 
             StatsConsole.Print(1, 15, "Location:", RLColor.White, RLColor.Black);
 

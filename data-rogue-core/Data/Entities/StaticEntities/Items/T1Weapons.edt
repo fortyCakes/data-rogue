@@ -107,6 +107,27 @@ Value: 10
 Name: Speed
 Value: 1000
 
+"Wooden Orb"
+[Description]
+Name: Wooden Orb
+[Prototype]
+Name: Item:WoodenOrb
+Singleton: false
+[Appearance]
+Glyph: *
+Color: #6B4D46
+[Position]
+[Item]
+ItemLevel: 1
+[Equipment]
+EquipmentSlot: Hand
+[Stat]
+Name: Willpower
+Value: 2
+[Stat]
+Name: Aegis
+Value: 2
+
 "Arrow"
 [Description]
 Name: Arrow

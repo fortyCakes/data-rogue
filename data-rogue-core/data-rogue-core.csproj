@@ -161,6 +161,7 @@
     <Compile Include="EventSystem\Rules\Actions\RestAction.cs" />
     <Compile Include="EventSystem\Rules\Actions\SaveAction.cs" />
     <Compile Include="EventSystem\Rules\Actions\SkillMenuAction.cs" />
+    <Compile Include="EventSystem\Rules\ApplyAegisRule.cs" />
     <Compile Include="EventSystem\Rules\ApplyDefenceRule.cs" />
     <Compile Include="EventSystem\Rules\ApplyEquipmentStatsRule.cs" />
     <Compile Include="EventSystem\Rules\ApplyHitOrMissedAttackRule.cs" />

@@ -81,9 +81,14 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             }
         }
 
-        internal static void PrintStat(RLConsole statsConsole, int x, int y, string statName, int value, RLColor color)
+        internal static void PrintStat(RLConsole statsConsole, int x, int y, string statName, string value, RLColor color)
         {
             statsConsole.Print(x, y, $"{statName}: {value}", color);
+        }
+
+        internal static void PrintStat(RLConsole statsConsole, int x, int y, string statName, int value, RLColor color)
+        {
+            PrintStat(statsConsole, x, y, statName, value.ToString(), color);
         }
     }
 }

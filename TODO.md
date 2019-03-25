@@ -1,14 +1,12 @@
 # BUGS
 
-(empty) 
+- [ ] Intermittent exceptions on quit
 
 # 0.1
 
-- [ ] Ranged and magic weapons
-  - [X] Stackable items
-    - [ ] Show stack size in inventory
-  - [X] "fire" command
-  - [ ] Apply combat stat (aegis)
+- [ ] Apply combat stat (aegis)
+  - [X] Prevent damage via aegis
+  - [ ] Aegis recovery - things that tick - remove from `TimeSystem`
 - [ ] Separate out core from implementation
   - [ ] Make stats window defined in data
   - [ ] Aura and Tilt separation 

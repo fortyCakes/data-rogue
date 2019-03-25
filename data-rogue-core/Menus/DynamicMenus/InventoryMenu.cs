@@ -32,7 +32,19 @@ namespace data_rogue_core.Menus.DynamicMenus
         {
             var item = entityEngine.Get(itemId);
 
-            return new MenuItem(item.Get<Description>().Name, item.EntityId);
+            var itemText = item.Get<Description>().Name;
+
+            if (item.Has<Stackable>())
+            {
+                itemText += $" (x{item.Get<Stackable>().StackSize})";
+            }
+
+            if (item.Has<Consumable>())
+            {
+                itemText += $" ({item.Get<Consumable>().Uses})";
+            }
+
+            return new MenuItem(itemText, item.EntityId);
         }
 
         private static MenuItemSelected GetCallback(ISystemContainer systemContainer)
