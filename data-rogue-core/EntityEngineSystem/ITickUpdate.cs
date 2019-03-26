@@ -5,6 +5,6 @@ namespace data_rogue_core.EntityEngineSystem
 {
     public interface ITickUpdate : IEntityComponent
     {
-        void Tick(IEventSystem eventSystem, IPlayerSystem playerSystem, IEntity entity, ulong currentTime);
+        void Tick(IEventSystem eventSystem, IPlayerSystem playerSystem, IStatSystem statSystem, IEntity entity, ulong currentTime);
     }
 }

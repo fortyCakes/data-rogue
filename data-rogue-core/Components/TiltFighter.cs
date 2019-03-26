@@ -9,7 +9,7 @@ namespace data_rogue_core.Components
     {
         public Counter Tilt;
         public int BrokenTicks = 0;
-        public void Tick(IEventSystem eventSystem, IPlayerSystem playerSystem, IEntity entity, ulong currentTime)
+        public void Tick(IEventSystem eventSystem, IPlayerSystem playerSystem, IStatSystem statSystem, IEntity entity, ulong currentTime)
         {
             if (BrokenTicks > 0)
             {

@@ -37,8 +37,13 @@ namespace data_rogue_core.Behaviours
 
             var tilt = entity.Get<TiltFighter>();
             var aura = entity.Get<AuraFighter>();
+            var currentAegis = EventSystem.GetStat(entity, "CurrentAegisLevel");
+            var maxAegis = EventSystem.GetStat(entity, "Aegis");
 
-            if (tilt.Tilt.Current == 0 && aura.Aura.Current == aura.BaseAura && tilt.BrokenTicks == 0)
+            if (tilt.Tilt.Current == 0 && 
+                aura.Aura.Current == aura.BaseAura && 
+                tilt.BrokenTicks == 0 &&
+                currentAegis == maxAegis)
             {
                 MessageSystem.Write("You finish resting.");
                 Resting = false;

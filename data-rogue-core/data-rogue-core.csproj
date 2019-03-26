@@ -95,6 +95,7 @@
     <Compile Include="Components\Experience.cs" />
     <Compile Include="Components\Health.cs" />
     <Compile Include="Components\KeyBinding.cs" />
+    <Compile Include="Components\AegisRecovery.cs" />
     <Compile Include="Components\Stackable.cs" />
     <Compile Include="Components\Weapon.cs" />
     <Compile Include="Data\KeyCombination.cs" />

@@ -17,14 +17,16 @@ namespace data_rogue_core.Systems
         private MapKey ActiveMapKey;
         private readonly IPlayerSystem _playerSystem;
         private IEventSystem _eventSystem;
+        private IStatSystem _statSystem;
 
         public IBehaviourFactory BehaviourFactory { get; }
 
-        public TimeSystem(IBehaviourFactory behaviourFactory, IEventSystem eventSystem, IPlayerSystem playerSystem)
+        public TimeSystem(IBehaviourFactory behaviourFactory, IEventSystem eventSystem, IPlayerSystem playerSystem, IStatSystem statSystem)
         {
             BehaviourFactory = behaviourFactory;
             _eventSystem = eventSystem;
             _playerSystem = playerSystem;
+            _statSystem = statSystem;
         }
 
         public new void Initialise()
@@ -65,11 +67,11 @@ namespace data_rogue_core.Systems
 
         private void RunTickUpdates(IEntity entity)
         {
-            var updatables = entity.Components.Where(c => c.GetType().IsAssignableFrom(typeof(ITickUpdate)));
+            var updatables = entity.Components.Where(c => c is ITickUpdate).ToList();
 
             foreach (var updatable in updatables)
             {
-                ((ITickUpdate) updatable).Tick(_eventSystem, _playerSystem, entity, CurrentTime);
+                ((ITickUpdate) updatable).Tick(_eventSystem, _playerSystem, _statSystem, entity, CurrentTime);
             }
         }
 

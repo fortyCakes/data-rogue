@@ -7,12 +7,11 @@ using data_rogue_core.Utils;
 
 namespace data_rogue_core.Components
 {
-
     public class AuraFighter : IEntityComponent, ITickUpdate
     {
         public Counter Aura;
         public int BaseAura;
-        public void Tick(IEventSystem eventSystem, IPlayerSystem playerSystem, IEntity entity, ulong currentTime)
+        public void Tick(IEventSystem eventSystem, IPlayerSystem playerSystem, IStatSystem statSystem, IEntity entity, ulong currentTime)
         {
             if (currentTime % 100 == 0)
             {
