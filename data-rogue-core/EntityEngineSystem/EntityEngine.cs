@@ -11,7 +11,7 @@ namespace data_rogue_core.EntityEngineSystem
     {
         private uint EntityKey = 0;
 
-        public IStaticEntityLoader StaticEntityLoader { get; }
+        public IEntityDataProvider StaticDataProvider { get; }
 
         public IEnumerable<Type> ComponentTypes => 
             AppDomain
@@ -38,9 +38,9 @@ namespace data_rogue_core.EntityEngineSystem
         private List<ISystem> _systems = new List<ISystem>();
         private List<IEntity> _allEntities = new List<IEntity>();
 
-        public EntityEngine(IStaticEntityLoader loader)
+        public EntityEngine(IEntityDataProvider staticDataProvider)
         {
-            StaticEntityLoader = loader;
+            StaticDataProvider = staticDataProvider;
         }
 
         public IEntity New(string name, params IEntityComponent[] components)
@@ -100,7 +100,12 @@ namespace data_rogue_core.EntityEngineSystem
                 system.Initialise();
             }
 
-            StaticEntityLoader.Load(systemContainer);
+            var staticEntityData = StaticDataProvider.GetData();
+
+            foreach (var entityDataText in staticEntityData)
+            {
+                EntitySerializer.DeserializeMultiple(systemContainer, entityDataText);
+            }
 
             _allEntities.ForEach(e => e.IsStatic = true);
         }
