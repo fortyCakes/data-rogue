@@ -128,6 +128,7 @@
     <Compile Include="Data\Counter.cs" />
     <Compile Include="Data\EquipmentMappingList.cs" />
     <Compile Include="EntityEngineSystem\IStaticEntityLoader.cs" />
+    <Compile Include="EntityEngineSystem\ITickUpdate.cs" />
     <Compile Include="EntityEngineSystem\SaveStateSerializer.cs" />
     <Compile Include="EntityEngineSystem\BaseStaticEntityLoader.cs" />
     <Compile Include="EntityEngineSystem\ComponentSerializer.cs" />
