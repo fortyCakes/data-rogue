@@ -33,10 +33,6 @@ namespace data_rogue_core.Systems
             base.Initialise();
         }
 
-        public bool TiltTick => CurrentTime % 1000 == 0;
-
-        public bool AuraTick => CurrentTime % 100 == 0;
-
         public ulong CurrentTime { get; set; }
 
         public override SystemComponents RequiredComponents => new SystemComponents { typeof(Actor), typeof(TiltFighter) };
@@ -56,10 +52,7 @@ namespace data_rogue_core.Systems
                 {
                     if (!entity.Removed)
                     {
-                        if (entity.Has<TiltFighter>())
-                        {
-                            TickFighter(entity);
-                        }
+                        RunTickUpdates(entity);
 
                         if (entity.Get<Actor>().NextTick <= CurrentTime)
                         {
@@ -67,6 +60,16 @@ namespace data_rogue_core.Systems
                         }
                     }
                 }
+            }
+        }
+
+        private void RunTickUpdates(IEntity entity)
+        {
+            var updatables = entity.Components.Where(c => c.GetType().IsAssignableFrom(typeof(ITickUpdate)));
+
+            foreach (var updatable in updatables)
+            {
+                ((ITickUpdate) updatable).Tick(_eventSystem, _playerSystem, entity, CurrentTime);
             }
         }
 
