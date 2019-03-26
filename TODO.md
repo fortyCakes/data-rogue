@@ -4,10 +4,8 @@
 
 # 0.1
 
-- [ ] Apply combat stat (aegis)
-  - [X] Prevent damage via aegis
-  - [ ] Aegis recovery - things that tick - remove from `TimeSystem`
 - [ ] Separate out core from implementation
+  - [ ] Move data files to the implementation
   - [ ] Make stats window defined in data
   - [ ] Aura and Tilt separation 
     - [ ] (remove `AuraFighter`/`TiltFighter`?)
