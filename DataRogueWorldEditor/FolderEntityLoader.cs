@@ -1,16 +1,23 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core
 {
-    public class FolderEntityLoader : BaseStaticEntityLoader
+    public class FolderDataProvider : BaseFolderDataProvider
     {
-        public override void Load(ISystemContainer systemContainer)
+        public override List<string> GetData()
+        {
+            return LoadFolderFiles().ToList();
+        }
+
+        private static IEnumerable<string> LoadFolderFiles()
         {
             string basePath;
 #if DEBUG
-            basePath = @"C:\Users\Lex\source\repos\fortyCakes\data-rogue\data-rogue-core\Data\Entities\StaticEntities";
+            basePath = @"C:\Users\Lex\source\repos\fortyCakes\data-rogue\data-rogue-one\Data\Entities\StaticEntities";
 #else
             using (var dialog = new FolderBrowserDialog())
             {
@@ -30,7 +37,7 @@ namespace data_rogue_core
             foreach (var file in edtFiles)
             {
                 var text = File.ReadAllText(file);
-                EntitySerializer.DeserializeMultiple(systemContainer, text);
+                yield return text;
             }
         }
     }

@@ -1,7 +1,10 @@
-﻿using data_rogue_core.Systems;
+﻿using data_rogue_core.EntityEngineSystem;
+using data_rogue_core.Systems;
 using FluentAssertions;
+using NSubstitute;
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 
 namespace data_rogue_core.UnitTests.Systems
 {
@@ -9,11 +12,15 @@ namespace data_rogue_core.UnitTests.Systems
     public class SystemContainerTests
     {
         private SystemContainer SystemContainer;
+        private IEntityDataProvider entityDataProvider;
 
         [SetUp]
         public void SetUp()
         {
-            SystemContainer = new SystemContainer();
+            entityDataProvider = Substitute.For<IEntityDataProvider>();
+            entityDataProvider.GetData().Returns(new List<string>());
+
+            SystemContainer = new SystemContainer(entityDataProvider);
 
             SystemContainer.CreateSystems("TEST SEED");
         }

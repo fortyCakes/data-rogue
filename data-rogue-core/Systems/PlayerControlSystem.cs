@@ -18,15 +18,17 @@ namespace data_rogue_core.Systems
     public class PlayerControlSystem : IPlayerControlSystem
     {
         private ISystemContainer _systemContainer;
+        private readonly IEntityDataProvider keyBindingsDataProvider;
         private List<KeyBinding> _keyBindings;
         private IActivitySystem _activitySystem;
         private ITargetingSystem _targetingSystem;
 
         public MapCoordinate HoveredCoordinate { get; private set; }
 
-        public PlayerControlSystem(ISystemContainer systemContainer)
+        public PlayerControlSystem(ISystemContainer systemContainer, IEntityDataProvider keyBindingsDataProvider)
         {
             this._systemContainer = systemContainer;
+            this.keyBindingsDataProvider = keyBindingsDataProvider;
             _activitySystem = systemContainer.ActivitySystem;
             _targetingSystem = systemContainer.TargetingSystem;
 
@@ -39,7 +41,18 @@ namespace data_rogue_core.Systems
 
         private void SetKeyBindings()
         {
-            _keyBindings = _systemContainer.PrototypeSystem.Get("KeyBindings").Components.OfType<KeyBinding>().ToList();
+            var keyBindingsData = keyBindingsDataProvider.GetData();
+
+            var bindings = EntitySerializer.DeserializeAll(_systemContainer, keyBindingsData).SingleOrDefault();
+
+            if (bindings != null)
+            {
+                _keyBindings = bindings.Components.OfType<KeyBinding>().ToList();
+            }
+            else
+            {
+                _keyBindings = new List<KeyBinding>();
+            }
         }
 
         public void HandleInput(KeyCombination keyPress, RLMouse mouse)

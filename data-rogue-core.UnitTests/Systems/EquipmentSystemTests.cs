@@ -17,7 +17,9 @@ namespace data_rogue_core.UnitTests.Systems
         [SetUp]
         public void SetUp()
         {
-            systemContainer = new SystemContainer();
+            entityDataProvider = Substitute.For<IEntityDataProvider>();
+
+            systemContainer = new SystemContainer(entityDataProvider);
 
             prototypeSystem = Substitute.For<IPrototypeSystem>();
             systemContainer.PrototypeSystem = prototypeSystem;
@@ -39,6 +41,7 @@ namespace data_rogue_core.UnitTests.Systems
         private IEntity entity;
 
         private IEquipmentSystem equipmentSystem;
+        private IEntityDataProvider entityDataProvider;
         private SystemContainer systemContainer;
         private IPrototypeSystem prototypeSystem;
         private IEntityEngine entityEngine;

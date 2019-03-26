@@ -1,13 +1,14 @@
 ﻿using data_rogue_core.EntityEngineSystem;
-using data_rogue_core.Systems.Interfaces;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace data_rogue_core
 {
-    public class WorldEntityLoader : BaseStaticEntityLoader
+    public class WorldEntityLoader : BaseFolderDataProvider
     {
-        public override void Load(ISystemContainer systemContainer)
+        public override List<string> GetData()
         {
-            Load(systemContainer, "Data/Entities/World");
+            return Load("Data/Entities/World").ToList();
         }
 
     }

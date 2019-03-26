@@ -23,9 +23,10 @@ namespace data_rogue_core.UnitTests.Systems
         [SetUp]
         public void SetUp()
         {
-            entityId = 0;
+            entityDataProvider = Substitute.For<IEntityDataProvider>();
+            entityDataProvider.GetData().Returns(new List<string>());
 
-            systemContainer = new SystemContainer();
+            systemContainer = new SystemContainer(entityDataProvider);
 
             systemContainer.CreateSystems("seed");
 
@@ -34,12 +35,12 @@ namespace data_rogue_core.UnitTests.Systems
 
             mover = GetTestEntity();
         }
-
-        uint entityId;
+        
         IEntity mover;
 
         private SystemContainer systemContainer;
         private IPositionSystem positionSystem;
+        private IEntityDataProvider entityDataProvider;
 
         [Test]
         public void CoordinateOf_HasPosition_ReturnsPosition()

@@ -23,10 +23,14 @@ end";
         private IEntityEngine entityEngine;
         private SystemContainer SystemContainer;
 
+        private IEntityDataProvider entityDataProvider;
+
         [SetUp]
         public void SetUp()
         {
-            SystemContainer = new SystemContainer();
+            entityDataProvider = Substitute.For<IEntityDataProvider>();
+
+            SystemContainer = new SystemContainer(entityDataProvider);
 
             SystemContainer.PositionSystem = Substitute.For<IPositionSystem>();
             SystemContainer.EventSystem = Substitute.For<IEventSystem>();
@@ -90,7 +94,7 @@ end";
         {
             var multipleSerialised = LoadFile("EntityEngineSystem/TestData/ExpectedSerialization_MultipleEntities.txt");
 
-            var entities = EntitySerializer.DeserializeMultiple(SystemContainer, multipleSerialised);
+            var entities = EntitySerializer.DeserializeAll(SystemContainer, new[] { multipleSerialised });
 
             var expected = new List<Entity>
             {

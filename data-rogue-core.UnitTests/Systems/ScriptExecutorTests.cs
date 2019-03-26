@@ -6,6 +6,7 @@ using NSubstitute;
 using NUnit.Framework;
 using System;
 using NLua;
+using System.Collections.Generic;
 
 namespace data_rogue_core.UnitTests.Systems
 {
@@ -15,11 +16,15 @@ namespace data_rogue_core.UnitTests.Systems
         private IScriptExecutor ScriptExecutor;
         private ISystemContainer SystemContainer;
         private IEntity TestEntity;
+        private IEntityDataProvider entityDataProvider;
 
         [SetUp]
         public void SetUp()
         {
-            SystemContainer = new SystemContainer();
+            entityDataProvider = Substitute.For<IEntityDataProvider>();
+            entityDataProvider.GetData().Returns(new List<string>());
+
+            SystemContainer = new SystemContainer(entityDataProvider);
             SystemContainer.CreateSystems("TEST SEED");
 
             ScriptExecutor = SystemContainer.ScriptExecutor;

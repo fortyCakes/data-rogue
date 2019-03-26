@@ -19,7 +19,9 @@ namespace data_rogue_core
 
             systemContainer.EntityEngine.Initialise(systemContainer);
 
-            (new WorldEntityLoader()).Load(systemContainer);
+            var worldData = (new WorldEntityLoader()).GetData();
+
+            EntitySerializer.DeserializeAll(systemContainer, worldData);
 
             var spawnPoint = CreateInitialMapAndGetSpawnPoint(systemContainer);
 

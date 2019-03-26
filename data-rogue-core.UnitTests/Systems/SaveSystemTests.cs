@@ -8,6 +8,7 @@ using data_rogue_core.Maps;
 using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
 using FluentAssertions;
+using NSubstitute;
 using NUnit.Framework;
 
 namespace data_rogue_core.UnitTests.Systems
@@ -17,11 +18,15 @@ namespace data_rogue_core.UnitTests.Systems
     {
         private ISystemContainer _systemContainer;
         private ISaveSystem _saveSystem;
+        private IEntityDataProvider entityDataProvider;
 
         [SetUp]
         public void SetUp()
         {
-            _systemContainer = new SystemContainer();
+            entityDataProvider = Substitute.For<IEntityDataProvider>();
+            entityDataProvider.GetData().Returns(new List<string>());
+
+            _systemContainer = new SystemContainer(entityDataProvider);
             _systemContainer.CreateSystems("Test");
             _systemContainer.EntityEngine.Initialise(_systemContainer);
 

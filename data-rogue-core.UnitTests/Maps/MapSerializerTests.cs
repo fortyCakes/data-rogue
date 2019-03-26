@@ -16,13 +16,18 @@ namespace data_rogue_core.UnitTests.Maps
         private ISystemContainer systemContainer;
         private IEntity wallCell;
         private IEntity floorCell;
+        private IEntityDataProvider entityDataProvider;
 
         [SetUp]
         public void SetUp()
         {
-            systemContainer = new SystemContainer();
+            entityDataProvider = Substitute.For<IEntityDataProvider>();
 
-            systemContainer.EntityEngine = new EntityEngine(new NullStaticEntityLoader());
+            systemContainer = new SystemContainer(entityDataProvider);
+
+            var entityLoader = Substitute.For<IEntityDataProvider>();
+
+            systemContainer.EntityEngine = new EntityEngine(entityLoader);
             systemContainer.PrototypeSystem = Substitute.For<IPrototypeSystem>();
 
             wallCell = CreateCell('#', "Cell:Wall");

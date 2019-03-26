@@ -92,7 +92,7 @@
     <None Include="Data\Entities\StaticEntities\Items\VampiricBlade.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Data\Entities\StaticEntities\keybindings.edt">
+    <None Include="Data\Entities\keybindings.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\Entities\StaticEntities\MapCells\GenericCells.edt">

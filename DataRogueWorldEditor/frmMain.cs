@@ -14,13 +14,13 @@ namespace DataRogueWorldEditor
         public ISystemContainer SystemContainer;
 
         private DockPanel dockPanel;
-        private IEntityEngine EntityEngineSystem { get; } = new EntityEngine(new FolderEntityLoader());
+        private IEntityEngine EntityEngineSystem { get; } = new EntityEngine(new FolderDataProvider());
 
         public frmMain()
         {
             InitializeComponent();
 
-            SystemContainer = new SystemContainer();
+            SystemContainer = new SystemContainer(new FolderDataProvider(), new NullDataProvider());
 
             SystemContainer.CreateSystems("EDITOR");
 

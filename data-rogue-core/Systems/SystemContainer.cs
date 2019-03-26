@@ -35,6 +35,25 @@ namespace data_rogue_core.Systems
 
         public string Seed { get; set; }
 
+        private readonly IEntityDataProvider _entityDataProvider;
+        private readonly IEntityDataProvider _keyBindingsDataProvider;
+
+        public SystemContainer(IEntityDataProvider entityDataProvider = null, IEntityDataProvider keyBindingsDataProvider = null)
+        {
+            if (entityDataProvider == null)
+            {
+                entityDataProvider = new NullDataProvider();
+            }
+
+            if (keyBindingsDataProvider == null)
+            {
+                keyBindingsDataProvider = new NullDataProvider();
+            }
+
+            _entityDataProvider = entityDataProvider;
+            _keyBindingsDataProvider = keyBindingsDataProvider;
+        }
+
         public void CreateSystems(string rngSeed)
         {
             ScriptExecutor = new ScriptExecutor(this);
@@ -48,7 +67,7 @@ namespace data_rogue_core.Systems
 
             RendererSystem = new RendererSystem(PlayerSystem);
 
-            EntityEngine = new EntityEngine(new DataStaticEntityLoader());
+            EntityEngine = new EntityEngine(_entityDataProvider);
 
             StatSystem = new StatSystem(EntityEngine);
 
@@ -80,7 +99,7 @@ namespace data_rogue_core.Systems
 
             TargetingSystem = new TargetingSystem(this);
 
-            PlayerControlSystem = new PlayerControlSystem(this);
+            PlayerControlSystem = new PlayerControlSystem(this, _keyBindingsDataProvider);
 
             SaveSystem = new SaveSystem(this);
 

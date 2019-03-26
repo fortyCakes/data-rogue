@@ -114,6 +114,8 @@
     <Compile Include="Data\Message.cs" />
     <Compile Include="Data\MessageSerializer.cs" />
     <Compile Include="Data\SaveState.cs" />
+    <Compile Include="EntityEngineSystem\BaseFileDataProvider.cs" />
+    <Compile Include="EntityEngineSystem\BaseFolderDataProvider.cs" />
     <Compile Include="EntityEngineSystem\EntityReferenceList.cs" />
     <Compile Include="Components\EquipmentMapping.cs" />
     <Compile Include="Components\EquipmentSlot.cs" />
@@ -134,15 +136,14 @@
     <Compile Include="Components\Actor.cs" />
     <Compile Include="Components\World.cs" />
     <Compile Include="EntityEngineSystem\IEntityDataProvider.cs" />
-    <Compile Include="EntityEngineSystem\IStaticEntityLoader.cs" />
     <Compile Include="EntityEngineSystem\ITickUpdate.cs" />
+    <Compile Include="EntityEngineSystem\NullDataProvider.cs" />
     <Compile Include="EntityEngineSystem\SaveStateSerializer.cs" />
-    <Compile Include="EntityEngineSystem\BaseStaticEntityLoader.cs" />
     <Compile Include="EntityEngineSystem\ComponentSerializer.cs" />
-    <Compile Include="EntityEngineSystem\DataStaticEntityLoader.cs" />
     <Compile Include="EntityEngineSystem\EntityEngine.cs" />
     <Compile Include="EntityEngineSystem\EntitySerializer.cs" />
     <Compile Include="EntityEngineSystem\ICustomFieldSerialization.cs" />
+    <Compile Include="EntityEngineSystem\StaticEntityDataProvider.cs" />
     <Compile Include="EventSystem\EventData\ActionType.cs" />
     <Compile Include="EventSystem\EventData\DefenceEventData.cs" />
     <Compile Include="EventSystem\EventRuleFactory.cs" />

@@ -8,6 +8,7 @@ using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems;
 using FluentAssertions;
+using NSubstitute;
 using NUnit.Framework;
 
 namespace data_rogue_core.UnitTests.Systems
@@ -20,7 +21,10 @@ namespace data_rogue_core.UnitTests.Systems
         {
             entityId = 0;
 
-            systemContainer = new SystemContainer();
+            entityDataProvider = Substitute.For<IEntityDataProvider>();
+            entityDataProvider.GetData().Returns(new List<string>());
+
+            systemContainer = new SystemContainer(entityDataProvider);
 
             systemContainer.CreateSystems("test");
 
@@ -37,6 +41,7 @@ namespace data_rogue_core.UnitTests.Systems
 
         private IItemSystem itemSystem => systemContainer.ItemSystem;
         private SystemContainer systemContainer;
+        private IEntityDataProvider entityDataProvider;
 
         [Test]
         public void MoveItemToInventory_AddsToInventory()

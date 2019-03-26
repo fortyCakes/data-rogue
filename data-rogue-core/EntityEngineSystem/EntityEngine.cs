@@ -102,10 +102,7 @@ namespace data_rogue_core.EntityEngineSystem
 
             var staticEntityData = StaticDataProvider.GetData();
 
-            foreach (var entityDataText in staticEntityData)
-            {
-                EntitySerializer.DeserializeMultiple(systemContainer, entityDataText);
-            }
+            EntitySerializer.DeserializeAll(systemContainer, staticEntityData);
 
             _allEntities.ForEach(e => e.IsStatic = true);
         }

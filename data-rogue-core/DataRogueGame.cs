@@ -124,7 +124,7 @@ namespace data_rogue_core
 
         private void CreateAndRegisterSystems()
         {
-            SystemContainer = new SystemContainer();
+            SystemContainer = new SystemContainer(new StaticEntityDataProvider(), new KeyBindingsDataProvider());
 
             SystemContainer.CreateSystems(DEBUG_SEED);
 
