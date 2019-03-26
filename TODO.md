@@ -5,7 +5,6 @@
 # 0.1
 
 - [ ] Move `RendererFactory` into `ActivityStack`
-- [X] Define a proper static-map based generation strategy
 - [ ] Gameplay rendering customisation
 - [ ] Aura and Tilt separation 
   - [ ] move `AuraFighter`/`TiltFighter`?
