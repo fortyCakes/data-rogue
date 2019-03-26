@@ -25,7 +25,7 @@ namespace data_rogue_core.UnitTests.Data
         {
             entityDataProvider = Substitute.For<IEntityDataProvider>();
 
-            systemContainer = new SystemContainer(entityDataProvider);
+            systemContainer = new SystemContainer();
             systemContainer.EntityEngine = new EntityEngine(Substitute.For<IEntityDataProvider>());
 
             wallCell = CreateCell('#', "Cell:Wall");

@@ -18,15 +18,11 @@ namespace data_rogue_core.UnitTests.Systems
     {
         private ISystemContainer _systemContainer;
         private ISaveSystem _saveSystem;
-        private IEntityDataProvider entityDataProvider;
 
         [SetUp]
         public void SetUp()
         {
-            entityDataProvider = Substitute.For<IEntityDataProvider>();
-            entityDataProvider.GetData().Returns(new List<string>());
-
-            _systemContainer = new SystemContainer(entityDataProvider);
+            _systemContainer = new SystemContainer();
             _systemContainer.CreateSystems("Test");
             _systemContainer.EntityEngine.Initialise(_systemContainer);
 

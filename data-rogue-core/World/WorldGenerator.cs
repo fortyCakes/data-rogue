@@ -9,9 +9,18 @@ using data_rogue_core.Forms.StaticForms;
 
 namespace data_rogue_core
 {
-    public static class WorldGenerator
+    public class WorldGenerator : IWorldGenerator
     {
-        public static void Create(ISystemContainer systemContainer, CharacterCreationForm characterCreationForm)
+        private readonly IEntityDataProvider worldEntityDataProvider;
+        private readonly IEntityDataProvider playerEntityDataProvider;
+
+        public WorldGenerator(IEntityDataProvider worldEntityDataProvider, IEntityDataProvider playerEntityDataProvider)
+        {
+            this.worldEntityDataProvider = worldEntityDataProvider;
+            this.playerEntityDataProvider = playerEntityDataProvider;
+        }
+
+        public void Create(ISystemContainer systemContainer, CharacterCreationForm characterCreationForm)
         {
             systemContainer.MessageSystem.Initialise();
 
@@ -19,7 +28,7 @@ namespace data_rogue_core
 
             systemContainer.EntityEngine.Initialise(systemContainer);
 
-            var worldData = (new WorldEntityLoader()).GetData();
+            var worldData = worldEntityDataProvider.GetData();
 
             EntitySerializer.DeserializeAll(systemContainer, worldData);
 
@@ -54,7 +63,7 @@ namespace data_rogue_core
 
         public static void GenerateBranch(ISystemContainer systemContainer, IEntity branchEntity)
         {
-            var branchGenerator = MapGeneratorFactory.GetGenerator(branchEntity.Get<Branch>().MapGenerationType);
+            var branchGenerator = new BranchGenerator();
 
             GeneratedBranch branch = branchGenerator.Generate(systemContainer, branchEntity);
 
@@ -64,9 +73,11 @@ namespace data_rogue_core
             }
         }
 
-        private static void AddPlayerToWorld(ISystemContainer systemContainer, MapCoordinate spawnPoint, CharacterCreationForm form)
+        private void AddPlayerToWorld(ISystemContainer systemContainer, MapCoordinate spawnPoint, CharacterCreationForm form)
         {
-            var player = EntitySerializer.Deserialize(systemContainer, DataFileLoader.LoadFile(@"Entities\player.edt"));
+            var playerData = playerEntityDataProvider.GetData().Single();
+
+            var player = EntitySerializer.Deserialize(systemContainer, playerData);
             systemContainer.PositionSystem.SetPosition(player, spawnPoint);
             player.Get<Description>().Name = form.Name;
 

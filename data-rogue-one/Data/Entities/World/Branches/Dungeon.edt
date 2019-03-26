@@ -3,15 +3,17 @@
 Name: Branch:Dungeon
 [Branch]
 BranchName: Branch:Dungeon
-MapGenerationType: Dungeon
 Depth: 5
 [Biome]
 Name: Dungeon
-[EntityGenerationStrategy]
-EntityGenerationType: BiomeBasedMonsterGeneration
+[BasicDungeonBranchMapGenerator]
+[BiomeBasedMonsterGeneration]
 BasePower: 0
 Density: 0.01
-[EntityGenerationStrategy]
-EntityGenerationType: RandomItemGeneration
+[RandomItemGeneration]
 BasePower: 0
 Density: 0.01
+[DefaultEntrancePortalGeneration]
+[StairGeneration]
+[StairGeneration]
+[StairGeneration]

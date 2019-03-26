@@ -23,14 +23,10 @@ end";
         private IEntityEngine entityEngine;
         private SystemContainer SystemContainer;
 
-        private IEntityDataProvider entityDataProvider;
-
         [SetUp]
         public void SetUp()
         {
-            entityDataProvider = Substitute.For<IEntityDataProvider>();
-
-            SystemContainer = new SystemContainer(entityDataProvider);
+            SystemContainer = new SystemContainer();
 
             SystemContainer.PositionSystem = Substitute.For<IPositionSystem>();
             SystemContainer.EventSystem = Substitute.For<IEventSystem>();

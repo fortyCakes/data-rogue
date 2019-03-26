@@ -5,16 +5,16 @@
 # 0.1
 
 - [ ] Separate out core from implementation
-  - [ ] Move data files to the implementation
+  - [X] Move data files to the implementation
+	- [X] Pass in entity data providers from the implementation: staticentities, world, keybinding, player
+	- [ ] Define a proper static-map based generation strategy
   - [ ] Make stats window defined in data
+    - [ ] Gameplay rendering customisation
   - [ ] Aura and Tilt separation 
-    - [ ] (remove `AuraFighter`/`TiltFighter`?)
-    - [ ] Stat window rendering customisation
-    - [ ] Map rendering customisation
+    - [ ] move `AuraFighter`/`TiltFighter`?
 - [ ] Move `RendererFactory` into `ActivityStack`
 - [ ] Remove RLNet dependencies from core (!)
-- [ ] Decouple dataloading from test entity engine
-  - [ ] In fact generally decouple the system testing, don't create a full systemcontainer
+- [ ] Generally decouple the system testing, don't create a full systemcontainer
 - [ ] Event system rework: separate pre- and post-event rules
 
 # 0.1.5

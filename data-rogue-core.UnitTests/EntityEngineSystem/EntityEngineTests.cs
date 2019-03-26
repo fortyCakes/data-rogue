@@ -147,7 +147,7 @@ namespace data_rogue_core.UnitTests.Systems
         [Test]
         public void Initialise_InitialisesSystems()
         {
-            var systemContainer = new SystemContainer(loader);
+            var systemContainer = new SystemContainer(new EntityDataProviders { PrototypeEntityDataProvider = loader});
             var system = Substitute.For<ISystem>();
 
             engine.Register(system);
@@ -160,7 +160,7 @@ namespace data_rogue_core.UnitTests.Systems
         [Test]
         public void Initialise_LoadsStaticEntities()
         {
-            var systemContainer = new SystemContainer(loader);
+            var systemContainer = new SystemContainer(new EntityDataProviders { PrototypeEntityDataProvider = loader });
             systemContainer.EntityEngine = engine;
             IEntity loadedEntity = null;
 

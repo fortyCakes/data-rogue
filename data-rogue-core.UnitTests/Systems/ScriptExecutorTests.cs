@@ -16,15 +16,11 @@ namespace data_rogue_core.UnitTests.Systems
         private IScriptExecutor ScriptExecutor;
         private ISystemContainer SystemContainer;
         private IEntity TestEntity;
-        private IEntityDataProvider entityDataProvider;
 
         [SetUp]
         public void SetUp()
         {
-            entityDataProvider = Substitute.For<IEntityDataProvider>();
-            entityDataProvider.GetData().Returns(new List<string>());
-
-            SystemContainer = new SystemContainer(entityDataProvider);
+            SystemContainer = new SystemContainer();
             SystemContainer.CreateSystems("TEST SEED");
 
             ScriptExecutor = SystemContainer.ScriptExecutor;

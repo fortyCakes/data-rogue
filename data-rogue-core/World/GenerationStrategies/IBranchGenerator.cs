@@ -5,8 +5,6 @@ namespace data_rogue_core
 {
     public interface IBranchGenerator
     {
-        string GenerationType { get; }
-
         GeneratedBranch Generate(ISystemContainer systemContainer, IEntity branchEntity);
     }
 }

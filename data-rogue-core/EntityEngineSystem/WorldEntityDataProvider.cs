@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace data_rogue_core
 {
-    public class WorldEntityLoader : BaseFolderDataProvider
+    public class WorldEntityDataProvider : BaseFolderDataProvider
     {
         public override List<string> GetData()
         {

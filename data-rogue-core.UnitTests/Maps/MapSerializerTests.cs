@@ -23,7 +23,7 @@ namespace data_rogue_core.UnitTests.Maps
         {
             entityDataProvider = Substitute.For<IEntityDataProvider>();
 
-            systemContainer = new SystemContainer(entityDataProvider);
+            systemContainer = new SystemContainer();
 
             var entityLoader = Substitute.For<IEntityDataProvider>();
 

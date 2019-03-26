@@ -12,15 +12,11 @@ namespace data_rogue_core.UnitTests.Systems
     public class SystemContainerTests
     {
         private SystemContainer SystemContainer;
-        private IEntityDataProvider entityDataProvider;
 
         [SetUp]
         public void SetUp()
         {
-            entityDataProvider = Substitute.For<IEntityDataProvider>();
-            entityDataProvider.GetData().Returns(new List<string>());
-
-            SystemContainer = new SystemContainer(entityDataProvider);
+            SystemContainer = new SystemContainer();
 
             SystemContainer.CreateSystems("TEST SEED");
         }

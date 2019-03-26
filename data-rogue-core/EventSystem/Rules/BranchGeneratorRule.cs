@@ -29,7 +29,7 @@ namespace data_rogue_core.EventSystem.Rules
             {
                 _systemContainer.ActivitySystem.Push(new StaticTextActivity("Generating branch...", _systemContainer.RendererSystem.RendererFactory));
 
-                var generator = MapGeneratorFactory.GetGenerator(branch.MapGenerationType);
+                var generator = new BranchGenerator();
 
                 var generatedBranch = generator.Generate(_systemContainer, branchEntity);
 

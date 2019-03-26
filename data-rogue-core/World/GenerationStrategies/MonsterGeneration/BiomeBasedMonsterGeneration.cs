@@ -10,23 +10,21 @@ using data_rogue_core.Utils;
 namespace data_rogue_core.World.GenerationStrategies
 {
 
-    public class BiomeBasedMonsterGeneration : IEntityGenerator
+    public class BiomeBasedMonsterGeneration : BaseEntityGenerationStrategy, IEntityGenerator
     {
         private class MonsterList: Dictionary<int, HashSet<IEntity>> { }
 
-        public string GenerationType => "BiomeBasedMonsterGeneration";
-
-        public void Generate(ISystemContainer systemContainer, GeneratedBranch generatedBranch, IEntity branch, EntityGenerationStrategy step, IRandom random)
+        public override void Generate(ISystemContainer systemContainer, GeneratedBranch generatedBranch, IEntity branch, IRandom random)
         {
-            var power = step.BasePower;
+            var power = BasePower;
 
             var monsterList = GetMonsterList(systemContainer, branch);
 
             foreach(var map in generatedBranch.Maps)
             {
-                FillMap(map, systemContainer, step, power, monsterList, random);
+                FillMap(map, systemContainer, power, monsterList, random);
 
-                power += step.PowerIncrement;
+                power += PowerIncrement;
             }
         }
 
@@ -72,11 +70,11 @@ namespace data_rogue_core.World.GenerationStrategies
             return entity.Components.OfType<Biome>().Select(b => b.Name);
         }
 
-        private void FillMap(Map map, ISystemContainer systemContainer, EntityGenerationStrategy step, int power, MonsterList monsterList, IRandom random)
+        private void FillMap(Map map, ISystemContainer systemContainer, int power, MonsterList monsterList, IRandom random)
         {
             var mapSize = map.Cells.Count;
 
-            var numberOfMonsters = (int)Math.Ceiling(step.Density * mapSize);
+            var numberOfMonsters = (int)Math.Ceiling(Density * mapSize);
 
             for (int i = 0; i< numberOfMonsters; i++)
             {

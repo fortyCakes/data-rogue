@@ -85,6 +85,7 @@
     <Compile Include="Components\Biome.cs" />
     <Compile Include="Components\BodyPartLocation.cs" />
     <Compile Include="Components\BodyPartType.cs" />
+    <Compile Include="Components\BranchMapGenerationStrategy.cs" />
     <Compile Include="Components\Consumable.cs" />
     <Compile Include="Components\Description.cs" />
     <Compile Include="Components\Enchantments\Enchantment.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="Components\Equipped.cs" />
     <Compile Include="Components\Experience.cs" />
     <Compile Include="Components\Health.cs" />
+    <Compile Include="Components\IBranchMapGenerator.cs" />
     <Compile Include="Components\KeyBinding.cs" />
     <Compile Include="Components\AegisRecovery.cs" />
     <Compile Include="Components\Stackable.cs" />
@@ -137,13 +139,16 @@
     <Compile Include="Components\World.cs" />
     <Compile Include="EntityEngineSystem\IEntityDataProvider.cs" />
     <Compile Include="EntityEngineSystem\ITickUpdate.cs" />
+    <Compile Include="EntityEngineSystem\KeyBindingsDataProvider.cs" />
     <Compile Include="EntityEngineSystem\NullDataProvider.cs" />
+    <Compile Include="EntityEngineSystem\PlayerEntityDataProvider.cs" />
     <Compile Include="EntityEngineSystem\SaveStateSerializer.cs" />
     <Compile Include="EntityEngineSystem\ComponentSerializer.cs" />
     <Compile Include="EntityEngineSystem\EntityEngine.cs" />
     <Compile Include="EntityEngineSystem\EntitySerializer.cs" />
     <Compile Include="EntityEngineSystem\ICustomFieldSerialization.cs" />
     <Compile Include="EntityEngineSystem\StaticEntityDataProvider.cs" />
+    <Compile Include="EntityEngineSystem\WorldEntityDataProvider.cs" />
     <Compile Include="EventSystem\EventData\ActionType.cs" />
     <Compile Include="EventSystem\EventData\DefenceEventData.cs" />
     <Compile Include="EventSystem\EventRuleFactory.cs" />
@@ -236,6 +241,7 @@
     <Compile Include="EventSystem\EventData\ActionEventData.cs" />
     <Compile Include="Systems\ActivitySystem.cs" />
     <Compile Include="Systems\EntityCache.cs" />
+    <Compile Include="Systems\EntityDataProviders.cs" />
     <Compile Include="Systems\Interfaces\IMapSystem.cs" />
     <Compile Include="Systems\Interfaces\IRendererSystem.cs" />
     <Compile Include="Systems\Interfaces\ISaveSystem.cs" />
@@ -326,18 +332,18 @@
     <Compile Include="Systems\PlayerControlSystem.cs" />
     <Compile Include="Systems\PositionSystem.cs" />
     <Compile Include="Maps\Vector.cs" />
-    <Compile Include="World\BranchGeneratorFactory.cs" />
-    <Compile Include="World\EntityGeneratorFactory.cs" />
     <Compile Include="World\GenerationStrategies\ItemGeneration\RandomItemGeneration.cs" />
+    <Compile Include="World\GenerationStrategies\MapGeneration\BasicDungeonBranchMapGenerator.cs" />
+    <Compile Include="World\GenerationStrategies\MapGeneration\StaticBranchMapGenerator.cs" />
     <Compile Include="World\GenerationStrategies\MonsterGeneration\BiomeBasedMonsterGeneration.cs" />
     <Compile Include="World\GenerationStrategies\IEntityGenerator.cs" />
     <Compile Include="World\GenerationStrategies\MapGeneration\BaseBranchGenerator.cs" />
-    <Compile Include="World\GenerationStrategies\MapGeneration\DungeonBranchGenerator.cs" />
     <Compile Include="World\GenerationStrategies\GeneratedBranch.cs" />
     <Compile Include="World\GenerationStrategies\IBranchGenerator.cs" />
     <Compile Include="Maps\Generators\IMapGenerator.cs" />
-    <Compile Include="EntityEngineSystem\WorldEntityLoader.cs" />
-    <Compile Include="World\GenerationStrategies\MapGeneration\EntranceBranchGenerator.cs" />
+    <Compile Include="World\GenerationStrategies\PropGeneration\DefaultEntrancePortalGeneration.cs" />
+    <Compile Include="World\GenerationStrategies\PropGeneration\StairGeneration.cs" />
+    <Compile Include="World\IWorldGenerator.cs" />
     <Compile Include="World\WorldGenerator.cs" />
   </ItemGroup>
   <ItemGroup>

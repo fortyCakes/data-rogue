@@ -19,10 +19,7 @@ namespace data_rogue_core.UnitTests.Systems
         {
             entityId = 0;
 
-            entityDataProvider = Substitute.For<IEntityDataProvider>();
-            entityDataProvider.GetData().Returns(new List<string>());
-
-            systemContainer = new SystemContainer(entityDataProvider);
+            systemContainer = new SystemContainer();
 
             systemContainer.CreateSystems("seed");
 
@@ -35,7 +32,6 @@ namespace data_rogue_core.UnitTests.Systems
         IEntity learner;
 
         private SystemContainer systemContainer;
-        private IEntityDataProvider entityDataProvider;
 
         [Test]
         public void LearnSkill_NoKnownSkills_HasKnownSkill()

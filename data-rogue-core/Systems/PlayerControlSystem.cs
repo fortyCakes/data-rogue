@@ -266,11 +266,6 @@ namespace data_rogue_core.Systems
             return (ActionType)Enum.Parse(typeof(ActionType), action);
         }
 
-        private void GetItem()
-        {
-            
-        }
-
         private void UseSkill(int index)
         {
             IEntity player = _systemContainer.PlayerSystem.Player;

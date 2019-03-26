@@ -12,7 +12,6 @@ namespace data_rogue_core.UnitTests.Systems
     public class StatSystemTests
     {
         private const string TEST_STAT = "TestStat";
-        private IEntityDataProvider entityDataProvider;
         IEntity entity;
 
         private SystemContainer systemContainer;
@@ -21,10 +20,7 @@ namespace data_rogue_core.UnitTests.Systems
         [SetUp]
         public void SetUp()
         {
-            entityDataProvider = Substitute.For<IEntityDataProvider>();
-            entityDataProvider.GetData().Returns(new List<string>());
-
-            systemContainer = new SystemContainer(entityDataProvider);
+            systemContainer = new SystemContainer();
 
             systemContainer.CreateSystems("seed");
 

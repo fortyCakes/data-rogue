@@ -21,10 +21,7 @@ namespace data_rogue_core.UnitTests.Systems
         {
             entityId = 0;
 
-            entityDataProvider = Substitute.For<IEntityDataProvider>();
-            entityDataProvider.GetData().Returns(new List<string>());
-
-            systemContainer = new SystemContainer(entityDataProvider);
+            systemContainer = new SystemContainer();
 
             systemContainer.CreateSystems("test");
 
@@ -41,7 +38,6 @@ namespace data_rogue_core.UnitTests.Systems
 
         private IItemSystem itemSystem => systemContainer.ItemSystem;
         private SystemContainer systemContainer;
-        private IEntityDataProvider entityDataProvider;
 
         [Test]
         public void MoveItemToInventory_AddsToInventory()

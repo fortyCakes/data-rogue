@@ -1,12 +1,15 @@
 ﻿using data_rogue_core.EntityEngineSystem;
+using data_rogue_core.Systems.Interfaces;
+using data_rogue_core.World.GenerationStrategies;
 
 namespace data_rogue_core.Components
 {
-    public class EntityGenerationStrategy : IEntityComponent
+    public abstract class BaseEntityGenerationStrategy : IEntityComponent, IEntityGenerator
     {
-        public string EntityGenerationType;
         public int BasePower = 0;
         public int PowerIncrement = 1;
         public decimal Density;
+
+        public abstract void Generate(ISystemContainer systemContainer, GeneratedBranch generatedBranch, IEntity branch, IRandom random);
     }
 }

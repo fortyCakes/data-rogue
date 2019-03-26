@@ -5,11 +5,12 @@ using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core
 {
-    public class StaticEntityDataProvider : BaseFolderDataProvider
+
+    public class PlayerEntityDataProvider : BaseFileDataProvider
     {
         public override List<string> GetData()
         {
-            return Load("Data/Entities/StaticEntities").ToList();
+            return Load("Data/Entities/player.edt").ToList();
         }
     }
 }

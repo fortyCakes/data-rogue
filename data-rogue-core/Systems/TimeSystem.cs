@@ -90,34 +90,6 @@ namespace data_rogue_core.Systems
             }
         }
 
-        private void UpdateAura(IEntity entity)
-        {
-            var fighter = entity.Get<AuraFighter>();
-
-            if (entity.IsPlayer)
-            {
-                var tension = _eventSystem.GetStat(entity, "Tension");
-
-                if (tension > 0)
-                {
-                    var auraAmount = Math.Ceiling(Math.Log((double) tension + 1));
-
-                    fighter.Aura.Add((int) auraAmount);
-                }
-                else
-                {
-                    if (fighter.Aura.Current > fighter.BaseAura)
-                    {
-                        fighter.Aura.Subtract(1);
-                    }
-                    else if (fighter.Aura.Current < fighter.BaseAura)
-                    {
-                        fighter.Aura.Add(1);
-                    }
-                }
-            }
-        }
-
         private void TickActor(IEntity entity)
         {
             var actor = entity.Get<Actor>();

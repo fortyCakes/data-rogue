@@ -3,5 +3,9 @@
 Name: Branch:Entrance
 [Branch]
 BranchName: Branch:Entrance
-MapGenerationType: Entrance
 Depth: 2
+[StaticBranchMapGenerator]
+StaticMaps: {
+entrance.map
+entrance2.map
+}

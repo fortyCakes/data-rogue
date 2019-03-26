@@ -35,23 +35,24 @@ namespace data_rogue_core.Systems
 
         public string Seed { get; set; }
 
-        private readonly IEntityDataProvider _entityDataProvider;
+        private readonly IEntityDataProvider _prototypeEntityDataProvider;
         private readonly IEntityDataProvider _keyBindingsDataProvider;
+        private readonly IEntityDataProvider _worldEntityDataProvider;
+        private readonly IEntityDataProvider _playerEntityDataProvider;
 
-        public SystemContainer(IEntityDataProvider entityDataProvider = null, IEntityDataProvider keyBindingsDataProvider = null)
+        public SystemContainer(
+            EntityDataProviders entityDataProviderContainer = null
+            )
         {
-            if (entityDataProvider == null)
+            if (entityDataProviderContainer == null)
             {
-                entityDataProvider = new NullDataProvider();
+                entityDataProviderContainer = new EntityDataProviders();
             }
 
-            if (keyBindingsDataProvider == null)
-            {
-                keyBindingsDataProvider = new NullDataProvider();
-            }
-
-            _entityDataProvider = entityDataProvider;
-            _keyBindingsDataProvider = keyBindingsDataProvider;
+            _prototypeEntityDataProvider = entityDataProviderContainer.PrototypeEntityDataProvider ?? new NullDataProvider();
+            _keyBindingsDataProvider = entityDataProviderContainer.KeyBindingsDataProvider ?? new NullDataProvider();
+            _worldEntityDataProvider = entityDataProviderContainer.WorldEntityDataProvider ?? new NullDataProvider();
+            _playerEntityDataProvider = entityDataProviderContainer.PlayerEntityDataProvider ?? new NullDataProvider();
         }
 
         public void CreateSystems(string rngSeed)
@@ -67,7 +68,7 @@ namespace data_rogue_core.Systems
 
             RendererSystem = new RendererSystem(PlayerSystem);
 
-            EntityEngine = new EntityEngine(_entityDataProvider);
+            EntityEngine = new EntityEngine(_prototypeEntityDataProvider);
 
             StatSystem = new StatSystem(EntityEngine);
 
@@ -101,7 +102,7 @@ namespace data_rogue_core.Systems
 
             PlayerControlSystem = new PlayerControlSystem(this, _keyBindingsDataProvider);
 
-            SaveSystem = new SaveSystem(this);
+            SaveSystem = new SaveSystem(this, new WorldGenerator(_worldEntityDataProvider, _playerEntityDataProvider));
 
             EntityEngine.Initialise(this);
             PlayerControlSystem.Initialise();

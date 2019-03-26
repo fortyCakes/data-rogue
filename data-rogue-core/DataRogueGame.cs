@@ -31,13 +31,13 @@ namespace data_rogue_core
         private bool _leaving = false;
         public bool Loading { get; set; } = false;
 
-        public void Run(string seed, List<Type> eventRules)
+        public void Run(string seed, List<Type> eventRules, EntityDataProviders entityDataProviders = null)
         {
             Seed = seed;
 
             SetupRootConsole();
 
-            CreateAndRegisterSystems();
+            CreateAndRegisterSystems(entityDataProviders);
 
             InitialiseRenderers();
 
@@ -122,9 +122,14 @@ namespace data_rogue_core
         }
 
 
-        private void CreateAndRegisterSystems()
+        private void CreateAndRegisterSystems(EntityDataProviders entityDataProviders)
         {
-            SystemContainer = new SystemContainer(new StaticEntityDataProvider(), new KeyBindingsDataProvider());
+            if (entityDataProviders == null)
+            {
+                entityDataProviders = EntityDataProviders.Default;
+            }
+
+            SystemContainer = new SystemContainer(entityDataProviders);
 
             SystemContainer.CreateSystems(DEBUG_SEED);
 
