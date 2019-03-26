@@ -88,16 +88,6 @@ namespace data_rogue_core.Systems
             }
         }
 
-        private void TickFighter(IEntity entity)
-        {
-            UpdateTilt(entity.Get<TiltFighter>());
-
-            if (AuraTick)
-            {
-                UpdateAura(entity);
-            }
-        }
-
         private void UpdateAura(IEntity entity)
         {
             var fighter = entity.Get<AuraFighter>();
@@ -123,25 +113,6 @@ namespace data_rogue_core.Systems
                         fighter.Aura.Add(1);
                     }
                 }
-            }
-        }
-
-        private void UpdateTilt(TiltFighter fighter)
-        {
-            if (fighter.BrokenTicks > 0)
-            {
-                fighter.BrokenTicks--;
-                if (fighter.BrokenTicks == 0)
-                {
-                    fighter.Tilt.Current /= 2;
-                }
-
-                return;
-            }
-
-            if (fighter.Tilt.Current > 0 && TiltTick)
-            {
-                fighter.Tilt.Current--;
             }
         }
 
