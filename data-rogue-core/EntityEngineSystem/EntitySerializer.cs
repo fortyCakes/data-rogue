@@ -26,11 +26,18 @@ namespace data_rogue_core.EntityEngineSystem
             return stringBuilder.ToString();
         }
 
-        public static List<IEntity> DeserializeMultiple(ISystemContainer systemContainer, string input)
+        public static IEnumerable<IEntity> DeserializeAll(ISystemContainer systemContainer, IEnumerable<string> input)
         {
-            var entityTexts = SplitIntoEntities(input);
+            var returnedEntities = new List<IEntity>();
 
-            return entityTexts.Select(text => Deserialize(systemContainer, text)).ToList();
+            foreach (var page in input)
+            {
+                var entityTexts = SplitIntoEntities(page);
+
+                returnedEntities.AddRange(entityTexts.Select(text => Deserialize(systemContainer, text)));
+            }
+
+            return returnedEntities;
         }
 
         private static IEnumerable<string> SplitIntoEntities(string input)

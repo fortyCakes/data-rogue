@@ -35,6 +35,26 @@ namespace data_rogue_core.Systems
 
         public string Seed { get; set; }
 
+        private readonly IEntityDataProvider _prototypeEntityDataProvider;
+        private readonly IEntityDataProvider _keyBindingsDataProvider;
+        private readonly IEntityDataProvider _worldEntityDataProvider;
+        private readonly IEntityDataProvider _playerEntityDataProvider;
+
+        public SystemContainer(
+            EntityDataProviders entityDataProviderContainer = null
+            )
+        {
+            if (entityDataProviderContainer == null)
+            {
+                entityDataProviderContainer = new EntityDataProviders();
+            }
+
+            _prototypeEntityDataProvider = entityDataProviderContainer.PrototypeEntityDataProvider ?? new NullDataProvider();
+            _keyBindingsDataProvider = entityDataProviderContainer.KeyBindingsDataProvider ?? new NullDataProvider();
+            _worldEntityDataProvider = entityDataProviderContainer.WorldEntityDataProvider ?? new NullDataProvider();
+            _playerEntityDataProvider = entityDataProviderContainer.PlayerEntityDataProvider ?? new NullDataProvider();
+        }
+
         public void CreateSystems(string rngSeed)
         {
             ScriptExecutor = new ScriptExecutor(this);
@@ -48,7 +68,7 @@ namespace data_rogue_core.Systems
 
             RendererSystem = new RendererSystem(PlayerSystem);
 
-            EntityEngine = new EntityEngine(new DataStaticEntityLoader());
+            EntityEngine = new EntityEngine(_prototypeEntityDataProvider);
 
             StatSystem = new StatSystem(EntityEngine);
 
@@ -80,9 +100,9 @@ namespace data_rogue_core.Systems
 
             TargetingSystem = new TargetingSystem(this);
 
-            PlayerControlSystem = new PlayerControlSystem(this);
+            PlayerControlSystem = new PlayerControlSystem(this, _keyBindingsDataProvider);
 
-            SaveSystem = new SaveSystem(this);
+            SaveSystem = new SaveSystem(this, new WorldGenerator(_worldEntityDataProvider, _playerEntityDataProvider));
 
             EntityEngine.Initialise(this);
             PlayerControlSystem.Initialise();

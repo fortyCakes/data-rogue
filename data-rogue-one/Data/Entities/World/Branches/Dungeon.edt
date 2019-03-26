@@ -1,0 +1,19 @@
+﻿"Branch:Dungeon"
+[Prototype]
+Name: Branch:Dungeon
+[Branch]
+BranchName: Branch:Dungeon
+Depth: 5
+[Biome]
+Name: Dungeon
+[BasicDungeonBranchMapGenerator]
+[BiomeBasedMonsterGeneration]
+BasePower: 0
+Density: 0.01
+[RandomItemGeneration]
+BasePower: 0
+Density: 0.01
+[DefaultEntrancePortalGeneration]
+[StairGeneration]
+[StairGeneration]
+[StairGeneration]

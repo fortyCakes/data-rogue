@@ -23,8 +23,6 @@ namespace data_rogue_core.UnitTests.Systems
         [SetUp]
         public void SetUp()
         {
-            entityId = 0;
-
             systemContainer = new SystemContainer();
 
             systemContainer.CreateSystems("seed");
@@ -34,8 +32,7 @@ namespace data_rogue_core.UnitTests.Systems
 
             mover = GetTestEntity();
         }
-
-        uint entityId;
+        
         IEntity mover;
 
         private SystemContainer systemContainer;

@@ -6,8 +6,6 @@ namespace data_rogue_core.World.GenerationStrategies
 {
     public interface IEntityGenerator
     {
-        string GenerationType { get; }
-
-        void Generate(ISystemContainer systemContainer, GeneratedBranch generatedBranch, IEntity branch, EntityGenerationStrategy step, IRandom random);
+        void Generate(ISystemContainer systemContainer, GeneratedBranch generatedBranch, IEntity branch, IRandom random);
     }
 }

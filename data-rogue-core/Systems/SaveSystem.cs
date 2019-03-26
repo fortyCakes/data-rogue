@@ -13,10 +13,12 @@ namespace data_rogue_core
     public class SaveSystem : ISaveSystem
     {
         private readonly ISystemContainer _systemContainer;
+        private readonly IWorldGenerator _worldGenerator;
 
-        public SaveSystem(ISystemContainer systemContainer)
+        public SaveSystem(ISystemContainer systemContainer, IWorldGenerator worldGenerator)
         {
             _systemContainer = systemContainer;
+            _worldGenerator = worldGenerator;
         }
 
         public void Load()
@@ -62,7 +64,7 @@ namespace data_rogue_core
 
         public void Create(CharacterCreationForm characterCreationForm)
         {
-            WorldGenerator.Create(_systemContainer, characterCreationForm);
+            _worldGenerator.Create(_systemContainer, characterCreationForm);
         }
 
         public void Save()

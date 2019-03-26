@@ -1,8 +1,9 @@
 ﻿using data_rogue_core;
+using data_rogue_core.Systems;
 
 namespace data_rogue_one
 {
-    public class Program
+    public static class Program
     {
         static void Main(string[] args)
         {

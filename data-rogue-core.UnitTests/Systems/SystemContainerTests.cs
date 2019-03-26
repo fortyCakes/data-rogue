@@ -1,7 +1,10 @@
-﻿using data_rogue_core.Systems;
+﻿using data_rogue_core.EntityEngineSystem;
+using data_rogue_core.Systems;
 using FluentAssertions;
+using NSubstitute;
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 
 namespace data_rogue_core.UnitTests.Systems
 {

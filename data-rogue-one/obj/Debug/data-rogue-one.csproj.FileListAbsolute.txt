@@ -92,7 +92,6 @@ C:\Users\Lex\source\repos\fortyCakes\data-rogue\data-rogue-one\bin\Debug\Data\En
 C:\Users\Lex\source\repos\fortyCakes\data-rogue\data-rogue-one\bin\Debug\Data\Entities\StaticEntities\Items\T1HeavyArmour.edt
 C:\Users\Lex\source\repos\fortyCakes\data-rogue\data-rogue-one\bin\Debug\Data\Entities\StaticEntities\Items\T1LightArmour.edt
 C:\Users\Lex\source\repos\fortyCakes\data-rogue\data-rogue-one\bin\Debug\Data\Entities\StaticEntities\Unarmed.edt
-C:\Users\Lex\source\repos\fortyCakes\data-rogue\data-rogue-one\bin\Debug\Data\Entities\StaticEntities\keybindings.edt
 C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-one\bin\Debug\Data\Entities\StaticEntities\keybindings.edt
 C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-one\bin\Debug\Data\Entities\StaticEntities\Items\T1Weapons.edt
 C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-one\bin\Debug\Data\Entities\StaticEntities\Items\T1HeavyArmour.edt
@@ -104,3 +103,4 @@ C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-one\bin\Debug\Data\Entit
 C:\Users\Lex\source\repos\fortyCakes\data-rogue\data-rogue-one\bin\Debug\Data\Entities\StaticEntities\Items\T2HeavyArmour.edt
 C:\Users\Lex\source\repos\fortyCakes\data-rogue\data-rogue-one\bin\Debug\Data\Entities\StaticEntities\Items\T2LightArmour.edt
 C:\Users\Lex\source\repos\fortyCakes\data-rogue\data-rogue-one\bin\Debug\Data\Entities\StaticEntities\Items\T2Weapons.edt
+C:\Users\Lex\source\repos\fortyCakes\data-rogue\data-rogue-one\bin\Debug\Data\Entities\keybindings.edt

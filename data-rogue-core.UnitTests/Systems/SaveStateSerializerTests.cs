@@ -18,13 +18,15 @@ namespace data_rogue_core.UnitTests.Data
         private ISystemContainer systemContainer;
         private IEntity wallCell;
         private IEntity floorCell;
-
+        private IEntityDataProvider entityDataProvider;
 
         [SetUp]
         public void SetUp()
         {
+            entityDataProvider = Substitute.For<IEntityDataProvider>();
+
             systemContainer = new SystemContainer();
-            systemContainer.EntityEngine = new EntityEngine(Substitute.For<BaseStaticEntityLoader>());
+            systemContainer.EntityEngine = new EntityEngine(Substitute.For<IEntityDataProvider>());
 
             wallCell = CreateCell('#', "Cell:Wall");
             floorCell = CreateCell('.', "Cell:Empty");

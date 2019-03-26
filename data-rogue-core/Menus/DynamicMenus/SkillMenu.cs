@@ -70,10 +70,5 @@ namespace data_rogue_core.Menus.DynamicMenus
                     throw new ApplicationException($"Unknown MenuAction in {nameof(SkillMenu)}");
             }
         }
-
-        private void SpendATurn()
-        {
-            _systemContainer.EventSystem.Try(EventType.SpendTime, _systemContainer.PlayerSystem.Player, new SpendTimeEventData { Ticks = 1000 });
-        }
     }
 }

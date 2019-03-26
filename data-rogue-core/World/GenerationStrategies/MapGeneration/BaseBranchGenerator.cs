@@ -10,12 +10,8 @@ using data_rogue_core.Utils;
 
 namespace data_rogue_core
 {
-    public abstract class BaseBranchGenerator : IBranchGenerator
-    {        
-        public abstract string GenerationType { get; }
-
-        protected abstract List<Map> GenerateMaps(ISystemContainer systemContainer, Branch branchDefinition);
-
+    public class BranchGenerator : IBranchGenerator
+    {    
         protected IRandom Random { get; set; }
 
         public GeneratedBranch Generate(ISystemContainer systemContainer, IEntity branchEntity)
@@ -24,7 +20,7 @@ namespace data_rogue_core
 
             Random = new RNG(systemContainer.Seed + branch.BranchName);
 
-            var generatedBranchMaps = GenerateMaps(systemContainer, branch);
+            var generatedBranchMaps = GenerateMaps(systemContainer, branch, branchEntity);
 
             var generatedBranch = new GeneratedBranch() { Maps = generatedBranchMaps };
 
@@ -49,15 +45,20 @@ namespace data_rogue_core
             return generatedBranch;
         }
 
+        private List<Map> GenerateMaps(ISystemContainer systemContainer, Branch branch, IEntity branchEntity)
+        {
+            var mapGenerator = branchEntity.Components.OfType<BranchMapGenerationStrategy>().Single();
+
+            return mapGenerator.Generate(systemContainer, branch);
+        }
+
         protected virtual void CreateEntities(ISystemContainer systemContainer, GeneratedBranch generatedBranch, IEntity branchEntity)
         {
-            var entityGenerationSteps = branchEntity.Components.OfType<EntityGenerationStrategy>();
+            var entityGenerationSteps = branchEntity.Components.OfType<BaseEntityGenerationStrategy>();
 
             foreach(var step in entityGenerationSteps)
             {
-                var generator = EntityGeneratorFactory.GetGenerator(step.EntityGenerationType);
-
-                generator.Generate(systemContainer, generatedBranch, branchEntity, step, Random);
+                step.Generate(systemContainer, generatedBranch, branchEntity, Random);
             }
         }
 
@@ -168,37 +169,35 @@ namespace data_rogue_core
                 .ToList();
         }
 
-
-
-        protected void PlaceStairs(ISystemContainer systemContainer, GeneratedBranch generatedBranch)
+        public static void PlaceStairs(ISystemContainer systemContainer, GeneratedBranch generatedBranch, IRandom random)
         {
             Map previousMap = null;
             foreach (Map map in generatedBranch.Maps.OrderBy(m => m.MapKey.Key))
             {
                 if (previousMap != null)
                 {
-                    PlaceStairSet(systemContainer, previousMap, map);
+                    PlaceStairSet(systemContainer, previousMap, map, random);
                 }
 
                 previousMap = map;
             }
         }
 
-        protected void PlaceStairSet(ISystemContainer systemContainer, Map previousMap, Map map)
+        protected static void PlaceStairSet(ISystemContainer systemContainer, Map previousMap, Map map, IRandom random)
         {
 
-            var downStairsCoordinate = previousMap.GetEmptyPosition(systemContainer.PrototypeSystem, systemContainer.PositionSystem, Random);
-            var upStairsCoordinate = map.GetEmptyPosition(systemContainer.PrototypeSystem, systemContainer.PositionSystem, Random);
+            var downStairsCoordinate = previousMap.GetEmptyPosition(systemContainer.PrototypeSystem, systemContainer.PositionSystem, random);
+            var upStairsCoordinate = map.GetEmptyPosition(systemContainer.PrototypeSystem, systemContainer.PositionSystem, random);
 
             var downStairs = systemContainer.PrototypeSystem.CreateAt("Props:StairsDown", downStairsCoordinate);
             var upStairs = systemContainer.PrototypeSystem.CreateAt("Props:StairsUp", upStairsCoordinate);
         }
 
-        protected void PlaceDefaultEntrancePortal(ISystemContainer systemContainer, GeneratedBranch generatedBranch, Branch branch)
+        public static void PlaceDefaultEntrancePortal(ISystemContainer systemContainer, GeneratedBranch generatedBranch, IRandom random)
         {
             var firstLayer = generatedBranch.Maps.First();
 
-            MapCoordinate emptyPosition = firstLayer.GetEmptyPosition(systemContainer.PrototypeSystem, systemContainer.PositionSystem, Random);
+            MapCoordinate emptyPosition = firstLayer.GetEmptyPosition(systemContainer.PrototypeSystem, systemContainer.PositionSystem, random);
 
             systemContainer.PrototypeSystem.CreateAt("Props:Portal", emptyPosition);
         }

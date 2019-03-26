@@ -14,12 +14,13 @@ namespace data_rogue_core.UnitTests.Systems
     public class EntityEngineTests
     {
         private IEntityEngine engine;
-        private IStaticEntityLoader loader;
+        private IEntityDataProvider loader;
 
         [SetUp]
         public void SetUp()
         {
-            loader = Substitute.For<IStaticEntityLoader>();
+            loader = Substitute.For<IEntityDataProvider>();
+            loader.GetData().Returns(new List<string>());
 
             engine = new EntityEngine(loader);
         }
@@ -146,7 +147,7 @@ namespace data_rogue_core.UnitTests.Systems
         [Test]
         public void Initialise_InitialisesSystems()
         {
-            var systemContainer = new SystemContainer();
+            var systemContainer = new SystemContainer(new EntityDataProviders { PrototypeEntityDataProvider = loader});
             var system = Substitute.For<ISystem>();
 
             engine.Register(system);
@@ -159,19 +160,13 @@ namespace data_rogue_core.UnitTests.Systems
         [Test]
         public void Initialise_LoadsStaticEntities()
         {
-            var systemContainer = new SystemContainer();
+            var systemContainer = new SystemContainer(new EntityDataProviders { PrototypeEntityDataProvider = loader });
             systemContainer.EntityEngine = engine;
             IEntity loadedEntity = null;
 
-            loader.When(l => l.Load(systemContainer)).Do(c =>
-            {
-                var sc = c.Arg<SystemContainer>();
-                loadedEntity = sc.EntityEngine.New("LoadedEntity");
-            });
+            loader.GetData().Returns(new List<string> { @"""TestEntity""" });
 
             engine.Initialise(systemContainer);
-
-            loader.Received(1).Load(systemContainer);
 
             (loadedEntity as Entity)?.IsStatic.Should().BeTrue();
         }

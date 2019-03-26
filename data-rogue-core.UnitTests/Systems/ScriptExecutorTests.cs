@@ -6,6 +6,7 @@ using NSubstitute;
 using NUnit.Framework;
 using System;
 using NLua;
+using System.Collections.Generic;
 
 namespace data_rogue_core.UnitTests.Systems
 {

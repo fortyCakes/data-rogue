@@ -90,7 +90,7 @@ end";
         {
             var multipleSerialised = LoadFile("EntityEngineSystem/TestData/ExpectedSerialization_MultipleEntities.txt");
 
-            var entities = EntitySerializer.DeserializeMultiple(SystemContainer, multipleSerialised);
+            var entities = EntitySerializer.DeserializeAll(SystemContainer, new[] { multipleSerialised });
 
             var expected = new List<Entity>
             {
