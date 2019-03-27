@@ -8,14 +8,12 @@ namespace data_rogue_core.Forms.StaticForms
 {
     public class CharacterCreationForm : Form
     {
-        private readonly IRendererSystem _rendererSystem;
         private readonly ISaveSystem _saveSystem;
         private readonly IPlayerSystem _playerSystem;
 
-        public CharacterCreationForm(IActivitySystem activitySystem, IRendererSystem rendererSystem, ISaveSystem saveSystem, IPlayerSystem playerSystem) : base(activitySystem, "Character Creation", FormButton.Ok | FormButton.Cancel,
+        public CharacterCreationForm(IActivitySystem activitySystem, ISaveSystem saveSystem, IPlayerSystem playerSystem) : base(activitySystem, "Character Creation", FormButton.Ok | FormButton.Cancel,
                 null, StaticFields)
         {
-            _rendererSystem = rendererSystem;
             _saveSystem = saveSystem;
             _playerSystem = playerSystem;
             OnSelectCallback += HandleCharacterCreationFormSelection;
@@ -44,9 +42,9 @@ namespace data_rogue_core.Forms.StaticForms
 
         public int Willpower => (Fields["Stats"] as StatsFormData).GetStat("Willpower");
 
-        public static FormActivity GetCharacterCreationActivity(IActivitySystem activitySystem, IRendererSystem rendererSystem, ISaveSystem saveSystem, IPlayerSystem playerSystem)
+        public static FormActivity GetCharacterCreationActivity(IActivitySystem activitySystem, ISaveSystem saveSystem, IPlayerSystem playerSystem)
         {
-            return new FormActivity(new CharacterCreationForm(activitySystem, rendererSystem, saveSystem, playerSystem), rendererSystem.RendererFactory);
+            return new FormActivity(new CharacterCreationForm(activitySystem, saveSystem, playerSystem));
         }
 
         public void HandleCharacterCreationFormSelection(FormButton button, Form form)
@@ -61,7 +59,7 @@ namespace data_rogue_core.Forms.StaticForms
                     break;
                 case FormButton.Cancel:
                     _activitySystem.Pop();
-                    _activitySystem.Push(new MenuActivity(new MainMenu(_activitySystem, _playerSystem, _saveSystem, _rendererSystem), _rendererSystem.RendererFactory));
+                    _activitySystem.Push(new MenuActivity(new MainMenu(_activitySystem, _playerSystem, _saveSystem)));
                     break;
                 default:
                     throw new ApplicationException("Unknown form button");

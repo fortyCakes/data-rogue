@@ -37,9 +37,9 @@ namespace data_rogue_core
 
             SetupRootConsole();
 
-            CreateAndRegisterSystems(entityDataProviders);
+            var rendererFactory = InitialiseRendererFactory();
 
-            InitialiseRenderers();
+            CreateAndRegisterSystems(entityDataProviders, rendererFactory);
 
             InitialiseState();
 
@@ -61,7 +61,7 @@ namespace data_rogue_core
 
         }
 
-        private void InitialiseRenderers()
+        private IRendererFactory InitialiseRendererFactory()
         {
             Dictionary<ActivityType, IRenderer> renderers;
             switch(GraphicsMode)
@@ -80,7 +80,7 @@ namespace data_rogue_core
                     throw new ApplicationException($"Renderers not found for graphics mode {GraphicsMode}.");
             }
 
-            SystemContainer.RendererSystem.RendererFactory = new RendererFactory(renderers);
+            return new RendererFactory(renderers);
         }
 
         private void RunRootConsole()
@@ -102,7 +102,7 @@ namespace data_rogue_core
         {
             SystemContainer.ActivitySystem.Initialise();
 
-            SystemContainer.ActivitySystem.Push(new GameplayActivity(SystemContainer.RendererSystem.RendererFactory));
+            SystemContainer.ActivitySystem.Push(new GameplayActivity());
 
             DisplayLoadingScreen("Loading...");
         }
@@ -122,23 +122,23 @@ namespace data_rogue_core
         }
 
 
-        private void CreateAndRegisterSystems(EntityDataProviders entityDataProviders)
+        private void CreateAndRegisterSystems(EntityDataProviders entityDataProviders, IRendererFactory rendererFactory)
         {
             if (entityDataProviders == null)
             {
                 entityDataProviders = EntityDataProviders.Default;
             }
 
-            SystemContainer = new SystemContainer(entityDataProviders);
+            SystemContainer = new SystemContainer(entityDataProviders, rendererFactory);
 
             SystemContainer.CreateSystems(DEBUG_SEED);
 
-            SystemContainer.RendererSystem.QuitAction = Quit;
+            SystemContainer.ActivitySystem.QuitAction = Quit;
         }
 
         private void DisplayMainMenu()
         {
-            SystemContainer.ActivitySystem.Push(new MenuActivity(new MainMenu(SystemContainer.ActivitySystem, SystemContainer.PlayerSystem, SystemContainer.SaveSystem, SystemContainer.RendererSystem), SystemContainer.RendererSystem.RendererFactory));
+            SystemContainer.ActivitySystem.Push(new MenuActivity(new MainMenu(SystemContainer.ActivitySystem, SystemContainer.PlayerSystem, SystemContainer.SaveSystem)));
         }
 
         private void OnRootConsoleRender(object sender, UpdateEventArgs e)
@@ -179,7 +179,7 @@ namespace data_rogue_core
 
         public void DisplayLoadingScreen(string text)
         {
-            SystemContainer.ActivitySystem.Push(new LoadingScreenActivity(text, SystemContainer.RendererSystem.RendererFactory));
+            SystemContainer.ActivitySystem.Push(new LoadingScreenActivity(text));
         }
 
         public void Quit()

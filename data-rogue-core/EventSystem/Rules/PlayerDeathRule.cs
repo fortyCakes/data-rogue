@@ -24,10 +24,9 @@ namespace data_rogue_core.EventSystem.Rules
                 systemContainer.ActivitySystem.Push(new MenuActivity(new MainMenu(
                         systemContainer.ActivitySystem,
                         systemContainer.PlayerSystem,
-                        systemContainer.SaveSystem,
-                        systemContainer.RendererSystem
-                    ), systemContainer.RendererSystem.RendererFactory));
-                systemContainer.ActivitySystem.Push(new DeathScreenActivity(systemContainer.RendererSystem.RendererFactory, systemContainer));
+                        systemContainer.SaveSystem
+                    )));
+                systemContainer.ActivitySystem.Push(new DeathScreenActivity(systemContainer));
             }
 
             return true;

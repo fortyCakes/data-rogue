@@ -17,28 +17,33 @@ namespace data_rogue_core.Activities
                 var stringBuilder = new StringBuilder();
 
                 stringBuilder.AppendLine("You are dead.");
-                stringBuilder.AppendLine($"Name: {systemContainer.PlayerSystem.Player.Get<Description>().Name}");
+                stringBuilder.Append("Name: ").AppendLine(systemContainer.PlayerSystem.Player.Get<Description>().Name);
                 stringBuilder.AppendLine();
-                stringBuilder.AppendLine($"Time: {systemContainer.TimeSystem.CurrentTime} aut");
+                stringBuilder.Append("Time: ").Append(systemContainer.TimeSystem.CurrentTime).AppendLine(" aut");
 
                 var text = stringBuilder.ToString();
 
                 return text.Replace("\r", "");
             }
         }
-        public IStaticTextRenderer Renderer { get; }
+
+        public IStaticTextRenderer Renderer { get; private set; }
 
         private readonly ISystemContainer systemContainer;
 
-        public DeathScreenActivity(IRendererFactory rendererFactory, ISystemContainer systemContainer)
+        public DeathScreenActivity(ISystemContainer systemContainer)
         {
-            Renderer = (IStaticTextRenderer)rendererFactory.GetRendererFor(Type);
             this.systemContainer = systemContainer;
         }
-        
+
         public void Render(ISystemContainer systemContainer)
         {
             Renderer.Render(Text, RendersEntireSpace);
+        }
+
+        public void Initialise(IRenderer renderer)
+        {
+            Renderer = (IStaticTextRenderer)renderer;
         }
     }
 }

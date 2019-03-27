@@ -7,9 +7,9 @@ namespace data_rogue_core.Maps.MapGenCommands
     {
         public MapGenCommandType CommandType => MapGenCommandType.Entity;
 
-        public void Execute(ISystemContainer systemContainer, Map map, MapGenCommand command, Vector offsetVector)
+        public void Execute(ISystemContainer systemContainer, Map map, MapGenCommand command, Vector offset)
         {
-            var coordinate = new MapCoordinate(map.MapKey, offsetVector + command.Vector);
+            var coordinate = new MapCoordinate(map.MapKey, offset + command.Vector);
 
             systemContainer.PrototypeSystem.CreateAt(command.Parameters, coordinate);
         }
@@ -19,9 +19,9 @@ namespace data_rogue_core.Maps.MapGenCommands
     {
         public MapGenCommandType CommandType => MapGenCommandType.EntityStack;
 
-        public void Execute(ISystemContainer systemContainer, Map map, MapGenCommand command, Vector offsetVector)
+        public void Execute(ISystemContainer systemContainer, Map map, MapGenCommand command, Vector offset)
         {
-            var coordinate = new MapCoordinate(map.MapKey, offsetVector + command.Vector);
+            var coordinate = new MapCoordinate(map.MapKey, offset + command.Vector);
 
             var splits = command.Parameters.Split(',');
             var entityName = splits[0];

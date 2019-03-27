@@ -7,9 +7,8 @@ namespace data_rogue_core.Menus.StaticMenus
     {
         private readonly IPlayerSystem _playerSystem;
         private readonly ISaveSystem _saveSystem;
-        private readonly IRendererSystem _rendererSystem;
 
-        public MainMenu(IActivitySystem activitySystem, IPlayerSystem playerSystem, ISaveSystem saveSystem, IRendererSystem rendererSystem) : base(
+        public MainMenu(IActivitySystem activitySystem, IPlayerSystem playerSystem, ISaveSystem saveSystem) : base(
             activitySystem,
             "Main Menu",
             null,
@@ -19,7 +18,6 @@ namespace data_rogue_core.Menus.StaticMenus
         {
             _playerSystem = playerSystem;
             _saveSystem = saveSystem;
-            _rendererSystem = rendererSystem;
             OnSelectCallback += HandleMainMenuSelection;
         }
 
@@ -31,7 +29,7 @@ namespace data_rogue_core.Menus.StaticMenus
             {
                 case "Quit":
                     _activitySystem.Pop();
-                    _rendererSystem.QuitAction();
+                    _activitySystem.QuitAction();
                     break;
                 case "New Game":
                     _activitySystem.Pop();
@@ -47,7 +45,7 @@ namespace data_rogue_core.Menus.StaticMenus
 
         private void StartCharacterCreation()
         {
-            _activitySystem.Push(CharacterCreationForm.GetCharacterCreationActivity(_activitySystem, _rendererSystem, _saveSystem, _playerSystem));
+            _activitySystem.Push(CharacterCreationForm.GetCharacterCreationActivity(_activitySystem, _saveSystem, _playerSystem));
         }
     }
 }

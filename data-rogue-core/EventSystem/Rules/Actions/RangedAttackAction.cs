@@ -102,7 +102,7 @@ namespace data_rogue_core.EventSystem.Rules
                 var weapon = GetFirstRangedWeapon(attacker);
                 var weaponClass = GetRangedWeaponClass(weapon);
 
-                _systemContainer.FighterSystem.Attack(attacker, defender, attackClass: weaponClass, weapon: weapon, isAction: true);
+                _systemContainer.FighterSystem.Attack(attacker, defender, attackClass: weaponClass, weapon: weapon, spendTime: true);
 
                 ExpendAmmoIfRequired(attacker, weapon);
             }

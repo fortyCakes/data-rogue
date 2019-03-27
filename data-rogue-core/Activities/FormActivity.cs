@@ -13,17 +13,21 @@ namespace data_rogue_core.Activities
         public bool RendersEntireSpace => true;
 
         public Form Form { get; set; }
-        public IFormRenderer Renderer { get; }
+        public IFormRenderer Renderer { get; private set; }
 
-        public FormActivity(Form form, IRendererFactory rendererFactory)
+        public FormActivity(Form form)
         {
             Form = form;
-            Renderer = (IFormRenderer)rendererFactory.GetRendererFor(Type);
         }
-        
+
         public void Render(ISystemContainer systemContainer)
         {
             Renderer.Render(Form);
+        }
+
+        public void Initialise(IRenderer renderer)
+        {
+            Renderer = (IFormRenderer)renderer;
         }
     }
 }

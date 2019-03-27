@@ -17,6 +17,5 @@ namespace data_rogue_core.Systems
 
         public IRendererFactory RendererFactory { get; set; }
         public MapCoordinate CameraPosition => playerSystem.Player.Get<Position>().MapCoordinate;
-        public Action QuitAction { get; set; }
     }
 }

@@ -10,7 +10,5 @@ namespace data_rogue_core.Systems.Interfaces
         IRendererFactory RendererFactory {get;set;}
 
         MapCoordinate CameraPosition { get; }
-
-        Action QuitAction { get; set; }
     }
 }

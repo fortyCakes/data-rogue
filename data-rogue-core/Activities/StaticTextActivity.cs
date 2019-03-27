@@ -10,17 +10,21 @@ namespace data_rogue_core.Activities
         public bool RendersEntireSpace => false;
 
         public string Text { get; set; }
-        public IStaticTextRenderer Renderer { get; }
+        public IStaticTextRenderer Renderer { get; private set; }
 
-        public StaticTextActivity(string staticText, IRendererFactory rendererFactory)
+        public StaticTextActivity(string staticText)
         {
             Text = staticText;
-            Renderer = (IStaticTextRenderer)rendererFactory.GetRendererFor(Type);
         }
-        
+
         public void Render(ISystemContainer systemContainer)
         {
             Renderer.Render(Text, RendersEntireSpace);
+        }
+
+        public void Initialise(IRenderer renderer)
+        {
+            Renderer = (IStaticTextRenderer)renderer;
         }
     }
 }

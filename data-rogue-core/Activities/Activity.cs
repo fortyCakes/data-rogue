@@ -1,4 +1,5 @@
-﻿using data_rogue_core.Systems.Interfaces;
+﻿using data_rogue_core.Renderers;
+using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.Activities
 {
@@ -8,5 +9,6 @@ namespace data_rogue_core.Activities
         object Data { get; }
         bool RendersEntireSpace { get; }
         void Render(ISystemContainer systemContainer);
+        void Initialise(IRenderer renderer);
     }
 }

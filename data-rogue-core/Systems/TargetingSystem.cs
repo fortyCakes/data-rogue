@@ -5,6 +5,7 @@ using data_rogue_core.Systems.Interfaces;
 using System;
 using data_rogue_core.Renderers;
 using RLNET;
+using System.Linq;
 
 namespace data_rogue_core.Systems
 {
@@ -42,7 +43,7 @@ namespace data_rogue_core.Systems
 
             if (_activitySystem.Peek() is TargetingActivity activity)
             {
-                var gameplayRenderer = _rendererSystem.RendererFactory.GetRendererFor(ActivityType.Gameplay) as IGameplayRenderer;
+                IGameplayRenderer gameplayRenderer = GetGameplayRenderer();
 
                 var hoveredLocation = gameplayRenderer.GetMapCoordinateFromMousePosition(_systemContainer.RendererSystem.CameraPosition, x, y);
 
@@ -65,6 +66,13 @@ namespace data_rogue_core.Systems
                     activity.Complete();
                 }
             }
+        }
+
+        private IGameplayRenderer GetGameplayRenderer()
+        {
+            GameplayActivity gameplayActivity = (GameplayActivity)_activitySystem.ActivityStack.Single(a => a.Type == ActivityType.Gameplay);
+
+            return gameplayActivity.Renderer;
         }
 
         private void GetTargetForPlayer(TargetingData data, Action<MapCoordinate> callback)

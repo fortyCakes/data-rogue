@@ -6,6 +6,7 @@ using System;
 using System.Runtime.Serialization;
 using System.Text;
 using data_rogue_core.Utils;
+using data_rogue_core.Renderers;
 
 namespace data_rogue_core.Systems
 {
@@ -39,9 +40,11 @@ namespace data_rogue_core.Systems
         private readonly IEntityDataProvider _keyBindingsDataProvider;
         private readonly IEntityDataProvider _worldEntityDataProvider;
         private readonly IEntityDataProvider _playerEntityDataProvider;
+        private readonly IRendererFactory _rendererFactory;
 
         public SystemContainer(
-            EntityDataProviders entityDataProviderContainer = null
+            EntityDataProviders entityDataProviderContainer = null,
+            IRendererFactory rendererFactory = null
             )
         {
             if (entityDataProviderContainer == null)
@@ -53,6 +56,7 @@ namespace data_rogue_core.Systems
             _keyBindingsDataProvider = entityDataProviderContainer.KeyBindingsDataProvider ?? new NullDataProvider();
             _worldEntityDataProvider = entityDataProviderContainer.WorldEntityDataProvider ?? new NullDataProvider();
             _playerEntityDataProvider = entityDataProviderContainer.PlayerEntityDataProvider ?? new NullDataProvider();
+            _rendererFactory = rendererFactory;
         }
 
         public void CreateSystems(string rngSeed)
@@ -61,7 +65,7 @@ namespace data_rogue_core.Systems
             EventSystem = new EventSystem.EventSystem();
 
             MessageSystem = new MessageSystem();
-            ActivitySystem = new ActivitySystem();
+            ActivitySystem = new ActivitySystem(_rendererFactory);
             PlayerSystem = new PlayerSystem(ActivitySystem);
             MapSystem = new MapSystem();
 

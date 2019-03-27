@@ -13,9 +13,7 @@ namespace data_rogue_core.Activities
         public MapCoordinate CurrentTarget => TargetingActivityData.CurrentTarget;
 
         public bool RendersEntireSpace => false;
-
-        private IRendererFactory rendererFactory;
-        private IActivitySystem activitySystem;
+        private readonly IActivitySystem activitySystem;
 
         public ITargetingRenderer Renderer { get; set; }
 
@@ -23,10 +21,7 @@ namespace data_rogue_core.Activities
 
         public TargetingActivity(TargetingData targetingData, Action<MapCoordinate> callback, ISystemContainer systemContainer)
         {
-            rendererFactory = systemContainer.RendererSystem.RendererFactory;
             activitySystem = systemContainer.ActivitySystem;
-
-            Renderer = (ITargetingRenderer)rendererFactory.GetRendererFor(Type);
 
             TargetingActivityData = new TargetingActivityData
             {
@@ -56,6 +51,11 @@ namespace data_rogue_core.Activities
             {
                 activitySystem.Pop();
             }
+        }
+
+        public void Initialise(IRenderer renderer)
+        {
+            Renderer = (ITargetingRenderer)renderer;
         }
     }
 

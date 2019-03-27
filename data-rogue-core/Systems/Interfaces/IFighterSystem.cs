@@ -7,7 +7,7 @@ namespace data_rogue_core.Systems.Interfaces
     {
         bool BasicAttack(IEntity attacker, IEntity defender);
 
-        bool Attack(IEntity attacker, IEntity defender, string attackClass = null, int? attackDamage = null, string[] attackTags = null, bool isAction = true, IEntity weapon = null);
+        bool Attack(IEntity attacker, IEntity defender, string attackClass = null, int? attackDamage = null, string[] attackTags = null, bool spendTime = true, IEntity weapon = null);
 
         IEnumerable<IEntity> GetEntitiesWithFighter(IEnumerable<IEntity> entities);
     }

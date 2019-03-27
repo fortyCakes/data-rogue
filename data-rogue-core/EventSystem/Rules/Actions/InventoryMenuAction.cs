@@ -21,7 +21,7 @@ namespace data_rogue_core.EventSystem.Rules
         {
             var inventory = sender.Get<Inventory>();
 
-            _systemContainer.ActivitySystem.Push(new MenuActivity(new InventoryMenu(_systemContainer, inventory), _systemContainer.RendererSystem.RendererFactory));
+            _systemContainer.ActivitySystem.Push(new MenuActivity(new InventoryMenu(_systemContainer, inventory)));
 
             return false;
         }

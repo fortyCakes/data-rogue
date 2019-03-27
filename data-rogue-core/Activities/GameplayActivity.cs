@@ -11,14 +11,14 @@ namespace data_rogue_core.Activities
         public bool RendersEntireSpace => true;
         public IGameplayRenderer Renderer { get; set; }
 
-        public GameplayActivity(IRendererFactory rendererFactory)
-        {
-            Renderer = (IGameplayRenderer)rendererFactory.GetRendererFor(Type);
-        }
-
         public void Render(ISystemContainer systemContainer)
         {
             Renderer.Render(systemContainer);
+        }
+
+        public void Initialise(IRenderer renderer)
+        {
+            Renderer = (IGameplayRenderer)renderer;
         }
     }
 }

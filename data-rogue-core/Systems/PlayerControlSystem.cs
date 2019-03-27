@@ -288,15 +288,22 @@ namespace data_rogue_core.Systems
             var x = mouse.X;
             var y = mouse.Y;
 
-            if (_systemContainer.ActivitySystem.Peek() is GameplayActivity activity && _systemContainer.PlayerSystem.Player != null)
+            if (_activitySystem.Peek() is GameplayActivity activity && _systemContainer.PlayerSystem.Player != null)
             {
-                var gameplayRenderer = _systemContainer.RendererSystem.RendererFactory.GetRendererFor(ActivityType.Gameplay) as IGameplayRenderer;
+                var gameplayRenderer = GetGameplayRenderer();
 
                 var hoveredLocation = gameplayRenderer.GetMapCoordinateFromMousePosition(_systemContainer.RendererSystem.CameraPosition, x, y);
 
                 SetHoveredLocation(hoveredLocation);
             }
                     
+        }
+
+        private IGameplayRenderer GetGameplayRenderer()
+        {
+            GameplayActivity gameplayActivity = (GameplayActivity)_activitySystem.ActivityStack.Single(a => a.Type == ActivityType.Gameplay);
+
+            return gameplayActivity.Renderer;
         }
 
         private void SetHoveredLocation(MapCoordinate mapCoordinate)
