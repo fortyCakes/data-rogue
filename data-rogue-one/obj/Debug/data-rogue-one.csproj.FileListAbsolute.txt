@@ -34,7 +34,6 @@ C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-one\bin\Debug\data-rogue
 C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-one\bin\Debug\data-rogue-one.exe
 C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-one\bin\Debug\data-rogue-one.pdb
 C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-one\bin\Debug\data-rogue-core.dll
-C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-one\bin\Debug\RLNET.dll
 C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-one\bin\Debug\NLua.dll
 C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-one\bin\Debug\KeraLua.dll
 C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-one\bin\Debug\data-rogue-core.pdb
@@ -92,7 +91,6 @@ C:\Users\Lex\source\repos\fortyCakes\data-rogue\data-rogue-one\bin\Debug\Data\En
 C:\Users\Lex\source\repos\fortyCakes\data-rogue\data-rogue-one\bin\Debug\Data\Entities\StaticEntities\Items\T1HeavyArmour.edt
 C:\Users\Lex\source\repos\fortyCakes\data-rogue\data-rogue-one\bin\Debug\Data\Entities\StaticEntities\Items\T1LightArmour.edt
 C:\Users\Lex\source\repos\fortyCakes\data-rogue\data-rogue-one\bin\Debug\Data\Entities\StaticEntities\Unarmed.edt
-C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-one\bin\Debug\Data\Entities\StaticEntities\keybindings.edt
 C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-one\bin\Debug\Data\Entities\StaticEntities\Items\T1Weapons.edt
 C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-one\bin\Debug\Data\Entities\StaticEntities\Items\T1HeavyArmour.edt
 C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-one\bin\Debug\Data\Entities\StaticEntities\Items\T1LightArmour.edt
@@ -104,3 +102,4 @@ C:\Users\Lex\source\repos\fortyCakes\data-rogue\data-rogue-one\bin\Debug\Data\En
 C:\Users\Lex\source\repos\fortyCakes\data-rogue\data-rogue-one\bin\Debug\Data\Entities\StaticEntities\Items\T2LightArmour.edt
 C:\Users\Lex\source\repos\fortyCakes\data-rogue\data-rogue-one\bin\Debug\Data\Entities\StaticEntities\Items\T2Weapons.edt
 C:\Users\Lex\source\repos\fortyCakes\data-rogue\data-rogue-one\bin\Debug\Data\Entities\keybindings.edt
+C:\Users\alex.stuart\Source\Repos\data-rogue\data-rogue-one\bin\Debug\Data\Entities\keybindings.edt

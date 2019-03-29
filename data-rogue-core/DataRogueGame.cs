@@ -11,6 +11,8 @@ using data_rogue_core.Systems.Interfaces;
 using data_rogue_core.EventSystem.Rules;
 using data_rogue_core.EventSystem;
 using data_rogue_core.Components;
+using data_rogue_core.IOSystems;
+using data_rogue_core.IOSystems.RLNetConsole;
 
 namespace data_rogue_core
 {
@@ -20,10 +22,7 @@ namespace data_rogue_core
 
         public ISystemContainer SystemContainer;
 
-        private const int CONSOLE_SCREEN_WIDTH = 100;
-        private const int CONSOLE_SCREEN_HEIGHT = 70;
-
-        public const string DEBUG_SEED = "DEBUG";
+        public IIOSystem IOSystem;
 
         public string Seed { get; set; }
 
@@ -31,61 +30,31 @@ namespace data_rogue_core
         private bool _leaving = false;
         public bool Loading { get; set; } = false;
 
-        public void Run(string seed, List<Type> eventRules, EntityDataProviders entityDataProviders = null)
+        public void Run(string seed, List<Type> eventRules, IIOSystem ioSystem = null, EntityDataProviders entityDataProviders = null)
         {
             Seed = seed;
 
-            SetupRootConsole();
+            IOSystem = ioSystem ?? new RLNetConsoleIOSystem();
 
-            var rendererFactory = InitialiseRendererFactory();
+            InitialiseIOSystem();
 
-            CreateAndRegisterSystems(entityDataProviders, rendererFactory);
+            CreateAndRegisterSystems(entityDataProviders, IOSystem.RendererFactory, seed);
 
             InitialiseState();
 
             StartDataLoad(eventRules);
 
-            RunRootConsole();
+            RunRootConsole(ioSystem);
         }
 
-        private void SetupRootConsole()
+        private void InitialiseIOSystem()
         {
-            string fontFileName = "Images\\Tileset\\Alloy_curses_12x12.png";
-            string consoleTitle = "data-rogue-core";
-
-            _rootConsole = new RLRootConsole(fontFileName, CONSOLE_SCREEN_WIDTH, CONSOLE_SCREEN_HEIGHT, 12, 12, 1, consoleTitle);
-
-            _rootConsole.Update += OnRootConsoleUpdate;
-            _rootConsole.Render += OnRootConsoleRender;
-
-
+            IOSystem.Initialise(OnRootConsoleUpdate, OnRootConsoleRender);
         }
 
-        private IRendererFactory InitialiseRendererFactory()
+        private void RunRootConsole(IIOSystem ioSystem)
         {
-            Dictionary<ActivityType, IRenderer> renderers;
-            switch(GraphicsMode)
-            {
-                case GraphicsMode.Console:
-                    renderers = new Dictionary<ActivityType, IRenderer>()
-                    {
-                        {ActivityType.Gameplay, new ConsoleGameplayRenderer(_rootConsole)},
-                        {ActivityType.Menu, new ConsoleMenuRenderer(_rootConsole)},
-                        {ActivityType.StaticDisplay, new ConsoleStaticTextRenderer(_rootConsole)},
-                        {ActivityType.Form, new ConsoleFormRenderer(_rootConsole) },
-                        {ActivityType.Targeting, new ConsoleTargetingRenderer(_rootConsole) }
-                    };
-                    break;
-                default:
-                    throw new ApplicationException($"Renderers not found for graphics mode {GraphicsMode}.");
-            }
-
-            return new RendererFactory(renderers);
-        }
-
-        private void RunRootConsole()
-        {
-            _rootConsole.Run();
+            ioSystem.Run();
         }
 
         private void InitialiseRules(List<Type> eventRules)
@@ -122,7 +91,7 @@ namespace data_rogue_core
         }
 
 
-        private void CreateAndRegisterSystems(EntityDataProviders entityDataProviders, IRendererFactory rendererFactory)
+        private void CreateAndRegisterSystems(EntityDataProviders entityDataProviders, IRendererFactory rendererFactory, string seed)
         {
             if (entityDataProviders == null)
             {
@@ -131,7 +100,7 @@ namespace data_rogue_core
 
             SystemContainer = new SystemContainer(entityDataProviders, rendererFactory);
 
-            SystemContainer.CreateSystems(DEBUG_SEED);
+            SystemContainer.CreateSystems(seed);
 
             SystemContainer.ActivitySystem.QuitAction = Quit;
         }
@@ -159,16 +128,16 @@ namespace data_rogue_core
                 activity.Render(SystemContainer);
             }
 
-            _rootConsole.Draw();
+            IOSystem.Draw();
         }
 
         private void OnRootConsoleUpdate(object sender, UpdateEventArgs e)
         {
             if (!_leaving && !Loading)
             {
-                var keyPress = KeyCombination.FromRLKeyPress(_rootConsole.Keyboard.GetKeyPress());
+                var keyPress = IOSystem.GetKeyPress();
 
-                SystemContainer.PlayerControlSystem.HandleInput(keyPress, _rootConsole.Mouse);
+                SystemContainer.PlayerControlSystem.HandleInput(keyPress, IOSystem.GetMouseData());
 
                 while (!SystemContainer.TimeSystem.WaitingForInput && SystemContainer.ActivitySystem.ActivityStack.Count > 0 && SystemContainer.ActivitySystem.Peek().Type == ActivityType.Gameplay && !_leaving)
                 {

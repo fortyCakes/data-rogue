@@ -7,6 +7,7 @@ using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.EventSystem;
 using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.Forms;
+using data_rogue_core.IOSystems;
 using data_rogue_core.Maps;
 using data_rogue_core.Menus;
 using data_rogue_core.Renderers;
@@ -55,7 +56,7 @@ namespace data_rogue_core.Systems
             }
         }
 
-        public void HandleInput(KeyCombination keyPress, RLMouse mouse)
+        public void HandleInput(KeyCombination keyPress, MouseData mouse)
         {
             var actionData = HandleKeyPress(keyPress);
 
@@ -283,7 +284,7 @@ namespace data_rogue_core.Systems
             }
         }
 
-        public void HandleMouseInput(RLMouse mouse)
+        public void HandleMouseInput(MouseData mouse)
         {
             var x = mouse.X;
             var y = mouse.Y;
