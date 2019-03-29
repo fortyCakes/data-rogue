@@ -4,10 +4,11 @@ packages/
 .vs/
 data-rogue-core/bin/
 data-rogue-core/obj/
+data-rogue-one/bin/
+data-rogue-one/obj/
 data-rogue-core.UnitTests/bin/
 data-rogue-core.UnitTests/obj/
 _NCrunch_data-rogue/
 *.ncrunchsolution
 *.ncrunchsolution.user
 /DataRogueWorldEditor/obj/Debug
-*.cache
