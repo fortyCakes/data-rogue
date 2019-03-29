@@ -1,4 +1,10 @@
-﻿using data_rogue_core;
+﻿using System.Collections.Generic;
+using data_rogue_core;
+using data_rogue_core.Activities;
+using data_rogue_core.IOSystems;
+using data_rogue_core.IOSystems.RLNetConsole;
+using data_rogue_core.Renderers;
+using data_rogue_core.Renderers.ConsoleRenderers;
 using data_rogue_core.Systems;
 
 namespace data_rogue_one
@@ -8,8 +14,10 @@ namespace data_rogue_one
         static void Main(string[] args)
         {
             var theGame = new DataRogueGame();
+            
+            var ioSystem = new RLNetConsoleIOSystem();
 
-            theGame.Run(DataRogueGame.DEBUG_SEED, GameRules.Rules);
+            theGame.Run("SEED_DEBUG", GameRules.Rules, ioSystem);
         }
     }
 }

@@ -1,9 +1,9 @@
-﻿using data_rogue_core.EntityEngineSystem;
+﻿using System;
+using data_rogue_core.EntityEngineSystem;
 using OpenTK.Input;
 using RLNET;
-using System;
 
-namespace data_rogue_core.Components
+namespace data_rogue_core.IOSystems
 {
     public class KeyCombination : ICustomFieldSerialization, IEquatable<KeyCombination>
     {
@@ -38,19 +38,6 @@ namespace data_rogue_core.Components
         public string Serialize()
         {
             return (Ctrl ? "Ctrl+" : "") + (Shift ? "Shift+" : "") + (Alt ? "Alt+" : "") + Key.ToString();
-        }
-
-        public static KeyCombination FromRLKeyPress(RLKeyPress keyPress)
-        {
-            if (keyPress == null) return null;
-
-            return new KeyCombination
-            {
-                Ctrl = keyPress.Control,
-                Shift = keyPress.Shift,
-                Alt = keyPress.Alt,
-                Key = (Key)keyPress.Key
-            };
         }
 
         public bool Equals(KeyCombination other)
