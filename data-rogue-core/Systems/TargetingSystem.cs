@@ -6,6 +6,7 @@ using System;
 using data_rogue_core.Renderers;
 using RLNET;
 using System.Linq;
+using data_rogue_core.IOSystems;
 
 namespace data_rogue_core.Systems
 {
@@ -36,7 +37,7 @@ namespace data_rogue_core.Systems
             }
         }
 
-        public void HandleMouseInput(RLMouse mouse)
+        public void HandleMouseInput(MouseData mouse)
         {
             var x = mouse.X;
             var y = mouse.Y;
@@ -61,7 +62,7 @@ namespace data_rogue_core.Systems
                     }
                 }
 
-                if (mouse.GetLeftClick())
+                if (mouse.IsLeftClick)
                 {
                     activity.Complete();
                 }
