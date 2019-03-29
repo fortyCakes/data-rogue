@@ -10,3 +10,4 @@ _NCrunch_data-rogue/
 *.ncrunchsolution
 *.ncrunchsolution.user
 /DataRogueWorldEditor/obj/Debug
+*.cache
