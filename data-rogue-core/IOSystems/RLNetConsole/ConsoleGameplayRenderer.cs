@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Linq;
 using data_rogue_core.Components;
 using data_rogue_core.Data;
+using data_rogue_core.IOSystems;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems.Interfaces;
 using data_rogue_core.Utils;
@@ -12,27 +13,26 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 {
     public class ConsoleGameplayRenderer : BaseConsoleRenderer, IGameplayRenderer
     {
-        public const int STATS_WIDTH = 22;
-        public const int MESSAGE_HEIGHT = 15;
+        private RLConsole MapConsole { get; }
+        private RLConsole StatsConsole { get; }
+        private RLConsole MessageConsole { get; }
+        public IOSystemConfiguration IOSystemConfiguration { get; }
 
-        private RLConsole MapConsole { get; set; }
-        private RLConsole StatsConsole { get; set; }
-        private RLConsole MessageConsole { get; set; }
-
-        public ConsoleGameplayRenderer(RLConsole console) : base(console)
+        public ConsoleGameplayRenderer(RLConsole console, IOSystemConfiguration ioSystemConfiguration) : base(console)
         {
             var consoleWidth = Console.Width;
             var consoleHeight = Console.Height;
 
-            MapConsole = new RLConsole(consoleWidth - STATS_WIDTH - 1, consoleHeight - MESSAGE_HEIGHT - 1);
-            StatsConsole = new RLConsole(STATS_WIDTH, consoleHeight - 1);
-            MessageConsole = new RLConsole(consoleWidth - STATS_WIDTH - 1, MESSAGE_HEIGHT);
+            MapConsole = new RLConsole(ioSystemConfiguration.MapPosition.Width, ioSystemConfiguration.MapPosition.Height);
+            StatsConsole = new RLConsole(ioSystemConfiguration.StatsPosition.Width, ioSystemConfiguration.StatsPosition.Height);
+            MessageConsole = new RLConsole(ioSystemConfiguration.MessagePosition.Width, ioSystemConfiguration.MessagePosition.Height);
 
+            IOSystemConfiguration = ioSystemConfiguration;
         }
 
         public void Render(ISystemContainer systemContainer)
         {
-            Console.Clear();
+            Console.Clear(176, RLColor.Black, RLColor.White);
 
             if (ReferenceEquals(systemContainer?.PlayerSystem?.Player, null))
             {
@@ -73,16 +73,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             var foreColor = alert? RLColor.Red : RLColor.White;
             var backColor = RLColor.Black;
 
-            for (int x = 0; x < Console.Width - STATS_WIDTH - 1; x++)
-            {
-                Console.Set(x, Console.Height - MESSAGE_HEIGHT - 1, foreColor, backColor, 196);
-            }
-            for (int y = 0; y < Console.Height; y++)
-            {
-                Console.Set(Console.Width - STATS_WIDTH - 1, y, foreColor, backColor, 179);
-            }
-
-            Console.Set(Console.Width - STATS_WIDTH - 1, Console.Height - MESSAGE_HEIGHT - 1, foreColor, backColor, 180);
+            // Work out line renderering later
         }
 
         private void RenderMessages(ISystemContainer systemContainer)
@@ -98,7 +89,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
                 MessageConsole.Print(0, y--, 1, message.Text, message.Color.ToRLColor(), null, MessageConsole.Width);
             }
 
-            RLConsole.Blit(MessageConsole, 0, 0, MessageConsole.Width, MessageConsole.Height, Console, 0, Console.Height - 15);
+            RLConsole.Blit(MessageConsole, 0, 0, MessageConsole.Width, MessageConsole.Height, Console, IOSystemConfiguration.MessagePosition.Left, IOSystemConfiguration.MessagePosition.Top);
         }
 
         private void RenderStats(ISystemContainer systemContainer, List<MapCoordinate> playerFov)
@@ -113,8 +104,8 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             StatsConsole.Print(1,1, player.Get<Description>().Name, RLColor.White, RLColor.Black);
             StatsConsole.Print(1,2, " the Adventurer", RLColor.White, RLColor.Black);
 
-            ConsoleRendererHelper.PrintBar(StatsConsole, 1, 4, STATS_WIDTH - 2, "hp", fighter.HP, RLColor.Red);
-            ConsoleRendererHelper.PrintBar(StatsConsole, 1, 6, STATS_WIDTH - 2, "aura", aura.Aura, RLColor.Yellow);
+            ConsoleRendererHelper.PrintBar(StatsConsole, 1, 4, StatsConsole.Width - 2, "hp", fighter.HP, RLColor.Red);
+            ConsoleRendererHelper.PrintBar(StatsConsole, 1, 6, StatsConsole.Width - 2, "aura", aura.Aura, RLColor.Yellow);
             var tension = systemContainer.EventSystem.GetStat(player, "Tension");
             StatsConsole.Print(1, 7, $"Tension: {tension}", RLColor.White, RLColor.Black);
 
@@ -126,7 +117,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             else
             {
 
-                ConsoleRendererHelper.PrintBar(StatsConsole, 1, 9, STATS_WIDTH - 2, "tilt", tilt.Tilt, RLColor.Magenta);
+                ConsoleRendererHelper.PrintBar(StatsConsole, 1, 9, StatsConsole.Width - 2, "tilt", tilt.Tilt, RLColor.Magenta);
             }
 
             ConsoleRendererHelper.PrintStat(StatsConsole, 1, 10, "Armour", (int)systemContainer.EventSystem.GetStat(player, "AC"), RLColor.White);
@@ -136,7 +127,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             var currentAegis = (int)systemContainer.EventSystem.GetStat(player, "CurrentAegisLevel");
             var maxAegis = (int)systemContainer.EventSystem.GetStat(player, "Aegis");
 
-            ConsoleRendererHelper.PrintBar(StatsConsole, 1, 13, STATS_WIDTH - 2, "Aegis", new Counter { Current = currentAegis, Max = maxAegis }, RLColor.LightBlue);
+            ConsoleRendererHelper.PrintBar(StatsConsole, 1, 13, StatsConsole.Width - 2, "Aegis", new Counter { Current = currentAegis, Max = maxAegis }, RLColor.LightBlue);
 
             StatsConsole.Print(1, 15, "Location:", RLColor.White, RLColor.Black);
 
@@ -174,7 +165,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             }
 
 
-            RLConsole.Blit(StatsConsole, 0, 0, StatsConsole.Width, StatsConsole.Height, Console, Console.Width - 22, 0);
+            RLConsole.Blit(StatsConsole, 0, 0, StatsConsole.Width, StatsConsole.Height, Console, IOSystemConfiguration.StatsPosition.Left, IOSystemConfiguration.StatsPosition.Top);
         }
         
 
@@ -213,7 +204,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
                 }
             }
 
-            RLConsole.Blit(MapConsole, 0, 0, MapConsole.Width, MapConsole.Height, Console, 0, 0);
+            RLConsole.Blit(MapConsole, 0, 0, MapConsole.Width, MapConsole.Height, Console, IOSystemConfiguration.MapPosition.Left, IOSystemConfiguration.MapPosition.Top);
         }
     }
 }

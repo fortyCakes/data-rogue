@@ -112,6 +112,7 @@
     <Compile Include="Data\EquipmentMappingListItem.cs" />
     <Compile Include="Data\EquipmentSlotDetails.cs" />
     <Compile Include="Data\IEntityDataParser.cs" />
+    <Compile Include="IOSystems\IOSystemConfiguration.cs" />
     <Compile Include="IOSystems\KeyCombination.cs" />
     <Compile Include="Data\Message.cs" />
     <Compile Include="Data\MessageSerializer.cs" />

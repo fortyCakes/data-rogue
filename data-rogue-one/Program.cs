@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Drawing;
 using data_rogue_core;
 using data_rogue_core.Activities;
 using data_rogue_core.IOSystems;
@@ -14,8 +15,9 @@ namespace data_rogue_one
         static void Main(string[] args)
         {
             var theGame = new DataRogueGame();
-            
-            var ioSystem = new RLNetConsoleIOSystem();
+
+
+            var ioSystem = new RLNetConsoleIOSystem(RLNetConsoleIOSystem.DefaultConfiguration);
 
             theGame.Run("SEED_DEBUG", GameRules.Rules, ioSystem);
         }
