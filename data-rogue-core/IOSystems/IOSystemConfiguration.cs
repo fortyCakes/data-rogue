@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
 
 namespace data_rogue_core.IOSystems
 {
@@ -9,8 +10,8 @@ namespace data_rogue_core.IOSystems
         public int TileWidth { get; set; }
         public int TileHeight { get; set; }
         public string WindowTitle { get; set; }
-        public Rectangle MapPosition { get; set; }
-        public Rectangle StatsPosition { get; set; }
-        public Rectangle MessagePosition { get; set; }
+        public List<MapConfiguration> MapConfigurations { get; set; } = new List<MapConfiguration>();
+        public List<StatsConfiguration> StatsConfigurations { get; set; } = new List<StatsConfiguration>();
+        public List<MessageConfiguration> MessageConfigurations { get; set; } = new List<MessageConfiguration>();
     }
 }

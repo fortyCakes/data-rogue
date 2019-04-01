@@ -17,9 +17,9 @@ namespace data_rogue_core.IOSystems.RLNetConsole
             TileHeight = 12,
             TileWidth = 12,
             WindowTitle = "data-rogue window title",
-            MapPosition = new Rectangle(0, 0, 76, 54),
-            StatsPosition = new Rectangle(77, 0, 23, 70),
-            MessagePosition = new Rectangle(0, 55, 76, 15)
+            MapConfigurations = new List<MapConfiguration> { new MapConfiguration { Position = new Rectangle(0, 0, 76, 54) } },
+            StatsConfigurations = new List<StatsConfiguration> { new StatsConfiguration { Position = new Rectangle(77, 0, 23, 70) } },
+            MessageConfigurations = new List<MessageConfiguration> { new MessageConfiguration { Position = new Rectangle(0, 55, 76, 15) } }
         };
 
         public RLNetConsoleIOSystem(IOSystemConfiguration ioSystemConfiguration)

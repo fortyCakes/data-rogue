@@ -113,6 +113,7 @@
     <Compile Include="Data\EquipmentSlotDetails.cs" />
     <Compile Include="Data\IEntityDataParser.cs" />
     <Compile Include="IOSystems\IOSystemConfiguration.cs" />
+    <Compile Include="IOSystems\IRendereringConfiguration.cs" />
     <Compile Include="IOSystems\KeyCombination.cs" />
     <Compile Include="Data\Message.cs" />
     <Compile Include="Data\MessageSerializer.cs" />
@@ -220,8 +221,11 @@
     <Compile Include="Forms\StatInformation.cs" />
     <Compile Include="Forms\StatsFormData.cs" />
     <Compile Include="IOSystems\IIOSystem.cs" />
+    <Compile Include="IOSystems\MapConfiguration.cs" />
+    <Compile Include="IOSystems\MessageConfiguration.cs" />
     <Compile Include="IOSystems\MouseData.cs" />
     <Compile Include="IOSystems\RLNetConsole\RLNetConsoleIOSystem.cs" />
+    <Compile Include="IOSystems\StatsConfiguration.cs" />
     <Compile Include="Maps\Generators\BasicDungeonMapGenerator.cs" />
     <Compile Include="Maps\IMap.cs" />
     <Compile Include="Maps\MapGenCommands\MapGenCommandExecutorFactory.cs" />
