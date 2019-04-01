@@ -224,7 +224,9 @@
     <Compile Include="IOSystems\MapConfiguration.cs" />
     <Compile Include="IOSystems\MessageConfiguration.cs" />
     <Compile Include="IOSystems\MouseData.cs" />
+    <Compile Include="IOSystems\RLNetConsole\DisplayType.cs" />
     <Compile Include="IOSystems\RLNetConsole\RLNetConsoleIOSystem.cs" />
+    <Compile Include="IOSystems\RLNetConsole\StatsDisplay.cs" />
     <Compile Include="IOSystems\StatsConfiguration.cs" />
     <Compile Include="Maps\Generators\BasicDungeonMapGenerator.cs" />
     <Compile Include="Maps\IMap.cs" />
