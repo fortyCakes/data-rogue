@@ -255,7 +255,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
                     foreach(var enemy in enemiesInFov.OrderBy(e => e.EntityId))
                     {
-                        PrintEnemyDetails(display, enemy, console, systemContainer, ref line);
+                        PrintEnemyDetails(display, enemy, console, ref line);
                     }
 
                     break;
@@ -264,7 +264,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             }
         }
 
-        private void PrintEnemyDetails(StatsDisplay display, IEntity enemy, RLConsole console, ISystemContainer systemContainer, ref int line)
+        private void PrintEnemyDetails(StatsDisplay display, IEntity enemy, RLConsole console, ref int line)
         {
             var appearance = enemy.Get<Appearance>();
             console.Print(1, line, appearance.Glyph.ToString(), appearance.Color.ToRLColor(), display.BackColor.ToRLColor());
