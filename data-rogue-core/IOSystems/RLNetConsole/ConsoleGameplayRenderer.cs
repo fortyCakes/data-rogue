@@ -242,12 +242,46 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
                     line++;
                     break;
                 case DisplayType.VisibleEnemies:
-                    console.Print(1, line, "TODO: ENEMIES", display.Color.ToRLColor(), display.BackColor.ToRLColor());
-                    line++;
+                    var enemiesInFov = new List<IEntity>();
+
+                    foreach(var mapCoordinate in playerFov)
+                    {
+                        var enemy = GetEnemy(mapCoordinate, systemContainer);
+                        if (enemy != null)
+                        {
+                            enemiesInFov.Add(enemy);
+                        }
+                    }
+
+                    foreach(var enemy in enemiesInFov.OrderBy(e => e.EntityId))
+                    {
+                        PrintEnemyDetails(display, enemy, console, systemContainer, ref line);
+                    }
+
                     break;
                 default:
                     throw new Exception("Unknown DisplayType in DisplayStatsItem");
             }
+        }
+
+        private void PrintEnemyDetails(StatsDisplay display, IEntity enemy, RLConsole console, ISystemContainer systemContainer, ref int line)
+        {
+            var appearance = enemy.Get<Appearance>();
+            console.Print(1, line, appearance.Glyph.ToString(), appearance.Color.ToRLColor(), display.BackColor.ToRLColor());
+            console.Print(3, line, enemy.DescriptionName, display.Color.ToRLColor(), display.BackColor.ToRLColor());
+            line++;
+            ConsoleRendererHelper.PrintBar(console, 1, line, console.Width - 2, nameof(Health.HP), enemy.Get<Health>().HP, RLColor.Red);
+            line += 2;
+        }
+
+        private static IEntity GetEnemy(MapCoordinate mapCoordinate, ISystemContainer systemContainer)
+        {
+            return systemContainer.PositionSystem.EntitiesAt(mapCoordinate).FirstOrDefault(e => IsEnemy(systemContainer, e));
+        }
+
+        private static bool IsEnemy(ISystemContainer systemContainer, IEntity e)
+        {
+            return !systemContainer.PlayerSystem.IsPlayer(e) && e.Has<Health>() && e.Has<Appearance>();
         }
 
         private void RenderMap(MapConfiguration mapConfiguration, ISystemContainer systemContainer, List<MapCoordinate> playerFov)

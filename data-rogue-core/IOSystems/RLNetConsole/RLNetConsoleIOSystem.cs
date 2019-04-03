@@ -24,22 +24,11 @@ namespace data_rogue_core.IOSystems.RLNetConsole
                 new StatsDisplay { DisplayType = DisplayType.Spacer},
                 new StatsDisplay { DisplayType = DisplayType.ComponentCounter, Parameters = "Health,HP", BackColor = Color.DarkRed},
                 new StatsDisplay { DisplayType = DisplayType.Spacer},
-                new StatsDisplay { DisplayType = DisplayType.ComponentCounter, Parameters = "AuraFighter,Aura", BackColor = Color.Yellow},
-                new StatsDisplay {DisplayType = DisplayType.Stat, Parameters = "Tension" },
-                new StatsDisplay { DisplayType = DisplayType.Spacer},
-                new StatsDisplay { DisplayType = DisplayType.ComponentCounter, Parameters = "TiltFighter,Tilt", BackColor = Color.Purple},
-                new StatsDisplay { DisplayType = DisplayType.Spacer},
-                new StatsDisplay {DisplayType = DisplayType.Stat, Parameters = "AC" },
-                new StatsDisplay {DisplayType = DisplayType.Stat, Parameters = "EV" },
-                new StatsDisplay {DisplayType = DisplayType.Stat, Parameters = "SH" },
-                new StatsDisplay {DisplayType = DisplayType.StatInterpolation, Parameters = "Aegis: {0}/{1},CurrentAegisLevel,Aegis", Color = Color.LightBlue },
-                new StatsDisplay { DisplayType = DisplayType.Spacer},
-                new StatsDisplay {DisplayType = DisplayType.Location},
+                new StatsDisplay { DisplayType = DisplayType.Location },
                 new StatsDisplay { DisplayType = DisplayType.Time },
                 new StatsDisplay { DisplayType = DisplayType.Spacer},
-                new StatsDisplay { DisplayType = DisplayType.Wealth, Parameters = "Gold", Color = Color.Gold},
-                new StatsDisplay { DisplayType = DisplayType.Spacer},
                 new StatsDisplay { DisplayType = DisplayType.VisibleEnemies}
+
             } } },
             MessageConfigurations = new List<MessageConfiguration> { new MessageConfiguration { Position = new Rectangle(0, 55, 76, 15) } }
         };
