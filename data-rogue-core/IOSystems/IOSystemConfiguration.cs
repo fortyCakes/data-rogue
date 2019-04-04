@@ -13,5 +13,6 @@ namespace data_rogue_core.IOSystems
         public List<MapConfiguration> MapConfigurations { get; set; } = new List<MapConfiguration>();
         public List<StatsConfiguration> StatsConfigurations { get; set; } = new List<StatsConfiguration>();
         public List<MessageConfiguration> MessageConfigurations { get; set; } = new List<MessageConfiguration>();
+        public IEnumerable<IStatsRendererHelper> AdditionalStatsDisplayers { get; set; } = new List<IStatsRendererHelper>();
     }
 }

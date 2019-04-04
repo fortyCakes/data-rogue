@@ -4,7 +4,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 {
     public class StatsDisplay
     {
-        public DisplayType DisplayType;
+        public string DisplayType;
 
         public string Parameters;
 

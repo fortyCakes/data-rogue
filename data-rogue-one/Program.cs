@@ -20,27 +20,27 @@ namespace data_rogue_one
 
             config.WindowTitle = "data-rogue-one";
             config.StatsConfigurations = new List<StatsConfiguration> { new StatsConfiguration { Position = new Rectangle(77, 0, 23, 70), Displays = new List<StatsDisplay> {
-                new StatsDisplay { DisplayType = DisplayType.Name },
-                new StatsDisplay {DisplayType = DisplayType.Title},
-                new StatsDisplay { DisplayType = DisplayType.Spacer},
-                new StatsDisplay { DisplayType = DisplayType.ComponentCounter, Parameters = "Health,HP", BackColor = Color.DarkRed},
-                new StatsDisplay { DisplayType = DisplayType.Spacer},
-                new StatsDisplay { DisplayType = DisplayType.ComponentCounter, Parameters = "AuraFighter,Aura", BackColor = Color.Yellow},
-                new StatsDisplay {DisplayType = DisplayType.Stat, Parameters = "Tension" },
-                new StatsDisplay { DisplayType = DisplayType.Spacer},
-                new StatsDisplay { DisplayType = DisplayType.ComponentCounter, Parameters = "TiltFighter,Tilt", BackColor = Color.Purple},
-                new StatsDisplay { DisplayType = DisplayType.Spacer},
-                new StatsDisplay {DisplayType = DisplayType.Stat, Parameters = "AC" },
-                new StatsDisplay {DisplayType = DisplayType.Stat, Parameters = "EV" },
-                new StatsDisplay {DisplayType = DisplayType.Stat, Parameters = "SH" },
-                new StatsDisplay {DisplayType = DisplayType.StatInterpolation, Parameters = "Aegis: {0}/{1},CurrentAegisLevel,Aegis", Color = Color.LightBlue },
-                new StatsDisplay { DisplayType = DisplayType.Spacer},
-                new StatsDisplay {DisplayType = DisplayType.Location},
-                new StatsDisplay { DisplayType = DisplayType.Time },
-                new StatsDisplay { DisplayType = DisplayType.Spacer},
-                new StatsDisplay { DisplayType = DisplayType.Wealth, Parameters = "Gold", Color = Color.Gold},
-                new StatsDisplay { DisplayType = DisplayType.Spacer},
-                new StatsDisplay { DisplayType = DisplayType.VisibleEnemies}
+                new StatsDisplay { DisplayType = "Name" },
+                new StatsDisplay {DisplayType =  "Title"},
+                new StatsDisplay { DisplayType = "Spacer"},
+                new StatsDisplay { DisplayType = "ComponentCounter", Parameters = "Health,HP", BackColor = Color.DarkRed},
+                new StatsDisplay { DisplayType = "Spacer"},
+                new StatsDisplay { DisplayType = "ComponentCounter", Parameters = "AuraFighter,Aura", BackColor = Color.Yellow},
+                new StatsDisplay {DisplayType =  "Stat", Parameters = "Tension" },
+                new StatsDisplay { DisplayType = "Spacer"},
+                new StatsDisplay { DisplayType = "ComponentCounter", Parameters = "TiltFighter,Tilt", BackColor = Color.Purple},
+                new StatsDisplay { DisplayType = "Spacer"},
+                new StatsDisplay {DisplayType =  "Stat", Parameters = "AC" },
+                new StatsDisplay {DisplayType =  "Stat", Parameters = "EV" },
+                new StatsDisplay {DisplayType =  "Stat", Parameters = "SH" },
+                new StatsDisplay {DisplayType =  "StatInterpolation", Parameters = "Aegis: {0}/{1},CurrentAegisLevel,Aegis", Color = Color.LightBlue },
+                new StatsDisplay { DisplayType = "Spacer"},
+                new StatsDisplay {DisplayType =  "Location"},
+                new StatsDisplay { DisplayType = "Time" },
+                new StatsDisplay { DisplayType = "Spacer"},
+                new StatsDisplay { DisplayType = "Wealth", Parameters = "Gold", Color = Color.Gold},
+                new StatsDisplay { DisplayType = "Spacer"},
+                new StatsDisplay { DisplayType = "VisibleEnemies"}
             } } };
 
 

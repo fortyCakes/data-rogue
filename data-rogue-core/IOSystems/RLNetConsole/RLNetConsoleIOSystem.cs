@@ -19,15 +19,15 @@ namespace data_rogue_core.IOSystems.RLNetConsole
             WindowTitle = "data-rogue window title",
             MapConfigurations = new List<MapConfiguration> { new MapConfiguration { Position = new Rectangle(0, 0, 76, 54) } },
             StatsConfigurations = new List<StatsConfiguration> { new StatsConfiguration { Position = new Rectangle(77, 0, 23, 70), Displays = new List<StatsDisplay> {
-                new StatsDisplay { DisplayType = DisplayType.Name },
-                new StatsDisplay {DisplayType = DisplayType.Title},
-                new StatsDisplay { DisplayType = DisplayType.Spacer},
-                new StatsDisplay { DisplayType = DisplayType.ComponentCounter, Parameters = "Health,HP", BackColor = Color.DarkRed},
-                new StatsDisplay { DisplayType = DisplayType.Spacer},
-                new StatsDisplay { DisplayType = DisplayType.Location },
-                new StatsDisplay { DisplayType = DisplayType.Time },
-                new StatsDisplay { DisplayType = DisplayType.Spacer},
-                new StatsDisplay { DisplayType = DisplayType.VisibleEnemies}
+                new StatsDisplay { DisplayType = "Name" },
+                new StatsDisplay {DisplayType =  "Title"},
+                new StatsDisplay { DisplayType = "Spacer"},
+                new StatsDisplay { DisplayType = "ComponentCounter", Parameters = "Health,HP", BackColor = Color.DarkRed},
+                new StatsDisplay { DisplayType = "Spacer"},
+                new StatsDisplay { DisplayType = "Location" },
+                new StatsDisplay { DisplayType = "Time" },
+                new StatsDisplay { DisplayType = "Spacer"},
+                new StatsDisplay { DisplayType = "VisibleEnemies" }
 
             } } },
             MessageConfigurations = new List<MessageConfiguration> { new MessageConfiguration { Position = new Rectangle(0, 55, 76, 15) } }
