@@ -13,6 +13,36 @@ Singleton: true
 [Description]
 Name: Floor
 
+"Cell:Grass"
+[Appearance]
+Glyph: ,
+Color: #567E3A
+ZOrder: 0
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:Grass
+Singleton: true
+[Memorable]
+[Description]
+Name: Grass
+
+"Cell:Tree"
+[Appearance]
+Glyph: 
+Color: #567E3A
+ZOrder: 0
+[Physical]
+Passable: false
+Transparent: true
+[Prototype]
+Name: Cell:Tree
+Singleton: true
+[Memorable]
+[Description]
+Name: Tree
+
 "Cell:SpawnPoint"
 [SpawnPoint]
 [Appearance]
