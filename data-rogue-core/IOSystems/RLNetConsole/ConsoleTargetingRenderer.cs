@@ -1,6 +1,7 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using data_rogue_core.Activities;
-using data_rogue_core.Components;
+using data_rogue_core.IOSystems;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems.Interfaces;
 using RLNET;
@@ -9,23 +10,26 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 {
     public class ConsoleTargetingRenderer : BaseConsoleRenderer, ITargetingRenderer
     {
-        private readonly int STATS_WIDTH;
-        private readonly int MESSAGE_HEIGHT;
+        private Dictionary<IRendereringConfiguration, RLConsole> Consoles = new Dictionary<IRendereringConfiguration, RLConsole>();
+        
+        public IOSystemConfiguration IOSystemConfiguration { get; }
 
-        private RLConsole MapConsole { get; set; }
-        private RLConsole StatsConsole { get; set; }
-
-        public ConsoleTargetingRenderer(RLConsole console) : base(console)
+        public ConsoleTargetingRenderer(RLConsole console, IOSystemConfiguration ioSystemConfiguration) : base(console)
         {
-            STATS_WIDTH = ConsoleGameplayRenderer.STATS_WIDTH;
-            MESSAGE_HEIGHT = ConsoleGameplayRenderer.MESSAGE_HEIGHT;
-
             var consoleWidth = Console.Width;
             var consoleHeight = Console.Height;
 
-            MapConsole = new RLConsole(consoleWidth - STATS_WIDTH - 1, consoleHeight - MESSAGE_HEIGHT - 1);
-            StatsConsole = new RLConsole(STATS_WIDTH, consoleHeight - MESSAGE_HEIGHT - 1);
+            List<IRendereringConfiguration> allConfigs = new List<IRendereringConfiguration>();
+            allConfigs.AddRange(ioSystemConfiguration.MessageConfigurations);
+            allConfigs.AddRange(ioSystemConfiguration.StatsConfigurations);
+            allConfigs.AddRange(ioSystemConfiguration.MapConfigurations);
 
+            foreach (IRendereringConfiguration config in allConfigs)
+            {
+                Consoles.Add(config, new RLConsole(config.Position.Width, config.Position.Height));
+            }
+
+            IOSystemConfiguration = ioSystemConfiguration;
         }
 
         public void Render(ISystemContainer systemContainer, TargetingActivityData targetingActivityData)
@@ -35,35 +39,19 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
                 return;
             }
 
-            RenderMap(systemContainer, targetingActivityData);
-
-            RenderStats(systemContainer, targetingActivityData);
-
+            foreach (var mapConfiguration in IOSystemConfiguration.MapConfigurations)
+            {
+                RenderMap(mapConfiguration, systemContainer, targetingActivityData);
+            }
         }
 
-        private void RenderStats(ISystemContainer systemContainer, TargetingActivityData targetingActivityData)
+        private void RenderMap(MapConfiguration mapConfiguration, ISystemContainer systemContainer, TargetingActivityData targetingActivityData)
         {
-            StatsConsole.Clear();
+            var mapConsole = Consoles[mapConfiguration];
 
-            RLConsole.Blit(Console, Console.Width - 22, 0, StatsConsole.Width, StatsConsole.Height, StatsConsole, 0, 0);
+            mapConsole.Clear();
 
-            if (targetingActivityData.CurrentTarget == null)
-            {
-                StatsConsole.Print(1, StatsConsole.Height - 15, $"Target: -", RLColor.White);
-            }
-            else
-            {
-                StatsConsole.Print(1, StatsConsole.Height - 15, $"Target: {targetingActivityData.CurrentTarget.X}, {targetingActivityData.CurrentTarget.Y}", RLColor.White);
-            }
-
-            RLConsole.Blit(StatsConsole, 0, 0, StatsConsole.Width, StatsConsole.Height, Console, Console.Width - 22, 0);
-        }
-
-        private void RenderMap(ISystemContainer systemContainer, TargetingActivityData targetingActivityData)
-        {
-            MapConsole.Clear();
-
-            RLConsole.Blit(Console, 0, 0, MapConsole.Width, MapConsole.Height, MapConsole, 0, 0);
+            RLConsole.Blit(Console, 0, 0, mapConsole.Width, mapConsole.Height, mapConsole, 0, 0);
 
             var cameraPosition = systemContainer.RendererSystem.CameraPosition;
 
@@ -76,8 +64,8 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
             var targetableCells = targetingActivityData.TargetingData.TargetableCellsFrom(playerPosition);
 
-            var consoleWidth = MapConsole.Width;
-            var consoleHeight = MapConsole.Height;
+            var consoleWidth = mapConsole.Width;
+            var consoleHeight = mapConsole.Height;
 
             int offsetX = consoleWidth / 2;
             int offsetY = consoleHeight / 2;
@@ -101,14 +89,14 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
                     if (cellTargeting != CellTargeting.None)
                     {
-                        MapRendererHelper.DrawCell(MapConsole, x, y, systemContainer.PositionSystem, currentMap, lookupX, lookupY, playerFov, cellTargeting);
+                        MapRendererHelper.DrawCell(mapConsole, x, y, systemContainer.PositionSystem, currentMap, lookupX, lookupY, playerFov, cellTargeting);
                     }
                 }
             }
 
 
 
-            RLConsole.Blit(MapConsole, 0, 0, MapConsole.Width, MapConsole.Height, Console, 0, 0);
+            RLConsole.Blit(mapConsole, 0, 0, mapConsole.Width, mapConsole.Height, Console, mapConfiguration.Position.Left, mapConfiguration.Position.Top);
         }
     }
 }

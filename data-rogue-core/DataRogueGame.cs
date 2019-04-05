@@ -34,7 +34,7 @@ namespace data_rogue_core
         {
             Seed = seed;
 
-            IOSystem = ioSystem ?? new RLNetConsoleIOSystem();
+            IOSystem = ioSystem ?? new RLNetConsoleIOSystem(RLNetConsoleIOSystem.DefaultConfiguration);
 
             InitialiseIOSystem();
 
