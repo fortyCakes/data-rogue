@@ -5,12 +5,8 @@ using RLNET;
 using System.Threading;
 using data_rogue_core.Activities;
 using data_rogue_core.Menus.StaticMenus;
-using data_rogue_core.Renderers.ConsoleRenderers;
 using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
-using data_rogue_core.EventSystem.Rules;
-using data_rogue_core.EventSystem;
-using data_rogue_core.Components;
 using data_rogue_core.IOSystems;
 using data_rogue_core.IOSystems.RLNetConsole;
 
@@ -18,8 +14,6 @@ namespace data_rogue_core
 {
     public class DataRogueGame
     {
-        public GraphicsMode GraphicsMode = GraphicsMode.Console;
-
         public ISystemContainer SystemContainer;
 
         public IIOSystem IOSystem;

@@ -318,7 +318,6 @@
     <Compile Include="Activities\GameplayActivity.cs" />
     <Compile Include="Activities\StaticTextActivity.cs" />
     <Compile Include="IOSystems\RLNetConsole\BaseConsoleRenderer.cs" />
-    <Compile Include="IOSystems\GraphicsMode.cs" />
     <Compile Include="IOSystems\IMenuRenderer.cs" />
     <Compile Include="IOSystems\IRenderer.cs" />
     <Compile Include="IOSystems\IStaticTextRenderer.cs" />
