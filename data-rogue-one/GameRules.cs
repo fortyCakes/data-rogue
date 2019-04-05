@@ -40,14 +40,16 @@ namespace data_rogue_one
                     typeof(TryApplyBlockOnAttackRule),
                     typeof(TryApplyDodgeOnAttackRule),
                     typeof(TryApplyTankOnAttackRule),
-                    typeof(ApplyBlockDefenceRule),
-                    typeof(ApplyDodgeDefenceRule),
-                    typeof(ApplyTankDefenceRule),
+                    typeof(ApplyTiltBlockDefenceRule),
+                    typeof(ApplyTiltDodgeDefenceRule),
+                    typeof(ApplyTiltTankDefenceRule),
                     typeof(ApplyHitOrMissedAttackRule),
                     typeof(AddAgilityToEvasionRule),
                     typeof(DefaultSpeedRule),
                     typeof(RandomiseDamageRule),
-                    typeof(ApplyAegisRule)
+                    typeof(ApplyAegisRule),
+                    typeof(AddStatToAccuracyRule),
+                    typeof(OnAttackProcEnchantmentRule)
                 };
 
                 list.AddRange(ApplyActionRule.AllActionRules);

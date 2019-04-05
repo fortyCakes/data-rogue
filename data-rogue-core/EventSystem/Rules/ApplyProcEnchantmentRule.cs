@@ -5,20 +5,19 @@ using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.EventSystem.Rules
 {
-    public class ApplyProcEnchantmentRule : IEventRule
+    public abstract class ApplyProcEnchantmentRule : IEventRule
     {
-        public ApplyProcEnchantmentRule(ISystemContainer systemContainer, EventType eventType)
+        public ApplyProcEnchantmentRule(ISystemContainer systemContainer)
         {
-            this.systemContainer = systemContainer;
-            this.eventType = eventType;
+            _systemContainer = systemContainer;
         }
 
-        public EventType eventType;
+        public abstract EventType EventType { get; }
 
-        public EventTypeList EventTypes => new EventTypeList{ eventType };
+        public EventTypeList EventTypes => new EventTypeList{ EventType };
         public int RuleOrder => int.MinValue;
 
-        private ISystemContainer systemContainer { get; }
+        private ISystemContainer _systemContainer { get; }
 
         public bool Apply(EventType type, IEntity sender, object eventData)
         {
@@ -29,13 +28,13 @@ namespace data_rogue_core.EventSystem.Rules
             foreach(var equippedItem in equipped.EquippedItems)
             {
                 var id = equippedItem.EquipmentId;
-                var item = systemContainer.EntityEngine.Get(id);
+                var item = _systemContainer.EntityEngine.Get(id);
 
                 foreach(var enchantment in item.Components.OfType<ProcEnchantment>())
                 {
-                    if (enchantment.EventType == eventType && ProcRoll(enchantment))
+                    if (enchantment.EventType == EventType && ProcRoll(enchantment))
                     {
-                        systemContainer.ScriptExecutor.ExecuteByName(sender, enchantment.ScriptName, item);
+                        _systemContainer.ScriptExecutor.ExecuteByName(sender, enchantment.ScriptName, item);
                     }
                 }
             }
@@ -45,7 +44,7 @@ namespace data_rogue_core.EventSystem.Rules
 
         private bool ProcRoll(ProcEnchantment enchantment)
         {
-            return enchantment.ProcChance >= 100 || systemContainer.Random.Between(1, 100) <= enchantment.ProcChance;
+            return enchantment.ProcChance >= 100 || _systemContainer.Random.Between(1, 100) <= enchantment.ProcChance;
         }
     }
 }

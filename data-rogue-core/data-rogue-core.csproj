@@ -112,6 +112,8 @@
     <Compile Include="Data\EquipmentMappingListItem.cs" />
     <Compile Include="Data\EquipmentSlotDetails.cs" />
     <Compile Include="Data\IEntityDataParser.cs" />
+    <Compile Include="EventSystem\Rules\AddStatToAccuracyRule.cs" />
+    <Compile Include="EventSystem\Rules\OnAttackProcEnchantmentRule.cs" />
     <Compile Include="IOSystems\KeyCombination.cs" />
     <Compile Include="Data\Message.cs" />
     <Compile Include="Data\MessageSerializer.cs" />
@@ -176,7 +178,7 @@
     <Compile Include="EventSystem\Rules\Actions\SaveAction.cs" />
     <Compile Include="EventSystem\Rules\Actions\SkillMenuAction.cs" />
     <Compile Include="EventSystem\Rules\ApplyAegisRule.cs" />
-    <Compile Include="EventSystem\Rules\ApplyDefenceRule.cs" />
+    <Compile Include="EventSystem\Rules\ApplyTiltDefenceRule.cs" />
     <Compile Include="EventSystem\Rules\ApplyEquipmentStatsRule.cs" />
     <Compile Include="EventSystem\Rules\ApplyHitOrMissedAttackRule.cs" />
     <Compile Include="EventSystem\Rules\Actions\ApplyActionRule.cs" />

@@ -10,8 +10,6 @@ namespace data_rogue_core
         int Between(int min, int max);
 
         T PickOne<T>(IList<T> items);
-
-        decimal StatCheck(decimal statLevel);
     }
 
     public class RNG : IRandom
@@ -46,11 +44,6 @@ namespace data_rogue_core
 
             var index = Between(1, max) - 1;
             return items[index];
-        }
-
-        public decimal StatCheck(decimal statLevel)
-        {
-            return statLevel + Between(1,20);
         }
     }
 }

@@ -62,8 +62,6 @@ namespace data_rogue_core
             SystemContainer.EventSystem.Initialise();
 
             SystemContainer.EventSystem.RegisterRules(EventRuleFactory.CreateRules(SystemContainer, eventRules));
-
-            SystemContainer.EventSystem.RegisterRule(new ApplyProcEnchantmentRule(SystemContainer, EventType.Attack));
         }
 
 

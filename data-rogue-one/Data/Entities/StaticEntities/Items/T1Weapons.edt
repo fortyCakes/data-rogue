@@ -16,7 +16,7 @@ EquipmentSlot: Hand
 Class: Light
 [Stat]
 Name: Accuracy
-Value: 30
+Value: 25
 [Stat]
 Name: Damage
 Value: 6
@@ -45,7 +45,7 @@ Name: EV
 Value: -1
 [Stat]
 Name: Accuracy
-Value: 30
+Value: 25
 [Stat]
 Name: Damage
 Value: 11
@@ -73,7 +73,7 @@ Class: Launcher
 AmmunitionType: Arrow
 [Stat]
 Name: Accuracy
-Value: 30
+Value: 25
 [Stat]
 Name: Damage
 Value: 10
@@ -99,7 +99,7 @@ EquipmentSlot: Hand
 Class: Blast
 [Stat]
 Name: Accuracy
-Value: 28
+Value: 23
 [Stat]
 Name: Damage
 Value: 10
