@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using data_rogue_core.EntityEngineSystem;
 
 namespace data_rogue_core.EventSystem
@@ -9,33 +10,77 @@ namespace data_rogue_core.EventSystem
 
         public bool Try(EventType eventType, IEntity sender, object eventData)
         {
+            bool eventSuccess = true;
+
             if (RuleBook.ContainsKey(eventType))
             {
-                foreach (var rule in RuleBook[eventType].OrderByDescending(rule => rule.RuleOrder))
-                {
-                    var canContinue = rule.Apply(eventType, sender, eventData);
+                var rulePage = RuleBook[eventType];
 
-                    if (!canContinue) return false;
+                var beforeEventRules = rulePage[EventRuleType.BeforeEvent];
+
+                eventSuccess = RunRules(eventType, sender, eventData, beforeEventRules, true);
+
+                if (eventSuccess)
+                {
+                    var resolutionRules = rulePage[EventRuleType.EventResolution];
+                    RunRules(eventType, sender, eventData, resolutionRules, false);
+
+                    var afterSuccessRules = rulePage[EventRuleType.AfterSuccess];
+                    RunRules(eventType, sender, eventData, afterSuccessRules, false);
+                }
+                else
+                {
+                    var afterFailureRules = rulePage[EventRuleType.AfterFailure];
+                    RunRules(eventType, sender, eventData, afterFailureRules, false);
+                }
+
+                var finallyRules = rulePage[EventRuleType.Finally];
+
+                RunRules(eventType, sender, eventData, finallyRules, false);
+            }
+
+            return eventSuccess;
+        }
+
+        private static bool RunRules(EventType eventType, IEntity sender, object eventData, List<IEventRule> beforeEventRules, bool breakOnRuleFailure)
+        {
+            bool eventSuccess = true;
+
+            foreach (var rule in beforeEventRules.OrderByDescending(rule => rule.RuleOrder))
+            {
+                var canContinue = rule.Apply(eventType, sender, eventData);
+
+                if (!canContinue)
+                {
+                    eventSuccess = false;
+                    if (breakOnRuleFailure)
+                    {
+                        break;
+                    }
                 }
             }
 
-            return true;
+            return eventSuccess;
         }
 
         public void RegisterRule(IEventRule eventRule)
         {
-            foreach (EventType type in eventRule.EventTypes)
+            foreach (EventType eventType in eventRule.EventTypes)
             {
-                if (RuleBook.ContainsKey(type))
+                if (RuleBook.ContainsKey(eventType))
                 {
-                    if (!RuleBook[type].Contains(eventRule))
+                    var page = RuleBook[eventType];
+
+                    if (!page[eventRule.RuleType].Contains(eventRule))
                     {
-                        RuleBook[type].Add(eventRule);
+                        page[eventRule.RuleType].Add(eventRule);
                     }
                 }
                 else
                 {
-                    RuleBook.Add(type, new RulePage { eventRule });
+                    var page = new RulePage();
+                    RuleBook.Add(eventType, page);
+                    page[eventRule.RuleType].Add(eventRule);
                 }
             }
         }
