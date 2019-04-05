@@ -19,8 +19,9 @@ namespace data_rogue_core.EventSystem.Rules
         }
 
         public EventTypeList EventTypes => new EventTypeList{ EventType.Move };
-        public int RuleOrder => int.MinValue;
-        
+        public uint RuleOrder => 0;
+        public EventRuleType RuleType => EventRuleType.EventResolution;
+
 
         public bool Apply(EventType type, IEntity sender, object eventData)
         {

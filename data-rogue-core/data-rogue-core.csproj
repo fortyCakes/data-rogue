@@ -112,6 +112,7 @@
     <Compile Include="Data\EquipmentMappingListItem.cs" />
     <Compile Include="Data\EquipmentSlotDetails.cs" />
     <Compile Include="Data\IEntityDataParser.cs" />
+    <Compile Include="EventSystem\Rules\AddAgilityToEvasionRule.cs" />
     <Compile Include="EventSystem\Rules\AddStatToAccuracyRule.cs" />
     <Compile Include="EventSystem\Rules\OnAttackProcEnchantmentRule.cs" />
     <Compile Include="IOSystems\IOSystemConfiguration.cs" />
@@ -188,7 +189,6 @@
     <Compile Include="EventSystem\Rules\ApplyProcEnchantmentRule.cs" />
     <Compile Include="EventSystem\Rules\ApplyStatBoostEnchantmentRule.cs" />
     <Compile Include="EventSystem\Rules\CheckEnoughAuraToActivateSkillRule.cs" />
-    <Compile Include="EventSystem\Rules\DisplayMessageOnXPGainRule.cs" />
     <Compile Include="EventSystem\Rules\DoXpGainRule.cs" />
     <Compile Include="EventSystem\Rules\EnemiesInViewAddTensionRule.cs" />
     <Compile Include="EventSystem\Rules\GainSingleXPOnKillRule.cs" />

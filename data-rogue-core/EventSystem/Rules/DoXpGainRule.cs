@@ -9,8 +9,9 @@ namespace data_rogue_core.EventSystem.Rules
     public class DoXpGainRule : IEventRule
     {
         public EventTypeList EventTypes => new EventTypeList { EventType.GainXP };
+        public EventRuleType RuleType => EventRuleType.EventResolution;
 
-        public int RuleOrder => 0;
+        public uint RuleOrder => 0;
 
         public DoXpGainRule(ISystemContainer systemContainer)
         {

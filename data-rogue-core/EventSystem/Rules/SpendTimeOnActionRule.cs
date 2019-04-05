@@ -16,7 +16,8 @@ namespace data_rogue_core.EventSystem.Rules
         }
 
         public EventTypeList EventTypes => new EventTypeList { EventType.Action };
-        public int RuleOrder => int.MinValue;
+        public uint RuleOrder => 0;
+        public EventRuleType RuleType => EventRuleType.AfterSuccess;
 
         public bool Apply(EventType type, IEntity sender, object eventData)
         {

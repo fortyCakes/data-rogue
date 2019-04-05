@@ -27,7 +27,8 @@ namespace data_rogue_core.EventSystem.Rules
         protected abstract decimal ApplyTiltToDefence(TiltFighter tiltFighter, decimal defence);
         protected abstract void IncreaseTiltForSucessfulDefence(TiltFighter tiltFighter, decimal defenceRoll, DefenceEventData eventData);
 
-        public int RuleOrder => 488;
+        public uint RuleOrder => 488;
+        public EventRuleType RuleType => EventRuleType.BeforeEvent;
 
         public bool Apply(EventType type, IEntity sender, object eventData)
         {

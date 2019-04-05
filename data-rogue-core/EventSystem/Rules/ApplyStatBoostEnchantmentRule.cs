@@ -14,7 +14,8 @@ namespace data_rogue_core.EventSystem.Rules
         }
 
         public EventTypeList EventTypes => new EventTypeList{ EventType.GetStat };
-        public int RuleOrder => 1;
+        public uint RuleOrder => 1;
+        public EventRuleType RuleType => EventRuleType.BeforeEvent;
 
         private ISystemContainer systemContainer { get; }
 

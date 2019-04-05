@@ -4,10 +4,21 @@ namespace data_rogue_core.EventSystem
 {
     public interface IEventRule
     {
-        EventTypeList EventTypes {get;}
+        EventTypeList EventTypes { get; }
 
-        int RuleOrder { get; }
+        EventRuleType RuleType { get; }
+
+        uint RuleOrder { get; }
 
         bool Apply(EventType type, IEntity sender, object eventData);
+    }
+
+    public enum EventRuleType
+    {
+        BeforeEvent,
+        EventResolution,
+        AfterSuccess,
+        AfterFailure,
+        Finally
     }
 }

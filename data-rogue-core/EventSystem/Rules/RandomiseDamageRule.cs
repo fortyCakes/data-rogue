@@ -18,7 +18,8 @@ namespace data_rogue_core.EventSystem.Rules
         }
 
         public EventTypeList EventTypes => new EventTypeList { EventType.Damage };
-        public int RuleOrder => 100;
+        public uint RuleOrder => 100;
+        public EventRuleType RuleType => EventRuleType.BeforeEvent;
 
         private IRandom _random;
 

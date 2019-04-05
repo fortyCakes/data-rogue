@@ -15,7 +15,8 @@ namespace data_rogue_core.EventSystem.Rules
         public abstract EventType EventType { get; }
 
         public EventTypeList EventTypes => new EventTypeList{ EventType };
-        public int RuleOrder => int.MinValue;
+        public uint RuleOrder => uint.MinValue;
+        public EventRuleType RuleType => EventRuleType.BeforeEvent;
 
         private ISystemContainer _systemContainer { get; }
 
