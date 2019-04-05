@@ -20,7 +20,6 @@ namespace data_rogue_core
 
         public string Seed { get; set; }
 
-        private RLRootConsole _rootConsole;
         private bool _leaving = false;
         public bool Loading { get; set; } = false;
 

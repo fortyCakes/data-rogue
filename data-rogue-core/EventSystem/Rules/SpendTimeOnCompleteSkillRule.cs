@@ -15,7 +15,8 @@ namespace data_rogue_core.EventSystem.Rules
         }
 
         public EventTypeList EventTypes => new EventTypeList { EventType.CompleteSkill };
-        public int RuleOrder => 0;
+        public uint RuleOrder => 0;
+        public EventRuleType RuleType => EventRuleType.AfterSuccess;
 
         public bool Apply(EventType type, IEntity sender, object eventData)
         {

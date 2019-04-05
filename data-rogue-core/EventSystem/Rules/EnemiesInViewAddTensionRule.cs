@@ -20,7 +20,8 @@ namespace data_rogue_core.EventSystem.Rules
         }
 
         public EventTypeList EventTypes => new EventTypeList{ EventType.GetStat };
-        public int RuleOrder => 100;
+        public EventRuleType RuleType => EventRuleType.EventResolution;
+        public uint RuleOrder => 100;
         
         private readonly IPositionSystem _positionSystem;
         private readonly IMapSystem _mapSystem;

@@ -15,7 +15,9 @@ namespace data_rogue_core.EventSystem.Rules
         }
 
         public EventTypeList EventTypes => new EventTypeList{ EventType.Move };
-        public int RuleOrder => 0;
+        public uint RuleOrder => 0;
+
+        public EventRuleType RuleType => EventRuleType.BeforeEvent;
 
         private IPositionSystem PositionSystem { get; }
 

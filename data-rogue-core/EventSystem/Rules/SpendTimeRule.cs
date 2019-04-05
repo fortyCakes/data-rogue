@@ -14,7 +14,8 @@ namespace data_rogue_core.EventSystem.Rules
         }
 
         public EventTypeList EventTypes => new EventTypeList{ EventType.SpendTime };
-        public int RuleOrder => 0;
+        public uint RuleOrder => 0;
+        public EventRuleType RuleType => EventRuleType.EventResolution;
 
         private ITimeSystem TimeSystem { get; }
 

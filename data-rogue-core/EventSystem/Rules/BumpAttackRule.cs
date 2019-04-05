@@ -12,17 +12,16 @@ namespace data_rogue_core.EventSystem.Rules
     {
         private IEventSystem _eventSystem;
         private IPositionSystem _positionSystem;
-        private IFighterSystem _fighterSystem;
 
         public BumpAttackRule(ISystemContainer systemContainer)
         {
             _positionSystem = systemContainer.PositionSystem;
-            _fighterSystem = systemContainer.FighterSystem;
             _eventSystem = systemContainer.EventSystem;
         }
 
         public EventTypeList EventTypes => new EventTypeList{ EventType.Move };
-        public int RuleOrder => 1;
+        public uint RuleOrder => 1;
+        public EventRuleType RuleType => EventRuleType.BeforeEvent;
 
 
         public bool Apply(EventType type, IEntity sender, object eventData)

@@ -35,7 +35,8 @@ namespace data_rogue_core.EventSystem.Rules
 
         public abstract ActionType actionType { get; }
 
-        public int RuleOrder => 0;
+        public uint RuleOrder => 0;
+        public EventRuleType RuleType => EventRuleType.EventResolution;
 
         public bool Apply(EventType type, IEntity sender, object eventData)
         {

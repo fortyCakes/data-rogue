@@ -15,7 +15,8 @@ namespace data_rogue_core.EventSystem.Rules
 
         public EventTypeList EventTypes => new EventTypeList { EventType.GainXP };
 
-        public int RuleOrder => -1;
+        public uint RuleOrder => 0;
+        public EventRuleType RuleType => EventRuleType.AfterSuccess;
 
         private ISystemContainer systemContainer;
 

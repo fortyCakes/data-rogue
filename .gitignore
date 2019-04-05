@@ -12,3 +12,4 @@ _NCrunch_data-rogue/
 *.ncrunchsolution
 *.ncrunchsolution.user
 /DataRogueWorldEditor/obj/Debug
+/data-rogue-one/data-rogue-one.v3.ncrunchproject
