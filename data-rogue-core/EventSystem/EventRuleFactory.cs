@@ -14,7 +14,7 @@ namespace data_rogue_core
 
             var rules = eventRules
                 .Select(T => T.GetConstructor(cparams)
-                .Invoke(new[] { systemContainer }))
+                .Invoke(new object[] { systemContainer }))
                 .Cast<IEventRule>();
 
             return rules.ToArray();

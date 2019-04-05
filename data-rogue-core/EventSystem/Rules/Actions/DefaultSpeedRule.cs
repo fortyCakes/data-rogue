@@ -14,7 +14,8 @@ namespace data_rogue_core.EventSystem.Rules
         private const int DEFAULT_SPEED = 1000;
 
         public EventTypeList EventTypes => new EventTypeList {EventType.Action};
-        public int RuleOrder => int.MaxValue;
+        public uint RuleOrder => int.MaxValue;
+        public EventRuleType RuleType => EventRuleType.BeforeEvent;
         public bool Apply(EventType type, IEntity sender, object eventData)
         {
             var data = eventData as ActionEventData;
