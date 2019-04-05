@@ -17,17 +17,17 @@ namespace data_rogue_core.UnitTests.Systems
         [SetUp]
         public void SetUp()
         {
-            systemContainer = new SystemContainer();
+            systemContainer = Substitute.For<ISystemContainer>();
 
             prototypeSystem = Substitute.For<IPrototypeSystem>();
-            systemContainer.PrototypeSystem = prototypeSystem;
+            systemContainer.PrototypeSystem.ReturnsForAnyArgs(prototypeSystem);
 
             eventSystem = Substitute.For<IEventSystem>();
-            systemContainer.EventSystem = eventSystem;
-            systemContainer.EventSystem.Try(Arg.Any<EventType>(), null, null).ReturnsForAnyArgs(true);
+            systemContainer.EventSystem.ReturnsForAnyArgs(eventSystem);
+            eventSystem.Try(Arg.Any<EventType>(), null, null).ReturnsForAnyArgs(true);
 
             entityEngine = Substitute.For<IEntityEngine>();
-            systemContainer.EntityEngine = entityEngine;
+            systemContainer.EntityEngine.ReturnsForAnyArgs(entityEngine);
 
             SetUpTestMappings();
 
@@ -39,7 +39,7 @@ namespace data_rogue_core.UnitTests.Systems
         private IEntity entity;
 
         private IEquipmentSystem equipmentSystem;
-        private SystemContainer systemContainer;
+        private ISystemContainer systemContainer;
         private IPrototypeSystem prototypeSystem;
         private IEntityEngine entityEngine;
         private IEventSystem eventSystem;
