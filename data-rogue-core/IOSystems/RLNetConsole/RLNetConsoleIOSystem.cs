@@ -74,5 +74,10 @@ namespace data_rogue_core.IOSystems.RLNetConsole
                 Y = rlMouse.Y
             };
         }
+
+        public void Close()
+        {
+            _rootConsole.Close();
+        }
     }
 }

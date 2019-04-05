@@ -152,7 +152,7 @@ namespace data_rogue_core
         public void Quit()
         {
             _leaving = true;
-            _rootConsole.Close();
+            IOSystem.Close();
         }
 
     }

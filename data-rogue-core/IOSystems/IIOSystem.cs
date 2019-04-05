@@ -21,5 +21,6 @@ namespace data_rogue_core.IOSystems
         KeyCombination GetKeyPress();
 
         MouseData GetMouseData();
+        void Close();
     }
 }
