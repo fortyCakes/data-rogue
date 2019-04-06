@@ -1,0 +1,23 @@
+﻿"MacGuffin"
+[Description]
+Name: MacGuffin
+[Prototype]
+Name: Item:MacGuffin
+Singleton: false
+[Appearance]
+Glyph: *
+Color: #f4b642
+[Position]
+[Item]
+ItemLevel: 999999
+UseScript: Script: Victory
+
+"Script: Victory"
+[Prototype]
+Name: Script: Victory
+Singleton: true
+[Script]
+Text: {
+	SystemContainer.MessageSystem:Write(User:Get('Description').Name .. ' uses the MacGuffin. You win!')
+	SystemContainer.EventSystem:Try(luanet.enum(EventType, 'Victory'), User, nil);
+}

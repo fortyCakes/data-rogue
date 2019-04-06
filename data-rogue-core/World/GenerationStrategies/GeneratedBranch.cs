@@ -5,6 +5,6 @@ namespace data_rogue_core
 {
     public class GeneratedBranch
     {
-        public IEnumerable<Map> Maps { get; internal set; }
+        public IList<Map> Maps { get; internal set; }
     }
 }

@@ -65,7 +65,8 @@ namespace data_rogue_core.Menus.DynamicMenus
             switch (selectedAction)
             {
                 case MenuAction.Drop:
-                    
+                    systemContainer.ActivitySystem.Pop();
+
                     if (systemContainer.EventSystem.Try(EventType.DropItem, systemContainer.PlayerSystem.Player, new DropItemEventData { Item = item }))
                     {
                         systemContainer.ItemSystem.DropItemFromInventory(item);
@@ -73,15 +74,15 @@ namespace data_rogue_core.Menus.DynamicMenus
                         SpendATurn(systemContainer);
                     }
 
-                    systemContainer.ActivitySystem.Pop();
                     break;
                 case MenuAction.Use:
+                    systemContainer.ActivitySystem.Pop();
+
                     if (systemContainer.EventSystem.Try(EventType.UseItem, systemContainer.PlayerSystem.Player, new DropItemEventData {Item = item}))
                     {
                         systemContainer.ItemSystem.Use(systemContainer.PlayerSystem.Player, item);
                     }
 
-                    systemContainer.ActivitySystem.Pop();
                     break;
                 case MenuAction.Equip:
                     if (item.Has<Equipment>())
@@ -90,8 +91,8 @@ namespace data_rogue_core.Menus.DynamicMenus
 
                         if (done)
                         {
-                            SpendATurn(systemContainer);
                             systemContainer.ActivitySystem.Pop();
+                            SpendATurn(systemContainer);
                             systemContainer.MessageSystem.Write($"You equip the {item.DescriptionName}.");
                         }
                     }

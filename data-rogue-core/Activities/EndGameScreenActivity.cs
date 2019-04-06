@@ -5,35 +5,37 @@ using System.Text;
 
 namespace data_rogue_core.Activities
 {
-    public class DeathScreenActivity : IActivity
+    public class EndGameScreenActivity : IActivity
     {
         public ActivityType Type => ActivityType.StaticDisplay;
         public object Data => Text;
         public bool RendersEntireSpace => true;
 
-        public string Text {
-            get
-            {
-                var stringBuilder = new StringBuilder();
+        public string Text { get; set; }
 
-                stringBuilder.AppendLine("You are dead.");
-                stringBuilder.Append("Name: ").AppendLine(systemContainer.PlayerSystem.Player.Get<Description>().Name);
-                stringBuilder.AppendLine();
-                stringBuilder.Append("Time: ").Append(systemContainer.TimeSystem.CurrentTime).AppendLine(" aut");
+        private string GetEndGameScreenText(bool victory)
+        {
+            var stringBuilder = new StringBuilder();
 
-                var text = stringBuilder.ToString();
+            stringBuilder.AppendLine(victory? "You win!" : "You are dead.");
+            stringBuilder.Append("Name: ").AppendLine(systemContainer.PlayerSystem.Player.Get<Description>().Name);
+            stringBuilder.AppendLine();
+            stringBuilder.Append("Time: ").Append(systemContainer.TimeSystem.CurrentTime).AppendLine(" aut");
 
-                return text.Replace("\r", "");
-            }
+            var text = stringBuilder.ToString();
+
+            return text.Replace("\r", "");
         }
 
         public IStaticTextRenderer Renderer { get; private set; }
 
         private readonly ISystemContainer systemContainer;
 
-        public DeathScreenActivity(ISystemContainer systemContainer)
+        public EndGameScreenActivity(ISystemContainer systemContainer, bool victory)
         {
             this.systemContainer = systemContainer;
+
+            Text = GetEndGameScreenText(victory);
         }
 
         public void Render(ISystemContainer systemContainer)

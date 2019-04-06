@@ -68,7 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activities\DeathScreenActivity.cs" />
+    <Compile Include="Activities\EndGameScreenActivity.cs" />
     <Compile Include="Activities\FormActivity.cs" />
     <Compile Include="Activities\LoadingScreenActivity.cs" />
     <Compile Include="Activities\TargetingActivity.cs" />
@@ -115,6 +115,7 @@
     <Compile Include="EventSystem\Rules\AddAgilityToEvasionRule.cs" />
     <Compile Include="EventSystem\Rules\AddStatToAccuracyRule.cs" />
     <Compile Include="EventSystem\Rules\OnAttackProcEnchantmentRule.cs" />
+    <Compile Include="EventSystem\Rules\PlayerVictoryRule.cs" />
     <Compile Include="IOSystems\IOSystemConfiguration.cs" />
     <Compile Include="IOSystems\IRendereringConfiguration.cs" />
     <Compile Include="IOSystems\IStatsDisplayer.cs" />
@@ -355,6 +356,7 @@
     <Compile Include="Systems\PlayerControlSystem.cs" />
     <Compile Include="Systems\PositionSystem.cs" />
     <Compile Include="Maps\Vector.cs" />
+    <Compile Include="World\GenerationStrategies\ItemGeneration\PlaceSpecificItem.cs" />
     <Compile Include="World\GenerationStrategies\ItemGeneration\RandomItemGeneration.cs" />
     <Compile Include="World\GenerationStrategies\MapGeneration\BasicDungeonBranchMapGenerator.cs" />
     <Compile Include="World\GenerationStrategies\MapGeneration\StaticBranchMapGenerator.cs" />

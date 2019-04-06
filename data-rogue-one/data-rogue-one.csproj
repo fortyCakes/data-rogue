@@ -64,6 +64,9 @@
     <None Include="Data\Entities\StaticEntities\Items\BookOfSkill.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Entities\StaticEntities\Items\MacGuffin.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\Entities\StaticEntities\Items\Junk.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

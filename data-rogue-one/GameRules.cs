@@ -23,6 +23,7 @@ namespace data_rogue_one
                     typeof(PeopleDieWhenTheyAreKilledRule),
                     typeof(SpendTimeRule),
                     typeof(PlayerDeathRule),
+                    typeof(PlayerVictoryRule),
                     typeof(CompleteMoveRule),
                     typeof(GetBaseStatRule),
                     typeof(EnemiesInViewAddTensionRule),

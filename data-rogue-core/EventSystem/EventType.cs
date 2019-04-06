@@ -21,6 +21,7 @@
         PickUpWealth,
         GainXP,
         Defence,
-        Action
+        Action,
+        Victory
     }
 }

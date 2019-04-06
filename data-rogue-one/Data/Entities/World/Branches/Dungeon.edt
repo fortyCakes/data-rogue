@@ -17,3 +17,6 @@ Density: 0.01
 [StairGeneration]
 [StairGeneration]
 [StairGeneration]
+[PlaceSpecificItem]
+Floor: 5
+Item: Item:MacGuffin

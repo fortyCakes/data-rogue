@@ -5,14 +5,15 @@ using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.EventSystem.Rules
 {
-    public class PlayerDeathRule : IEventRule
+
+    public class PlayerVictoryRule : IEventRule
     {
-        public PlayerDeathRule(ISystemContainer systemContainer)
+        public PlayerVictoryRule(ISystemContainer systemContainer)
         {
             this.systemContainer = systemContainer;
         }
 
-        public EventTypeList EventTypes => new EventTypeList{ EventType.Death };
+        public EventTypeList EventTypes => new EventTypeList { EventType.Victory };
         public uint RuleOrder => 0;
         public EventRuleType RuleType => EventRuleType.EventResolution;
 
@@ -27,7 +28,7 @@ namespace data_rogue_core.EventSystem.Rules
                         systemContainer.PlayerSystem,
                         systemContainer.SaveSystem
                     )));
-                systemContainer.ActivitySystem.Push(new EndGameScreenActivity(systemContainer, false));
+                systemContainer.ActivitySystem.Push(new EndGameScreenActivity(systemContainer, true));
             }
 
             return true;
