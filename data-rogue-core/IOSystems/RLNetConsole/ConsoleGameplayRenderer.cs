@@ -17,9 +17,11 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
     public class ConsoleGameplayRenderer : BaseConsoleRenderer, IGameplayRenderer
     {
         private Dictionary<IRendereringConfiguration, RLConsole> Consoles = new Dictionary<IRendereringConfiguration, RLConsole>();
+        private RLConsole backgroundConsole;
         public IOSystemConfiguration IOSystemConfiguration { get; }
 
         private List<IStatsRendererHelper> statsDisplayers;
+        private char?[,] _lineChars;
 
         public ConsoleGameplayRenderer(RLConsole console, IOSystemConfiguration ioSystemConfiguration) : base(console)
         {
@@ -35,8 +37,13 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             {
                 Consoles.Add(config, new RLConsole(config.Position.Width, config.Position.Height));
             }
+
+            backgroundConsole = new RLConsole(Console.Width, Console.Height);
+
            
             IOSystemConfiguration = ioSystemConfiguration;
+
+            CalculateLines();
 
             statsDisplayers = RLNetStatsRendererHelper.DefaultStatsDisplayers.OfType<IStatsRendererHelper>().ToList();
 
@@ -45,7 +52,9 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
         public void Render(ISystemContainer systemContainer)
         {
-            Console.Clear(176, RLColor.Black, RLColor.White);
+            Console.Clear();
+            
+            RenderLines();
 
             if (ReferenceEquals(systemContainer?.PlayerSystem?.Player, null))
             {
@@ -68,8 +77,6 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             {
                 RenderMessages(messageConfiguration, systemContainer);
             }
-
-            RenderLines();
         }
 
         private List<MapCoordinate> CalculatePlayerFov(ISystemContainer systemContainer)
@@ -120,7 +127,48 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             var foreColor = RLColor.White;
             var backColor = RLColor.Black;
 
-            // Work out outline renderering later
+            for (int x = 0; x < Console.Width; x++)
+            {
+                for (int y = 0; y < Console.Height; y++)
+                {
+                    if (_lineChars[x,y].HasValue)
+                    {
+                        backgroundConsole.Print(x, y, _lineChars[x, y].ToString(), foreColor, backColor);
+                    }
+                }
+            }
+
+
+            RLConsole.Blit(backgroundConsole, 0, 0, backgroundConsole.Width, backgroundConsole.Height, Console, 0, 0);
+        }
+
+        private bool IsInSubconsole(int x, int y)
+        {
+            foreach(var config in IOSystemConfiguration.MapConfigurations)
+            {
+                if (config.Position.Contains(x,y))
+                {
+                    return true;
+                }
+            }
+
+            foreach (var config in IOSystemConfiguration.StatsConfigurations)
+            {
+                if (config.Position.Contains(x, y))
+                {
+                    return true;
+                }
+            }
+
+            foreach (var config in IOSystemConfiguration.MessageConfigurations)
+            {
+                if (config.Position.Contains(x, y))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private void RenderMessages(MessageConfiguration messageConfiguration, ISystemContainer systemContainer)
@@ -189,6 +237,66 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             }
 
             RLConsole.Blit(mapConsole, 0, 0, mapConsole.Width, mapConsole.Height, Console, mapConfiguration.Position.Left, mapConfiguration.Position.Top);
+        }
+
+        private void CalculateLines()
+        {
+            byte connectTop = 1;
+            byte connectRight = 2;
+            byte connectBottom = 4;
+            byte connectLeft = 8;
+
+            var mapping = new Dictionary<byte, char>
+            {
+                {0, (char)254 },
+                {1, (char)186 },
+                {2, (char)205 },
+                {3, (char)200 },
+                {4, (char)186 },
+                {5, (char)186 },
+                {6, (char)201 },
+                {7, (char)204 },
+                {8, (char)205 },
+                {9, (char)188 },
+                {10, (char)205 },
+                {11, (char)202 },
+                {12, (char)187 },
+                {13, (char)185 },
+                {14, (char)203 },
+                {15, (char)206 },
+            };
+
+            var lines = new bool[Console.Width, Console.Height];
+            _lineChars = new char?[Console.Width, Console.Height];
+
+            for (int x = 0; x < Console.Width; x++)
+            {
+                for (int y = 0; y < Console.Height; y++)
+                {
+                    lines[x, y] = !IsInSubconsole(x, y);
+                }
+            }
+
+            for (int x = 0; x < Console.Width; x++)
+            {
+                for (int y = 0; y < Console.Height; y++)
+                {
+                    if (lines[x, y])
+                    {
+                        byte tileConnects = 0;
+                        if (x != 0 && lines[x - 1, y]) tileConnects |= connectLeft;
+                        if (y != 0 && lines[x, y - 1]) tileConnects |= connectTop;
+                        if (y != Console.Height - 1 && lines[x, y + 1]) tileConnects |= connectBottom;
+                        if (x != Console.Width - 1 && lines[x + 1, y]) tileConnects |= connectRight;
+
+                        _lineChars[x, y] = mapping[tileConnects];
+                    }
+                    else
+                    {
+                        _lineChars[x, y] = null;
+                    }
+                }
+            }
         }
     }
 }

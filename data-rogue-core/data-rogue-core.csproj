@@ -213,6 +213,7 @@
     <Compile Include="IOSystems\MapConfiguration.cs" />
     <Compile Include="IOSystems\MessageConfiguration.cs" />
     <Compile Include="IOSystems\MouseData.cs" />
+    <Compile Include="IOSystems\RLNetConsole\IRenderingConfiguration.cs" />
     <Compile Include="IOSystems\RLNetConsole\RLNetConsoleIOSystem.cs" />
     <Compile Include="IOSystems\RLNetConsole\StatsDisplayers\RLNetComponentCounterDisplayer.cs" />
     <Compile Include="IOSystems\RLNetConsole\StatsDisplayers\RLNetHoveredEntityDisplayer.cs" />
