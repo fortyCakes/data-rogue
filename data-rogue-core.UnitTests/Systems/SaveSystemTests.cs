@@ -17,18 +17,45 @@ namespace data_rogue_core.UnitTests.Systems
     public class SaveSystemTests
     {
         private ISystemContainer _systemContainer;
+        private IEntityEngine _entityEngine;
+        private List<IEntity> _mutableEntities;
+        private IWorldGenerator _worldGenerator;
         private ISaveSystem _saveSystem;
+        private IMapSystem _mapSystem;
+        private MapCollection _mapCollection;
+        private IMessageSystem _messageSystem;
+        private List<Message> _messages;
+        private ITimeSystem _timeSystem;
+        private ulong _currentTime;
 
         [SetUp]
         public void SetUp()
         {
-            _systemContainer = new SystemContainer();
-            _systemContainer.CreateSystems("Test");
-            _systemContainer.EntityEngine.Initialise(_systemContainer);
+            _systemContainer = Substitute.For<ISystemContainer>();
 
-            _systemContainer.MapSystem.Initialise();
+            _entityEngine = Substitute.For<IEntityEngine>();
+            _systemContainer.EntityEngine.Returns(_entityEngine);
+            _mutableEntities = new List<IEntity>();
+            _entityEngine.MutableEntities.Returns(_mutableEntities);
 
-            _saveSystem = _systemContainer.SaveSystem;
+            _mapSystem = Substitute.For<IMapSystem>();
+            _systemContainer.MapSystem.Returns(_mapSystem);
+            _mapCollection = new MapCollection();
+            _mapSystem.MapCollection.Returns(_mapCollection);
+
+            _messageSystem = Substitute.For<IMessageSystem>();
+            _systemContainer.MessageSystem.Returns(_messageSystem);
+            _messages = new List<Message>();
+            _messageSystem.AllMessages.Returns(_messages);
+
+            _timeSystem = Substitute.For<ITimeSystem>();
+            _systemContainer.TimeSystem.Returns(_timeSystem);
+            _currentTime = 0;
+            _timeSystem.CurrentTime.Returns(_currentTime);
+
+            _worldGenerator = Substitute.For<IWorldGenerator>();
+
+            _saveSystem = new SaveSystem(_systemContainer, _worldGenerator);
         }
 
         [Test]
@@ -44,7 +71,8 @@ namespace data_rogue_core.UnitTests.Systems
         [Test]
         public void SaveSystem_GetSaveState_WithEntity_ReturnsSaveStateWithSerialisedEntity()
         {
-            var entity = _systemContainer.EntityEngine.New("New Entity");
+            var entity = new Entity(0, "New Entity", new IEntityComponent[0]);
+            _mutableEntities.Add(entity);
 
             var result = _saveSystem.GetSaveState();
 
@@ -56,9 +84,12 @@ namespace data_rogue_core.UnitTests.Systems
         [Test]
         public void SaveSystem_GetSaveState_WithMap_ReturnsSaveStateWithSerialisedMap()
         {
-            var map = new Map("key", _systemContainer.EntityEngine.New("Map Cell", new Appearance(), new Physical()));
+            var mapCell = new Entity(0, "Map Cell", new IEntityComponent[] { new Appearance(), new Physical() });
 
-            _systemContainer.MapSystem.MapCollection.Add(map.MapKey, map);
+            _mutableEntities.Add(mapCell);
+            var map = new Map("key", mapCell);
+
+            _mapCollection.Add(map.MapKey, map);
 
             var result = _saveSystem.GetSaveState();
 
@@ -82,7 +113,7 @@ namespace data_rogue_core.UnitTests.Systems
         {
             var message = new Message {Text = "message", Color = Color.AliceBlue};
 
-            _systemContainer.MessageSystem.Write(message.Text, message.Color);
+            _messages.Add(message);
 
             var result = _saveSystem.GetSaveState();
 
