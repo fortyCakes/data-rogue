@@ -109,6 +109,12 @@
     <Compile Include="Data\IEntityDataParser.cs" />
     <Compile Include="EventSystem\Rules\OnAttackProcEnchantmentRule.cs" />
     <Compile Include="EventSystem\Rules\PlayerVictoryRule.cs" />
+    <Compile Include="IOSystems\BLTTiles\BLTTilesFormRenderer.cs" />
+    <Compile Include="IOSystems\BLTTiles\BLTTilesGameplayRenderer.cs" />
+    <Compile Include="IOSystems\BLTTiles\BLTTilesIOSystem.cs" />
+    <Compile Include="IOSystems\BLTTiles\BLTTilesMenuRenderer.cs" />
+    <Compile Include="IOSystems\BLTTiles\BLTTilesStaticTextRenderer.cs" />
+    <Compile Include="IOSystems\BLTTiles\BLTTilesTargetingRenderer.cs" />
     <Compile Include="IOSystems\IOSystemConfiguration.cs" />
     <Compile Include="IOSystems\IRendereringConfiguration.cs" />
     <Compile Include="IOSystems\IStatsDisplayer.cs" />
@@ -219,7 +225,7 @@
     <Compile Include="IOSystems\RLNetConsole\StatsDisplayers\RLNetHoveredEntityDisplayer.cs" />
     <Compile Include="IOSystems\RLNetConsole\StatsDisplayers\RLNetLocationDisplayer.cs" />
     <Compile Include="IOSystems\RLNetConsole\StatsDisplayers\RLNetNameDisplayer.cs" />
-    <Compile Include="IOSystems\RLNetConsole\StatsDisplay.cs" />
+    <Compile Include="IOSystems\StatsDisplay.cs" />
     <Compile Include="IOSystems\RLNetConsole\StatsDisplayers\RLNetSpacerDisplayer.cs" />
     <Compile Include="IOSystems\RLNetConsole\StatsDisplayers\RLNetStatDisplayer.cs" />
     <Compile Include="IOSystems\RLNetConsole\StatsDisplayers\RLNetStatInterpolationDisplayer.cs" />
@@ -358,10 +364,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Images\Tileset\SDS_8x8.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\Sprites\Misc\textbox_blue.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Tiles\wall_1.png" />
     <Content Include="Images\Tileset\Alloy_curses_12x12.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -374,6 +387,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Saves\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BearLib\BearLib.csproj">
+      <Project>{890fadbe-7bff-49bf-b3bc-e316279c5059}</Project>
+      <Name>BearLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BLTWrapper\BLTWrapper.csproj">
+      <Project>{81288ab7-ef21-4660-86e4-a477deb7c75c}</Project>
+      <Name>BLTWrapper</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace data_rogue_core.Renderers.ConsoleRenderers
+namespace data_rogue_core.IOSystems
 {
     public class StatsDisplay
     {

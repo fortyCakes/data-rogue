@@ -1,0 +1,12 @@
+C:\Users\Lex\source\repos\fortyCakes\data-rogue\BLTWrapper\bin\Debug\BearLibTerminal.dll
+C:\Users\Lex\source\repos\fortyCakes\data-rogue\BLTWrapper\bin\Debug\BLTWrapper.dll.config
+C:\Users\Lex\source\repos\fortyCakes\data-rogue\BLTWrapper\bin\Debug\BLTWrapper.dll
+C:\Users\Lex\source\repos\fortyCakes\data-rogue\BLTWrapper\bin\Debug\BLTWrapper.pdb
+C:\Users\Lex\source\repos\fortyCakes\data-rogue\BLTWrapper\bin\Debug\BearLib.dll
+C:\Users\Lex\source\repos\fortyCakes\data-rogue\BLTWrapper\bin\Debug\BearLib.pdb
+C:\Users\Lex\source\repos\fortyCakes\data-rogue\BLTWrapper\bin\Debug\BearLib.dll.config
+C:\Users\Lex\source\repos\fortyCakes\data-rogue\BLTWrapper\obj\Debug\BLTWrapper.csprojAssemblyReference.cache
+C:\Users\Lex\source\repos\fortyCakes\data-rogue\BLTWrapper\obj\Debug\BLTWrapper.csproj.CoreCompileInputs.cache
+C:\Users\Lex\source\repos\fortyCakes\data-rogue\BLTWrapper\obj\Debug\BLTWrapper.csproj.CopyComplete
+C:\Users\Lex\source\repos\fortyCakes\data-rogue\BLTWrapper\obj\Debug\BLTWrapper.dll
+C:\Users\Lex\source\repos\fortyCakes\data-rogue\BLTWrapper\obj\Debug\BLTWrapper.pdb

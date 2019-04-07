@@ -4,6 +4,7 @@ using System.Linq;
 using data_rogue_core;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.IOSystems;
+using data_rogue_core.IOSystems.BLTTiles;
 using data_rogue_core.IOSystems.RLNetConsole;
 using data_rogue_core.Renderers.ConsoleRenderers;
 
@@ -15,7 +16,9 @@ namespace data_rogue_one
         {
             var theGame = new DataRogueGame();
 
-            RLNetConsoleIOSystem ioSystem = GetRLNetIOSystem();
+            //RLNetConsoleIOSystem ioSystem = GetRLNetIOSystem();
+
+            BLTTilesIOSystem ioSystem = new BLTTilesIOSystem(BLTTilesIOSystem.DefaultConfiguration);
 
             var additionalComponents = typeof(Program).Assembly.GetTypes().Where(t => t.IsAssignableFrom(typeof(IEntityComponent))).ToList();
 
