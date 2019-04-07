@@ -20,7 +20,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
         public void Render(ISystemContainer systemContainer)
         {
-            throw new System.NotImplementedException();
+            //throw new System.NotImplementedException();
         }
     }
 }

@@ -51,7 +51,6 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
         public void Run()
         {
-            BLT.Open();
 
             do
             {
@@ -102,16 +101,18 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
         public void Initialise(UpdateEventHandler onUpdate, UpdateEventHandler onRender)
         {
+            BLT.Open();
+
             _update = onUpdate;
             _render = onRender;
 
             var config = $"window: size={_ioSystemConfiguration.InitialWidth}x{_ioSystemConfiguration.InitialHeight}, cellsize={_ioSystemConfiguration.TileWidth}x{_ioSystemConfiguration.TileHeight}, title='{_ioSystemConfiguration.WindowTitle}';";
 
-            var ok = BLT.Set(config);
+            BLT.Set(config);
 
-            //BLT.Set("font: Images/Tileset/SDS_8x8.ttf, size=8;");
+            BLT.Set("font: Images/Tileset/SDS_8x8.ttf, size=8;");
 
-            var menuBackground = _spriteLoader.LoadTileset_BoxType("textbox_blue", "/Images/Sprites/Misc/textbox_blue.png", 16, 16, 2);
+            BoxTilesetSpriteSheet menuBackground = _spriteLoader.LoadTileset_BoxType("textbox_blue", "Images/Sprites/Misc/textbox_blue.png", 16, 16, 2);
 
             var renderers = new Dictionary<ActivityType, IRenderer>()
             {
