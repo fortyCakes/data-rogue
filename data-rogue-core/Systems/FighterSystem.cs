@@ -10,7 +10,7 @@ namespace data_rogue_core.Systems
 {
     public class FighterSystem : BaseSystem, IFighterSystem
     {
-        public override SystemComponents RequiredComponents => new SystemComponents { typeof(TiltFighter) };
+        public override SystemComponents RequiredComponents => new SystemComponents { typeof(Health) };
         public override SystemComponents ForbiddenComponents => new SystemComponents { typeof(Prototype) };
 
         private readonly IStatSystem _statSystem;

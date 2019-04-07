@@ -16,16 +16,16 @@ namespace data_rogue_core.Systems
         public override SystemComponents RequiredComponents => new SystemComponents { typeof(Prototype) };
         public override SystemComponents ForbiddenComponents => new SystemComponents { };
 
-        public PrototypeSystem(IEntityEngine engine, IPositionSystem positionSystem, IBehaviourFactory behaviourFactory)
+        public PrototypeSystem(IEntityEngine engine, IPositionSystem positionSystem, ISystemContainer systemContainer)
         {
-            Engine = engine;
-            PositionSystem = positionSystem;
-            BehaviourFactory = behaviourFactory;
+            _engine = engine;
+            _positionSystem = positionSystem;
+            _systemContainer = systemContainer;
         }
 
-        public IEntityEngine Engine;
-        public IPositionSystem PositionSystem;
-        private IBehaviourFactory BehaviourFactory;
+        private IEntityEngine _engine;
+        private IPositionSystem _positionSystem;
+        private ISystemContainer _systemContainer;
 
         public IEntity Get(int entityId)
         {
@@ -49,21 +49,21 @@ namespace data_rogue_core.Systems
         public IEntity CreateAt(string entityName, MapCoordinate mapCoordinate)
         {
             var entity = Get(entityName);
-            PositionSystem.SetPosition(entity, mapCoordinate);
+            _positionSystem.SetPosition(entity, mapCoordinate);
             return entity;
         }
 
         public IEntity CreateAt(IEntity entity, MapCoordinate mapCoordinate)
         {
             var newEntity = Get(entity);
-            PositionSystem.SetPosition(newEntity, mapCoordinate);
+            _positionSystem.SetPosition(newEntity, mapCoordinate);
             return newEntity;
         }
 
         public IEntity CreateAt(int entityId, MapCoordinate mapCoordinate)
         {
             var entity = Get(entityId);
-            PositionSystem.SetPosition(entity, mapCoordinate);
+            _positionSystem.SetPosition(entity, mapCoordinate);
             return entity;
         }
 
@@ -84,7 +84,7 @@ namespace data_rogue_core.Systems
 
                 if (IsBehaviour(componentType))
                 {
-                    newComponent = BehaviourFactory.Get(componentType);
+                    newComponent = (IEntityComponent)Activator.CreateInstance(componentType, new object[] { _systemContainer });
                 }
                 else {
                     newComponent = (IEntityComponent)Activator.CreateInstance(componentType);
@@ -107,7 +107,7 @@ namespace data_rogue_core.Systems
                 newComponents.Add(newComponent);
             }
 
-            return Engine.New(null, newComponents.ToArray());
+            return _engine.New(null, newComponents.ToArray());
         }
 
         private static bool IsBehaviour(Type type)

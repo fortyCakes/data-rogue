@@ -13,13 +13,8 @@ namespace data_rogue_core.EntityEngineSystem
 
         public IEntityDataProvider StaticDataProvider { get; }
 
-        public IEnumerable<Type> ComponentTypes => 
-            AppDomain
-            .CurrentDomain
-            .GetAssemblies()
-            .SelectMany(s => s.GetTypes())
-            .Where(p => typeof(IEntityComponent).IsAssignableFrom(p))
-            .ToList();
+        public IList<Type> ComponentTypes { get; set; }
+            
 
         public IEnumerable<IEntity> AllEntities
         {
@@ -38,9 +33,21 @@ namespace data_rogue_core.EntityEngineSystem
         private List<ISystem> _systems = new List<ISystem>();
         private List<IEntity> _allEntities = new List<IEntity>();
 
-        public EntityEngine(IEntityDataProvider staticDataProvider)
+        public EntityEngine(IEntityDataProvider staticDataProvider, IList<Type> additionalComponentTypes = null)
         {
             StaticDataProvider = staticDataProvider;
+
+            ComponentTypes = AppDomain
+            .CurrentDomain
+            .GetAssemblies()
+            .SelectMany(s => s.GetTypes())
+            .Where(p => typeof(IEntityComponent).IsAssignableFrom(p))
+            .ToList();
+
+            if (additionalComponentTypes != null)
+            {
+                ((List<Type>)ComponentTypes).AddRange(additionalComponentTypes);
+            }
         }
 
         public IEntity New(string name, params IEntityComponent[] components)

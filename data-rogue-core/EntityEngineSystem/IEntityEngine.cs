@@ -6,7 +6,7 @@ namespace data_rogue_core.EntityEngineSystem
 {
     public interface IEntityEngine
     {
-        IEnumerable<Type> ComponentTypes { get; }
+        IList<Type> ComponentTypes { get; }
         IEnumerable<IEntity> AllEntities { get; }
         IEnumerable<IEntity> MutableEntities { get; }
 

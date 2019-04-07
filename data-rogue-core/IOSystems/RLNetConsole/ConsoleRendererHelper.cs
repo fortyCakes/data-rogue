@@ -8,38 +8,6 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 {
     public static class ConsoleRendererHelper
     {
-        public static void DisplayEntitySummary(RLConsole console, int x, int y, IEntity hoveredEntity)
-        {
-            var appearance = hoveredEntity.Get<Appearance>();
-
-            var description = hoveredEntity.TryGet<Description>();
-
-            console.Print(x + 1, y + 0, appearance.Glyph.ToString(), appearance.Color.ToRLColor());
-
-            var name = description?.Name ?? "";
-
-            console.Print(x + 3, y + 0, name, RLColor.White);
-
-            var tilt = hoveredEntity.TryGet<TiltFighter>();
-            var health = hoveredEntity.TryGet<Health>();
-            var aura = hoveredEntity.TryGet<AuraFighter>();
-
-            if (tilt != null)
-            {
-                PrintBar(console, x + 1, y + 7, console.Width - 2, "tilt", tilt.Tilt, RLColor.Magenta);
-            }
-
-            if (health != null)
-            {
-                PrintBar(console, x + 1, y + 3, console.Width - 2, "hp", health.HP, RLColor.Red);
-            }
-
-            if (aura != null)
-            {
-                PrintBar(console, x + 1, y + 5, console.Width - 2, "aura", aura.Aura, RLColor.Yellow);
-            }
-        }
-
         public static void PrintBar(RLConsole console, int x, int y, int length, string name, Counter counter, RLColor color)
         {
             if (counter.Max == 0)

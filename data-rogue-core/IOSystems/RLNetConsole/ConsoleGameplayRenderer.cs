@@ -69,7 +69,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
                 RenderMessages(messageConfiguration, systemContainer);
             }
 
-            RenderLines(systemContainer.PlayerSystem.Player.Get<TiltFighter>().BrokenTicks > 0);
+            RenderLines();
         }
 
         private List<MapCoordinate> CalculatePlayerFov(ISystemContainer systemContainer)
@@ -115,12 +115,12 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             return x >= 0 && x < mapWidth && y >= 0 && y < mapHeight;
         }
 
-        private void RenderLines(bool alert)
+        private void RenderLines()
         {
-            var foreColor = alert? RLColor.Red : RLColor.White;
+            var foreColor = RLColor.White;
             var backColor = RLColor.Black;
 
-            // Work out line renderering later
+            // Work out outline renderering later
         }
 
         private void RenderMessages(MessageConfiguration messageConfiguration, ISystemContainer systemContainer)

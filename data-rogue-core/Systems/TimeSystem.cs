@@ -18,12 +18,10 @@ namespace data_rogue_core.Systems
         private readonly IPlayerSystem _playerSystem;
         private IEventSystem _eventSystem;
         private IStatSystem _statSystem;
+        
 
-        public IBehaviourFactory BehaviourFactory { get; }
-
-        public TimeSystem(IBehaviourFactory behaviourFactory, IEventSystem eventSystem, IPlayerSystem playerSystem, IStatSystem statSystem)
+        public TimeSystem(IEventSystem eventSystem, IPlayerSystem playerSystem, IStatSystem statSystem)
         {
-            BehaviourFactory = behaviourFactory;
             _eventSystem = eventSystem;
             _playerSystem = playerSystem;
             _statSystem = statSystem;
@@ -37,7 +35,7 @@ namespace data_rogue_core.Systems
 
         public ulong CurrentTime { get; set; }
 
-        public override SystemComponents RequiredComponents => new SystemComponents { typeof(Actor), typeof(TiltFighter) };
+        public override SystemComponents RequiredComponents => new SystemComponents { typeof(Actor) };
         public override SystemComponents ForbiddenComponents => new SystemComponents { typeof(Prototype) };
 
         public void Tick()

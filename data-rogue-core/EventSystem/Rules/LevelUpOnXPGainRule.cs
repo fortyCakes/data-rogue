@@ -36,8 +36,6 @@ namespace data_rogue_core.EventSystem.Rules
                 {
                     experience.Level++;
 
-                    var fighter = sender.Get<TiltFighter>();
-
                     systemContainer.StatSystem.IncreaseStat(sender, "Agility", 2);
                     systemContainer.StatSystem.IncreaseStat(sender, "Intellect", 2);
                     systemContainer.StatSystem.IncreaseStat(sender, "Willpower", 2);

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using data_rogue_core;
+using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.IOSystems;
 using data_rogue_core.IOSystems.RLNetConsole;
 using data_rogue_core.Renderers.ConsoleRenderers;
@@ -13,6 +15,15 @@ namespace data_rogue_one
         {
             var theGame = new DataRogueGame();
 
+            RLNetConsoleIOSystem ioSystem = GetRLNetIOSystem();
+
+            var additionalComponents = typeof(Program).Assembly.GetTypes().Where(t => t.IsAssignableFrom(typeof(IEntityComponent))).ToList();
+
+            theGame.Run("SEED_DEBUG", GameRules.Rules, ioSystem, null, additionalComponents);
+        }
+
+        private static RLNetConsoleIOSystem GetRLNetIOSystem()
+        {
             var config = RLNetConsoleIOSystem.DefaultConfiguration;
 
             config.WindowTitle = "data-rogue-one";
@@ -40,10 +51,8 @@ namespace data_rogue_one
                 new StatsDisplay { DisplayType = "VisibleEnemies"}
             } } };
 
-
             var ioSystem = new RLNetConsoleIOSystem(config);
-
-            theGame.Run("SEED_DEBUG", GameRules.Rules, ioSystem);
+            return ioSystem;
         }
     }
 }
