@@ -23,7 +23,7 @@ namespace data_rogue_core
         private bool _leaving = false;
         public bool Loading { get; set; } = false;
 
-        public void Run(string seed, List<Type> eventRules, IIOSystem ioSystem = null, EntityDataProviders entityDataProviders = null)
+        public void Run(string seed, List<Type> eventRules, IIOSystem ioSystem = null, EntityDataProviders entityDataProviders = null, IList<Type> additionalComponentTypes = null)
         {
             Seed = seed;
 
@@ -31,7 +31,7 @@ namespace data_rogue_core
 
             InitialiseIOSystem();
 
-            CreateAndRegisterSystems(entityDataProviders, IOSystem.RendererFactory, seed);
+            CreateAndRegisterSystems(entityDataProviders, additionalComponentTypes, IOSystem.RendererFactory, seed);
 
             InitialiseState();
 
@@ -82,14 +82,14 @@ namespace data_rogue_core
         }
 
 
-        private void CreateAndRegisterSystems(EntityDataProviders entityDataProviders, IRendererFactory rendererFactory, string seed)
+        private void CreateAndRegisterSystems(EntityDataProviders entityDataProviders, IList<Type> additionalComponentTypes, IRendererFactory rendererFactory, string seed)
         {
             if (entityDataProviders == null)
             {
                 entityDataProviders = EntityDataProviders.Default;
             }
 
-            SystemContainer = new SystemContainer(entityDataProviders, rendererFactory);
+            SystemContainer = new SystemContainer(entityDataProviders, rendererFactory, additionalComponentTypes);
 
             SystemContainer.CreateSystems(seed);
 

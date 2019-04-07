@@ -16,7 +16,6 @@ namespace data_rogue_core.EventSystem.Rules
             typeof(RangedAttackAction),
             typeof(SaveAction),
             typeof(EnterAction),
-            typeof(RestAction),
             typeof(EquipmentMenuAction),
             typeof(InventoryMenuAction),
             typeof(GetItemAction),

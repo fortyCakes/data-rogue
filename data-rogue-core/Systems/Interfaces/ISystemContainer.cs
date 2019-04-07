@@ -17,7 +17,6 @@ namespace data_rogue_core.Systems.Interfaces
         IFighterSystem FighterSystem {get; set;}
         IMessageSystem MessageSystem {get; set;}
         ITimeSystem TimeSystem {get; set;}
-        IBehaviourFactory BehaviourFactory {get; set;}
         IRandom Random {get; set;}
         IScriptExecutor ScriptExecutor {get; set;}
         ISkillSystem SkillSystem {get; set;}

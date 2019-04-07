@@ -15,10 +15,10 @@ namespace data_rogue_core.Behaviours
         private readonly IEventSystem EventSystem;
         private readonly IMessageSystem MessageSystem;
 
-        public PlayerRestBehaviour(IEventSystem eventSystem, IMessageSystem messageSystem)
+        public PlayerRestBehaviour(ISystemContainer systemContainer)
         {
-            EventSystem = eventSystem;
-            MessageSystem = messageSystem;
+            EventSystem = systemContainer.EventSystem;
+            MessageSystem = systemContainer.MessageSystem;
         }
 
         public override ActionEventData ChooseAction(IEntity entity)

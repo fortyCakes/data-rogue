@@ -17,12 +17,12 @@ namespace data_rogue_core.Behaviours
         private readonly IPlayerSystem _playerSystem;
         private readonly IMapSystem _mapSystem;
 
-        public MoveToPlayerBehaviour(IPositionSystem positionSystem, IEventSystem eventRuleSystem, IPlayerSystem playerSystem, IMapSystem mapSystem)
+        public MoveToPlayerBehaviour(ISystemContainer systemContainer)
         {
-            _positionSystem = positionSystem;
-            _eventRuleSystem = eventRuleSystem;
-            _playerSystem = playerSystem;
-            _mapSystem = mapSystem;
+            _positionSystem = systemContainer.PositionSystem;
+            _eventRuleSystem = systemContainer.EventSystem;
+            _playerSystem = systemContainer.PlayerSystem;
+            _mapSystem = systemContainer.MapSystem;
         }
 
         public override ActionEventData ChooseAction(IEntity entity)

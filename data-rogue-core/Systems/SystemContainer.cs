@@ -7,6 +7,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using data_rogue_core.Utils;
 using data_rogue_core.Renderers;
+using System.Collections.Generic;
 
 namespace data_rogue_core.Systems
 {
@@ -20,7 +21,6 @@ namespace data_rogue_core.Systems
         public IFighterSystem FighterSystem { get; set; }
         public IMessageSystem MessageSystem { get; set; }
         public ITimeSystem TimeSystem { get; set; }
-        public IBehaviourFactory BehaviourFactory { get; set; }
         public IRandom Random { get; set; }
         public IScriptExecutor ScriptExecutor { get; set; }
         public ISkillSystem SkillSystem { get; set; }
@@ -41,10 +41,12 @@ namespace data_rogue_core.Systems
         private readonly IEntityDataProvider _worldEntityDataProvider;
         private readonly IEntityDataProvider _playerEntityDataProvider;
         private readonly IRendererFactory _rendererFactory;
+        private readonly IList<Type> _additionalComponentTypes;
 
         public SystemContainer(
             EntityDataProviders entityDataProviderContainer = null,
-            IRendererFactory rendererFactory = null
+            IRendererFactory rendererFactory = null,
+            IList<Type> additionalComponentTypes = null
             )
         {
             if (entityDataProviderContainer == null)
@@ -57,6 +59,7 @@ namespace data_rogue_core.Systems
             _worldEntityDataProvider = entityDataProviderContainer.WorldEntityDataProvider ?? new NullDataProvider();
             _playerEntityDataProvider = entityDataProviderContainer.PlayerEntityDataProvider ?? new NullDataProvider();
             _rendererFactory = rendererFactory;
+            _additionalComponentTypes = additionalComponentTypes;
         }
 
         public void CreateSystems(string rngSeed)
@@ -72,7 +75,7 @@ namespace data_rogue_core.Systems
 
             RendererSystem = new RendererSystem(PlayerSystem);
 
-            EntityEngine = new EntityEngine(_prototypeEntityDataProvider);
+            EntityEngine = new EntityEngine(_prototypeEntityDataProvider, _additionalComponentTypes);
 
             StatSystem = new StatSystem(EntityEngine);
 
@@ -81,15 +84,13 @@ namespace data_rogue_core.Systems
 
             Random = new RNG(rngSeed);
 
-            TimeSystem = new TimeSystem(BehaviourFactory, EventSystem, PlayerSystem, StatSystem);
+            TimeSystem = new TimeSystem(EventSystem, PlayerSystem, StatSystem);
             EntityEngine.Register(TimeSystem);
 
             FighterSystem = new FighterSystem(EntityEngine, MessageSystem, EventSystem, TimeSystem, StatSystem);
             EntityEngine.Register(FighterSystem);
 
-            BehaviourFactory = new BehaviourFactory(PositionSystem, EventSystem, Random, MessageSystem, PlayerSystem, MapSystem);
-
-            PrototypeSystem = new PrototypeSystem(EntityEngine, PositionSystem, BehaviourFactory);
+            PrototypeSystem = new PrototypeSystem(EntityEngine, PositionSystem, this);
             EntityEngine.Register(PrototypeSystem);
 
             ItemSystem = new ItemSystem(EntityEngine, PrototypeSystem, ScriptExecutor, MessageSystem, EventSystem);
@@ -127,7 +128,6 @@ namespace data_rogue_core.Systems
             Check(FighterSystem, "FighterSystem", msg, ref valid);
             Check(MessageSystem, "MessageSystem", msg, ref valid);
             Check(TimeSystem, "TimeSystem", msg, ref valid);
-            Check(BehaviourFactory, "BehaviourFactory", msg, ref valid);
             Check(Random, "Random", msg, ref valid);
             Check(ScriptExecutor, "ScriptExecutor", msg, ref valid);
             Check(SkillSystem, "SkillSystem", msg, ref valid);

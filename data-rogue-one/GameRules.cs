@@ -55,6 +55,9 @@ namespace data_rogue_one
 
                 list.AddRange(ApplyActionRule.AllActionRules);
 
+                // Custom actions
+                list.Add(typeof(RestAction));
+
                 return list;
             }
         }

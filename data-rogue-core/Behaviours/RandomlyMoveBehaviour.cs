@@ -4,6 +4,7 @@ using data_rogue_core.EventSystem;
 using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems;
+using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.Behaviours
 {
@@ -14,11 +15,11 @@ namespace data_rogue_core.Behaviours
         private readonly IEventSystem _eventRuleSystem;
         private readonly IRandom _random;
 
-        public RandomlyMoveBehaviour(IPositionSystem positionSystem, IEventSystem eventRuleSystem, IRandom random)
+        public RandomlyMoveBehaviour(ISystemContainer systemContainer)
         {
-            _positionSystem = positionSystem;
-            _eventRuleSystem = eventRuleSystem;
-            _random = random;
+            _positionSystem = systemContainer.PositionSystem;
+            _eventRuleSystem = systemContainer.EventSystem;
+            _random = systemContainer.Random;
         }
 
         public override ActionEventData ChooseAction(IEntity entity)

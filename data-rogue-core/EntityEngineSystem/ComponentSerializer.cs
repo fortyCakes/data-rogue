@@ -79,7 +79,7 @@ namespace data_rogue_core.EntityEngineSystem
 
             if (type.GetInterfaces().Contains(typeof(IBehaviour)))
             {
-                component = systemContainer.BehaviourFactory.Get(type);
+                component = (IEntityComponent)Activator.CreateInstance(type, new object[] { systemContainer });
             }
             else
             {

@@ -59,20 +59,8 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             if (entity != null)
             {
                 appearance = entity.Get<Appearance>();
-
-                if (entity.Has<TiltFighter>())
-                {
-                    var fighter = entity.Get<TiltFighter>();
-
-                    if (fighter.BrokenTicks > 0)
-                    {
-                        backColor = RLColor.Red;
-                    }
-                    else
-                    {
-                        backColor = ColorExtensions.Gradient(fighter.Tilt.Max, Color.Black, Color.Purple, fighter.Tilt.Current);
-                    }
-                }
+                
+                backColor = RLColor.Black;
             }
             else
             {
