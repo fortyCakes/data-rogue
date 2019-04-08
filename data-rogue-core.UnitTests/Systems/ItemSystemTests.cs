@@ -174,21 +174,18 @@ namespace data_rogue_core.UnitTests.Systems
         [Test]
         public void RemoveWealth_InsufficientWealth_Fails()
         {
-            entity.Get<Wealth>().Amount = 2;
+            entity.Components.Add(new Wealth { Currency = "TestCurrency", Amount = 2 });
 
             var result = itemSystem.RemoveWealth(entity, "TestCurrency", 5);
 
             result.Should().BeFalse();
 
             itemSystem.CheckWealth(entity, "TestCurrency").Should().Be(2);
-
         }
 
         [Test]
         public void RemoveWealth_DoesntHaveWealth_Fails()
         {
-            entityEngine.RemoveComponent(entity, entity.Get<Wealth>());
-
             var result = itemSystem.RemoveWealth(entity, "TestCurrency", 5);
 
             result.Should().BeFalse();
@@ -200,23 +197,23 @@ namespace data_rogue_core.UnitTests.Systems
         [Test]
         public void AddWealth_DoesntHaveWealth_Adds()
         {
-            entityEngine.RemoveComponent(entity, entity.Get<Wealth>());
-
             var result = itemSystem.AddWealth(entity, "TestCurrency", 5);
 
             result.Should().BeTrue();
 
-            itemSystem.CheckWealth(entity, "TestCurrency").Should().Be(5);
+            entityEngine.Received(1).AddComponent(entity, Arg.Is<Wealth>(w => w.Amount == 5 && w.Currency == "TestCurrency"));
         }
 
         [Test]
         public void AddWealth_HasWealth_Adds()
         {
+            entity.Components.Add(new Wealth { Currency = "TestCurrency", Amount = 15 });
+
             var result = itemSystem.AddWealth(entity, "TestCurrency", 5);
 
             result.Should().BeTrue();
 
-            itemSystem.CheckWealth(entity, "TestCurrency").Should().Be(5);
+            itemSystem.CheckWealth(entity, "TestCurrency").Should().Be(20);
         }
 
         [Test]
@@ -265,14 +262,11 @@ namespace data_rogue_core.UnitTests.Systems
             var item = GetTestItem();
             item.Get<Item>().UseScript = "TestScript";
 
-            var guid = Guid.NewGuid().ToString();
-
-            GenerateTestScript(guid);
+            prototypeSystem.Get("TestScript").Returns(new Entity(999, "TestScript", new []{new Script {Text = "hello world"}}));
 
             itemSystem.Use(entity, item);
 
-            messageSystem.AllMessages.Single().Should().BeEquivalentTo(
-                new Message {Text = guid, Color = Color.White});
+            scriptExecutor.Received(1).Execute(entity,"hello world",item,null);
         }
 
 
@@ -281,11 +275,7 @@ namespace data_rogue_core.UnitTests.Systems
         {
             var item = GetTestItem();
             item.Get<Item>().UseScript = "TestScript";
-            entityEngine.AddComponent(item, new Consumable {Uses = new Counter{Current = 2, Max = 2}});
-
-            var guid = Guid.NewGuid().ToString();
-
-            GenerateTestScript(guid);
+            item.Components.Add(new Consumable { Uses = new Counter { Current = 2, Max = 2 } });
 
             itemSystem.Use(entity, item);
 
@@ -299,11 +289,8 @@ namespace data_rogue_core.UnitTests.Systems
             itemSystem.MoveToInventory(item, inventory);
 
             item.Get<Item>().UseScript = "TestScript";
-            entityEngine.AddComponent(item, new Consumable { Uses = new Counter { Current = 1, Max = 2 } });
-
-            var guid = Guid.NewGuid().ToString();
-
-            GenerateTestScript(guid);
+            item.Components.Add(new Consumable { Uses = new Counter { Current = 1, Max = 2 } });
+            eventSystem.Try(EventType.ConsumableRunOut, item, Arg.Any<object>()).Returns(true);
 
             itemSystem.Use(entity, item);
 
@@ -315,14 +302,12 @@ namespace data_rogue_core.UnitTests.Systems
         {
             var item = GetTestItem();
 
-            entityEngine.AddComponent(entity, new Description { Name = "Test User" });
-            entityEngine.AddComponent(item, new Description { Name = "Test Item" });
+            entity.Components.Add(new Description { Name = "Test User" });
+            item.Components.Add(new Description { Name = "Test Item" });
 
             itemSystem.Use(entity, item);
 
-            var result = messageSystem.AllMessages.Single();
-
-            result.Should().BeEquivalentTo(new Message {Color = Color.White, Text = "Test User tries to use Test Item. Nothing interesting happens." });
+            messageSystem.Received(1).Write("Test User tries to use Test Item. Nothing interesting happens.");
         }
 
         [Test]
@@ -337,23 +322,24 @@ namespace data_rogue_core.UnitTests.Systems
             inventory.Contents.Should().BeEmpty();
         }
 
-        private void GenerateTestScript(string testMessage = "")
-        {
-            entityEngine.New("TestScript",
-                new Prototype { Name = "TestScript", Singleton = true },
-                new Script { Text = $"SystemContainer.MessageSystem:Write('{testMessage}')" });
-        }
-
         private IEntity GetTestItem(string itemName = null, bool hasPosition = true, bool stackable = false)
         {
-            var item = Substitute.For<IEntity>();
-            item.EntityId.Returns(entityId++);
+            var components = new List<IEntityComponent> {new Item()};
 
-            item.Has<Item>().Returns(true);
-            item.Has<Position>().Returns(hasPosition);
-            item.Has<Stackable>().Returns(stackable);
+            if (hasPosition)
+            {
+                components.Add(new Position());
+            }
 
-            return item;
+            if (stackable)
+            {
+                components.Add(new Stackable {StackSize = 1, StacksWith = "TestStack"});
+            }
+
+            var item = new Entity(entityId++, $"TestItem{entityId}", components.ToArray());
+            entityEngine.Get(item.EntityId).Returns(item);
+
+            return item; 
         }
 
         private IEntity GetTestEntity(int capacity = 2)
