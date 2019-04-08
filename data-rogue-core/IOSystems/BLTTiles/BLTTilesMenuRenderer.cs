@@ -3,6 +3,7 @@ using BLTWrapper;
 using data_rogue_core.Menus;
 using data_rogue_core.Renderers;
 using System;
+using System.Text;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
@@ -26,9 +27,45 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
             RenderTitleBar(menu);
 
+            RenderMenuActions(menu);
+
             RenderMenuText(menu);
 
             //throw new NotImplementedException();
+        }
+
+        private void RenderMenuActions(Menu menu)
+        {
+            if (menu.AvailableActions.Count > 1)
+            {
+                BLT.Layer((int)BLTLayers.Text);
+                BLT.Font("text");
+
+                var width = BLT.State(BLT.TK_WIDTH);
+
+                StringBuilder text = new StringBuilder("[[");
+
+                foreach (var action in menu.AvailableActions)
+                {
+                    var selected = action == menu.SelectedAction;
+
+                    if (selected)
+                    {
+                        text.Append($"[color=#42a7f4]{action}[/color]|");
+                    }
+                    else
+                    {
+                        text.Append(action + "|");
+                    }
+
+                    text.Remove(text.Length - 1, 1);
+                    text.Append("]]");
+
+                    var size = BLT.Measure(text.ToString());
+
+                    BLT.Print(width - size.Width - 2, 2, text.ToString());
+                }
+            }
         }
 
         private void RenderTitleBar(Menu menu)
