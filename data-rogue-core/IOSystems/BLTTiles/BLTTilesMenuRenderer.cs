@@ -78,13 +78,53 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
         private void RenderMenuText(Menu menu)
         {
+            int fontHeight = 3;
+
             BLT.Layer((int)BLTLayers.Text);
             BLT.Font("text");
 
-            BLT.Print(2, 8, "[color=red]menu text");
+            var height = BLT.State(BLT.TK_HEIGHT);
+            height -= 6; // Top and bottom border/padding
+            height -= 7; // Title
+            height -= 4; // Pagination
+
+            int selectedIndex = menu.SelectedIndex;
+            int itemCount = menu.MenuItems.Count;
+            int itemsPerPage = height / 3;
+            int pageCount = (itemCount - 1) / itemsPerPage + 1;
+            int page = selectedIndex / itemsPerPage;
+
+            int menuOffset = 11;
+            for (int i = 0; i < itemsPerPage; i++)
+            {
+                var displayIndex = page * itemsPerPage + i;
+                if (displayIndex < itemCount)
+                {
+                    MenuItem item = menu.MenuItems[displayIndex];
+                    int y = menuOffset + i * 3;
+                    BLT.Print(4, y, item.Text);
+
+                    if (displayIndex == selectedIndex)
+                    {
+                        RenderMenuSelector(y, item.Text);
+                    }
+                }
+            }
+
+            if (pageCount > 1)
+            {
+                BLT.Print(2, height, $"(page {page} of {pageCount})");
+            }
+
+        }
+
+        private void RenderMenuSelector(int y, string text)
+        {
+            var size = BLT.Measure(text);
 
             BLT.Font("");
-            BLT.Put(40, 8, _selectorSprite.Tile(TileDirections.Left));
+            BLT.PutExt(6 + size.Width, y, 0, -8, _selectorSprite.Tile(TileDirections.Left));
+            BLT.Font("text");
         }
 
         private void RenderBackground()
