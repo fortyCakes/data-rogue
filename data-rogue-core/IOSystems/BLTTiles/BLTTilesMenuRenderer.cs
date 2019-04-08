@@ -9,10 +9,12 @@ namespace data_rogue_core.IOSystems.BLTTiles
     public class BLTTilesMenuRenderer : IMenuRenderer
     {
         private ISpriteSheet _backgroundSpriteSheet;
+        private readonly ISpriteSheet _selectorSprite;
 
-        public BLTTilesMenuRenderer(ISpriteSheet backgroundSpriteSheet)
+        public BLTTilesMenuRenderer(ISpriteSheet backgroundSpriteSheet, ISpriteSheet selectorSprite)
         {
             _backgroundSpriteSheet = backgroundSpriteSheet;
+            _selectorSprite = selectorSprite;
         }
 
 
@@ -22,13 +24,39 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
             RenderBackground();
 
+            RenderTitleBar(menu);
+
+            RenderMenuText(menu);
+
             //throw new NotImplementedException();
+        }
+
+        private void RenderTitleBar(Menu menu)
+        {
+            BLT.Layer((int)BLTLayers.Text);
+            BLT.Font("textLarge");
+
+            BLT.Print(2, 2, menu.MenuName);
+        }
+
+        private void RenderMenuText(Menu menu)
+        {
+            BLT.Layer((int)BLTLayers.Text);
+            BLT.Font("text");
+
+            BLT.Print(2, 8, "[color=red]menu text");
+
+            BLT.Font("");
+            BLT.Put(40, 8, _selectorSprite.Tile(TileDirections.Left));
         }
 
         private void RenderBackground()
         {
-            var width = BLT.State(BLT.TK_WIDTH);
-            var height = BLT.State(BLT.TK_HEIGHT);
+            BLT.Layer((int)BLTLayers.Background);
+            BLT.Font("");
+
+            var width = BLT.State(BLT.TK_WIDTH) / BLTTilesIOSystem.TILE_SPACING;
+            var height = BLT.State(BLT.TK_HEIGHT) / BLTTilesIOSystem.TILE_SPACING;
 
             for (int x = 0; x < width; x++)
             {
@@ -42,11 +70,9 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
                     var sprite = _backgroundSpriteSheet.Tile(directions);
 
-                    BLT.Put(x, y, sprite);
+                    BLT.Put(x * BLTTilesIOSystem.TILE_SPACING, y * BLTTilesIOSystem.TILE_SPACING, sprite);
                 }
             }
-
-            BLT.Print(5,5,"Test");
         }
     }
 }

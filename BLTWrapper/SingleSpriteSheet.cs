@@ -15,6 +15,7 @@ namespace BLTWrapper
 
         public SingleSpriteSheet(string name, int offset)
         {
+            Name = name;
             _offset = offset;
         }
 

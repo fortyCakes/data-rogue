@@ -10,3 +10,15 @@ C:\Users\Lex\source\repos\fortyCakes\data-rogue\BLTWrapper\obj\Debug\BLTWrapper.
 C:\Users\Lex\source\repos\fortyCakes\data-rogue\BLTWrapper\obj\Debug\BLTWrapper.csproj.CopyComplete
 C:\Users\Lex\source\repos\fortyCakes\data-rogue\BLTWrapper\obj\Debug\BLTWrapper.dll
 C:\Users\Lex\source\repos\fortyCakes\data-rogue\BLTWrapper\obj\Debug\BLTWrapper.pdb
+C:\Users\alex.stuart\Source\Repos\data-rogue\BLTWrapper\bin\Debug\BearLibTerminal.dll
+C:\Users\alex.stuart\Source\Repos\data-rogue\BLTWrapper\bin\Debug\BLTWrapper.dll.config
+C:\Users\alex.stuart\Source\Repos\data-rogue\BLTWrapper\bin\Debug\BLTWrapper.dll
+C:\Users\alex.stuart\Source\Repos\data-rogue\BLTWrapper\bin\Debug\BLTWrapper.pdb
+C:\Users\alex.stuart\Source\Repos\data-rogue\BLTWrapper\bin\Debug\BearLib.dll
+C:\Users\alex.stuart\Source\Repos\data-rogue\BLTWrapper\bin\Debug\BearLib.pdb
+C:\Users\alex.stuart\Source\Repos\data-rogue\BLTWrapper\bin\Debug\BearLib.dll.config
+C:\Users\alex.stuart\Source\Repos\data-rogue\BLTWrapper\obj\Debug\BLTWrapper.csprojAssemblyReference.cache
+C:\Users\alex.stuart\Source\Repos\data-rogue\BLTWrapper\obj\Debug\BLTWrapper.csproj.CoreCompileInputs.cache
+C:\Users\alex.stuart\Source\Repos\data-rogue\BLTWrapper\obj\Debug\BLTWrapper.csproj.CopyComplete
+C:\Users\alex.stuart\Source\Repos\data-rogue\BLTWrapper\obj\Debug\BLTWrapper.dll
+C:\Users\alex.stuart\Source\Repos\data-rogue\BLTWrapper\obj\Debug\BLTWrapper.pdb

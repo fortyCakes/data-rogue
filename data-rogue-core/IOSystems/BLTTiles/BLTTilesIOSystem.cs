@@ -33,6 +33,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
         private UpdateEventHandler _update;
         private UpdateEventHandler _render;
         private readonly IOSystemConfiguration _ioSystemConfiguration;
+        public const int TILE_SPACING = 8;
 
         public BLTTilesIOSystem(IOSystemConfiguration ioSystemConfiguration)
         { 
@@ -106,18 +107,21 @@ namespace data_rogue_core.IOSystems.BLTTiles
             _update = onUpdate;
             _render = onRender;
 
-            var config = $"window: size={_ioSystemConfiguration.InitialWidth}x{_ioSystemConfiguration.InitialHeight}, cellsize={_ioSystemConfiguration.TileWidth}x{_ioSystemConfiguration.TileHeight}, title='{_ioSystemConfiguration.WindowTitle}';";
+            var config = $"window: size={_ioSystemConfiguration.InitialWidth*TILE_SPACING}x{_ioSystemConfiguration.InitialHeight* TILE_SPACING}, cellsize=4x4, title='{_ioSystemConfiguration.WindowTitle}';";
 
             BLT.Set(config);
 
-            BLT.Set("font: Images/Tileset/SDS_8x8.ttf, size=8;");
+            BLT.Set("text font: Images/Tileset/Andux_sleipnir_8x12_tf.png, codepage=437, size=8x12, spacing=2x3;");
+            BLT.Set("textLarge font: Images/Tileset/Andux_sleipnir_8x12_tf.png, codepage=437, size=8x12, resize=16x24, resize-filter=nearest, spacing=4x6;");
+            BLT.Set("textXLarge font: Images/Tileset/Andux_sleipnir_8x12_tf.png, codepage=437, size=8x12, resize=32x48, resize-filter=nearest, spacing=8x12;");
 
-            BoxTilesetSpriteSheet menuBackground = _spriteLoader.LoadTileset_BoxType("textbox_blue", "Images/Sprites/Misc/textbox_blue.png", 16, 16, 2);
+            SingleSpriteSheet selectorSprite = _spriteLoader.LoadSingleSprite("selector", "Images/Sprites/Misc/selector.png", 16, 16, 2, TILE_SPACING);
+            BoxTilesetSpriteSheet menuBackground = _spriteLoader.LoadTileset_BoxType("textbox_blue", "Images/Sprites/Misc/textbox_blue.png", 16, 16, 2, TILE_SPACING);
 
             var renderers = new Dictionary<ActivityType, IRenderer>()
             {
                 {ActivityType.Gameplay, new BLTTilesGameplayRenderer(_ioSystemConfiguration)},
-                {ActivityType.Menu, new BLTTilesMenuRenderer(menuBackground)},
+                {ActivityType.Menu, new BLTTilesMenuRenderer(menuBackground, selectorSprite)},
                 {ActivityType.StaticDisplay, new BLTTilesStaticTextRenderer()},
                 {ActivityType.Form, new BLTTilesFormRenderer() },
                 {ActivityType.Targeting, new BLTTilesTargetingRenderer( _ioSystemConfiguration) }

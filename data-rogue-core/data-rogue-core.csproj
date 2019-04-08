@@ -109,6 +109,7 @@
     <Compile Include="Data\IEntityDataParser.cs" />
     <Compile Include="EventSystem\Rules\OnAttackProcEnchantmentRule.cs" />
     <Compile Include="EventSystem\Rules\PlayerVictoryRule.cs" />
+    <Compile Include="IOSystems\BLTTiles\BLTLayers.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTTilesFormRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTTilesGameplayRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTTilesIOSystem.cs" />
@@ -371,11 +372,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\Sprites\Misc\selector.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Sprites\Misc\textbox_blue.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Tiles\wall_1.png" />
     <Content Include="Images\Tileset\Alloy_curses_12x12.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Tileset\Andux_sleipnir_8x12_tf.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Tileset\cheepicus_8x8.png">
