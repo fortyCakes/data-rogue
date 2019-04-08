@@ -6,7 +6,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
     {
         public void Render(string text, bool renderEntireSpace)
         {
-            throw new System.NotImplementedException();
+            //throw new System.NotImplementedException();
         }
     }
 }

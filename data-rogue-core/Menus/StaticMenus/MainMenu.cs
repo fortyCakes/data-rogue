@@ -5,6 +5,8 @@ namespace data_rogue_core.Menus.StaticMenus
 {
     public class MainMenu : Menu
     {
+        public override bool Centred => true;
+
         private readonly IPlayerSystem _playerSystem;
         private readonly ISaveSystem _saveSystem;
 

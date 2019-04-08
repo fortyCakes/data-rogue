@@ -116,6 +116,7 @@
     <Compile Include="IOSystems\BLTTiles\BLTTilesMenuRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTTilesStaticTextRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTTilesTargetingRenderer.cs" />
+    <Compile Include="IOSystems\BLTTiles\KeyConverter.cs" />
     <Compile Include="IOSystems\IOSystemConfiguration.cs" />
     <Compile Include="IOSystems\IRendereringConfiguration.cs" />
     <Compile Include="IOSystems\IStatsDisplayer.cs" />
@@ -372,7 +373,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\Sprites\Misc\selector.png">
+    <Content Include="Images\Sprites\Misc\selector-left.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Misc\selector-right.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Misc\textbox_blue.png">

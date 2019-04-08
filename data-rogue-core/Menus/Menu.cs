@@ -9,6 +9,7 @@ namespace data_rogue_core.Menus
     public class Menu
     {
         public string MenuName { get; set; }
+        public virtual bool Centred => false;
 
         public List<MenuItem> MenuItems { get; private set; }
         public virtual List<MenuAction> AvailableActions { get; set; } = new List<MenuAction> { MenuAction.Select };

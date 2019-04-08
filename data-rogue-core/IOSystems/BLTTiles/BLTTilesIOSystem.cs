@@ -5,6 +5,7 @@ using data_rogue_core.Renderers;
 using data_rogue_core.Renderers.ConsoleRenderers;
 using OpenTK.Input;
 using RLNET;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 
@@ -32,6 +33,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
         private bool isClosed;
         private UpdateEventHandler _update;
         private UpdateEventHandler _render;
+        private KeyCombination _keyCombination;
         private readonly IOSystemConfiguration _ioSystemConfiguration;
         public const int TILE_SPACING = 8;
 
@@ -55,9 +57,45 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
             do
             {
+                CheckInput();
                 _update(null, null);
                 _render(null, null);
-            } while (!isClosed && !BLT.Check(BLT.TK_CLOSE));
+            } while (!isClosed);
+        }
+
+        private void CheckInput()
+        {
+            if (BLT.HasInput())
+            {
+                var input = BLT.Read();
+
+                if (input == BLT.TK_CLOSE)
+                {
+                    isClosed = true;
+                }
+
+                //if (IsMouseEvent(input))
+                //{
+                //    ResolveMouseInput(input);
+                //}
+                //else
+                {
+                    ResolveKeyboardInput(input);
+                }
+            }
+        }
+
+        private void ResolveKeyboardInput(int input)
+        {
+            var key = KeyConverter.FromBLTInput(input);
+
+            _keyCombination = new KeyCombination
+            {
+                Key = key,
+                Ctrl = BLT.State(BLT.TK_CONTROL) != 0,
+                Shift = BLT.State(BLT.TK_SHIFT) != 0,
+                Alt = BLT.State(BLT.TK_ALT) != 0,
+            };
         }
 
         public void Draw()
@@ -67,20 +105,9 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
         public KeyCombination GetKeyPress()
         {
-            var input = BLT.Peek();
-
-            var key = (Key)input;
-            var ctrl = BLT.Check(BLT.TK_CONTROL);
-            var shift = BLT.Check(BLT.TK_SHIFT);
-            var alt = BLT.Check(BLT.TK_ALT);
-
-            return new KeyCombination
-            {
-                Key = key,
-                Shift = shift,
-                Ctrl = ctrl,
-                Alt = alt
-            };
+            var ret = _keyCombination;
+            _keyCombination = null;
+            return ret;
         }
 
         public MouseData GetMouseData()
@@ -115,19 +142,22 @@ namespace data_rogue_core.IOSystems.BLTTiles
             BLT.Set("textLarge font: Images/Tileset/Andux_sleipnir_8x12_tf.png, codepage=437, size=8x12, resize=16x24, resize-filter=nearest, spacing=4x6;");
             BLT.Set("textXLarge font: Images/Tileset/Andux_sleipnir_8x12_tf.png, codepage=437, size=8x12, resize=32x48, resize-filter=nearest, spacing=8x12;");
 
-            SingleSpriteSheet selectorSprite = _spriteLoader.LoadSingleSprite("selector", "Images/Sprites/Misc/selector.png", 16, 16, 2, TILE_SPACING);
+            SingleSpriteSheet selectorSpriteLeft = _spriteLoader.LoadSingleSprite("selector", "Images/Sprites/Misc/selector-left.png", 8, 14, 1, TILE_SPACING);
+            SingleSpriteSheet selectorSpriteRight = _spriteLoader.LoadSingleSprite("selector", "Images/Sprites/Misc/selector-right.png", 8, 14, 1, TILE_SPACING);
             BoxTilesetSpriteSheet menuBackground = _spriteLoader.LoadTileset_BoxType("textbox_blue", "Images/Sprites/Misc/textbox_blue.png", 16, 16, 2, TILE_SPACING);
 
             var renderers = new Dictionary<ActivityType, IRenderer>()
             {
                 {ActivityType.Gameplay, new BLTTilesGameplayRenderer(_ioSystemConfiguration)},
-                {ActivityType.Menu, new BLTTilesMenuRenderer(menuBackground, selectorSprite)},
+                {ActivityType.Menu, new BLTTilesMenuRenderer(menuBackground, selectorSpriteLeft, selectorSpriteRight)},
                 {ActivityType.StaticDisplay, new BLTTilesStaticTextRenderer()},
-                {ActivityType.Form, new BLTTilesFormRenderer() },
+                {ActivityType.Form, new BLTTilesFormRenderer(menuBackground, selectorSpriteLeft, selectorSpriteRight) },
                 {ActivityType.Targeting, new BLTTilesTargetingRenderer( _ioSystemConfiguration) }
             };
 
             RendererFactory = new RendererFactory(renderers);
+
+            BLT.Refresh();
         }
     }
 }
