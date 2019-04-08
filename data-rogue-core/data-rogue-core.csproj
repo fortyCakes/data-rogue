@@ -373,6 +373,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\Sprites\Misc\blue_button_pressed.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Misc\blue_button_unpressed.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Sprites\Misc\selector-left.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
