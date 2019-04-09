@@ -13,7 +13,7 @@ namespace data_rogue_core.Forms
     public class Form
     {
         protected readonly IActivitySystem _activitySystem;
-        public string Title { get; }
+        public virtual string Title { get; }
         public FormButton Buttons { get; }
         public FormButtonSelected OnSelectCallback { get; protected set; }
         public Dictionary<string, FormData> Fields { get; set; }
@@ -32,6 +32,7 @@ namespace data_rogue_core.Forms
             Buttons = buttons;
             OnSelectCallback = onSelectCallback;
             Fields = fields;
+            Title = title;
 
             SelectField(Fields.First().Key, true);
         }
@@ -147,7 +148,7 @@ namespace data_rogue_core.Forms
                 return true;
             }
 
-            if (action.KeyPress.Key == Key.BackSpace)
+            if (action.KeyPress.Key == Key.BackSpace || action.KeyPress.Key == Key.Back)
             {
                 string text = (string)selectedFormData.Value;
 

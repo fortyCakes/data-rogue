@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using BearLib;
 using BLTWrapper;
 using data_rogue_core.Forms;
@@ -8,23 +7,16 @@ using data_rogue_core.Renderers.ConsoleRenderers;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
+
     public class BLTTilesFormRenderer : IFormRenderer
     {
-        private readonly ISpriteSheet _backgroundSpriteSheet;
-        private readonly ISpriteSheet _selectorSpriteLeft;
-        private readonly ISpriteSheet _selectorSpriteRight;
+        private readonly ISpriteManager _spriteManager;
         private int _height;
         private int _width;
-        private ISpriteSheet _buttonPressed;
-        private ISpriteSheet _button;
 
-        public BLTTilesFormRenderer(ISpriteSheet backgroundSpriteSheet, ISpriteSheet selectorSpriteLeft, ISpriteSheet selectorSpriteRight, ISpriteSheet button, ISpriteSheet buttonPressed)
+        public BLTTilesFormRenderer(ISpriteManager spriteManager)
         {
-            _backgroundSpriteSheet = backgroundSpriteSheet;
-            _selectorSpriteLeft = selectorSpriteLeft;
-            _selectorSpriteRight = selectorSpriteRight;
-            _button = button;
-            _buttonPressed = buttonPressed;
+            _spriteManager = spriteManager;
         }
 
         public void Render(Form form)
@@ -34,13 +26,73 @@ namespace data_rogue_core.IOSystems.BLTTiles
             _height = BLT.State(BLT.TK_HEIGHT);
             _width = BLT.State(BLT.TK_WIDTH);
 
-            BLTTilesBackgroundRenderer.RenderBackground(_width, _height, _backgroundSpriteSheet);
+            BLTTilesBackgroundRenderer.RenderBackground(_width, _height, _spriteManager.Get("textbox_blue"));
 
             RenderTitleBar(form);
 
             RenderFormButtons(form);
 
+            RenderFormControls(form);
+
             // throw new NotImplementedException();
+        }
+        private void RenderFormControls(Form form)
+        {
+            int yCoordinate = 12;
+
+            foreach (var field in form.Fields)
+            {
+                RenderSingleControl(ref yCoordinate, field.Key, field.Value, form.FormSelection);
+            }
+        }
+
+        private void RenderSingleControl(ref int yCoordinate, string fieldName, FormData fieldValue, FormSelection selection)
+        {
+            var selected = selection.SelectedItem == fieldName;
+            if (selected)
+            {
+                BLT.Layer(BLTLayers.UIElements);
+                BLT.Font("");
+                BLT.Put(4, yCoordinate, _spriteManager.Tile("selector_left", TileDirections.Left));
+            }
+
+            BLT.Font("text");
+            BLT.Layer(BLTLayers.Text);
+            var nameText = fieldName + ":";
+            var nameSize = BLT.Measure(nameText);
+
+            switch (fieldValue.FormDataType)
+            {
+                case FormDataType.Text:
+
+                    BLT.Print(8, yCoordinate, fieldName + ":");
+                    var size = BLTTextBox.Render(12 + nameSize.Width, yCoordinate, fieldValue.Value.ToString(), _spriteManager);
+
+                    yCoordinate += size.Height + 2;
+
+                    break;
+                case FormDataType.MultipleChoice:
+
+                    BLT.Print(8, yCoordinate, fieldName + ":");
+
+                    var text = fieldValue.Value.ToString();
+                    var textSize = BLT.Measure(text);
+
+
+                    BLT.Print(23 + nameSize.Width, yCoordinate, text);
+
+                    if (selected)
+                    {
+                        BLT.Layer(BLTLayers.UIElements);
+                        BLT.Font("");
+                        BLT.Put(12 + nameSize.Width, yCoordinate - 2, _spriteManager.Tile("arrow", TileDirections.Left));
+                        BLT.Put(26 + nameSize.Width + textSize.Width, yCoordinate - 2, _spriteManager.Tile("arrow", TileDirections.Right));
+                    }
+
+                    yCoordinate += 5;
+
+                    break;
+            }
         }
 
         private void RenderFormButtons(Form form)
@@ -53,52 +105,11 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
                 if (form.Buttons.HasFlag(flag))
                 {
-                    var buttonSize = RenderButton(xCoordinate, _height - 12, flag.ToString(), form.FormSelection.SelectedItem == flag.ToString());
+                    var buttonSize = BLTButton.RenderButton(xCoordinate, _height - 12, flag.ToString(), form.FormSelection.SelectedItem == flag.ToString(), _spriteManager);
 
                     xCoordinate += buttonSize.Width + 4;
                 }
             }
-        }
-
-        private Size RenderButton(int x, int y, string buttonText, bool pressed)
-        {
-            var spriteSheet = pressed ? _buttonPressed : _button;
-
-            BLT.Font("text");
-
-            var buttonSize = 4; // base size
-            var textSize = BLT.Measure(buttonText).Width;
-            buttonSize += textSize;
-            if (buttonSize % 8 != 0)
-            {
-                buttonSize = (buttonSize / 8 + 1) * 8;
-            }
-
-            var numberOfTiles = buttonSize / 8;
-
-            BLT.Font("");
-            BLT.Layer((int)BLTLayers.UIElements);
-            for (int i = 0; i < numberOfTiles; i++)
-            {
-                TileDirections direction = TileDirections.None;
-                if (i != 0)
-                {
-                    direction |= TileDirections.Left;
-                }
-
-                if (i != numberOfTiles - 1)
-                {
-                    direction |= TileDirections.Right;
-                }
-
-                BLT.Put(x + 8*i, y, spriteSheet.Tile(direction));
-            }
-
-            BLT.Font("text");
-            BLT.Layer((int)BLTLayers.Text);
-            BLT.Print(x + buttonSize / 2 - textSize / 2, y + (pressed ? 3 : 2), buttonText);
-
-            return new Size(8*numberOfTiles, 8);
         }
 
         private void RenderTitleBar(Form form)

@@ -40,6 +40,17 @@ namespace BLTWrapper
             return sheet;
         }
 
+        public FourDirectionSpriteSheet LoadFourDirectionSprite(string name, string imageFile, int spriteWidth, int spriteHeight, int scaling, int spacing)
+        {
+            var sheet = new FourDirectionSpriteSheet(name, _offset);
+
+            LoadSpriteSheetFile(imageFile, spriteWidth, spriteHeight, scaling, spacing);
+
+            _offset += 4;
+
+            return sheet;
+        }
+
         private void LoadSpriteSheetFile(string imageFile, int spriteWidth, int spriteHeight, int scaling, int spacing)
         {
             string configString = $"0x{_offset.ToString("X")}: {imageFile}, size={spriteWidth}x{spriteHeight}, resize={spriteWidth * scaling}x{spriteHeight * scaling}, resize-filter=nearest, spacing={spacing}x{spacing};";

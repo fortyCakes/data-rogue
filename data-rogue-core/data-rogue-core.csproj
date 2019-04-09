@@ -109,13 +109,18 @@
     <Compile Include="Data\IEntityDataParser.cs" />
     <Compile Include="EventSystem\Rules\OnAttackProcEnchantmentRule.cs" />
     <Compile Include="EventSystem\Rules\PlayerVictoryRule.cs" />
+    <Compile Include="IOSystems\BLTTiles\BLTButton.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTLayers.cs" />
+    <Compile Include="IOSystems\BLTTiles\BLTSpriteManager.cs" />
+    <Compile Include="IOSystems\BLTTiles\BLTTextBox.cs" />
+    <Compile Include="IOSystems\BLTTiles\BLTTilesBackgroundRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTTilesFormRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTTilesGameplayRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTTilesIOSystem.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTTilesMenuRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTTilesStaticTextRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTTilesTargetingRenderer.cs" />
+    <Compile Include="IOSystems\BLTTiles\ISpriteManager.cs" />
     <Compile Include="IOSystems\BLTTiles\KeyConverter.cs" />
     <Compile Include="IOSystems\IOSystemConfiguration.cs" />
     <Compile Include="IOSystems\IRendereringConfiguration.cs" />
@@ -373,6 +378,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\Sprites\Misc\arrow.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Sprites\UITiles\blue_button_pressed.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -389,6 +397,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Tiles\wall_1.png" />
+    <Content Include="Images\Sprites\UITiles\textbox_grey.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\UITiles\textbox_white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Tileset\Alloy_curses_12x12.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

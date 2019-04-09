@@ -32,11 +32,11 @@ namespace BLTWrapper
             {TileDirections.Up | TileDirections.Left | TileDirections.Right, 15},
             {TileDirections.Left | TileDirections.Down, 2},
             {TileDirections.Up | TileDirections.Down, 10},
-            {TileDirections.Down |TileDirections.Up|TileDirections.Left, 9},
-            {TileDirections.Down|TileDirections.Right, 0},
-            {TileDirections.Left|TileDirections.Right|TileDirections.Down, 1},
-            {TileDirections.Right|TileDirections.Down|TileDirections.Up, 7},
-            {TileDirections.Down|TileDirections.Up|TileDirections.Left|TileDirections.Right, 8}
+            {TileDirections.Down | TileDirections.Up | TileDirections.Left, 9},
+            {TileDirections.Down | TileDirections.Right, 0},
+            {TileDirections.Left | TileDirections.Right | TileDirections.Down, 1},
+            {TileDirections.Right | TileDirections.Down | TileDirections.Up, 7},
+            {TileDirections.Down | TileDirections.Up | TileDirections.Left | TileDirections.Right, 8}
         };
 
     }

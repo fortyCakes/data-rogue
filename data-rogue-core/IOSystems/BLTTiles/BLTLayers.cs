@@ -1,10 +1,10 @@
 ﻿namespace data_rogue_core.IOSystems.BLTTiles
 {
-    public enum BLTLayers
+    public static class BLTLayers
     {
-        Base = 0,
-        Background = 1,
-        UIElements = 5,
-        Text = 10
+        public static int Base = 0;
+        public static int Background = 1;
+        public static int UIElements = 5;
+        public static int Text = 10;
     }
 }

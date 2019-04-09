@@ -54,7 +54,8 @@ namespace data_rogue_core.IOSystems.BLTTiles
             {BLT.TK_UP, Key.Up },
             {BLT.TK_LEFT, Key.Left },
             {BLT.TK_RIGHT, Key.Right },
-            {BLT.TK_ENTER, Key.Enter }
+            {BLT.TK_ENTER, Key.Enter },
+            {BLT.TK_SPACE, Key.Space }
 
         };
 

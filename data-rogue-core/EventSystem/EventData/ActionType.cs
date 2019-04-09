@@ -2,6 +2,7 @@
 {
     public enum ActionType
     {
+        None = 0,
         Wait,
         InventoryMenu,
         Select,

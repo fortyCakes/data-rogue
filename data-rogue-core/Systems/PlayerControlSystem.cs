@@ -92,7 +92,12 @@ namespace data_rogue_core.Systems
         {
             var keyBinding = _keyBindings.SingleOrDefault(k => k.Key.Equals(keyPress));
 
-            if (keyBinding == null) return null;
+            if (keyBinding == null)
+            {
+                if (keyPress == null) return null;
+
+                return new ActionEventData{ Action =  ActionType.None, Parameters = null, KeyPress = keyPress};
+            }
 
             var action = keyBinding.Action;
 

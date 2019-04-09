@@ -35,6 +35,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
         private UpdateEventHandler _render;
         private KeyCombination _keyCombination;
         private readonly IOSystemConfiguration _ioSystemConfiguration;
+        private BLTSpriteManager _spriteManager;
         public const int TILE_SPACING = 8;
 
         public BLTTilesIOSystem(IOSystemConfiguration ioSystemConfiguration)
@@ -141,20 +142,24 @@ namespace data_rogue_core.IOSystems.BLTTiles
             BLT.Set("text font: Images/Tileset/Andux_sleipnir_8x12_tf.png, codepage=437, size=8x12, spacing=2x3;");
             BLT.Set("textLarge font: Images/Tileset/Andux_sleipnir_8x12_tf.png, codepage=437, size=8x12, resize=16x24, resize-filter=nearest, spacing=4x6;");
             BLT.Set("textXLarge font: Images/Tileset/Andux_sleipnir_8x12_tf.png, codepage=437, size=8x12, resize=32x48, resize-filter=nearest, spacing=8x12;");
-
-            SingleSpriteSheet selectorSpriteLeft = _spriteLoader.LoadSingleSprite("selector", "Images/Sprites/Misc/selector-left.png", 8, 14, 1, TILE_SPACING);
-            SingleSpriteSheet selectorSpriteRight = _spriteLoader.LoadSingleSprite("selector", "Images/Sprites/Misc/selector-right.png", 8, 14, 1, TILE_SPACING);
-            BoxTilesetSpriteSheet menuBackground = _spriteLoader.LoadTileset_BoxType("textbox_blue", "Images/Sprites/UITiles/textbox_blue.png", 16, 16, 2, TILE_SPACING);
-
-            BoxTilesetSpriteSheet button = _spriteLoader.LoadTileset_BoxType("button", "Images/Sprites/UITiles/blue_button_unpressed.png", 16, 16, 2, TILE_SPACING);
-            BoxTilesetSpriteSheet buttonPressed = _spriteLoader.LoadTileset_BoxType("button_pressed", "Images/Sprites/UITiles/blue_button_pressed.png", 16, 16, 2, TILE_SPACING);
+            
+            _spriteManager = new BLTSpriteManager();
+            _spriteManager.Add(_spriteLoader.LoadSingleSprite("selector_left", "Images/Sprites/Misc/selector-left.png", 8, 14, 1, TILE_SPACING));
+            _spriteManager.Add(_spriteLoader.LoadSingleSprite("selector_right", "Images/Sprites/Misc/selector-right.png", 8, 14, 1, TILE_SPACING));
+            _spriteManager.Add(_spriteLoader.LoadTileset_BoxType("textbox_blue", "Images/Sprites/UITiles/textbox_blue.png", 16, 16, 2, TILE_SPACING));
+            _spriteManager.Add(_spriteLoader.LoadTileset_BoxType("textbox_grey", "Images/Sprites/UITiles/textbox_grey.png", 16, 16, 2, TILE_SPACING));
+            _spriteManager.Add(_spriteLoader.LoadTileset_BoxType("textbox_grey_small", "Images/Sprites/UITiles/textbox_grey.png", 16, 16, 1, TILE_SPACING));
+            _spriteManager.Add(_spriteLoader.LoadTileset_BoxType("textbox_white", "Images/Sprites/UITiles/textbox_white.png", 16, 16, 2, TILE_SPACING));
+            _spriteManager.Add(_spriteLoader.LoadTileset_BoxType("button_unpressed", "Images/Sprites/UITiles/blue_button_unpressed.png", 16, 16, 2, TILE_SPACING));
+            _spriteManager.Add(_spriteLoader.LoadTileset_BoxType("button_pressed", "Images/Sprites/UITiles/blue_button_pressed.png", 16, 16, 2, TILE_SPACING));
+            _spriteManager.Add(_spriteLoader.LoadFourDirectionSprite("arrow", "Images/Sprites/Misc/arrow.png", 16, 16, 2, TILE_SPACING));
 
             var renderers = new Dictionary<ActivityType, IRenderer>()
             {
                 {ActivityType.Gameplay, new BLTTilesGameplayRenderer(_ioSystemConfiguration)},
-                {ActivityType.Menu, new BLTTilesMenuRenderer(menuBackground, selectorSpriteLeft, selectorSpriteRight)},
+                {ActivityType.Menu, new BLTTilesMenuRenderer(_spriteManager)},
                 {ActivityType.StaticDisplay, new BLTTilesStaticTextRenderer()},
-                {ActivityType.Form, new BLTTilesFormRenderer(menuBackground, selectorSpriteLeft, selectorSpriteRight, button, buttonPressed) },
+                {ActivityType.Form, new BLTTilesFormRenderer(_spriteManager) },
                 {ActivityType.Targeting, new BLTTilesTargetingRenderer( _ioSystemConfiguration) }
             };
 

@@ -8,47 +8,15 @@ using System.Text;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
-    public static class BLTTilesBackgroundRenderer
-    {
-        public static void RenderBackground(int _width, int _height, ISpriteSheet backgroundSpriteSheet)
-        {
-            BLT.Layer((int)BLTLayers.Background);
-            BLT.Font("");
-
-            var width = _width / BLTTilesIOSystem.TILE_SPACING;
-            var height = _height / BLTTilesIOSystem.TILE_SPACING;
-
-            for (int x = 0; x < width; x++)
-            {
-                for (int y = 0; y < height; y++)
-                {
-                    var directions = TileDirections.None;
-                    if (x != 0) directions |= TileDirections.Left;
-                    if (x != width - 1) directions |= TileDirections.Right;
-                    if (y != 0) directions |= TileDirections.Up;
-                    if (y != height - 1) directions |= TileDirections.Down;
-
-                    var sprite = backgroundSpriteSheet.Tile(directions);
-
-                    BLT.Put(x * BLTTilesIOSystem.TILE_SPACING, y * BLTTilesIOSystem.TILE_SPACING, sprite);
-                }
-            }
-        }
-    }
-
     public class BLTTilesMenuRenderer : IMenuRenderer
     {
-        private ISpriteSheet _backgroundSpriteSheet;
+        private readonly ISpriteManager _spriteManager;
         private int _height;
         private int _width;
-        private readonly ISpriteSheet _selectorSpriteLeft;
-        private readonly ISpriteSheet _selectorSpriteRight;
 
-        public BLTTilesMenuRenderer(ISpriteSheet backgroundSpriteSheet, ISpriteSheet selectorSpriteLeft, ISpriteSheet selectorSpriteRight)
+        public BLTTilesMenuRenderer(ISpriteManager spriteManager)
         {
-            _backgroundSpriteSheet = backgroundSpriteSheet;
-            _selectorSpriteLeft = selectorSpriteLeft;
-            _selectorSpriteRight = selectorSpriteRight;
+            _spriteManager = spriteManager;
         }
 
 
@@ -59,7 +27,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             _height = BLT.State(BLT.TK_HEIGHT);
             _width = BLT.State(BLT.TK_WIDTH);
 
-            BLTTilesBackgroundRenderer.RenderBackground(_width, _height, _backgroundSpriteSheet);
+            BLTTilesBackgroundRenderer.RenderBackground(_width, _height, _spriteManager.Get("textbox_blue"));
 
             RenderTitleBar(menu);
 
@@ -181,8 +149,8 @@ namespace data_rogue_core.IOSystems.BLTTiles
         private void RenderMenuSelector(int baseX, int y, Size size)
         {
             BLT.Font("");
-            BLT.PutExt(baseX - 4, y, 0, -1, _selectorSpriteLeft.Tile(TileDirections.Left));
-            BLT.PutExt(baseX + size.Width + 2, y, -2, -1, _selectorSpriteRight.Tile(TileDirections.Right));
+            BLT.PutExt(baseX - 4, y, 0, -1, _spriteManager.Get("selector_left").Tile(TileDirections.Left));
+            BLT.PutExt(baseX + size.Width + 2, y, -2, -1, _spriteManager.Get("selector_left").Tile(TileDirections.Right));
             BLT.Font("text");
         }
 
