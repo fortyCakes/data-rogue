@@ -26,5 +26,10 @@ namespace data_rogue_core.IOSystems.BLTTiles
         {
             return _spriteDictionary[name].Tile(directions);
         }
+
+        public int Tile(string name)
+        {
+            return Tile(name, TileDirections.None);
+        }
     }
 }

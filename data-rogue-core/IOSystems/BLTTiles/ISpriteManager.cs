@@ -9,5 +9,6 @@ namespace data_rogue_core.IOSystems.BLTTiles
         ISpriteSheet Get(string name);
 
         int Tile(string name, TileDirections directions);
+        int Tile(string name);
     }
 }
