@@ -444,6 +444,9 @@
     <Content Include="Images\Sprites\Entities\sword_1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\Sprites\Tiles\stone_wall_external.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Sprites\Tiles\trees_1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
