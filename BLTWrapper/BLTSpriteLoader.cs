@@ -55,8 +55,8 @@ namespace BLTWrapper
 
             LoadSpriteSheetFile(imageFile, spriteWidth, spriteHeight, scaling, spacing);
 
-            // We assume loading a 4x3 tile set
-            _offset += 4*3;
+            // We assume loading a 8x3 tile set
+            _offset += 8*3;
 
             return sheet;
         }

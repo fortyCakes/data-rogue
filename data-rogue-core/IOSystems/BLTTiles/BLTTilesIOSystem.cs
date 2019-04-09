@@ -144,14 +144,17 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
             SingleSpriteSheet selectorSpriteLeft = _spriteLoader.LoadSingleSprite("selector", "Images/Sprites/Misc/selector-left.png", 8, 14, 1, TILE_SPACING);
             SingleSpriteSheet selectorSpriteRight = _spriteLoader.LoadSingleSprite("selector", "Images/Sprites/Misc/selector-right.png", 8, 14, 1, TILE_SPACING);
-            BoxTilesetSpriteSheet menuBackground = _spriteLoader.LoadTileset_BoxType("textbox_blue", "Images/Sprites/Misc/textbox_blue.png", 16, 16, 2, TILE_SPACING);
+            BoxTilesetSpriteSheet menuBackground = _spriteLoader.LoadTileset_BoxType("textbox_blue", "Images/Sprites/UITiles/textbox_blue.png", 16, 16, 2, TILE_SPACING);
+
+            BoxTilesetSpriteSheet button = _spriteLoader.LoadTileset_BoxType("button", "Images/Sprites/UITiles/blue_button_unpressed.png", 16, 16, 2, TILE_SPACING);
+            BoxTilesetSpriteSheet buttonPressed = _spriteLoader.LoadTileset_BoxType("button_pressed", "Images/Sprites/UITiles/blue_button_pressed.png", 16, 16, 2, TILE_SPACING);
 
             var renderers = new Dictionary<ActivityType, IRenderer>()
             {
                 {ActivityType.Gameplay, new BLTTilesGameplayRenderer(_ioSystemConfiguration)},
                 {ActivityType.Menu, new BLTTilesMenuRenderer(menuBackground, selectorSpriteLeft, selectorSpriteRight)},
                 {ActivityType.StaticDisplay, new BLTTilesStaticTextRenderer()},
-                {ActivityType.Form, new BLTTilesFormRenderer(menuBackground, selectorSpriteLeft, selectorSpriteRight) },
+                {ActivityType.Form, new BLTTilesFormRenderer(menuBackground, selectorSpriteLeft, selectorSpriteRight, button, buttonPressed) },
                 {ActivityType.Targeting, new BLTTilesTargetingRenderer( _ioSystemConfiguration) }
             };
 

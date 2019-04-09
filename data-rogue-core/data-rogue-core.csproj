@@ -373,10 +373,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\Sprites\Misc\blue_button_pressed.png">
+    <Content Include="Images\Sprites\UITiles\blue_button_pressed.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Misc\blue_button_unpressed.png">
+    <Content Include="Images\Sprites\UITiles\blue_button_unpressed.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Misc\selector-left.png">
@@ -385,7 +385,7 @@
     <Content Include="Images\Sprites\Misc\selector-right.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Misc\textbox_blue.png">
+    <Content Include="Images\Sprites\UITiles\textbox_blue.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Tiles\wall_1.png" />
