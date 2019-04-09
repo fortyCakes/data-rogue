@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Linq;
 using BearLib;
 using BLTWrapper;
 using data_rogue_core.Forms;
+using data_rogue_core.Forms.StaticForms;
 using data_rogue_core.Renderers;
 using data_rogue_core.Renderers.ConsoleRenderers;
+using data_rogue_core.Utils;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
@@ -61,19 +64,18 @@ namespace data_rogue_core.IOSystems.BLTTiles
             var nameText = fieldName + ":";
             var nameSize = BLT.Measure(nameText);
 
+            BLT.Print(8, yCoordinate, fieldName + ":");
+
             switch (fieldValue.FormDataType)
             {
                 case FormDataType.Text:
 
-                    BLT.Print(8, yCoordinate, fieldName + ":");
                     var size = BLTTextBox.Render(12 + nameSize.Width, yCoordinate, fieldValue.Value.ToString(), _spriteManager);
 
                     yCoordinate += size.Height + 2;
 
                     break;
                 case FormDataType.MultipleChoice:
-
-                    BLT.Print(8, yCoordinate, fieldName + ":");
 
                     var text = fieldValue.Value.ToString();
                     var textSize = BLT.Measure(text);
@@ -90,6 +92,43 @@ namespace data_rogue_core.IOSystems.BLTTiles
                     }
 
                     yCoordinate += 5;
+
+                    break;
+
+                case FormDataType.StatArray:
+
+                    var statsFormData = fieldValue as StatsFormData;
+                    var stats = statsFormData.Stats;
+
+                    var statTotal = $"[[{statsFormData.CurrentTotalStat.ToString().PadLeft(4)}/{statsFormData.MaxTotalStat.ToString().PadRight(4)}]]";
+
+                    BLT.Print(16 + nameSize.Width, yCoordinate, statTotal);
+
+                    var longestStat = stats.Max(s => BLT.Measure(s.statName).Width);
+                    yCoordinate += 4;
+
+                    foreach (var stat in stats)
+                    {
+                        var statSelected = selection.SubItem == stat.statName;
+
+                        BLT.Print(12, yCoordinate, (stat.statName + ": ").PadRight(longestStat + 2));
+                        BLT.Print(12 + longestStat + 4, yCoordinate, (statSelected ? "[color=red]" : "") + "-");
+                        BLT.Print(12 + longestStat + 8, yCoordinate, stat.statValue.ToString().PadBoth(4));
+                        BLT.Print(12 + longestStat + 16, yCoordinate, (statSelected? "[color=green]" : "")+"+");
+
+                        if (statSelected)
+                        {
+                            BLT.Layer(BLTLayers.UIElements);
+                            BLT.Font("");
+                            BLT.Put(6, yCoordinate, _spriteManager.Tile("selector_left", TileDirections.Left));
+                            BLT.Layer(BLTLayers.Text);
+                            BLT.Font("text");
+                        }
+
+                        yCoordinate += 4;
+                    }
+
+                    yCoordinate += 2;
 
                     break;
             }

@@ -150,7 +150,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
         {
             BLT.Font("");
             BLT.PutExt(baseX - 4, y, 0, -1, _spriteManager.Get("selector_left").Tile(TileDirections.Left));
-            BLT.PutExt(baseX + size.Width + 2, y, -2, -1, _spriteManager.Get("selector_left").Tile(TileDirections.Right));
+            BLT.PutExt(baseX + size.Width + 2, y, -2, -1, _spriteManager.Get("selector_right").Tile(TileDirections.Right));
             BLT.Font("text");
         }
 
