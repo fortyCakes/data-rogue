@@ -33,6 +33,8 @@ Singleton: false
 [Appearance]
 Glyph: ]
 Color: #6B4D46
+[SpriteAppearance]
+Bottom: sword_1
 [Position]
 [Item]
 ItemLevel: 1

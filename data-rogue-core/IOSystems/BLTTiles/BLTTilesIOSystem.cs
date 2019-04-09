@@ -1,8 +1,11 @@
 ﻿using BearLib;
 using BLTWrapper;
 using data_rogue_core.Activities;
+using data_rogue_core.Components;
+using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Renderers;
 using data_rogue_core.Renderers.ConsoleRenderers;
+using data_rogue_core.Systems;
 using OpenTK.Input;
 using RLNET;
 using System;
@@ -35,7 +38,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
         private UpdateEventHandler _render;
         private KeyCombination _keyCombination;
         private readonly IOSystemConfiguration _ioSystemConfiguration;
-        private BLTSpriteManager _spriteManager;
+        private ISpriteManager _spriteManager;
         public const int TILE_SPACING = 8;
 
         private readonly List<int> MOUSE_EVENTS = new List<int> { BLT.TK_MOUSE_LEFT, BLT.TK_MOUSE_RIGHT };
@@ -143,32 +146,23 @@ namespace data_rogue_core.IOSystems.BLTTiles
             };
         }
 
-        public void Initialise(UpdateEventHandler onUpdate, UpdateEventHandler onRender)
+        public void Initialise(UpdateEventHandler onUpdate, UpdateEventHandler onRender, IEntityDataProvider graphicsDataProvider)
         {
             BLT.Open();
 
             _update = onUpdate;
             _render = onRender;
 
-            var config = $"window: size={_ioSystemConfiguration.InitialWidth*TILE_SPACING}x{_ioSystemConfiguration.InitialHeight* TILE_SPACING}, cellsize=4x4, title='{_ioSystemConfiguration.WindowTitle}', filter='keyboard,mouse';";
+            var config = $"window: size={_ioSystemConfiguration.InitialWidth * TILE_SPACING}x{_ioSystemConfiguration.InitialHeight * TILE_SPACING}, cellsize=4x4, title='{_ioSystemConfiguration.WindowTitle}', filter='keyboard,mouse';";
 
             BLT.Set(config);
 
             BLT.Set("text font: Images/Tileset/Andux_sleipnir_8x12_tf.png, codepage=437, size=8x12, spacing=2x3;");
             BLT.Set("textLarge font: Images/Tileset/Andux_sleipnir_8x12_tf.png, codepage=437, size=8x12, resize=16x24, resize-filter=nearest, spacing=4x6;");
             BLT.Set("textXLarge font: Images/Tileset/Andux_sleipnir_8x12_tf.png, codepage=437, size=8x12, resize=32x48, resize-filter=nearest, spacing=8x12;");
+
             
-            _spriteManager = new BLTSpriteManager();
-            _spriteManager.Add(_spriteLoader.LoadSingleSprite("selector_left", "Images/Sprites/Misc/selector-left.png", 8, 14, 1, TILE_SPACING));
-            _spriteManager.Add(_spriteLoader.LoadSingleSprite("selector_right", "Images/Sprites/Misc/selector-right.png", 8, 14, 1, TILE_SPACING));
-            _spriteManager.Add(_spriteLoader.LoadSingleSprite("unknown", "Images/Sprites/Misc/unknown.png", 16, 16, 2, TILE_SPACING));
-            _spriteManager.Add(_spriteLoader.LoadTileset_BoxType("textbox_blue", "Images/Sprites/UITiles/textbox_blue.png", 16, 16, 2, TILE_SPACING));
-            _spriteManager.Add(_spriteLoader.LoadTileset_BoxType("textbox_grey", "Images/Sprites/UITiles/textbox_grey.png", 16, 16, 2, TILE_SPACING));
-            _spriteManager.Add(_spriteLoader.LoadTileset_BoxType("textbox_grey_small", "Images/Sprites/UITiles/textbox_grey.png", 16, 16, 1, TILE_SPACING));
-            _spriteManager.Add(_spriteLoader.LoadTileset_BoxType("textbox_white", "Images/Sprites/UITiles/textbox_white.png", 16, 16, 2, TILE_SPACING));
-            _spriteManager.Add(_spriteLoader.LoadTileset_BoxType("button_unpressed", "Images/Sprites/UITiles/blue_button_unpressed.png", 16, 16, 2, TILE_SPACING));
-            _spriteManager.Add(_spriteLoader.LoadTileset_BoxType("button_pressed", "Images/Sprites/UITiles/blue_button_pressed.png", 16, 16, 2, TILE_SPACING));
-            _spriteManager.Add(_spriteLoader.LoadFourDirectionSprite("arrow", "Images/Sprites/Misc/arrow.png", 16, 16, 2, TILE_SPACING));
+            _spriteManager = SetUpSpriteManager(graphicsDataProvider);
 
             var renderers = new Dictionary<ActivityType, IRenderer>()
             {
@@ -182,6 +176,41 @@ namespace data_rogue_core.IOSystems.BLTTiles
             RendererFactory = new RendererFactory(renderers);
 
             BLT.Refresh();
+        }
+
+        private ISpriteManager SetUpSpriteManager(IEntityDataProvider graphicsDataProvider)
+        {
+            var spriteManager = new BLTSpriteManager();
+
+            var graphicsData = graphicsDataProvider.GetData();
+
+            foreach (var spriteCollection in graphicsData)
+            {
+                var entity = EntitySerializer.DeserializeOutsideEngine(spriteCollection);
+
+                foreach (SpriteSheet sheet in entity.Components)
+                {
+                    switch(sheet.Type)
+                    {
+                        case "SingleSprite":
+                            spriteManager.Add(_spriteLoader.LoadSingleSprite(sheet.Name, sheet.Path, sheet.SpriteWidth, sheet.SpriteHeight, sheet.Scaling, TILE_SPACING));
+                            break;
+                        case "TilesetBox":
+                            spriteManager.Add(_spriteLoader.LoadTileset_BoxType(sheet.Name, sheet.Path, sheet.SpriteWidth, sheet.SpriteHeight, sheet.Scaling, TILE_SPACING));
+                            break;
+                        case "TilesetWall":
+                            spriteManager.Add(_spriteLoader.LoadTileset_WallType(sheet.Name, sheet.Path, sheet.SpriteWidth, sheet.SpriteHeight, sheet.Scaling, TILE_SPACING));
+                            break;
+                        case "FourDirection":
+                            spriteManager.Add(_spriteLoader.LoadFourDirectionSprite(sheet.Name, sheet.Path, sheet.SpriteWidth, sheet.SpriteHeight, sheet.Scaling, TILE_SPACING));
+                            break;
+                        default:
+                            throw new Exception($"Unknown sprite sheet type '{sheet.Type}' in SetUpSpriteManager");
+                    }
+                }
+            }
+
+            return spriteManager;
         }
     }
 }

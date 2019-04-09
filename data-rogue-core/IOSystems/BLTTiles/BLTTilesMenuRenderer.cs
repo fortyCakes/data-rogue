@@ -122,7 +122,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
                     MenuItem item = menu.MenuItems[displayIndex];
                     int y = menuOffset + i * font_height;
 
-                    int x = 4;
+                    int x = 8;
                     var size = BLT.Measure(item.Text);
 
                     if (menu.Centred)

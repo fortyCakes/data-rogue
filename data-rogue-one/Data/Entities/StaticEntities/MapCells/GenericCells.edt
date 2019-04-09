@@ -3,6 +3,9 @@
 Glyph: .
 Color: #aaaaaa
 ZOrder: 0
+[SpriteAppearance]
+Bottom: stone_floor_1
+BottomConnect: stone_floor
 [Physical]
 Passable: true
 Transparent: true
@@ -18,6 +21,9 @@ Name: Floor
 Glyph: ,
 Color: #567E3A
 ZOrder: 0
+[SpriteAppearance]
+Bottom: grass_1
+BottomConnect: grass
 [Physical]
 Passable: true
 Transparent: true
@@ -33,6 +39,11 @@ Name: Grass
 Glyph: 
 Color: #567E3A
 ZOrder: 0
+[SpriteAppearance]
+Bottom: grass_1
+BottomConnect: grass
+Top: trees_1
+TopConnect: trees
 [Physical]
 Passable: false
 Transparent: true
@@ -49,6 +60,9 @@ Name: Tree
 Glyph: .
 Color: #aaaaaa
 ZOrder: 0
+[SpriteAppearance]
+Bottom: stone_floor_1
+BottomConnect: stone_floor
 [Physical]
 Passable: true
 Transparent: true
@@ -64,6 +78,9 @@ Name: Floor
 Glyph: #
 Color: #aaaaaa
 ZOrder: 0
+[SpriteAppearance]
+Bottom: stone_wall_1
+BottomConnect: wall
 [Physical]
 Passable: false
 Transparent: false
@@ -79,9 +96,13 @@ Name: Wall
 Glyph: O
 Color: #efefef
 ZOrder: 0
+[SpriteAppearance]
+Bottom: grass_1
+BottomConnect: grass
+Top: stones
 [Physical]
 Passable: false
-Transparent: false
+Transparent: true
 [Prototype]
 Name: Cell:Boulder
 Singleton: true

@@ -94,6 +94,8 @@
     <Compile Include="Components\Health.cs" />
     <Compile Include="Components\IBranchMapGenerator.cs" />
     <Compile Include="Components\KeyBinding.cs" />
+    <Compile Include="Components\SpriteAppearance.cs" />
+    <Compile Include="Components\SpriteSheet.cs" />
     <Compile Include="Components\Stackable.cs" />
     <Compile Include="Components\Weapon.cs" />
     <Compile Include="Components\Stat.cs" />
@@ -107,6 +109,7 @@
     <Compile Include="Data\EquipmentMappingListItem.cs" />
     <Compile Include="Data\EquipmentSlotDetails.cs" />
     <Compile Include="Data\IEntityDataParser.cs" />
+    <Compile Include="EntityEngineSystem\SpriteSheetDataProvider.cs" />
     <Compile Include="EventSystem\Rules\OnAttackProcEnchantmentRule.cs" />
     <Compile Include="EventSystem\Rules\PlayerVictoryRule.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTButton.cs" />
@@ -378,10 +381,70 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\Sprites\Entities\portal.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Sprites\Misc\arrow.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\Sprites\Misc\shade_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Sprites\Misc\unknown.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Entities\generic_person.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Entities\armour_brown.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Entities\boot_brown.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Entities\dog_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Entities\glove_brown.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Entities\goblin.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Tiles\grass_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Entities\helm_brown.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Entities\lamp.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Entities\legs_brown.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Entities\pile_of_gold.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Entities\potion_red.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Entities\stairs_down.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Entities\stairs_up.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Tiles\stones.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Tiles\stone_floor_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Entities\sword_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Tiles\trees_1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\UITiles\blue_button_pressed.png">
@@ -399,7 +462,9 @@
     <Content Include="Images\Sprites\UITiles\textbox_blue.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\wall_1.png" />
+    <Content Include="Images\Sprites\Tiles\stone_wall_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Sprites\UITiles\textbox_grey.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

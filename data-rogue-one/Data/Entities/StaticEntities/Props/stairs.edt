@@ -8,6 +8,8 @@ Singleton: false
 Glyph: >
 Color: #aaaaaa
 ZOrder: 1
+[SpriteAppearance]
+Bottom: stairs_down
 [Position]
 [Memorable]
 [Description]
@@ -23,6 +25,8 @@ Singleton: false
 Glyph: <
 Color: #aaaaaa
 ZOrder: 1
+[SpriteAppearance]
+Bottom: stairs_up
 [Position]
 [Memorable]
 [Description]

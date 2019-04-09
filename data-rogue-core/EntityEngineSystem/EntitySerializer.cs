@@ -1,4 +1,5 @@
 ﻿using data_rogue_core.Data;
+using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
 using data_rogue_core.Utils;
 using System.Collections.Generic;
@@ -67,14 +68,20 @@ namespace data_rogue_core.EntityEngineSystem
             }
         }
 
+        public static IEntity DeserializeOutsideEngine(string input)
+        {
+            var fakeSystemContainer = new SystemContainer();
+            fakeSystemContainer.CreateSystems("");
+
+            return Deserialize(fakeSystemContainer, input);
+        }
+
         public static IEntity Deserialize(ISystemContainer systemContainer, string input)
         {
             var lines = input.SplitLines();
 
             EntityBuilder currentEntity = null;
             StringBuilder currentComponent = null;
-
-
 
             foreach (string line in lines)
             {

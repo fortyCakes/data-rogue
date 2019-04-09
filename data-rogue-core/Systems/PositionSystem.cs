@@ -28,7 +28,7 @@ namespace data_rogue_core.Systems
         public override SystemComponents RequiredComponents => new SystemComponents {typeof(Position)};
         public override SystemComponents ForbiddenComponents => new SystemComponents {typeof(Prototype)};
 
-        public IEnumerable<IEntity> EntitiesAt(MapCoordinate coordinate)
+        public IList<IEntity> EntitiesAt(MapCoordinate coordinate)
         {
             return EntitiesAt_Internal(coordinate).ToList();
         }
@@ -80,7 +80,7 @@ namespace data_rogue_core.Systems
             Move(entity, position, vector);
         }
 
-        public IEnumerable<IEntity> EntitiesAt(MapKey mapKey, int x, int y)
+        public IList<IEntity> EntitiesAt(MapKey mapKey, int x, int y)
         {
             return EntitiesAt(new MapCoordinate(mapKey, x, y));
         }

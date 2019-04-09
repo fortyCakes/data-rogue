@@ -1,0 +1,218 @@
+﻿"Sprites"
+[SpriteSheet]
+Name: selector_left
+Path: Images/Sprites/Misc/selector-left.png
+Type: SingleSprite
+SpriteWidth: 8
+SpriteHeight: 14
+Scaling: 1
+[SpriteSheet]
+Name: selector_right
+Path: Images/Sprites/Misc/selector-right.png
+Type: SingleSprite
+SpriteWidth: 8
+SpriteHeight: 14
+Scaling: 1
+[SpriteSheet]
+Name: unknown
+Path: Images/Sprites/Misc/unknown.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: shade
+Path: Images/Sprites/Misc/shade_1.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: textbox_blue
+Path: Images/Sprites/UITiles/textbox_blue.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: textbox_grey
+Path: Images/Sprites/UITiles/textbox_grey.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: textbox_grey_small
+Path: Images/Sprites/UITiles/textbox_grey.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 1
+[SpriteSheet]
+Name: textbox_white
+Path: Images/Sprites/UITiles/textbox_white.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: button_unpressed
+Path: Images/Sprites/UITiles/blue_button_unpressed.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: button_pressed
+Path: Images/Sprites/UITiles/blue_button_pressed.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: arrow
+Path: Images/Sprites/Misc/arrow.png
+Type: FourDirection
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: stone_floor_1
+Path: Images/Sprites/Tiles/stone_floor_1.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: stone_wall_1
+Path: Images/Sprites/Tiles/stone_wall_1.png
+Type: TilesetWall
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: grass_1
+Path: Images/Sprites/Tiles/grass_1.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: trees_1
+Path: Images/Sprites/Tiles/trees_1.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: stones
+Path: Images/Sprites/Tiles/stones.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: generic_person
+Path: Images/Sprites/Entities/generic_person.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: armour_brown
+Path: Images/Sprites/Entities/armour_brown.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: boot_brown
+Path: Images/Sprites/Entities/boot_brown.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: dog_1
+Path: Images/Sprites/Entities/dog_1.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: glove_brown
+Path: Images/Sprites/Entities/glove_brown.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: goblin
+Path: Images/Sprites/Entities/goblin.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: helm_brown
+Path: Images/Sprites/Entities/helm_brown.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: lamp
+Path: Images/Sprites/Entities/lamp.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: legs_brown
+Path: Images/Sprites/Entities/legs_brown.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: potion_red
+Path: Images/Sprites/Entities/potion_red.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: stairs_down
+Path: Images/Sprites/Entities/stairs_down.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: stairs_up
+Path: Images/Sprites/Entities/stairs_up.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: portal
+Path: Images/Sprites/Entities/portal.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: sword_1
+Path: Images/Sprites/Entities/sword_1.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: pile_of_gold
+Path: Images/Sprites/Entities/pile_of_gold.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2

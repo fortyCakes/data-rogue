@@ -14,7 +14,8 @@ namespace BLTWrapper
 
         public int Tile(TileDirections directions)
         {
-            return _offset + mapping[directions];
+            var map = mapping[directions];
+            return _offset + map;
         }
 
         private int _offset;

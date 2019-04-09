@@ -4,11 +4,12 @@ using data_rogue_core.EntityEngineSystem;
 
 namespace data_rogue_core
 {
-    public class KeyBindingsDataProvider : BaseFileDataProvider
+
+    public class SpriteSheetDataProvider : BaseFileDataProvider
     {
         public override List<string> GetData()
         {
-            return Load("Data/Entities/keybindings.edt").ToList();
+            return Load("Data/Entities/spritesheet.edt").ToList();
         }
     }
 }
