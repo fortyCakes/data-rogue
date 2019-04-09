@@ -381,6 +381,9 @@
     <Content Include="Images\Sprites\Misc\arrow.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\Sprites\Misc\unknown.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Sprites\UITiles\blue_button_pressed.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

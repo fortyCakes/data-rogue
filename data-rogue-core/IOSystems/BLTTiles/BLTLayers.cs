@@ -5,6 +5,9 @@
         public static int Base = 0;
         public static int Background = 1;
         public static int UIElements = 5;
-        public static int Text = 10;
+        public static int Text = 9;
+        public static int Top = 24;
+
+        public static int FULL_LAYER_SIZE = 25;
     }
 }

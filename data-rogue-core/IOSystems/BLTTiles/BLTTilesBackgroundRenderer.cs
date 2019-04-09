@@ -17,17 +17,23 @@ namespace data_rogue_core.IOSystems.BLTTiles
             {
                 for (int y = 0; y < height; y++)
                 {
-                    var directions = TileDirections.None;
-                    if (x != 0) directions |= TileDirections.Left;
-                    if (x != width - 1) directions |= TileDirections.Right;
-                    if (y != 0) directions |= TileDirections.Up;
-                    if (y != height - 1) directions |= TileDirections.Down;
+                    TileDirections directions = GetDirections(x, width, y, height);
 
                     var sprite = backgroundSpriteSheet.Tile(directions);
 
                     BLT.Put(x * BLTTilesIOSystem.TILE_SPACING, y * BLTTilesIOSystem.TILE_SPACING, sprite);
                 }
             }
+        }
+
+        public static TileDirections GetDirections(int x, int width, int y, int height)
+        {
+            var directions = TileDirections.None;
+            if (x != 0) directions |= TileDirections.Left;
+            if (x != width - 1) directions |= TileDirections.Right;
+            if (y != 0) directions |= TileDirections.Up;
+            if (y != height - 1) directions |= TileDirections.Down;
+            return directions;
         }
     }
 }

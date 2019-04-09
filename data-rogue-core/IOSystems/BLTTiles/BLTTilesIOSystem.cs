@@ -146,6 +146,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             _spriteManager = new BLTSpriteManager();
             _spriteManager.Add(_spriteLoader.LoadSingleSprite("selector_left", "Images/Sprites/Misc/selector-left.png", 8, 14, 1, TILE_SPACING));
             _spriteManager.Add(_spriteLoader.LoadSingleSprite("selector_right", "Images/Sprites/Misc/selector-right.png", 8, 14, 1, TILE_SPACING));
+            _spriteManager.Add(_spriteLoader.LoadSingleSprite("unknown", "Images/Sprites/Misc/unknown.png", 16, 16, 2, TILE_SPACING));
             _spriteManager.Add(_spriteLoader.LoadTileset_BoxType("textbox_blue", "Images/Sprites/UITiles/textbox_blue.png", 16, 16, 2, TILE_SPACING));
             _spriteManager.Add(_spriteLoader.LoadTileset_BoxType("textbox_grey", "Images/Sprites/UITiles/textbox_grey.png", 16, 16, 2, TILE_SPACING));
             _spriteManager.Add(_spriteLoader.LoadTileset_BoxType("textbox_grey_small", "Images/Sprites/UITiles/textbox_grey.png", 16, 16, 1, TILE_SPACING));
@@ -158,7 +159,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             {
                 {ActivityType.Gameplay, new BLTTilesGameplayRenderer(_ioSystemConfiguration)},
                 {ActivityType.Menu, new BLTTilesMenuRenderer(_spriteManager)},
-                {ActivityType.StaticDisplay, new BLTTilesStaticTextRenderer()},
+                {ActivityType.StaticDisplay, new BLTTilesStaticTextRenderer(_spriteManager, TILE_SPACING)},
                 {ActivityType.Form, new BLTTilesFormRenderer(_spriteManager) },
                 {ActivityType.Targeting, new BLTTilesTargetingRenderer( _ioSystemConfiguration) }
             };
