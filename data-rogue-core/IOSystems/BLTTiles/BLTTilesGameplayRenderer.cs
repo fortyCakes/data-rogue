@@ -101,18 +101,18 @@ namespace data_rogue_core.IOSystems.BLTTiles
                 }
             }
 
-            RenderSprites(mapConfiguration, renderTracker, renderWidth, renderHeight, tilesTracker, 0, false);
+            RenderMapSprites(mapConfiguration, renderTracker, renderWidth, renderHeight, tilesTracker, 0, false);
 
-            RenderSprites(mapConfiguration, renderTracker, renderWidth, renderHeight, tilesTracker, 1, false);
+            RenderMapSprites(mapConfiguration, renderTracker, renderWidth, renderHeight, tilesTracker, 1, false);
 
-            RenderSprites(mapConfiguration, renderTracker, renderWidth, renderHeight, tilesTracker, 0, true);
+            RenderMapSprites(mapConfiguration, renderTracker, renderWidth, renderHeight, tilesTracker, 0, true);
 
-            RenderSprites(mapConfiguration, renderTracker, renderWidth, renderHeight, tilesTracker, 1, true);
+            RenderMapSprites(mapConfiguration, renderTracker, renderWidth, renderHeight, tilesTracker, 1, true);
 
-            RenderShade(renderTracker, fovTracker, renderWidth, renderHeight, mapConfiguration);
+            RenderMapShade(renderTracker, fovTracker, renderWidth, renderHeight, mapConfiguration);
         }
 
-        private void RenderShade(bool[,] renderTracker, bool[,] fovTracker, int renderWidth, int renderHeight, MapConfiguration mapConfiguration)
+        private void RenderMapShade(bool[,] renderTracker, bool[,] fovTracker, int renderWidth, int renderHeight, MapConfiguration mapConfiguration)
         {
             BLT.Layer(BLTLayers.MapShade);
             BLT.Font("");
@@ -125,10 +125,15 @@ namespace data_rogue_core.IOSystems.BLTTiles
                     {
                         if (!fovTracker[x + 1, y + 1])
                         {
-                            var aboveConnect = !(fovTracker[x + 1, y]);
-                            var belowConnect = !(fovTracker[x + 1, y + 2]);
-                            var leftConnect = !(fovTracker[x, y + 1]);
-                            var rightConnect = !(fovTracker[x + 2, y + 1]);
+                            var sprite = _shadeSprite.Tile(TileDirections.None);
+                            BLT.Put(mapConfiguration.Position.Left + x * BLTTilesIOSystem.TILE_SPACING, mapConfiguration.Position.Top + y * BLTTilesIOSystem.TILE_SPACING, sprite);
+                        }
+                        else
+                        {
+                            var aboveConnect = (fovTracker[x + 1, y]);
+                            var belowConnect = (fovTracker[x + 1, y + 2]);
+                            var leftConnect = (fovTracker[x, y + 1]);
+                            var rightConnect = (fovTracker[x + 2, y + 1]);
 
                             var directions = TileDirections.None;
                             if (aboveConnect) directions |= TileDirections.Up;
@@ -144,7 +149,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             }
         }
 
-        private void RenderSprites(MapConfiguration mapConfiguration, bool[,] renderTracker, int renderWidth, int renderHeight, SpriteAppearance[,,] tilesTracker, int z, bool top)
+        private void RenderMapSprites(MapConfiguration mapConfiguration, bool[,] renderTracker, int renderWidth, int renderHeight, SpriteAppearance[,,] tilesTracker, int z, bool top)
         {
             if (z == 0)
             {
