@@ -13,6 +13,7 @@ namespace BLTWrapper
         Left = 1,
         Up = 2,
         Right = 4,
-        Down = 8
+        Down = 8,
+        All = 15
     }
 }

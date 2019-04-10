@@ -85,8 +85,8 @@ SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
 Name: stone_wall_1
-Path: Images/Sprites/Tiles/stone_wall_1.png
-Type: TilesetWall
+Path: Images/Sprites/Tiles/stone_wall_box.png
+Type: TilesetBox
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
