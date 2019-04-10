@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
-    internal class BLTTilesGameplayRenderer : IGameplayRenderer
+    public class BLTTilesGameplayRenderer : IGameplayRenderer
     {
         private IOSystemConfiguration _ioSystemConfiguration;
         private readonly ISpriteManager _spriteManager;
@@ -26,7 +26,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
         public MapCoordinate GetMapCoordinateFromMousePosition(MapCoordinate cameraPosition, int x, int y)
         {
-            return new MapCoordinate(cameraPosition.Key, x/8, y/8);
+            return new MapCoordinate(cameraPosition.Key, x / 8, y / 8);
         }
 
         public void Render(ISystemContainer systemContainer)
@@ -74,7 +74,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
                     MapCoordinate coordinate = new MapCoordinate(currentMap.MapKey, lookupX, lookupY);
                     var isInFov = playerFov.Contains(coordinate);
 
-                    renderTracker[x+1,y + 1] = isInFov || currentMap.SeenCoordinates.Contains(coordinate);
+                    renderTracker[x + 1, y + 1] = isInFov || currentMap.SeenCoordinates.Contains(coordinate);
                     fovTracker[x + 1, y + 1] = isInFov;
 
                     var entities = systemContainer.PositionSystem.EntitiesAt(coordinate);
@@ -95,7 +95,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
                         }
                         else
                         {
-                            tilesTracker[x + 1, y + 1, 1] = new SpriteAppearance { Top = "unknown" };
+                            tilesTracker[x + 1, y + 1, 1] = new SpriteAppearance {Top = "unknown"};
                         }
                     }
                 }
@@ -123,10 +123,10 @@ namespace data_rogue_core.IOSystems.BLTTiles
                 {
                     if (renderTracker[x + 1, y + 1])
                     {
-                        if (!fovTracker[x+1,y+1])
+                        if (!fovTracker[x + 1, y + 1])
                         {
                             var aboveConnect = !(fovTracker[x + 1, y]);
-                            var belowConnect = !(fovTracker[x + 1, y+2]);
+                            var belowConnect = !(fovTracker[x + 1, y + 2]);
                             var leftConnect = !(fovTracker[x, y + 1]);
                             var rightConnect = !(fovTracker[x + 2, y + 1]);
 
@@ -154,13 +154,14 @@ namespace data_rogue_core.IOSystems.BLTTiles
             {
                 BLT.Layer(top ? BLTLayers.MapEntityTop : BLTLayers.MapEntityBottom);
             }
+
             BLT.Font("");
 
             for (int x = 0; x < renderWidth; x++)
             {
                 for (int y = 0; y < renderHeight; y++)
                 {
-                    if (renderTracker[x+1, y+1])
+                    if (renderTracker[x + 1, y + 1])
                     {
                         var appearance = tilesTracker[x + 1, y + 1, z];
                         if (appearance != null)
@@ -168,7 +169,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
                             var spriteName = top ? appearance.Top : appearance.Bottom;
                             if (spriteName != null)
                             {
-                                TileDirections directions = GetDirections(tilesTracker, x + 1, y + 1, z, top);
+                                TileDirections directions = BLTTileDirectionHelper.GetDirections(tilesTracker, x + 1, y + 1, z, top);
                                 var sprite = _spriteManager.Tile(spriteName, directions);
                                 BLT.Put(mapConfiguration.Position.Left + x * BLTTilesIOSystem.TILE_SPACING, mapConfiguration.Position.Top + y * BLTTilesIOSystem.TILE_SPACING, sprite);
                             }
@@ -178,45 +179,9 @@ namespace data_rogue_core.IOSystems.BLTTiles
             }
         }
 
-        private TileDirections GetDirections(SpriteAppearance[,,] tilesTracker, int x, int y, int z, bool top)
-        {
-            var appearance = tilesTracker[x, y, z];
-            var connect = GetConnect(appearance, top);
-            var directions = TileDirections.None;
-            if (appearance == null || connect == null) return directions;
-
-            var above = tilesTracker[x, y - 1, z];
-            var below = tilesTracker[x, y + 1, z];
-            var left = tilesTracker[x - 1, y, z];
-            var right = tilesTracker[x + 1, y, z];
-
-            var aboveConnect = GetConnect(above, top) == connect;
-            var belowConnect = GetConnect(below, top) == connect;
-            var leftConnect = GetConnect(left, top) == connect;
-            var rightConnect = GetConnect(right, top) == connect;
-
-            if (aboveConnect) directions |= TileDirections.Up;
-            if (belowConnect) directions |= TileDirections.Down;
-            if (leftConnect) directions |= TileDirections.Left;
-            if (rightConnect) directions |= TileDirections.Right;
-
-            return directions;
-        }
-
-        private static string GetConnect(SpriteAppearance appearance, bool top)
-        {
-            if (appearance == null) return null;
-            return !top ? appearance.BottomConnect : appearance.TopConnect;
-        }
-
         private bool IsRemembered(IMap currentMap, MapCoordinate coordinate, IEntity e)
         {
             return currentMap.SeenCoordinates.Contains(coordinate) && e.Has<Memorable>();
-        }
-
-        private static bool IsFullTile(int x, int y)
-        {
-            return x % BLTTilesIOSystem.TILE_SPACING == 0 && y % BLTTilesIOSystem.TILE_SPACING == 0;
         }
 
         private List<MapCoordinate> CalculatePlayerFov(ISystemContainer systemContainer)
@@ -224,8 +189,6 @@ namespace data_rogue_core.IOSystems.BLTTiles
             var cameraPosition = systemContainer.RendererSystem.CameraPosition;
 
             var currentMap = systemContainer.MapSystem.MapCollection[cameraPosition.Key];
-            var cameraX = cameraPosition.X;
-            var cameraY = cameraPosition.Y;
 
             MapCoordinate playerPosition = systemContainer.PositionSystem.CoordinateOf(systemContainer.PlayerSystem.Player);
 

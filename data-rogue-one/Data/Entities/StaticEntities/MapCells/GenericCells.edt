@@ -81,6 +81,7 @@ ZOrder: 0
 [SpriteAppearance]
 Bottom: stone_wall_1
 BottomConnect: wall
+BottomConnectType: Wall
 [Physical]
 Passable: false
 Transparent: false
@@ -90,6 +91,25 @@ Singleton: true
 [Memorable]
 [Description]
 Name: Wall
+
+"Cell:CobbleWall"
+[Appearance]
+Glyph: #
+Color: #cccccc
+ZOrder: 0
+[SpriteAppearance]
+Bottom: cobble_wall_1
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:CobbleWall
+Singleton: true
+[Memorable]
+[Description]
+Name: Cobble Wall
 
 "Cell:Boulder"
 [Appearance]

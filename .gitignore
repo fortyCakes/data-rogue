@@ -4,6 +4,10 @@ packages/
 .vs/
 data-rogue-core/bin/
 data-rogue-core/obj/
+BearLib/obj/
+BLTWrapper/obj/
+BearLib/bin/
+BLTWrapper/bin/
 data-rogue-one/bin/
 data-rogue-one/obj/
 data-rogue-core.UnitTests/bin/
