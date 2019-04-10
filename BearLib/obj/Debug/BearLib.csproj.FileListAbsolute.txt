@@ -1,10 +1,3 @@
-C:\Users\Lex\source\repos\fortyCakes\data-rogue\BearLib\bin\Debug\BearLibTerminal.dll
-C:\Users\Lex\source\repos\fortyCakes\data-rogue\BearLib\bin\Debug\BearLib.dll.config
-C:\Users\Lex\source\repos\fortyCakes\data-rogue\BearLib\bin\Debug\BearLib.dll
-C:\Users\Lex\source\repos\fortyCakes\data-rogue\BearLib\bin\Debug\BearLib.pdb
-C:\Users\Lex\source\repos\fortyCakes\data-rogue\BearLib\obj\Debug\BearLib.csproj.CoreCompileInputs.cache
-C:\Users\Lex\source\repos\fortyCakes\data-rogue\BearLib\obj\Debug\BearLib.dll
-C:\Users\Lex\source\repos\fortyCakes\data-rogue\BearLib\obj\Debug\BearLib.pdb
 C:\Users\alex.stuart\Source\Repos\data-rogue\BearLib\bin\Debug\BearLibTerminal.dll
 C:\Users\alex.stuart\Source\Repos\data-rogue\BearLib\bin\Debug\BearLib.dll.config
 C:\Users\alex.stuart\Source\Repos\data-rogue\BearLib\bin\Debug\BearLib.dll
@@ -13,4 +6,14 @@ C:\Users\alex.stuart\Source\Repos\data-rogue\BearLib\obj\Debug\BearLib.csprojAss
 C:\Users\alex.stuart\Source\Repos\data-rogue\BearLib\obj\Debug\BearLib.csproj.CoreCompileInputs.cache
 C:\Users\alex.stuart\Source\Repos\data-rogue\BearLib\obj\Debug\BearLib.dll
 C:\Users\alex.stuart\Source\Repos\data-rogue\BearLib\obj\Debug\BearLib.pdb
+C:\Users\Lex\source\repos\fortyCakes\data-rogue\BearLib\bin\Debug\BearLibTerminal.dll
+C:\Users\Lex\source\repos\fortyCakes\data-rogue\BearLib\bin\Debug\BearLib.dll.config
+C:\Users\Lex\source\repos\fortyCakes\data-rogue\BearLib\bin\Debug\BearLib.dll
+C:\Users\Lex\source\repos\fortyCakes\data-rogue\BearLib\bin\Debug\BearLib.pdb
+C:\Users\Lex\source\repos\fortyCakes\data-rogue\BearLib\obj\Debug\BearLib.csproj.CoreCompileInputs.cache
+C:\Users\Lex\source\repos\fortyCakes\data-rogue\BearLib\obj\Debug\BearLib.dll
+C:\Users\Lex\source\repos\fortyCakes\data-rogue\BearLib\obj\Debug\BearLib.pdb
+C:\Users\Lex\source\repos\fortyCakes\data-rogue\BearLib\bin\Debug\System.ValueTuple.dll
+C:\Users\Lex\source\repos\fortyCakes\data-rogue\BearLib\bin\Debug\System.ValueTuple.xml
 C:\Users\Lex\source\repos\fortyCakes\data-rogue\BearLib\obj\Debug\BearLib.csprojAssemblyReference.cache
+C:\Users\Lex\source\repos\fortyCakes\data-rogue\BearLib\obj\Debug\BearLib.csproj.CopyComplete

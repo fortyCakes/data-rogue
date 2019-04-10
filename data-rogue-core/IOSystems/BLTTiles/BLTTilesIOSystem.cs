@@ -24,9 +24,9 @@ namespace data_rogue_core.IOSystems.BLTTiles
             TileWidth = 32,
             WindowTitle = "data-rogue window title",
             MapConfigurations = new List<MapConfiguration> { new MapConfiguration { Position = new Rectangle(0, 0, 40 * TILE_SPACING, 25 * TILE_SPACING) } },
-            StatsConfigurations = new List<StatsConfiguration> { new StatsConfiguration { Position = new Rectangle(0, 0, 40 * TILE_SPACING, 25 * TILE_SPACING), Displays = new List<StatsDisplay> {
+            StatsConfigurations = new List<StatsConfiguration> { new StatsConfiguration { Position = new Rectangle(2, 2, 40 * TILE_SPACING - 2, 25 * TILE_SPACING - 2), Displays = new List<StatsDisplay> {
                 new StatsDisplay { DisplayType = "Name" },
-                new StatsDisplay { DisplayType = "ComponentCounter", Parameters = "Health,HP", BackColor = Color.DarkRed}
+                new StatsDisplay { DisplayType = "ComponentCounter", Parameters = "Health,HP", BackColor = Color.Red}
 
             } } },
             MessageConfigurations = new List<MessageConfiguration> { new MessageConfiguration { Position = new Rectangle(0, 15 * TILE_SPACING, 40 * TILE_SPACING, 10 * TILE_SPACING) } }

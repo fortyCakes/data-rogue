@@ -223,3 +223,59 @@ Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
+[SpriteSheet]
+Name: bar_container_left
+Path: Images/Sprites/UITiles/bar_container_left.png
+Type: SingleSprite
+SpriteWidth: 8
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: bar_container_right
+Path: Images/Sprites/UITiles/bar_container_right.png
+Type: SingleSprite
+SpriteWidth: 8
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: bar_container_mid
+Path: Images/Sprites/UITiles/bar_container_mid.png
+Type: SingleSprite
+SpriteWidth: 4
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: bar_fill
+Path: Images/Sprites/UITiles/bar_fill.png
+Type: SingleSprite
+SpriteWidth: 4
+SpriteHeight: 8
+Scaling: 2
+[SpriteSheet]
+Name: bar_fill_mask
+Path: Images/Sprites/UITiles/bar_fill_mask.png
+Type: SingleSprite
+SpriteWidth: 4
+SpriteHeight: 8
+Scaling: 2
+[SpriteSheet]
+Name: bar_left
+Path: Images/Sprites/UITiles/bar_left.png
+Type: SingleSprite
+SpriteWidth: 4
+SpriteHeight: 8
+Scaling: 2
+[SpriteSheet]
+Name: bar_right
+Path: Images/Sprites/UITiles/bar_right.png
+Type: SingleSprite
+SpriteWidth: 4
+SpriteHeight: 8
+Scaling: 2
+[SpriteSheet]
+Name: bar_full_right
+Path: Images/Sprites/UITiles/bar_full_right.png
+Type: SingleSprite
+SpriteWidth: 4
+SpriteHeight: 8
+Scaling: 2

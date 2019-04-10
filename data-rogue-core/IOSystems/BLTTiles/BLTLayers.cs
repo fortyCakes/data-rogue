@@ -11,6 +11,8 @@
         public static int MapShade = 5;
 
         public static int UIElements = 6;
+        public static int UIElementPieces = 7;
+        public static int UIMasks = 8;
         public static int Text = 9;
         public static int Top = 24;
 

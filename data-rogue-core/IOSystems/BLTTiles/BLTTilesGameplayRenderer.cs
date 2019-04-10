@@ -16,12 +16,17 @@ namespace data_rogue_core.IOSystems.BLTTiles
         private IOSystemConfiguration _ioSystemConfiguration;
         private readonly ISpriteManager _spriteManager;
         private readonly ISpriteSheet _shadeSprite;
+        private readonly List<IStatsRendererHelper> _statsDisplayers;
 
         public BLTTilesGameplayRenderer(IOSystemConfiguration ioSystemConfiguration, ISpriteManager spriteManager)
         {
             _ioSystemConfiguration = ioSystemConfiguration;
             _spriteManager = spriteManager;
             _shadeSprite = _spriteManager.Get("shade");
+
+            _statsDisplayers = BLTStatsRendererHelper.DefaultStatsDisplayers.OfType<IStatsRendererHelper>().ToList();
+
+            _statsDisplayers.AddRange(ioSystemConfiguration.AdditionalStatsDisplayers);
         }
 
         public MapCoordinate GetMapCoordinateFromMousePosition(MapCoordinate cameraPosition, int x, int y)
@@ -43,6 +48,11 @@ namespace data_rogue_core.IOSystems.BLTTiles
             foreach (var mapConfiguration in _ioSystemConfiguration.MapConfigurations)
             {
                 RenderMap(mapConfiguration, systemContainer, playerFov);
+            }
+
+            foreach(var statsConfiguration in _ioSystemConfiguration.StatsConfigurations)
+            {
+                RenderStats(statsConfiguration, systemContainer, playerFov);
             }
         }
 
@@ -110,6 +120,19 @@ namespace data_rogue_core.IOSystems.BLTTiles
             RenderMapSprites(mapConfiguration, renderTracker, renderWidth, renderHeight, tilesTracker, 1, true);
 
             RenderMapShade(renderTracker, fovTracker, renderWidth, renderHeight, mapConfiguration);
+        }
+
+        private void RenderStats(StatsConfiguration statsConfiguration, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        {
+            var player = systemContainer.PlayerSystem.Player;
+            int y = statsConfiguration.Position.Top;
+
+            foreach (StatsDisplay display in statsConfiguration.Displays)
+            {
+                IStatsRendererHelper statsDisplayer = _statsDisplayers.Single(s => s.DisplayType == display.DisplayType);
+                var tuple = new ValueTuple<int, ISpriteManager>(statsConfiguration.Position.Left, _spriteManager);
+                statsDisplayer.Display(tuple, display, systemContainer, player, playerFov, ref y);
+            }
         }
 
         private void RenderMapShade(bool[,] renderTracker, bool[,] fovTracker, int renderWidth, int renderHeight, MapConfiguration mapConfiguration)

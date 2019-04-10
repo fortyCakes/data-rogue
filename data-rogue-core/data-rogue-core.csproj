@@ -59,6 +59,9 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -113,8 +116,16 @@
     <Compile Include="EventSystem\Rules\OnAttackProcEnchantmentRule.cs" />
     <Compile Include="EventSystem\Rules\PlayerVictoryRule.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTButton.cs" />
+    <Compile Include="IOSystems\BLTTiles\StatsDisplayers\BLTComponentCounterDisplayer.cs" />
+    <Compile Include="IOSystems\BLTTiles\StatsDisplayers\BLTHoveredEntityDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTLayers.cs" />
+    <Compile Include="IOSystems\BLTTiles\StatsDisplayers\BLTLocationDisplayer.cs" />
+    <Compile Include="IOSystems\BLTTiles\StatsDisplayers\BLTNameDisplayer.cs" />
+    <Compile Include="IOSystems\BLTTiles\StatsDisplayers\BLTSpacerDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTSpriteManager.cs" />
+    <Compile Include="IOSystems\BLTTiles\StatsDisplayers\BLTStatDisplayer.cs" />
+    <Compile Include="IOSystems\BLTTiles\StatsDisplayers\BLTStatInterpolationDisplayer.cs" />
+    <Compile Include="IOSystems\BLTTiles\StatsDisplayers\BLTStatsRendererHelper.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTTextBox.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTTileDirectionHelper.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTTilesBackgroundRenderer.cs" />
@@ -124,6 +135,10 @@
     <Compile Include="IOSystems\BLTTiles\BLTTilesMenuRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTTilesStaticTextRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTTilesTargetingRenderer.cs" />
+    <Compile Include="IOSystems\BLTTiles\StatsDisplayers\BLTTimeDisplayer.cs" />
+    <Compile Include="IOSystems\BLTTiles\StatsDisplayers\BLTTitleDisplayer.cs" />
+    <Compile Include="IOSystems\BLTTiles\StatsDisplayers\BLTVisibleEnemiesDisplayer.cs" />
+    <Compile Include="IOSystems\BLTTiles\StatsDisplayers\BLTWealthDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\ISpriteManager.cs" />
     <Compile Include="IOSystems\BLTTiles\KeyConverter.cs" />
     <Compile Include="IOSystems\IOSystemConfiguration.cs" />
@@ -452,6 +467,30 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Tiles\trees_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\UITiles\bar_container_left.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\UITiles\bar_container_mid.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\UITiles\bar_container_right.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\UITiles\bar_fill.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\UITiles\bar_fill_mask.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\UITiles\bar_full_right.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\UITiles\bar_left.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\UITiles\bar_right.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\UITiles\blue_button_pressed.png">
