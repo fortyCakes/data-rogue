@@ -17,3 +17,6 @@ C:\Users\Lex\source\repos\fortyCakes\data-rogue\BearLib\bin\Debug\System.ValueTu
 C:\Users\Lex\source\repos\fortyCakes\data-rogue\BearLib\bin\Debug\System.ValueTuple.xml
 C:\Users\Lex\source\repos\fortyCakes\data-rogue\BearLib\obj\Debug\BearLib.csprojAssemblyReference.cache
 C:\Users\Lex\source\repos\fortyCakes\data-rogue\BearLib\obj\Debug\BearLib.csproj.CopyComplete
+C:\Users\alex.stuart\Source\Repos\data-rogue\BearLib\bin\Debug\System.ValueTuple.dll
+C:\Users\alex.stuart\Source\Repos\data-rogue\BearLib\bin\Debug\System.ValueTuple.xml
+C:\Users\alex.stuart\Source\Repos\data-rogue\BearLib\obj\Debug\BearLib.csproj.CopyComplete

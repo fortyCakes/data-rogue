@@ -24,3 +24,5 @@ C:\Users\Lex\source\repos\fortyCakes\data-rogue\BLTWrapper\obj\Debug\BLTWrapper.
 C:\Users\Lex\source\repos\fortyCakes\data-rogue\BLTWrapper\obj\Debug\BLTWrapper.pdb
 C:\Users\Lex\source\repos\fortyCakes\data-rogue\BLTWrapper\bin\Debug\System.ValueTuple.dll
 C:\Users\Lex\source\repos\fortyCakes\data-rogue\BLTWrapper\bin\Debug\System.ValueTuple.xml
+C:\Users\alex.stuart\Source\Repos\data-rogue\BLTWrapper\bin\Debug\System.ValueTuple.dll
+C:\Users\alex.stuart\Source\Repos\data-rogue\BLTWrapper\bin\Debug\System.ValueTuple.xml

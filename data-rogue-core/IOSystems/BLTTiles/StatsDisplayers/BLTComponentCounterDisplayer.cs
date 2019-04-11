@@ -22,6 +22,34 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
             var totalLength = 100;
 
+            Counter counter = GetCounter(display, player);
+
+            var percentage = (decimal)counter.Current / counter.Max;
+            
+            RenderBarContainer(x, y, spriteManager, totalLength);
+
+            RenderBarFill(x, y, spriteManager, totalLength, percentage);
+
+            RenderBarFillMask(x, y, spriteManager, totalLength, percentage, color);
+
+            RenderText(x, y, counter);
+
+            y += 5;
+        }
+
+        private void RenderText(int x, int y, Counter counter)
+        {
+            BLT.Layer(BLTLayers.Text);
+            BLT.Font("text");
+
+            string counterText = counter.ToString();
+            BLT.Print(x+2, y+2, counterText);
+
+            BLT.Font("");
+        }
+
+        private static Counter GetCounter(StatsDisplay display, IEntity player)
+        {
             var componentCounterSplits = display.Parameters.Split(',');
             var componentName = componentCounterSplits[0];
             var counterName = componentCounterSplits[1];
@@ -29,11 +57,33 @@ namespace data_rogue_core.IOSystems.BLTTiles
             var component = player.Get(componentName);
             FieldInfo[] fields = component.GetType().GetFields();
             var field = fields.Single(f => f.Name == counterName);
-            var counter = (Counter)field.GetValue(component);
+            var counter = (Counter) field.GetValue(component);
+            return counter;
+        }
 
-            var percentage = (decimal)counter.Current / counter.Max;
+        private static void RenderBarFillMask(int x, int y, ISpriteManager spriteManager, int totalLength, decimal percentage, Color color)
+        {
+            BLT.Layer(BLTLayers.UIMasks);
+            BLT.Color(color);
+            var mask_main = spriteManager.Tile("bar_fill_mask");
 
-            //DisplayBarContainer
+            RenderBarContent(x, y, totalLength, percentage, mask_main, mask_main, mask_main, mask_main);
+            BLT.Color("");
+        }
+
+        private static void RenderBarFill(int x, int y, ISpriteManager spriteManager, int totalLength, decimal percentage)
+        {
+            BLT.Layer(BLTLayers.UIElementPieces);
+            var bar_left = spriteManager.Tile("bar_left");
+            var bar_fill = spriteManager.Tile("bar_fill");
+            var bar_full_right = spriteManager.Tile("bar_full_right");
+            var bar_right = spriteManager.Tile("bar_right");
+
+            RenderBarContent(x, y, totalLength, percentage, bar_left, bar_fill, bar_full_right, bar_right);
+        }
+
+        private static void RenderBarContainer(int x, int y, ISpriteManager spriteManager, int totalLength)
+        {
             BLT.Layer(BLTLayers.UIElements);
             BLT.Put(x, y, spriteManager.Tile("bar_container_left"));
 
@@ -43,24 +93,6 @@ namespace data_rogue_core.IOSystems.BLTTiles
             }
 
             BLT.Put(x + totalLength - 4 - 4, y, spriteManager.Tile("bar_container_right"));
-
-
-            BLT.Layer(BLTLayers.UIElementPieces);
-            var bar_left = spriteManager.Tile("bar_left");
-            var bar_fill = spriteManager.Tile("bar_fill");
-            var bar_full_right = spriteManager.Tile("bar_full_right");
-            var bar_right = spriteManager.Tile("bar_right");
-
-            RenderBarContent(x, y, totalLength, percentage, bar_left, bar_fill, bar_full_right, bar_right);
-
-            BLT.Layer(BLTLayers.UIMasks);
-            BLT.Color(color);
-            var mask_main = spriteManager.Tile("bar_fill_mask");
-
-            RenderBarContent(x, y, totalLength, percentage, mask_main, mask_main, mask_main, mask_main);
-            BLT.Color("");
-
-            y += 5;
         }
 
         private static void RenderBarContent(int x, int y, int totalLength, decimal percentage, int bar_left, int bar_fill, int bar_full_right, int bar_right)
