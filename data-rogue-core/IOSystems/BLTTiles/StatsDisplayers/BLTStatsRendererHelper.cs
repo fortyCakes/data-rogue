@@ -40,14 +40,17 @@ namespace data_rogue_core.IOSystems.BLTTiles
         protected abstract void DisplayInternal(int x, ISpriteManager spriteManager, StatsDisplay display, ISystemContainer systemContainer, IEntity player, List<MapCoordinate> playerFov, ref int y);
         
 
-        protected static void RenderText(int x, ref int y, string text, Color color)
+        protected static void RenderText(int x, ref int y, string text, Color color, bool updateY = true)
         {
             BLT.Layer(BLTLayers.Text);
             BLT.Font("text");
             BLT.Color(color);
             BLT.Print(x, y, text);
-            var size = BLT.Measure(text);
-            y += size.Height + 1;
+            if (updateY)
+            {
+                var size = BLT.Measure(text);
+                y += size.Height + 1;
+            }
 
             BLT.Color("");
         }

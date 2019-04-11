@@ -22,7 +22,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
             var totalLength = 100;
 
-            Counter counter = GetCounter(display, player);
+            Counter counter = GetCounter(display, player, out string counterText);
 
             var percentage = (decimal)counter.Current / counter.Max;
             
@@ -32,27 +32,24 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
             RenderBarFillMask(x, y, spriteManager, totalLength, percentage, color);
 
-            RenderText(x, y, counter);
+            RenderText(x, ref y, counter, counterText, display);
 
             y += 8;
         }
 
-        private void RenderText(int x, int y, Counter counter)
+        private void RenderText(int x, ref int y, Counter counter, string counterText, StatsDisplay display)
         {
-            BLT.Layer(BLTLayers.Text);
-            BLT.Font("text");
-
-            string counterText = counter.ToString();
-            BLT.Print(x+2, y+2, counterText);
-
-            BLT.Font("");
+            string text = $"{counterText}: {counter}";
+            
+            RenderText(x, ref y, text, display.Color, false);
         }
 
-        private static Counter GetCounter(StatsDisplay display, IEntity player)
+        private static Counter GetCounter(StatsDisplay display, IEntity player, out string counterText)
         {
             var componentCounterSplits = display.Parameters.Split(',');
             var componentName = componentCounterSplits[0];
             var counterName = componentCounterSplits[1];
+            counterText = counterName;
 
             var component = player.Get(componentName);
             FieldInfo[] fields = component.GetType().GetFields();
