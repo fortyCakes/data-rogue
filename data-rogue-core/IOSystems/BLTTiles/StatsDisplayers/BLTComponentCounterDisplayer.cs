@@ -83,24 +83,31 @@ namespace data_rogue_core.IOSystems.BLTTiles
         {
             if (percentage > 0)
             {
-                BLT.Put(x + 1, y + 2, bar_left);
-
                 var lengthToCover = percentage * totalLength - 6;
 
-                for (int i = 3; i < lengthToCover-1; i += 2)
+                if (lengthToCover < 0)
                 {
-                    BLT.Put(x + i, y + 2, bar_fill);
-                }
-
-                if (percentage == 1)
-                {
-                    BLT.Put(x + totalLength - 7, y + 2, bar_full_right);
+                    BLT.Put(x + 1, y + 2, bar_right);
                 }
                 else
                 {
-                    BLT.Put(x + (int)lengthToCover-1, y + 2, bar_right);
-                }
+                    BLT.Put(x + 1, y + 2, bar_left);
 
+
+                    for (int i = 3; i < lengthToCover - 1; i += 2)
+                    {
+                        BLT.Put(x + i, y + 2, bar_fill);
+                    }
+
+                    if (percentage == 1)
+                    {
+                        BLT.Put(x + totalLength - 7, y + 2, bar_full_right);
+                    }
+                    else
+                    {
+                        BLT.Put(x + (int)lengthToCover - 1, y + 2, bar_right);
+                    }
+                }
             }
         }
     }
