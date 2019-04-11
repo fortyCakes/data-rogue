@@ -10,6 +10,8 @@ ChallengeRating: 1
 Glyph: d
 Color: #654321
 ZOrder: 10
+[SpriteAppearance]
+Bottom: dog_1
 [Position]
 [Physical]
 Passable: false

@@ -13,6 +13,11 @@ namespace data_rogue_core.Activities
             _rendererFactory = rendererFactory;
         }
 
+        public ActivityStack(IRendererFactory rendererFactory, List<IActivity> list) : base(list)
+        {
+            _rendererFactory = rendererFactory;
+        }
+
         internal void PushAndInitialise(IActivity activity)
         {
             Push(activity);

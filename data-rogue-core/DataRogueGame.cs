@@ -28,8 +28,9 @@ namespace data_rogue_core
             Seed = seed;
 
             IOSystem = ioSystem ?? new RLNetConsoleIOSystem(RLNetConsoleIOSystem.DefaultConfiguration);
+            entityDataProviders = entityDataProviders ?? EntityDataProviders.Default;
 
-            InitialiseIOSystem();
+            InitialiseIOSystem(entityDataProviders);
 
             CreateAndRegisterSystems(entityDataProviders, additionalComponentTypes, IOSystem.RendererFactory, seed);
 
@@ -40,9 +41,9 @@ namespace data_rogue_core
             RunRootConsole(ioSystem);
         }
 
-        private void InitialiseIOSystem()
+        private void InitialiseIOSystem(EntityDataProviders entityDataProviders)
         {
-            IOSystem.Initialise(OnRootConsoleUpdate, OnRootConsoleRender);
+            IOSystem.Initialise(OnRootConsoleUpdate, OnRootConsoleRender, entityDataProviders.GraphicsDataProvider);
         }
 
         private void RunRootConsole(IIOSystem ioSystem)
@@ -84,11 +85,6 @@ namespace data_rogue_core
 
         private void CreateAndRegisterSystems(EntityDataProviders entityDataProviders, IList<Type> additionalComponentTypes, IRendererFactory rendererFactory, string seed)
         {
-            if (entityDataProviders == null)
-            {
-                entityDataProviders = EntityDataProviders.Default;
-            }
-
             SystemContainer = new SystemContainer(entityDataProviders, rendererFactory, additionalComponentTypes);
 
             SystemContainer.CreateSystems(seed);
@@ -130,7 +126,8 @@ namespace data_rogue_core
 
                 SystemContainer.PlayerControlSystem.HandleInput(keyPress, IOSystem.GetMouseData());
 
-                while (!SystemContainer.TimeSystem.WaitingForInput && SystemContainer.ActivitySystem.ActivityStack.Count > 0 && SystemContainer.ActivitySystem.Peek().Type == ActivityType.Gameplay && !_leaving)
+                var throttle = 1000;
+                while (!SystemContainer.TimeSystem.WaitingForInput && SystemContainer.ActivitySystem.ActivityStack.Count > 0 && SystemContainer.ActivitySystem.Peek().Type == ActivityType.Gameplay && SystemContainer.PlayerSystem.Player != null && !_leaving && throttle-- > 0)
                 {
                     SystemContainer.TimeSystem.Tick();
                 }

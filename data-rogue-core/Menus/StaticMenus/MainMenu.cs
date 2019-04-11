@@ -5,6 +5,8 @@ namespace data_rogue_core.Menus.StaticMenus
 {
     public class MainMenu : Menu
     {
+        public override bool Centred => true;
+
         private readonly IPlayerSystem _playerSystem;
         private readonly ISaveSystem _saveSystem;
 
@@ -28,15 +30,15 @@ namespace data_rogue_core.Menus.StaticMenus
             switch(item.Text)
             {
                 case "Quit":
-                    _activitySystem.Pop();
+                    CloseActivity();
                     _activitySystem.QuitAction();
                     break;
                 case "New Game":
-                    _activitySystem.Pop();
+                    CloseActivity();
                     StartCharacterCreation();
                     break;
                 case "Load Game":
-                    _activitySystem.Pop();
+                    CloseActivity();
                     _saveSystem.Load();
                     break;
 

@@ -10,6 +10,8 @@ ChallengeRating: 1
 Glyph: g
 Color: #aaffaa
 ZOrder: 10
+[SpriteAppearance]
+Bottom: goblin
 [Position]
 [Physical]
 Passable: false

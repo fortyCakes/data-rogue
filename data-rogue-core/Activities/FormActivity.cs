@@ -18,6 +18,7 @@ namespace data_rogue_core.Activities
         public FormActivity(Form form)
         {
             Form = form;
+            form.Activity = this;
         }
 
         public void Render(ISystemContainer systemContainer)

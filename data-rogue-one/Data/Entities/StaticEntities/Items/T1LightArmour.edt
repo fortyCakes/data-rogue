@@ -7,6 +7,8 @@ Singleton: false
 [Appearance]
 Glyph: (
 Color: #6B4D46
+[SpriteAppearance]
+Bottom: armour_brown
 [Position]
 [Item]
 ItemLevel: 1
@@ -28,6 +30,8 @@ Singleton: false
 [Appearance]
 Glyph: (
 Color: #6B4D46
+[SpriteAppearance]
+Bottom: legs_brown
 [Position]
 [Item]
 ItemLevel: 1
@@ -49,6 +53,8 @@ Singleton: false
 [Appearance]
 Glyph: (
 Color: #6B4D46
+[SpriteAppearance]
+Bottom: helm_brown
 [Position]
 [Item]
 ItemLevel: 1
@@ -70,6 +76,8 @@ Singleton: false
 [Appearance]
 Glyph: (
 Color: #6B4D46
+[SpriteAppearance]
+Bottom: glove_brown
 [Position]
 [Item]
 ItemLevel: 1
@@ -91,6 +99,8 @@ Singleton: false
 [Appearance]
 Glyph: (
 Color: #6B4D46
+[SpriteAppearance]
+Bottom: boot_brown
 [Position]
 [Item]
 ItemLevel: 1

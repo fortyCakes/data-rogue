@@ -21,6 +21,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataRogueWorldEditor", "Dat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "data-rogue-one", "data-rogue-one\data-rogue-one.csproj", "{EB725E82-DAA7-4F21-AA3C-4CCABFC11AAA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLTWrapper", "BLTWrapper\BLTWrapper.csproj", "{81288AB7-EF21-4660-86E4-A477DEB7C75C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BearLib", "BearLib\BearLib.csproj", "{890FADBE-7BFF-49BF-B3BC-E316279C5059}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +47,14 @@ Global
 		{EB725E82-DAA7-4F21-AA3C-4CCABFC11AAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB725E82-DAA7-4F21-AA3C-4CCABFC11AAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB725E82-DAA7-4F21-AA3C-4CCABFC11AAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81288AB7-EF21-4660-86E4-A477DEB7C75C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81288AB7-EF21-4660-86E4-A477DEB7C75C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81288AB7-EF21-4660-86E4-A477DEB7C75C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81288AB7-EF21-4660-86E4-A477DEB7C75C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{890FADBE-7BFF-49BF-B3BC-E316279C5059}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{890FADBE-7BFF-49BF-B3BC-E316279C5059}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{890FADBE-7BFF-49BF-B3BC-E316279C5059}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{890FADBE-7BFF-49BF-B3BC-E316279C5059}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

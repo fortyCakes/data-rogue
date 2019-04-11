@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using data_rogue_core.Activities;
+using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Renderers;
 using data_rogue_core.Renderers.ConsoleRenderers;
 using OpenTK.Input;
@@ -42,7 +43,7 @@ namespace data_rogue_core.IOSystems.RLNetConsole
         public IRendererFactory RendererFactory { get; private set; }
         public IOSystemConfiguration IOSystemConfiguration { get; }
 
-        public void Initialise(UpdateEventHandler onUpdate, UpdateEventHandler onRender)
+        public void Initialise(UpdateEventHandler onUpdate, UpdateEventHandler onRender, IEntityDataProvider graphicsDataProvider)
         {
             string fontFileName = "Images\\Tileset\\Alloy_curses_12x12.png";
             string consoleTitle = IOSystemConfiguration.WindowTitle;

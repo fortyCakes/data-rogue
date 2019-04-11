@@ -9,12 +9,15 @@ namespace data_rogue_core.Systems
             PrototypeEntityDataProvider = new StaticEntityDataProvider(),
             KeyBindingsDataProvider = new KeyBindingsDataProvider(),
             WorldEntityDataProvider = new WorldEntityDataProvider(),
-            PlayerEntityDataProvider = new PlayerEntityDataProvider()
+            PlayerEntityDataProvider = new PlayerEntityDataProvider(),
+            GraphicsDataProvider = new SpriteSheetDataProvider()
+
         };
 
         public IEntityDataProvider PrototypeEntityDataProvider { get; set; }
         public IEntityDataProvider KeyBindingsDataProvider { get; set; }
         public IEntityDataProvider WorldEntityDataProvider { get; set; }
         public IEntityDataProvider PlayerEntityDataProvider { get; set; }
+        public IEntityDataProvider GraphicsDataProvider { get; set; }
     }
 }

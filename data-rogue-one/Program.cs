@@ -4,6 +4,7 @@ using System.Linq;
 using data_rogue_core;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.IOSystems;
+using data_rogue_core.IOSystems.BLTTiles;
 using data_rogue_core.IOSystems.RLNetConsole;
 using data_rogue_core.Renderers.ConsoleRenderers;
 
@@ -15,7 +16,9 @@ namespace data_rogue_one
         {
             var theGame = new DataRogueGame();
 
-            RLNetConsoleIOSystem ioSystem = GetRLNetIOSystem();
+            //RLNetConsoleIOSystem ioSystem = GetRLNetIOSystem();
+
+            BLTTilesIOSystem ioSystem = new BLTTilesIOSystem(BLTTilesIOSystem.DefaultConfiguration);
 
             var additionalComponents = typeof(Program).Assembly.GetTypes().Where(t => t.IsAssignableFrom(typeof(IEntityComponent))).ToList();
 
@@ -29,21 +32,21 @@ namespace data_rogue_one
             config.WindowTitle = "data-rogue-one";
             config.StatsConfigurations = new List<StatsConfiguration> { new StatsConfiguration { Position = new Rectangle(77, 0, 23, 70), Displays = new List<StatsDisplay> {
                 new StatsDisplay { DisplayType = "Name" },
-                new StatsDisplay {DisplayType =  "Title"},
+                new StatsDisplay { DisplayType =  "Title"},
                 new StatsDisplay { DisplayType = "Spacer"},
                 new StatsDisplay { DisplayType = "ComponentCounter", Parameters = "Health,HP", BackColor = Color.DarkRed},
                 new StatsDisplay { DisplayType = "Spacer"},
                 new StatsDisplay { DisplayType = "ComponentCounter", Parameters = "AuraFighter,Aura", BackColor = Color.Yellow},
-                new StatsDisplay {DisplayType =  "Stat", Parameters = "Tension" },
+                new StatsDisplay { DisplayType =  "Stat", Parameters = "Tension" },
                 new StatsDisplay { DisplayType = "Spacer"},
                 new StatsDisplay { DisplayType = "ComponentCounter", Parameters = "TiltFighter,Tilt", BackColor = Color.Purple},
                 new StatsDisplay { DisplayType = "Spacer"},
-                new StatsDisplay {DisplayType =  "Stat", Parameters = "AC" },
-                new StatsDisplay {DisplayType =  "Stat", Parameters = "EV" },
-                new StatsDisplay {DisplayType =  "Stat", Parameters = "SH" },
-                new StatsDisplay {DisplayType =  "StatInterpolation", Parameters = "Aegis: {0}/{1},CurrentAegisLevel,Aegis", Color = Color.LightBlue },
+                new StatsDisplay { DisplayType =  "Stat", Parameters = "AC" },
+                new StatsDisplay { DisplayType =  "Stat", Parameters = "EV" },
+                new StatsDisplay { DisplayType =  "Stat", Parameters = "SH" },
+                new StatsDisplay { DisplayType =  "StatInterpolation", Parameters = "Aegis: {0}/{1},CurrentAegisLevel,Aegis", Color = Color.LightBlue },
                 new StatsDisplay { DisplayType = "Spacer"},
-                new StatsDisplay {DisplayType =  "Location"},
+                new StatsDisplay { DisplayType =  "Location"},
                 new StatsDisplay { DisplayType = "Time" },
                 new StatsDisplay { DisplayType = "Spacer"},
                 new StatsDisplay { DisplayType = "Wealth", Parameters = "Gold", Color = Color.Gold},

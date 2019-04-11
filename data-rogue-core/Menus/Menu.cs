@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using data_rogue_core.Activities;
 using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
@@ -9,6 +10,9 @@ namespace data_rogue_core.Menus
     public class Menu
     {
         public string MenuName { get; set; }
+        public virtual bool Centred => false;
+
+        public IActivity Activity { get; set; }
 
         public List<MenuItem> MenuItems { get; private set; }
         public virtual List<MenuAction> AvailableActions { get; set; } = new List<MenuAction> { MenuAction.Select };
@@ -59,6 +63,11 @@ namespace data_rogue_core.Menus
                     Select();
                 }
             }
+        }
+
+        protected void CloseActivity()
+        {
+            _activitySystem.RemoveActivity(Activity);
         }
 
         private void Next()

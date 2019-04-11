@@ -53,7 +53,7 @@ namespace data_rogue_core.Menus.DynamicMenus
         {
             if (selectedItem.Text == "Cancel")
             {
-                _systemContainer.ActivitySystem.Pop();
+                CloseActivity();
                 return;
             }
 
@@ -67,7 +67,7 @@ namespace data_rogue_core.Menus.DynamicMenus
                     if (done)
                     {
                         SpendATurn();
-                        _systemContainer.ActivitySystem.Pop();
+                        CloseActivity();
                         _systemContainer.MessageSystem.Write($"You unequip the {item.DescriptionName}.");
                     }
 

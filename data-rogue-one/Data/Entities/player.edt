@@ -3,6 +3,8 @@
 Glyph: @
 Color: #FFFFFF
 ZOrder: 9999
+[SpriteAppearance]
+Bottom: generic_person
 [Physical]
 Passable: false
 Transparent: true

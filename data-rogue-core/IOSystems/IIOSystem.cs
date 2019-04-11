@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using data_rogue_core.Components;
+using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Renderers;
 using RLNET;
 
@@ -12,7 +13,7 @@ namespace data_rogue_core.IOSystems
     {
         IRendererFactory RendererFactory { get; }
 
-        void Initialise(UpdateEventHandler onUpdate, UpdateEventHandler onRender);
+        void Initialise(UpdateEventHandler onUpdate, UpdateEventHandler onRender, IEntityDataProvider graphicsDataProvider);
 
         void Run();
 

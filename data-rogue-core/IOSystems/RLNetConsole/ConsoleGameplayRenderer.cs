@@ -117,9 +117,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
         private bool IsOnMap(MapConfiguration map, int x, int y)
         {
-            var mapWidth = map.Position.Width;
-            var mapHeight = map.Position.Height;
-            return x >= 0 && x < mapWidth && y >= 0 && y < mapHeight;
+            return x >= map.Position.Left && x <= map.Position.Right && y >= map.Position.Top && y < map.Position.Bottom;
         }
 
         private void RenderLines()
