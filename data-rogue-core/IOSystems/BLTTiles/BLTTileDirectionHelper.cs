@@ -67,6 +67,16 @@ namespace data_rogue_core.IOSystems.BLTTiles
             return directions;
         }
 
+        public static TileDirections GetDirections(int x, int width, int y, int height)
+        {
+            var directions = TileDirections.None;
+            if (x != 0) directions |= TileDirections.Left;
+            if (x != width - 1) directions |= TileDirections.Right;
+            if (y != 0) directions |= TileDirections.Up;
+            if (y != height - 1) directions |= TileDirections.Down;
+            return directions;
+        }
+
         private static TileDirections ApplyWallTypeConnectionRules(SpriteAppearance[,,] tilesTracker, int x, int y, int z, bool top, TileDirections directions, string connect)
         {
             if (IsTripleSide(directions))

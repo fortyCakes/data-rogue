@@ -9,9 +9,15 @@ namespace data_rogue_core.IOSystems.BLTTiles
     {
         public override string DisplayType => "Location";
 
-        protected override void DisplayInternal(int x, ISpriteManager spriteManager, StatsDisplay display, ISystemContainer systemContainer, IEntity player, List<MapCoordinate> playerFov, ref int line)
+        protected override void DisplayInternal(int x, ISpriteManager spriteManager, StatsDisplay display, ISystemContainer systemContainer, IEntity player, List<MapCoordinate> playerFov, ref int y)
         {
-            throw new System.NotImplementedException();
+            var mapName = systemContainer.PositionSystem.CoordinateOf(player).Key.Key;
+            if (mapName.StartsWith("Branch:"))
+            {
+                mapName = mapName.Substring(7);
+            }
+
+            RenderText(x, ref y, $"Location: {mapName}", display.Color);
         }
     }
 }

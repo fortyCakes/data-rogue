@@ -9,9 +9,12 @@ namespace data_rogue_core.IOSystems.BLTTiles
     {
         public override string DisplayType => "Wealth";
 
-        protected override void DisplayInternal(int x, ISpriteManager spriteManager, StatsDisplay display, ISystemContainer systemContainer, IEntity player, List<MapCoordinate> playerFov, ref int line)
+        protected override void DisplayInternal(int x, ISpriteManager spriteManager, StatsDisplay display, ISystemContainer systemContainer, IEntity player, List<MapCoordinate> playerFov, ref int y)
         {
-            throw new System.NotImplementedException();
+            var wealthType = display.Parameters;
+            var text = $"{wealthType}: {systemContainer.ItemSystem.CheckWealth(player, wealthType)}";
+
+            RenderText(x, ref y, text, display.Color);
         }
     }
 }

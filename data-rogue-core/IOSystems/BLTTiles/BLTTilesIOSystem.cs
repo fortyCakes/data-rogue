@@ -25,8 +25,9 @@ namespace data_rogue_core.IOSystems.BLTTiles
             WindowTitle = "data-rogue window title",
             MapConfigurations = new List<MapConfiguration> { new MapConfiguration { Position = new Rectangle(0, 0, 40 * TILE_SPACING, 25 * TILE_SPACING) } },
             StatsConfigurations = new List<StatsConfiguration> { new StatsConfiguration { Position = new Rectangle(2, 2, 40 * TILE_SPACING - 2, 25 * TILE_SPACING - 2), Displays = new List<StatsDisplay> {
-                new StatsDisplay { DisplayType = "Name" },
-                new StatsDisplay { DisplayType = "ComponentCounter", Parameters = "Health,HP", BackColor = Color.Red}
+                new StatsDisplay { DisplayType = "ComponentCounter", Parameters = "Health,HP", BackColor = Color.Red},
+                new StatsDisplay { DisplayType =  "StatInterpolation", Parameters = "Aegis: {0}/{1},CurrentAegisLevel,Aegis", Color = Color.LightBlue },
+                new StatsDisplay { DisplayType =  "HoveredEntity" }
 
             } } },
             MessageConfigurations = new List<MessageConfiguration> { new MessageConfiguration { Position = new Rectangle(0, 15 * TILE_SPACING, 40 * TILE_SPACING, 10 * TILE_SPACING) } }
@@ -44,6 +45,8 @@ namespace data_rogue_core.IOSystems.BLTTiles
         private readonly List<int> MOUSE_EVENTS = new List<int> { BLT.TK_MOUSE_LEFT, BLT.TK_MOUSE_RIGHT };
         private bool _leftClick;
         private bool _rightClick;
+        private int _mouseY;
+        private int _mouseX;
 
         public BLTTilesIOSystem(IOSystemConfiguration ioSystemConfiguration)
         { 
@@ -82,7 +85,12 @@ namespace data_rogue_core.IOSystems.BLTTiles
                     isClosed = true;
                 }
 
-                if (IsMouseEvent(input))
+                if (IsMouseMove(input))
+                {
+                    _mouseX = BLT.State(BLT.TK_MOUSE_X);
+                    _mouseY = BLT.State(BLT.TK_MOUSE_Y);
+                }
+                if (IsClickEvent(input))
                 {
                     ResolveMouseInput(input);
                 }
@@ -93,13 +101,18 @@ namespace data_rogue_core.IOSystems.BLTTiles
             }
         }
 
+        private bool IsMouseMove(int input)
+        {
+            return input == BLT.TK_MOUSE_MOVE;
+        }
+
         private void ResolveMouseInput(int input)
         {
             _leftClick = input == BLT.TK_MOUSE_LEFT;
             _rightClick = input == BLT.TK_MOUSE_RIGHT;
         }
 
-        private bool IsMouseEvent(int input)
+        private bool IsClickEvent(int input)
         {
             return MOUSE_EVENTS.Contains(input);
         }
@@ -131,18 +144,12 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
         public MouseData GetMouseData()
         {
-            var x = BLT.State(BLT.TK_MOUSE_X);
-            var y = BLT.State(BLT.TK_MOUSE_Y);
-
-            var leftClick = _leftClick;
-            var rightClick = _rightClick;
-
             return new MouseData
             {
-                IsLeftClick = leftClick,
-                IsRightClick = rightClick,
-                X = x,
-                Y = y
+                IsLeftClick = _leftClick,
+                IsRightClick = _rightClick,
+                X = _mouseX,
+                Y = _mouseY
             };
         }
 
@@ -153,9 +160,11 @@ namespace data_rogue_core.IOSystems.BLTTiles
             _update = onUpdate;
             _render = onRender;
 
-            var config = $"window: size={_ioSystemConfiguration.InitialWidth * TILE_SPACING}x{_ioSystemConfiguration.InitialHeight * TILE_SPACING}, cellsize=4x4, title='{_ioSystemConfiguration.WindowTitle}', filter='keyboard,mouse';";
-
+            var config = $"window: size={_ioSystemConfiguration.InitialWidth * TILE_SPACING}x{_ioSystemConfiguration.InitialHeight * TILE_SPACING}, cellsize=4x4, title='{_ioSystemConfiguration.WindowTitle}'";
+        
             BLT.Set(config);
+
+            BLT.Set("input: precise-mouse=false, filter=[keyboard,mouse+];");
 
             BLT.Set("text font: Images/Tileset/Andux_sleipnir_8x12_tf.png, codepage=437, size=8x12, spacing=2x3;");
             BLT.Set("textLarge font: Images/Tileset/Andux_sleipnir_8x12_tf.png, codepage=437, size=8x12, resize=16x24, resize-filter=nearest, spacing=4x6;");

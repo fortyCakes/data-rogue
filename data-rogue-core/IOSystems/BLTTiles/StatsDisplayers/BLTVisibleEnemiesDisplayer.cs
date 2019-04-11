@@ -9,7 +9,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
     {
         public override string DisplayType => "VisibleEnemies";
 
-        protected override void DisplayInternal(int x, ISpriteManager spriteManager, StatsDisplay display, ISystemContainer systemContainer, IEntity player, List<MapCoordinate> playerFov, ref int line)
+        protected override void DisplayInternal(int x, ISpriteManager spriteManager, StatsDisplay display, ISystemContainer systemContainer, IEntity player, List<MapCoordinate> playerFov, ref int y)
         {
             throw new System.NotImplementedException();
         }

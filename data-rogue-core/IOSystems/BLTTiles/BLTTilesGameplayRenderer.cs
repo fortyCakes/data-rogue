@@ -31,7 +31,23 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
         public MapCoordinate GetMapCoordinateFromMousePosition(MapCoordinate cameraPosition, int x, int y)
         {
-            return new MapCoordinate(cameraPosition.Key, x / 8, y / 8);
+            foreach (MapConfiguration map in _ioSystemConfiguration.MapConfigurations)
+            {
+                if (IsOnMap(map, x, y))
+                {
+                    var lookupX = cameraPosition.X - map.Position.Width / (2 * BLTTilesIOSystem.TILE_SPACING) + x / BLTTilesIOSystem.TILE_SPACING;
+                    var lookupY = cameraPosition.Y - map.Position.Height / (2 * BLTTilesIOSystem.TILE_SPACING) + y / BLTTilesIOSystem.TILE_SPACING;
+
+                    return new MapCoordinate(cameraPosition.Key, lookupX, lookupY);
+                }
+            }
+
+            return null;
+        }
+
+        private bool IsOnMap(MapConfiguration map, int x, int y)
+        {
+            return x >= map.Position.Left && x <= map.Position.Right && y >= map.Position.Top && y < map.Position.Bottom;
         }
 
         public void Render(ISystemContainer systemContainer)

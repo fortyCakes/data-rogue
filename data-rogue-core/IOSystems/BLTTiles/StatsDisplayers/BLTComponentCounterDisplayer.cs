@@ -34,7 +34,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
             RenderText(x, y, counter);
 
-            y += 5;
+            y += 8;
         }
 
         private void RenderText(int x, int y, Counter counter)

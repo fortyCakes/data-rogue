@@ -10,14 +10,11 @@ namespace data_rogue_core.IOSystems.BLTTiles
     {
         public override string DisplayType => "Name";
 
-        protected override void DisplayInternal(int x, ISpriteManager spriteManager, StatsDisplay display, ISystemContainer systemContainer, IEntity player, List<MapCoordinate> playerFov, ref int line)
+        protected override void DisplayInternal(int x, ISpriteManager spriteManager, StatsDisplay display, ISystemContainer systemContainer, IEntity player, List<MapCoordinate> playerFov, ref int y)
         {
-            BLT.Layer(BLTLayers.Text);
-            BLT.Font("text");
             var text = $"Name: {player.DescriptionName}";
-            BLT.Print(x, line, text);
-            var size = BLT.Measure(text);
-            line += size.Height + 1;
+
+            RenderText(x, ref y, text, display.Color);
         }
     }
 }

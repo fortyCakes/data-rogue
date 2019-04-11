@@ -81,7 +81,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             {
                 for (int y = 0; y < heightInTiles; y++)
                 {
-                    var directions = BLTTilesBackgroundRenderer.GetDirections(x, widthInTiles, y, heightInTiles);
+                    var directions = BLTTileDirectionHelper.GetDirections(x, widthInTiles, y, heightInTiles);
 
                     BLT.Put(_width/2 - boxWidth/2 + x * _tileSpacing, _height/2 - boxHeight/2 + y * _tileSpacing, textboxSprite.Tile(directions));
                 }
