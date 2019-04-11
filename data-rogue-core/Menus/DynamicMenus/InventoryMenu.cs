@@ -15,10 +15,11 @@ namespace data_rogue_core.Menus.DynamicMenus
 
         public override List<MenuAction> AvailableActions { get; set; } = new List<MenuAction> { MenuAction.Use, MenuAction.Drop, MenuAction.Equip };
 
-        public InventoryMenu(ISystemContainer systemContainer, Inventory inventory) : base(systemContainer.ActivitySystem, "Inventory", GetCallback(systemContainer), GetInventoryMenuItems(systemContainer, inventory))
+        public InventoryMenu(ISystemContainer systemContainer, Inventory inventory) : base(systemContainer.ActivitySystem, "Inventory", null, GetInventoryMenuItems(systemContainer, inventory))
         {
             this.systemContainer = systemContainer;
             SelectedAction = MenuAction.Use;
+            OnSelectCallback += GetCallback(systemContainer);
         }
 
         private static MenuItem[] GetInventoryMenuItems(ISystemContainer systemContainer, Inventory inventory)
@@ -47,12 +48,12 @@ namespace data_rogue_core.Menus.DynamicMenus
             return new MenuItem(itemText, item.EntityId);
         }
 
-        private static MenuItemSelected GetCallback(ISystemContainer systemContainer)
+        private MenuItemSelected GetCallback(ISystemContainer systemContainer)
         {
             return (item, action) => DoInventoryStuff(systemContainer, item, action);
         }
 
-        private static void DoInventoryStuff(ISystemContainer systemContainer, MenuItem selectedItem, MenuAction selectedAction)
+        private void DoInventoryStuff(ISystemContainer systemContainer, MenuItem selectedItem, MenuAction selectedAction)
         {
             if (selectedItem.Text == "Cancel")
             {
@@ -65,7 +66,7 @@ namespace data_rogue_core.Menus.DynamicMenus
             switch (selectedAction)
             {
                 case MenuAction.Drop:
-                    systemContainer.ActivitySystem.Pop();
+                    CloseActivity();
 
                     if (systemContainer.EventSystem.Try(EventType.DropItem, systemContainer.PlayerSystem.Player, new DropItemEventData { Item = item }))
                     {
@@ -76,7 +77,7 @@ namespace data_rogue_core.Menus.DynamicMenus
 
                     break;
                 case MenuAction.Use:
-                    systemContainer.ActivitySystem.Pop();
+                    CloseActivity();
 
                     if (systemContainer.EventSystem.Try(EventType.UseItem, systemContainer.PlayerSystem.Player, new DropItemEventData {Item = item}))
                     {
@@ -91,7 +92,7 @@ namespace data_rogue_core.Menus.DynamicMenus
 
                         if (done)
                         {
-                            systemContainer.ActivitySystem.Pop();
+                            CloseActivity();
                             SpendATurn(systemContainer);
                             systemContainer.MessageSystem.Write($"You equip the {item.DescriptionName}.");
                         }

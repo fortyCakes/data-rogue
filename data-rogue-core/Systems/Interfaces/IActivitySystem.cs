@@ -14,5 +14,7 @@ namespace data_rogue_core.Systems.Interfaces
         IActivity Peek();
 
         Action QuitAction { get; set; }
+
+        void RemoveActivity(IActivity activity);
     }
 }

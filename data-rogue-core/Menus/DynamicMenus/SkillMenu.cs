@@ -46,14 +46,14 @@ namespace data_rogue_core.Menus.DynamicMenus
         {
             if (selectedItem.Text == "Cancel")
             {
-                _systemContainer.ActivitySystem.Pop();
+                CloseActivity();
                 return;
             }
 
             switch (selectedAction)
             {
                 case MenuAction.Use:
-                    _systemContainer.ActivitySystem.Pop();
+                    CloseActivity();
 
                     KnownSkill knownSkill = (KnownSkill)selectedItem.Value;
 

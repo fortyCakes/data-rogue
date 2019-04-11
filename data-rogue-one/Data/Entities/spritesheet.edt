@@ -279,3 +279,17 @@ Type: SingleSprite
 SpriteWidth: 4
 SpriteHeight: 8
 Scaling: 2
+[SpriteSheet]
+Name: targetable
+Path: Images/Sprites/Misc/targetable.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: current_target
+Path: Images/Sprites/Misc/current_target.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2

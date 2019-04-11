@@ -26,8 +26,11 @@ namespace data_rogue_core.IOSystems.BLTTiles
             MapConfigurations = new List<MapConfiguration> { new MapConfiguration { Position = new Rectangle(0, 0, 40 * TILE_SPACING, 25 * TILE_SPACING) } },
             StatsConfigurations = new List<StatsConfiguration> { new StatsConfiguration { Position = new Rectangle(2, 2, 40 * TILE_SPACING - 2, 25 * TILE_SPACING - 2), Displays = new List<StatsDisplay> {
                 new StatsDisplay { DisplayType = "ComponentCounter", Parameters = "Health,HP", BackColor = Color.Red},
-                new StatsDisplay { DisplayType =  "StatInterpolation", Parameters = "Aegis: {0}/{1},CurrentAegisLevel,Aegis", Color = Color.LightBlue },
-                new StatsDisplay { DisplayType =  "HoveredEntity" }
+                new StatsDisplay { DisplayType = "ComponentCounter", Parameters = "AuraFighter,Aura", BackColor = Color.Gold},
+                new StatsDisplay { DisplayType = "ComponentCounter", Parameters = "TiltFighter,Tilt", BackColor = Color.Purple},
+                new StatsDisplay { DisplayType =  "Spacer" },
+                new StatsDisplay {DisplayType = "Time"},
+                new StatsDisplay { DisplayType =  "HoveredEntity", Parameters = "Health,HP;AuraFighter,Aura;TiltFighter,Tilt" }
 
             } } },
             MessageConfigurations = new List<MessageConfiguration> { new MessageConfiguration { Position = new Rectangle(0, 15 * TILE_SPACING, 40 * TILE_SPACING, 10 * TILE_SPACING) } }
@@ -42,7 +45,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
         private ISpriteManager _spriteManager;
         public const int TILE_SPACING = 8;
 
-        private readonly List<int> MOUSE_EVENTS = new List<int> { BLT.TK_MOUSE_LEFT, BLT.TK_MOUSE_RIGHT };
+        private readonly List<int> MOUSE_EVENTS = new List<int> { BLT.TK_MOUSE_LEFT, BLT.TK_MOUSE_RIGHT, BLT.TK_MOUSE_LEFT | BLT.TK_KEY_RELEASED, BLT.TK_MOUSE_RIGHT | BLT.TK_KEY_RELEASED };
         private bool _leftClick;
         private bool _rightClick;
         private int _mouseY;
@@ -92,7 +95,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
                 }
                 if (IsClickEvent(input))
                 {
-                    ResolveMouseInput(input);
+                    SetMouseButtons(input);
                 }
                 else
                 {
@@ -106,7 +109,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             return input == BLT.TK_MOUSE_MOVE;
         }
 
-        private void ResolveMouseInput(int input)
+        private void SetMouseButtons(int input)
         {
             _leftClick = input == BLT.TK_MOUSE_LEFT;
             _rightClick = input == BLT.TK_MOUSE_RIGHT;
@@ -179,7 +182,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
                 {ActivityType.Menu, new BLTTilesMenuRenderer(_spriteManager)},
                 {ActivityType.StaticDisplay, new BLTTilesStaticTextRenderer(_spriteManager, TILE_SPACING)},
                 {ActivityType.Form, new BLTTilesFormRenderer(_spriteManager) },
-                {ActivityType.Targeting, new BLTTilesTargetingRenderer( _ioSystemConfiguration) }
+                {ActivityType.Targeting, new BLTTilesTargetingRenderer( _ioSystemConfiguration, _spriteManager) }
             };
 
             RendererFactory = new RendererFactory(renderers);

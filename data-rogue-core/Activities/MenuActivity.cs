@@ -14,6 +14,7 @@ namespace data_rogue_core.Activities
         public MenuActivity(Menu menu)
         {
             Menu = menu;
+            Menu.Activity = this;
         }
 
         public IMenuRenderer Renderer { get; set; }

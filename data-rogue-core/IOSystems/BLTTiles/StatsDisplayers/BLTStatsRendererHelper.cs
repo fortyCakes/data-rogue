@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System;
 using System.Drawing;
 using BearLib;
+using data_rogue_core.Data;
+using System.Reflection;
+using System.Linq;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
@@ -21,7 +24,6 @@ namespace data_rogue_core.IOSystems.BLTTiles
             new BLTSpacerDisplayer(),
             new BLTStatDisplayer(),
             new BLTStatInterpolationDisplayer(),
-            new BLTVisibleEnemiesDisplayer(),
             new BLTWealthDisplayer(),
             new BLTComponentCounterDisplayer()
         };
@@ -53,6 +55,24 @@ namespace data_rogue_core.IOSystems.BLTTiles
             }
 
             BLT.Color("");
+        }
+
+        protected static Counter GetCounter(string parameters, IEntity entity, out string counterText)
+        {
+            var componentCounterSplits = parameters.Split(',');
+            var componentName = componentCounterSplits[0];
+            var counterName = componentCounterSplits[1];
+            counterText = counterName;
+
+            if (!entity.Has(componentName))
+            {
+                return null;
+            }
+            var component = entity.Get(componentName);
+
+            FieldInfo[] fields = component.GetType().GetFields();
+            var field = fields.Single(f => f.Name == counterName);
+            return (Counter)field.GetValue(component);
         }
     }
 }

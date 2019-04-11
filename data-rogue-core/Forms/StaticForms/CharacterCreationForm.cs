@@ -54,8 +54,8 @@ namespace data_rogue_core.Forms.StaticForms
             switch(button)
             {
                 case FormButton.Ok:
+                    CloseActivity();
                     _saveSystem.Create(characterCreationForm);
-                    _activitySystem.Pop();
                     break;
                 case FormButton.Cancel:
                     _activitySystem.Pop();

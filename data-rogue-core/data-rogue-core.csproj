@@ -73,6 +73,7 @@
   <ItemGroup>
     <Compile Include="Activities\EndGameScreenActivity.cs" />
     <Compile Include="Activities\FormActivity.cs" />
+    <Compile Include="Activities\IStaticTextActivity.cs" />
     <Compile Include="Activities\LoadingScreenActivity.cs" />
     <Compile Include="Activities\TargetingActivity.cs" />
     <Compile Include="Behaviours\ActionResults.cs" />
@@ -137,7 +138,6 @@
     <Compile Include="IOSystems\BLTTiles\BLTTilesTargetingRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\StatsDisplayers\BLTTimeDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\StatsDisplayers\BLTTitleDisplayer.cs" />
-    <Compile Include="IOSystems\BLTTiles\StatsDisplayers\BLTVisibleEnemiesDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\StatsDisplayers\BLTWealthDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\ISpriteManager.cs" />
     <Compile Include="IOSystems\BLTTiles\KeyConverter.cs" />
@@ -403,7 +403,13 @@
     <Content Include="Images\Sprites\Misc\arrow.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\Sprites\Misc\current_target.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Sprites\Misc\shade_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Misc\targetable.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Misc\unknown.png">

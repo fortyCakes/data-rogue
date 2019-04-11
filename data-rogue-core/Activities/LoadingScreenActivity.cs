@@ -3,7 +3,7 @@ using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.Activities
 {
-    public class LoadingScreenActivity : IActivity
+    public class LoadingScreenActivity : IActivity, IStaticTextActivity
     {
         public ActivityType Type => ActivityType.StaticDisplay;
         public object Data => Text;
@@ -11,6 +11,8 @@ namespace data_rogue_core.Activities
 
         public string Text { get; set; }
         public IStaticTextRenderer Renderer { get; private set; }
+
+        public bool CloseOnKeyPress => false;
 
         public LoadingScreenActivity(string staticText)
         {

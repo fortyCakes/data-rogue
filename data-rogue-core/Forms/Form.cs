@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using data_rogue_core.Activities;
 using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.Forms.StaticForms;
 using data_rogue_core.Systems;
@@ -17,6 +18,7 @@ namespace data_rogue_core.Forms
         public FormButton Buttons { get; }
         public FormButtonSelected OnSelectCallback { get; protected set; }
         public Dictionary<string, FormData> Fields { get; set; }
+        public IActivity Activity { get; set; }
 
         private List<string> FieldsKeyList => Fields.OrderBy(f => f.Value.Order).Select(f => f.Key).ToList();
 
@@ -88,8 +90,11 @@ namespace data_rogue_core.Forms
                     Select();
                 }
             }
-            
-            
+        }
+
+        protected void CloseActivity()
+        {
+            _activitySystem.RemoveActivity(Activity);
         }
 
         private bool HandleAction_StatArray(ActionEventData action, FormData selectedFormData, string subItem)

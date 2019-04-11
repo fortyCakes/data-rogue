@@ -12,6 +12,7 @@ using data_rogue_core.Maps;
 using data_rogue_core.Menus;
 using data_rogue_core.Renderers;
 using data_rogue_core.Systems.Interfaces;
+using OpenTK.Input;
 using RLNET;
 
 namespace data_rogue_core.Systems
@@ -59,32 +60,34 @@ namespace data_rogue_core.Systems
         public void HandleInput(KeyCombination keyPress, MouseData mouse)
         {
             var actionData = HandleKeyPress(keyPress);
-
-            IActivity currentActivity = _activitySystem.Peek();
-            switch (currentActivity.Type)
+            if (_activitySystem.ActivityStack.Any())
             {
-                case ActivityType.Menu:
-                    (currentActivity.Data as Menu)?.HandleAction(actionData);
-                    break;
-                case ActivityType.StaticDisplay:
-                    if (keyPress != null)
-                    {
-                        _activitySystem.Pop();
-                    }
-                    break;
-                case ActivityType.Gameplay:
-                    if (_systemContainer.TimeSystem.WaitingForInput && actionData != null)
-                    {
-                        _systemContainer.EventSystem.Try(EventType.Action, _systemContainer.PlayerSystem.Player, actionData);
-                    }
-                    HandleMouseInput(mouse);
-                    break;
-                case ActivityType.Form:
-                    (currentActivity.Data as Form)?.HandleAction(actionData);
-                    break;
-                case ActivityType.Targeting:
-                    _targetingSystem.HandleMouseInput(mouse);
-                    break;
+                IActivity currentActivity = _activitySystem.Peek();
+                switch (currentActivity.Type)
+                {
+                    case ActivityType.Menu:
+                        (currentActivity.Data as Menu)?.HandleAction(actionData);
+                        break;
+                    case ActivityType.StaticDisplay:
+                        if (keyPress != null && keyPress.Key != Key.Unknown && (currentActivity as IStaticTextActivity).CloseOnKeyPress)
+                        {
+                            _activitySystem.RemoveActivity(currentActivity);
+                        }
+                        break;
+                    case ActivityType.Gameplay:
+                        if (_systemContainer.TimeSystem.WaitingForInput && actionData != null)
+                        {
+                            _systemContainer.EventSystem.Try(EventType.Action, _systemContainer.PlayerSystem.Player, actionData);
+                        }
+                        HandleMouseInput(mouse);
+                        break;
+                    case ActivityType.Form:
+                        (currentActivity.Data as Form)?.HandleAction(actionData);
+                        break;
+                    case ActivityType.Targeting:
+                        _targetingSystem.HandleMouseInput(mouse);
+                        break;
+                }
             }
         }
 

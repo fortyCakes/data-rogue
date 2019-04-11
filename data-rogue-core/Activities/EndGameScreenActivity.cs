@@ -5,7 +5,7 @@ using System.Text;
 
 namespace data_rogue_core.Activities
 {
-    public class EndGameScreenActivity : IActivity
+    public class EndGameScreenActivity : IActivity, IStaticTextActivity
     {
         public ActivityType Type => ActivityType.StaticDisplay;
         public object Data => Text;
@@ -28,6 +28,8 @@ namespace data_rogue_core.Activities
         }
 
         public IStaticTextRenderer Renderer { get; private set; }
+
+        public bool CloseOnKeyPress => true;
 
         private readonly ISystemContainer systemContainer;
 

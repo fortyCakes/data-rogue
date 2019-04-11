@@ -22,6 +22,7 @@ namespace data_rogue_core.EntityEngineSystem
         bool IsPlayer { get; }
 
         IEntityComponent Get(string typeName);
+        bool Has(string typeName);
 
         bool HasAll(SystemComponents systemComponents);
 

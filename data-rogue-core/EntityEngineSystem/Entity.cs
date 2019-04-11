@@ -29,6 +29,11 @@ namespace data_rogue_core.EntityEngineSystem
             return Components.Any(t => t.GetType() == typeof(T));
         }
 
+        public bool Has(string typeName)
+        {
+            return Components.Any(t => t.GetType().Name == typeName);
+        }
+
         public bool HasAll(SystemComponents systemComponents)
         {
             return systemComponents.All(sc => Components.Any(c => c.GetType() == sc));
