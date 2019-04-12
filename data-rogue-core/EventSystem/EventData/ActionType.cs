@@ -16,6 +16,7 @@
         EscapeMenu,
         SkillMenu,
         UseSkill,
-        RangedAttack
+        RangedAttack,
+        Rest
     }
 }

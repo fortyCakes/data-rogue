@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
-    public static class KeyConverter
+    public static class BLTKeyConverter
     {
         private static Dictionary<int, Key> mapping = new Dictionary<int, Key>
         {

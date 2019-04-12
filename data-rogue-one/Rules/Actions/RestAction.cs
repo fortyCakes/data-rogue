@@ -13,7 +13,7 @@ namespace data_rogue_core.EventSystem.Rules
         {
         }
 
-        public override ActionType actionType => ActionType.Save;
+        public override ActionType actionType => ActionType.Rest;
 
         public override bool ApplyInternal(IEntity sender, ActionEventData eventData)
         {

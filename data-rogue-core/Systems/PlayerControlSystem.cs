@@ -97,7 +97,7 @@ namespace data_rogue_core.Systems
 
             if (keyBinding == null)
             {
-                if (keyPress == null) return null;
+                if (keyPress == null || keyPress.Key == Key.Unknown) return null;
 
                 return new ActionEventData{ Action =  ActionType.None, Parameters = null, KeyPress = keyPress};
             }

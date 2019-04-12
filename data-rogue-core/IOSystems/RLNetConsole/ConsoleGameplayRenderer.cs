@@ -175,10 +175,10 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
             MessageConsole.Clear();
 
-            var messages = systemContainer.MessageSystem.RecentMessages(15);
+            var messages = systemContainer.MessageSystem.RecentMessages(messageConfiguration.NumberOfMessages);
             messages.Reverse();
 
-            int y = 14;
+            int y = messageConfiguration.Position.Height-1;
             foreach (Message message in messages)
             {
                 MessageConsole.Print(0, y--, 1, message.Text, message.Color.ToRLColor(), null, MessageConsole.Width);

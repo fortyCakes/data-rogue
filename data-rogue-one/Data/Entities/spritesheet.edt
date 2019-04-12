@@ -289,7 +289,7 @@ Scaling: 2
 [SpriteSheet]
 Name: current_target
 Path: Images/Sprites/Misc/current_target.png
-Type: SingleSprite
+Type: TilesetBox
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2

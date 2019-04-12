@@ -31,7 +31,8 @@ namespace data_rogue_core.IOSystems.RLNetConsole
                 new StatsDisplay { DisplayType = "VisibleEnemies" }
 
             } } },
-            MessageConfigurations = new List<MessageConfiguration> { new MessageConfiguration { Position = new Rectangle(0, 55, 76, 15) } }
+            MessageConfigurations = new List<MessageConfiguration> { new MessageConfiguration { Position = new Rectangle(0, 55, 76, 15) ,
+                NumberOfMessages = 10} }
         };
 
         public RLNetConsoleIOSystem(IOSystemConfiguration ioSystemConfiguration)

@@ -140,7 +140,7 @@
     <Compile Include="IOSystems\BLTTiles\StatsDisplayers\BLTTitleDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\StatsDisplayers\BLTWealthDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\ISpriteManager.cs" />
-    <Compile Include="IOSystems\BLTTiles\KeyConverter.cs" />
+    <Compile Include="IOSystems\BLTTiles\BLTKeyConverter.cs" />
     <Compile Include="IOSystems\IOSystemConfiguration.cs" />
     <Compile Include="IOSystems\IRendereringConfiguration.cs" />
     <Compile Include="IOSystems\IStatsDisplayer.cs" />

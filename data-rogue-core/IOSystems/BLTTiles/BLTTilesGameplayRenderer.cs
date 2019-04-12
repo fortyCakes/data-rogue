@@ -70,6 +70,35 @@ namespace data_rogue_core.IOSystems.BLTTiles
             {
                 RenderStats(statsConfiguration, systemContainer, playerFov);
             }
+
+            foreach (var messageConfiguration in _ioSystemConfiguration.MessageConfigurations)
+            {
+                RenderMessages(messageConfiguration, systemContainer);
+            }
+        }
+
+        private void RenderMessages(MessageConfiguration messageConfiguration, ISystemContainer systemContainer)
+        {
+            BLT.Layer(BLTLayers.Text);
+            BLT.Font("text");
+
+            var messagesToRender = systemContainer.MessageSystem.RecentMessages(10);
+            messagesToRender.Reverse();
+
+            var x = messageConfiguration.Position.Left;
+            var y = messageConfiguration.Position.Bottom;
+
+            foreach (var message in messagesToRender)
+            {
+                var size = BLT.Measure(message.Text);
+                y -= size.Height + 1;
+
+                BLT.Color(message.Color);
+                BLT.Print(x, y, message.Text);
+            }
+
+            BLT.Color("");
+            BLT.Font("");
         }
 
         private void RenderMap(MapConfiguration mapConfiguration, ISystemContainer systemContainer, List<MapCoordinate> playerFov)

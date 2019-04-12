@@ -33,7 +33,9 @@ namespace data_rogue_core.IOSystems.BLTTiles
                 new StatsDisplay { DisplayType =  "HoveredEntity", Parameters = "Health,HP;AuraFighter,Aura;TiltFighter,Tilt" }
 
             } } },
-            MessageConfigurations = new List<MessageConfiguration> { new MessageConfiguration { Position = new Rectangle(0, 15 * TILE_SPACING, 40 * TILE_SPACING, 10 * TILE_SPACING) } }
+            MessageConfigurations = new List<MessageConfiguration> { new MessageConfiguration {
+                Position = new Rectangle(2, 15 * TILE_SPACING, 40 * TILE_SPACING, 10 * TILE_SPACING - 2),
+                NumberOfMessages = 15} }
         };
 
         private BLTSpriteLoader _spriteLoader;
@@ -122,7 +124,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
         private void ResolveKeyboardInput(int input)
         {
-            var key = KeyConverter.FromBLTInput(input);
+            var key = BLTKeyConverter.FromBLTInput(input);
 
             _keyCombination = new KeyCombination
             {
