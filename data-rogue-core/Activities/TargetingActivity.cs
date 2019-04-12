@@ -57,8 +57,7 @@ namespace data_rogue_core.Activities
             cellsByDistance.OrderBy(c =>
             {
                 var vector = _targetFrom - c;
-                var size = Math.Sqrt(vector.X ^ 2 + vector.Y ^ 2);
-                return size;
+                return Math.Sqrt(vector.X ^ 2 + vector.Y ^ 2);
             });
 
             foreach(var coordinate in cellsByDistance)
