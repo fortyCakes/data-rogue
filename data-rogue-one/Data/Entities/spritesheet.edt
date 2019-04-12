@@ -70,7 +70,7 @@ SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
-Name: arrow
+Name: ui_arrow
 Path: Images/Sprites/Misc/arrow.png
 Type: FourDirection
 SpriteWidth: 16
@@ -290,6 +290,48 @@ Scaling: 2
 Name: current_target
 Path: Images/Sprites/Misc/current_target.png
 Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: bow
+Path: Images/Sprites/Entities/bow.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: arrow
+Path: Images/Sprites/Entities/arrow.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: orb
+Path: Images/Sprites/Entities/orb.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: junk
+Path: Images/Sprites/Entities/junk.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: wooden_shield
+Path: Images/Sprites/Entities/wooden_shield.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: staff_1
+Path: Images/Sprites/Entities/staff_1.png
+Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2

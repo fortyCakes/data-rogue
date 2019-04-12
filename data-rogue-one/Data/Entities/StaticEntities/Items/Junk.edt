@@ -7,6 +7,8 @@ Singleton: false
 [Appearance]
 Glyph: %
 Color: #6B4D46
+[SpriteAppearance]
+Top: junk
 [Position]
 [Item]
 ItemLevel: 0

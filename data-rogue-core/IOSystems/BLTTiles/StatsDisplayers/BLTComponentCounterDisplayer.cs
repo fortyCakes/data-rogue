@@ -85,7 +85,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             {
                 var lengthToCover = percentage * totalLength - 6;
 
-                if (lengthToCover < 0)
+                if (lengthToCover - 1 < 0)
                 {
                     BLT.Put(x + 1, y + 2, bar_right);
                 }

@@ -64,6 +64,8 @@ Singleton: false
 [Appearance]
 Glyph: )
 Color: #6B4D46
+[SpriteAppearance]
+Top: bow
 [Position]
 [Item]
 ItemLevel: 1
@@ -92,6 +94,8 @@ Singleton: false
 [Appearance]
 Glyph: )
 Color: #6B4D46
+[SpriteAppearance]
+Top: staff_1
 [Position]
 [Item]
 ItemLevel: 1
@@ -118,6 +122,8 @@ Singleton: false
 [Appearance]
 Glyph: *
 Color: #6B4D46
+[SpriteAppearance]
+Top: orb
 [Position]
 [Item]
 ItemLevel: 1
@@ -139,6 +145,8 @@ Singleton: false
 [Appearance]
 Glyph: ]
 Color: #6B4D46
+[SpriteAppearance]
+Top: arrow
 [Position]
 [Item]
 ItemLevel: 1
@@ -156,6 +164,8 @@ Singleton: false
 [Appearance]
 Glyph: [
 Color: #6B4D46
+[SpriteAppearance]
+Top: wooden_shield
 [Position]
 [Item]
 ItemLevel: 1

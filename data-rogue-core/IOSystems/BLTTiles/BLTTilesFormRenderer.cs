@@ -87,8 +87,8 @@ namespace data_rogue_core.IOSystems.BLTTiles
                     {
                         BLT.Layer(BLTLayers.UIElements);
                         BLT.Font("");
-                        BLT.Put(12 + nameSize.Width, yCoordinate - 2, _spriteManager.Tile("arrow", TileDirections.Left));
-                        BLT.Put(26 + nameSize.Width + textSize.Width, yCoordinate - 2, _spriteManager.Tile("arrow", TileDirections.Right));
+                        BLT.Put(12 + nameSize.Width, yCoordinate - 2, _spriteManager.Tile("ui_arrow", TileDirections.Left));
+                        BLT.Put(26 + nameSize.Width + textSize.Width, yCoordinate - 2, _spriteManager.Tile("ui_arrow", TileDirections.Right));
                     }
 
                     yCoordinate += 5;
