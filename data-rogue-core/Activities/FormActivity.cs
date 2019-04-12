@@ -3,6 +3,8 @@ using data_rogue_core.Renderers;
 using data_rogue_core.Forms;
 using data_rogue_core.Renderers.ConsoleRenderers;
 using data_rogue_core.Systems.Interfaces;
+using data_rogue_core.IOSystems;
+using data_rogue_core.Systems;
 
 namespace data_rogue_core.Activities
 {
@@ -29,6 +31,21 @@ namespace data_rogue_core.Activities
         public void Initialise(IRenderer renderer)
         {
             Renderer = (IFormRenderer)renderer;
+        }
+
+        public void HandleMouse(ISystemContainer systemContainer, MouseData mouse)
+        {
+            //throw new System.NotImplementedException();
+        }
+
+        public void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard)
+        {
+            // None
+        }
+
+        public void HandleAction(ISystemContainer systemContainer, ActionEventData action)
+        {
+            Form.HandleAction(action);
         }
     }
 }

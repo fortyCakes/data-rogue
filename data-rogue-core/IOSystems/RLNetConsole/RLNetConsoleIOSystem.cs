@@ -41,6 +41,8 @@ namespace data_rogue_core.IOSystems.RLNetConsole
         }
 
         private RLRootConsole _rootConsole;
+        private MouseData _lastMouse;
+
         public IRendererFactory RendererFactory { get; private set; }
         public IOSystemConfiguration IOSystemConfiguration { get; }
 
@@ -95,13 +97,18 @@ namespace data_rogue_core.IOSystems.RLNetConsole
         {
             var rlMouse = _rootConsole.Mouse;
 
-            return new MouseData
+            var mouse = new MouseData
             {
                 IsLeftClick = rlMouse.GetLeftClick(),
                 IsRightClick = rlMouse.GetRightClick(),
                 X = rlMouse.X,
-                Y = rlMouse.Y
+                Y = rlMouse.Y,
+                MouseActive = (rlMouse.GetLeftClick() || rlMouse.GetLeftClick() || _lastMouse?.X != rlMouse.X || _lastMouse?.Y != rlMouse.Y)
             };
+
+            _lastMouse = mouse;
+
+            return mouse;
         }
 
         public void Close()

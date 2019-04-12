@@ -1,11 +1,14 @@
 ﻿using data_rogue_core.Components;
+using data_rogue_core.IOSystems;
 using data_rogue_core.Renderers;
+using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
+using OpenTK.Input;
 using System.Text;
 
 namespace data_rogue_core.Activities
 {
-    public class EndGameScreenActivity : IActivity, IStaticTextActivity
+    public class EndGameScreenActivity : IActivity
     {
         public ActivityType Type => ActivityType.StaticDisplay;
         public object Data => Text;
@@ -18,9 +21,9 @@ namespace data_rogue_core.Activities
             var stringBuilder = new StringBuilder();
 
             stringBuilder.AppendLine(victory? "You win!" : "You are dead.");
-            stringBuilder.Append("Name: ").AppendLine(systemContainer.PlayerSystem.Player.Get<Description>().Name);
+            stringBuilder.Append("Name: ").AppendLine(_systemContainer.PlayerSystem.Player.Get<Description>().Name);
             stringBuilder.AppendLine();
-            stringBuilder.Append("Time: ").Append(systemContainer.TimeSystem.CurrentTime).AppendLine(" aut");
+            stringBuilder.Append("Time: ").Append(_systemContainer.TimeSystem.CurrentTime).AppendLine(" aut");
 
             var text = stringBuilder.ToString();
 
@@ -29,13 +32,11 @@ namespace data_rogue_core.Activities
 
         public IStaticTextRenderer Renderer { get; private set; }
 
-        public bool CloseOnKeyPress => true;
-
-        private readonly ISystemContainer systemContainer;
+        private readonly ISystemContainer _systemContainer;
 
         public EndGameScreenActivity(ISystemContainer systemContainer, bool victory)
         {
-            this.systemContainer = systemContainer;
+            this._systemContainer = systemContainer;
 
             Text = GetEndGameScreenText(victory);
         }
@@ -48,6 +49,32 @@ namespace data_rogue_core.Activities
         public void Initialise(IRenderer renderer)
         {
             Renderer = (IStaticTextRenderer)renderer;
+        }
+
+        public void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard)
+        {
+            if (keyboard != null && keyboard.Key != Key.Unknown)
+            {
+                Close();
+            }
+        }
+
+        public void HandleMouse(ISystemContainer systemContainer, MouseData mouse)
+        {
+            if (mouse.IsLeftClick)
+            {
+                Close();
+            }
+        }
+
+        public void HandleAction(ISystemContainer systemContainer, ActionEventData action)
+        {
+            // None
+        }
+
+        private void Close()
+        {
+            _systemContainer.ActivitySystem.RemoveActivity(this);
         }
     }
 }

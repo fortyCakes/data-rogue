@@ -9,6 +9,6 @@ namespace data_rogue_core.Systems
     {
         void HandleInput(KeyCombination keyPress, MouseData mouse);
 
-        MapCoordinate HoveredCoordinate { get; }
+        MapCoordinate HoveredCoordinate { get; set; }
     }
 }

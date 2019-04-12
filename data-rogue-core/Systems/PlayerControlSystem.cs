@@ -25,7 +25,7 @@ namespace data_rogue_core.Systems
         private IActivitySystem _activitySystem;
         private ITargetingSystem _targetingSystem;
 
-        public MapCoordinate HoveredCoordinate { get; private set; }
+        public MapCoordinate HoveredCoordinate { get; set; }
 
         public PlayerControlSystem(ISystemContainer systemContainer, IEntityDataProvider keyBindingsDataProvider)
         {
@@ -59,39 +59,27 @@ namespace data_rogue_core.Systems
 
         public void HandleInput(KeyCombination keyPress, MouseData mouse)
         {
-            var actionData = HandleKeyPress(keyPress);
+            var actionData = GetActionFromBoundKey(keyPress);
             if (_activitySystem.ActivityStack.Any())
             {
                 IActivity currentActivity = _activitySystem.Peek();
-                switch (currentActivity.Type)
+
+                if (actionData != null)
                 {
-                    case ActivityType.Menu:
-                        (currentActivity.Data as Menu)?.HandleAction(actionData);
-                        break;
-                    case ActivityType.StaticDisplay:
-                        if (keyPress != null && keyPress.Key != Key.Unknown && (currentActivity as IStaticTextActivity).CloseOnKeyPress)
-                        {
-                            _activitySystem.RemoveActivity(currentActivity);
-                        }
-                        break;
-                    case ActivityType.Gameplay:
-                        if (_systemContainer.TimeSystem.WaitingForInput && actionData != null)
-                        {
-                            _systemContainer.EventSystem.Try(EventType.Action, _systemContainer.PlayerSystem.Player, actionData);
-                        }
-                        HandleMouseInput(mouse);
-                        break;
-                    case ActivityType.Form:
-                        (currentActivity.Data as Form)?.HandleAction(actionData);
-                        break;
-                    case ActivityType.Targeting:
-                        _targetingSystem.HandleMouseInput(mouse);
-                        break;
+                    currentActivity.HandleAction(_systemContainer, actionData);
+                }
+                if (keyPress != null)
+                {
+                    currentActivity.HandleKeyboard(_systemContainer, keyPress);
+                }
+                if (mouse != null)
+                {
+                    currentActivity.HandleMouse(_systemContainer, mouse);
                 }
             }
         }
 
-        private ActionEventData HandleKeyPress(KeyCombination keyPress)
+        private ActionEventData GetActionFromBoundKey(KeyCombination keyPress)
         {
             var keyBinding = _keyBindings.SingleOrDefault(k => k.Key.Equals(keyPress));
 
@@ -109,146 +97,6 @@ namespace data_rogue_core.Systems
 
             return new ActionEventData { Action = actionType, Parameters = parameters, KeyPress = keyPress, Speed = 1000 };
         }
-
-                //switch(keyBinding.Action)
-                //{
-
-                //    case RLKey.S:
-                //        if (keyPress.Shift)
-                //        {
-                //            Save();
-                //            _systemContainer.ActivitySystem.Push(new StaticTextActivity("Saved", _systemContainer.RendererSystem.RendererFactory));
-                //        }
-
-                //        break;
-                //    case RLKey.D:
-                //        MovePlayer(1, 0);
-                //        break;
-                //    case RLKey.Y:
-                //        MovePlayer(-1, -1);
-                //        break;
-                //    case RLKey.U:
-                //        MovePlayer(1, -1);
-                //        break;
-                //    case RLKey.B:
-                //        MovePlayer(-1, 1);
-                //        break;
-                //    case RLKey.N:
-                //        MovePlayer(1, 1);
-                //        break;
-                //    case RLKey.L:
-                //        break;
-                //    case RLKey.R:
-                //        if (keyPress.Shift)
-                //        {
-                //            BeginRest();
-                //        }
-                //        break;
-                //    case RLKey.G:
-                //        if (keyPress.Shift)
-                //        {
-
-                //        }
-                //        else
-                //        {
-                //            GetItem();
-                //        }
-                //        break;
-                //    case RLKey.I:
-                //        if (keyPress.Shift)
-                //        {
-
-                //        }
-                //        else
-                //        {
-                //            ShowInventory();
-                //        }
-                //        break;
-                //    case RLKey.E:
-                //        if (keyPress.Shift)
-                //        {
-
-                //        }
-                //        else
-                //        {
-                //            ShowEquipment();
-                //        }
-                //        break;
-                //    case RLKey.Escape:
-                //        _systemContainer.ActivitySystem.Push(new MenuActivity(new MainMenu(
-                //                _systemContainer.ActivitySystem,
-                //                _systemContainer.PlayerSystem,
-                //                _systemContainer.SaveSystem,
-                //                _systemContainer.RendererSystem
-                //            ), _systemContainer.RendererSystem.RendererFactory));
-                //        break;
-                //    case RLKey.Period:
-                //        if (keyPress.Shift)
-                //        {
-                //            UseStairs(StairDirection.Down);
-                //        }
-                //        else
-                //        {
-                //            Wait(1000);
-                //        }
-                //        break;
-                //    case RLKey.Comma:
-                //        if (keyPress.Shift)
-                //        {
-                //            UseStairs(StairDirection.Up);
-                //        }
-                //        break;
-                //    case RLKey.Number1:
-                //        if (keyPress.Shift)
-                //        {
-
-                //        }
-                //        else
-                //        {
-                //            UseSkill(1);
-                //        }
-                //        break;
-                //    case RLKey.Number2:
-                //        if (keyPress.Shift)
-                //        {
-
-                //        }
-                //        else
-                //        {
-                //            UseSkill(2);
-                //        }
-                //        break;
-                //    case RLKey.Number3:
-                //        if (keyPress.Shift)
-                //        {
-
-                //        }
-                //        else
-                //        {
-                //            UseSkill(3);
-                //        }
-                //        break;
-                //    case RLKey.Number4:
-                //        if (keyPress.Shift)
-                //        {
-
-                //        }
-                //        else
-                //        {
-                //            UseSkill(4);
-                //        }
-                //        break;
-                //    case RLKey.Number5:
-                //        if (keyPress.Shift)
-                //        {
-
-                //        }
-                //        else
-                //        {
-                //            UseSkill(5);
-                //        }
-                //        break;
-                //}
 
         public static string ExtractParameters(string action)
         {

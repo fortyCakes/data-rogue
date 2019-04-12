@@ -35,6 +35,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             {BLT.TK_X, Key.X },
             {BLT.TK_Y, Key.Y },
             {BLT.TK_Z, Key.Z },
+
             {BLT.TK_1, Key.Number1 },
             {BLT.TK_2, Key.Number2 },
             {BLT.TK_3, Key.Number3 },
@@ -45,17 +46,41 @@ namespace data_rogue_core.IOSystems.BLTTiles
             {BLT.TK_8, Key.Number8 },
             {BLT.TK_9, Key.Number9 },
             {BLT.TK_0, Key.Number0 },
+
             {BLT.TK_PERIOD, Key.Period },
             {BLT.TK_COMMA, Key.Comma },
             {BLT.TK_SLASH, Key.Slash },
             {BLT.TK_BACKSLASH, Key.BackSlash },
             {BLT.TK_BACKSPACE, Key.BackSpace },
+
             {BLT.TK_DOWN, Key.Down },
             {BLT.TK_UP, Key.Up },
             {BLT.TK_LEFT, Key.Left },
             {BLT.TK_RIGHT, Key.Right },
+
             {BLT.TK_ENTER, Key.Enter },
-            {BLT.TK_SPACE, Key.Space }
+            {BLT.TK_SPACE, Key.Space },
+            {BLT.TK_ESCAPE, Key.Escape },
+            
+            {BLT.TK_TAB        , Key.Tab},
+            {BLT.TK_MINUS      , Key.Minus},
+            {BLT.TK_EQUALS     , Key.Plus},
+            {BLT.TK_LBRACKET   , Key.BracketLeft},
+            {BLT.TK_RBRACKET   , Key.BracketRight},
+            {BLT.TK_SEMICOLON  , Key.Semicolon},
+            {BLT.TK_GRAVE      , Key.Grave},
+            {BLT.TK_F1         , Key.F1 },
+            {BLT.TK_F2         , Key.F2 },
+            {BLT.TK_F3         , Key.F3 },
+            {BLT.TK_F4         , Key.F4 },
+            {BLT.TK_F5         , Key.F5 },
+            {BLT.TK_F6         , Key.F6 },
+            {BLT.TK_F7         , Key.F7 },
+            {BLT.TK_F8         , Key.F8 },
+            {BLT.TK_F9         , Key.F9 },
+            {BLT.TK_F10        , Key.F10},
+            {BLT.TK_F11        , Key.F11},
+            {BLT.TK_F12        , Key.F12},
 
         };
 

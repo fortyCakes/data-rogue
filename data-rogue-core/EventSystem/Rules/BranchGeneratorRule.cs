@@ -28,7 +28,7 @@ namespace data_rogue_core.EventSystem.Rules
 
             if (!branch.Generated)
             {
-                _systemContainer.ActivitySystem.Push(new StaticTextActivity("Generating branch..."));
+                _systemContainer.ActivitySystem.Push(new StaticTextActivity(_systemContainer.ActivitySystem, "Generating branch..."));
 
                 var generator = new BranchGenerator();
 

@@ -1,5 +1,7 @@
-﻿using data_rogue_core.Menus;
+﻿using data_rogue_core.IOSystems;
+using data_rogue_core.Menus;
 using data_rogue_core.Renderers;
+using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.Activities
@@ -27,6 +29,21 @@ namespace data_rogue_core.Activities
         public void Initialise(IRenderer renderer)
         {
             Renderer = (IMenuRenderer)renderer;
+        }
+
+        public void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard)
+        {
+            //throw new System.NotImplementedException();
+        }
+
+        public void HandleMouse(ISystemContainer systemContainer, MouseData mouse)
+        {
+            //throw new System.NotImplementedException();
+        }
+
+        public void HandleAction(ISystemContainer systemContainer, ActionEventData action)
+        {
+            Menu.HandleAction(action);
         }
     }
 }

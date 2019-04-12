@@ -1,9 +1,11 @@
-﻿using data_rogue_core.Renderers;
+﻿using data_rogue_core.IOSystems;
+using data_rogue_core.Renderers;
+using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.Activities
 {
-    public class LoadingScreenActivity : IActivity, IStaticTextActivity
+    public class LoadingScreenActivity : IActivity
     {
         public ActivityType Type => ActivityType.StaticDisplay;
         public object Data => Text;
@@ -27,6 +29,18 @@ namespace data_rogue_core.Activities
         public void Initialise(IRenderer renderer)
         {
             Renderer = (IStaticTextRenderer)renderer;
+        }
+
+        public void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard)
+        {
+        }
+
+        public void HandleMouse(ISystemContainer systemContainer, MouseData mouse)
+        {
+        }
+
+        public void HandleAction(ISystemContainer systemContainer, ActionEventData action)
+        {
         }
     }
 }

@@ -52,6 +52,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
         private bool _rightClick;
         private int _mouseY;
         private int _mouseX;
+        private bool _mouseActive;
 
         public BLTTilesIOSystem(IOSystemConfiguration ioSystemConfiguration)
         { 
@@ -92,11 +93,13 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
                 if (IsMouseMove(input))
                 {
+                    _mouseActive = true;
                     _mouseX = BLT.State(BLT.TK_MOUSE_X);
                     _mouseY = BLT.State(BLT.TK_MOUSE_Y);
                 }
                 if (IsClickEvent(input))
                 {
+                    _mouseActive = true;
                     SetMouseButtons(input);
                 }
                 else
@@ -149,13 +152,18 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
         public MouseData GetMouseData()
         {
-            return new MouseData
+            var mouse = new MouseData
             {
                 IsLeftClick = _leftClick,
                 IsRightClick = _rightClick,
                 X = _mouseX,
-                Y = _mouseY
+                Y = _mouseY,
+                MouseActive = _mouseActive
             };
+
+            _mouseActive = false;
+
+            return mouse;
         }
 
         public void Initialise(UpdateEventHandler onUpdate, UpdateEventHandler onRender, IEntityDataProvider graphicsDataProvider)

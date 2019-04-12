@@ -37,48 +37,11 @@ namespace data_rogue_core.Systems
             }
         }
 
-        public void HandleMouseInput(MouseData mouse)
-        {
-            var x = mouse.X;
-            var y = mouse.Y;
-
-            if (_activitySystem.Peek() is TargetingActivity activity)
-            {
-                IGameplayRenderer gameplayRenderer = GetGameplayRenderer();
-
-                var hoveredLocation = gameplayRenderer.GetMapCoordinateFromMousePosition(_systemContainer.RendererSystem.CameraPosition, x, y);
-
-                if (hoveredLocation != null)
-                {
-                    MapCoordinate playerPosition = _positionSystem.CoordinateOf(_systemContainer.PlayerSystem.Player);
-
-                    if (activity.TargetingActivityData.TargetingData.TargetableCellsFrom(playerPosition).Contains(hoveredLocation))
-                    {
-                        activity.TargetingActivityData.CurrentTarget = hoveredLocation;
-                    }
-                    else
-                    {
-                        activity.TargetingActivityData.CurrentTarget = null;
-                    }
-                }
-
-                if (mouse.IsLeftClick)
-                {
-                    activity.Complete();
-                }
-            }
-        }
-
-        private IGameplayRenderer GetGameplayRenderer()
-        {
-            GameplayActivity gameplayActivity = (GameplayActivity)_activitySystem.ActivityStack.Single(a => a.Type == ActivityType.Gameplay);
-
-            return gameplayActivity.Renderer;
-        }
-
         private void GetTargetForPlayer(TargetingData data, Action<MapCoordinate> callback)
         {
-            var activity = new TargetingActivity(data, callback, _systemContainer);
+            var playerPosition = _systemContainer.PositionSystem.CoordinateOf(_systemContainer.PlayerSystem.Player);
+
+            var activity = new TargetingActivity(data, callback, _systemContainer, playerPosition);
 
             _activitySystem.Push(activity);
         }

@@ -73,7 +73,6 @@
   <ItemGroup>
     <Compile Include="Activities\EndGameScreenActivity.cs" />
     <Compile Include="Activities\FormActivity.cs" />
-    <Compile Include="Activities\IStaticTextActivity.cs" />
     <Compile Include="Activities\LoadingScreenActivity.cs" />
     <Compile Include="Activities\TargetingActivity.cs" />
     <Compile Include="Behaviours\ActionResults.cs" />
@@ -289,6 +288,7 @@
     <Compile Include="Systems\Interfaces\IRendererSystem.cs" />
     <Compile Include="Systems\Interfaces\ISaveSystem.cs" />
     <Compile Include="Systems\Interfaces\IStatSystem.cs" />
+    <Compile Include="Systems\Interfaces\TargetingData.cs" />
     <Compile Include="Systems\MapSystem.cs" />
     <Compile Include="Systems\RendererSystem.cs" />
     <Compile Include="Systems\StatSystem.cs" />
