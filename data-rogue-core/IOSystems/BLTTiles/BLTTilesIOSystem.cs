@@ -10,10 +10,12 @@ using OpenTK.Input;
 using RLNET;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
+
     public class BLTTilesIOSystem : IIOSystem
     {
         public static IOSystemConfiguration DefaultConfiguration = new IOSystemConfiguration
@@ -40,8 +42,8 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
         private BLTSpriteLoader _spriteLoader;
         private bool isClosed;
-        private UpdateEventHandler _update;
-        private UpdateEventHandler _render;
+        private GameLoopEventHandler _update;
+        private GameLoopEventHandler _render;
         private KeyCombination _keyCombination;
         private readonly IOSystemConfiguration _ioSystemConfiguration;
         private ISpriteManager _spriteManager;
@@ -71,12 +73,20 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
         public void Run()
         {
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            var elapsedMs = stopwatch.ElapsedMilliseconds;
 
             do
             {
+                var delta = stopwatch.ElapsedMilliseconds - elapsedMs;
+                elapsedMs = stopwatch.ElapsedMilliseconds;
+                var eventArgs = new GameLoopEventArgs(delta);
                 CheckInput();
-                _update(null, null);
-                _render(null, null);
+                _update(null, eventArgs);
+                _render(null, eventArgs);
+                
             } while (!isClosed);
         }
 
@@ -166,7 +176,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             return mouse;
         }
 
-        public void Initialise(UpdateEventHandler onUpdate, UpdateEventHandler onRender, IEntityDataProvider graphicsDataProvider)
+        public void Initialise(GameLoopEventHandler onUpdate, GameLoopEventHandler onRender, IEntityDataProvider graphicsDataProvider)
         {
             BLT.Open();
 

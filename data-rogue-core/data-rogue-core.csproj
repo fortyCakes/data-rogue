@@ -116,6 +116,8 @@
     <Compile Include="EventSystem\Rules\OnAttackProcEnchantmentRule.cs" />
     <Compile Include="EventSystem\Rules\PlayerVictoryRule.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTButton.cs" />
+    <Compile Include="IOSystems\GameLoopEventArgs.cs" />
+    <Compile Include="IOSystems\GameLoopEventHandler.cs" />
     <Compile Include="IOSystems\BLTTiles\StatsDisplayers\BLTComponentCounterDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\StatsDisplayers\BLTHoveredEntityDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTLayers.cs" />

@@ -20,8 +20,8 @@ Priority: 0
 Level: 1
 Amount: 0
 [AuraFighter]
-Aura: 100/500
-BaseAura: 100
+Aura: 000/500
+BaseAura: 500
 [Health]
 HP: 25/25
 [TiltFighter]

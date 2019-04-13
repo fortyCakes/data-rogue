@@ -2,6 +2,7 @@
 using System.Drawing;
 using data_rogue_core.Activities;
 using data_rogue_core.EntityEngineSystem;
+using data_rogue_core.IOSystems.BLTTiles;
 using data_rogue_core.Renderers;
 using data_rogue_core.Renderers.ConsoleRenderers;
 using OpenTK.Input;
@@ -42,19 +43,33 @@ namespace data_rogue_core.IOSystems.RLNetConsole
 
         private RLRootConsole _rootConsole;
         private MouseData _lastMouse;
+        private GameLoopEventHandler _onUpdate;
+        private GameLoopEventHandler _onRender;
 
         public IRendererFactory RendererFactory { get; private set; }
         public IOSystemConfiguration IOSystemConfiguration { get; }
 
-        public void Initialise(UpdateEventHandler onUpdate, UpdateEventHandler onRender, IEntityDataProvider graphicsDataProvider)
+        public void RenderHandler(object sender, UpdateEventArgs e)
+        {
+            _onRender(null, new GameLoopEventArgs((long)e.Time/1000));
+        }
+
+        public void UpdateHandler(object sender, UpdateEventArgs e)
+        {
+            _onUpdate(null, new GameLoopEventArgs((long)e.Time / 1000));
+        }
+
+        public void Initialise(GameLoopEventHandler onUpdate, GameLoopEventHandler onRender, IEntityDataProvider graphicsDataProvider)
         {
             string fontFileName = "Images\\Tileset\\Alloy_curses_12x12.png";
             string consoleTitle = IOSystemConfiguration.WindowTitle;
 
             _rootConsole = new RLRootConsole(fontFileName, IOSystemConfiguration.InitialWidth, IOSystemConfiguration.InitialHeight, IOSystemConfiguration.TileWidth, IOSystemConfiguration.TileHeight, 1, consoleTitle);
 
-            _rootConsole.Update += onUpdate;
-            _rootConsole.Render += onRender;
+            _onUpdate = onUpdate;
+            _onRender = onRender;
+            _rootConsole.Update += UpdateHandler;
+            _rootConsole.Render += RenderHandler;
 
             var renderers = new Dictionary<ActivityType, IRenderer>()
             {

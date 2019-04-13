@@ -54,18 +54,19 @@ namespace data_rogue_core.Activities
         private void PickInitialTarget()
         {
             var cellsByDistance = _targetableCells.Except(new[] { _targetFrom }).ToList();
-            cellsByDistance.OrderBy(c =>
+            cellsByDistance = cellsByDistance.OrderBy(c =>
             {
                 var vector = _targetFrom - c;
-                return Math.Sqrt(vector.X ^ 2 + vector.Y ^ 2);
-            });
+                return Math.Sqrt(vector.X * vector.X + vector.Y * vector.Y);
+            }).ToList();
 
             foreach(var coordinate in cellsByDistance)
             {
-                var entities = _systemContainer.PositionSystem.EntitiesAt(coordinate);
+                var entities = _positionSystem.EntitiesAt(coordinate);
                 if (entities.Any(e => e.Has<Health>()))
                 {
                     TargetingActivityData.CurrentTarget = coordinate;
+                    return;
                 }
             }
         }

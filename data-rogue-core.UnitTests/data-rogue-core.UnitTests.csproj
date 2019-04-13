@@ -70,6 +70,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\TargetingActivityTests.cs" />
     <Compile Include="EntityEngineSystem\EntitySerializerTests.cs" />
     <Compile Include="EventSystem\EventSystemTests.cs" />
     <Compile Include="Maps\MapCoordinateTests.cs" />

@@ -9,6 +9,7 @@ using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
 using data_rogue_core.IOSystems;
 using data_rogue_core.IOSystems.RLNetConsole;
+using data_rogue_core.IOSystems.BLTTiles;
 
 namespace data_rogue_core
 {
@@ -97,7 +98,7 @@ namespace data_rogue_core
             SystemContainer.ActivitySystem.Push(new MenuActivity(new MainMenu(SystemContainer.ActivitySystem, SystemContainer.PlayerSystem, SystemContainer.SaveSystem)));
         }
 
-        private void OnRootConsoleRender(object sender, UpdateEventArgs e)
+        private void OnRootConsoleRender(object sender, GameLoopEventArgs e)
         {
             Stack<IActivity> renderStack = new Stack<IActivity>();
 
@@ -118,7 +119,7 @@ namespace data_rogue_core
             IOSystem.Draw();
         }
 
-        private void OnRootConsoleUpdate(object sender, UpdateEventArgs e)
+        private void OnRootConsoleUpdate(object sender, GameLoopEventArgs e)
         {
             if (!_leaving && !Loading)
             {
