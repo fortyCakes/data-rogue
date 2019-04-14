@@ -87,12 +87,8 @@ namespace data_rogue_core.Activities
             {
                 TargetingActivityData.Callback(CurrentTarget);
             }
-            else
-            {
-                Cancel();
-            }
             
-            _activitySystem.RemoveActivity(this);
+            CloseActivity();
         }
 
         public void HandleMouse(ISystemContainer systemContainer, MouseData mouse)
@@ -142,12 +138,12 @@ namespace data_rogue_core.Activities
                     Complete();
                     break;
                 case ActionType.EscapeMenu:
-                    Cancel();
+                    CloseActivity();
                     break;
             }
         }
 
-        private void Cancel()
+        private void CloseActivity()
         {
             _activitySystem.RemoveActivity(this);
         }
@@ -174,8 +170,8 @@ namespace data_rogue_core.Activities
 
     public class TargetingActivityData
     {
-        public TargetingData TargetingData { get; internal set; }
-        public MapCoordinate CurrentTarget { get; internal set; }
+        public TargetingData TargetingData { get; set; }
+        public MapCoordinate CurrentTarget { get; set; }
         public Action<MapCoordinate> Callback { get; set; }
     }
 }
