@@ -61,7 +61,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
                 return;
             }
 
-            var playerFov = CalculatePlayerFov(systemContainer);
+            var playerFov = FOVHelper.CalculatePlayerFov(systemContainer);
 
             foreach (var mapConfiguration in IOSystemConfiguration.MapConfigurations)
             {
@@ -77,26 +77,6 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             {
                 RenderMessages(messageConfiguration, systemContainer);
             }
-        }
-
-        private List<MapCoordinate> CalculatePlayerFov(ISystemContainer systemContainer)
-        {
-            var cameraPosition = systemContainer.RendererSystem.CameraPosition;
-
-            var currentMap = systemContainer.MapSystem.MapCollection[cameraPosition.Key];
-            var cameraX = cameraPosition.X;
-            var cameraY = cameraPosition.Y;
-
-            MapCoordinate playerPosition = systemContainer.PositionSystem.CoordinateOf(systemContainer.PlayerSystem.Player);
-
-            var playerFov = currentMap.FovFrom(playerPosition, 9);
-
-            foreach (var coordinate in playerFov)
-            {
-                currentMap.SetSeen(coordinate);
-            }
-
-            return playerFov;
         }
 
         public MapCoordinate GetMapCoordinateFromMousePosition(MapCoordinate cameraPosition, int x, int y)

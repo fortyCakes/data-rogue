@@ -27,6 +27,8 @@ namespace data_rogue_core.Utils
 
         public IEnumerable<MapCoordinate> Path(IMap map, MapCoordinate origin, MapCoordinate destination)
         {
+            if (origin == destination) return null;
+
             AStarLocation current = null;
 
             var start = new AStarLocation() {X = origin.X, Y = origin.Y};

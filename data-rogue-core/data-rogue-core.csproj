@@ -73,6 +73,17 @@
   <ItemGroup>
     <Compile Include="Activities\EndGameScreenActivity.cs" />
     <Compile Include="Activities\FormActivity.cs" />
+    <Compile Include="EventSystem\Rules\Actions\FollowPathAction.cs" />
+    <Compile Include="Behaviours\FollowPathBehaviour.cs" />
+    <Compile Include="EventSystem\Rules\Actions\ResolveRangedAttackAction.cs" />
+    <Compile Include="EventSystem\Rules\Actions\SetIsActionFalseRule.cs" />
+    <Compile Include="EventSystem\Rules\Actions\UseSkillAction.cs" />
+    <Compile Include="IOSystems\BLTTiles\BLTTilesInformationRenderer.cs" />
+    <Compile Include="IOSystems\BLTTiles\StatsDisplayers\BLTLargeTextDisplayer.cs" />
+    <Compile Include="IOSystems\BLTTiles\StatsDisplayers\BLTTextDisplayer.cs" />
+    <Compile Include="IOSystems\FOVHelper.cs" />
+    <Compile Include="IOSystems\IInformationRenderer.cs" />
+    <Compile Include="Activities\InformationActivity.cs" />
     <Compile Include="Activities\LoadingScreenActivity.cs" />
     <Compile Include="Activities\TargetingActivity.cs" />
     <Compile Include="Behaviours\ActionResults.cs" />
@@ -246,12 +257,14 @@
     <Compile Include="IOSystems\MapConfiguration.cs" />
     <Compile Include="IOSystems\MessageConfiguration.cs" />
     <Compile Include="IOSystems\MouseData.cs" />
+    <Compile Include="IOSystems\RLNetConsole\ConsoleInformationRenderer.cs" />
     <Compile Include="IOSystems\RLNetConsole\IRenderingConfiguration.cs" />
     <Compile Include="IOSystems\RLNetConsole\RLNetConsoleIOSystem.cs" />
     <Compile Include="IOSystems\RLNetConsole\StatsDisplayers\RLNetComponentCounterDisplayer.cs" />
     <Compile Include="IOSystems\RLNetConsole\StatsDisplayers\RLNetHoveredEntityDisplayer.cs" />
     <Compile Include="IOSystems\RLNetConsole\StatsDisplayers\RLNetLocationDisplayer.cs" />
     <Compile Include="IOSystems\RLNetConsole\StatsDisplayers\RLNetNameDisplayer.cs" />
+    <Compile Include="IOSystems\RLNetConsole\StatsDisplayers\RLNetTextDisplayer.cs" />
     <Compile Include="IOSystems\StatsDisplay.cs" />
     <Compile Include="IOSystems\RLNetConsole\StatsDisplayers\RLNetSpacerDisplayer.cs" />
     <Compile Include="IOSystems\RLNetConsole\StatsDisplayers\RLNetStatDisplayer.cs" />

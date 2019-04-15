@@ -7,17 +7,18 @@ using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.EventSystem.Rules
 {
-    public class SkillMenuAction: ApplyActionRule
+
+    public class UseSkillAction : ApplyActionRule
     {
-        public SkillMenuAction(ISystemContainer systemContainer) : base(systemContainer)
+        public UseSkillAction(ISystemContainer systemContainer) : base(systemContainer)
         {
         }
 
-        public override ActionType actionType => ActionType.SkillMenu;
+        public override ActionType actionType => ActionType.UseSkill;
 
         public override bool ApplyInternal(IEntity sender, ActionEventData eventData)
         {
-            _systemContainer.ActivitySystem.Push(new MenuActivity(new SkillMenu(_systemContainer, sender)));
+            _systemContainer.SkillSystem.Use(sender, eventData.Parameters);
 
             return false;
         }

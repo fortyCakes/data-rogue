@@ -6,9 +6,9 @@ using data_rogue_core.Systems.Interfaces;
 namespace data_rogue_core.EventSystem.Rules
 {
 
-    public class MeleeAttackAction : ApplyActionRule
+    public class ResolveMeleeAttackAction : ApplyActionRule
     {
-        public MeleeAttackAction(ISystemContainer systemContainer) : base(systemContainer)
+        public ResolveMeleeAttackAction(ISystemContainer systemContainer) : base(systemContainer)
         {
         }
 
@@ -22,7 +22,11 @@ namespace data_rogue_core.EventSystem.Rules
 
             var hit = _systemContainer.FighterSystem.BasicAttack(attacker, defender);
 
+            eventData.IsAction = true;
+
             return true;
         }
+
+        
     }
 }

@@ -17,6 +17,9 @@
         SkillMenu,
         UseSkill,
         RangedAttack,
-        Rest
+        Rest,
+        PlayerStatus,
+        ResolveRangedAttack,
+        FollowPath
     }
 }

@@ -1,4 +1,5 @@
 ﻿using data_rogue_core.EventSystem.Rules;
+using data_rogue_one.EventSystem.Rules;
 using System;
 using System.Collections.Generic;
 
@@ -50,13 +51,19 @@ namespace data_rogue_one
                     typeof(RandomiseDamageRule),
                     typeof(ApplyAegisRule),
                     typeof(AddStatToAccuracyRule),
-                    typeof(OnAttackProcEnchantmentRule)
+                    typeof(OnAttackProcEnchantmentRule),
                 };
 
                 list.AddRange(ApplyActionRule.AllActionRules);
 
                 // Custom actions
-                list.Add(typeof(RestAction));
+                var customActions = new List<Type>
+                {
+                    typeof(RestAction),
+                    typeof(PlayerStatusAction)
+                };
+
+                list.AddRange(customActions);
 
                 return list;
             }

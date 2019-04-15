@@ -23,7 +23,7 @@ namespace data_rogue_core.EventSystem.Rules
         {
             var data = eventData as ActionEventData;
 
-            if (data.Action == ActionType.None) return true;
+            if (data.Action == ActionType.None || !data.IsAction) return true;
 
             if (data.Speed.Value > 0)
             {

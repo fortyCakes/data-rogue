@@ -11,11 +11,11 @@ using System.Linq;
 namespace data_rogue_core.EventSystem.Rules
 {
 
-    public class RangedAttackAction : ApplyActionRule
+    public class StartRangedAttackAction : ApplyActionRule
     {
         public virtual List<string> RangedAttackClasses => new List<string> { "Launcher", "Thrown", "Blast", "Bolt" };
 
-        public RangedAttackAction(ISystemContainer systemContainer) : base(systemContainer)
+        public StartRangedAttackAction(ISystemContainer systemContainer) : base(systemContainer)
         {
         }
 
@@ -100,34 +100,13 @@ namespace data_rogue_core.EventSystem.Rules
             if (defender != null)
             {
                 var weapon = GetFirstRangedWeapon(attacker);
-                var weaponClass = GetRangedWeaponClass(weapon);
 
-                _systemContainer.FighterSystem.Attack(attacker, defender, attackClass: weaponClass, weapon: weapon, spendTime: true);
-
-                ExpendAmmoIfRequired(attacker, weapon);
+                _systemContainer.EventSystem.Try(EventType.Action, attacker, new ActionEventData { Action = ActionType.ResolveRangedAttack, Parameters = $"{attacker.EntityId},{defender.EntityId},{weapon.EntityId}" });
             }
             else
             {
                 _systemContainer.MessageSystem.Write("No valid target there.");
             }
-        }
-
-        private void ExpendAmmoIfRequired(IEntity attacker, IEntity weapon)
-        {
-            if (weapon.Has<RequiresAmmunition>())
-            {
-                var ammunitionType = weapon.Get<RequiresAmmunition>().AmmunitionType;
-                var inventory = _systemContainer.ItemSystem.GetInventory(attacker);
-
-                var ammo = _systemContainer.ItemSystem.GetInventory(attacker).Single(i => i.Has<Ammunition>() && i.Get<Ammunition>().AmmunitionType == ammunitionType);
-
-                _systemContainer.ItemSystem.RemoveItemFromInventory(ammo);
-            }
-        }
-
-        private string GetRangedWeaponClass(IEntity weapon)
-        {
-            return weapon.Get<Weapon>().Class;
         }
     }
 }

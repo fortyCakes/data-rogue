@@ -34,6 +34,8 @@ namespace data_rogue_core.EventSystem.Rules
                 {
                     _systemContainer.PositionSystem.SetPosition(sender, stairs.Destination);
                 }
+
+                eventData.IsAction = true;
             }
             else
             {
@@ -49,6 +51,8 @@ namespace data_rogue_core.EventSystem.Rules
                     {
                         _systemContainer.PositionSystem.SetPosition(sender, portal.Destination);
                     }
+
+                    eventData.IsAction = true;
                 }
             }
 

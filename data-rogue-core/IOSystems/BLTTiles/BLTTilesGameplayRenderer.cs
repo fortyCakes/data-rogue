@@ -29,6 +29,33 @@ namespace data_rogue_core.IOSystems.BLTTiles
             _statsDisplayers.AddRange(ioSystemConfiguration.AdditionalStatsDisplayers);
         }
 
+        public void Render(ISystemContainer systemContainer)
+        {
+            BLT.Clear();
+
+            if (ReferenceEquals(systemContainer?.PlayerSystem?.Player, null))
+            {
+                return;
+            }
+
+            var playerFov = FOVHelper.CalculatePlayerFov(systemContainer);
+
+            foreach (var mapConfiguration in _ioSystemConfiguration.MapConfigurations)
+            {
+                RenderMap(mapConfiguration, systemContainer, playerFov);
+            }
+
+            foreach (var statsConfiguration in _ioSystemConfiguration.StatsConfigurations)
+            {
+                RenderStats(statsConfiguration, systemContainer, playerFov);
+            }
+
+            foreach (var messageConfiguration in _ioSystemConfiguration.MessageConfigurations)
+            {
+                RenderMessages(messageConfiguration, systemContainer);
+            }
+        }
+
         public MapCoordinate GetMapCoordinateFromMousePosition(MapCoordinate cameraPosition, int x, int y)
         {
             foreach (MapConfiguration map in _ioSystemConfiguration.MapConfigurations)
@@ -48,33 +75,6 @@ namespace data_rogue_core.IOSystems.BLTTiles
         private bool IsOnMap(MapConfiguration map, int x, int y)
         {
             return x >= map.Position.Left && x <= map.Position.Right && y >= map.Position.Top && y < map.Position.Bottom;
-        }
-
-        public void Render(ISystemContainer systemContainer)
-        {
-            BLT.Clear();
-
-            if (ReferenceEquals(systemContainer?.PlayerSystem?.Player, null))
-            {
-                return;
-            }
-
-            var playerFov = CalculatePlayerFov(systemContainer);
-
-            foreach (var mapConfiguration in _ioSystemConfiguration.MapConfigurations)
-            {
-                RenderMap(mapConfiguration, systemContainer, playerFov);
-            }
-
-            foreach(var statsConfiguration in _ioSystemConfiguration.StatsConfigurations)
-            {
-                RenderStats(statsConfiguration, systemContainer, playerFov);
-            }
-
-            foreach (var messageConfiguration in _ioSystemConfiguration.MessageConfigurations)
-            {
-                RenderMessages(messageConfiguration, systemContainer);
-            }
         }
 
         private void RenderMessages(MessageConfiguration messageConfiguration, ISystemContainer systemContainer)
@@ -255,24 +255,6 @@ namespace data_rogue_core.IOSystems.BLTTiles
         private bool IsRemembered(IMap currentMap, MapCoordinate coordinate, IEntity e)
         {
             return currentMap.SeenCoordinates.Contains(coordinate) && e.Has<Memorable>();
-        }
-
-        private List<MapCoordinate> CalculatePlayerFov(ISystemContainer systemContainer)
-        {
-            var cameraPosition = systemContainer.RendererSystem.CameraPosition;
-
-            var currentMap = systemContainer.MapSystem.MapCollection[cameraPosition.Key];
-
-            MapCoordinate playerPosition = systemContainer.PositionSystem.CoordinateOf(systemContainer.PlayerSystem.Player);
-
-            var playerFov = currentMap.FovFrom(playerPosition, 9);
-
-            foreach (var coordinate in playerFov)
-            {
-                currentMap.SetSeen(coordinate);
-            }
-
-            return playerFov;
         }
 
     }

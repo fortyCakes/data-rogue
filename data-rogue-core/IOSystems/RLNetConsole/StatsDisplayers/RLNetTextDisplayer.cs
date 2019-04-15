@@ -9,13 +9,14 @@ using System.Collections.Generic;
 
 namespace data_rogue_core.IOSystems
 {
-    public class RLNetNameDisplayer : RLNetStatsRendererHelper
+
+    public class RLNetTextDisplayer : RLNetStatsRendererHelper
     {
-        public override string DisplayType => "Name";
+        public override string DisplayType => "Text";
 
         protected override void DisplayInternal(RLConsole console, StatsDisplay display, ISystemContainer systemContainer, IEntity player, List<MapCoordinate> playerFov, ref int line)
         {
-            console.Print(1, line, player.Get<Description>().Name, display.Color.ToRLColor(), display.BackColor.ToRLColor());
+            console.Print(1, line, display.Parameters, display.Color.ToRLColor(), display.BackColor.ToRLColor());
             line++;
         }
     }

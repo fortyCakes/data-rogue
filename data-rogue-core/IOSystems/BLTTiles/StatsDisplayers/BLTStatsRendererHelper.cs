@@ -25,7 +25,9 @@ namespace data_rogue_core.IOSystems.BLTTiles
             new BLTStatDisplayer(),
             new BLTStatInterpolationDisplayer(),
             new BLTWealthDisplayer(),
-            new BLTComponentCounterDisplayer()
+            new BLTComponentCounterDisplayer(),
+            new BLTTextDisplayer(),
+            new BLTLargeTextDisplayer()
         };
 
         public abstract string DisplayType { get; }

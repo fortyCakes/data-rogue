@@ -12,15 +12,17 @@ namespace data_rogue_core.EventSystem.Rules
         public static List<Type> AllActionRules = new List<Type>
         {
             typeof(MoveAction),
-            typeof(MeleeAttackAction),
-            typeof(RangedAttackAction),
+            typeof(ResolveMeleeAttackAction),
+            typeof(StartRangedAttackAction),
+            typeof(ResolveRangedAttackAction),
             typeof(SaveAction),
             typeof(EnterAction),
             typeof(EquipmentMenuAction),
             typeof(InventoryMenuAction),
             typeof(GetItemAction),
             typeof(SkillMenuAction),
-            typeof(UseSkillAction)
+            typeof(UseSkillAction),
+            typeof(FollowPathAction)
         };
 
         protected ISystemContainer _systemContainer;

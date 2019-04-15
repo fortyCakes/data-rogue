@@ -19,7 +19,12 @@ namespace data_rogue_core.EventSystem.Rules
         {
             var vector = Vector.Parse(eventData.Parameters);
 
-            return _systemContainer.EventSystem.Try(EventType.Move, sender, vector);
+            if (_systemContainer.EventSystem.Try(EventType.Move, sender, vector))
+            {
+                eventData.IsAction = true;
+            }
+
+            return true;
         }
     }
 }

@@ -27,6 +27,9 @@ Action: Move(-1,1)
 Key: N
 Action: Move(1,1)
 [KeyBinding]
+Key: C
+Action: PlayerStatus
+[KeyBinding]
 Key: Shift+S
 Action: Save
 [KeyBinding]

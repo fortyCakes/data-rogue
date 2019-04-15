@@ -29,6 +29,8 @@ namespace data_rogue_core.EventSystem.Rules
 
             if (firstItem != null)
             {
+                eventData.IsAction = true;
+
                 if (firstItem.Has<Wealth>())
                 {
                     var wealth = firstItem.Get<Wealth>();
