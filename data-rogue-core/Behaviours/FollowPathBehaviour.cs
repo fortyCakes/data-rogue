@@ -43,7 +43,7 @@ namespace data_rogue_core.EventSystem.Rules
 
             if (Path.Any())
             {
-                _timeSystem.WaitingForInput = false;
+                SetWaitingForInputIfPlayer(entity, false);
 
                 if (_playerSystem.Player == entity && _eventRuleSystem.GetStat(entity, "Tension") > 0)
                 {
@@ -64,9 +64,18 @@ namespace data_rogue_core.EventSystem.Rules
             }
         }
 
+        private void SetWaitingForInputIfPlayer(IEntity entity, bool setTo)
+        {
+            if (entity == _playerSystem.Player)
+            {
+                _timeSystem.WaitingForInput = setTo;
+            }
+        }
+
         private void EndPath(IEntity entity)
         {
             _entityEngine.RemoveComponent(entity, this);
+            SetWaitingForInputIfPlayer(entity, true);
         }
     }
 }

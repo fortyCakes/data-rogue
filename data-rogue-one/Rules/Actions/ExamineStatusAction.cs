@@ -51,7 +51,7 @@ namespace data_rogue_one.EventSystem.Rules
 
             if (entity.Has<Health>())
             {
-                statsDisplays.AddRange(GetCombatStats());
+                statsDisplays.AddRange(GetCombatStats(entity));
             }
 
             return new List<StatsConfiguration>
@@ -64,17 +64,26 @@ namespace data_rogue_one.EventSystem.Rules
             };
         }
 
-        private static List<StatsDisplay> GetCombatStats()
+        private static List<StatsDisplay> GetCombatStats(IEntity entity)
         {
+            var ret = new List<StatsDisplay>();
+
+            var healthStats = new List<StatsDisplay> {
+            new StatsDisplay { DisplayType = "ComponentCounter", Parameters = "Health,HP", BackColor = Color.DarkRed },
+                new StatsDisplay { DisplayType = "Spacer" }};
+
+            var auraStats = new List<StatsDisplay> {
+                new StatsDisplay { DisplayType = "ComponentCounter", Parameters = "AuraFighter,Aura", BackColor = Color.Yellow },
+                new StatsDisplay { DisplayType = "Stat", Parameters = "Tension" },
+                new StatsDisplay { DisplayType = "Spacer" }
+            };
+
+            var tiltStats =  new List<StatsDisplay> {
+                new StatsDisplay { DisplayType = "ComponentCounter", Parameters = "TiltFighter,Tilt", BackColor = Color.Purple },
+                new StatsDisplay { DisplayType = "Spacer" } };
+
             var combatStats = new List<StatsDisplay>
             {
-                new StatsDisplay { DisplayType = "ComponentCounter", Parameters = "Health,HP", BackColor = Color.DarkRed},
-                new StatsDisplay { DisplayType = "Spacer"},
-                new StatsDisplay { DisplayType = "ComponentCounter", Parameters = "AuraFighter,Aura", BackColor = Color.Yellow},
-                new StatsDisplay { DisplayType =  "Stat", Parameters = "Tension" },
-                new StatsDisplay { DisplayType = "Spacer"},
-                new StatsDisplay { DisplayType = "ComponentCounter", Parameters = "TiltFighter,Tilt", BackColor = Color.Purple},
-                new StatsDisplay {DisplayType = "Spacer"},
                 new StatsDisplay {DisplayType = "Stat", Parameters = "Muscle"},
                 new StatsDisplay {DisplayType = "Stat", Parameters = "Agility"},
                 new StatsDisplay {DisplayType = "Stat", Parameters = "Intellect"},
@@ -84,7 +93,25 @@ namespace data_rogue_one.EventSystem.Rules
                 new StatsDisplay {DisplayType = "Stat", Parameters = "EV"},
                 new StatsDisplay {DisplayType = "Stat", Parameters = "SH"}
             };
-            return combatStats;
+
+            if (entity.Has<Health>())
+            {
+                ret.AddRange(healthStats);
+            }
+
+            if (entity.Has<AuraFighter>())
+            {
+                ret.AddRange(auraStats);
+            }
+
+            if (entity.Has<TiltFighter>())
+            {
+                ret.AddRange(tiltStats);
+            }
+
+            ret.AddRange(combatStats);
+
+            return ret;
         }
     }
 }

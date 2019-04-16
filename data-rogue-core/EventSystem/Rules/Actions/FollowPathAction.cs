@@ -35,7 +35,10 @@ namespace data_rogue_core.EventSystem.Rules
 
                 var firstStep = behaviour.ChooseAction(sender);
 
-                _systemContainer.EventSystem.Try(EventType.Action, sender, firstStep);
+                if (firstStep != null)
+                {
+                    _systemContainer.EventSystem.Try(EventType.Action, sender, firstStep);
+                }
             }
 
             return true;

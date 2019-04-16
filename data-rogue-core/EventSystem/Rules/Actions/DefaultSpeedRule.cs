@@ -20,7 +20,7 @@ namespace data_rogue_core.EventSystem.Rules
         {
             var data = eventData as ActionEventData;
 
-            if (!data.Speed.HasValue)
+            if (data != null && !data.Speed.HasValue)
             {
                 data.Speed = DEFAULT_SPEED;
             }
