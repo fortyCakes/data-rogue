@@ -1,6 +1,7 @@
 ﻿"Bronze Dagger"
 [Description]
 Name: Bronze Dagger
+Detail: A dagger made of bronze.
 [Prototype]
 Name: Item:BronzeDagger
 Singleton: false
@@ -27,6 +28,7 @@ Value: 700
 "Bronze Sword"
 [Description]
 Name: Bronze Sword
+Detail: A sword made of bronze.
 [Prototype]
 Name: Item:BronzeSword
 Singleton: false
@@ -58,6 +60,7 @@ Value: 1000
 "Wooden Bow"
 [Description]
 Name: Wooden Bow
+Detail: A wooden bow. It requires arrows to fire.
 [Prototype]
 Name: Item:WoodenBow
 Singleton: false
@@ -88,6 +91,7 @@ Value: 700
 "Wooden Staff"
 [Description]
 Name: Wooden Staff
+Detail: A wooden staff, suitable for blaster mages.
 [Prototype]
 Name: Item:WoodenStaff
 Singleton: false
@@ -116,6 +120,7 @@ Value: 1000
 "Wooden Orb"
 [Description]
 Name: Wooden Orb
+Detail: A carved wooden orb, suitable for mages.
 [Prototype]
 Name: Item:WoodenOrb
 Singleton: false
@@ -139,6 +144,7 @@ Value: 2
 "Arrow"
 [Description]
 Name: Arrow
+Detail: Arrows for use with a bow.
 [Prototype]
 Name: Item:Arrow
 Singleton: false
@@ -158,6 +164,7 @@ StacksWith: Arrow
 "Wooden Shield"
 [Description]
 Name: Wooden Shield
+Detail: A round wooden shield.
 [Prototype]
 Name: Item:WoodenShield
 Singleton: false

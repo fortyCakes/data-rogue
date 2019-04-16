@@ -336,6 +336,13 @@ SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
+Name: sword_dark_1
+Path: Images/Sprites/Entities/sword_dark_1.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
 Name: book_1
 Path: Images/Sprites/Entities/book_1.png
 Type: SingleSprite

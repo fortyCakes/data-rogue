@@ -7,6 +7,7 @@ using data_rogue_core.Systems.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using data_rogue_core.Systems;
 
 namespace data_rogue_core.Menus.DynamicMenus
 {
@@ -14,7 +15,7 @@ namespace data_rogue_core.Menus.DynamicMenus
     {
         private ISystemContainer _systemContainer;
 
-        public override List<MenuAction> AvailableActions { get; set; } = new List<MenuAction> { MenuAction.Unequip };
+        public override List<MenuAction> AvailableActions { get; set; } = new List<MenuAction> { MenuAction.Unequip, MenuAction.Examine };
 
         public EquipmentMenu(ISystemContainer systemContainer, IEntity equippedEntity) : base(systemContainer.ActivitySystem, "Equipment", null, GetEquipmentMenuItems(systemContainer, equippedEntity))
         {
@@ -71,6 +72,10 @@ namespace data_rogue_core.Menus.DynamicMenus
                         _systemContainer.MessageSystem.Write($"You unequip the {item.DescriptionName}.");
                     }
 
+                    break;
+                case MenuAction.Examine:
+                    var actionData = new ActionEventData { Action = ActionType.Examine, Parameters = item.EntityId.ToString() };
+                    _systemContainer.EventSystem.Try(EventType.Action, _systemContainer.PlayerSystem.Player, actionData);
                     break;
                 default:
                     throw new ApplicationException($"Unknown MenuAction in {nameof(EquipmentMenu)}");

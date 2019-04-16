@@ -1,6 +1,7 @@
 ﻿"Leather Armour"
 [Description]
 Name: Leather Armour
+Detail: A chestpiece made of leather. This is light armour. 
 [Prototype]
 Name: Item:LeatherArmourChest
 Singleton: false
@@ -24,6 +25,7 @@ Value: -1
 "Leather Chaps"
 [Description]
 Name: Leather Chaps
+Detail: Some leggings made of leather. This is light armour. 
 [Prototype]
 Name: Item:LeatherArmourLegs
 Singleton: false
@@ -44,9 +46,10 @@ Value: 2
 Name: EV
 Value: -1
 
-"Leather Helmet"
+"Leather Cap"
 [Description]
-Name: Leather Helmet
+Name: Leather Cap
+Detail: A cap made of leather. This is light armour. 
 [Prototype]
 Name: Item:LeatherArmourHead
 Singleton: false
@@ -70,6 +73,7 @@ Value: 0
 "Leather Gloves"
 [Description]
 Name: Leather Gloves
+Detail: A pair of leather gloves. This is light armour. 
 [Prototype]
 Name: Item:LeatherArmourGloves
 Singleton: false
@@ -93,6 +97,7 @@ Value: 0
 "Leather Boots"
 [Description]
 Name: Leather Boots
+Detail: A pair of leather boots. This is light armour. 
 [Prototype]
 Name: Item:LeatherArmourBoots
 Singleton: false

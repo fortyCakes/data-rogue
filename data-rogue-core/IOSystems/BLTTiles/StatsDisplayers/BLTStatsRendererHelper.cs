@@ -29,7 +29,8 @@ namespace data_rogue_core.IOSystems.BLTTiles
             new BLTTextDisplayer(),
             new BLTLargeTextDisplayer(),
             new BLTDescriptionDisplayer(),
-            new BLTAppearanceNameDisplayer()
+            new BLTAppearanceNameDisplayer(),
+            new BLTExperienceDisplayer()
         };
 
         public abstract string DisplayType { get; }

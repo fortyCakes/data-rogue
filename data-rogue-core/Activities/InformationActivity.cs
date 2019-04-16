@@ -22,11 +22,12 @@ namespace data_rogue_core.Activities
 
         private readonly IActivitySystem _activitySystem;
 
-        public InformationActivity(IActivitySystem activitySystem, List<StatsConfiguration> statsDisplays, IEntity entity, bool closeOnKeyPress = true)
+        public InformationActivity(IActivitySystem activitySystem, List<StatsConfiguration> statsDisplays, IEntity entity, bool closeOnKeyPress = true, bool rendersEntireSpace = false)
         {
             Entity = entity;
             StatsDisplays = statsDisplays;
             CloseOnKeyPress = closeOnKeyPress;
+            RendersEntireSpace = rendersEntireSpace;
             _activitySystem = activitySystem;
         }
 

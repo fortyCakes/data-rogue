@@ -1,12 +1,19 @@
 ﻿"Vampiric Blade"
 [Description]
 Name: Bronze Sword of Vampirism
+Detail: {
+A sword made of bronze. It has a dark aura about it.
+
+50% chance to heal 10 health on hit.
+}
 [Prototype]
 Name: Item:BronzeSwordVampire
 Singleton: false
 [Appearance]
 Glyph: ]
 Color: #990000
+[SpriteAppearance]
+Top: sword_dark_1
 [Position]
 [Item]
 ItemLevel: 5

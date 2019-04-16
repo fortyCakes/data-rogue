@@ -6,6 +6,7 @@ using data_rogue_core.Systems.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using data_rogue_core.Systems;
 
 namespace data_rogue_core.Menus.DynamicMenus
 {
@@ -13,7 +14,7 @@ namespace data_rogue_core.Menus.DynamicMenus
     {
         private ISystemContainer systemContainer;
 
-        public override List<MenuAction> AvailableActions { get; set; } = new List<MenuAction> { MenuAction.Use, MenuAction.Drop, MenuAction.Equip };
+        public override List<MenuAction> AvailableActions { get; set; } = new List<MenuAction> { MenuAction.Use, MenuAction.Examine, MenuAction.Drop, MenuAction.Equip };
 
         public InventoryMenu(ISystemContainer systemContainer, Inventory inventory) : base(systemContainer.ActivitySystem, "Inventory", null, GetInventoryMenuItems(systemContainer, inventory))
         {
@@ -98,6 +99,10 @@ namespace data_rogue_core.Menus.DynamicMenus
                         }
                     }
 
+                    break;
+                case MenuAction.Examine:
+                    var actionData = new ActionEventData {Action = ActionType.Examine, Parameters = item.EntityId.ToString()};
+                    systemContainer.EventSystem.Try(EventType.Action, systemContainer.PlayerSystem.Player, actionData);
                     break;
                 default:
                     throw new ApplicationException("Unknown MenuAction in InventoryMenu");

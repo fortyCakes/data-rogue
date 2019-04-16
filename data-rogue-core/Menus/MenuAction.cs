@@ -6,6 +6,7 @@
         Drop,
         Use,
         Equip,
-        Unequip
+        Unequip,
+        Examine
     }
 }

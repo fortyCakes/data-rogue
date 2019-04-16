@@ -25,7 +25,9 @@ namespace data_rogue_core.IOSystems
             new RLNetVisibleEnemiesDisplayer(),
             new RLNetWealthDisplayer(),
             new RLNetComponentCounterDisplayer(),
-            new RLNetDescriptionDisplayer()
+            new RLNetDescriptionDisplayer(),
+            new RLNetAppearanceNameDisplayer(),
+            new RLNetExperienceDisplayer()
         };
 
         public abstract string DisplayType { get; }
