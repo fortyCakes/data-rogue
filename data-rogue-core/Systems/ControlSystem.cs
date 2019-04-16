@@ -17,7 +17,7 @@ using RLNET;
 
 namespace data_rogue_core.Systems
 {
-    public class PlayerControlSystem : IPlayerControlSystem
+    public class ControlSystem : IControlSystem
     {
         private ISystemContainer _systemContainer;
         private readonly IEntityDataProvider keyBindingsDataProvider;
@@ -27,7 +27,7 @@ namespace data_rogue_core.Systems
 
         public MapCoordinate HoveredCoordinate { get; set; }
 
-        public PlayerControlSystem(ISystemContainer systemContainer, IEntityDataProvider keyBindingsDataProvider)
+        public ControlSystem(ISystemContainer systemContainer, IEntityDataProvider keyBindingsDataProvider)
         {
             this._systemContainer = systemContainer;
             this.keyBindingsDataProvider = keyBindingsDataProvider;
@@ -64,17 +64,22 @@ namespace data_rogue_core.Systems
             {
                 IActivity currentActivity = _activitySystem.Peek();
 
-                if (actionData != null)
+                if (currentActivity.Running)
                 {
-                    currentActivity.HandleAction(_systemContainer, actionData);
-                }
-                if (keyPress != null)
-                {
-                    currentActivity.HandleKeyboard(_systemContainer, keyPress);
-                }
-                if (mouse != null)
-                {
-                    currentActivity.HandleMouse(_systemContainer, mouse);
+                    if (actionData != null)
+                    {
+                        currentActivity.HandleAction(_systemContainer, actionData);
+                    }
+
+                    if (keyPress != null)
+                    {
+                        currentActivity.HandleKeyboard(_systemContainer, keyPress);
+                    }
+
+                    if (mouse != null)
+                    {
+                        currentActivity.HandleMouse(_systemContainer, mouse);
+                    }
                 }
             }
         }

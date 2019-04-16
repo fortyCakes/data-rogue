@@ -4,6 +4,7 @@ using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
 using OpenTK.Input;
 using System.Collections.Generic;
+using data_rogue_core.EntityEngineSystem;
 
 namespace data_rogue_core.Activities
 {
@@ -12,15 +13,18 @@ namespace data_rogue_core.Activities
         public ActivityType Type => ActivityType.Information;
         public object Data => StatsDisplays;
         public bool RendersEntireSpace { get; set; }
-
+        public IEntity Entity { get; }
         public List<StatsConfiguration> StatsDisplays { get; set; }
         public IInformationRenderer Renderer { get; private set; }
         public bool CloseOnKeyPress { get; }
 
+        public bool Running => true;
+
         private readonly IActivitySystem _activitySystem;
 
-        public InformationActivity(IActivitySystem activitySystem, List<StatsConfiguration> statsDisplays, bool closeOnKeyPress = true)
+        public InformationActivity(IActivitySystem activitySystem, List<StatsConfiguration> statsDisplays, IEntity entity, bool closeOnKeyPress = true)
         {
+            Entity = entity;
             StatsDisplays = statsDisplays;
             CloseOnKeyPress = closeOnKeyPress;
             _activitySystem = activitySystem;
@@ -28,7 +32,7 @@ namespace data_rogue_core.Activities
 
         public void Render(ISystemContainer systemContainer)
         {
-            Renderer.Render(systemContainer, StatsDisplays, RendersEntireSpace);
+            Renderer.Render(systemContainer, StatsDisplays, Entity, RendersEntireSpace);
         }
 
         public void Initialise(IRenderer renderer)

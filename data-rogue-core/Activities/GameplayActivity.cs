@@ -7,6 +7,8 @@ using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
 using data_rogue_core.Utils;
 using System.Linq;
+using data_rogue_core.Components;
+using data_rogue_core.EntityEngineSystem;
 
 namespace data_rogue_core.Activities
 {
@@ -14,6 +16,8 @@ namespace data_rogue_core.Activities
     {
         public ActivityType Type => ActivityType.Gameplay;
         public object Data => null;
+
+        public bool Running { get; set; } = false;
 
         public bool RendersEntireSpace => true;
         public IGameplayRenderer Renderer { get; set; }
@@ -44,20 +48,44 @@ namespace data_rogue_core.Activities
 
         public void HandleMouse(ISystemContainer systemContainer, MouseData mouse)
         {
-            systemContainer.PlayerControlSystem.HoveredCoordinate = Renderer.GetMapCoordinateFromMousePosition(systemContainer.RendererSystem.CameraPosition, mouse.X, mouse.Y);
+            MapCoordinate mapCoordinate = Renderer.GetMapCoordinateFromMousePosition(systemContainer.RendererSystem.CameraPosition, mouse.X, mouse.Y);
+            systemContainer.ControlSystem.HoveredCoordinate = mapCoordinate;
+            var player = systemContainer.PlayerSystem.Player;
 
             if (mouse.IsLeftClick && systemContainer.TimeSystem.WaitingForInput)
             {
-                var player = systemContainer.PlayerSystem.Player;
                 var playerLocation = systemContainer.PositionSystem.CoordinateOf(player);
                 var map = systemContainer.MapSystem.MapCollection[systemContainer.RendererSystem.CameraPosition.Key];
-                var path = _pathfindingAlgorithm.Path(map, playerLocation, systemContainer.PlayerControlSystem.HoveredCoordinate);
+                var path = _pathfindingAlgorithm.Path(map, playerLocation, mapCoordinate);
 
                 if (path != null)
                 {
-                    var newAction = new ActionEventData { Action = ActionType.FollowPath, Parameters = string.Join(";", path.Select(m => m.ToString())) };
+                    var action = new ActionEventData { Action = ActionType.FollowPath, Parameters = string.Join(";", path.Select(m => m.ToString())) };
 
-                    systemContainer.EventSystem.Try(EventType.Action, player, newAction);
+                    systemContainer.EventSystem.Try(EventType.Action, player, action);
+                }
+            }
+
+            if (mouse.IsRightClick && systemContainer.TimeSystem.WaitingForInput)
+            {
+                var map = systemContainer.MapSystem.MapCollection[systemContainer.RendererSystem.CameraPosition.Key];
+
+                if (map.SeenCoordinates.Contains(mapCoordinate))
+                {
+                    var playerFov = FOVHelper.CalculatePlayerFov(systemContainer);
+
+                    var entities = systemContainer.PositionSystem.EntitiesAt(mapCoordinate);
+
+                    if (!playerFov.Contains(mapCoordinate))
+                    {
+                        entities = entities.Where(e => e.Has<Memorable>()).ToList();
+                    }
+
+                    IEntity entityToShow = entities.OrderByDescending(e => e.Has<Appearance>() ? e.Get<Appearance>().ZOrder : int.MinValue).First();
+
+                    var action = new ActionEventData {Action = ActionType.Examine, Parameters = entityToShow.EntityId.ToString()};
+
+                    systemContainer.EventSystem.Try(EventType.Action, player, action);
                 }
             }
         }

@@ -1,4 +1,5 @@
-﻿using data_rogue_core.Activities;
+﻿using System.Linq;
+using data_rogue_core.Activities;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Menus.StaticMenus;
 using data_rogue_core.Systems.Interfaces;
@@ -22,6 +23,8 @@ namespace data_rogue_core.EventSystem.Rules
         {
             if (systemContainer.PlayerSystem.IsPlayer(sender))
             {
+                systemContainer.ActivitySystem.ActivityStack.OfType<GameplayActivity>().Single().Running = false;
+
                 systemContainer.ActivitySystem.Push(new MenuActivity(new MainMenu(
                         systemContainer.ActivitySystem,
                         systemContainer.PlayerSystem,

@@ -5,7 +5,7 @@ using RLNET;
 
 namespace data_rogue_core.Systems
 {
-    public interface IPlayerControlSystem : IInitialisableSystem
+    public interface IControlSystem : IInitialisableSystem
     {
         void HandleInput(KeyCombination keyPress, MouseData mouse);
 

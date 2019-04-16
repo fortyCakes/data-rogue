@@ -16,7 +16,7 @@ namespace data_rogue_core.Systems
         public IEntityEngine EntityEngine { get; set; }
         public IEventSystem EventSystem { get; set; }
         public IPositionSystem PositionSystem { get; set; }
-        public IPlayerControlSystem PlayerControlSystem { get; set; }
+        public IControlSystem ControlSystem { get; set; }
         public IPrototypeSystem PrototypeSystem { get; set; }
         public IFighterSystem FighterSystem { get; set; }
         public IMessageSystem MessageSystem { get; set; }
@@ -105,12 +105,12 @@ namespace data_rogue_core.Systems
 
             TargetingSystem = new TargetingSystem(this);
 
-            PlayerControlSystem = new PlayerControlSystem(this, _keyBindingsDataProvider);
+            ControlSystem = new ControlSystem(this, _keyBindingsDataProvider);
 
             SaveSystem = new SaveSystem(this, new WorldGenerator(_worldEntityDataProvider, _playerEntityDataProvider));
 
             EntityEngine.Initialise(this);
-            PlayerControlSystem.Initialise();
+            ControlSystem.Initialise();
 
             Verify();
         }
@@ -123,7 +123,7 @@ namespace data_rogue_core.Systems
             Check(EntityEngine, "EntityEngine", msg, ref valid);
             Check(EventSystem, "EventSystem", msg, ref valid);
             Check(PositionSystem, "PositionSystem", msg, ref valid);
-            Check(PlayerControlSystem, "PlayerControlSystem", msg, ref valid);
+            Check(ControlSystem, "PlayerControlSystem", msg, ref valid);
             Check(PrototypeSystem, "PrototypeSystem", msg, ref valid);
             Check(FighterSystem, "FighterSystem", msg, ref valid);
             Check(MessageSystem, "MessageSystem", msg, ref valid);

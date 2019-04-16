@@ -10,7 +10,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
     {
         public override string DisplayType => "Text";
 
-        protected override void DisplayInternal(int x, ISpriteManager spriteManager, StatsDisplay display, ISystemContainer systemContainer, IEntity player, List<MapCoordinate> playerFov, ref int y)
+        protected override void DisplayInternal(int x, ISpriteManager spriteManager, StatsDisplay display, ISystemContainer systemContainer, IEntity entity, List<MapCoordinate> playerFov, ref int y)
         {
             RenderText(x, ref y, display.Parameters, display.Color);
         }

@@ -1,6 +1,7 @@
 ﻿"Gold"
 [Description]
 Name: Pile of Gold
+Detail: A pile of valuable gold coins.
 [Prototype]
 Name: Item:PileOfGold
 Singleton: false

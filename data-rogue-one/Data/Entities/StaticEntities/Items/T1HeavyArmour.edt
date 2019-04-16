@@ -1,6 +1,7 @@
 ﻿"Bronze Armour"
 [Description]
 Name: Bronze Armour
+Detail: A bronze chestplate, sized to fit a normal humanoid. This is heavy armour.
 [Prototype]
 Name: Item:BronzeArmourChest
 Singleton: false
@@ -24,6 +25,7 @@ Value: -3
 "Bronze Platelegs"
 [Description]
 Name: Bronze Platelegs
+Detail: A set of plate legs, made of bronze. This is heavy armour.
 [Prototype]
 Name: Item:BronzeArmourLegs
 Singleton: false
@@ -47,6 +49,7 @@ Value: -3
 "Bronze Helmet"
 [Description]
 Name: Bronze Helmet
+Detail: A bronze helmet. This is heavy armour.
 [Prototype]
 Name: Item:BronzeArmourHead
 Singleton: false
@@ -70,6 +73,7 @@ Value: -1
 "Bronze Gloves"
 [Description]
 Name: Bronze Gauntlets
+Detail: A set of bronze gauntlets. This is heavy armour.
 [Prototype]
 Name: Item:BronzeArmourGloves
 Singleton: false
@@ -96,6 +100,7 @@ Value: 1
 "Bronze Boots"
 [Description]
 Name: Bronze Boots
+Detail: A set of bronze boots. This is heavy armour.
 [Prototype]
 Name: Item:BronzeArmourBoots
 Singleton: false

@@ -1,12 +1,15 @@
 ﻿"Book of Test Skill"
 [Description]
 Name: Book of Test Skill
+Detail: A thick, leather-bound tome. It contains instructions.
 [Prototype]
 Name: Item:BookSkillTest
 Singleton: false
 [Appearance]
 Glyph: ?
 Color: #FFAA00
+[SpriteAppearance]
+Top: book_1
 [Position]
 [Item]
 UseScript: Script: Learn Skill

@@ -4,6 +4,7 @@ using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Maps;
 using System;
 using System.Linq;
+using data_rogue_core.Activities;
 using data_rogue_core.Systems.Interfaces;
 using data_rogue_core.Forms.StaticForms;
 
@@ -35,6 +36,13 @@ namespace data_rogue_core
             var spawnPoint = CreateInitialMapAndGetSpawnPoint(systemContainer);
 
             AddPlayerToWorld(systemContainer, spawnPoint, characterCreationForm);
+
+            StartGameplayRunning(systemContainer);
+        }
+
+        private static void StartGameplayRunning(ISystemContainer systemContainer)
+        {
+            systemContainer.ActivitySystem.ActivityStack.OfType<GameplayActivity>().Single().Running = true;
         }
 
         private static MapCoordinate CreateInitialMapAndGetSpawnPoint(ISystemContainer systemContainer)

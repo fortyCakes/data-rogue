@@ -7,6 +7,7 @@ namespace data_rogue_core.Activities
 {
     public interface IActivity
     {
+        bool Running { get; }
         ActivityType Type { get; }
         object Data { get; }
         bool RendersEntireSpace { get; }

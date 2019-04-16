@@ -14,6 +14,7 @@ Bottom: stairs_down
 [Memorable]
 [Description]
 Name: Stairs Down
+Detail: A set of stairs, leading downwards.
 
 "Props:StairsUp"
 [Stairs]
@@ -31,3 +32,4 @@ Bottom: stairs_up
 [Memorable]
 [Description]
 Name: Stairs Up
+Detail: A set of stairs, leading upwards.

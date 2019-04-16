@@ -1,6 +1,7 @@
 ﻿"Junk"
 [Description]
 Name: Junk
+Detail: A pile of useless junk.
 [Prototype]
 Name: Item:Junk
 Singleton: false

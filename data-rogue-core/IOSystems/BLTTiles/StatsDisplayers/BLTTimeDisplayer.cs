@@ -9,7 +9,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
     {
         public override string DisplayType => "Time";
 
-        protected override void DisplayInternal(int x, ISpriteManager spriteManager, StatsDisplay display, ISystemContainer systemContainer, IEntity player, List<MapCoordinate> playerFov, ref int y)
+        protected override void DisplayInternal(int x, ISpriteManager spriteManager, StatsDisplay display, ISystemContainer systemContainer, IEntity entity, List<MapCoordinate> playerFov, ref int y)
         {
             var text = $"Time: {systemContainer.TimeSystem.TimeString}";
             RenderText(x, ref y, text, display.Color);

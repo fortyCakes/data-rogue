@@ -12,7 +12,7 @@ namespace data_rogue_core.Systems.Interfaces
         IEntityEngine EntityEngine {get; set;}
         IEventSystem EventSystem {get; set;}
         IPositionSystem PositionSystem {get; set;}
-        IPlayerControlSystem PlayerControlSystem {get; set;}
+        IControlSystem ControlSystem {get; set;}
         IPrototypeSystem PrototypeSystem {get; set;}
         IFighterSystem FighterSystem {get; set;}
         IMessageSystem MessageSystem {get; set;}

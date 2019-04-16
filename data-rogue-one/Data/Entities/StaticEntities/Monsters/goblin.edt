@@ -34,6 +34,7 @@ Name: Intellect
 Value: 4
 [Description]
 Name: Goblin
+Detail: This is a small, green-skinned humanoid. They are known to be highly aggressive towards humans, and fast. They're also weak and frail.
 [Actor]
 [MoveToPlayerBehaviour]
 Priority: 0

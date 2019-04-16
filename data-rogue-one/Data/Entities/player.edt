@@ -40,6 +40,7 @@ Name: Intellect
 Value: 15
 [Description]
 Name: Player
+Detail: The player character. 
 [KnownSkill]
 Skill: Skill:ManaBolt
 Order: 1

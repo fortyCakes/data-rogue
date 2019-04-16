@@ -19,6 +19,9 @@ namespace data_rogue_core.Activities
         public MapCoordinate CurrentTarget => TargetingActivityData.CurrentTarget;
 
         public bool RendersEntireSpace => false;
+
+        public bool Running => true;
+
         private readonly IActivitySystem _activitySystem;
 
         public ITargetingRenderer Renderer { get; set; }

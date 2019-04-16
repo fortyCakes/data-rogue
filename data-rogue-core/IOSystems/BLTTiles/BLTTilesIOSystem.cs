@@ -50,11 +50,13 @@ namespace data_rogue_core.IOSystems.BLTTiles
         public const int TILE_SPACING = 8;
 
         private readonly List<int> MOUSE_EVENTS = new List<int> { BLT.TK_MOUSE_LEFT, BLT.TK_MOUSE_RIGHT, BLT.TK_MOUSE_LEFT | BLT.TK_KEY_RELEASED, BLT.TK_MOUSE_RIGHT | BLT.TK_KEY_RELEASED };
-        private bool _leftClick;
-        private bool _rightClick;
+        private bool _leftMouseDown;
+        private bool _rightMouseDown;
         private int _mouseY;
         private int _mouseX;
         private bool _mouseActive;
+        private bool _leftClick;
+        private bool _rightClick;
 
         public BLTTilesIOSystem(IOSystemConfiguration ioSystemConfiguration)
         { 
@@ -110,12 +112,13 @@ namespace data_rogue_core.IOSystems.BLTTiles
                 if (IsClickEvent(input))
                 {
                     _mouseActive = true;
-                    SetMouseButtons(input);
                 }
                 else
                 {
                     ResolveKeyboardInput(input);
                 }
+                
+                SetMouseButtons(input);
             }
         }
 
@@ -126,8 +129,14 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
         private void SetMouseButtons(int input)
         {
-            _leftClick = input == BLT.TK_MOUSE_LEFT;
-            _rightClick = input == BLT.TK_MOUSE_RIGHT;
+            var leftMouseCurrentlyDown = BLT.State(BLT.TK_MOUSE_LEFT) == 1;
+            var rightMouseCurrentlyDown = BLT.State(BLT.TK_MOUSE_RIGHT) == 1;
+
+            _leftClick = _leftMouseDown && !leftMouseCurrentlyDown;
+            _rightClick = _rightMouseDown && !rightMouseCurrentlyDown;
+
+            _leftMouseDown = leftMouseCurrentlyDown;
+            _rightMouseDown = rightMouseCurrentlyDown;
         }
 
         private bool IsClickEvent(int input)
@@ -171,9 +180,16 @@ namespace data_rogue_core.IOSystems.BLTTiles
                 MouseActive = _mouseActive
             };
 
-            _mouseActive = false;
+            ResetMouseFlags();
 
             return mouse;
+        }
+
+        private void ResetMouseFlags()
+        {
+            _mouseActive = false;
+            _leftClick = false;
+            _rightClick = false;
         }
 
         public void Initialise(GameLoopEventHandler onUpdate, GameLoopEventHandler onRender, IEntityDataProvider graphicsDataProvider)

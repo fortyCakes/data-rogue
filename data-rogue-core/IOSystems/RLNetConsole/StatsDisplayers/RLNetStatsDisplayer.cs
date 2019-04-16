@@ -24,7 +24,8 @@ namespace data_rogue_core.IOSystems
             new RLNetStatInterpolationDisplayer(),
             new RLNetVisibleEnemiesDisplayer(),
             new RLNetWealthDisplayer(),
-            new RLNetComponentCounterDisplayer()
+            new RLNetComponentCounterDisplayer(),
+            new RLNetDescriptionDisplayer()
         };
 
         public abstract string DisplayType { get; }

@@ -27,7 +27,9 @@ namespace data_rogue_core.IOSystems.BLTTiles
             new BLTWealthDisplayer(),
             new BLTComponentCounterDisplayer(),
             new BLTTextDisplayer(),
-            new BLTLargeTextDisplayer()
+            new BLTLargeTextDisplayer(),
+            new BLTDescriptionDisplayer(),
+            new BLTAppearanceNameDisplayer()
         };
 
         public abstract string DisplayType { get; }
@@ -41,13 +43,13 @@ namespace data_rogue_core.IOSystems.BLTTiles
             DisplayInternal(x, spriteManager, display, systemContainer, player, playerFov, ref line);
         }
 
-        protected abstract void DisplayInternal(int x, ISpriteManager spriteManager, StatsDisplay display, ISystemContainer systemContainer, IEntity player, List<MapCoordinate> playerFov, ref int y);
+        protected abstract void DisplayInternal(int x, ISpriteManager spriteManager, StatsDisplay display, ISystemContainer systemContainer, IEntity entity, List<MapCoordinate> playerFov, ref int y);
         
 
-        protected static void RenderText(int x, ref int y, string text, Color color, bool updateY = true)
+        protected static void RenderText(int x, ref int y, string text, Color color, bool updateY = true, string font = "text")
         {
             BLT.Layer(BLTLayers.Text);
-            BLT.Font("text");
+            BLT.Font(font);
             BLT.Color(color);
             BLT.Print(x, y, text);
             if (updateY)

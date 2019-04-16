@@ -23,4 +23,15 @@ namespace data_rogue_core.IOSystems
             line++;
         }
     }
+
+    public class RLNetDescriptionDisplayer : RLNetStatsRendererHelper
+    {
+        public override string DisplayType => "Title";
+
+        protected override void DisplayInternal(RLConsole console, StatsDisplay display, ISystemContainer systemContainer, IEntity player, List<MapCoordinate> playerFov, ref int line)
+        {
+            console.Print(1, line, player.Get<Description>().Detail, display.Color.ToRLColor(), display.BackColor.ToRLColor());
+            line++;
+        }
+    }
 }

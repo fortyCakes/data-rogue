@@ -12,17 +12,20 @@ using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_one.EventSystem.Rules
 {
-    public class PlayerStatusAction: ApplyActionRule
+    public class ExamineStatusAction: ApplyActionRule
     {
-        public PlayerStatusAction(ISystemContainer systemContainer) : base(systemContainer)
+        public ExamineStatusAction(ISystemContainer systemContainer) : base(systemContainer)
         {
         }
 
-        public override ActionType actionType => ActionType.PlayerStatus;
+        public override ActionType actionType => ActionType.Examine;
 
         public override bool ApplyInternal(IEntity sender, ActionEventData eventData)
         {
-            _systemContainer.ActivitySystem.Push(new InformationActivity(_systemContainer.ActivitySystem, GetStatusConfigurations(), true));
+            var entityId = uint.Parse(eventData.Parameters);
+            var entity = _systemContainer.EntityEngine.Get(entityId);
+
+            _systemContainer.ActivitySystem.Push(new InformationActivity(_systemContainer.ActivitySystem, GetStatusConfigurations(), entity, true));
 
             return false;
         }
@@ -33,12 +36,11 @@ namespace data_rogue_one.EventSystem.Rules
             {
                 new StatsConfiguration
                 {
-                    Position = new Rectangle(2,2,0,0),
+                    Position = new Rectangle(2,4,0,0),
                     Displays = new List<StatsDisplay>
                     {
-                        new StatsDisplay { DisplayType = "LargeText", Parameters = "Character Status" },
+                        new StatsDisplay { DisplayType = "AppearanceName" },
                         new StatsDisplay { DisplayType = "Spacer" },
-                        new StatsDisplay { DisplayType = "Name" },
                         new StatsDisplay { DisplayType = "Stat", Parameters = "Muscle"},
                         new StatsDisplay { DisplayType = "Stat", Parameters = "Agility"},
                         new StatsDisplay { DisplayType = "Stat", Parameters = "Intellect"},

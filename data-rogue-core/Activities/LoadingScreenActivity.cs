@@ -11,6 +11,8 @@ namespace data_rogue_core.Activities
         public object Data => Text;
         public bool RendersEntireSpace => true;
 
+        public bool Running => true;
+
         public string Text { get; set; }
         public IStaticTextRenderer Renderer { get; private set; }
 

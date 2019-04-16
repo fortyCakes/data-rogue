@@ -60,7 +60,7 @@ namespace data_rogue_one
                 var customActions = new List<Type>
                 {
                     typeof(RestAction),
-                    typeof(PlayerStatusAction)
+                    typeof(ExamineStatusAction)
                 };
 
                 list.AddRange(customActions);

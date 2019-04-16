@@ -19,7 +19,7 @@ namespace data_rogue_core.IOSystems
 
         protected override void DisplayInternal(RLConsole console, StatsDisplay display, ISystemContainer systemContainer, IEntity player, List<MapCoordinate> playerFov, ref int line)
         {
-            var hoveredCoordinate = systemContainer.PlayerControlSystem.HoveredCoordinate;
+            var hoveredCoordinate = systemContainer.ControlSystem.HoveredCoordinate;
 
             if (hoveredCoordinate != null && playerFov.Contains(hoveredCoordinate))
             {

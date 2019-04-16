@@ -16,6 +16,8 @@ namespace data_rogue_core.Activities
         public IStaticTextRenderer Renderer { get; private set; }
         public bool CloseOnKeyPress { get; }
 
+        public bool Running => true;
+
         private readonly IActivitySystem _activitySystem;
 
         public StaticTextActivity(IActivitySystem activitySystem, string staticText, bool closeOnKeyPress = true)

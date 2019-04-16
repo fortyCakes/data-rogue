@@ -1,6 +1,7 @@
 ﻿"MacGuffin"
 [Description]
 Name: MacGuffin
+Detail: The fabled MacGuffin; its true powers are unknown and possibly irrelevant, but it is the object of your quest.
 [Prototype]
 Name: Item:MacGuffin
 Singleton: false

@@ -18,7 +18,7 @@
         UseSkill,
         RangedAttack,
         Rest,
-        PlayerStatus,
+        Examine,
         ResolveRangedAttack,
         FollowPath
     }

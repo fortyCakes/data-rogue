@@ -11,7 +11,7 @@ namespace data_rogue_core.UnitTests.Systems
         [Test]
         public void ExtractActionType_NoParameters_Extracts()
         {
-            var result = PlayerControlSystem.ExtractActionType("InventoryMenu");
+            var result = ControlSystem.ExtractActionType("InventoryMenu");
 
             result.Should().Be(ActionType.InventoryMenu);
         }
@@ -19,7 +19,7 @@ namespace data_rogue_core.UnitTests.Systems
         [Test]
         public void ExtractActionType_WithParameters_Extracts()
         {
-            var result = PlayerControlSystem.ExtractActionType("Move(1,0)");
+            var result = ControlSystem.ExtractActionType("Move(1,0)");
 
             result.Should().Be(ActionType.Move);
         }
@@ -27,7 +27,7 @@ namespace data_rogue_core.UnitTests.Systems
         [Test]
         public void ExtractParameters_NoParameters_Extracts()
         {
-            var result = PlayerControlSystem.ExtractParameters("InventoryMenu");
+            var result = ControlSystem.ExtractParameters("InventoryMenu");
 
             result.Should().Be(null);
         }
@@ -35,7 +35,7 @@ namespace data_rogue_core.UnitTests.Systems
         [Test]
         public void ExtractParameters_WithParameters_Extracts()
         {
-            var result = PlayerControlSystem.ExtractParameters("Move(1,0)");
+            var result = ControlSystem.ExtractParameters("Move(1,0)");
 
             result.Should().Be("1,0");
         }

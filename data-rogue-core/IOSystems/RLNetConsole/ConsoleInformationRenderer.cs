@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using data_rogue_core.Activities;
+using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Maps;
 using data_rogue_core.Renderers;
 using data_rogue_core.Systems.Interfaces;
@@ -27,7 +28,7 @@ namespace data_rogue_core.IOSystems.RLNetConsole
 
         public RLConsole Console { get; }
 
-        public void Render(ISystemContainer systemContainer, List<StatsConfiguration> statsDisplays, bool rendersEntireSpace)
+        public void Render(ISystemContainer systemContainer, List<StatsConfiguration> statsDisplays, IEntity entity, bool rendersEntireSpace)
         {
             Console.Clear();
 
@@ -41,11 +42,11 @@ namespace data_rogue_core.IOSystems.RLNetConsole
 
             foreach (var statsConfiguration in _ioSystemConfiguration.StatsConfigurations)
             {
-                RenderStats(statsConfiguration, systemContainer, playerFov);
+                RenderStats(statsConfiguration, systemContainer, playerFov, entity);
             }
         }
 
-        private void RenderStats(StatsConfiguration statsConfiguration, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        private void RenderStats(StatsConfiguration statsConfiguration, ISystemContainer systemContainer, List<MapCoordinate> playerFov, IEntity entity)
         {
             var statsConsole = Consoles[statsConfiguration];
 
@@ -57,7 +58,7 @@ namespace data_rogue_core.IOSystems.RLNetConsole
             foreach (StatsDisplay display in statsConfiguration.Displays)
             {
                 var statsDisplayer = statsDisplayers.Single(s => s.DisplayType == display.DisplayType);
-                statsDisplayer.Display(statsConsole, display, systemContainer, player, playerFov, ref line);
+                statsDisplayer.Display(statsConsole, display, systemContainer, entity, playerFov, ref line);
             }
 
             RLConsole.Blit(statsConsole, 0, 0, statsConsole.Width, statsConsole.Height, Console, statsConfiguration.Position.Left, statsConfiguration.Position.Top);

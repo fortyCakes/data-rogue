@@ -34,6 +34,7 @@ Name: Intellect
 Value: 2
 [Description]
 Name: Jackal
+Detail: A wild, dog-like creature with golden yellow fur.
 [Actor]
 [MoveToPlayerBehaviour]
 Priority: 0

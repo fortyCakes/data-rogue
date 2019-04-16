@@ -1,6 +1,7 @@
 ﻿"Potion of Minor Healing"
 [Description]
 Name: Potion of Minor Healing
+Detail: A bright red potion. Drinking it will heal some of your wounds.
 [Prototype]
 Name: Item:PotionHealing1
 Singleton: false

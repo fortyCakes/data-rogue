@@ -10,9 +10,9 @@ namespace data_rogue_core.IOSystems.BLTTiles
     {
         public override string DisplayType => "Stat";
 
-        protected override void DisplayInternal(int x, ISpriteManager spriteManager, StatsDisplay display, ISystemContainer systemContainer, IEntity player, List<MapCoordinate> playerFov, ref int y)
+        protected override void DisplayInternal(int x, ISpriteManager spriteManager, StatsDisplay display, ISystemContainer systemContainer, IEntity entity, List<MapCoordinate> playerFov, ref int y)
         {
-            var stat = (int)systemContainer.EventSystem.GetStat(player, display.Parameters);
+            var stat = (int)systemContainer.EventSystem.GetStat(entity, display.Parameters);
 
             var text = $"{display.Parameters}: {stat}";
 

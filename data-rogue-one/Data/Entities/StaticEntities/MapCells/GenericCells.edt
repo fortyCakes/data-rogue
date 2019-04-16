@@ -15,6 +15,7 @@ Singleton: true
 [Memorable]
 [Description]
 Name: Floor
+Detail: This is a stone floor.
 
 "Cell:Grass"
 [Appearance]
@@ -33,6 +34,7 @@ Singleton: true
 [Memorable]
 [Description]
 Name: Grass
+Detail: A patch of grass.
 
 "Cell:Tree"
 [Appearance]
@@ -53,6 +55,7 @@ Singleton: true
 [Memorable]
 [Description]
 Name: Tree
+Detail: A large, sturdy-looking tree.
 
 "Cell:SpawnPoint"
 [SpawnPoint]
@@ -72,6 +75,7 @@ Singleton: true
 [Memorable]
 [Description]
 Name: Floor
+Detail: This is a stone floor.
 
 "Cell:Wall"
 [Appearance]
@@ -91,6 +95,7 @@ Singleton: true
 [Memorable]
 [Description]
 Name: Wall
+Detail: A wall made of smooth stone bricks.
 
 "Cell:CobbleWall"
 [Appearance]
@@ -110,6 +115,7 @@ Singleton: true
 [Memorable]
 [Description]
 Name: Cobble Wall
+Detail: A wall made of pieces of stone mortared together in a haphazard fashion.
 
 "Cell:Boulder"
 [Appearance]
@@ -129,3 +135,4 @@ Singleton: true
 [Memorable]
 [Description]
 Name: Boulder
+Detail: A large boulder.

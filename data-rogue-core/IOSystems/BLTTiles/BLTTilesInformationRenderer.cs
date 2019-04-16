@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using data_rogue_core.EntityEngineSystem;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
@@ -29,7 +30,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             _statsDisplayers.AddRange(ioSystemConfiguration.AdditionalStatsDisplayers);
         }
 
-        public void Render(ISystemContainer systemContainer, List<StatsConfiguration> statsDisplays, bool rendersEntireSpace)
+        public void Render(ISystemContainer systemContainer, List<StatsConfiguration> statsDisplays, IEntity entity, bool rendersEntireSpace)
         {
             BLT.Clear();
 
@@ -42,20 +43,19 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
             foreach (var statsConfiguration in statsDisplays)
             {
-                RenderStats(statsConfiguration, systemContainer, playerFov);
+                RenderStats(statsConfiguration, systemContainer, playerFov, entity);
             }
         }
 
-        private void RenderStats(StatsConfiguration statsConfiguration, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        private void RenderStats(StatsConfiguration statsConfiguration, ISystemContainer systemContainer, List<MapCoordinate> playerFov, IEntity entity)
         {
-            var player = systemContainer.PlayerSystem.Player;
             int y = statsConfiguration.Position.Top;
 
             foreach (StatsDisplay display in statsConfiguration.Displays)
             {
                 IStatsRendererHelper statsDisplayer = _statsDisplayers.Single(s => s.DisplayType == display.DisplayType);
                 var tuple = new ValueTuple<int, ISpriteManager>(statsConfiguration.Position.Left, _spriteManager);
-                statsDisplayer.Display(tuple, display, systemContainer, player, playerFov, ref y);
+                statsDisplayer.Display(tuple, display, systemContainer, entity, playerFov, ref y);
             }
         }
     }

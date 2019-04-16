@@ -14,6 +14,8 @@ namespace data_rogue_core.Activities
         public object Data => Form;
         public bool RendersEntireSpace => true;
 
+        public bool Running => true;
+
         public Form Form { get; set; }
         public IFormRenderer Renderer { get; private set; }
 

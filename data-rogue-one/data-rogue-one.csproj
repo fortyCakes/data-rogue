@@ -60,7 +60,7 @@
     <Compile Include="GameRules.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rules\Actions\PlayerStatusAction.cs" />
+    <Compile Include="Rules\Actions\ExamineStatusAction.cs" />
     <Compile Include="Rules\Actions\RestAction.cs" />
     <Compile Include="Rules\AddAgilityToEvasionRule.cs" />
     <Compile Include="Rules\AddStatToAccuracyRule.cs" />
