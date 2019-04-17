@@ -14,7 +14,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
 {
     public abstract class BLTControlRenderer : IDataRogueControlRenderer
     {
-        public static List<BLTControlRenderer> DefaultControls => new List<BLTControlRenderer>
+        public static List<IDataRogueControlRenderer> DefaultControlRenderers => new List<IDataRogueControlRenderer>
         {
             new BLTNameDisplayer(),
             new BLTTitleDisplayer(),
@@ -55,6 +55,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             BLT.Color(color);
             BLT.Print(x, y, text);
             textSize = BLT.Measure(text);
+            textSize.Height += 1;
 
             BLT.Color("");
         }

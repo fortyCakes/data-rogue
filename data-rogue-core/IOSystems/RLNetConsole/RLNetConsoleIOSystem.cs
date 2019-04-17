@@ -79,7 +79,7 @@ namespace data_rogue_core.IOSystems.RLNetConsole
                 {ActivityType.StaticDisplay, new ConsoleStaticTextRenderer(_rootConsole)},
                 {ActivityType.Form, new ConsoleFormRenderer(_rootConsole) },
                 {ActivityType.Targeting, new ConsoleTargetingRenderer(_rootConsole, IOSystemConfiguration) },
-                {ActivityType.Information, new ConsoleInformationRenderer(_rootConsole, IOSystemConfiguration) }
+                {ActivityType.Information, new ConsoleUnifiedRenderer(_rootConsole, IOSystemConfiguration) }
             };
 
             RendererFactory = new RendererFactory(renderers);

@@ -10,20 +10,20 @@ using RLNET;
 
 namespace data_rogue_core.IOSystems.RLNetConsole
 {
-    public class ConsoleInformationRenderer : IUnifiedRenderer
+    public class ConsoleUnifiedRenderer : IUnifiedRenderer
     {
         private Dictionary<IRendereringConfiguration, RLConsole> Consoles = new Dictionary<IRendereringConfiguration, RLConsole>();
         private IOSystemConfiguration _ioSystemConfiguration;
         private List<IDataRogueControlRenderer> statsDisplayers;
 
-        public ConsoleInformationRenderer(RLConsole console, IOSystemConfiguration ioSystemConfiguration)
+        public ConsoleUnifiedRenderer(RLConsole console, IOSystemConfiguration ioSystemConfiguration)
         {
             _ioSystemConfiguration = ioSystemConfiguration;
 
             statsDisplayers = RLNetStatsRendererHelper.DefaultStatsDisplayers.OfType<IDataRogueControlRenderer>().ToList();
 
 
-            statsDisplayers.AddRange(ioSystemConfiguration.AdditionalStatsDisplayers);
+            statsDisplayers.AddRange(ioSystemConfiguration.AdditionalControlRenderers);
             Console = console;
         }
 
@@ -45,6 +45,11 @@ namespace data_rogue_core.IOSystems.RLNetConsole
             {
                 RenderStats(statsConfiguration, systemContainer, playerFov, entity);
             }
+        }
+
+        public void Render(ISystemContainer systemContainer, IActivity activity)
+        {
+            throw new NotImplementedException();
         }
 
         private void RenderStats(StatsConfiguration statsConfiguration, ISystemContainer systemContainer, List<MapCoordinate> playerFov, IEntity entity)

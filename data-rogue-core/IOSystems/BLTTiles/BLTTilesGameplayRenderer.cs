@@ -24,9 +24,9 @@ namespace data_rogue_core.IOSystems.BLTTiles
             _spriteManager = spriteManager;
             _shadeSprite = _spriteManager.Get("shade");
 
-            _statsDisplayers = BLTControlRenderer.DefaultControls.OfType<IDataRogueControlRenderer>().ToList();
+            _statsDisplayers = BLTControlRenderer.DefaultControlRenderers.OfType<IDataRogueControlRenderer>().ToList();
 
-            _statsDisplayers.AddRange(ioSystemConfiguration.AdditionalStatsDisplayers);
+            _statsDisplayers.AddRange(ioSystemConfiguration.AdditionalControlRenderers);
         }
 
         public void Render(ISystemContainer systemContainer)

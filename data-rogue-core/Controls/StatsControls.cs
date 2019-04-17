@@ -26,9 +26,13 @@ namespace data_rogue_core.Controls
 
     public class TimeControl : BaseInfoControl { }
 
+    public class NameControl : BaseInfoControl { }
+
     public class VisibleEnemiesControl : BaseInfoControl { }
 
     public class StatControl : BaseInfoControl { }
 
     public class TextControl : BaseInfoControl { }
+
+    public class LargeTextControl : BaseInfoControl { }
 }

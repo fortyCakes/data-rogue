@@ -47,7 +47,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
             statsDisplayers = RLNetStatsRendererHelper.DefaultStatsDisplayers.OfType<IDataRogueControlRenderer>().ToList();
 
-            statsDisplayers.AddRange(ioSystemConfiguration.AdditionalStatsDisplayers);
+            statsDisplayers.AddRange(ioSystemConfiguration.AdditionalControlRenderers);
         }
 
         public void Render(ISystemContainer systemContainer)

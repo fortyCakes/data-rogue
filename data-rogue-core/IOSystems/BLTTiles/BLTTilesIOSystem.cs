@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
@@ -213,6 +214,10 @@ namespace data_rogue_core.IOSystems.BLTTiles
             
             _spriteManager = SetUpSpriteManager(graphicsDataProvider);
 
+            List<IDataRogueControlRenderer> controlRenderers = BLTControlRenderer.DefaultControlRenderers;
+
+            controlRenderers.AddRange(_ioSystemConfiguration.AdditionalControlRenderers);
+
             var renderers = new Dictionary<ActivityType, IRenderer>()
             {
                 {ActivityType.Gameplay, new BLTTilesGameplayRenderer(_ioSystemConfiguration, _spriteManager)},
@@ -220,7 +225,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
                 {ActivityType.StaticDisplay, new BLTTilesStaticTextRenderer(_spriteManager, TILE_SPACING)},
                 {ActivityType.Form, new BLTTilesFormRenderer(_spriteManager) },
                 {ActivityType.Targeting, new BLTTilesTargetingRenderer( _ioSystemConfiguration, _spriteManager) },
-                {ActivityType.Information, new BLTTilesUnifiedRenderer(_ioSystemConfiguration, _spriteManager) }
+                {ActivityType.Information, new BLTTilesUnifiedRenderer(_ioSystemConfiguration, controlRenderers, _spriteManager) }
             };
 
             RendererFactory = new RendererFactory(renderers);

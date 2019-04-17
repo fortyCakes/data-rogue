@@ -18,16 +18,14 @@ namespace data_rogue_core.IOSystems.BLTTiles
         private int _height;
         private int _width;
         private readonly ISpriteManager _spriteManager;
-        private readonly List<IDataRogueControlRenderer> _statsDisplayers;
+        private readonly List<IDataRogueControlRenderer> _controlRenderers;
 
-        public BLTTilesUnifiedRenderer(IOSystemConfiguration ioSystemConfiguration, ISpriteManager spriteManager)
+        public BLTTilesUnifiedRenderer(IOSystemConfiguration ioSystemConfiguration, List<IDataRogueControlRenderer> controlRenderers, ISpriteManager spriteManager)
         {
             _ioSystemConfiguration = ioSystemConfiguration;
             _spriteManager = spriteManager;
 
-            _statsDisplayers = BLTControlRenderer.DefaultControls.OfType<IDataRogueControlRenderer>().ToList();
-
-            _statsDisplayers.AddRange(ioSystemConfiguration.AdditionalStatsDisplayers);
+            _controlRenderers = controlRenderers;
         }
 
         public void Render(ISystemContainer systemContainer, IActivity activity)
@@ -41,7 +39,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
             foreach (var control in activity.GetLayout(_width, _height))
             {
-                IDataRogueControlRenderer statsDisplayer = _statsDisplayers.Single(s => s.DisplayType == control.GetType());
+                IDataRogueControlRenderer statsDisplayer = _controlRenderers.Single(s => s.DisplayType == control.GetType());
                 statsDisplayer.Display(_spriteManager, control, systemContainer, playerFov);
             }
         }
