@@ -11,7 +11,7 @@ namespace data_rogue_core.IOSystems
     internal class RLNetExperienceDisplayer : RLNetStatsRendererHelper
     {
         public override string DisplayType => "Experience";
-        protected override void DisplayInternal(RLConsole console, StatsDisplay display, ISystemContainer systemContainer, IEntity player, List<MapCoordinate> playerFov, ref int line)
+        protected override void DisplayInternal(RLConsole console, InfoDisplay display, ISystemContainer systemContainer, IEntity player, List<MapCoordinate> playerFov, ref int line)
         {
             var experience = player.Get<Experience>();
 

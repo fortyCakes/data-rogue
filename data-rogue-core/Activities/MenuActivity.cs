@@ -1,4 +1,5 @@
-﻿using data_rogue_core.IOSystems;
+﻿using System.Collections.Generic;
+using data_rogue_core.IOSystems;
 using data_rogue_core.Menus;
 using data_rogue_core.Renderers;
 using data_rogue_core.Systems;
@@ -46,6 +47,11 @@ namespace data_rogue_core.Activities
         public void HandleAction(ISystemContainer systemContainer, ActionEventData action)
         {
             Menu.HandleAction(action);
+        }
+
+        public IEnumerable<IDataRogueControl> GetLayout(int width, int height)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using data_rogue_core.Activities;
+using data_rogue_core.Controls;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.IOSystems.BLTTiles;
 using data_rogue_core.Renderers;
@@ -20,16 +21,16 @@ namespace data_rogue_core.IOSystems.RLNetConsole
             TileWidth = 12,
             WindowTitle = "data-rogue window title",
             MapConfigurations = new List<MapConfiguration> { new MapConfiguration { Position = new Rectangle(0, 0, 76, 54) } },
-            StatsConfigurations = new List<StatsConfiguration> { new StatsConfiguration { Position = new Rectangle(77, 0, 23, 70), Displays = new List<StatsDisplay> {
-                new StatsDisplay { DisplayType = "Name" },
-                new StatsDisplay {DisplayType =  "Title"},
-                new StatsDisplay { DisplayType = "Spacer"},
-                new StatsDisplay { DisplayType = "ComponentCounter", Parameters = "Health,HP", BackColor = Color.DarkRed},
-                new StatsDisplay { DisplayType = "Spacer"},
-                new StatsDisplay { DisplayType = "Location" },
-                new StatsDisplay { DisplayType = "Time" },
-                new StatsDisplay { DisplayType = "Spacer"},
-                new StatsDisplay { DisplayType = "VisibleEnemies" }
+            StatsConfigurations = new List<StatsConfiguration> { new StatsConfiguration { Position = new Rectangle(77, 0, 23, 70), Displays = new List<InfoDisplay> {
+                new InfoDisplay { ControlType = typeof(NameControl) },
+                new InfoDisplay {ControlType =  typeof(TitleControl)},
+                new InfoDisplay { ControlType = typeof(Spacer)},
+                new InfoDisplay { ControlType = typeof(ComponentCounter), Parameters = "Health,HP", BackColor = Color.DarkRed},
+                new InfoDisplay { ControlType = typeof(Spacer)},
+                new InfoDisplay { ControlType = typeof(LocationControl) },
+                new InfoDisplay { ControlType = typeof(TimeControl) },
+                new InfoDisplay { ControlType = typeof(Spacer)},
+                new InfoDisplay { ControlType = typeof(VisibleEnemiesControl) }
 
             } } },
             MessageConfigurations = new List<MessageConfiguration> { new MessageConfiguration { Position = new Rectangle(0, 55, 76, 15) ,

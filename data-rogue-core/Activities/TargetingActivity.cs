@@ -168,7 +168,10 @@ namespace data_rogue_core.Activities
             return gameplayActivity.Renderer;
         }
 
-        
+        public IEnumerable<IDataRogueControl> GetLayout(int width, int height)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class TargetingActivityData

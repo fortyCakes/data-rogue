@@ -17,7 +17,7 @@ namespace data_rogue_core.IOSystems
     {
         public override string DisplayType => "Title";
 
-        protected override void DisplayInternal(RLConsole console, StatsDisplay display, ISystemContainer systemContainer, IEntity player, List<MapCoordinate> playerFov, ref int line)
+        protected override void DisplayInternal(RLConsole console, InfoDisplay display, ISystemContainer systemContainer, IEntity player, List<MapCoordinate> playerFov, ref int line)
         {
             console.Print(1, line, " the Untitled", display.Color.ToRLColor(), display.BackColor.ToRLColor());
             line++;
@@ -28,7 +28,7 @@ namespace data_rogue_core.IOSystems
     {
         public override string DisplayType => "Title";
 
-        protected override void DisplayInternal(RLConsole console, StatsDisplay display, ISystemContainer systemContainer, IEntity player, List<MapCoordinate> playerFov, ref int line)
+        protected override void DisplayInternal(RLConsole console, InfoDisplay display, ISystemContainer systemContainer, IEntity player, List<MapCoordinate> playerFov, ref int line)
         {
             console.Print(1, line, player.Get<Description>().Detail, display.Color.ToRLColor(), display.BackColor.ToRLColor());
             line++;

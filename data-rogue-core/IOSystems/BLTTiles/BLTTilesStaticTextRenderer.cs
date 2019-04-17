@@ -30,7 +30,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             if (renderEntireSpace)
             {
                 BLT.Clear();
-                BLTTilesBackgroundRenderer.RenderBackground(_width,_height, textboxSprite);
+                BLTTilesBackgroundRenderer_Old.RenderBackground(_width,_height, textboxSprite);
 
                 BLT.Layer(BLTLayers.Text);
                 BLT.Font("text");

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using data_rogue_core.Activities;
 using data_rogue_core.EntityEngineSystem;
@@ -9,17 +10,17 @@ using RLNET;
 
 namespace data_rogue_core.IOSystems.RLNetConsole
 {
-    public class ConsoleInformationRenderer : IInformationRenderer
+    public class ConsoleInformationRenderer : IUnifiedRenderer
     {
         private Dictionary<IRendereringConfiguration, RLConsole> Consoles = new Dictionary<IRendereringConfiguration, RLConsole>();
         private IOSystemConfiguration _ioSystemConfiguration;
-        private List<IStatsRendererHelper> statsDisplayers;
+        private List<IDataRogueControlRenderer> statsDisplayers;
 
         public ConsoleInformationRenderer(RLConsole console, IOSystemConfiguration ioSystemConfiguration)
         {
             _ioSystemConfiguration = ioSystemConfiguration;
 
-            statsDisplayers = RLNetStatsRendererHelper.DefaultStatsDisplayers.OfType<IStatsRendererHelper>().ToList();
+            statsDisplayers = RLNetStatsRendererHelper.DefaultStatsDisplayers.OfType<IDataRogueControlRenderer>().ToList();
 
 
             statsDisplayers.AddRange(ioSystemConfiguration.AdditionalStatsDisplayers);
@@ -48,20 +49,21 @@ namespace data_rogue_core.IOSystems.RLNetConsole
 
         private void RenderStats(StatsConfiguration statsConfiguration, ISystemContainer systemContainer, List<MapCoordinate> playerFov, IEntity entity)
         {
-            var statsConsole = Consoles[statsConfiguration];
+            throw new NotImplementedException();
+            //var statsConsole = Consoles[statsConfiguration];
 
-            statsConsole.Clear();
+            //statsConsole.Clear();
 
-            var player = systemContainer.PlayerSystem.Player;
-            int line = 1;
+            //var player = systemContainer.PlayerSystem.Player;
+            //int line = 1;
 
-            foreach (StatsDisplay display in statsConfiguration.Displays)
-            {
-                var statsDisplayer = statsDisplayers.Single(s => s.DisplayType == display.DisplayType);
-                statsDisplayer.Display(statsConsole, display, systemContainer, entity, playerFov, ref line);
-            }
+            //foreach (StatsDisplay display in statsConfiguration.Displays)
+            //{
+            //    var statsDisplayer = statsDisplayers.Single(s => s.DisplayType == display.ControlType);
+            //    statsDisplayer.Display(statsConsole, display, systemContainer, entity, playerFov, ref line);
+            //}
 
-            RLConsole.Blit(statsConsole, 0, 0, statsConsole.Width, statsConsole.Height, Console, statsConfiguration.Position.Left, statsConfiguration.Position.Top);
+            //RLConsole.Blit(statsConsole, 0, 0, statsConsole.Width, statsConsole.Height, Console, statsConfiguration.Position.Left, statsConfiguration.Position.Top);
         }
     }
 }

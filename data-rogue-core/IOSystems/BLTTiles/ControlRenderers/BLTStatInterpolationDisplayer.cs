@@ -7,11 +7,11 @@ using data_rogue_core.Utils;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
-    internal class BLTStatInterpolationDisplayer : BLTStatsRendererHelper
+    internal class BLTStatInterpolationDisplayer : BLTControlRenderer
     {
         public override string DisplayType => "StatInterpolation";
 
-        protected override void DisplayInternal(int x, ISpriteManager spriteManager, StatsDisplay display, ISystemContainer systemContainer, IEntity entity, List<MapCoordinate> playerFov, ref int y)
+        protected override void DisplayInternal(int x, ISpriteManager spriteManager, InfoDisplay display, ISystemContainer systemContainer, IEntity entity, List<MapCoordinate> playerFov, ref int y)
         {
             var interpolationSplits = display.Parameters.Split(',');
             var format = interpolationSplits[0];

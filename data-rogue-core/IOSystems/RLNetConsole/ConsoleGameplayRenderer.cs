@@ -20,7 +20,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
         private RLConsole backgroundConsole;
         public IOSystemConfiguration IOSystemConfiguration { get; }
 
-        private List<IStatsRendererHelper> statsDisplayers;
+        private List<IDataRogueControlRenderer> statsDisplayers;
         private char?[,] _lineChars;
 
         public ConsoleGameplayRenderer(RLConsole console, IOSystemConfiguration ioSystemConfiguration) : base(console)
@@ -45,7 +45,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
             CalculateLines();
 
-            statsDisplayers = RLNetStatsRendererHelper.DefaultStatsDisplayers.OfType<IStatsRendererHelper>().ToList();
+            statsDisplayers = RLNetStatsRendererHelper.DefaultStatsDisplayers.OfType<IDataRogueControlRenderer>().ToList();
 
             statsDisplayers.AddRange(ioSystemConfiguration.AdditionalStatsDisplayers);
         }
@@ -169,20 +169,21 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
         private void RenderStats(StatsConfiguration statsConfiguration, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
-            var statsConsole = Consoles[statsConfiguration];
+            throw new NotImplementedException();
+            //var statsConsole = Consoles[statsConfiguration];
 
-            statsConsole.Clear();
+            //statsConsole.Clear();
 
-            var player = systemContainer.PlayerSystem.Player;
-            int line = 1;
+            //var player = systemContainer.PlayerSystem.Player;
+            //int line = 1;
 
-            foreach(StatsDisplay display in statsConfiguration.Displays)
-            {
-                var statsDisplayer = statsDisplayers.Single(s => s.DisplayType == display.DisplayType);
-                statsDisplayer.Display(statsConsole, display, systemContainer, player, playerFov, ref line);
-            }
+            //foreach(StatsDisplay display in statsConfiguration.Displays)
+            //{
+            //    var statsDisplayer = statsDisplayers.Single(s => s.DisplayType == display.ControlType);
+            //    statsDisplayer.Display(statsConsole, display, systemContainer, player, playerFov, ref line);
+            //}
 
-            RLConsole.Blit(statsConsole, 0, 0, statsConsole.Width, statsConsole.Height, Console, statsConfiguration.Position.Left, statsConfiguration.Position.Top);
+            //RLConsole.Blit(statsConsole, 0, 0, statsConsole.Width, statsConsole.Height, Console, statsConfiguration.Position.Left, statsConfiguration.Position.Top);
         }
 
         private void RenderMap(MapConfiguration mapConfiguration, ISystemContainer systemContainer, List<MapCoordinate> playerFov)

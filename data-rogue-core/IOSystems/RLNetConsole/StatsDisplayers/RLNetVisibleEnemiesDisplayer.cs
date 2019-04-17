@@ -17,7 +17,7 @@ namespace data_rogue_core.IOSystems
     {
         public override string DisplayType => "VisibleEnemies";
 
-        protected override void DisplayInternal(RLConsole console, StatsDisplay display, ISystemContainer systemContainer, IEntity player, List<MapCoordinate> playerFov, ref int line)
+        protected override void DisplayInternal(RLConsole console, InfoDisplay display, ISystemContainer systemContainer, IEntity player, List<MapCoordinate> playerFov, ref int line)
         {
             var enemiesInFov = new List<IEntity>();
 

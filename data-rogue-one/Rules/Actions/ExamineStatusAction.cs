@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using data_rogue_core.Activities;
 using data_rogue_core.Components;
+using data_rogue_core.Controls;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.EventSystem.Rules;
@@ -33,20 +34,20 @@ namespace data_rogue_one.EventSystem.Rules
 
         private List<StatsConfiguration> GetStatusConfigurations(IEntity entity)
         {
-            var statsDisplays = new List<StatsDisplay>
+            var statsDisplays = new List<InfoDisplay>
             {
-                new StatsDisplay { DisplayType = "AppearanceName" },
-                new StatsDisplay { DisplayType = "Spacer" }
+                new InfoDisplay { ControlType = typeof(AppearanceName) },
+                new InfoDisplay { ControlType = typeof(Spacer) }
             };
 
             if (entity.Has<Description>())
             {
-                statsDisplays.Add(new StatsDisplay {DisplayType =  "Text", Parameters = entity.Get<Description>().Detail });
+                statsDisplays.Add(new InfoDisplay {ControlType = typeof(TextControl), Parameters = entity.Get<Description>().Detail });
             }
 
             if (entity.Has<Experience>())
             {
-                statsDisplays.Add(new StatsDisplay {DisplayType = "Experience"});
+                statsDisplays.Add(new InfoDisplay {ControlType = typeof(ExperienceControl)});
             }
 
             if (entity.Has<Health>())
@@ -64,34 +65,34 @@ namespace data_rogue_one.EventSystem.Rules
             };
         }
 
-        private static List<StatsDisplay> GetCombatStats(IEntity entity)
+        private static List<InfoDisplay> GetCombatStats(IEntity entity)
         {
-            var ret = new List<StatsDisplay>();
+            var ret = new List<InfoDisplay>();
 
-            var healthStats = new List<StatsDisplay> {
-            new StatsDisplay { DisplayType = "ComponentCounter", Parameters = "Health,HP", BackColor = Color.DarkRed },
-                new StatsDisplay { DisplayType = "Spacer" }};
+            var healthStats = new List<InfoDisplay> {
+            new InfoDisplay { ControlType = typeof(ComponentCounter), Parameters = "Health,HP", BackColor = Color.DarkRed },
+                new InfoDisplay { ControlType = typeof(Spacer) }};
 
-            var auraStats = new List<StatsDisplay> {
-                new StatsDisplay { DisplayType = "ComponentCounter", Parameters = "AuraFighter,Aura", BackColor = Color.Yellow },
-                new StatsDisplay { DisplayType = "Stat", Parameters = "Tension" },
-                new StatsDisplay { DisplayType = "Spacer" }
+            var auraStats = new List<InfoDisplay> {
+                new InfoDisplay { ControlType = typeof(ComponentCounter), Parameters = "AuraFighter,Aura", BackColor = Color.Yellow },
+                new InfoDisplay { ControlType = typeof(StatControl), Parameters = "Tension" },
+                new InfoDisplay { ControlType = typeof(Spacer) }
             };
 
-            var tiltStats =  new List<StatsDisplay> {
-                new StatsDisplay { DisplayType = "ComponentCounter", Parameters = "TiltFighter,Tilt", BackColor = Color.Purple },
-                new StatsDisplay { DisplayType = "Spacer" } };
+            var tiltStats =  new List<InfoDisplay> {
+                new InfoDisplay { ControlType = typeof(ComponentCounter), Parameters = "TiltFighter,Tilt", BackColor = Color.Purple },
+                new InfoDisplay { ControlType = typeof(Spacer) } };
 
-            var combatStats = new List<StatsDisplay>
+            var combatStats = new List<InfoDisplay>
             {
-                new StatsDisplay {DisplayType = "Stat", Parameters = "Muscle"},
-                new StatsDisplay {DisplayType = "Stat", Parameters = "Agility"},
-                new StatsDisplay {DisplayType = "Stat", Parameters = "Intellect"},
-                new StatsDisplay {DisplayType = "Stat", Parameters = "Willpower"},
-                new StatsDisplay {DisplayType = "Spacer"},
-                new StatsDisplay {DisplayType = "Stat", Parameters = "AC"},
-                new StatsDisplay {DisplayType = "Stat", Parameters = "EV"},
-                new StatsDisplay {DisplayType = "Stat", Parameters = "SH"}
+                new InfoDisplay {ControlType = typeof(StatControl), Parameters = "Muscle"},
+                new InfoDisplay {ControlType = typeof(StatControl), Parameters = "Agility"},
+                new InfoDisplay {ControlType = typeof(StatControl), Parameters = "Intellect"},
+                new InfoDisplay {ControlType = typeof(StatControl), Parameters = "Willpower"},
+                new InfoDisplay {ControlType = typeof(Spacer)},
+                new InfoDisplay {ControlType = typeof(StatControl), Parameters = "AC"},
+                new InfoDisplay {ControlType = typeof(StatControl), Parameters = "EV"},
+                new InfoDisplay {ControlType = typeof(StatControl), Parameters = "SH"}
             };
 
             if (entity.Has<Health>())

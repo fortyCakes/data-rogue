@@ -17,7 +17,7 @@ namespace data_rogue_core.IOSystems
     {
         public override string DisplayType => "Stat";
 
-        protected override void DisplayInternal(RLConsole console, StatsDisplay display, ISystemContainer systemContainer, IEntity player, List<MapCoordinate> playerFov, ref int line)
+        protected override void DisplayInternal(RLConsole console, InfoDisplay display, ISystemContainer systemContainer, IEntity player, List<MapCoordinate> playerFov, ref int line)
         {
             var statName = display.Parameters;
             console.Print(1, line, $"{statName}: {systemContainer.EventSystem.GetStat(player, statName)}", display.Color.ToRLColor(), display.BackColor.ToRLColor());

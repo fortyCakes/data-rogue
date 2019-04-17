@@ -2,6 +2,7 @@
 using BLTWrapper;
 using data_rogue_core.Activities;
 using data_rogue_core.Components;
+using data_rogue_core.Controls;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Renderers;
 using data_rogue_core.Renderers.ConsoleRenderers;
@@ -26,13 +27,13 @@ namespace data_rogue_core.IOSystems.BLTTiles
             TileWidth = 32,
             WindowTitle = "data-rogue window title",
             MapConfigurations = new List<MapConfiguration> { new MapConfiguration { Position = new Rectangle(0, 0, 40 * TILE_SPACING, 25 * TILE_SPACING) } },
-            StatsConfigurations = new List<StatsConfiguration> { new StatsConfiguration { Position = new Rectangle(2, 2, 40 * TILE_SPACING - 2, 25 * TILE_SPACING - 2), Displays = new List<StatsDisplay> {
-                new StatsDisplay { DisplayType = "ComponentCounter", Parameters = "Health,HP", BackColor = Color.Red},
-                new StatsDisplay { DisplayType = "ComponentCounter", Parameters = "AuraFighter,Aura", BackColor = Color.Gold},
-                new StatsDisplay { DisplayType = "ComponentCounter", Parameters = "TiltFighter,Tilt", BackColor = Color.Purple},
-                new StatsDisplay { DisplayType =  "Spacer" },
-                new StatsDisplay {DisplayType = "Time"},
-                new StatsDisplay { DisplayType =  "HoveredEntity", Parameters = "Health,HP;AuraFighter,Aura;TiltFighter,Tilt" }
+            StatsConfigurations = new List<StatsConfiguration> { new StatsConfiguration { Position = new Rectangle(2, 2, 40 * TILE_SPACING - 2, 25 * TILE_SPACING - 2), Displays = new List<InfoDisplay> {
+                new InfoDisplay { ControlType = typeof(ComponentCounter), Parameters = "Health,HP", BackColor = Color.Red},
+                new InfoDisplay { ControlType = typeof(ComponentCounter), Parameters = "AuraFighter,Aura", BackColor = Color.Gold},
+                new InfoDisplay { ControlType = typeof(ComponentCounter), Parameters = "TiltFighter,Tilt", BackColor = Color.Purple},
+                new InfoDisplay { ControlType =  typeof(Spacer) },
+                new InfoDisplay {ControlType = typeof(TimeControl)},
+                new InfoDisplay { ControlType =  typeof(HoveredEntityDisplayBox), Parameters = "Health,HP;AuraFighter,Aura;TiltFighter,Tilt" }
 
             } } },
             MessageConfigurations = new List<MessageConfiguration> { new MessageConfiguration {
@@ -219,7 +220,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
                 {ActivityType.StaticDisplay, new BLTTilesStaticTextRenderer(_spriteManager, TILE_SPACING)},
                 {ActivityType.Form, new BLTTilesFormRenderer(_spriteManager) },
                 {ActivityType.Targeting, new BLTTilesTargetingRenderer( _ioSystemConfiguration, _spriteManager) },
-                {ActivityType.Information, new BLTTilesInformationRenderer(_ioSystemConfiguration, _spriteManager) }
+                {ActivityType.Information, new BLTTilesUnifiedRenderer(_ioSystemConfiguration, _spriteManager) }
             };
 
             RendererFactory = new RendererFactory(renderers);

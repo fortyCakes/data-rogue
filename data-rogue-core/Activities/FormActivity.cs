@@ -5,6 +5,7 @@ using data_rogue_core.Renderers.ConsoleRenderers;
 using data_rogue_core.Systems.Interfaces;
 using data_rogue_core.IOSystems;
 using data_rogue_core.Systems;
+using System.Collections.Generic;
 
 namespace data_rogue_core.Activities
 {
@@ -48,6 +49,11 @@ namespace data_rogue_core.Activities
         public void HandleAction(ISystemContainer systemContainer, ActionEventData action)
         {
             Form.HandleAction(action);
+        }
+
+        public IEnumerable<IDataRogueControl> GetLayout(int width, int height)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

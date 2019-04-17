@@ -6,11 +6,11 @@ using data_rogue_core.Utils;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
-    internal class BLTStatDisplayer : BLTStatsRendererHelper
+    internal class BLTStatDisplayer : BLTControlRenderer
     {
         public override string DisplayType => "Stat";
 
-        protected override void DisplayInternal(int x, ISpriteManager spriteManager, StatsDisplay display, ISystemContainer systemContainer, IEntity entity, List<MapCoordinate> playerFov, ref int y)
+        protected override void DisplayInternal(int x, ISpriteManager spriteManager, InfoDisplay display, ISystemContainer systemContainer, IEntity entity, List<MapCoordinate> playerFov, ref int y)
         {
             var stat = (int)systemContainer.EventSystem.GetStat(entity, display.Parameters);
 

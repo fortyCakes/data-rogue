@@ -1,19 +1,27 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
 using BearLib;
 using BLTWrapper;
+using data_rogue_core.Activities;
 using data_rogue_core.Components;
-using data_rogue_core.EntityEngineSystem;
+using data_rogue_core.Controls;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
-    public class BLTAppearanceNameDisplayer : BLTStatsRendererHelper
+    public class BLTAppearanceNameDisplayer : BLTControlRenderer
     {
-        public override string DisplayType => "AppearanceName";
+        public override Type DisplayType => typeof(AppearanceName);
 
-        protected override void DisplayInternal(int x, ISpriteManager spriteManager, StatsDisplay display, ISystemContainer systemContainer, IEntity entity, List<MapCoordinate> playerFov, ref int y)
+        protected override void DisplayInternal(ISpriteManager spriteManager, IDataRogueControl display, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
+            var x = display.Position.Left;
+            var y = display.Position.Top;
+            var statsControl = (display as IDataRogueInfoControl);
+            var entity = statsControl.Entity;
+
             BLT.Font("");
 
             BLT.Layer(BLTLayers.MapTileBottom);
@@ -41,8 +49,15 @@ namespace data_rogue_core.IOSystems.BLTTiles
             var text = $"{entity.DescriptionName}";
 
             y += 5;
-            RenderText(x + 18, ref y, text, display.Color, false, font: "textLarge");
+            RenderText(x + 18, y, out _, text, statsControl.Color, false, font: "textLarge");
             y += 13;
         }
+
+        protected override Size GetSizeInternal(ISpriteManager spriteManager, IDataRogueControl display, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        {
+            return new Size(60 , Height);
+        }
+
+        public static int Height = 18;
     }
 }

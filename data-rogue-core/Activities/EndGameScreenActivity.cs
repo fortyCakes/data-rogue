@@ -4,6 +4,7 @@ using data_rogue_core.Renderers;
 using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
 using OpenTK.Input;
+using System.Collections.Generic;
 using System.Text;
 
 namespace data_rogue_core.Activities
@@ -76,6 +77,11 @@ namespace data_rogue_core.Activities
         private void Close()
         {
             _systemContainer.ActivitySystem.RemoveActivity(this);
+        }
+
+        public IEnumerable<IDataRogueControl> GetLayout(int width, int height)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

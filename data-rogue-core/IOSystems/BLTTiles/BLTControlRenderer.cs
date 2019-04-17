@@ -8,13 +8,13 @@ using BearLib;
 using data_rogue_core.Data;
 using System.Reflection;
 using System.Linq;
+using data_rogue_core.Activities;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
-
-    public abstract class BLTStatsRendererHelper : IStatsRendererHelper
+    public abstract class BLTControlRenderer : IDataRogueControlRenderer
     {
-        public static List<BLTStatsRendererHelper> DefaultStatsDisplayers => new List<BLTStatsRendererHelper>
+        public static List<BLTControlRenderer> DefaultControls => new List<BLTControlRenderer>
         {
             new BLTNameDisplayer(),
             new BLTTitleDisplayer(),
@@ -26,38 +26,35 @@ namespace data_rogue_core.IOSystems.BLTTiles
             new BLTStatInterpolationDisplayer(),
             new BLTWealthDisplayer(),
             new BLTComponentCounterDisplayer(),
-            new BLTTextDisplayer(),
+            new BLTDescriptionDisplayer(),
             new BLTLargeTextDisplayer(),
             new BLTDescriptionDisplayer(),
             new BLTAppearanceNameDisplayer(),
             new BLTExperienceDisplayer()
         };
 
-        public abstract string DisplayType { get; }
+        public abstract Type DisplayType { get; }
 
-        public void Display(object handle, StatsDisplay display, ISystemContainer systemContainer, IEntity player, List<MapCoordinate> playerFov, ref int line)
+        public void Display(object handle, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
-            (int, ISpriteManager)split = ((int, ISpriteManager))handle;
-
-            var x = split.Item1;
-            var spriteManager = split.Item2;
-            DisplayInternal(x, spriteManager, display, systemContainer, player, playerFov, ref line);
+            DisplayInternal((ISpriteManager)handle, control, systemContainer, playerFov);
         }
 
-        protected abstract void DisplayInternal(int x, ISpriteManager spriteManager, StatsDisplay display, ISystemContainer systemContainer, IEntity entity, List<MapCoordinate> playerFov, ref int y);
-        
+        public Size GetSize(object handle, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        {
+            return GetSizeInternal((ISpriteManager)handle, control, systemContainer, playerFov);
+        }
 
-        protected static void RenderText(int x, ref int y, string text, Color color, bool updateY = true, string font = "text")
+        protected abstract void DisplayInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov);
+        protected abstract Size GetSizeInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov);
+
+        protected static void RenderText(int x, int y, out Size textSize, string text, Color color, bool updateY = true, string font = "text")
         {
             BLT.Layer(BLTLayers.Text);
             BLT.Font(font);
             BLT.Color(color);
             BLT.Print(x, y, text);
-            if (updateY)
-            {
-                var size = BLT.Measure(text);
-                y += size.Height + 1;
-            }
+            textSize = BLT.Measure(text);
 
             BLT.Color("");
         }

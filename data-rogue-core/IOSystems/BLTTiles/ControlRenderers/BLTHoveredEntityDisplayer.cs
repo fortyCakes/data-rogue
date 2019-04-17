@@ -1,20 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using BearLib;
+using data_rogue_core.Activities;
 using data_rogue_core.Components;
+using data_rogue_core.Controls;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
-    public class BLTHoveredEntityDisplayer : BLTStatsRendererHelper
+    public class BLTHoveredEntityDisplayer : BLTControlRenderer
     {
-        public override string DisplayType => "HoveredEntity";
+        public override Type DisplayType => typeof(HoveredEntityDisplayBox);
 
-        protected override void DisplayInternal(int x, ISpriteManager spriteManager, StatsDisplay display, ISystemContainer systemContainer, IEntity entity, List<MapCoordinate> playerFov, ref int y)
+        protected override void DisplayInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
+            var x = control.Position.X;
+            var y = control.Position.Y;
+            var display = control as IDataRogueInfoControl;
+
             var hoveredCoordinate = systemContainer.ControlSystem.HoveredCoordinate;
 
             if (hoveredCoordinate != null && playerFov.Contains(hoveredCoordinate))
@@ -23,16 +30,29 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
                 var hoveredEntity = entities.Where(e => e.Has<Appearance>()).OrderByDescending(e => e.Get<Appearance>().ZOrder).First();
 
-                var originalY = y;
+                RenderEntityDetails(x, y, display, hoveredEntity, spriteManager);
 
-                RenderEntityDetails(x, ref y, display, hoveredEntity, spriteManager);
-
-                RenderBackgroundBox(x, originalY, 10, (int)Math.Ceiling((decimal)(y - originalY + 2) / BLTTilesIOSystem.TILE_SPACING), spriteManager);
+                RenderBackgroundBox(x, y, GetSizeInternal(spriteManager, control, systemContainer, playerFov), spriteManager);
 
             }
         }
 
-        protected void RenderEntityDetails(int x, ref int y, StatsDisplay display, IEntity hoveredEntity, ISpriteManager spriteManager)
+        protected override Size GetSizeInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        {
+            var height = 12;
+            var display = control as IDataRogueInfoControl;
+
+            foreach (var split in display.Parameters.Split(';'))
+            {
+                height += BLTComponentCounterDisplayer.Height;
+            }
+
+            height = BLTTilesIOSystem.TILE_SPACING * (int)Math.Ceiling((decimal)height / BLTTilesIOSystem.TILE_SPACING);
+
+            return new Size(10 * BLTTilesIOSystem.TILE_SPACING, height);
+        }
+
+        protected void RenderEntityDetails(int x, int y, IDataRogueInfoControl display, IEntity hoveredEntity, ISpriteManager spriteManager)
         {
             BLT.Font("");
             SpriteAppearance appearance = hoveredEntity.Has<SpriteAppearance>() ? hoveredEntity.Get<SpriteAppearance>() : new SpriteAppearance { Bottom = "unknown" };
@@ -57,15 +77,17 @@ namespace data_rogue_core.IOSystems.BLTTiles
                 if (counter != null)
                 {
                     var text = $"{counterText}: {counter}";
-                    RenderText(x + 4, ref y, text, display.Color);
+                    RenderText(x + 4, y, out var textSize, text, display.Color);
                 }
             }
         }
 
-        private static void RenderBackgroundBox(int x, int y, int width, int height, ISpriteManager spriteManager)
+        private static void RenderBackgroundBox(int x, int y, Size size, ISpriteManager spriteManager)
         {
             BLT.Layer(BLTLayers.UIElements);
             BLT.Font("");
+            var width = size.Width / BLTTilesIOSystem.TILE_SPACING;
+            var height = size.Height / BLTTilesIOSystem.TILE_SPACING;
 
             var spriteSheet = spriteManager.Get("textbox_blue");
 

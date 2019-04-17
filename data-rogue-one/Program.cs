@@ -30,28 +30,28 @@ namespace data_rogue_one
             var config = RLNetConsoleIOSystem.DefaultConfiguration;
 
             config.WindowTitle = "data-rogue-one";
-            config.StatsConfigurations = new List<StatsConfiguration> { new StatsConfiguration { Position = new Rectangle(77, 0, 23, 70), Displays = new List<StatsDisplay> {
-                new StatsDisplay { DisplayType = "Name" },
-                new StatsDisplay { DisplayType =  "Title"},
-                new StatsDisplay { DisplayType = "Spacer"},
-                new StatsDisplay { DisplayType = "ComponentCounter", Parameters = "Health,HP", BackColor = Color.DarkRed},
-                new StatsDisplay { DisplayType = "Spacer"},
-                new StatsDisplay { DisplayType = "ComponentCounter", Parameters = "AuraFighter,Aura", BackColor = Color.Yellow},
-                new StatsDisplay { DisplayType =  "Stat", Parameters = "Tension" },
-                new StatsDisplay { DisplayType = "Spacer"},
-                new StatsDisplay { DisplayType = "ComponentCounter", Parameters = "TiltFighter,Tilt", BackColor = Color.Purple},
-                new StatsDisplay { DisplayType = "Spacer"},
-                new StatsDisplay { DisplayType =  "Stat", Parameters = "AC" },
-                new StatsDisplay { DisplayType =  "Stat", Parameters = "EV" },
-                new StatsDisplay { DisplayType =  "Stat", Parameters = "SH" },
-                new StatsDisplay { DisplayType =  "StatInterpolation", Parameters = "Aegis: {0}/{1},CurrentAegisLevel,Aegis", Color = Color.LightBlue },
-                new StatsDisplay { DisplayType = "Spacer"},
-                new StatsDisplay { DisplayType =  "Location"},
-                new StatsDisplay { DisplayType = "Time" },
-                new StatsDisplay { DisplayType = "Spacer"},
-                new StatsDisplay { DisplayType = "Wealth", Parameters = "Gold", Color = Color.Gold},
-                new StatsDisplay { DisplayType = "Spacer"},
-                new StatsDisplay { DisplayType = "VisibleEnemies"}
+            config.StatsConfigurations = new List<StatsConfiguration> { new StatsConfiguration { Position = new Rectangle(77, 0, 23, 70), Displays = new List<InfoDisplay> {
+                new InfoDisplay { ControlType = "Name" },
+                new InfoDisplay { ControlType =  "Title"},
+                new InfoDisplay { ControlType = "Spacer"},
+                new InfoDisplay { ControlType = "ComponentCounter", Parameters = "Health,HP", BackColor = Color.DarkRed},
+                new InfoDisplay { ControlType = "Spacer"},
+                new InfoDisplay { ControlType = "ComponentCounter", Parameters = "AuraFighter,Aura", BackColor = Color.Yellow},
+                new InfoDisplay { ControlType =  "Stat", Parameters = "Tension" },
+                new InfoDisplay { ControlType = "Spacer"},
+                new InfoDisplay { ControlType = "ComponentCounter", Parameters = "TiltFighter,Tilt", BackColor = Color.Purple},
+                new InfoDisplay { ControlType = "Spacer"},
+                new InfoDisplay { ControlType =  "Stat", Parameters = "AC" },
+                new InfoDisplay { ControlType =  "Stat", Parameters = "EV" },
+                new InfoDisplay { ControlType =  "Stat", Parameters = "SH" },
+                new InfoDisplay { ControlType =  "StatInterpolation", Parameters = "Aegis: {0}/{1},CurrentAegisLevel,Aegis", Color = Color.LightBlue },
+                new InfoDisplay { ControlType = "Spacer"},
+                new InfoDisplay { ControlType =  "Location"},
+                new InfoDisplay { ControlType = "Time" },
+                new InfoDisplay { ControlType = "Spacer"},
+                new InfoDisplay { ControlType = "Wealth", Parameters = "Gold", Color = Color.Gold},
+                new InfoDisplay { ControlType = "Spacer"},
+                new InfoDisplay { ControlType = "VisibleEnemies"}
             } } };
 
             var ioSystem = new RLNetConsoleIOSystem(config);

@@ -17,7 +17,7 @@ namespace data_rogue_core.IOSystems
     {
         public override string DisplayType => "Time";
 
-        protected override void DisplayInternal(RLConsole console, StatsDisplay display, ISystemContainer systemContainer, IEntity player, List<MapCoordinate> playerFov, ref int line)
+        protected override void DisplayInternal(RLConsole console, InfoDisplay display, ISystemContainer systemContainer, IEntity player, List<MapCoordinate> playerFov, ref int line)
         {
             console.Print(1, line, $"Time: {systemContainer.TimeSystem.TimeString}", display.Color.ToRLColor(), display.BackColor.ToRLColor());
             line++;

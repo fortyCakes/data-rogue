@@ -5,11 +5,11 @@ using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
-    internal class BLTLocationDisplayer : BLTStatsRendererHelper
+    internal class BLTLocationDisplayer : BLTControlRenderer
     {
         public override string DisplayType => "Location";
 
-        protected override void DisplayInternal(int x, ISpriteManager spriteManager, StatsDisplay display, ISystemContainer systemContainer, IEntity entity, List<MapCoordinate> playerFov, ref int y)
+        protected override void DisplayInternal(int x, ISpriteManager spriteManager, InfoDisplay display, ISystemContainer systemContainer, IEntity entity, List<MapCoordinate> playerFov, ref int y)
         {
             var mapName = systemContainer.PositionSystem.CoordinateOf(entity).Key.Key;
             if (mapName.StartsWith("Branch:"))

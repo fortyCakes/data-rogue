@@ -9,6 +9,7 @@ using data_rogue_core.Utils;
 using System.Linq;
 using data_rogue_core.Components;
 using data_rogue_core.EntityEngineSystem;
+using System.Collections.Generic;
 
 namespace data_rogue_core.Activities
 {
@@ -88,6 +89,11 @@ namespace data_rogue_core.Activities
                     systemContainer.EventSystem.Try(EventType.Action, player, action);
                 }
             }
+        }
+
+        public IEnumerable<IDataRogueControl> GetLayout(int width, int height)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

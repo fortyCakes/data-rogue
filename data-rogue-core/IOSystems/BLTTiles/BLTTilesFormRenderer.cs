@@ -29,7 +29,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             _height = BLT.State(BLT.TK_HEIGHT);
             _width = BLT.State(BLT.TK_WIDTH);
 
-            BLTTilesBackgroundRenderer.RenderBackground(_width, _height, _spriteManager.Get("textbox_blue"));
+            BLTTilesBackgroundRenderer_Old.RenderBackground(_width, _height, _spriteManager.Get("textbox_blue"));
 
             RenderTitleBar(form);
 
