@@ -146,6 +146,11 @@ namespace data_rogue_core.Activities
             }
         }
 
+        public IEnumerable<IDataRogueControl> GetLayout(ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
+        {
+            throw new NotImplementedException();
+        }
+
         private void CloseActivity()
         {
             _activitySystem.RemoveActivity(this);
@@ -166,11 +171,6 @@ namespace data_rogue_core.Activities
             GameplayActivity gameplayActivity = (GameplayActivity)_activitySystem.ActivityStack.Single(a => a.Type == ActivityType.Gameplay);
 
             return gameplayActivity.Renderer;
-        }
-
-        public IEnumerable<IDataRogueControl> GetLayout(int width, int height)
-        {
-            throw new NotImplementedException();
         }
     }
 

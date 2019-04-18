@@ -19,7 +19,7 @@ namespace data_rogue_core.Controls
 
         public void SetData(IEntity entity, InfoDisplay display)
         {
-            entity = Entity;
+            Entity = entity;
             Parameters = display.Parameters;
             Color = display.Color;
             BackColor = display.BackColor;

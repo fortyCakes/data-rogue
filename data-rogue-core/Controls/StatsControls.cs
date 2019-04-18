@@ -1,14 +1,4 @@
-﻿using data_rogue_core.Activities;
-using data_rogue_core.EntityEngineSystem;
-using data_rogue_core.IOSystems;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace data_rogue_core.Controls
+﻿namespace data_rogue_core.Controls
 {
     public class AppearanceName: BaseInfoControl { }
 
@@ -32,7 +22,13 @@ namespace data_rogue_core.Controls
 
     public class StatControl : BaseInfoControl { }
 
+    public class StatInterpolationControl : BaseInfoControl { }
+
     public class TextControl : BaseInfoControl { }
 
+    public class WealthControl : BaseInfoControl { }
+
     public class LargeTextControl : BaseInfoControl { }
+
+    public class ExperienceControl : BaseInfoControl { }
 }

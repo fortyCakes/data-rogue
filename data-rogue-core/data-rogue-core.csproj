@@ -92,7 +92,6 @@
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTExperienceDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTLargeTextDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTTextDisplayer.cs" />
-    <Compile Include="IOSystems\BLTTiles\ControlRenderers\ExperienceControl.cs" />
     <Compile Include="IOSystems\FOVHelper.cs" />
     <Compile Include="IOSystems\IDataRogueControl.cs" />
     <Compile Include="IOSystems\IInformationRenderer.cs" />

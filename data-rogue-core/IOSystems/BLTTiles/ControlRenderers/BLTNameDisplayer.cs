@@ -1,19 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using data_rogue_core.Activities;
+using data_rogue_core.Controls;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
-    internal class BLTNameDisplayer : BLTControlRenderer
+    internal class BLTNameDisplayer : BLTBaseTextDisplayer
     {
-        public override string DisplayType => "Name";
+        public override Type DisplayType => typeof(NameControl);
 
-        protected override void DisplayInternal(int x, ISpriteManager spriteManager, InfoDisplay display, ISystemContainer systemContainer, IEntity entity, List<MapCoordinate> playerFov, ref int y)
+        protected override string GetText(IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
-            var text = $"Name: {entity.DescriptionName}";
-
-            RenderText(x, ref y, text, display.Color);
+            var entity = (control as IDataRogueInfoControl)?.Entity;
+            return $"Name: {entity?.DescriptionName}";
         }
     }
 }

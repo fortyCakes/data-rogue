@@ -37,7 +37,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             _height = BLT.State(BLT.TK_HEIGHT);
             _width = BLT.State(BLT.TK_WIDTH);
 
-            foreach (var control in activity.GetLayout(_width, _height))
+            foreach (var control in activity.GetLayout(systemContainer, _spriteManager, _controlRenderers, playerFov, _width, _height))
             {
                 IDataRogueControlRenderer statsDisplayer = _controlRenderers.Single(s => s.DisplayType == control.GetType());
                 statsDisplayer.Display(_spriteManager, control, systemContainer, playerFov);

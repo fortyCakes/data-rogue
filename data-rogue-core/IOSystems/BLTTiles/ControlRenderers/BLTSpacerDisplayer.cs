@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using data_rogue_core.Activities;
+using data_rogue_core.Controls;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems.Interfaces;
@@ -7,11 +11,15 @@ namespace data_rogue_core.IOSystems.BLTTiles
 {
     internal class BLTSpacerDisplayer : BLTControlRenderer
     {
-        public override string DisplayType => "Spacer";
-
-        protected override void DisplayInternal(int x, ISpriteManager spriteManager, InfoDisplay display, ISystemContainer systemContainer, IEntity entity, List<MapCoordinate> playerFov, ref int y)
+        public override Type DisplayType => typeof(Spacer);
+        protected override void DisplayInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
-            y += 4;
+            // Do not display anything
+        }
+
+        protected override Size GetSizeInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        {
+            return new Size(4, 4);
         }
     }
 }

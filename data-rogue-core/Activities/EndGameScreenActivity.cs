@@ -6,6 +6,7 @@ using data_rogue_core.Systems.Interfaces;
 using OpenTK.Input;
 using System.Collections.Generic;
 using System.Text;
+using data_rogue_core.Maps;
 
 namespace data_rogue_core.Activities
 {
@@ -74,14 +75,14 @@ namespace data_rogue_core.Activities
             // None
         }
 
+        public IEnumerable<IDataRogueControl> GetLayout(ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
+        {
+            throw new System.NotImplementedException();
+        }
+
         private void Close()
         {
             _systemContainer.ActivitySystem.RemoveActivity(this);
-        }
-
-        public IEnumerable<IDataRogueControl> GetLayout(int width, int height)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

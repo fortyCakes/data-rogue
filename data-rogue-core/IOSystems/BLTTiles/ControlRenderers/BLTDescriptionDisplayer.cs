@@ -9,7 +9,7 @@ using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
-    public abstract class BLTTextDisplayer : BLTControlRenderer
+    public abstract class BLTBaseTextDisplayer : BLTControlRenderer
     {
         protected abstract string GetText(IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov);
 
@@ -25,7 +25,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
         }
     }
 
-    public class BLTDescriptionDisplayer : BLTTextDisplayer
+    public class BLTDescriptionDisplayer : BLTBaseTextDisplayer
     {
         public override Type DisplayType => typeof(DescriptionControl);
 

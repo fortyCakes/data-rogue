@@ -21,5 +21,5 @@ namespace data_rogue_core.Controls
         public event PositionEventHandler Click;
     }
 
-    public class Background : BaseControl { }
+    public class BackgroundControl : BaseControl { }
 }

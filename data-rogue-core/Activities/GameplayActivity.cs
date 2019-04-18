@@ -42,6 +42,11 @@ namespace data_rogue_core.Activities
             }
         }
 
+        public IEnumerable<IDataRogueControl> GetLayout(ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard)
         {
             //throw new System.NotImplementedException();
@@ -89,11 +94,6 @@ namespace data_rogue_core.Activities
                     systemContainer.EventSystem.Try(EventType.Action, player, action);
                 }
             }
-        }
-
-        public IEnumerable<IDataRogueControl> GetLayout(int width, int height)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

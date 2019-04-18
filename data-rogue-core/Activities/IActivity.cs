@@ -4,6 +4,7 @@ using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
 using System;
 using System.Collections.Generic;
+using data_rogue_core.Maps;
 
 namespace data_rogue_core.Activities
 {
@@ -21,6 +22,6 @@ namespace data_rogue_core.Activities
         void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard);
         void HandleMouse(ISystemContainer systemContainer, MouseData mouse);
         void HandleAction(ISystemContainer systemContainer, ActionEventData action);
-        IEnumerable<IDataRogueControl> GetLayout(int width, int height);
+        IEnumerable<IDataRogueControl> GetLayout(ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height);
     }
 }

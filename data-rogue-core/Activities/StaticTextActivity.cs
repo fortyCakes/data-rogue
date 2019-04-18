@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using data_rogue_core.IOSystems;
+using data_rogue_core.Maps;
 using data_rogue_core.Renderers;
 using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
@@ -59,14 +60,14 @@ namespace data_rogue_core.Activities
             //throw new System.NotImplementedException();
         }
 
+        public IEnumerable<IDataRogueControl> GetLayout(ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
+        {
+            throw new System.NotImplementedException();
+        }
+
         private void Close()
         {
             _activitySystem.RemoveActivity(this);
-        }
-
-        public IEnumerable<IDataRogueControl> GetLayout(int width, int height)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

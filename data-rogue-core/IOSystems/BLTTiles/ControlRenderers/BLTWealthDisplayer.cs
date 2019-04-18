@@ -1,20 +1,24 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using data_rogue_core.Activities;
+using data_rogue_core.Controls;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
-    internal class BLTWealthDisplayer : BLTControlRenderer
+    internal class BLTWealthDisplayer : BLTBaseTextDisplayer
     {
-        public override string DisplayType => "Wealth";
+        public override Type DisplayType => typeof(WealthControl);
 
-        protected override void DisplayInternal(int x, ISpriteManager spriteManager, InfoDisplay display, ISystemContainer systemContainer, IEntity entity, List<MapCoordinate> playerFov, ref int y)
+        protected override string GetText(IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
-            var wealthType = display.Parameters;
-            var text = $"{wealthType}: {systemContainer.ItemSystem.CheckWealth(entity, wealthType)}";
+            var display = control as IDataRogueInfoControl;
+            var entity = display.Entity;
 
-            RenderText(x, ref y, text, display.Color);
+            var wealthType = display.Parameters;
+            return $"{wealthType}: {systemContainer.ItemSystem.CheckWealth(entity, wealthType)}";
         }
     }
 }

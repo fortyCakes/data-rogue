@@ -8,6 +8,8 @@ using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Controls;
 using System.Drawing;
 using System;
+using System.Linq;
+using data_rogue_core.Maps;
 
 namespace data_rogue_core.Activities
 {
@@ -41,18 +43,30 @@ namespace data_rogue_core.Activities
             Renderer.Render(systemContainer, this);
         }
 
-        public IEnumerable<IDataRogueControl> GetLayout(int width, int height)
+        public IEnumerable<IDataRogueControl> GetLayout(ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
         {
-            yield return new Background { Position = new Rectangle(0, 0, width, height) };
+            yield return new BackgroundControl { Position = new Rectangle(0, 0, width, height) };
 
             foreach(var config in StatsConfigs)
             {
+                var y = config.Position.Y;
+
                 foreach(var display in config.Displays)
                 {
                     var controlType = display.ControlType;
 
                     var control = (IDataRogueInfoControl)Activator.CreateInstance(controlType);
                     control.SetData(Entity, display);
+
+                    var renderer = controlRenderers.Single(s => s.DisplayType == control.GetType());
+                    var size = renderer.GetSize(rendererHandle, control, systemContainer, playerFov);
+
+                    var position = new Rectangle(config.Position.X, y, size.Width, size.Height);
+                    control.Position = position;
+
+                    y += size.Height;
+
+                    yield return control;
                 }
             }
         }

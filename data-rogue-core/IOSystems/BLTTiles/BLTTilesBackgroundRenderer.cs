@@ -6,6 +6,7 @@ using data_rogue_core.Systems.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using data_rogue_core.Controls;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
@@ -36,7 +37,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
     public class BLTTilesBackgroundRenderer : IDataRogueControlRenderer
     {
-        public Type DisplayType => throw new NotImplementedException();
+        public Type DisplayType => typeof(BackgroundControl);
 
         public void Display(object handle, IDataRogueControl display, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
