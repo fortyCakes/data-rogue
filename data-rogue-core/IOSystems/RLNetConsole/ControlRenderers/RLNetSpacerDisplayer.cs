@@ -16,7 +16,6 @@ using data_rogue_core.Controls;
 
 namespace data_rogue_core.IOSystems
 {
-
     public class RLNetSpacerDisplayer : RLNetControlRenderer
     {
         public override Type DisplayType => typeof(Spacer);

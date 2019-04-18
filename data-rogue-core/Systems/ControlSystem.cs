@@ -64,7 +64,7 @@ namespace data_rogue_core.Systems
             {
                 IActivity currentActivity = _activitySystem.Peek();
 
-                if (currentActivity.Running)
+                if ((currentActivity as GameplayActivity)?.Running ?? true)
                 {
                     if (actionData != null)
                     {
@@ -161,7 +161,7 @@ namespace data_rogue_core.Systems
                     
         }
 
-        private IGameplayRenderer GetGameplayRenderer()
+        private IUnifiedRenderer GetGameplayRenderer()
         {
             GameplayActivity gameplayActivity = (GameplayActivity)_activitySystem.ActivityStack.Single(a => a.Type == ActivityType.Gameplay);
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using data_rogue_core.Activities;
 using data_rogue_core.Controls;
 using data_rogue_core.Maps;

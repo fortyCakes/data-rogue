@@ -1,5 +1,6 @@
 ﻿using data_rogue_core.Activities;
 using System;
+using System.Windows.Forms;
 
 namespace data_rogue_core.Systems.Interfaces
 {
@@ -14,6 +15,7 @@ namespace data_rogue_core.Systems.Interfaces
         IActivity Peek();
 
         Action QuitAction { get; set; }
+        GameplayActivity GameplayActivity { get; }
 
         void RemoveActivity(IActivity activity);
     }

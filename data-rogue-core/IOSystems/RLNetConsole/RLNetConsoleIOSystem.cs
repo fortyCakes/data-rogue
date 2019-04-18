@@ -40,7 +40,7 @@ namespace data_rogue_core.IOSystems.RLNetConsole
 
         public RLNetConsoleIOSystem(IOSystemConfiguration ioSystemConfiguration)
         {
-            this.IOSystemConfiguration = ioSystemConfiguration;
+            Configuration = ioSystemConfiguration;
         }
 
         private RLRootConsole _rootConsole;
@@ -49,7 +49,7 @@ namespace data_rogue_core.IOSystems.RLNetConsole
         private GameLoopEventHandler _onRender;
 
         public IRendererFactory RendererFactory { get; private set; }
-        public IOSystemConfiguration IOSystemConfiguration { get; }
+        public IOSystemConfiguration Configuration { get; set; }
 
         public void RenderHandler(object sender, UpdateEventArgs e)
         {
@@ -64,9 +64,9 @@ namespace data_rogue_core.IOSystems.RLNetConsole
         public void Initialise(GameLoopEventHandler onUpdate, GameLoopEventHandler onRender, IEntityDataProvider graphicsDataProvider)
         {
             string fontFileName = "Images\\Tileset\\Alloy_curses_12x12.png";
-            string consoleTitle = IOSystemConfiguration.WindowTitle;
+            string consoleTitle = Configuration.WindowTitle;
 
-            _rootConsole = new RLRootConsole(fontFileName, IOSystemConfiguration.InitialWidth, IOSystemConfiguration.InitialHeight, IOSystemConfiguration.TileWidth, IOSystemConfiguration.TileHeight, 1, consoleTitle);
+            _rootConsole = new RLRootConsole(fontFileName, Configuration.InitialWidth, Configuration.InitialHeight, Configuration.TileWidth, Configuration.TileHeight, 1, consoleTitle);
 
             _onUpdate = onUpdate;
             _onRender = onRender;
@@ -75,16 +75,18 @@ namespace data_rogue_core.IOSystems.RLNetConsole
 
             var controlRenderers = RLNetControlRenderer.DefaultStatsDisplayers.OfType<IDataRogueControlRenderer>().ToList();
 
-            controlRenderers.AddRange(IOSystemConfiguration.AdditionalControlRenderers);
+            controlRenderers.AddRange(Configuration.AdditionalControlRenderers);
+
+            var unifiedRenderer = new ConsoleUnifiedRenderer(_rootConsole, Configuration, controlRenderers);
 
             var renderers = new Dictionary<ActivityType, IRenderer>()
             {
-                {ActivityType.Gameplay, new ConsoleGameplayRenderer(_rootConsole, IOSystemConfiguration, controlRenderers)},
+                {ActivityType.Gameplay, unifiedRenderer},
                 {ActivityType.Menu, new ConsoleMenuRenderer(_rootConsole)},
-                {ActivityType.StaticDisplay, new ConsoleStaticTextRenderer(_rootConsole)},
+                {ActivityType.StaticDisplay, unifiedRenderer},
                 {ActivityType.Form, new ConsoleFormRenderer(_rootConsole) },
-                {ActivityType.Targeting, new ConsoleTargetingRenderer(_rootConsole, IOSystemConfiguration) },
-                {ActivityType.Information, new ConsoleUnifiedRenderer(_rootConsole, IOSystemConfiguration, controlRenderers) }
+                {ActivityType.Targeting, new ConsoleTargetingRenderer(_rootConsole, Configuration) },
+                {ActivityType.Information, unifiedRenderer}
             };
 
             RendererFactory = new RendererFactory(renderers);

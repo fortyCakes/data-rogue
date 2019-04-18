@@ -19,12 +19,6 @@ namespace data_rogue_core.IOSystems
 
         protected override void DisplayInternal(RLConsole console, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
-            var background = control as BackgroundControl;
-
-            if (background.FillUnusedSpace)
-            {
-                throw new NotImplementedException();
-            }
         }
 
         protected override Size GetSizeInternal(RLConsole console, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)

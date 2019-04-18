@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Drawing;
+using System.Windows.Forms;
+using data_rogue_core.Controls;
 using data_rogue_core.IOSystems;
 using data_rogue_core.Maps;
 using data_rogue_core.Renderers;
@@ -15,10 +18,8 @@ namespace data_rogue_core.Activities
         public bool RendersEntireSpace => false;
 
         public string Text { get; set; }
-        public IStaticTextRenderer Renderer { get; private set; }
+        public IUnifiedRenderer Renderer { get; private set; }
         public bool CloseOnKeyPress { get; }
-
-        public bool Running => true;
 
         private readonly IActivitySystem _activitySystem;
 
@@ -31,12 +32,12 @@ namespace data_rogue_core.Activities
 
         public void Render(ISystemContainer systemContainer)
         {
-            Renderer.Render(Text, RendersEntireSpace);
+            Renderer.Render(systemContainer, this);
         }
 
         public void Initialise(IRenderer renderer)
         {
-            Renderer = (IStaticTextRenderer)renderer;
+            Renderer = (IUnifiedRenderer)renderer;
         }
         
         public void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard)
@@ -62,7 +63,9 @@ namespace data_rogue_core.Activities
 
         public IEnumerable<IDataRogueControl> GetLayout(ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
         {
-            throw new System.NotImplementedException();
+            yield return new BackgroundControl { Position = new Rectangle(0, 0, width, height) };
+
+            yield return new TextControl { Position = new Rectangle(1, 1, width, height), Parameters = Text };
         }
 
         private void Close()

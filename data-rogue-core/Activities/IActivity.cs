@@ -5,12 +5,12 @@ using data_rogue_core.Systems.Interfaces;
 using System;
 using System.Collections.Generic;
 using data_rogue_core.Maps;
+using System.Windows.Forms;
 
 namespace data_rogue_core.Activities
 {
     public interface IActivity
     {
-        bool Running { get; }
         ActivityType Type { get; }
         object Data { get; }
         bool RendersEntireSpace { get; }

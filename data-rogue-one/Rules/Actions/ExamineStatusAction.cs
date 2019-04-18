@@ -59,7 +59,7 @@ namespace data_rogue_one.EventSystem.Rules
             {
                 new StatsConfiguration
                 {
-                    Position = new Rectangle(4,4,0,0),
+                    Position = new Rectangle(0,0,0,0),
                     Displays = statsDisplays
                 }
             };

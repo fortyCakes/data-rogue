@@ -23,6 +23,7 @@ namespace data_rogue_core.IOSystems
         protected override void DisplayInternal(RLConsole console, IDataRogueControl display, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
             var control = display as IDataRogueInfoControl;
+            var x = control.Position.X;
             var y = control.Position.Y;
 
             var componentCounterSplits = control.Parameters.Split(',');
@@ -34,12 +35,12 @@ namespace data_rogue_core.IOSystems
             var field = fields.Single(f => f.Name == counterName);
             var counter = (Counter)field.GetValue(component);
 
-            ConsoleRendererHelper.PrintBar(console, 1, y, console.Width - 2, counterName, counter, display.BackColor.ToRLColor());
+            ConsoleRendererHelper.PrintBar(console, x, y, control.Position.Width - 2, counterName, counter, control.BackColor.ToRLColor());
         }
 
-        protected override Size GetSizeInternal(RLConsole console, IDataRogueControl display, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        protected override Size GetSizeInternal(RLConsole console, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
-            return new Size(console.Width - 2, 1);
+            return new Size(control.Position.Width - 2, 1);
         }
     }
 }

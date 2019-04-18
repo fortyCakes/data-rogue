@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 using data_rogue_core.Activities;
+using data_rogue_core.Maps;
 using data_rogue_core.Systems.Interfaces;
 using RLNET;
 
@@ -21,10 +23,13 @@ namespace data_rogue_core.IOSystems.RLNetConsole
 
         public RLConsole _console { get; }
 
+        public Padding ActivityPadding => new Padding(1);
+
         public void Render(ISystemContainer systemContainer, IActivity activity)
         {
             _console.Clear();
-            var playerFov = FOVHelper.CalculatePlayerFov(systemContainer);
+
+            var playerFov = systemContainer.ActivitySystem.GameplayActivity.Running ? FOVHelper.CalculatePlayerFov(systemContainer) : null;
 
             var height = _console.Height;
             var width = _console.Width;
@@ -36,6 +41,25 @@ namespace data_rogue_core.IOSystems.RLNetConsole
             }
         }
 
+        public MapCoordinate GetMapCoordinateFromMousePosition(MapCoordinate cameraPosition, int x, int y)
+        {
+            foreach (MapConfiguration map in _ioSystemConfiguration.MapConfigurations)
+            {
+                if (IsOnMap(map, x, y))
+                {
+                    var lookupX = cameraPosition.X - map.Position.Width / 2 + x;
+                    var lookupY = cameraPosition.Y - map.Position.Height / 2 + y;
 
+                    return new MapCoordinate(cameraPosition.Key, lookupX, lookupY);
+                }
+            }
+
+            return null;
+        }
+
+        private bool IsOnMap(MapConfiguration map, int x, int y)
+        {
+            return x >= map.Position.Left && x <= map.Position.Right && y >= map.Position.Top && y < map.Position.Bottom;
+        }
     }
 }

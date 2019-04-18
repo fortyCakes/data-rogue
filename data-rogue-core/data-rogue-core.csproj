@@ -76,7 +76,9 @@
     <Compile Include="Activities\FormActivity.cs" />
     <Compile Include="Activities\IDataRogueControl.cs" />
     <Compile Include="Activities\PositionEventHandler.cs" />
-    <Compile Include="Activities\StatsDisplayTypeMapping.cs" />
+    <Compile Include="Controls\BackgroundControl.cs" />
+    <Compile Include="Controls\MapControl.cs" />
+    <Compile Include="Controls\MessageLogControl.cs" />
     <Compile Include="Controls\StatsControls.cs" />
     <Compile Include="Controls\BaseControl.cs" />
     <Compile Include="Controls\BaseStatsControl.cs" />
@@ -91,10 +93,12 @@
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTDescriptionDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTExperienceDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTLargeTextDisplayer.cs" />
+    <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTLinesRenderer.cs" />
+    <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMapRenderer.cs" />
+    <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMessageLogRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTTextDisplayer.cs" />
     <Compile Include="IOSystems\FOVHelper.cs" />
     <Compile Include="IOSystems\IDataRogueControl.cs" />
-    <Compile Include="IOSystems\IInformationRenderer.cs" />
     <Compile Include="Activities\InformationActivity.cs" />
     <Compile Include="Activities\LoadingScreenActivity.cs" />
     <Compile Include="Activities\TargetingActivity.cs" />
@@ -154,10 +158,8 @@
     <Compile Include="IOSystems\BLTTiles\BLTTileDirectionHelper.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTTilesBackgroundRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTTilesFormRenderer.cs" />
-    <Compile Include="IOSystems\BLTTiles\BLTTilesGameplayRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTTilesIOSystem.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTTilesMenuRenderer.cs" />
-    <Compile Include="IOSystems\BLTTiles\BLTTilesStaticTextRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTTilesTargetingRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTTimeDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTTitleDisplayer.cs" />
@@ -166,6 +168,7 @@
     <Compile Include="IOSystems\BLTTiles\BLTKeyConverter.cs" />
     <Compile Include="IOSystems\IOSystemConfiguration.cs" />
     <Compile Include="IOSystems\IRendereringConfiguration.cs" />
+    <Compile Include="IOSystems\IUnifiedRenderer.cs" />
     <Compile Include="IOSystems\KeyCombination.cs" />
     <Compile Include="Data\Message.cs" />
     <Compile Include="Data\MessageSerializer.cs" />
@@ -269,6 +272,9 @@
     <Compile Include="IOSystems\MouseData.cs" />
     <Compile Include="IOSystems\RLNetConsole\ConsoleUnifiedRenderer.cs" />
     <Compile Include="IOSystems\RLNetConsole\ControlRenderers\RLNetBackgroundRenderer.cs" />
+    <Compile Include="IOSystems\RLNetConsole\ControlRenderers\RLNetLinesDisplayer.cs" />
+    <Compile Include="IOSystems\RLNetConsole\ControlRenderers\RLNetMapRenderer.cs" />
+    <Compile Include="IOSystems\RLNetConsole\ControlRenderers\RLNetMessageLogRenderer.cs" />
     <Compile Include="IOSystems\RLNetConsole\IRenderingConfiguration.cs" />
     <Compile Include="IOSystems\RLNetConsole\RLNetConsoleIOSystem.cs" />
     <Compile Include="IOSystems\RLNetConsole\ControlRenderers\RLNetAppearanceNameDisplayer.cs" />
@@ -361,14 +367,12 @@
     <Compile Include="Menus\StaticMenus\MainMenu.cs" />
     <Compile Include="IOSystems\IRendererFactory.cs" />
     <Compile Include="IOSystems\RLNetConsole\ConsoleMenuRenderer.cs" />
-    <Compile Include="IOSystems\IGameplayRenderer.cs" />
     <Compile Include="Activities\MenuActivity.cs" />
     <Compile Include="Activities\GameplayActivity.cs" />
     <Compile Include="Activities\StaticTextActivity.cs" />
     <Compile Include="IOSystems\RLNetConsole\BaseConsoleRenderer.cs" />
     <Compile Include="IOSystems\IMenuRenderer.cs" />
     <Compile Include="IOSystems\IRenderer.cs" />
-    <Compile Include="IOSystems\IStaticTextRenderer.cs" />
     <Compile Include="Components\Appearance.cs" />
     <Compile Include="Activities\IActivity.cs" />
     <Compile Include="EntityEngineSystem\IEntityComponent.cs" />
@@ -390,8 +394,6 @@
     <Compile Include="EventSystem\RuleBook.cs" />
     <Compile Include="EventSystem\Rules\PhysicalCollisionRule.cs" />
     <Compile Include="Maps\MapCollection.cs" />
-    <Compile Include="IOSystems\RLNetConsole\ConsoleGameplayRenderer.cs" />
-    <Compile Include="IOSystems\RLNetConsole\ConsoleStaticTextRenderer.cs" />
     <Compile Include="Menus\Menu.cs" />
     <Compile Include="Menus\MenuItem.cs" />
     <Compile Include="Activities\ActivityStack.cs" />

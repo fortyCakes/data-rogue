@@ -30,7 +30,7 @@ namespace data_rogue_core.Activities
         private MapCoordinate _targetFrom;
         private ISystemContainer _systemContainer;
         private IPositionSystem _positionSystem;
-        private IGameplayRenderer _gameplayRenderer;
+        private IUnifiedRenderer _gameplayRenderer;
         private HashSet<MapCoordinate> _targetableCells;
 
         public TargetingActivity(TargetingData targetingData, Action<MapCoordinate> callback, ISystemContainer systemContainer, MapCoordinate targetFrom)
@@ -166,7 +166,7 @@ namespace data_rogue_core.Activities
             }
         }
 
-        private IGameplayRenderer GetGameplayRenderer()
+        private IUnifiedRenderer GetGameplayRenderer()
         {
             GameplayActivity gameplayActivity = (GameplayActivity)_activitySystem.ActivityStack.Single(a => a.Type == ActivityType.Gameplay);
 

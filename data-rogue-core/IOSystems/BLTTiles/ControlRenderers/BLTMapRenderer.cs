@@ -1,107 +1,34 @@
-﻿using BearLib;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using BearLib;
 using BLTWrapper;
+using data_rogue_core.Activities;
 using data_rogue_core.Components;
+using data_rogue_core.Controls;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Maps;
-using data_rogue_core.Renderers;
 using data_rogue_core.Systems.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
-    public class BLTTilesGameplayRenderer : IGameplayRenderer
+
+    internal class BLTMapRenderer : BLTControlRenderer
     {
-        private IOSystemConfiguration _ioSystemConfiguration;
-        private readonly ISpriteManager _spriteManager;
-        private readonly ISpriteSheet _shadeSprite;
-        private readonly List<IDataRogueControlRenderer> _statsDisplayers;
+        public override Type DisplayType => typeof(MapControl);
 
-        public BLTTilesGameplayRenderer(IOSystemConfiguration ioSystemConfiguration, ISpriteManager spriteManager)
+        protected override void DisplayInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
-            _ioSystemConfiguration = ioSystemConfiguration;
-            _spriteManager = spriteManager;
-            _shadeSprite = _spriteManager.Get("shade");
-
-            _statsDisplayers = BLTControlRenderer.DefaultControlRenderers.OfType<IDataRogueControlRenderer>().ToList();
-
-            _statsDisplayers.AddRange(ioSystemConfiguration.AdditionalControlRenderers);
+            RenderMap(spriteManager, control, systemContainer, playerFov);
         }
 
-        public void Render(ISystemContainer systemContainer)
+        protected override Size GetSizeInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
-            BLT.Clear();
-
-            if (ReferenceEquals(systemContainer?.PlayerSystem?.Player, null))
-            {
-                return;
-            }
-
-            var playerFov = FOVHelper.CalculatePlayerFov(systemContainer);
-
-            foreach (var mapConfiguration in _ioSystemConfiguration.MapConfigurations)
-            {
-                RenderMap(mapConfiguration, systemContainer, playerFov);
-            }
-
-            foreach (var statsConfiguration in _ioSystemConfiguration.StatsConfigurations)
-            {
-                RenderStats(statsConfiguration, systemContainer, playerFov);
-            }
-
-            foreach (var messageConfiguration in _ioSystemConfiguration.MessageConfigurations)
-            {
-                RenderMessages(messageConfiguration, systemContainer);
-            }
+            return control.Position.Size;
         }
 
-        public MapCoordinate GetMapCoordinateFromMousePosition(MapCoordinate cameraPosition, int x, int y)
-        {
-            foreach (MapConfiguration map in _ioSystemConfiguration.MapConfigurations)
-            {
-                if (IsOnMap(map, x, y))
-                {
-                    var lookupX = cameraPosition.X - map.Position.Width / (2 * BLTTilesIOSystem.TILE_SPACING) + x / BLTTilesIOSystem.TILE_SPACING;
-                    var lookupY = cameraPosition.Y - map.Position.Height / (2 * BLTTilesIOSystem.TILE_SPACING) + y / BLTTilesIOSystem.TILE_SPACING;
-
-                    return new MapCoordinate(cameraPosition.Key, lookupX, lookupY);
-                }
-            }
-
-            return null;
-        }
-
-        private bool IsOnMap(MapConfiguration map, int x, int y)
-        {
-            return x >= map.Position.Left && x <= map.Position.Right && y >= map.Position.Top && y < map.Position.Bottom;
-        }
-
-        private void RenderMessages(MessageConfiguration messageConfiguration, ISystemContainer systemContainer)
-        {
-            BLT.Layer(BLTLayers.Text);
-            BLT.Font("text");
-
-            var messagesToRender = systemContainer.MessageSystem.RecentMessages(10);
-            messagesToRender.Reverse();
-
-            var x = messageConfiguration.Position.Left;
-            var y = messageConfiguration.Position.Bottom;
-
-            foreach (var message in messagesToRender)
-            {
-                var size = BLT.Measure(message.Text);
-                y -= size.Height + 1;
-
-                BLT.Color(message.Color);
-                BLT.Print(x, y, message.Text);
-            }
-
-            BLT.Color("");
-            BLT.Font("");
-        }
-
-        private void RenderMap(MapConfiguration mapConfiguration, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        private void RenderMap(ISpriteManager spriteManager, IDataRogueControl mapConfiguration, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
             var cameraPosition = systemContainer.RendererSystem.CameraPosition;
 
@@ -150,38 +77,27 @@ namespace data_rogue_core.IOSystems.BLTTiles
                         }
                         else
                         {
-                            tilesTracker[x + 1, y + 1, 1] = new SpriteAppearance {Top = "unknown"};
+                            tilesTracker[x + 1, y + 1, 1] = new SpriteAppearance { Top = "unknown" };
                         }
                     }
                 }
             }
 
-            RenderMapSprites(mapConfiguration, renderTracker, renderWidth, renderHeight, tilesTracker, 0, false);
+            RenderMapSprites(spriteManager, mapConfiguration, renderTracker, renderWidth, renderHeight, tilesTracker, 0, false);
 
-            RenderMapSprites(mapConfiguration, renderTracker, renderWidth, renderHeight, tilesTracker, 1, false);
+            RenderMapSprites(spriteManager, mapConfiguration, renderTracker, renderWidth, renderHeight, tilesTracker, 1, false);
 
-            RenderMapSprites(mapConfiguration, renderTracker, renderWidth, renderHeight, tilesTracker, 0, true);
+            RenderMapSprites(spriteManager, mapConfiguration, renderTracker, renderWidth, renderHeight, tilesTracker, 0, true);
 
-            RenderMapSprites(mapConfiguration, renderTracker, renderWidth, renderHeight, tilesTracker, 1, true);
+            RenderMapSprites(spriteManager, mapConfiguration, renderTracker, renderWidth, renderHeight, tilesTracker, 1, true);
 
-            RenderMapShade(renderTracker, fovTracker, renderWidth, renderHeight, mapConfiguration);
+            RenderMapShade(spriteManager, renderTracker, fovTracker, renderWidth, renderHeight, mapConfiguration);
         }
 
-        private void RenderStats(StatsConfiguration statsConfiguration, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        private void RenderMapShade(ISpriteManager spriteManager, bool[,] renderTracker, bool[,] fovTracker, int renderWidth, int renderHeight, IDataRogueControl mapConfiguration)
         {
-            //var player = systemContainer.PlayerSystem.Player;
-            //int y = statsConfiguration.Position.Top;
+            var shadeSprite = spriteManager.Get("shade");
 
-            //foreach (StatsDisplay display in statsConfiguration.Displays)
-            //{
-            //    IDataRogueControlRenderer statsDisplayer = _statsDisplayers.Single(s => s.DisplayType == display.DisplayType);
-            //    var tuple = new ValueTuple<int, ISpriteManager>(statsConfiguration.Position.Left, _spriteManager);
-            //    statsDisplayer.Display(tuple, display, systemContainer, player, playerFov, ref y);
-            //}
-        }
-
-        private void RenderMapShade(bool[,] renderTracker, bool[,] fovTracker, int renderWidth, int renderHeight, MapConfiguration mapConfiguration)
-        {
             BLT.Layer(BLTLayers.MapShade);
             BLT.Font("");
 
@@ -193,7 +109,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
                     {
                         if (!fovTracker[x + 1, y + 1])
                         {
-                            var sprite = _shadeSprite.Tile(TileDirections.None);
+                            var sprite = shadeSprite.Tile(TileDirections.None);
                             BLT.Put(mapConfiguration.Position.Left + x * BLTTilesIOSystem.TILE_SPACING, mapConfiguration.Position.Top + y * BLTTilesIOSystem.TILE_SPACING, sprite);
                         }
                         else
@@ -209,7 +125,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
                             if (leftConnect) directions |= TileDirections.Left;
                             if (rightConnect) directions |= TileDirections.Right;
 
-                            var sprite = _shadeSprite.Tile(directions);
+                            var sprite = shadeSprite.Tile(directions);
                             BLT.Put(mapConfiguration.Position.Left + x * BLTTilesIOSystem.TILE_SPACING, mapConfiguration.Position.Top + y * BLTTilesIOSystem.TILE_SPACING, sprite);
                         }
                     }
@@ -217,7 +133,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             }
         }
 
-        private void RenderMapSprites(MapConfiguration mapConfiguration, bool[,] renderTracker, int renderWidth, int renderHeight, SpriteAppearance[,,] tilesTracker, int z, bool top)
+        private void RenderMapSprites(ISpriteManager spriteManager, IDataRogueControl mapConfiguration, bool[,] renderTracker, int renderWidth, int renderHeight, SpriteAppearance[,,] tilesTracker, int z, bool top)
         {
             if (z == 0)
             {
@@ -243,7 +159,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
                             if (spriteName != null)
                             {
                                 TileDirections directions = BLTTileDirectionHelper.GetDirections(tilesTracker, x + 1, y + 1, z, top);
-                                var sprite = _spriteManager.Tile(spriteName, directions);
+                                var sprite = spriteManager.Tile(spriteName, directions);
                                 BLT.Put(mapConfiguration.Position.Left + x * BLTTilesIOSystem.TILE_SPACING, mapConfiguration.Position.Top + y * BLTTilesIOSystem.TILE_SPACING, sprite);
                             }
                         }
@@ -256,6 +172,5 @@ namespace data_rogue_core.IOSystems.BLTTiles
         {
             return currentMap.SeenCoordinates.Contains(coordinate) && e.Has<Memorable>();
         }
-
     }
 }

@@ -10,20 +10,22 @@ using data_rogue_core.Maps;
 
 namespace data_rogue_core.Activities
 {
-    public class EndGameScreenActivity : IActivity
+    public class EndGameScreenActivity : StaticTextActivity
     {
-        public ActivityType Type => ActivityType.StaticDisplay;
-        public object Data => Text;
-        public bool RendersEntireSpace => true;
+        private readonly ISystemContainer _systemContainer;
 
-        public bool Running => true;
-        public string Text { get; set; }
+        public EndGameScreenActivity(ISystemContainer systemContainer, bool victory) : base(systemContainer.ActivitySystem, null, true)
+        {
+            _systemContainer = systemContainer;
+
+            Text = GetEndGameScreenText(victory);
+        }
 
         private string GetEndGameScreenText(bool victory)
         {
             var stringBuilder = new StringBuilder();
 
-            stringBuilder.AppendLine(victory? "You win!" : "You are dead.");
+            stringBuilder.AppendLine(victory ? "You win!" : "You are dead.");
             stringBuilder.Append("Name: ").AppendLine(_systemContainer.PlayerSystem.Player.Get<Description>().Name);
             stringBuilder.AppendLine();
             stringBuilder.Append("Time: ").Append(_systemContainer.TimeSystem.CurrentTime).AppendLine(" aut");
@@ -31,58 +33,6 @@ namespace data_rogue_core.Activities
             var text = stringBuilder.ToString();
 
             return text.Replace("\r", "");
-        }
-
-        public IStaticTextRenderer Renderer { get; private set; }
-
-        private readonly ISystemContainer _systemContainer;
-
-        public EndGameScreenActivity(ISystemContainer systemContainer, bool victory)
-        {
-            this._systemContainer = systemContainer;
-
-            Text = GetEndGameScreenText(victory);
-        }
-
-        public void Render(ISystemContainer systemContainer)
-        {
-            Renderer.Render(Text, RendersEntireSpace);
-        }
-
-        public void Initialise(IRenderer renderer)
-        {
-            Renderer = (IStaticTextRenderer)renderer;
-        }
-
-        public void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard)
-        {
-            if (keyboard != null && keyboard.Key != Key.Unknown)
-            {
-                Close();
-            }
-        }
-
-        public void HandleMouse(ISystemContainer systemContainer, MouseData mouse)
-        {
-            if (mouse.IsLeftClick)
-            {
-                Close();
-            }
-        }
-
-        public void HandleAction(ISystemContainer systemContainer, ActionEventData action)
-        {
-            // None
-        }
-
-        public IEnumerable<IDataRogueControl> GetLayout(ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        private void Close()
-        {
-            _systemContainer.ActivitySystem.RemoveActivity(this);
         }
     }
 }

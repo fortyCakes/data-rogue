@@ -17,11 +17,13 @@ namespace data_rogue_core.IOSystems
         protected override void DisplayInternal(RLConsole console, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
             var display = control as IDataRogueInfoControl;
+
+            var x = display.Position.X;
             var y = display.Position.Y;
             var entity = display.Entity;
 
             var statName = display.Parameters;
-            console.Print(1, y, $"{statName}: {systemContainer.EventSystem.GetStat(entity, statName)}", display.Color.ToRLColor(), display.BackColor.ToRLColor());
+            console.Print(x, y, $"{statName}: {systemContainer.EventSystem.GetStat(entity, statName)}", display.Color.ToRLColor(), display.BackColor.ToRLColor());
         }
 
         protected override Size GetSizeInternal(RLConsole console, IDataRogueControl display, ISystemContainer systemContainer, List<MapCoordinate> playerFov)

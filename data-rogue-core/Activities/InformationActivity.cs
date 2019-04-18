@@ -10,6 +10,7 @@ using System.Drawing;
 using System;
 using System.Linq;
 using data_rogue_core.Maps;
+using System.Windows.Forms;
 
 namespace data_rogue_core.Activities
 {
@@ -22,10 +23,6 @@ namespace data_rogue_core.Activities
         public List<StatsConfiguration> StatsConfigs { get; set; }
         public IUnifiedRenderer Renderer { get; private set; }
         public bool CloseOnKeyPress { get; }
-
-        private StatsDisplayTypeMapping _dictionary;
-
-        public bool Running => true;
 
         private readonly IActivitySystem _activitySystem;
 
@@ -49,7 +46,8 @@ namespace data_rogue_core.Activities
 
             foreach(var config in StatsConfigs)
             {
-                var y = config.Position.Y;
+                var x = config.Position.X + Renderer.ActivityPadding.Left;
+                var y = config.Position.Y + Renderer.ActivityPadding.Top;
 
                 foreach(var display in config.Displays)
                 {
@@ -61,8 +59,7 @@ namespace data_rogue_core.Activities
                     var renderer = controlRenderers.Single(s => s.DisplayType == control.GetType());
                     var size = renderer.GetSize(rendererHandle, control, systemContainer, playerFov);
 
-                    var position = new Rectangle(config.Position.X, y, size.Width, size.Height);
-                    control.Position = position;
+                    control.Position = new Rectangle(x, y, size.Width, size.Height);
 
                     y += size.Height;
 

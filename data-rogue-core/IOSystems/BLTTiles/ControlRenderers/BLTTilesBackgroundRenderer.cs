@@ -35,20 +35,19 @@ namespace data_rogue_core.IOSystems.BLTTiles
         }
     }
 
-    public class BLTTilesBackgroundRenderer : IDataRogueControlRenderer
+    public class BLTTilesBackgroundRenderer : BLTControlRenderer
     {
-        public Type DisplayType => typeof(BackgroundControl);
+        public override Type DisplayType => typeof(BackgroundControl);
 
-        public void Display(object handle, IDataRogueControl display, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        protected override void DisplayInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
-            var spriteManager = (ISpriteManager)handle;
             var backgroundSpriteSheet = spriteManager.Get("textbox_blue");
 
             BLT.Layer((int)BLTLayers.Background);
             BLT.Font("");
 
-            var width = display.Position.Width / BLTTilesIOSystem.TILE_SPACING;
-            var height = display.Position.Height / BLTTilesIOSystem.TILE_SPACING;
+            var width = control.Position.Width / BLTTilesIOSystem.TILE_SPACING;
+            var height = control.Position.Height / BLTTilesIOSystem.TILE_SPACING;
 
             for (int x = 0; x < width; x++)
             {
@@ -58,14 +57,14 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
                     var sprite = backgroundSpriteSheet.Tile(directions);
 
-                    BLT.Put(display.Position.Left + x * BLTTilesIOSystem.TILE_SPACING, display.Position.Top + y * BLTTilesIOSystem.TILE_SPACING, sprite);
+                    BLT.Put(control.Position.Left + x * BLTTilesIOSystem.TILE_SPACING, control.Position.Top + y * BLTTilesIOSystem.TILE_SPACING, sprite);
                 }
             }
         }
 
-        public Size GetSize(object handle, IDataRogueControl display, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        protected override Size GetSizeInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
-            return display.Position.Size;
+            return control.Position.Size;
         }
     }
 }

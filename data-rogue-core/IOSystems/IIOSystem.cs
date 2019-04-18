@@ -13,6 +13,7 @@ namespace data_rogue_core.IOSystems
     public interface IIOSystem
     {
         IRendererFactory RendererFactory { get; }
+        IOSystemConfiguration Configuration { get; }
 
         void Initialise(GameLoopEventHandler onUpdate, GameLoopEventHandler onRender, IEntityDataProvider graphicsDataProvider);
 

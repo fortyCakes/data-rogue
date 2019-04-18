@@ -33,7 +33,6 @@ namespace data_rogue_core.IOSystems.BLTTiles
                 new InfoDisplay { ControlType = typeof(ComponentCounter), Parameters = "AuraFighter,Aura", BackColor = Color.Gold},
                 new InfoDisplay { ControlType = typeof(ComponentCounter), Parameters = "TiltFighter,Tilt", BackColor = Color.Purple},
                 new InfoDisplay { ControlType =  typeof(Spacer) },
-                new InfoDisplay {ControlType = typeof(TimeControl)},
                 new InfoDisplay { ControlType =  typeof(HoveredEntityDisplayBox), Parameters = "Health,HP;AuraFighter,Aura;TiltFighter,Tilt" }
 
             } } },
@@ -47,7 +46,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
         private GameLoopEventHandler _update;
         private GameLoopEventHandler _render;
         private KeyCombination _keyCombination;
-        private readonly IOSystemConfiguration _ioSystemConfiguration;
+        public IOSystemConfiguration Configuration { get; set; }
         private ISpriteManager _spriteManager;
         public const int TILE_SPACING = 8;
 
@@ -64,7 +63,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
         { 
             _spriteLoader = new BLTSpriteLoader();
 
-            _ioSystemConfiguration = ioSystemConfiguration;
+            Configuration = ioSystemConfiguration;
         }
 
         public IRendererFactory RendererFactory { get; private set; }
@@ -201,7 +200,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             _update = onUpdate;
             _render = onRender;
 
-            var config = $"window: size={_ioSystemConfiguration.InitialWidth * TILE_SPACING}x{_ioSystemConfiguration.InitialHeight * TILE_SPACING}, cellsize=4x4, title='{_ioSystemConfiguration.WindowTitle}'";
+            var config = $"window: size={Configuration.InitialWidth * TILE_SPACING}x{Configuration.InitialHeight * TILE_SPACING}, cellsize=4x4, title='{Configuration.WindowTitle}'";
         
             BLT.Set(config);
 
@@ -216,16 +215,17 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
             List<IDataRogueControlRenderer> controlRenderers = BLTControlRenderer.DefaultControlRenderers;
 
-            controlRenderers.AddRange(_ioSystemConfiguration.AdditionalControlRenderers);
+            controlRenderers.AddRange(Configuration.AdditionalControlRenderers);
 
+            BLTTilesUnifiedRenderer unifiedRenderer = new BLTTilesUnifiedRenderer(controlRenderers, _spriteManager, Configuration);
             var renderers = new Dictionary<ActivityType, IRenderer>()
             {
-                {ActivityType.Gameplay, new BLTTilesGameplayRenderer(_ioSystemConfiguration, _spriteManager)},
+                {ActivityType.Gameplay, unifiedRenderer},
                 {ActivityType.Menu, new BLTTilesMenuRenderer(_spriteManager)},
-                {ActivityType.StaticDisplay, new BLTTilesStaticTextRenderer(_spriteManager, TILE_SPACING)},
+                {ActivityType.StaticDisplay, unifiedRenderer},
                 {ActivityType.Form, new BLTTilesFormRenderer(_spriteManager) },
-                {ActivityType.Targeting, new BLTTilesTargetingRenderer( _ioSystemConfiguration, _spriteManager) },
-                {ActivityType.Information, new BLTTilesUnifiedRenderer(controlRenderers, _spriteManager) }
+                {ActivityType.Targeting, new BLTTilesTargetingRenderer( Configuration, _spriteManager) },
+                {ActivityType.Information, unifiedRenderer }
             };
 
             RendererFactory = new RendererFactory(renderers);

@@ -19,8 +19,9 @@ namespace data_rogue_core.IOSystems
         protected override void DisplayInternal(RLConsole console, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
             IDataRogueInfoControl display = control as IDataRogueInfoControl;
+            var x = control.Position.X;
             string interpolated = DataRogueInfoControl(control, systemContainer, out int y);
-            console.Print(1, y, interpolated, display.Color.ToRLColor(), display.BackColor.ToRLColor());
+            console.Print(x, y, interpolated, display.Color.ToRLColor(), display.BackColor.ToRLColor());
         }
 
         protected override Size GetSizeInternal(RLConsole console, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)

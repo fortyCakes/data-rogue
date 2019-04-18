@@ -14,15 +14,10 @@ namespace data_rogue_core.Controls
         public bool IsPressed { get; set; }
 
         public Rectangle Position { get; set; }
-        
-        public Color Color { get; protected set; }
-        public Color BackColor { get; protected set; }
+
+        public Color Color { get; protected set; } = Color.White;
+        public Color BackColor { get; protected set; } = Color.Black;
 
         public event PositionEventHandler Click;
-    }
-
-    public class BackgroundControl : BaseControl
-    {
-        public bool FillUnusedSpace { get; set; } = false;
     }
 }

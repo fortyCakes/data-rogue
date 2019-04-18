@@ -13,9 +13,9 @@ namespace data_rogue_core.Controls
 
     public class BaseInfoControl : BaseControl, IDataRogueInfoControl
     {
-        public IEntity Entity { get; protected set; }
+        public IEntity Entity { get; set; }
 
-        public string Parameters { get; protected set; }
+        public string Parameters { get; set; }
 
         public void SetData(IEntity entity, InfoDisplay display)
         {

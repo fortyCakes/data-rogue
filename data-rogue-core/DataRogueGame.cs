@@ -64,7 +64,7 @@ namespace data_rogue_core
         {
             SystemContainer.ActivitySystem.Initialise();
 
-            SystemContainer.ActivitySystem.Push(new GameplayActivity());
+            SystemContainer.ActivitySystem.Push(new GameplayActivity(IOSystem.Configuration));
 
             DisplayLoadingScreen("Loading...");
         }
@@ -100,23 +100,29 @@ namespace data_rogue_core
 
         private void OnRootConsoleRender(object sender, GameLoopEventArgs e)
         {
-            Stack<IActivity> renderStack = new Stack<IActivity>();
-
-            foreach (IActivity activity in SystemContainer.ActivitySystem.ActivityStack)
+            if (!_leaving)
             {
-                renderStack.Push(activity);
-                if (activity.RendersEntireSpace)
+                Stack<IActivity> renderStack = new Stack<IActivity>();
+
+                foreach (IActivity activity in SystemContainer.ActivitySystem.ActivityStack)
                 {
-                    break;
+                    renderStack.Push(activity);
+                    if (activity.RendersEntireSpace)
+                    {
+                        break;
+                    }
                 }
-            }
 
-            foreach (IActivity activity in renderStack)
-            {
-                activity.Render(SystemContainer);
-            }
+                foreach (IActivity activity in renderStack)
+                {
+                    if ((activity as GameplayActivity)?.Running ?? true)
+                    {
+                        activity.Render(SystemContainer);
+                    }
+                }
 
-            IOSystem.Draw();
+                IOSystem.Draw();
+            }
         }
 
         private void OnRootConsoleUpdate(object sender, GameLoopEventArgs e)
@@ -137,7 +143,7 @@ namespace data_rogue_core
 
         public void DisplayLoadingScreen(string text)
         {
-            SystemContainer.ActivitySystem.Push(new LoadingScreenActivity(text));
+            SystemContainer.ActivitySystem.Push(new LoadingScreenActivity(SystemContainer.ActivitySystem, text));
         }
 
         public void Quit()
