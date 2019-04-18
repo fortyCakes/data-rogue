@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using data_rogue_core.Activities;
 using data_rogue_core.Components;
+using data_rogue_core.Controls;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems.Interfaces;
@@ -9,18 +12,23 @@ using RLNET;
 
 namespace data_rogue_core.IOSystems
 {
-    public class RLNetAppearanceNameDisplayer : RLNetStatsRendererHelper
+    public class RLNetAppearanceNameDisplayer : RLNetControlRenderer
     {
-        public override string DisplayType => "AppearanceName";
-
-        protected override void DisplayInternal(RLConsole console, InfoDisplay display, ISystemContainer systemContainer, IEntity player, List<MapCoordinate> playerFov, ref int line)
+        public override Type DisplayType => typeof(AppearanceName);
+        protected override void DisplayInternal(RLConsole console, IDataRogueControl display, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
-            var appearance = player.Has<Appearance>() ? player.Get<Appearance>() : new Appearance {Color = Color.White, Glyph = '?'};
+            var y = display.Position.Y;
+            var entity = (display as IDataRogueInfoControl).Entity;
 
-            console.Print(1, line, appearance.Glyph.ToString(), appearance.Color.ToRLColor(), display.BackColor.ToRLColor());
-            console.Print(3, line, player.Get<Description>().Name, display.Color.ToRLColor(), display.BackColor.ToRLColor());
+            var appearance = entity.Has<Appearance>() ? entity.Get<Appearance>() : new Appearance { Color = Color.White, Glyph = '?' };
 
-            line++;
+            console.Print(1, y, appearance.Glyph.ToString(), appearance.Color.ToRLColor(), display.BackColor.ToRLColor());
+            console.Print(3, y, entity.Get<Description>().Name, display.Color.ToRLColor(), display.BackColor.ToRLColor());
+        }
+
+        protected override Size GetSizeInternal(RLConsole console, IDataRogueControl display, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        {
+            return new Size(20, 1);
         }
     }
 }

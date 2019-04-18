@@ -13,7 +13,7 @@ using System.Reflection;
 namespace data_rogue_core.IOSystems
 {
 
-    public class RLNetHoveredEntityDisplayer : RLNetStatsRendererHelper
+    public class RLNetHoveredEntityDisplayer : RLNetControlRenderer
     {
         public override string DisplayType => "HoveredEntity";
 

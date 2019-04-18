@@ -10,7 +10,7 @@ namespace data_rogue_core.IOSystems
 {
     public static class FOVHelper
     {
-        public static List<MapCoordinate> CalculatePlayerFov(ISystemContainer systemContainer)
+        public static FieldOfView CalculatePlayerFov(ISystemContainer systemContainer)
         {
             var cameraPosition = systemContainer.RendererSystem.CameraPosition;
 
@@ -25,7 +25,9 @@ namespace data_rogue_core.IOSystems
                 currentMap.SetSeen(coordinate);
             }
 
-            return playerFov;
+            return (FieldOfView)playerFov;
         }
     }
+
+    public class FieldOfView : List<MapCoordinate> { }
 }

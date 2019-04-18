@@ -225,7 +225,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
                 {ActivityType.StaticDisplay, new BLTTilesStaticTextRenderer(_spriteManager, TILE_SPACING)},
                 {ActivityType.Form, new BLTTilesFormRenderer(_spriteManager) },
                 {ActivityType.Targeting, new BLTTilesTargetingRenderer( _ioSystemConfiguration, _spriteManager) },
-                {ActivityType.Information, new BLTTilesUnifiedRenderer(_ioSystemConfiguration, controlRenderers, _spriteManager) }
+                {ActivityType.Information, new BLTTilesUnifiedRenderer(controlRenderers, _spriteManager) }
             };
 
             RendererFactory = new RendererFactory(renderers);

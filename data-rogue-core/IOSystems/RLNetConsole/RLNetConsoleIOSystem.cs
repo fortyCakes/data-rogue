@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using data_rogue_core.Activities;
 using data_rogue_core.Controls;
 using data_rogue_core.EntityEngineSystem;
@@ -72,14 +73,18 @@ namespace data_rogue_core.IOSystems.RLNetConsole
             _rootConsole.Update += UpdateHandler;
             _rootConsole.Render += RenderHandler;
 
+            var controlRenderers = RLNetControlRenderer.DefaultStatsDisplayers.OfType<IDataRogueControlRenderer>().ToList();
+
+            controlRenderers.AddRange(IOSystemConfiguration.AdditionalControlRenderers);
+
             var renderers = new Dictionary<ActivityType, IRenderer>()
             {
-                {ActivityType.Gameplay, new ConsoleGameplayRenderer(_rootConsole, IOSystemConfiguration)},
+                {ActivityType.Gameplay, new ConsoleGameplayRenderer(_rootConsole, IOSystemConfiguration, controlRenderers)},
                 {ActivityType.Menu, new ConsoleMenuRenderer(_rootConsole)},
                 {ActivityType.StaticDisplay, new ConsoleStaticTextRenderer(_rootConsole)},
                 {ActivityType.Form, new ConsoleFormRenderer(_rootConsole) },
                 {ActivityType.Targeting, new ConsoleTargetingRenderer(_rootConsole, IOSystemConfiguration) },
-                {ActivityType.Information, new ConsoleUnifiedRenderer(_rootConsole, IOSystemConfiguration) }
+                {ActivityType.Information, new ConsoleUnifiedRenderer(_rootConsole, IOSystemConfiguration, controlRenderers) }
             };
 
             RendererFactory = new RendererFactory(renderers);

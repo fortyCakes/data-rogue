@@ -52,7 +52,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             return new Size(10 * BLTTilesIOSystem.TILE_SPACING, height);
         }
 
-        protected void RenderEntityDetails(int x, int y, IDataRogueInfoControl display, IEntity hoveredEntity, ISpriteManager spriteManager)
+        protected static void RenderEntityDetails(int x, int y, IDataRogueInfoControl display, IEntity hoveredEntity, ISpriteManager spriteManager)
         {
             BLT.Font("");
             SpriteAppearance appearance = hoveredEntity.Has<SpriteAppearance>() ? hoveredEntity.Get<SpriteAppearance>() : new SpriteAppearance { Bottom = "unknown" };

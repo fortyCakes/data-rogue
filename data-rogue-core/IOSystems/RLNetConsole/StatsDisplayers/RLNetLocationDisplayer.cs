@@ -13,7 +13,7 @@ using System.Reflection;
 namespace data_rogue_core.IOSystems
 {
 
-    public class RLNetLocationDisplayer : RLNetStatsRendererHelper
+    public class RLNetLocationDisplayer : RLNetControlRenderer
     {
         public override string DisplayType => "Location";
 

@@ -17,13 +17,18 @@ namespace data_rogue_one
         {
             var theGame = new DataRogueGame();
 
-            //RLNetConsoleIOSystem ioSystem = GetRLNetIOSystem();
-
-            BLTTilesIOSystem ioSystem = new BLTTilesIOSystem(BLTTilesIOSystem.DefaultConfiguration);
+            IIOSystem ioSystem = 
+                GetRLNetIOSystem();
+                //GetBLTTilesIOSystem();
 
             var additionalComponents = typeof(Program).Assembly.GetTypes().Where(t => t.IsAssignableFrom(typeof(IEntityComponent))).ToList();
 
             theGame.Run("SEED_DEBUG", GameRules.Rules, ioSystem, null, additionalComponents);
+        }
+
+        private static BLTTilesIOSystem GetBLTTilesIOSystem()
+        {
+            return new BLTTilesIOSystem(BLTTilesIOSystem.DefaultConfiguration);
         }
 
         private static RLNetConsoleIOSystem GetRLNetIOSystem()

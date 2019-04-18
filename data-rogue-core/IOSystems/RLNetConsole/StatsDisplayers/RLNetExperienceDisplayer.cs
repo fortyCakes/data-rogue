@@ -8,7 +8,7 @@ using RLNET;
 
 namespace data_rogue_core.IOSystems
 {
-    internal class RLNetExperienceDisplayer : RLNetStatsRendererHelper
+    internal class RLNetExperienceDisplayer : RLNetControlRenderer
     {
         public override string DisplayType => "Experience";
         protected override void DisplayInternal(RLConsole console, InfoDisplay display, ISystemContainer systemContainer, IEntity player, List<MapCoordinate> playerFov, ref int line)

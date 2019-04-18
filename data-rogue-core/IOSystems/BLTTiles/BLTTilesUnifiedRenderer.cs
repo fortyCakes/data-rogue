@@ -14,17 +14,14 @@ namespace data_rogue_core.IOSystems.BLTTiles
 {
     public class BLTTilesUnifiedRenderer : IUnifiedRenderer
     {
-        private IOSystemConfiguration _ioSystemConfiguration;
         private int _height;
         private int _width;
         private readonly ISpriteManager _spriteManager;
         private readonly List<IDataRogueControlRenderer> _controlRenderers;
 
-        public BLTTilesUnifiedRenderer(IOSystemConfiguration ioSystemConfiguration, List<IDataRogueControlRenderer> controlRenderers, ISpriteManager spriteManager)
+        public BLTTilesUnifiedRenderer(List<IDataRogueControlRenderer> controlRenderers, ISpriteManager spriteManager)
         {
-            _ioSystemConfiguration = ioSystemConfiguration;
             _spriteManager = spriteManager;
-
             _controlRenderers = controlRenderers;
         }
 

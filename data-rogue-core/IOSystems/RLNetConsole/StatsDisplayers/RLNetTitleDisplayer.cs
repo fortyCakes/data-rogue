@@ -1,4 +1,4 @@
-﻿using data_rogue_core.Components;
+﻿using System;
 using data_rogue_core.Data;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Maps;
@@ -7,31 +7,26 @@ using data_rogue_core.Systems.Interfaces;
 using data_rogue_core.Utils;
 using RLNET;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Reflection;
+using data_rogue_core.Activities;
+using data_rogue_core.Controls;
 
 namespace data_rogue_core.IOSystems
 {
 
-    public class RLNetTitleDisplayer : RLNetStatsRendererHelper
+    public class RLNetTitleDisplayer : RLNetControlRenderer
     {
-        public override string DisplayType => "Title";
-
-        protected override void DisplayInternal(RLConsole console, InfoDisplay display, ISystemContainer systemContainer, IEntity player, List<MapCoordinate> playerFov, ref int line)
+        public override Type DisplayType => typeof(TitleControl);
+        protected override void DisplayInternal(RLConsole console, IDataRogueControl display, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
-            console.Print(1, line, " the Untitled", display.Color.ToRLColor(), display.BackColor.ToRLColor());
-            line++;
+            console.Print(display.Position.X, display.Position.Y, " the Untitled", display.Color.ToRLColor(), display.BackColor.ToRLColor());
         }
-    }
 
-    public class RLNetDescriptionDisplayer : RLNetStatsRendererHelper
-    {
-        public override string DisplayType => "Title";
-
-        protected override void DisplayInternal(RLConsole console, InfoDisplay display, ISystemContainer systemContainer, IEntity player, List<MapCoordinate> playerFov, ref int line)
+        protected override Size GetSizeInternal(RLConsole console, IDataRogueControl display, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
-            console.Print(1, line, player.Get<Description>().Detail, display.Color.ToRLColor(), display.BackColor.ToRLColor());
-            line++;
+            return new Size(20,1);
         }
     }
 }

@@ -20,10 +20,10 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
         private RLConsole backgroundConsole;
         public IOSystemConfiguration IOSystemConfiguration { get; }
 
-        private List<IDataRogueControlRenderer> statsDisplayers;
+        private List<IDataRogueControlRenderer> _controlRenderers;
         private char?[,] _lineChars;
 
-        public ConsoleGameplayRenderer(RLConsole console, IOSystemConfiguration ioSystemConfiguration) : base(console)
+        public ConsoleGameplayRenderer(RLConsole console, IOSystemConfiguration ioSystemConfiguration, List<IDataRogueControlRenderer> controlRenderers) : base(console)
         {
             var consoleWidth = Console.Width;
             var consoleHeight = Console.Height;
@@ -45,9 +45,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
             CalculateLines();
 
-            statsDisplayers = RLNetStatsRendererHelper.DefaultStatsDisplayers.OfType<IDataRogueControlRenderer>().ToList();
-
-            statsDisplayers.AddRange(ioSystemConfiguration.AdditionalControlRenderers);
+            _controlRenderers = controlRenderers;
         }
 
         public void Render(ISystemContainer systemContainer)
@@ -169,7 +167,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
         private void RenderStats(StatsConfiguration statsConfiguration, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
             //var statsConsole = Consoles[statsConfiguration];
 
             //statsConsole.Clear();

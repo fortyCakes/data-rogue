@@ -1,4 +1,5 @@
-﻿using data_rogue_core.Components;
+﻿using System;
+using data_rogue_core.Components;
 using data_rogue_core.Data;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Maps;
@@ -9,13 +10,14 @@ using RLNET;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using data_rogue_core.Controls;
 
 namespace data_rogue_core.IOSystems
 {
 
-    public class RLNetWealthDisplayer : RLNetStatsRendererHelper
+    public class RLNetWealthDisplayer : RLNetControlRenderer
     {
-        public override string DisplayType => "Wealth";
+        public override Type DisplayType => typeof(WealthControl);
 
         protected override void DisplayInternal(RLConsole console, InfoDisplay display, ISystemContainer systemContainer, IEntity player, List<MapCoordinate> playerFov, ref int line)
         {
