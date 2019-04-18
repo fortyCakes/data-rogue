@@ -4,7 +4,6 @@ using BearLib;
 using BLTWrapper;
 using data_rogue_core.Forms;
 using data_rogue_core.Forms.StaticForms;
-using data_rogue_core.Renderers;
 using data_rogue_core.Renderers.ConsoleRenderers;
 using data_rogue_core.Utils;
 

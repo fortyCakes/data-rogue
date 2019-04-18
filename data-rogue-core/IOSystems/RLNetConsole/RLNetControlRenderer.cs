@@ -9,29 +9,14 @@ using RLNET;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 
 namespace data_rogue_core.IOSystems
 {
 
     public abstract class RLNetControlRenderer : IDataRogueControlRenderer
     {
-        public static List<RLNetControlRenderer> DefaultStatsDisplayers => new List<RLNetControlRenderer>
-        {
-            new RLNetNameDisplayer(),
-            new RLNetTitleDisplayer(),
-            new RLNetTimeDisplayer(),
-            new RLNetLocationDisplayer(),
-            new RLNetHoveredEntityDisplayer(),
-            new RLNetSpacerDisplayer(),
-            new RLNetStatDisplayer(),
-            new RLNetStatInterpolationDisplayer(),
-            new RLNetVisibleEnemiesDisplayer(),
-            new RLNetWealthDisplayer(),
-            new RLNetComponentCounterDisplayer(),
-            new RLNetDescriptionDisplayer(),
-            new RLNetAppearanceNameDisplayer(),
-            new RLNetExperienceDisplayer()
-        };
+        public static List<IDataRogueControlRenderer> DefaultStatsDisplayers => ReflectiveEnumerator.GetEnumerableOfType<RLNetControlRenderer>().OfType<IDataRogueControlRenderer>().ToList();
 
         public abstract Type DisplayType { get; }
 
@@ -47,8 +32,8 @@ namespace data_rogue_core.IOSystems
             return GetSizeInternal(console, display, systemContainer, playerFov);
         }
 
-        protected abstract void DisplayInternal(RLConsole console, IDataRogueControl display, ISystemContainer systemContainer, List<MapCoordinate> playerFov);
-        protected abstract Size GetSizeInternal(RLConsole console, IDataRogueControl display, ISystemContainer systemContainer, List<MapCoordinate> playerFov);
+        protected abstract void DisplayInternal(RLConsole console, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov);
+        protected abstract Size GetSizeInternal(RLConsole console, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov);
 
         protected void PrintEntityDetails(IDataRogueInfoControl display, IEntity entity, RLConsole console)
         {

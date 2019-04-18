@@ -9,31 +9,13 @@ using data_rogue_core.Data;
 using System.Reflection;
 using System.Linq;
 using data_rogue_core.Activities;
+using data_rogue_core.Utils;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
     public abstract class BLTControlRenderer : IDataRogueControlRenderer
     {
-        public static List<IDataRogueControlRenderer> DefaultControlRenderers => new List<IDataRogueControlRenderer>
-        {
-            new BLTNameDisplayer(),
-            new BLTTitleDisplayer(),
-            new BLTTimeDisplayer(),
-            new BLTLocationDisplayer(),
-            new BLTHoveredEntityDisplayer(),
-            new BLTSpacerDisplayer(),
-            new BLTStatDisplayer(),
-            new BLTStatInterpolationDisplayer(),
-            new BLTWealthDisplayer(),
-            new BLTComponentCounterDisplayer(),
-            new BLTDescriptionDisplayer(),
-            new BLTLargeTextDisplayer(),
-            new BLTDescriptionDisplayer(),
-            new BLTAppearanceNameDisplayer(),
-            new BLTExperienceDisplayer(),
-            new BLTTextDisplayer(),
-            new BLTTilesBackgroundRenderer()
-        };
+        public static List<IDataRogueControlRenderer> DefaultControlRenderers => ReflectiveEnumerator.GetEnumerableOfType<BLTControlRenderer>().OfType<IDataRogueControlRenderer>().ToList();
 
         public abstract Type DisplayType { get; }
 

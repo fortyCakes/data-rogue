@@ -1,7 +1,5 @@
-﻿using data_rogue_core.Components;
-using data_rogue_core.IOSystems;
+﻿using data_rogue_core.IOSystems;
 using data_rogue_core.Maps;
-using RLNET;
 
 namespace data_rogue_core.Systems
 {

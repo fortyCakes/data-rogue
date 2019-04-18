@@ -3,10 +3,6 @@ using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems.Interfaces;
 using System;
-using data_rogue_core.Renderers;
-using RLNET;
-using System.Linq;
-using data_rogue_core.IOSystems;
 
 namespace data_rogue_core.Systems
 {

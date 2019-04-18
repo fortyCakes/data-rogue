@@ -21,5 +21,8 @@ namespace data_rogue_core.Controls
         public event PositionEventHandler Click;
     }
 
-    public class BackgroundControl : BaseControl { }
+    public class BackgroundControl : BaseControl
+    {
+        public bool FillUnusedSpace { get; set; } = false;
+    }
 }
