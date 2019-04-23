@@ -71,13 +71,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activities\DataRogueControl.cs" />
     <Compile Include="Activities\EndGameScreenActivity.cs" />
     <Compile Include="Activities\FormActivity.cs" />
     <Compile Include="Activities\IDataRogueControl.cs" />
     <Compile Include="Activities\PositionEventHandler.cs" />
     <Compile Include="Controls\BackgroundControl.cs" />
+    <Compile Include="Controls\LineControl.cs" />
     <Compile Include="Controls\MapControl.cs" />
+    <Compile Include="Controls\MenuSelectorControl.cs" />
     <Compile Include="Controls\MessageLogControl.cs" />
     <Compile Include="Controls\StatsControls.cs" />
     <Compile Include="Controls\BaseControl.cs" />
@@ -93,8 +94,11 @@
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTDescriptionDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTExperienceDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTLargeTextDisplayer.cs" />
+    <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTLineControlRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTLinesRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMapRenderer.cs" />
+    <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMenuItemRenderer.cs" />
+    <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMenuSelectorControlRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMessageLogRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTTextDisplayer.cs" />
     <Compile Include="IOSystems\FOVHelper.cs" />

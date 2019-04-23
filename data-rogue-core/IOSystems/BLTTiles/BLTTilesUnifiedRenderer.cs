@@ -41,8 +41,11 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
             foreach (var control in activity.GetLayout(systemContainer, _spriteManager, _controlRenderers, playerFov, _width, _height))
             {
-                IDataRogueControlRenderer statsDisplayer = _controlRenderers.Single(s => s.DisplayType == control.GetType());
-                statsDisplayer.Display(_spriteManager, control, systemContainer, playerFov);
+                if (control.Visible)
+                {
+                    IDataRogueControlRenderer statsDisplayer = _controlRenderers.Single(s => s.DisplayType == control.GetType());
+                    statsDisplayer.Display(_spriteManager, control, systemContainer, playerFov);
+                }
             }
         }
 

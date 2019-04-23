@@ -15,6 +15,8 @@ namespace data_rogue_core.Activities
         Color BackColor { get; }
 
         event PositionEventHandler Click;
+
+        bool Visible { get; set; }
     }
 
     public interface IDataRogueInfoControl : IDataRogueControl

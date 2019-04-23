@@ -221,7 +221,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             var renderers = new Dictionary<ActivityType, IRenderer>()
             {
                 {ActivityType.Gameplay, unifiedRenderer},
-                {ActivityType.Menu, new BLTTilesMenuRenderer(_spriteManager)},
+                {ActivityType.Menu, unifiedRenderer},
                 {ActivityType.StaticDisplay, unifiedRenderer},
                 {ActivityType.Form, new BLTTilesFormRenderer(_spriteManager) },
                 {ActivityType.Targeting, new BLTTilesTargetingRenderer( Configuration, _spriteManager) },
