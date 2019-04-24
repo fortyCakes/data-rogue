@@ -78,6 +78,7 @@
     <Compile Include="Controls\BackgroundControl.cs" />
     <Compile Include="Controls\LineControl.cs" />
     <Compile Include="Controls\MapControl.cs" />
+    <Compile Include="Controls\MenuActionsControl.cs" />
     <Compile Include="Controls\MenuSelectorControl.cs" />
     <Compile Include="Controls\MessageLogControl.cs" />
     <Compile Include="Controls\StatsControls.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTLineControlRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTLinesRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMapRenderer.cs" />
+    <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMenuActionRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMenuItemRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMenuSelectorControlRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMessageLogRenderer.cs" />
@@ -276,8 +278,13 @@
     <Compile Include="IOSystems\MouseData.cs" />
     <Compile Include="IOSystems\RLNetConsole\ConsoleUnifiedRenderer.cs" />
     <Compile Include="IOSystems\RLNetConsole\ControlRenderers\RLNetBackgroundRenderer.cs" />
+    <Compile Include="IOSystems\RLNetConsole\ControlRenderers\RLNetLargeTextRenderer.cs" />
+    <Compile Include="IOSystems\RLNetConsole\ControlRenderers\RLNetLineRenderer.cs" />
     <Compile Include="IOSystems\RLNetConsole\ControlRenderers\RLNetLinesDisplayer.cs" />
     <Compile Include="IOSystems\RLNetConsole\ControlRenderers\RLNetMapRenderer.cs" />
+    <Compile Include="IOSystems\RLNetConsole\ControlRenderers\RLNetMenuActionRenderer.cs" />
+    <Compile Include="IOSystems\RLNetConsole\ControlRenderers\RLNetMenuItemRenderer.cs" />
+    <Compile Include="IOSystems\RLNetConsole\ControlRenderers\RLNetMenuSelectorRenderer.cs" />
     <Compile Include="IOSystems\RLNetConsole\ControlRenderers\RLNetMessageLogRenderer.cs" />
     <Compile Include="IOSystems\RLNetConsole\IRenderingConfiguration.cs" />
     <Compile Include="IOSystems\RLNetConsole\RLNetConsoleIOSystem.cs" />

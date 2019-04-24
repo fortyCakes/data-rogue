@@ -63,24 +63,38 @@ namespace data_rogue_core.Activities
 
             var titleText = new LargeTextControl { Position = new Rectangle(Renderer.ActivityPadding.Left, y, 0, 0), Parameters = Menu.MenuName };
 
-            var titleSize = controlRenderers.Single(c => c.DisplayType == titleText.GetType()).GetSize(rendererHandle, titleText, systemContainer, playerFov);
+            var titleSize = GetSizeOf(systemContainer, rendererHandle, controlRenderers, playerFov, titleText);
 
             if (Menu.Centred)
             {
                 y = height / 2 - titleSize.Height;
                 titleText.Position = new Rectangle(width / 2 - titleSize.Width / 2, y, 0, 0);
+
+                
             }
             y += titleSize.Height;
 
-            var lineControl = new LineControl { Position = new Rectangle(titleText.Position.Left + titleSize.Width, y, titleSize.Width, titleSize.Height) };
-            Size lineSize = GetSizeOf(systemContainer, rendererHandle, controlRenderers, playerFov, titleText);
+            Rectangle linePosition;
+            if (Menu.Centred)
+            {
+                linePosition = new Rectangle(titleText.Position.X, y, titleSize.Width, 0);
+            }
+            else
+            {
+                linePosition = new Rectangle(0, y, width, 0);
+            }
+
+            var lineControl = new LineControl { Position = linePosition };
+            Size lineSize = GetSizeOf(systemContainer, rendererHandle, controlRenderers, playerFov, lineControl);
             y += lineSize.Height;
 
             yield return titleText;
             yield return lineControl;
 
-            // TODO: menu actions control
-            throw new NotImplementedException();
+            var menuActionsControl = new MenuActionsControl {AvailableActions = Menu.AvailableActions, SelectedAction = Menu.SelectedAction, SelectedColor = Color.Blue};
+            var actionsSize = GetSizeOf(systemContainer, rendererHandle, controlRenderers, playerFov, menuActionsControl);
+            menuActionsControl.Position = new Rectangle(width - Renderer.ActivityPadding.Right - actionsSize.Width, Renderer.ActivityPadding.Top, actionsSize.Width, actionsSize.Height);
+            yield return menuActionsControl;
 
             var availableHeight = height - y - Renderer.ActivityPadding.Bottom;
 
@@ -93,6 +107,9 @@ namespace data_rogue_core.Activities
             int pageCount = (itemCount - 1) / itemsPerPage + 1;
             int page = selectedIndex / itemsPerPage;
 
+            var leftSelector = new MenuSelectorControl { Direction = TileDirections.Left };
+            var selectorSize = GetSizeOf(systemContainer, rendererHandle, controlRenderers, playerFov, leftSelector);
+
             for (int i = 0; i < itemsPerPage; i++)
             {
                 var displayIndex = page * itemsPerPage + i;
@@ -101,7 +118,7 @@ namespace data_rogue_core.Activities
                     MenuItem item = Menu.MenuItems[displayIndex];
                     int itemY = y + i * itemHeight;
 
-                    int itemX = Renderer.ActivityPadding.Left;
+                    int itemX = Renderer.ActivityPadding.Left + selectorSize.Width * 2;
                     var size = GetSizeOf(systemContainer, rendererHandle, controlRenderers, playerFov, item);
 
                     if (Menu.Centred)

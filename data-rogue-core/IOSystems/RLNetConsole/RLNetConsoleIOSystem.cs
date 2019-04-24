@@ -82,7 +82,7 @@ namespace data_rogue_core.IOSystems.RLNetConsole
             var renderers = new Dictionary<ActivityType, IRenderer>()
             {
                 {ActivityType.Gameplay, unifiedRenderer},
-                {ActivityType.Menu, new ConsoleMenuRenderer(_rootConsole)},
+                {ActivityType.Menu, unifiedRenderer},
                 {ActivityType.StaticDisplay, unifiedRenderer},
                 {ActivityType.Form, new ConsoleFormRenderer(_rootConsole) },
                 {ActivityType.Targeting, new ConsoleTargetingRenderer(_rootConsole, Configuration) },

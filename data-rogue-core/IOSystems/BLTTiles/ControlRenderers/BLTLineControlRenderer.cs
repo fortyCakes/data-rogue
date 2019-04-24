@@ -18,7 +18,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
         protected override Size GetSizeInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
-            return new Size(0, 0);
+            return new Size(0, 2);
         }
     }
 }
