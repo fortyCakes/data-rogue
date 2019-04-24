@@ -32,8 +32,6 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
             RenderTitleBar(form);
 
-            RenderFormButtons(form);
-
             RenderFormControls(form);
 
             // throw new NotImplementedException();
@@ -133,22 +131,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             }
         }
 
-        private void RenderFormButtons(Form form)
-        {
-            var xCoordinate = 6;
 
-            foreach (FormButton flag in (FormButton[])Enum.GetValues(typeof(FormButton)))
-            {
-                if (flag == FormButton.None) continue;
-
-                if (form.Buttons.HasFlag(flag))
-                {
-                    var buttonSize = BLTButton.RenderButton(xCoordinate, _height - 12, flag.ToString(), form.FormSelection.SelectedItem == flag.ToString(), _spriteManager);
-
-                    xCoordinate += buttonSize.Width + 4;
-                }
-            }
-        }
 
         private void RenderTitleBar(Form form)
         {

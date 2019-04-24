@@ -129,25 +129,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 
         private void RenderSingleButton(ref int xCoordinate, string text, bool selected)
         {
-            var foreColor = selected ? RLColor.Cyan : RLColor.White;
-
-            Console.Set(xCoordinate, HEIGHT - 3, foreColor, RLColor.Black, 201);
-            Console.Set(xCoordinate, HEIGHT - 2, foreColor, RLColor.Black, 186);
-            Console.Set(xCoordinate, HEIGHT - 1, foreColor, RLColor.Black, 200);
-
-            Console.Set(xCoordinate + text.Length + 1, HEIGHT - 3, foreColor, RLColor.Black, 187);
-            Console.Set(xCoordinate + text.Length + 1, HEIGHT - 2, foreColor, RLColor.Black, 186);
-            Console.Set(xCoordinate + text.Length + 1, HEIGHT - 1, foreColor, RLColor.Black, 188);
-
-            for (int i = 0; i < text.Length; i++)
-            {
-                Console.Set(xCoordinate + i + 1, HEIGHT - 3, foreColor, RLColor.Black, 205);
-                Console.Set(xCoordinate + i + 1, HEIGHT - 1, foreColor, RLColor.Black, 205);
-            }
-
-            Console.Print(xCoordinate + 1, HEIGHT - 2, text, foreColor, RLColor.Black);
-
-            xCoordinate += text.Length + 3;
+            
         }
 
         private void RenderTitleBar(Form form)

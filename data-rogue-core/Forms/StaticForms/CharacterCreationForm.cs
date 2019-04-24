@@ -21,7 +21,7 @@ namespace data_rogue_core.Forms.StaticForms
 
         public static Dictionary<string, FormData> StaticFields => new Dictionary<string, FormData>
         {
-            {"Name", new FormData (FormDataType.Text, "Steve",1) },
+            {"Name", new TextFormData (FormDataType.Text, "Steve",1) },
             {"Class", new MultipleChoiceFormData("Warrior", 2, new List<object> { "Warrior", "Wizard", "Rogue" }) },
             {"Stats", new StatsFormData(3, 50, new List<FormStatInformation>
             {

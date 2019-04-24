@@ -2,7 +2,7 @@
 
 namespace data_rogue_core.Forms
 {
-    public class FormData
+    public abstract class FormData
     {
         public FormDataType FormDataType;
         public int Order;

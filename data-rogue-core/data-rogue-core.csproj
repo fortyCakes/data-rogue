@@ -76,6 +76,7 @@
     <Compile Include="Activities\IDataRogueControl.cs" />
     <Compile Include="Activities\PositionEventHandler.cs" />
     <Compile Include="Controls\BackgroundControl.cs" />
+    <Compile Include="Controls\ButtonControl.cs" />
     <Compile Include="Controls\LineControl.cs" />
     <Compile Include="Controls\MapControl.cs" />
     <Compile Include="Controls\MenuActionsControl.cs" />
@@ -89,9 +90,11 @@
     <Compile Include="EventSystem\Rules\Actions\ResolveRangedAttackAction.cs" />
     <Compile Include="EventSystem\Rules\Actions\SetIsActionFalseRule.cs" />
     <Compile Include="EventSystem\Rules\Actions\UseSkillAction.cs" />
+    <Compile Include="Forms\StaticForms\TextFormData.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTTilesUnifiedRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTAppearanceNameDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTControlRenderer.cs" />
+    <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTButtonRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTDescriptionDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTExperienceDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTLargeTextDisplayer.cs" />
@@ -148,7 +151,6 @@
     <Compile Include="EntityEngineSystem\SpriteSheetDataProvider.cs" />
     <Compile Include="EventSystem\Rules\OnAttackProcEnchantmentRule.cs" />
     <Compile Include="EventSystem\Rules\PlayerVictoryRule.cs" />
-    <Compile Include="IOSystems\BLTTiles\BLTButton.cs" />
     <Compile Include="IOSystems\GameLoopEventArgs.cs" />
     <Compile Include="IOSystems\GameLoopEventHandler.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTComponentCounterDisplayer.cs" />
@@ -165,7 +167,6 @@
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTTilesBackgroundRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTTilesFormRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTTilesIOSystem.cs" />
-    <Compile Include="IOSystems\BLTTiles\BLTTilesMenuRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTTilesTargetingRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTTimeDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTTitleDisplayer.cs" />
@@ -278,6 +279,7 @@
     <Compile Include="IOSystems\MouseData.cs" />
     <Compile Include="IOSystems\RLNetConsole\ConsoleUnifiedRenderer.cs" />
     <Compile Include="IOSystems\RLNetConsole\ControlRenderers\RLNetBackgroundRenderer.cs" />
+    <Compile Include="IOSystems\RLNetConsole\ControlRenderers\RLNetButtonRenderer.cs" />
     <Compile Include="IOSystems\RLNetConsole\ControlRenderers\RLNetLargeTextRenderer.cs" />
     <Compile Include="IOSystems\RLNetConsole\ControlRenderers\RLNetLineRenderer.cs" />
     <Compile Include="IOSystems\RLNetConsole\ControlRenderers\RLNetLinesDisplayer.cs" />
@@ -377,7 +379,6 @@
     <Compile Include="Utils\WordWrap.cs" />
     <Compile Include="Menus\StaticMenus\MainMenu.cs" />
     <Compile Include="IOSystems\IRendererFactory.cs" />
-    <Compile Include="IOSystems\RLNetConsole\ConsoleMenuRenderer.cs" />
     <Compile Include="Activities\MenuActivity.cs" />
     <Compile Include="Activities\GameplayActivity.cs" />
     <Compile Include="Activities\StaticTextActivity.cs" />

@@ -223,7 +223,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
                 {ActivityType.Gameplay, unifiedRenderer},
                 {ActivityType.Menu, unifiedRenderer},
                 {ActivityType.StaticDisplay, unifiedRenderer},
-                {ActivityType.Form, new BLTTilesFormRenderer(_spriteManager) },
+                {ActivityType.Form, unifiedRenderer },
                 {ActivityType.Targeting, new BLTTilesTargetingRenderer( Configuration, _spriteManager) },
                 {ActivityType.Information, unifiedRenderer }
             };
