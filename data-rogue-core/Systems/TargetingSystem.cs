@@ -37,7 +37,7 @@ namespace data_rogue_core.Systems
         {
             var playerPosition = _systemContainer.PositionSystem.CoordinateOf(_systemContainer.PlayerSystem.Player);
 
-            var activity = new TargetingActivity(data, callback, _systemContainer, playerPosition);
+            var activity = new TargetingActivity(data, callback, _systemContainer, playerPosition, _rendererSystem.IOSystemConfiguration);
 
             _activitySystem.Push(activity);
         }

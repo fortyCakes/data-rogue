@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace data_rogue_core.Forms.StaticForms
 {
-    public class StatsFormData : FormData
+    public class StatsFormData : SubSelectableFormData
     {
         public int MaxTotalStat;
 

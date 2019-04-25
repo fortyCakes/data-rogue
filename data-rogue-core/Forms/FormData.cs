@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using data_rogue_core.Controls;
+using System.Collections.Generic;
 
 namespace data_rogue_core.Forms
 {
-    public abstract class FormData
+    public abstract class FormData : BaseControl
     {
         public FormDataType FormDataType;
         public int Order;

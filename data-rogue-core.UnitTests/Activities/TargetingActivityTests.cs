@@ -23,11 +23,12 @@ namespace data_rogue_core.UnitTests.Activities
         private bool _callbackHappened;
         private MapCoordinate _callbackTarget;
         private IRendererFactory _rendererFactory;
-        private IGameplayRenderer _gameplayRenderer;
+        private IUnifiedRenderer _gameplayRenderer;
         private ActivityStack _activityStack;
         private IActivitySystem _activitySystem;
         private IPositionSystem _positionSystem;
         private ISystemContainer _systemContainer;
+        private IOSystemConfiguration _ioConfig;
 
         [SetUp]
         public void SetUp()
@@ -36,9 +37,10 @@ namespace data_rogue_core.UnitTests.Activities
             _callbackTarget = null;
             _callbackHappened = false;
 
-            _gameplayRenderer = Substitute.For<IGameplayRenderer>();
+            _gameplayRenderer = Substitute.For<IUnifiedRenderer>();
             _activityStack = new ActivityStack(null);
-            _activityStack.Push(new GameplayActivity() { Renderer = _gameplayRenderer });
+            _ioConfig = new IOSystemConfiguration();
+            _activityStack.Push(new GameplayActivity(_ioConfig) { Renderer = _gameplayRenderer });
             _activitySystem = Substitute.For<IActivitySystem>();
             _activitySystem.ActivityStack.Returns(_activityStack);
             _positionSystem = Substitute.For<IPositionSystem>();
@@ -46,7 +48,7 @@ namespace data_rogue_core.UnitTests.Activities
             _systemContainer.ActivitySystem.Returns(_activitySystem);
             _systemContainer.PositionSystem.Returns(_positionSystem);
 
-            _targetingActivity = new TargetingActivity(_targetingData, _callback, _systemContainer, new MapCoordinate("Map", 0, 0));
+            _targetingActivity = new TargetingActivity(_targetingData, _callback, _systemContainer, new MapCoordinate("Map", 0, 0), _ioConfig);
             _activityStack.Push(_targetingActivity);
         }
 
@@ -93,7 +95,7 @@ namespace data_rogue_core.UnitTests.Activities
             _positionSystem.EntitiesAt(Arg.Any<MapCoordinate>()).ReturnsForAnyArgs(entityList);
             _systemContainer.PositionSystem.Returns(_positionSystem);
 
-            _targetingActivity = new TargetingActivity(_targetingData, _callback, _systemContainer, new MapCoordinate("Map", 0, 0));
+            _targetingActivity = new TargetingActivity(_targetingData, _callback, _systemContainer, new MapCoordinate("Map", 0, 0), _ioConfig);
             _targetingActivity.Complete();
 
             _callbackHappened.Should().BeTrue();
@@ -145,12 +147,12 @@ namespace data_rogue_core.UnitTests.Activities
         [Test]
         public void Initialise_SetsRenderer_ForUseInRenderCall()
         {
-            var renderer = Substitute.For<ITargetingRenderer>();
+            var renderer = Substitute.For<IUnifiedRenderer>();
             _targetingActivity.Initialise(renderer);
 
             _targetingActivity.Render(_systemContainer);
 
-            renderer.Received(1).Render(_systemContainer, _targetingActivity.TargetingActivityData);
+            renderer.Received(1).Render(_systemContainer, _targetingActivity);
         }
 
         [Test]

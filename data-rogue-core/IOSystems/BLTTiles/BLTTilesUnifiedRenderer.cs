@@ -32,7 +32,10 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
         public void Render(ISystemContainer systemContainer, IActivity activity)
         {
-            BLT.Clear();
+            if (activity.RendersEntireSpace)
+            {
+                BLT.Clear();
+            }
 
             var playerFov = systemContainer.ActivitySystem.GameplayActivity.Running ? FOVHelper.CalculatePlayerFov(systemContainer) : null;
 

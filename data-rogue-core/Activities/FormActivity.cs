@@ -13,6 +13,7 @@ using System.Drawing;
 using System.Linq;
 using data_rogue_core.Utils;
 using System;
+using data_rogue_core.Forms.StaticForms;
 
 namespace data_rogue_core.Activities
 {
@@ -87,10 +88,36 @@ namespace data_rogue_core.Activities
                 buttonX += size.Width + Renderer.ActivityPadding.Left;
             }
 
-            foreach(var formData in Form.Fields)
+            foreach(var kvp in Form.Fields)
             {
-                // TODO set position
-                throw new NotImplementedException();
+                var nameText = new TextControl { Parameters = kvp.Key + ": " };
+                var nameSize = GetSizeOf(systemContainer, rendererHandle, controlRenderers, playerFov, nameText);
+
+                var x = Renderer.ActivityPadding.Left;
+
+                nameText.Position = new Rectangle(x, y, nameSize.Width, nameSize.Height);
+                yield return nameText;
+
+                x += nameSize.Width;
+                
+                var formData = kvp.Value;
+                var size = GetSizeOf(systemContainer, rendererHandle, controlRenderers, playerFov, formData);
+
+                formData.Position = new Rectangle(x, y, size.Width, size.Height);
+
+                formData.IsFocused = Form.FormSelection.SelectedItem == kvp.Key;
+
+                y += size.Height;
+
+                SubSelectableFormData subData;
+                if ((subData = formData as SubSelectableFormData) != null)
+                {
+                    subData.SubSelection = Form.FormSelection.SubItem;
+                }
+
+                yield return formData;
+
+                y += Renderer.ActivityPadding.Top;
             }
         }
 

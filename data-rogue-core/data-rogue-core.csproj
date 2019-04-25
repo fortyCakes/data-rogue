@@ -85,12 +85,14 @@
     <Compile Include="Controls\StatsControls.cs" />
     <Compile Include="Controls\BaseControl.cs" />
     <Compile Include="Controls\BaseStatsControl.cs" />
+    <Compile Include="Controls\TargetingOverlayControl.cs" />
     <Compile Include="EventSystem\Rules\Actions\FollowPathAction.cs" />
     <Compile Include="Behaviours\FollowPathBehaviour.cs" />
     <Compile Include="EventSystem\Rules\Actions\ResolveRangedAttackAction.cs" />
     <Compile Include="EventSystem\Rules\Actions\SetIsActionFalseRule.cs" />
     <Compile Include="EventSystem\Rules\Actions\UseSkillAction.cs" />
     <Compile Include="Forms\StaticForms\TextFormData.cs" />
+    <Compile Include="Forms\SubSelectableFormData.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTTilesUnifiedRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTAppearanceNameDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTControlRenderer.cs" />
@@ -105,7 +107,11 @@
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMenuItemRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMenuSelectorControlRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMessageLogRenderer.cs" />
+    <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMultipleChoiceFormDataRenderer.cs" />
+    <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTStatsFormRenderer.cs" />
+    <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTTargetingOverlayRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTTextDisplayer.cs" />
+    <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTTextFormDataRenderer.cs" />
     <Compile Include="IOSystems\FOVHelper.cs" />
     <Compile Include="IOSystems\IDataRogueControl.cs" />
     <Compile Include="Activities\InformationActivity.cs" />
@@ -162,10 +168,8 @@
     <Compile Include="IOSystems\BLTTiles\BLTSpriteManager.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTStatDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTStatInterpolationDisplayer.cs" />
-    <Compile Include="IOSystems\BLTTiles\BLTTextBox.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTTileDirectionHelper.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTTilesBackgroundRenderer.cs" />
-    <Compile Include="IOSystems\BLTTiles\BLTTilesFormRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTTilesIOSystem.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTTilesTargetingRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTTimeDisplayer.cs" />
