@@ -3,7 +3,6 @@ using data_rogue_core.Maps;
 using data_rogue_core.Maps.Generators;
 using System.Collections.Generic;
 using data_rogue_core.Systems.Interfaces;
-using data_rogue_core.EntityEngineSystem;
 using System.Linq;
 using System;
 

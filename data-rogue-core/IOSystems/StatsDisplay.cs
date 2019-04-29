@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace data_rogue_core.IOSystems
 {
-    public class StatsDisplay
+    public class InfoDisplay
     {
-        public string DisplayType;
+        public Type ControlType;
 
         public string Parameters;
 

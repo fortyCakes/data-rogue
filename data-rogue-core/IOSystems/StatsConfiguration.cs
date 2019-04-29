@@ -7,6 +7,6 @@ namespace data_rogue_core.IOSystems
     public class StatsConfiguration : IRendereringConfiguration
     {
         public Rectangle Position { get; set; }
-        public List<StatsDisplay> Displays { get; set; } = new List<StatsDisplay>();
+        public List<InfoDisplay> Displays { get; set; } = new List<InfoDisplay>();
     }
 }

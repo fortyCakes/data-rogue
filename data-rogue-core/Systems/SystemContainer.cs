@@ -8,6 +8,7 @@ using System.Text;
 using data_rogue_core.Utils;
 using data_rogue_core.Renderers;
 using System.Collections.Generic;
+using data_rogue_core.Activities;
 
 namespace data_rogue_core.Systems
 {
@@ -40,12 +41,12 @@ namespace data_rogue_core.Systems
         private readonly IEntityDataProvider _keyBindingsDataProvider;
         private readonly IEntityDataProvider _worldEntityDataProvider;
         private readonly IEntityDataProvider _playerEntityDataProvider;
-        private readonly IRendererFactory _rendererFactory;
+        private readonly IUnifiedRenderer _renderer;
         private readonly IList<Type> _additionalComponentTypes;
 
         public SystemContainer(
             EntityDataProviders entityDataProviderContainer = null,
-            IRendererFactory rendererFactory = null,
+            IUnifiedRenderer renderer = null,
             IList<Type> additionalComponentTypes = null
             )
         {
@@ -58,7 +59,7 @@ namespace data_rogue_core.Systems
             _keyBindingsDataProvider = entityDataProviderContainer.KeyBindingsDataProvider ?? new NullDataProvider();
             _worldEntityDataProvider = entityDataProviderContainer.WorldEntityDataProvider ?? new NullDataProvider();
             _playerEntityDataProvider = entityDataProviderContainer.PlayerEntityDataProvider ?? new NullDataProvider();
-            _rendererFactory = rendererFactory;
+            _renderer = renderer;
             _additionalComponentTypes = additionalComponentTypes;
         }
 
@@ -68,12 +69,12 @@ namespace data_rogue_core.Systems
             EventSystem = new EventSystem.EventSystem();
 
             MessageSystem = new MessageSystem();
-            ActivitySystem = new ActivitySystem(_rendererFactory);
+            ActivitySystem = new ActivitySystem();
             PlayerSystem = new PlayerSystem(ActivitySystem);
             MapSystem = new MapSystem();
 
 
-            RendererSystem = new RendererSystem(PlayerSystem);
+            RendererSystem = new RendererSystem(PlayerSystem, _renderer);
 
             EntityEngine = new EntityEngine(_prototypeEntityDataProvider, _additionalComponentTypes);
 

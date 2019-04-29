@@ -9,6 +9,10 @@ using data_rogue_core.Utils;
 using System.Linq;
 using data_rogue_core.Components;
 using data_rogue_core.EntityEngineSystem;
+using System.Collections.Generic;
+using data_rogue_core.Controls;
+using System;
+using System.Drawing;
 
 namespace data_rogue_core.Activities
 {
@@ -20,17 +24,16 @@ namespace data_rogue_core.Activities
         public bool Running { get; set; } = false;
 
         public bool RendersEntireSpace => true;
-        public IGameplayRenderer Renderer { get; set; }
         private IPathfindingAlgorithm _pathfindingAlgorithm = new AStarPathfindingAlgorithm();
+        private readonly IOSystemConfiguration _ioSystemConfiguration;
 
-        public void Render(ISystemContainer systemContainer)
+        public GameplayActivity(IOSystemConfiguration ioSystemConfiguration)
         {
-            Renderer.Render(systemContainer);
+            _ioSystemConfiguration = ioSystemConfiguration;
         }
 
-        public void Initialise(IRenderer renderer)
+        public void Initialise()
         {
-            Renderer = (IGameplayRenderer)renderer;
         }
 
         public void HandleAction(ISystemContainer systemContainer, ActionEventData action)
@@ -43,12 +46,12 @@ namespace data_rogue_core.Activities
 
         public void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard)
         {
-            //throw new System.NotImplementedException();
+
         }
 
         public void HandleMouse(ISystemContainer systemContainer, MouseData mouse)
         {
-            MapCoordinate mapCoordinate = Renderer.GetMapCoordinateFromMousePosition(systemContainer.RendererSystem.CameraPosition, mouse.X, mouse.Y);
+            MapCoordinate mapCoordinate = systemContainer.RendererSystem.Renderer.GetMapCoordinateFromMousePosition(systemContainer.RendererSystem.CameraPosition, mouse.X, mouse.Y);
             systemContainer.ControlSystem.HoveredCoordinate = mapCoordinate;
             var player = systemContainer.PlayerSystem.Player;
 
@@ -87,6 +90,49 @@ namespace data_rogue_core.Activities
 
                     systemContainer.EventSystem.Try(EventType.Action, player, action);
                 }
+            }
+        }
+
+
+
+        public IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
+        {
+            yield return new LinesControl { Position = new Rectangle(0, 0, width, height), Configuration = _ioSystemConfiguration };
+
+            foreach (var mapConfiguration in _ioSystemConfiguration.MapConfigurations)
+            {
+                yield return new MapControl { Position = mapConfiguration.Position };
+            }
+
+            var player = systemContainer.PlayerSystem.Player;
+
+            foreach (var statsConfiguration in _ioSystemConfiguration.StatsConfigurations)
+            {
+                var x = statsConfiguration.Position.X + renderer.ActivityPadding.Left;
+                var y = statsConfiguration.Position.Y + renderer.ActivityPadding.Top;
+
+                foreach (var display in statsConfiguration.Displays)
+                {
+                    var controlType = display.ControlType;
+
+                    var control = (IDataRogueInfoControl)Activator.CreateInstance(controlType);
+                    control.SetData(player, display);
+                    control.Position = new Rectangle(control.Position.X, control.Position.Y, statsConfiguration.Position.Width, 0);
+
+                    var controlRenderer = controlRenderers.Single(s => s.DisplayType == control.GetType());
+                    var size = controlRenderer.GetSize(rendererHandle, control, systemContainer, playerFov);
+
+                    control.Position = new Rectangle(x, y, size.Width, size.Height);
+
+                    y += size.Height;
+
+                    yield return control;
+                }
+            }
+
+            foreach(var messageConfiguration in _ioSystemConfiguration.MessageConfigurations)
+            {
+                yield return new MessageLogControl { Position = messageConfiguration.Position, NumberOfMessages = messageConfiguration.NumberOfMessages };
             }
         }
     }

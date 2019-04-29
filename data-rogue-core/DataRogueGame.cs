@@ -33,7 +33,7 @@ namespace data_rogue_core
 
             InitialiseIOSystem(entityDataProviders);
 
-            CreateAndRegisterSystems(entityDataProviders, additionalComponentTypes, IOSystem.RendererFactory, seed);
+            CreateAndRegisterSystems(entityDataProviders, additionalComponentTypes, IOSystem.Renderer, seed, IOSystem.Configuration);
 
             InitialiseState();
 
@@ -64,7 +64,7 @@ namespace data_rogue_core
         {
             SystemContainer.ActivitySystem.Initialise();
 
-            SystemContainer.ActivitySystem.Push(new GameplayActivity());
+            SystemContainer.ActivitySystem.Push(new GameplayActivity(IOSystem.Configuration));
 
             DisplayLoadingScreen("Loading...");
         }
@@ -84,12 +84,13 @@ namespace data_rogue_core
         }
 
 
-        private void CreateAndRegisterSystems(EntityDataProviders entityDataProviders, IList<Type> additionalComponentTypes, IRendererFactory rendererFactory, string seed)
+        private void CreateAndRegisterSystems(EntityDataProviders entityDataProviders, IList<Type> additionalComponentTypes, IUnifiedRenderer renderer, string seed, IOSystemConfiguration ioSystemConfiguration)
         {
-            SystemContainer = new SystemContainer(entityDataProviders, rendererFactory, additionalComponentTypes);
+            SystemContainer = new SystemContainer(entityDataProviders, renderer, additionalComponentTypes);
 
             SystemContainer.CreateSystems(seed);
 
+            SystemContainer.RendererSystem.IOSystemConfiguration = ioSystemConfiguration;
             SystemContainer.ActivitySystem.QuitAction = Quit;
         }
 
@@ -100,23 +101,29 @@ namespace data_rogue_core
 
         private void OnRootConsoleRender(object sender, GameLoopEventArgs e)
         {
-            Stack<IActivity> renderStack = new Stack<IActivity>();
-
-            foreach (IActivity activity in SystemContainer.ActivitySystem.ActivityStack)
+            if (!_leaving)
             {
-                renderStack.Push(activity);
-                if (activity.RendersEntireSpace)
+                Stack<IActivity> renderStack = new Stack<IActivity>();
+
+                foreach (IActivity activity in SystemContainer.ActivitySystem.ActivityStack)
                 {
-                    break;
+                    renderStack.Push(activity);
+                    if (activity.RendersEntireSpace)
+                    {
+                        break;
+                    }
                 }
-            }
 
-            foreach (IActivity activity in renderStack)
-            {
-                activity.Render(SystemContainer);
-            }
+                foreach (IActivity activity in renderStack)
+                {
+                    if ((activity as GameplayActivity)?.Running ?? true)
+                    {
+                        SystemContainer.RendererSystem.Renderer.Render(SystemContainer, activity);
+                    }
+                }
 
-            IOSystem.Draw();
+                IOSystem.Draw();
+            }
         }
 
         private void OnRootConsoleUpdate(object sender, GameLoopEventArgs e)
@@ -137,7 +144,7 @@ namespace data_rogue_core
 
         public void DisplayLoadingScreen(string text)
         {
-            SystemContainer.ActivitySystem.Push(new LoadingScreenActivity(text));
+            SystemContainer.ActivitySystem.Push(new LoadingScreenActivity(SystemContainer.ActivitySystem, text));
         }
 
         public void Quit()

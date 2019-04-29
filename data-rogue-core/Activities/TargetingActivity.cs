@@ -1,4 +1,5 @@
 ﻿using data_rogue_core.Components;
+using data_rogue_core.Controls;
 using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.IOSystems;
 using data_rogue_core.Maps;
@@ -7,6 +8,7 @@ using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 
 namespace data_rogue_core.Activities
@@ -24,16 +26,14 @@ namespace data_rogue_core.Activities
 
         private readonly IActivitySystem _activitySystem;
 
-        public ITargetingRenderer Renderer { get; set; }
-
         public TargetingActivityData TargetingActivityData;
         private MapCoordinate _targetFrom;
         private ISystemContainer _systemContainer;
         private IPositionSystem _positionSystem;
-        private IGameplayRenderer _gameplayRenderer;
         private HashSet<MapCoordinate> _targetableCells;
+        private IOSystemConfiguration _ioSystemConfiguration;
 
-        public TargetingActivity(TargetingData targetingData, Action<MapCoordinate> callback, ISystemContainer systemContainer, MapCoordinate targetFrom)
+        public TargetingActivity(TargetingData targetingData, Action<MapCoordinate> callback, ISystemContainer systemContainer, MapCoordinate targetFrom, IOSystemConfiguration ioSystemConfiguration)
         {
             _activitySystem = systemContainer.ActivitySystem;
             _systemContainer = systemContainer;
@@ -47,11 +47,11 @@ namespace data_rogue_core.Activities
             };
 
             _targetFrom = targetFrom;
-            _gameplayRenderer = GetGameplayRenderer();
 
             _targetableCells = targetingData.TargetableCellsFrom(_targetFrom);
 
             PickInitialTarget();
+            _ioSystemConfiguration = ioSystemConfiguration;
         }
 
         private void PickInitialTarget()
@@ -74,14 +74,8 @@ namespace data_rogue_core.Activities
             }
         }
 
-        public void Initialise(IRenderer renderer)
+        public void Initialise()
         {
-            Renderer = (ITargetingRenderer)renderer;
-        }
-
-        public void Render(ISystemContainer systemContainer)
-        {
-            Renderer.Render(systemContainer, TargetingActivityData);
         }
 
         public void Complete()
@@ -101,7 +95,7 @@ namespace data_rogue_core.Activities
                 var x = mouse.X;
                 var y = mouse.Y;
 
-                var hoveredLocation = _gameplayRenderer.GetMapCoordinateFromMousePosition(_systemContainer.RendererSystem.CameraPosition, x, y);
+                var hoveredLocation = systemContainer.RendererSystem.Renderer.GetMapCoordinateFromMousePosition(_systemContainer.RendererSystem.CameraPosition, x, y);
 
                 if (hoveredLocation != null)
                 {
@@ -146,6 +140,14 @@ namespace data_rogue_core.Activities
             }
         }
 
+        public IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
+        {
+            foreach (var mapConfiguration in _ioSystemConfiguration.MapConfigurations)
+            {
+                yield return new TargetingOverlayControl { Position = mapConfiguration.Position, TargetingActivityData = TargetingActivityData };
+            }
+        }
+
         private void CloseActivity()
         {
             _activitySystem.RemoveActivity(this);
@@ -160,15 +162,6 @@ namespace data_rogue_core.Activities
                 TargetingActivityData.CurrentTarget = newTarget;
             }
         }
-
-        private IGameplayRenderer GetGameplayRenderer()
-        {
-            GameplayActivity gameplayActivity = (GameplayActivity)_activitySystem.ActivityStack.Single(a => a.Type == ActivityType.Gameplay);
-
-            return gameplayActivity.Renderer;
-        }
-
-        
     }
 
     public class TargetingActivityData

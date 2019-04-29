@@ -1,6 +1,8 @@
-﻿namespace data_rogue_core.Menus
+﻿using data_rogue_core.Controls;
+
+namespace data_rogue_core.Menus
 {
-    public class MenuItem
+    public class MenuItem : BaseControl
     {
         public string Text { get; private set; }
         public bool Enabled { get; private set; }

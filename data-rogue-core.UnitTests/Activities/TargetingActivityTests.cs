@@ -22,12 +22,12 @@ namespace data_rogue_core.UnitTests.Activities
         private TargetingActivity _targetingActivity;
         private bool _callbackHappened;
         private MapCoordinate _callbackTarget;
-        private IRendererFactory _rendererFactory;
-        private IGameplayRenderer _gameplayRenderer;
+        private IUnifiedRenderer _renderer;
         private ActivityStack _activityStack;
         private IActivitySystem _activitySystem;
         private IPositionSystem _positionSystem;
         private ISystemContainer _systemContainer;
+        private IOSystemConfiguration _ioConfig;
 
         [SetUp]
         public void SetUp()
@@ -36,17 +36,22 @@ namespace data_rogue_core.UnitTests.Activities
             _callbackTarget = null;
             _callbackHappened = false;
 
-            _gameplayRenderer = Substitute.For<IGameplayRenderer>();
-            _activityStack = new ActivityStack(null);
-            _activityStack.Push(new GameplayActivity() { Renderer = _gameplayRenderer });
+            _renderer = Substitute.For<IUnifiedRenderer>();
+            var rendererSystem = Substitute.For<IRendererSystem>();
+            rendererSystem.Renderer.Returns(_renderer);
+
+            _activityStack = new ActivityStack();
+            _ioConfig = new IOSystemConfiguration();
+            _activityStack.Push(new GameplayActivity(_ioConfig));
             _activitySystem = Substitute.For<IActivitySystem>();
             _activitySystem.ActivityStack.Returns(_activityStack);
             _positionSystem = Substitute.For<IPositionSystem>();
             _systemContainer = Substitute.For<ISystemContainer>();
             _systemContainer.ActivitySystem.Returns(_activitySystem);
             _systemContainer.PositionSystem.Returns(_positionSystem);
+            _systemContainer.RendererSystem.Returns(rendererSystem);
 
-            _targetingActivity = new TargetingActivity(_targetingData, _callback, _systemContainer, new MapCoordinate("Map", 0, 0));
+            _targetingActivity = new TargetingActivity(_targetingData, _callback, _systemContainer, new MapCoordinate("Map", 0, 0), _ioConfig);
             _activityStack.Push(_targetingActivity);
         }
 
@@ -93,7 +98,7 @@ namespace data_rogue_core.UnitTests.Activities
             _positionSystem.EntitiesAt(Arg.Any<MapCoordinate>()).ReturnsForAnyArgs(entityList);
             _systemContainer.PositionSystem.Returns(_positionSystem);
 
-            _targetingActivity = new TargetingActivity(_targetingData, _callback, _systemContainer, new MapCoordinate("Map", 0, 0));
+            _targetingActivity = new TargetingActivity(_targetingData, _callback, _systemContainer, new MapCoordinate("Map", 0, 0), _ioConfig);
             _targetingActivity.Complete();
 
             _callbackHappened.Should().BeTrue();
@@ -143,17 +148,6 @@ namespace data_rogue_core.UnitTests.Activities
         }
 
         [Test]
-        public void Initialise_SetsRenderer_ForUseInRenderCall()
-        {
-            var renderer = Substitute.For<ITargetingRenderer>();
-            _targetingActivity.Initialise(renderer);
-
-            _targetingActivity.Render(_systemContainer);
-
-            renderer.Received(1).Render(_systemContainer, _targetingActivity.TargetingActivityData);
-        }
-
-        [Test]
         public void HandleMouse_NotActive_DoesNotChangeTarget()
         {
             var mouse = new MouseData() { MouseActive = false };
@@ -169,7 +163,7 @@ namespace data_rogue_core.UnitTests.Activities
         {
             var mouse = new MouseData() { MouseActive = true };
 
-            _gameplayRenderer
+            _renderer
                 .GetMapCoordinateFromMousePosition(Arg.Any<MapCoordinate>(), Arg.Any<int>(), Arg.Any<int>())
                 .Returns(new MapCoordinate("Map", 1000, 1000));
 
@@ -184,7 +178,7 @@ namespace data_rogue_core.UnitTests.Activities
         {
             var mouse = new MouseData() { MouseActive = true };
 
-            _gameplayRenderer
+            _renderer
                 .GetMapCoordinateFromMousePosition(Arg.Any<MapCoordinate>(), Arg.Any<int>(), Arg.Any<int>())
                 .Returns((MapCoordinate)null);
 
@@ -199,7 +193,7 @@ namespace data_rogue_core.UnitTests.Activities
         {
             var mouse = new MouseData() { MouseActive = true };
 
-            _gameplayRenderer
+            _renderer
                 .GetMapCoordinateFromMousePosition(Arg.Any<MapCoordinate>(), Arg.Any<int>(), Arg.Any<int>())
                 .Returns(new MapCoordinate("Map", 2, 2));
 
@@ -214,7 +208,7 @@ namespace data_rogue_core.UnitTests.Activities
         {
             var mouse = new MouseData() { MouseActive = true, IsLeftClick = true };
 
-            _gameplayRenderer
+            _renderer
                 .GetMapCoordinateFromMousePosition(Arg.Any<MapCoordinate>(), Arg.Any<int>(), Arg.Any<int>())
                 .Returns(new MapCoordinate("Map", 2, 2));
 

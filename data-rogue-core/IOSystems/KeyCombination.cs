@@ -1,7 +1,6 @@
 ﻿using System;
 using data_rogue_core.EntityEngineSystem;
 using OpenTK.Input;
-using RLNET;
 
 namespace data_rogue_core.IOSystems
 {

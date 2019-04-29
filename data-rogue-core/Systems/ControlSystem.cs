@@ -64,7 +64,7 @@ namespace data_rogue_core.Systems
             {
                 IActivity currentActivity = _activitySystem.Peek();
 
-                if (currentActivity.Running)
+                if ((currentActivity as GameplayActivity)?.Running ?? true)
                 {
                     if (actionData != null)
                     {
@@ -152,20 +152,12 @@ namespace data_rogue_core.Systems
 
             if (_activitySystem.Peek() is GameplayActivity activity && _systemContainer.PlayerSystem.Player != null)
             {
-                var gameplayRenderer = GetGameplayRenderer();
-
-                var hoveredLocation = gameplayRenderer.GetMapCoordinateFromMousePosition(_systemContainer.RendererSystem.CameraPosition, x, y);
+                IUnifiedRenderer renderer = _systemContainer.RendererSystem.Renderer;
+                var hoveredLocation = renderer.GetMapCoordinateFromMousePosition(_systemContainer.RendererSystem.CameraPosition, x, y);
 
                 SetHoveredLocation(hoveredLocation);
             }
                     
-        }
-
-        private IGameplayRenderer GetGameplayRenderer()
-        {
-            GameplayActivity gameplayActivity = (GameplayActivity)_activitySystem.ActivityStack.Single(a => a.Type == ActivityType.Gameplay);
-
-            return gameplayActivity.Renderer;
         }
 
         private void SetHoveredLocation(MapCoordinate mapCoordinate)
