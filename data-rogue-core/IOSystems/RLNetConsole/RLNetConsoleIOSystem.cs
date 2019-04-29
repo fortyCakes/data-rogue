@@ -108,14 +108,16 @@ namespace data_rogue_core.IOSystems.RLNetConsole
         public MouseData GetMouseData()
         {
             var rlMouse = _rootConsole.Mouse;
+            var leftClick = rlMouse.GetLeftClick();
+            var rightClick = rlMouse.GetRightClick();
 
             var mouse = new MouseData
             {
-                IsLeftClick = rlMouse.GetLeftClick(),
-                IsRightClick = rlMouse.GetRightClick(),
+                IsLeftClick = leftClick,
+                IsRightClick = rightClick,
                 X = rlMouse.X,
                 Y = rlMouse.Y,
-                MouseActive = (rlMouse.GetLeftClick() || rlMouse.GetLeftClick() || _lastMouse?.X != rlMouse.X || _lastMouse?.Y != rlMouse.Y)
+                MouseActive = (leftClick || rightClick || _lastMouse?.X != rlMouse.X || _lastMouse?.Y != rlMouse.Y)
             };
 
             _lastMouse = mouse;
