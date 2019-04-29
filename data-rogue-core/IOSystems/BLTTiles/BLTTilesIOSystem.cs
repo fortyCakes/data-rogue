@@ -66,7 +66,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             Configuration = ioSystemConfiguration;
         }
 
-        public IRendererFactory RendererFactory { get; private set; }
+        public IUnifiedRenderer Renderer { get; private set; }
 
         public void Close()
         {
@@ -217,18 +217,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
             controlRenderers.AddRange(Configuration.AdditionalControlRenderers);
 
-            BLTTilesUnifiedRenderer unifiedRenderer = new BLTTilesUnifiedRenderer(controlRenderers, _spriteManager, Configuration);
-            var renderers = new Dictionary<ActivityType, IRenderer>()
-            {
-                {ActivityType.Gameplay, unifiedRenderer},
-                {ActivityType.Menu, unifiedRenderer},
-                {ActivityType.StaticDisplay, unifiedRenderer},
-                {ActivityType.Form, unifiedRenderer },
-                {ActivityType.Targeting, unifiedRenderer },
-                {ActivityType.Information, unifiedRenderer }
-            };
-
-            RendererFactory = new RendererFactory(renderers);
+            Renderer = new BLTTilesUnifiedRenderer(controlRenderers, _spriteManager, Configuration);
 
             BLT.Refresh();
         }

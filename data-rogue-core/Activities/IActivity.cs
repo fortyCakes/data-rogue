@@ -14,14 +14,12 @@ namespace data_rogue_core.Activities
         ActivityType Type { get; }
         object Data { get; }
         bool RendersEntireSpace { get; }
-
-        [Obsolete]
-        void Render(ISystemContainer systemContainer);
-        void Initialise(IRenderer renderer);
+        
+        void Initialise();
 
         void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard);
         void HandleMouse(ISystemContainer systemContainer, MouseData mouse);
         void HandleAction(ISystemContainer systemContainer, ActionEventData action);
-        IEnumerable<IDataRogueControl> GetLayout(ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height);
+        IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height);
     }
 }

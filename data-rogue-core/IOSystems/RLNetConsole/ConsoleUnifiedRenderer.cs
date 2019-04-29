@@ -27,14 +27,17 @@ namespace data_rogue_core.IOSystems.RLNetConsole
 
         public void Render(ISystemContainer systemContainer, IActivity activity)
         {
-            _console.Clear();
+            if (activity.RendersEntireSpace)
+            {
+                _console.Clear();
+            }
 
             var playerFov = systemContainer.ActivitySystem.GameplayActivity.Running ? FOVHelper.CalculatePlayerFov(systemContainer) : null;
 
             var height = _console.Height;
             var width = _console.Width;
 
-            foreach (var control in activity.GetLayout(systemContainer, _console, _controlRenderers, playerFov, width, height))
+            foreach (var control in activity.GetLayout(this, systemContainer, _console, _controlRenderers, playerFov, width, height))
             {
                 IDataRogueControlRenderer controlRenderer = _controlRenderers.Single(s => s.DisplayType == control.GetType());
                 controlRenderer.Display(_console, control, systemContainer, playerFov);

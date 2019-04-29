@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using data_rogue_core.Activities;
 using data_rogue_core.Components;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.IOSystems.BLTTiles;
@@ -12,7 +13,7 @@ namespace data_rogue_core.IOSystems
 {
     public interface IIOSystem
     {
-        IRendererFactory RendererFactory { get; }
+        IUnifiedRenderer Renderer { get; }
         IOSystemConfiguration Configuration { get; }
 
         void Initialise(GameLoopEventHandler onUpdate, GameLoopEventHandler onRender, IEntityDataProvider graphicsDataProvider);

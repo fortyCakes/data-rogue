@@ -18,7 +18,6 @@ namespace data_rogue_core.Activities
         public bool RendersEntireSpace => false;
 
         public string Text { get; set; }
-        public IUnifiedRenderer Renderer { get; private set; }
         public bool CloseOnKeyPress { get; }
 
         private readonly IActivitySystem _activitySystem;
@@ -30,14 +29,8 @@ namespace data_rogue_core.Activities
             _activitySystem = activitySystem;
         }
 
-        public void Render(ISystemContainer systemContainer)
+        public void Initialise()
         {
-            Renderer.Render(systemContainer, this);
-        }
-
-        public void Initialise(IRenderer renderer)
-        {
-            Renderer = (IUnifiedRenderer)renderer;
         }
         
         public void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard)
@@ -61,7 +54,7 @@ namespace data_rogue_core.Activities
             //throw new System.NotImplementedException();
         }
 
-        public IEnumerable<IDataRogueControl> GetLayout(ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
+        public IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
         {
             yield return new BackgroundControl { Position = new Rectangle(0, 0, width, height) };
 

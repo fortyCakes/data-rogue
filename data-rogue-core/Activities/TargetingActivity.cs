@@ -26,13 +26,10 @@ namespace data_rogue_core.Activities
 
         private readonly IActivitySystem _activitySystem;
 
-        public IUnifiedRenderer Renderer { get; set; }
-
         public TargetingActivityData TargetingActivityData;
         private MapCoordinate _targetFrom;
         private ISystemContainer _systemContainer;
         private IPositionSystem _positionSystem;
-        private IUnifiedRenderer _gameplayRenderer;
         private HashSet<MapCoordinate> _targetableCells;
         private IOSystemConfiguration _ioSystemConfiguration;
 
@@ -50,7 +47,6 @@ namespace data_rogue_core.Activities
             };
 
             _targetFrom = targetFrom;
-            _gameplayRenderer = GetGameplayRenderer();
 
             _targetableCells = targetingData.TargetableCellsFrom(_targetFrom);
 
@@ -78,14 +74,8 @@ namespace data_rogue_core.Activities
             }
         }
 
-        public void Initialise(IRenderer renderer)
+        public void Initialise()
         {
-            Renderer = (IUnifiedRenderer)renderer;
-        }
-
-        public void Render(ISystemContainer systemContainer)
-        {
-            Renderer.Render(systemContainer, this);
         }
 
         public void Complete()
@@ -105,7 +95,7 @@ namespace data_rogue_core.Activities
                 var x = mouse.X;
                 var y = mouse.Y;
 
-                var hoveredLocation = _gameplayRenderer.GetMapCoordinateFromMousePosition(_systemContainer.RendererSystem.CameraPosition, x, y);
+                var hoveredLocation = systemContainer.RendererSystem.Renderer.GetMapCoordinateFromMousePosition(_systemContainer.RendererSystem.CameraPosition, x, y);
 
                 if (hoveredLocation != null)
                 {
@@ -150,7 +140,7 @@ namespace data_rogue_core.Activities
             }
         }
 
-        public IEnumerable<IDataRogueControl> GetLayout(ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
+        public IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
         {
             foreach (var mapConfiguration in _ioSystemConfiguration.MapConfigurations)
             {
@@ -171,13 +161,6 @@ namespace data_rogue_core.Activities
             {
                 TargetingActivityData.CurrentTarget = newTarget;
             }
-        }
-
-        private IUnifiedRenderer GetGameplayRenderer()
-        {
-            GameplayActivity gameplayActivity = (GameplayActivity)_activitySystem.ActivityStack.Single(a => a.Type == ActivityType.Gameplay);
-
-            return gameplayActivity.Renderer;
         }
     }
 

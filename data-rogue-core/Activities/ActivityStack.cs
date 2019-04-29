@@ -6,22 +6,18 @@ namespace data_rogue_core.Activities
 {
     public class ActivityStack : Stack<IActivity>
     {
-        private readonly IRendererFactory _rendererFactory;
-
-        public ActivityStack(IRendererFactory rendererFactory)
+        public ActivityStack()
         {
-            _rendererFactory = rendererFactory;
         }
 
-        public ActivityStack(IRendererFactory rendererFactory, List<IActivity> list) : base(list)
+        public ActivityStack(List<IActivity> list) : base(list)
         {
-            _rendererFactory = rendererFactory;
         }
 
         internal void PushAndInitialise(IActivity activity)
         {
             Push(activity);
-            activity.Initialise(_rendererFactory.GetRendererFor(activity.Type));
+            activity.Initialise();
         }
     }
 }

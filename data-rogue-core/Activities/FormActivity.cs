@@ -26,7 +26,6 @@ namespace data_rogue_core.Activities
         public bool Running => true;
 
         public Form Form { get; set; }
-        public IUnifiedRenderer Renderer { get; private set; }
 
         public FormActivity(Form form)
         {
@@ -34,14 +33,8 @@ namespace data_rogue_core.Activities
             form.Activity = this;
         }
 
-        public void Render(ISystemContainer systemContainer)
+        public void Initialise()
         {
-            Renderer.Render(systemContainer, this);
-        }
-
-        public void Initialise(IRenderer renderer)
-        {
-            Renderer = (IUnifiedRenderer)renderer;
         }
 
         public void HandleMouse(ISystemContainer systemContainer, MouseData mouse)
@@ -59,13 +52,13 @@ namespace data_rogue_core.Activities
             Form.HandleAction(action);
         }
 
-        public IEnumerable<IDataRogueControl> GetLayout(ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
+        public IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
         {
             yield return new BackgroundControl { Position = new Rectangle(0, 0, width, height) };
 
-            var y = Renderer.ActivityPadding.Top;
+            var y = renderer.ActivityPadding.Top;
 
-            var titleText = new LargeTextControl { Position = new Rectangle(Renderer.ActivityPadding.Left, y, 0, 0), Parameters = Form.Title };
+            var titleText = new LargeTextControl { Position = new Rectangle(renderer.ActivityPadding.Left, y, 0, 0), Parameters = Form.Title };
             var titleSize = GetSizeOf(systemContainer, rendererHandle, controlRenderers, playerFov, titleText);
             y += titleSize.Height;
             
@@ -76,16 +69,16 @@ namespace data_rogue_core.Activities
             yield return titleText;
             yield return lineControl;
 
-            var buttonX = Renderer.ActivityPadding.Left;
+            var buttonX = renderer.ActivityPadding.Left;
             foreach (var button in Form.Buttons.GetFlags())
             {
                 var control = new ButtonControl { Text = button.ToString(), IsFocused = Form.FormSelection.SelectedItem == button.ToString()};
                 var size = GetSizeOf(systemContainer, rendererHandle, controlRenderers, playerFov, control);
 
-                control.Position = new Rectangle(buttonX, height - Renderer.ActivityPadding.Top - size.Height, size.Width, size.Height);
+                control.Position = new Rectangle(buttonX, height - renderer.ActivityPadding.Top - size.Height, size.Width, size.Height);
                 yield return control;
 
-                buttonX += size.Width + Renderer.ActivityPadding.Left;
+                buttonX += size.Width + renderer.ActivityPadding.Left;
             }
 
             foreach(var kvp in Form.Fields)
@@ -93,7 +86,7 @@ namespace data_rogue_core.Activities
                 var nameText = new TextControl { Parameters = kvp.Key + ": " };
                 var nameSize = GetSizeOf(systemContainer, rendererHandle, controlRenderers, playerFov, nameText);
 
-                var x = Renderer.ActivityPadding.Left;
+                var x = renderer.ActivityPadding.Left;
 
                 nameText.Position = new Rectangle(x, y, nameSize.Width, nameSize.Height);
                 yield return nameText;
@@ -117,7 +110,7 @@ namespace data_rogue_core.Activities
 
                 yield return formData;
 
-                y += Renderer.ActivityPadding.Top;
+                y += renderer.ActivityPadding.Top;
             }
         }
 

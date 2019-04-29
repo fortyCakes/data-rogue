@@ -24,7 +24,6 @@ namespace data_rogue_core.Activities
         public bool Running { get; set; } = false;
 
         public bool RendersEntireSpace => true;
-        public IUnifiedRenderer Renderer { get; set; }
         private IPathfindingAlgorithm _pathfindingAlgorithm = new AStarPathfindingAlgorithm();
         private readonly IOSystemConfiguration _ioSystemConfiguration;
 
@@ -33,14 +32,8 @@ namespace data_rogue_core.Activities
             _ioSystemConfiguration = ioSystemConfiguration;
         }
 
-        public void Render(ISystemContainer systemContainer)
+        public void Initialise()
         {
-            Renderer.Render(systemContainer, this);
-        }
-
-        public void Initialise(IRenderer renderer)
-        {
-            Renderer = (IUnifiedRenderer)renderer;
         }
 
         public void HandleAction(ISystemContainer systemContainer, ActionEventData action)
@@ -58,7 +51,7 @@ namespace data_rogue_core.Activities
 
         public void HandleMouse(ISystemContainer systemContainer, MouseData mouse)
         {
-            MapCoordinate mapCoordinate = Renderer.GetMapCoordinateFromMousePosition(systemContainer.RendererSystem.CameraPosition, mouse.X, mouse.Y);
+            MapCoordinate mapCoordinate = systemContainer.RendererSystem.Renderer.GetMapCoordinateFromMousePosition(systemContainer.RendererSystem.CameraPosition, mouse.X, mouse.Y);
             systemContainer.ControlSystem.HoveredCoordinate = mapCoordinate;
             var player = systemContainer.PlayerSystem.Player;
 
@@ -102,7 +95,7 @@ namespace data_rogue_core.Activities
 
 
 
-        public IEnumerable<IDataRogueControl> GetLayout(ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
+        public IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
         {
             yield return new LinesControl { Position = new Rectangle(0, 0, width, height), Configuration = _ioSystemConfiguration };
 
@@ -115,8 +108,8 @@ namespace data_rogue_core.Activities
 
             foreach (var statsConfiguration in _ioSystemConfiguration.StatsConfigurations)
             {
-                var x = statsConfiguration.Position.X + Renderer.ActivityPadding.Left;
-                var y = statsConfiguration.Position.Y + Renderer.ActivityPadding.Top;
+                var x = statsConfiguration.Position.X + renderer.ActivityPadding.Left;
+                var y = statsConfiguration.Position.Y + renderer.ActivityPadding.Top;
 
                 foreach (var display in statsConfiguration.Displays)
                 {
@@ -126,8 +119,8 @@ namespace data_rogue_core.Activities
                     control.SetData(player, display);
                     control.Position = new Rectangle(control.Position.X, control.Position.Y, statsConfiguration.Position.Width, 0);
 
-                    var renderer = controlRenderers.Single(s => s.DisplayType == control.GetType());
-                    var size = renderer.GetSize(rendererHandle, control, systemContainer, playerFov);
+                    var controlRenderer = controlRenderers.Single(s => s.DisplayType == control.GetType());
+                    var size = controlRenderer.GetSize(rendererHandle, control, systemContainer, playerFov);
 
                     control.Position = new Rectangle(x, y, size.Width, size.Height);
 

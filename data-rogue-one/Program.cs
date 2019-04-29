@@ -18,8 +18,8 @@ namespace data_rogue_one
             var theGame = new DataRogueGame();
 
             IIOSystem ioSystem = 
-                //GetRLNetIOSystem();
-                GetBLTTilesIOSystem();
+                GetRLNetIOSystem();
+                //GetBLTTilesIOSystem();
 
             var additionalComponents = typeof(Program).Assembly.GetTypes().Where(t => t.IsAssignableFrom(typeof(IEntityComponent))).ToList();
 

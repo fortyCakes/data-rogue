@@ -8,18 +8,11 @@ namespace data_rogue_core.Systems
 {
     public class ActivitySystem: IActivitySystem
     {
-        public IRendererFactory _rendererFactory;
-
-        public ActivitySystem(IRendererFactory rendererFactory)
-        {
-            _rendererFactory = rendererFactory;
-        }
-
         public ActivityStack ActivityStack { get; private set; }
 
         public void Initialise()
         {
-            ActivityStack = new ActivityStack(_rendererFactory);
+            ActivityStack = new ActivityStack();
         }
 
         public IActivity Peek() => ActivityStack.Peek();
@@ -34,7 +27,7 @@ namespace data_rogue_core.Systems
             list.Remove(activity);
             list.Reverse();
 
-            ActivityStack = new ActivityStack(_rendererFactory, list);
+            ActivityStack = new ActivityStack(list);
         }
 
         public Action QuitAction { get; set; }

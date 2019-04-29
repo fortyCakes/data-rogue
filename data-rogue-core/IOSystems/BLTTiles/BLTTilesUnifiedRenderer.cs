@@ -42,7 +42,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             _height = BLT.State(BLT.TK_HEIGHT);
             _width = BLT.State(BLT.TK_WIDTH);
 
-            foreach (var control in activity.GetLayout(systemContainer, _spriteManager, _controlRenderers, playerFov, _width, _height))
+            foreach (var control in activity.GetLayout(this, systemContainer, _spriteManager, _controlRenderers, playerFov, _width, _height))
             {
                 if (control.Visible)
                 {

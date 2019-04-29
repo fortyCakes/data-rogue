@@ -33,7 +33,7 @@ namespace data_rogue_core
 
             InitialiseIOSystem(entityDataProviders);
 
-            CreateAndRegisterSystems(entityDataProviders, additionalComponentTypes, IOSystem.RendererFactory, seed, IOSystem.Configuration);
+            CreateAndRegisterSystems(entityDataProviders, additionalComponentTypes, IOSystem.Renderer, seed, IOSystem.Configuration);
 
             InitialiseState();
 
@@ -84,9 +84,9 @@ namespace data_rogue_core
         }
 
 
-        private void CreateAndRegisterSystems(EntityDataProviders entityDataProviders, IList<Type> additionalComponentTypes, IRendererFactory rendererFactory, string seed, IOSystemConfiguration ioSystemConfiguration)
+        private void CreateAndRegisterSystems(EntityDataProviders entityDataProviders, IList<Type> additionalComponentTypes, IUnifiedRenderer renderer, string seed, IOSystemConfiguration ioSystemConfiguration)
         {
-            SystemContainer = new SystemContainer(entityDataProviders, rendererFactory, additionalComponentTypes);
+            SystemContainer = new SystemContainer(entityDataProviders, renderer, additionalComponentTypes);
 
             SystemContainer.CreateSystems(seed);
 
@@ -118,7 +118,7 @@ namespace data_rogue_core
                 {
                     if ((activity as GameplayActivity)?.Running ?? true)
                     {
-                        activity.Render(SystemContainer);
+                        SystemContainer.RendererSystem.Renderer.Render(SystemContainer, activity);
                     }
                 }
 

@@ -28,18 +28,6 @@ namespace data_rogue_core.Activities
             Menu.Activity = this;
         }
 
-        public IUnifiedRenderer Renderer { get; set; }
-
-        public void Render(ISystemContainer systemContainer)
-        {
-            Renderer.Render(systemContainer, this);
-        }
-
-        public void Initialise(IRenderer renderer)
-        {
-            Renderer = (IUnifiedRenderer)renderer;
-        }
-
         public void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard)
         {
             //throw new System.NotImplementedException();
@@ -55,13 +43,13 @@ namespace data_rogue_core.Activities
             Menu.HandleAction(action);
         }
 
-        public IEnumerable<IDataRogueControl> GetLayout(ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
+        public IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
         {
             yield return new BackgroundControl { Position = new Rectangle(0, 0, width, height) };
 
-            var y = Renderer.ActivityPadding.Top;
+            var y = renderer.ActivityPadding.Top;
 
-            var titleText = new LargeTextControl { Position = new Rectangle(Renderer.ActivityPadding.Left, y, 0, 0), Parameters = Menu.MenuName };
+            var titleText = new LargeTextControl { Position = new Rectangle(renderer.ActivityPadding.Left, y, 0, 0), Parameters = Menu.MenuName };
 
             var titleSize = GetSizeOf(systemContainer, rendererHandle, controlRenderers, playerFov, titleText);
 
@@ -93,10 +81,10 @@ namespace data_rogue_core.Activities
 
             var menuActionsControl = new MenuActionsControl {AvailableActions = Menu.AvailableActions, SelectedAction = Menu.SelectedAction, SelectedColor = Color.Blue};
             var actionsSize = GetSizeOf(systemContainer, rendererHandle, controlRenderers, playerFov, menuActionsControl);
-            menuActionsControl.Position = new Rectangle(width - Renderer.ActivityPadding.Right - actionsSize.Width, Renderer.ActivityPadding.Top, actionsSize.Width, actionsSize.Height);
+            menuActionsControl.Position = new Rectangle(width - renderer.ActivityPadding.Right - actionsSize.Width, renderer.ActivityPadding.Top, actionsSize.Width, actionsSize.Height);
             yield return menuActionsControl;
 
-            var availableHeight = height - y - Renderer.ActivityPadding.Bottom;
+            var availableHeight = height - y - renderer.ActivityPadding.Bottom;
 
             var testSize = GetSizeOf(systemContainer, rendererHandle, controlRenderers, playerFov, Menu.MenuItems.First());
             var itemHeight = testSize.Height;
@@ -118,7 +106,7 @@ namespace data_rogue_core.Activities
                     MenuItem item = Menu.MenuItems[displayIndex];
                     int itemY = y + i * itemHeight;
 
-                    int itemX = Renderer.ActivityPadding.Left + selectorSize.Width * 2;
+                    int itemX = renderer.ActivityPadding.Left + selectorSize.Width * 2;
                     var size = GetSizeOf(systemContainer, rendererHandle, controlRenderers, playerFov, item);
 
                     if (Menu.Centred)
@@ -145,7 +133,7 @@ namespace data_rogue_core.Activities
             if (pageCount > 1)
             {
                 y += itemHeight;
-                yield return new TextControl { Position = new Rectangle(Renderer.ActivityPadding.Left, y, 0, 0), Parameters = $"(page {page} of {pageCount})" };
+                yield return new TextControl { Position = new Rectangle(renderer.ActivityPadding.Left, y, 0, 0), Parameters = $"(page {page} of {pageCount})" };
             }
         }
 
@@ -164,6 +152,10 @@ namespace data_rogue_core.Activities
         private static Size GetSizeOf(ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, IDataRogueControl control)
         {
             return controlRenderers.Single(c => c.DisplayType == control.GetType()).GetSize(rendererHandle, control, systemContainer, playerFov);
+        }
+
+        public void Initialise()
+        {
         }
     }
 }

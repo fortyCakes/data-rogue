@@ -48,7 +48,7 @@ namespace data_rogue_core.IOSystems.RLNetConsole
         private GameLoopEventHandler _onUpdate;
         private GameLoopEventHandler _onRender;
 
-        public IRendererFactory RendererFactory { get; private set; }
+        public IUnifiedRenderer Renderer { get; private set; }
         public IOSystemConfiguration Configuration { get; set; }
 
         public void RenderHandler(object sender, UpdateEventArgs e)
@@ -77,19 +77,7 @@ namespace data_rogue_core.IOSystems.RLNetConsole
 
             controlRenderers.AddRange(Configuration.AdditionalControlRenderers);
 
-            var unifiedRenderer = new ConsoleUnifiedRenderer(_rootConsole, Configuration, controlRenderers);
-
-            var renderers = new Dictionary<ActivityType, IRenderer>()
-            {
-                {ActivityType.Gameplay, unifiedRenderer},
-                {ActivityType.Menu, unifiedRenderer},
-                {ActivityType.StaticDisplay, unifiedRenderer},
-                {ActivityType.Form, new ConsoleFormRenderer(_rootConsole) },
-                {ActivityType.Targeting, new ConsoleTargetingRenderer(_rootConsole, Configuration) },
-                {ActivityType.Information, unifiedRenderer}
-            };
-
-            RendererFactory = new RendererFactory(renderers);
+            Renderer = new ConsoleUnifiedRenderer(_rootConsole, Configuration, controlRenderers);
         }
 
         public void Draw()

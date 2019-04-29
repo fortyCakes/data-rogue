@@ -35,12 +35,7 @@ namespace data_rogue_core.Activities
             _activitySystem = activitySystem;
         }
 
-        public void Render(ISystemContainer systemContainer)
-        {
-            Renderer.Render(systemContainer, this);
-        }
-
-        public IEnumerable<IDataRogueControl> GetLayout(ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
+        public IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
         {
             yield return new BackgroundControl { Position = new Rectangle(0, 0, width, height) };
 
@@ -56,8 +51,8 @@ namespace data_rogue_core.Activities
                     var control = (IDataRogueInfoControl)Activator.CreateInstance(controlType);
                     control.SetData(Entity, display);
 
-                    var renderer = controlRenderers.Single(s => s.DisplayType == control.GetType());
-                    var size = renderer.GetSize(rendererHandle, control, systemContainer, playerFov);
+                    var controlRenderer = controlRenderers.Single(s => s.DisplayType == control.GetType());
+                    var size = controlRenderer.GetSize(rendererHandle, control, systemContainer, playerFov);
 
                     control.Position = new Rectangle(x, y, size.Width, size.Height);
 
@@ -68,9 +63,8 @@ namespace data_rogue_core.Activities
             }
         }
 
-        public void Initialise(IRenderer renderer)
+        public void Initialise()
         {
-            Renderer = (IUnifiedRenderer)renderer;
         }
         
         public void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard)
@@ -91,7 +85,6 @@ namespace data_rogue_core.Activities
 
         public void HandleAction(ISystemContainer systemContainer, ActionEventData action)
         {
-            //throw new System.NotImplementedException();
         }
 
         private void Close()
