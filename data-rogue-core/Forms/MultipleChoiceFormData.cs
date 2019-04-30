@@ -4,7 +4,7 @@ namespace data_rogue_core.Forms
 {
     public class MultipleChoiceFormData : FormData
     {
-        public MultipleChoiceFormData(object value, int order, List<object> validValues) : base(FormDataType.MultipleChoice, value, order)
+        public MultipleChoiceFormData(string name, object value, int order, List<object> validValues) : base(name, FormDataType.MultipleChoice, value, order)
         {
             ValidValues = validValues;
         }

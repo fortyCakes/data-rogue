@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using data_rogue_core.Activities;
 
 namespace data_rogue_core.Forms.StaticForms
 {
@@ -16,7 +17,7 @@ namespace data_rogue_core.Forms.StaticForms
             }
         }
 
-        public StatsFormData(int order, int maxTotalStat, List<FormStatInformation> stats) : base(FormDataType.StatArray, stats, order)
+        public StatsFormData(string name, int order, int maxTotalStat, List<FormStatInformation> stats) : base(name, FormDataType.StatArray, stats, order)
         {
             HasSubFields = true;
             MaxTotalStat = maxTotalStat;

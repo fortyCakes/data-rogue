@@ -13,11 +13,11 @@ using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.Activities
 {
-    public class MenuActivity : IActivity
+    public class MenuActivity : BaseActivity
     {
-        public ActivityType Type => ActivityType.Menu;
-        public object Data => Menu;
-        public bool RendersEntireSpace => true;
+        public override ActivityType Type => ActivityType.Menu;
+        public override object Data => Menu;
+        public override bool RendersEntireSpace => true;
         public Menu Menu { get; }
 
         public bool Running => true;
@@ -28,22 +28,52 @@ namespace data_rogue_core.Activities
             Menu.Activity = this;
         }
 
-        public void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard)
+        public override void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard)
         {
             //throw new System.NotImplementedException();
         }
 
-        public void HandleMouse(ISystemContainer systemContainer, MouseData mouse)
+        public override void HandleMouse(ISystemContainer systemContainer, MouseData mouse)
         {
-            //throw new System.NotImplementedException();
+            if (mouse.MouseActive)
+            {
+                var controlsUnderMouse = MouseControlHelper.GetControlsUnderMouse(mouse, Controls);
+                controlsUnderMouse = controlsUnderMouse.Where(c => c.GetType() != typeof(BackgroundControl));
+
+                if (controlsUnderMouse.Count() == 1)
+                {
+                    var control = controlsUnderMouse.Single();
+
+                    if (control is MenuItem)
+                    {
+                        Menu.SelectedItem = control as MenuItem;
+                    }
+
+
+                    if (mouse.IsLeftClick)
+                    {
+                        if (control is MenuItem)
+                        {
+                            Menu.Select();
+                        }
+
+                        if (control is MenuActionsControl)
+                        {
+                            Menu.NextAction();
+                        }
+                    }
+                }
+
+            }
+
         }
 
-        public void HandleAction(ISystemContainer systemContainer, ActionEventData action)
+        public override void HandleAction(ISystemContainer systemContainer, ActionEventData action)
         {
             Menu.HandleAction(action);
         }
 
-        public IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
+        public override IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
         {
             yield return new BackgroundControl { Position = new Rectangle(0, 0, width, height) };
 

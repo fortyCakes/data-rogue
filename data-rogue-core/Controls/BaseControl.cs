@@ -18,7 +18,11 @@ namespace data_rogue_core.Controls
         public Color Color { get; protected set; } = Color.White;
         public Color BackColor { get; protected set; } = Color.Black;
 
-        public event PositionEventHandler Click;
+        public virtual void Click(object sender, PositionEventHandlerArgs eventArgs)
+        {
+            OnClick?.Invoke(sender, eventArgs);
+        }
+        public event PositionEventHandler OnClick;
 
         public bool Visible { get; set; } = true;
     }

@@ -2,7 +2,7 @@
 {
     public class TextFormData : FormData
     {
-        public TextFormData(FormDataType formDataType, object value, int order) : base(formDataType, value, order)
+        public TextFormData(string name, FormDataType formDataType, object value, int order) : base(name, formDataType, value, order)
         {
         }
     }

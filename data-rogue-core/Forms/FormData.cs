@@ -5,15 +5,17 @@ namespace data_rogue_core.Forms
 {
     public abstract class FormData : BaseControl
     {
+        public string Name { get; set; }
         public FormDataType FormDataType;
         public int Order;
         public object Value;
 
-        public FormData(FormDataType formDataType, object value, int order)
+        public FormData(string name, FormDataType formDataType, object value, int order)
         {
             FormDataType = formDataType;
             Value = value;
             Order = order;
+            Name = name;
         }
 
         public bool HasSubFields { get; internal set; } = false;

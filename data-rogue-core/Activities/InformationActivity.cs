@@ -14,14 +14,13 @@ using System.Windows.Forms;
 
 namespace data_rogue_core.Activities
 {
-    public class InformationActivity : IActivity
+    public class InformationActivity : BaseActivity
     {
-        public ActivityType Type => ActivityType.Information;
-        public object Data => StatsConfigs;
-        public bool RendersEntireSpace { get; set; }
+        public override ActivityType Type => ActivityType.Information;
+        public override object Data => StatsConfigs;
+        public override bool RendersEntireSpace { get; }
         public IEntity Entity { get; }
         public List<StatsConfiguration> StatsConfigs { get; set; }
-        public IUnifiedRenderer Renderer { get; private set; }
         public bool CloseOnKeyPress { get; }
 
         private readonly IActivitySystem _activitySystem;
@@ -35,14 +34,14 @@ namespace data_rogue_core.Activities
             _activitySystem = activitySystem;
         }
 
-        public IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
+        public override IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
         {
             yield return new BackgroundControl { Position = new Rectangle(0, 0, width, height) };
 
             foreach(var config in StatsConfigs)
             {
-                var x = config.Position.X + Renderer.ActivityPadding.Left;
-                var y = config.Position.Y + Renderer.ActivityPadding.Top;
+                var x = config.Position.X + renderer.ActivityPadding.Left;
+                var y = config.Position.Y + renderer.ActivityPadding.Top;
 
                 foreach(var display in config.Displays)
                 {
@@ -67,7 +66,7 @@ namespace data_rogue_core.Activities
         {
         }
         
-        public void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard)
+        public override void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard)
         {
             if (keyboard != null && keyboard.Key != Key.Unknown && CloseOnKeyPress)
             {
@@ -75,7 +74,7 @@ namespace data_rogue_core.Activities
             }
         }
 
-        public void HandleMouse(ISystemContainer systemContainer, MouseData mouse)
+        public override void HandleMouse(ISystemContainer systemContainer, MouseData mouse)
         {
             if (mouse.IsLeftClick)
             {
@@ -83,7 +82,7 @@ namespace data_rogue_core.Activities
             }
         }
 
-        public void HandleAction(ISystemContainer systemContainer, ActionEventData action)
+        public override void HandleAction(ISystemContainer systemContainer, ActionEventData action)
         {
         }
 

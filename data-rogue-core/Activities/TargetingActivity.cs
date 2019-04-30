@@ -13,14 +13,14 @@ using System.Linq;
 
 namespace data_rogue_core.Activities
 {
-    public class TargetingActivity : IActivity
+    public class TargetingActivity : BaseActivity
     {
-        public ActivityType Type => ActivityType.Targeting;
-        public object Data => TargetingActivityData;
+        public override ActivityType Type => ActivityType.Targeting;
+        public override object Data => TargetingActivityData;
 
         public MapCoordinate CurrentTarget => TargetingActivityData.CurrentTarget;
 
-        public bool RendersEntireSpace => false;
+        public override bool RendersEntireSpace => false;
 
         public bool Running => true;
 
@@ -88,7 +88,7 @@ namespace data_rogue_core.Activities
             CloseActivity();
         }
 
-        public void HandleMouse(ISystemContainer systemContainer, MouseData mouse)
+        public override void HandleMouse(ISystemContainer systemContainer, MouseData mouse)
         {
             if (mouse.MouseActive)
             {
@@ -118,12 +118,12 @@ namespace data_rogue_core.Activities
             }
         }
 
-        public void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard)
+        public override void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard)
         {
             // None
         }
 
-        public void HandleAction(ISystemContainer systemContainer, ActionEventData action)
+        public override void HandleAction(ISystemContainer systemContainer, ActionEventData action)
         {
             switch(action.Action)
             {
@@ -140,7 +140,7 @@ namespace data_rogue_core.Activities
             }
         }
 
-        public IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
+        public override IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
         {
             foreach (var mapConfiguration in _ioSystemConfiguration.MapConfigurations)
             {

@@ -14,7 +14,8 @@ namespace data_rogue_core.Activities
         Color Color { get; }
         Color BackColor { get; }
 
-        event PositionEventHandler Click;
+        void Click(object sender, PositionEventHandlerArgs eventArgs);
+        event PositionEventHandler OnClick;
 
         bool Visible { get; set; }
     }

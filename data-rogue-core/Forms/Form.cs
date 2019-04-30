@@ -18,7 +18,7 @@ namespace data_rogue_core.Forms
         public FormButton Buttons { get; }
         public FormButtonSelected OnSelectCallback { get; protected set; }
         public Dictionary<string, FormData> Fields { get; set; }
-        public IActivity Activity { get; set; }
+        public FormActivity Activity { get; set; }
 
         private List<string> FieldsKeyList => Fields.OrderBy(f => f.Value.Order).Select(f => f.Key).ToList();
 
@@ -307,7 +307,7 @@ namespace data_rogue_core.Forms
             }
         }
 
-        private void Select()
+        public void Select()
         {
             if (ButtonNames.Contains(FormSelection.SelectedItem))
             {

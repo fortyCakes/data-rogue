@@ -11,11 +11,11 @@ using OpenTK.Input;
 
 namespace data_rogue_core.Activities
 {
-    public class StaticTextActivity : IActivity
+    public class StaticTextActivity : BaseActivity
     {
-        public ActivityType Type => ActivityType.StaticDisplay;
-        public object Data => Text;
-        public bool RendersEntireSpace => false;
+        public override ActivityType Type => ActivityType.StaticDisplay;
+        public override object Data => Text;
+        public override bool RendersEntireSpace => false;
 
         public string Text { get; set; }
         public bool CloseOnKeyPress { get; }
@@ -28,12 +28,8 @@ namespace data_rogue_core.Activities
             CloseOnKeyPress = closeOnKeyPress;
             _activitySystem = activitySystem;
         }
-
-        public void Initialise()
-        {
-        }
         
-        public void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard)
+        public override void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard)
         {
             if (keyboard != null && keyboard.Key != Key.Unknown && CloseOnKeyPress)
             {
@@ -41,7 +37,7 @@ namespace data_rogue_core.Activities
             }
         }
 
-        public void HandleMouse(ISystemContainer systemContainer, MouseData mouse)
+        public override void HandleMouse(ISystemContainer systemContainer, MouseData mouse)
         {
             if (mouse.IsLeftClick)
             {
@@ -49,12 +45,12 @@ namespace data_rogue_core.Activities
             }
         }
 
-        public void HandleAction(ISystemContainer systemContainer, ActionEventData action)
+        public override void HandleAction(ISystemContainer systemContainer, ActionEventData action)
         {
             //throw new System.NotImplementedException();
         }
 
-        public IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
+        public override IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
         {
             yield return new BackgroundControl { Position = new Rectangle(0, 0, width, height) };
 

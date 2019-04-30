@@ -37,7 +37,8 @@ namespace data_rogue_core.IOSystems.RLNetConsole
             var height = _console.Height;
             var width = _console.Width;
 
-            foreach (var control in activity.GetLayout(this, systemContainer, _console, _controlRenderers, playerFov, width, height))
+            activity.Layout(this, systemContainer, _console, _controlRenderers, playerFov, width, height);
+            foreach (var control in activity.Controls)
             {
                 IDataRogueControlRenderer controlRenderer = _controlRenderers.Single(s => s.DisplayType == control.GetType());
                 controlRenderer.Display(_console, control, systemContainer, playerFov);

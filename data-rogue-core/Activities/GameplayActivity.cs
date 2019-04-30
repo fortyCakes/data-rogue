@@ -16,14 +16,14 @@ using System.Drawing;
 
 namespace data_rogue_core.Activities
 {
-    public class GameplayActivity : IActivity
+    public class GameplayActivity : BaseActivity
     {
-        public ActivityType Type => ActivityType.Gameplay;
-        public object Data => null;
+        public override ActivityType Type => ActivityType.Gameplay;
+        public override object Data => null;
 
         public bool Running { get; set; } = false;
 
-        public bool RendersEntireSpace => true;
+        public override bool RendersEntireSpace => true;
         private IPathfindingAlgorithm _pathfindingAlgorithm = new AStarPathfindingAlgorithm();
         private readonly IOSystemConfiguration _ioSystemConfiguration;
 
@@ -36,7 +36,7 @@ namespace data_rogue_core.Activities
         {
         }
 
-        public void HandleAction(ISystemContainer systemContainer, ActionEventData action)
+        public override void HandleAction(ISystemContainer systemContainer, ActionEventData action)
         {
             if (systemContainer.TimeSystem.WaitingForInput && action != null)
             {
@@ -44,12 +44,12 @@ namespace data_rogue_core.Activities
             }
         }
 
-        public void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard)
+        public override void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard)
         {
 
         }
 
-        public void HandleMouse(ISystemContainer systemContainer, MouseData mouse)
+        public override void HandleMouse(ISystemContainer systemContainer, MouseData mouse)
         {
             MapCoordinate mapCoordinate = systemContainer.RendererSystem.Renderer.GetMapCoordinateFromMousePosition(systemContainer.RendererSystem.CameraPosition, mouse.X, mouse.Y);
             systemContainer.ControlSystem.HoveredCoordinate = mapCoordinate;
@@ -93,9 +93,7 @@ namespace data_rogue_core.Activities
             }
         }
 
-
-
-        public IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
+        public override IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
         {
             yield return new LinesControl { Position = new Rectangle(0, 0, width, height), Configuration = _ioSystemConfiguration };
 

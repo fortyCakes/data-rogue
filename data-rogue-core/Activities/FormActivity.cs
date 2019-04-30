@@ -17,11 +17,11 @@ using data_rogue_core.Forms.StaticForms;
 
 namespace data_rogue_core.Activities
 {
-    public class FormActivity : IActivity
+    public class FormActivity : BaseActivity
     {
-        public ActivityType Type => ActivityType.Form;
-        public object Data => Form;
-        public bool RendersEntireSpace => true;
+        public override ActivityType Type => ActivityType.Form;
+        public override object Data => Form;
+        public override bool RendersEntireSpace => true;
 
         public bool Running => true;
 
@@ -37,22 +37,52 @@ namespace data_rogue_core.Activities
         {
         }
 
-        public void HandleMouse(ISystemContainer systemContainer, MouseData mouse)
+        public override void HandleMouse(ISystemContainer systemContainer, MouseData mouse)
         {
-            //throw new System.NotImplementedException();
+            if (mouse.IsLeftClick)
+            {
+                var controlsUnderMouse = MouseControlHelper.GetControlsUnderMouse(mouse, Controls);
+                controlsUnderMouse = controlsUnderMouse.Where(c => c.GetType() != typeof(BackgroundControl));
+
+                if (controlsUnderMouse.Count() == 1)
+                {
+                    var control = controlsUnderMouse.Single();
+
+                    if (control is ButtonControl)
+                    {
+                        var button = control as ButtonControl;
+                        Form.FormSelection = new FormSelection { SelectedItem = button.Text };
+                        Form.Select();
+                    }
+
+                    if (control is FormData)
+                    {
+                        var data = control as FormData;
+                        Form.FormSelection = new FormSelection { SelectedItem = data.Name };
+                        control.Click(this, new PositionEventHandlerArgs(mouse.X, mouse.Y));
+
+                        if (control is SubSelectableFormData)
+                        {
+                            var subData = control as SubSelectableFormData;
+
+                            Form.FormSelection.SubItem = subData.GetSubItems().First();
+                        }
+                    }
+                }
+            }
         }
 
-        public void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard)
+        public override void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard)
         {
             // None
         }
 
-        public void HandleAction(ISystemContainer systemContainer, ActionEventData action)
+        public override void HandleAction(ISystemContainer systemContainer, ActionEventData action)
         {
             Form.HandleAction(action);
         }
 
-        public IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
+        public override IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
         {
             yield return new BackgroundControl { Position = new Rectangle(0, 0, width, height) };
 

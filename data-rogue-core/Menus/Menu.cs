@@ -22,8 +22,8 @@ namespace data_rogue_core.Menus
         protected MenuItemSelected OnSelectCallback;
         protected readonly IActivitySystem _activitySystem;
 
-        public MenuItem SelectedItem { get; protected set; }
-        public MenuAction SelectedAction { get; protected set; }
+        public MenuItem SelectedItem { get; set; }
+        public MenuAction SelectedAction { get; set; }
 
         public int SelectedIndex => MenuItems.IndexOf(SelectedItem);
 
@@ -91,8 +91,8 @@ namespace data_rogue_core.Menus
 
             SelectedItem = MenuItems[newIndex];
         }
-        
-        private void Select()
+
+        public void Select()
         {
             if (SelectedItem.Enabled)
             {
@@ -100,7 +100,7 @@ namespace data_rogue_core.Menus
             }
         }
 
-        private void PreviousAction()
+        public void PreviousAction()
         {
             var index = AvailableActions.IndexOf(SelectedAction);
 
@@ -114,7 +114,7 @@ namespace data_rogue_core.Menus
             }
         }
 
-        private void NextAction()
+        public void NextAction()
         {
             var index = AvailableActions.IndexOf(SelectedAction);
 

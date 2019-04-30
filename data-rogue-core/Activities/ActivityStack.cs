@@ -17,7 +17,6 @@ namespace data_rogue_core.Activities
         internal void PushAndInitialise(IActivity activity)
         {
             Push(activity);
-            activity.Initialise();
         }
     }
 }
