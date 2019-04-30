@@ -27,7 +27,7 @@ namespace data_rogue_one.EventSystem.Rules
             var entityId = uint.Parse(eventData.Parameters);
             var entity = _systemContainer.EntityEngine.Get(entityId);
 
-            _systemContainer.ActivitySystem.Push(new InformationActivity(_systemContainer.ActivitySystem, GetStatusConfigurations(entity), entity, true));
+            _systemContainer.ActivitySystem.Push(new InformationActivity(_systemContainer.ActivitySystem, GetStatusConfigurations(entity), entity, true, true));
 
             return false;
         }
