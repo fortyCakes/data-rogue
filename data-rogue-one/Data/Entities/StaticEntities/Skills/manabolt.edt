@@ -7,6 +7,14 @@ Cost: 50
 ScriptName: Script: Mana Bolt
 [Description]
 Name: Mana Bolt
+[Targeting]
+Range: 10
+[AttackDefinition]
+AttackClass: Bolt
+SpendTime: false
+Damage: willpower
+Accuracy: 40
+AttackName: Mana Bolt
 
 "Script: Mana Bolt"
 [Prototype]
