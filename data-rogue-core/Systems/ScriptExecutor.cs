@@ -1,7 +1,10 @@
 ﻿using data_rogue_core.Components;
 using data_rogue_core.EntityEngineSystem;
+using data_rogue_core.EventSystem;
+using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems.Interfaces;
+using data_rogue_core.Utils;
 using NLua;
 using System;
 
@@ -67,6 +70,7 @@ namespace data_rogue_core.Systems
             state.RegisterFunction("withTarget", this, GetType().GetMethod(nameof(SetTargetHandler)));
             state.RegisterFunction("requestTarget", this, GetType().GetMethod(nameof(RequestTarget)));
             state.RegisterFunction("onComplete", this, GetType().GetMethod(nameof(Complete)));
+            state.RegisterFunction("makeAttack", this, GetType().GetMethod(nameof(MakeAttack)));
         }
 
         private void RegisterValues(IEntity user, Lua state, IEntity withEntity)
@@ -95,9 +99,56 @@ namespace data_rogue_core.Systems
             targetCallback = callback;
         }
 
-        public void RequestTarget(IEntity user, TargetingData targetingData)
+        public void RequestTarget(IEntity user, IEntity forSkill)
         {
+            var targetingData = GetTargetingData(forSkill);
+
             systemContainer.TargetingSystem.GetTarget(user, targetingData, (MapCoordinate c) => targetCallback?.Invoke(c));
+        }
+
+        public void MakeAttack(IEntity attacker, IEntity defender, IEntity forSkill)
+        {
+            if (!defender.Has<Health>()) return;
+
+            var attackDefinition = forSkill.Get<AttackDefinition>();
+
+            var attackData = new AttackEventData
+            {
+                Accuracy = attackDefinition.Accuracy,
+                AttackClass = attackDefinition.AttackClass,
+                Attacker = attacker,
+                AttackName = attackDefinition.AttackName,
+                Damage = ResolveAttackDamage(attacker, attackDefinition.Damage),
+                Defender = defender,
+                Speed = attackDefinition.Speed,
+                SpendTime = attackDefinition.SpendTime,
+                Tags = attackDefinition.Tags?.Split(',')
+            };
+
+            systemContainer.EventSystem.Try(EventType.Attack, attacker, attackData);
+        }
+
+        private int? ResolveAttackDamage(IEntity attacker, string input)
+        {
+            int damage;
+
+            if (int.TryParse(input, out damage))
+            {
+                return damage;
+            }
+
+            return (int)systemContainer.EventSystem.GetStat(attacker, input);
+        }
+
+        private static TargetingData GetTargetingData(IEntity forSkill)
+        {
+            var targeting = forSkill.Get<Targeting>();
+
+            return new TargetingData
+            {
+                MoveToCell = targeting.MoveToCell,
+                Range = targeting.Range
+            };
         }
     }
 }

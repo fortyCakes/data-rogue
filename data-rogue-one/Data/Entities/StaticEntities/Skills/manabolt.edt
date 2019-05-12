@@ -12,7 +12,7 @@ Range: 10
 [AttackDefinition]
 AttackClass: Bolt
 SpendTime: false
-Damage: willpower
+Damage: Willpower
 Accuracy: 40
 AttackName: Mana Bolt
 
@@ -24,29 +24,15 @@ Singleton: true
 Text: {
 	withTarget(
 	function(target)
-		willpower = SystemContainer.EventSystem:GetStat(User, 'Willpower')
+		
 		targetEntities = SystemContainer.PositionSystem:EntitiesAt(target)
 		targetFighters = SystemContainer.FighterSystem:GetEntitiesWithFighter(targetEntities)
-
 		anyTargets = false
 
 		for defender in each(targetFighters) do
 			anyTargets = true
 
-			attackingFighter = User:Get('Fighter')
-			defendingFighter = defender:Get('Fighter')
-
-			attackData = AttackEventData()
-			attackData.Attacker = User
-			attackData.Defender = defender
-			attackData.AttackClass = 'Bolt'
-			attackData.SpendTime = false
-			attackData.Damage = willpower
-			attackData.Accuracy = 40
-			attackData.AttackName = 'Mana Bolt'
-
-			hit = SystemContainer.EventSystem:Try(luanet.enum(EventType, 'Attack'), User, attackData);
-
+			makeAttack(User, defender, Entity)
 		end
 
 		if not anyTargets then
@@ -55,8 +41,6 @@ Text: {
 
 		onComplete()
 	end)
-
-	targetingData = TargetingData()
-	targetingData.Range = 10
-	requestTarget(User, targetingData)
+	
+	requestTarget(User, Entity)
 }
