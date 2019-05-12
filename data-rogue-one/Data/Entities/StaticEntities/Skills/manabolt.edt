@@ -25,17 +25,9 @@ Text: {
 	withTarget(
 	function(target)
 		
-		targetEntities = SystemContainer.PositionSystem:EntitiesAt(target)
-		targetFighters = SystemContainer.FighterSystem:GetEntitiesWithFighter(targetEntities)
-		anyTargets = false
+		attacked = attackAtPosition(target, User, Entity)
 
-		for defender in each(targetFighters) do
-			anyTargets = true
-
-			makeAttack(User, defender, Entity)
-		end
-
-		if not anyTargets then
+		if not attacked then
 			SystemContainer.MessageSystem:Write('The mana bolt strikes empty space.')
 		end
 

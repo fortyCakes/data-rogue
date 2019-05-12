@@ -150,5 +150,22 @@ namespace data_rogue_core.Systems
                 Range = targeting.Range
             };
         }
+
+        public bool AttackAtPosition(MapCoordinate target, IEntity user, IEntity forSkill)
+        {
+            var targetEntities = systemContainer.PositionSystem.EntitiesAt(target);
+
+            var targetFighters = systemContainer.FighterSystem.GetEntitiesWithFighter(targetEntities);
+            var anyTargets = false;
+
+
+            foreach (var defender in targetFighters)
+            {
+                anyTargets = true;
+                MakeAttack(user, defender, forSkill);
+            }
+
+            return anyTargets;
+        }
     }
 }
