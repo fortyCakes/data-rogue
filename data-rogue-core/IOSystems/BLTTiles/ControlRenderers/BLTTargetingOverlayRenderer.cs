@@ -45,6 +45,8 @@ namespace data_rogue_core.IOSystems.BLTTiles
             int offsetX = renderWidth / 2;
             int offsetY = renderHeight / 2;
 
+            var sprites = new CellTargeting[renderWidth + 2, renderHeight + 2];
+
             for (int y = 0; y < renderHeight; y++)
             {
                 for (int x = 0; x < renderWidth; x++)
@@ -64,12 +66,35 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
                     if (cellTargeting != CellTargeting.None)
                     {
+                        sprites[x + 1, y + 1] = cellTargeting;
+                    }
+                }
+            }
+
+            for (int y = 0; y < renderHeight; y++)
+            {
+                for (int x = 0; x < renderWidth; x++)
+                {
+                    var cellTargeting = sprites[x + 1, y + 1];
+
+                    if (cellTargeting != CellTargeting.None)
+                    {
+
                         var renderX = control.Position.Left + x * BLTTilesIOSystem.TILE_SPACING;
                         var renderY = control.Position.Top + y * BLTTilesIOSystem.TILE_SPACING;
 
-                        var sprite = targetingSprites[cellTargeting];
+                        var aboveConnect = sprites[x + 1, y + 1] == sprites[x + 1, y];
+                        var belowConnect = sprites[x + 1, y + 1] == sprites[x + 1, y + 2];
+                        var leftConnect = sprites[x + 1, y + 1] == sprites[x, y + 1];
+                        var rightConnect = sprites[x + 1, y + 1] == sprites[x + 2, y + 1];
 
-                        BLT.Put(renderX, renderY, sprite.Tile(TileDirections.None));
+                        var directions = TileDirections.None;
+                        if (aboveConnect) directions |= TileDirections.Up;
+                        if (belowConnect) directions |= TileDirections.Down;
+                        if (leftConnect) directions |= TileDirections.Left;
+                        if (rightConnect) directions |= TileDirections.Right;
+
+                        BLT.Put(renderX, renderY, targetingSprites[cellTargeting].Tile(directions));
                     }
                 }
             }
