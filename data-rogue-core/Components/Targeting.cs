@@ -7,5 +7,7 @@ namespace data_rogue_core.Components
         public int Range;
 
         public bool MoveToCell;
+
+        public VectorList CellsHit;
     }
 }

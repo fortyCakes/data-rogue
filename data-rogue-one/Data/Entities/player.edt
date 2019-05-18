@@ -42,7 +42,7 @@ Value: 15
 Name: Player
 Detail: The player character. 
 [KnownSkill]
-Skill: Skill:ManaBolt
+Skill: Skill:Fireball
 Order: 1
 [Wealth]
 Currency: Gold

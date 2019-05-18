@@ -55,7 +55,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
                     var currentCell = new MapCoordinate(currentMap.MapKey, lookupX, lookupY);
 
                     var targetable = targetableCells.Any(c => c == currentCell);
-                    var isTarget = targetingActivityData.CurrentTarget == currentCell;
+                    var isTarget = targetingActivityData.IsTargeted(currentCell);
 
                     var cellTargeting = CellTargeting.None;
 

@@ -71,6 +71,7 @@ namespace data_rogue_core.Systems
             state.RegisterFunction("requestTarget", this, GetType().GetMethod(nameof(RequestTarget)));
             state.RegisterFunction("onComplete", this, GetType().GetMethod(nameof(Complete)));
             state.RegisterFunction("makeAttack", this, GetType().GetMethod(nameof(MakeAttack)));
+            state.RegisterFunction("attackAtPosition", this, GetType().GetMethod(nameof(AttackAtPosition)));
         }
 
         private void RegisterValues(IEntity user, Lua state, IEntity withEntity)
@@ -147,7 +148,8 @@ namespace data_rogue_core.Systems
             return new TargetingData
             {
                 MoveToCell = targeting.MoveToCell,
-                Range = targeting.Range
+                Range = targeting.Range,
+                CellsHit = targeting.CellsHit
             };
         }
 

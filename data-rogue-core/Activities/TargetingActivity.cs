@@ -169,5 +169,20 @@ namespace data_rogue_core.Activities
         public TargetingData TargetingData { get; set; }
         public MapCoordinate CurrentTarget { get; set; }
         public Action<MapCoordinate> Callback { get; set; }
+
+        public bool IsTargeted(MapCoordinate currentCell)
+        {
+            if (currentCell == CurrentTarget) return true;
+
+            foreach(var diff in TargetingData.CellsHit)
+            {
+                if (currentCell == CurrentTarget + diff)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }

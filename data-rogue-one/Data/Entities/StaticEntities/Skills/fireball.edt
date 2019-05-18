@@ -1,0 +1,39 @@
+﻿"Fireball"
+[Prototype]
+Name: Skill:Fireball
+Singleton: true
+[Skill]
+Cost: 50
+ScriptName: Script: Fireball
+[Description]
+Name: Fireball
+[Targeting]
+Range: 10
+CellsHit: -1,-1;-1,0;-1,1;0,-1;0,1;1,-1;1,0;1,1;0,0
+[AttackDefinition]
+AttackClass: Blast
+SpendTime: false
+Damage: Willpower
+Accuracy: 40
+AttackName: Fireball
+
+"Script: Fireball"
+[Prototype]
+Name: Script: Fireball
+Singleton: true
+[Script]
+Text: {
+	withTarget(
+	function(target)
+		
+		attacked = attackAtPosition(target, User, Entity)
+
+		if not attacked then
+			SystemContainer.MessageSystem:Write('The fireball strikes empty space.')
+		end
+
+		onComplete()
+	end)
+	
+	requestTarget(User, Entity)
+}

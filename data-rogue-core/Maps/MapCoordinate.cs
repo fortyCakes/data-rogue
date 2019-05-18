@@ -105,6 +105,8 @@ namespace data_rogue_core.Maps
 
         public static MapCoordinate operator +(MapCoordinate position, Vector vector)
         {
+            if (position == null) return null;
+
             var newCoordinate =  new MapCoordinate(
                     mapKey: position.Key,
                     x: position.X + vector.X,

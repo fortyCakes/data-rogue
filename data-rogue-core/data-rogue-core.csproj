@@ -79,6 +79,7 @@
     <Compile Include="Activities\PositionEventHandler.cs" />
     <Compile Include="Components\AttackDefinition.cs" />
     <Compile Include="Components\Targeting.cs" />
+    <Compile Include="Data\VectorList.cs" />
     <Compile Include="Controls\BackgroundControl.cs" />
     <Compile Include="Controls\ButtonControl.cs" />
     <Compile Include="Controls\LineControl.cs" />
