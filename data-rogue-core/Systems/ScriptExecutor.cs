@@ -71,7 +71,7 @@ namespace data_rogue_core.Systems
             state.RegisterFunction("requestTarget", this, GetType().GetMethod(nameof(RequestTarget)));
             state.RegisterFunction("onComplete", this, GetType().GetMethod(nameof(Complete)));
             state.RegisterFunction("makeAttack", this, GetType().GetMethod(nameof(MakeAttack)));
-            state.RegisterFunction("attackAtPosition", this, GetType().GetMethod(nameof(AttackAtPosition)));
+            state.RegisterFunction("attackCellsHit", this, GetType().GetMethod(nameof(AttackCellsHit)));
         }
 
         private void RegisterValues(IEntity user, Lua state, IEntity withEntity)
@@ -153,18 +153,23 @@ namespace data_rogue_core.Systems
             };
         }
 
-        public bool AttackAtPosition(MapCoordinate target, IEntity user, IEntity forSkill)
+        public bool AttackCellsHit(MapCoordinate target, IEntity user, IEntity forSkill)
         {
-            var targetEntities = systemContainer.PositionSystem.EntitiesAt(target);
-
-            var targetFighters = systemContainer.FighterSystem.GetEntitiesWithFighter(targetEntities);
             var anyTargets = false;
+            var targeting = forSkill.Get<Targeting>();
 
-
-            foreach (var defender in targetFighters)
+            foreach (var vector in targeting.CellsHit)
             {
-                anyTargets = true;
-                MakeAttack(user, defender, forSkill);
+                var targetEntities = systemContainer.PositionSystem.EntitiesAt(target + vector);
+
+                var targetFighters = systemContainer.FighterSystem.GetEntitiesWithFighter(targetEntities);
+
+
+                foreach (var defender in targetFighters)
+                {
+                    anyTargets = true;
+                    MakeAttack(user, defender, forSkill);
+                }
             }
 
             return anyTargets;

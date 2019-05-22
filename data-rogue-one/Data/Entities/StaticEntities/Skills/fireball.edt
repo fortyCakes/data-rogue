@@ -26,7 +26,7 @@ Text: {
 	withTarget(
 	function(target)
 		
-		attacked = attackAtPosition(target, User, Entity)
+		attacked = attackCellsHit(target, User, Entity)
 
 		if not attacked then
 			SystemContainer.MessageSystem:Write('The fireball strikes empty space.')

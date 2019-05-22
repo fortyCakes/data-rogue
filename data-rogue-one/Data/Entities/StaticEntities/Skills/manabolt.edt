@@ -9,6 +9,7 @@ ScriptName: Script: Mana Bolt
 Name: Mana Bolt
 [Targeting]
 Range: 10
+CellsHit: 0,0
 [AttackDefinition]
 AttackClass: Bolt
 SpendTime: false
@@ -25,7 +26,7 @@ Text: {
 	withTarget(
 	function(target)
 		
-		attacked = attackAtPosition(target, User, Entity)
+		attacked = attackCellsHit(target, User, Entity)
 
 		if not attacked then
 			SystemContainer.MessageSystem:Write('The mana bolt strikes empty space.')
