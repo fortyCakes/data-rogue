@@ -1,0 +1,40 @@
+﻿"Cleave"
+[Prototype]
+Name: Skill:Cleave
+Singleton: true
+[Skill]
+Cost: 50
+ScriptName: Script: Cleave
+[Description]
+Name: Cleave
+[Targeting]
+Range: 0
+CellsHit: 0,0;0,-1;0,1
+Rotatable: true
+[AttackDefinition]
+AttackClass: Heavy
+SpendTime: false
+Damage: Muscle
+Accuracy: 40
+AttackName: Cleave
+
+"Script: Cleave"
+[Prototype]
+Name: Script: Cleave
+Singleton: true
+[Script]
+Text: {
+	withTarget(
+	function(target)
+		
+		attacked = attackCellsHit(target, User, Entity)
+
+		if not attacked then
+			SystemContainer.MessageSystem:Write('You cleave the air, and hit nothing.')
+		end
+
+		onComplete()
+	end)
+	
+	requestTarget(User, Entity)
+}

@@ -140,6 +140,9 @@
     <None Include="Data\Entities\StaticEntities\Skills\fireball.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Entities\StaticEntities\Skills\cleave.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\Entities\StaticEntities\Skills\manabolt.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

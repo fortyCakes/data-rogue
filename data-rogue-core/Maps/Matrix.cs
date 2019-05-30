@@ -20,5 +20,10 @@
         {
             return new Vector(m.A1 * v.X + m.A2 * v.Y, m.B1 * v.X + m.B2 * v.Y);
         }
+
+        public static Matrix Identity => new Matrix(1, 0, 0, 1);
+        public static Matrix Rotate90 => new Matrix(0, -1, 1, 0);
+        public static Matrix Rotate180 => new Matrix(-1, 0, 0, -1);
+        public static Matrix Rotate270 => new Matrix(0, 1, -1, 0);
     }
 }

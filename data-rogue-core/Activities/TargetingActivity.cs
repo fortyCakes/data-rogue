@@ -27,7 +27,6 @@ namespace data_rogue_core.Activities
         private readonly IActivitySystem _activitySystem;
 
         public TargetingActivityData TargetingActivityData;
-        private MapCoordinate _targetFrom;
         private ISystemContainer _systemContainer;
         private IPositionSystem _positionSystem;
         private HashSet<MapCoordinate> _targetableCells;
@@ -43,12 +42,11 @@ namespace data_rogue_core.Activities
             {
                 TargetingData = targetingData,
                 CurrentTarget = null,
-                Callback = callback
+                Callback = callback,
+                TargetFrom = targetFrom
             };
 
-            _targetFrom = targetFrom;
-
-            _targetableCells = targetingData.TargetableCellsFrom(_targetFrom);
+            _targetableCells = targetingData.TargetableCellsFrom(TargetingActivityData.TargetFrom);
 
             PickInitialTarget();
             _ioSystemConfiguration = ioSystemConfiguration;
@@ -56,10 +54,10 @@ namespace data_rogue_core.Activities
 
         private void PickInitialTarget()
         {
-            var cellsByDistance = _targetableCells.Except(new[] { _targetFrom }).ToList();
+            var cellsByDistance = _targetableCells.Except(new[] { TargetingActivityData.TargetFrom }).ToList();
             cellsByDistance = cellsByDistance.OrderBy(c =>
             {
-                var vector = _targetFrom - c;
+                var vector = TargetingActivityData.TargetFrom - c;
                 return Math.Sqrt(vector.X * vector.X + vector.Y * vector.Y);
             }).ToList();
 
@@ -155,7 +153,7 @@ namespace data_rogue_core.Activities
 
         private void TryMoveTarget(Vector vector)
         {
-            var newTarget = (TargetingActivityData.CurrentTarget ?? _targetFrom) + vector;
+            var newTarget = (TargetingActivityData.CurrentTarget ?? TargetingActivityData.TargetFrom) + vector;
 
             if (_targetableCells.Contains(newTarget))
             {
@@ -167,8 +165,21 @@ namespace data_rogue_core.Activities
     public class TargetingActivityData
     {
         public TargetingData TargetingData { get; set; }
-        public MapCoordinate CurrentTarget { get; set; }
+        public MapCoordinate CurrentTarget;
         public Action<MapCoordinate> Callback { get; set; }
+        public MapCoordinate TargetFrom { get; internal set; }
+
+        public Matrix Rotation {
+            get
+            {
+                if (!TargetingData.Rotatable) return Matrix.Identity;
+
+                if (CurrentTarget == TargetFrom + new Vector(0, -1)) { return Matrix.Rotate90; }
+                if (CurrentTarget == TargetFrom + new Vector(-1, 0)) { return Matrix.Rotate180; }
+                if (CurrentTarget == TargetFrom + new Vector(0, 1)) { return Matrix.Rotate270; }
+                return Matrix.Identity;
+            }
+        }
 
         public bool IsTargeted(MapCoordinate currentCell)
         {
@@ -176,7 +187,7 @@ namespace data_rogue_core.Activities
 
             foreach(var diff in TargetingData.CellsHit)
             {
-                if (currentCell == CurrentTarget + diff)
+                if (currentCell == CurrentTarget + Rotation * diff)
                 {
                     return true;
                 }

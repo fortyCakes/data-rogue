@@ -149,7 +149,8 @@ namespace data_rogue_core.Systems
             {
                 MoveToCell = targeting.MoveToCell,
                 Range = targeting.Range,
-                CellsHit = targeting.CellsHit
+                CellsHit = targeting.CellsHit,
+                Rotatable = targeting.Rotatable
             };
         }
 

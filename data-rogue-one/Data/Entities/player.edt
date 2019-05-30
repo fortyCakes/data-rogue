@@ -45,7 +45,7 @@ Detail: The player character.
 Skill: Skill:Fireball
 Order: 1
 [KnownSkill]
-Skill: Skill:ManaBolt
+Skill: Skill:Cleave
 Order: 2
 [Wealth]
 Currency: Gold

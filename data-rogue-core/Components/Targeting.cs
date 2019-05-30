@@ -9,5 +9,7 @@ namespace data_rogue_core.Components
         public bool MoveToCell;
 
         public VectorList CellsHit;
+
+        public bool Rotatable;
     }
 }

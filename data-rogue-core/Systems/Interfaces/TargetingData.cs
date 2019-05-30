@@ -9,6 +9,7 @@ namespace data_rogue_core.Systems.Interfaces
     {
         public bool Friendly = false;
         public bool MoveToCell = false;
+        public bool Rotatable = false;
 
         public int? Range = null;
 
@@ -30,9 +31,17 @@ namespace data_rogue_core.Systems.Interfaces
             {
                 var range = Range.Value;
 
+                if (range == 0)
+                {
+                   foreach (var vector in GetAdjacentCellVectors())
+                   {
+                       targetableCells.Add(playerPosition + vector);
+                   }
+                }
+
                 if (range == 1)
                 {
-                    foreach (var vector in GetAdjacentCellVectors())
+                    foreach (var vector in GetAdjacentAndDiagonalCellVectors())
                     {
                         targetableCells.Add(playerPosition + vector);
                     }
@@ -55,6 +64,16 @@ namespace data_rogue_core.Systems.Interfaces
         }
 
         private static Vector[] GetAdjacentCellVectors()
+        {
+            return new[]
+            {
+                new Vector(-1, 0),
+                new Vector(0, -1), new Vector(0, 1),
+                new Vector(1, 0)
+            };
+        }
+
+        private static Vector[] GetAdjacentAndDiagonalCellVectors()
         {
             return new[]
             {
