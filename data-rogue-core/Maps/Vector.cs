@@ -70,5 +70,10 @@
             if (ReferenceEquals(thatVector, null)) return false;
             return !(thisVector == thatVector);
         }
+
+        public Vector Transpose()
+        {
+            return new Vector(Y, X);
+        }
     }
 }

@@ -158,13 +158,20 @@ namespace data_rogue_core.Systems
         {
             var anyTargets = false;
             var targeting = forSkill.Get<Targeting>();
+            Matrix rotation = Matrix.Identity;
+
+            if (targeting.Rotatable)
+            {
+                rotation = TargetingRotationHelper.GetSkillRotation(user, target);
+            }
 
             foreach (var vector in targeting.CellsHit)
             {
-                var targetEntities = systemContainer.PositionSystem.EntitiesAt(target + vector);
+                var vectorToCell = rotation * vector;
+
+                var targetEntities = systemContainer.PositionSystem.EntitiesAt(target + vectorToCell);
 
                 var targetFighters = systemContainer.FighterSystem.GetEntitiesWithFighter(targetEntities);
-
 
                 foreach (var defender in targetFighters)
                 {

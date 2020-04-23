@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using data_rogue_core.Utils;
 
 namespace data_rogue_core.Activities
 {
@@ -172,12 +173,12 @@ namespace data_rogue_core.Activities
         public Matrix Rotation {
             get
             {
-                if (!TargetingData.Rotatable) return Matrix.Identity;
+                if (!TargetingData.Rotatable || CurrentTarget == null || TargetFrom == null) return Matrix.Identity;
 
-                if (CurrentTarget == TargetFrom + new Vector(0, -1)) { return Matrix.Rotate90; }
-                if (CurrentTarget == TargetFrom + new Vector(-1, 0)) { return Matrix.Rotate180; }
-                if (CurrentTarget == TargetFrom + new Vector(0, 1)) { return Matrix.Rotate270; }
-                return Matrix.Identity;
+                var dx = CurrentTarget.X - TargetFrom.X;
+                var dy = CurrentTarget.Y - TargetFrom.Y;
+
+                return TargetingRotationHelper.GetSkillRotation(dy: dy, dx: dx);
             }
         }
 
