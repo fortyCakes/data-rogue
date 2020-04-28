@@ -31,9 +31,11 @@ namespace data_rogue_core.UnitTests.Systems
             systemContainer.EntityEngine.Initialise(systemContainer);
 
             mover = GetTestEntity();
+            map = SetUpTestMap();
         }
         
         IEntity mover;
+        private IMap map;
 
         private SystemContainer systemContainer;
         private IPositionSystem positionSystem;
@@ -59,7 +61,6 @@ namespace data_rogue_core.UnitTests.Systems
         [Test]
         public void EntitiesAt_ReturnsListOfEntities()
         {
-            IMap map = SetUpTestMap();
             IEntity mapCell = SetUpTestMapCell(map, 0, 0);
 
             var expected = new List<IEntity>
@@ -190,6 +191,42 @@ namespace data_rogue_core.UnitTests.Systems
             result.Should().BeNull();
         }
 
+        [Test]
+        public void IsBlocked_NotBlocked_ReturnsFalse()
+        {
+            MapCoordinate testMapCoordinate = GetTestMapCoordinate();
+            positionSystem.SetPosition(mover, testMapCoordinate);
+            systemContainer.EntityEngine.AddComponent(mover, new Physical{Passable = true});
+
+            var result = positionSystem.IsBlocked(testMapCoordinate);
+
+            result.Should().BeFalse();
+        }
+
+        [Test]
+        public void IsBlocked_Blocked_ReturnsTrue()
+        {
+            MapCoordinate testMapCoordinate = GetTestMapCoordinate();
+            positionSystem.SetPosition(mover, testMapCoordinate);
+            systemContainer.EntityEngine.AddComponent(mover, new Physical { Passable = false });
+
+            var result = positionSystem.IsBlocked(testMapCoordinate);
+
+            result.Should().BeTrue();
+        }
+
+        [Test]
+        public void IsBlocked_BlockedByExcept_ReturnsFalse()
+        {
+            MapCoordinate testMapCoordinate = GetTestMapCoordinate();
+            positionSystem.SetPosition(mover, testMapCoordinate);
+            systemContainer.EntityEngine.AddComponent(mover, new Physical { Passable = false });
+
+            var result = positionSystem.IsBlocked(testMapCoordinate, mover);
+
+            result.Should().BeFalse();
+        }
+
         private static PositionSystem SetUpTestPositionSystemWithPathfindingAlgorithm(out IPathfindingAlgorithm pathfindingAlgorithm)
         {
             pathfindingAlgorithm = Substitute.For<IPathfindingAlgorithm>();
@@ -213,6 +250,11 @@ namespace data_rogue_core.UnitTests.Systems
             var map = Substitute.For<IMap>();
             systemContainer.MapSystem.Initialise();
             systemContainer.MapSystem.MapCollection[TEST_MAP_KEY] = map;
+
+            var cell = Substitute.For<IEntity>();
+            map.CellAt(Arg.Any<int>(), Arg.Any<int>()).Returns(cell);
+            cell.TryGet<Physical>().Returns(new Physical {Passable = true, Transparent = true});
+
             return map;
         }
 

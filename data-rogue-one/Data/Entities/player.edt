@@ -47,6 +47,12 @@ Order: 1
 [KnownSkill]
 Skill: Skill:Cleave
 Order: 2
+[KnownSkill]
+Skill: Skill:Jump
+Order: 2
+[KnownSkill]
+Skill: Skill:SamuraiCut
+Order: 3
 [Wealth]
 Currency: Gold
 Amount: 0

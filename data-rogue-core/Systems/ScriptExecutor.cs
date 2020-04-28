@@ -7,6 +7,7 @@ using data_rogue_core.Systems.Interfaces;
 using data_rogue_core.Utils;
 using NLua;
 using System;
+using System.Linq;
 
 namespace data_rogue_core.Systems
 {
@@ -72,6 +73,7 @@ namespace data_rogue_core.Systems
             state.RegisterFunction("onComplete", this, GetType().GetMethod(nameof(Complete)));
             state.RegisterFunction("makeAttack", this, GetType().GetMethod(nameof(MakeAttack)));
             state.RegisterFunction("attackCellsHit", this, GetType().GetMethod(nameof(AttackCellsHit)));
+            state.RegisterFunction("isCellBlocked", this, GetType().GetMethod(nameof(IsCellBlocked)));
         }
 
         private void RegisterValues(IEntity user, Lua state, IEntity withEntity)
@@ -150,7 +152,10 @@ namespace data_rogue_core.Systems
                 MoveToCell = targeting.MoveToCell,
                 Range = targeting.Range,
                 CellsHit = targeting.CellsHit,
-                Rotatable = targeting.Rotatable
+                Rotatable = targeting.Rotatable,
+                TargetOrigin = targeting.TargetOrigin,
+                ValidVectors = targeting.ValidVectors,
+                Friendly = targeting.Friendly
             };
         }
 
@@ -181,6 +186,11 @@ namespace data_rogue_core.Systems
             }
 
             return anyTargets;
+        }
+
+        public bool IsCellBlocked(MapCoordinate target, IEntity user)
+        {
+            return systemContainer.PositionSystem.IsBlocked(target, except: user);
         }
     }
 }

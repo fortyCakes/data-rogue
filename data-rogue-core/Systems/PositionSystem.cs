@@ -121,6 +121,18 @@ namespace data_rogue_core.Systems
             return _pathfindingAlgorithm.Path(map, origin, destination);
         }
 
+        public bool IsBlocked(MapCoordinate key, IEntity except = null)
+        {
+            var entities = EntitiesAt(key)
+                .Where(e => e != except);
+
+            var components = entities
+                .Select(e => e.TryGet<Physical>())
+                .Where(p => p != null);
+
+            return components.Any(p => !p.Passable);
+        }
+
         private IEnumerable<IEntity> EntitiesAt_Internal(MapCoordinate coordinate)
         {
             if (_entityCache.ContainsKey(coordinate))

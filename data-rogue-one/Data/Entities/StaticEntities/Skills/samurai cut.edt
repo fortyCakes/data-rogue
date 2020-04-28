@@ -1,0 +1,40 @@
+﻿"SamuraiCut"
+[Prototype]
+Name: Skill:SamuraiCut
+Singleton: true
+[Skill]
+Cost: 30
+ScriptName: Script: SamuraiCut
+[Description]
+Name: Samurai Cut
+Detail: A skill that lets the user flash past an enemy and attack them.
+[Targeting]
+Range: 2
+CellsHit: -1,0
+ValidVectors: 2,0;-2,0;0,-2;0,2
+Rotatable: true
+MoveToCell: true
+
+"Script: SamuraiCut"
+[Prototype]
+Name: Script: SamuraiCut
+Singleton: true
+[Script]
+Text: {
+	withTarget(
+	function(target)
+		
+		blocked = isCellBlocked(target, User)
+
+		if blocked then
+			SystemContainer.MessageSystem:Write('You can\'t flash to there - it\'s blocked.')
+		else
+			SystemContainer.MessageSystem:Write('You flash forward and strike!.')
+			SystemContainer.PositionSystem:SetPosition(User, target)
+		end
+
+		onComplete()
+	end)
+	
+	requestTarget(User, Entity)
+}

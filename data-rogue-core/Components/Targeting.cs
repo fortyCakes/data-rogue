@@ -11,5 +11,11 @@ namespace data_rogue_core.Components
         public VectorList CellsHit;
 
         public bool Rotatable;
+
+        public bool TargetOrigin = true;
+
+        public bool Friendly;
+
+        public VectorList ValidVectors;
     }
 }

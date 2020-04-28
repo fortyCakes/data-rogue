@@ -10,6 +10,7 @@ namespace data_rogue_core.Systems.Interfaces
         public bool Friendly = false;
         public bool MoveToCell = false;
         public bool Rotatable = false;
+        public bool TargetOrigin = true;
 
         public int? Range = null;
 
@@ -49,10 +50,10 @@ namespace data_rogue_core.Systems.Interfaces
 
                 if (range > 1)
                 {
-                    for (int x = -range; x < range; x++)
-                    for (int y = -range; y < range; y++)
+                    for (int x = -range; x <= range; x++)
+                    for (int y = -range; y <= range; y++)
                     {
-                        if (x * x + y * y < range * range)
+                        if (x * x + y * y <= range * range && (TargetOrigin || x != 0 || y != 0))
                         {
                             targetableCells.Add(playerPosition + new Vector(x, y));
                         }

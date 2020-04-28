@@ -1,0 +1,38 @@
+﻿"Jump"
+[Prototype]
+Name: Skill:Jump
+Singleton: true
+[Skill]
+Cost: 30
+ScriptName: Script: Jump
+[Description]
+Name: Jump
+Detail: A skill that allows you to jump to a distant space.
+[Targeting]
+Range: 4
+CellsHit: 0,0
+MoveToCell: true
+
+"Script: Jump"
+[Prototype]
+Name: Script: Jump
+Singleton: true
+[Script]
+Text: {
+	withTarget(
+	function(target)
+		
+		blocked = isCellBlocked(target, User)
+
+		if blocked then
+			SystemContainer.MessageSystem:Write('You can\'t jump there - it\'s blocked.')
+		else
+			SystemContainer.MessageSystem:Write('You jump.')
+			SystemContainer.PositionSystem:SetPosition(User, target)
+		end
+
+		onComplete()
+	end)
+	
+	requestTarget(User, Entity)
+}
