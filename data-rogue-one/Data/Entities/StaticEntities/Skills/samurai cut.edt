@@ -14,6 +14,12 @@ CellsHit: -1,0
 ValidVectors: 2,0;-2,0;0,-2;0,2
 Rotatable: true
 MoveToCell: true
+[AttackDefinition]
+AttackClass: Heavy
+SpendTime: false
+Damage: Muscle
+Accuracy: 40
+AttackName: Samurai Cut
 
 "Script: SamuraiCut"
 [Prototype]
@@ -30,6 +36,7 @@ Text: {
 			SystemContainer.MessageSystem:Write('You can\'t flash to there - it\'s blocked.')
 		else
 			SystemContainer.MessageSystem:Write('You flash forward and strike!.')
+			attacked = attackCellsHit(target, User, Entity)
 			SystemContainer.PositionSystem:SetPosition(User, target)
 		end
 
