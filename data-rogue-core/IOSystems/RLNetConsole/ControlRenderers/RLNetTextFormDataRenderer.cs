@@ -36,7 +36,7 @@ namespace data_rogue_core.IOSystems
         protected override void DisplayInternal(RLConsole console, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
             var targetingOverlayControl = control as TargetingOverlayControl;
-            var targetingActivityData = targetingOverlayControl.TargetingActivityData;
+            var targetingActivityData = targetingOverlayControl.TargetingActivity;
 
             var mapConsole = new RLConsole(control.Position.Width, control.Position.Height);
 

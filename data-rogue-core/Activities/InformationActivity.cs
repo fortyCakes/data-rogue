@@ -17,7 +17,6 @@ namespace data_rogue_core.Activities
     public class InformationActivity : BaseActivity
     {
         public override ActivityType Type => ActivityType.Information;
-        public override object Data => StatsConfigs;
         public override bool RendersEntireSpace { get; }
         public IEntity Entity { get; }
         public List<StatsConfiguration> StatsConfigs { get; set; }

@@ -11,6 +11,7 @@ namespace data_rogue_core.Systems.Interfaces
         public bool MoveToCell = false;
         public bool Rotatable = false;
         public bool TargetOrigin = true;
+        public bool PathToTarget = false;
 
         public int? Range = null;
 

@@ -118,7 +118,7 @@ namespace data_rogue_core.UnitTests.Activities
         [Test]
         public void HandleAction_Move_CurrentTarget_MovesFromCurrentTarget()
         {
-            _targetingActivity.TargetingActivityData.CurrentTarget = new MapCoordinate("Map", 1, 0);
+            _targetingActivity.CurrentTarget = new MapCoordinate("Map", 1, 0);
 
            var action = new ActionEventData { Action = ActionType.Move, Parameters = "1,0" };
             _targetingActivity.HandleAction(_systemContainer, action);
@@ -129,7 +129,7 @@ namespace data_rogue_core.UnitTests.Activities
         [Test]
         public void HandleAction_Select_CallsBack()
         {
-            _targetingActivity.TargetingActivityData.CurrentTarget = new MapCoordinate("Map", 1, 0);
+            _targetingActivity.CurrentTarget = new MapCoordinate("Map", 1, 0);
 
             var action = new ActionEventData { Action = ActionType.Select };
             _targetingActivity.HandleAction(_systemContainer, action);

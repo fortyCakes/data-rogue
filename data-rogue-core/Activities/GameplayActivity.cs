@@ -19,7 +19,6 @@ namespace data_rogue_core.Activities
     public class GameplayActivity : BaseActivity
     {
         public override ActivityType Type => ActivityType.Gameplay;
-        public override object Data => null;
 
         public bool Running { get; set; } = false;
 

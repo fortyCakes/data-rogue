@@ -14,7 +14,6 @@ namespace data_rogue_core.Activities
     public class StaticTextActivity : BaseActivity
     {
         public override ActivityType Type => ActivityType.StaticDisplay;
-        public override object Data => Text;
         public override bool RendersEntireSpace => false;
 
         public string Text { get; set; }

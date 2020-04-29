@@ -17,5 +17,7 @@ namespace data_rogue_core.Components
         public bool Friendly;
 
         public VectorList ValidVectors;
+
+        public bool PathToTarget;
     }
 }

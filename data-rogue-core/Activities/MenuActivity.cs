@@ -16,7 +16,6 @@ namespace data_rogue_core.Activities
     public class MenuActivity : BaseActivity
     {
         public override ActivityType Type => ActivityType.Menu;
-        public override object Data => Menu;
         public override bool RendersEntireSpace => true;
         public Menu Menu { get; }
 

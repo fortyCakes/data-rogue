@@ -19,7 +19,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
         protected override void DisplayInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
             var display = control as TargetingOverlayControl;
-            var targetingActivityData = display.TargetingActivityData;
+            var targetingActivityData = display.TargetingActivity;
             var targetingSprites = new Dictionary<CellTargeting, ISpriteSheet>
             {
                 { CellTargeting.Targetable, spriteManager.Get("targetable") },

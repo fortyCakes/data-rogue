@@ -12,7 +12,6 @@ namespace data_rogue_core.Activities
 
         public IEnumerable<IDataRogueControl> Controls { get; set; } = new List<IDataRogueControl>();
         public abstract ActivityType Type { get; }
-        public abstract object Data { get; }
         public abstract bool RendersEntireSpace { get; }
 
         public void Layout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)

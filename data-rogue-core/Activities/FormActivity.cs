@@ -20,7 +20,6 @@ namespace data_rogue_core.Activities
     public class FormActivity : BaseActivity
     {
         public override ActivityType Type => ActivityType.Form;
-        public override object Data => Form;
         public override bool RendersEntireSpace => true;
 
         public bool Running => true;

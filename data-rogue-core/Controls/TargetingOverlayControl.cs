@@ -10,6 +10,6 @@ namespace data_rogue_core.Controls
 {
     public class TargetingOverlayControl : BaseControl
     {
-        public TargetingActivityData TargetingActivityData { get; internal set; }
+        public TargetingActivity TargetingActivity { get; internal set; }
     }
 }
