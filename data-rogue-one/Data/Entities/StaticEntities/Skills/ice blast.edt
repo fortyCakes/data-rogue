@@ -1,0 +1,42 @@
+﻿"SamuraiCut"
+[Prototype]
+Name: Skill:IceBlast
+Singleton: true
+[Skill]
+Cost: 50
+ScriptName: Script: IceBlast
+[Description]
+Name: Ice Blast
+Detail: A skill that blasts the target square with ice, and all squares on the path to it.
+[Targeting]
+Range: 4
+CellsHit: 0,0
+Rotatable: false
+MoveToCell: false
+PathToTarget: true
+[AttackDefinition]
+AttackClass: Blast
+SpendTime: false
+Damage: Intellect
+Accuracy: 35
+AttackName: Ice Blast
+
+"Script: IceBlast"
+[Prototype]
+Name: Script: IceBlast
+Singleton: true
+[Script]
+Text: {
+	withTarget(
+	function(target)
+
+		origin = SystemContainer.PositionSystem:CoordinateOf(User)
+		pathtotarget = SystemContainer.PositionSystem:Path(origin, target)
+
+		attackAllCells(pathtotarget, User, Entity)
+
+		onComplete()
+	end)
+	
+	requestTarget(User, Entity)
+}

@@ -7,6 +7,7 @@ using data_rogue_core.Systems.Interfaces;
 using data_rogue_core.Utils;
 using NLua;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace data_rogue_core.Systems
@@ -73,6 +74,7 @@ namespace data_rogue_core.Systems
             state.RegisterFunction("onComplete", this, GetType().GetMethod(nameof(Complete)));
             state.RegisterFunction("makeAttack", this, GetType().GetMethod(nameof(MakeAttack)));
             state.RegisterFunction("attackCellsHit", this, GetType().GetMethod(nameof(AttackCellsHit)));
+            state.RegisterFunction("attackAllCells", this, GetType().GetMethod(nameof(AttackAllCells)));
             state.RegisterFunction("isCellBlocked", this, GetType().GetMethod(nameof(IsCellBlocked)));
         }
 
@@ -155,7 +157,8 @@ namespace data_rogue_core.Systems
                 Rotatable = targeting.Rotatable,
                 TargetOrigin = targeting.TargetOrigin,
                 ValidVectors = targeting.ValidVectors,
-                Friendly = targeting.Friendly
+                Friendly = targeting.Friendly,
+                PathToTarget = targeting.PathToTarget
             };
         }
 
@@ -175,6 +178,26 @@ namespace data_rogue_core.Systems
                 var vectorToCell = rotation * vector;
 
                 var targetEntities = systemContainer.PositionSystem.EntitiesAt(target + vectorToCell);
+
+                var targetFighters = systemContainer.FighterSystem.GetEntitiesWithFighter(targetEntities);
+
+                foreach (var defender in targetFighters)
+                {
+                    anyTargets = true;
+                    MakeAttack(user, defender, forSkill);
+                }
+            }
+
+            return anyTargets;
+        }
+
+        public bool AttackAllCells(IEnumerable<MapCoordinate> coordinates, IEntity user, IEntity forSkill)
+        {
+            var anyTargets = false;
+
+            foreach (var mapCoordinate in coordinates)
+            {
+                var targetEntities = systemContainer.PositionSystem.EntitiesAt(mapCoordinate);
 
                 var targetFighters = systemContainer.FighterSystem.GetEntitiesWithFighter(targetEntities);
 

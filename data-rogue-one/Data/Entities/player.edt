@@ -53,6 +53,9 @@ Order: 2
 [KnownSkill]
 Skill: Skill:SamuraiCut
 Order: 3
+[KnownSkill]
+Skill: Skill:IceBlast
+Order: 4
 [Wealth]
 Currency: Gold
 Amount: 0
