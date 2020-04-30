@@ -56,6 +56,9 @@ Order: 3
 [KnownSkill]
 Skill: Skill:IceBlast
 Order: 4
+[KnownSkill]
+Skill: Skill:BouncingBolt
+Order: 5
 [Wealth]
 Currency: Gold
 Amount: 0

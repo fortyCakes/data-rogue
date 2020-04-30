@@ -1,4 +1,4 @@
-﻿"SamuraiCut"
+﻿"IceBlast"
 [Prototype]
 Name: Skill:IceBlast
 Singleton: true
@@ -31,7 +31,7 @@ Text: {
 	function(target)
 
 		origin = SystemContainer.PositionSystem:CoordinateOf(User)
-		pathtotarget = SystemContainer.PositionSystem:Path(origin, target)
+		pathtotarget = SystemContainer.PositionSystem:DirectPath(origin, target)
 
 		attackAllCells(pathtotarget, User, Entity)
 

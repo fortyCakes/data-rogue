@@ -218,6 +218,52 @@ namespace data_rogue_core.UnitTests.Activities
             _callbackHappened.Should().BeTrue();
         }
 
+        [Test]
+        public void IsTargeted_CurrentTarget_ReturnsTrue()
+        {
+            _targetingActivity.CurrentTarget = new MapCoordinate("Map", 0, 0);
+            _targetingActivity.TargetingData.CellsHit = new List<Vector>{new Vector(0,0)};
+
+            _targetingActivity.GetTargetingStatus(new MapCoordinate("Map", 0, 0)).Should().Be(TargetingStatus.Targeted);
+        }
+
+        [Test]
+        public void IsTargeted_NotCurrentTarget_ReturnsFalse()
+        {
+            _targetingActivity.CurrentTarget = new MapCoordinate("Map", 0, 0);
+            _targetingActivity.TargetingData.CellsHit = new List<Vector> { new Vector(0, 0) };
+
+            _targetingActivity.GetTargetingStatus(new MapCoordinate("Map", 1, 0)).Should().Be(TargetingStatus.NotTargeted);
+        }
+
+        [Test]
+        public void IsTargeted_InCellsHit_ReturnsTrue()
+        {
+            _targetingActivity.CurrentTarget = new MapCoordinate("Map", 0, 0);
+            _targetingActivity.TargetingData.CellsHit = new List<Vector> { new Vector(0, 0), new Vector(1, 1) };
+
+            _targetingActivity.GetTargetingStatus(new MapCoordinate("Map", 1, 1)).Should().Be(TargetingStatus.Targeted);
+        }
+
+        [Test]
+        public void IsTargeted_OnDirectPath_ReturnsTrue()
+        {
+            _positionSystem.DirectPath(Arg.Any<MapCoordinate>(), Arg.Any<MapCoordinate>()).Returns(new List<MapCoordinate>
+            {
+                new MapCoordinate("Map", 1, -1),
+                new MapCoordinate("Map", 2, -2),
+                new MapCoordinate("Map", 3, -3),
+                new MapCoordinate("Map", 4, -4),
+                new MapCoordinate("Map", 5, -5)
+            });
+
+            _targetingActivity.TargetingData.PathToTarget = true;
+            _targetingActivity.CurrentTarget = new MapCoordinate("Map", 5, -5);
+            _targetingActivity.TargetingData.CellsHit = new List<Vector> { new Vector(0, 0) };
+
+            _targetingActivity.GetTargetingStatus(new MapCoordinate("Map", 1, -1)).Should().Be(TargetingStatus.Targeted);
+        }
+
         private void TargetShouldBe(int x, int y)
         {
             _targetingActivity.CurrentTarget.Should().BeEquivalentTo(new MapCoordinate("Map", x, y));

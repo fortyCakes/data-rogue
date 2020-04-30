@@ -121,6 +121,48 @@ namespace data_rogue_core.Systems
             return _pathfindingAlgorithm.Path(map, origin, destination);
         }
 
+        public IEnumerable<MapCoordinate> DirectPath(MapCoordinate origin, MapCoordinate destination)
+        {
+            if (origin == destination || origin.Key != destination.Key) return null;
+
+            var path = new List<MapCoordinate>();
+
+            IMap map = _mapSystem.MapCollection[origin.Key];
+
+            var diff = origin-destination;
+
+            // Normalise the vector
+            var size = Math.Sqrt(diff.X * diff.X + diff.Y * diff.Y);
+            var ndx = diff.X / size;
+            var ndy = diff.Y / size;
+
+            double currentX = origin.X + 0.5;
+            double currentY = origin.Y + 0.5;
+
+            while (!((int)Math.Floor(currentX) == destination.X && (int)Math.Floor(currentY) == destination.Y))
+            {
+                var currentCoordinate = new MapCoordinate(origin.Key, (int)Math.Floor(currentX), (int)Math.Floor(currentY));
+
+                if (!path.Contains(currentCoordinate))
+                {
+                    var cell = map.CellAt(currentCoordinate);
+                    if (!cell.Get<Physical>().Passable)
+                    {
+                        break;
+                    }
+                    
+                    path.Add(currentCoordinate);
+                }
+
+                currentX += ndx / 100;
+                currentY += ndy / 100;
+            }
+
+            path.Remove(origin);
+
+            return path;
+        }
+
         public bool IsBlocked(MapCoordinate key, IEntity except = null)
         {
             var entities = EntitiesAt(key)

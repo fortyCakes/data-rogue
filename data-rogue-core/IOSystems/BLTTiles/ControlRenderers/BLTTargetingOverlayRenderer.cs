@@ -20,10 +20,10 @@ namespace data_rogue_core.IOSystems.BLTTiles
         {
             var display = control as TargetingOverlayControl;
             var targetingActivityData = display.TargetingActivity;
-            var targetingSprites = new Dictionary<CellTargeting, ISpriteSheet>
+            var targetingSprites = new Dictionary<TargetingStatus, ISpriteSheet>
             {
-                { CellTargeting.Targetable, spriteManager.Get("targetable") },
-                { CellTargeting.CurrentTarget, spriteManager.Get("current_target") }
+                { TargetingStatus.Targetable, spriteManager.Get("targetable") },
+                { TargetingStatus.Targeted, spriteManager.Get("current_target") }
             };
 
             BLT.Layer(BLTLayers.MapShade);
@@ -45,7 +45,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             int offsetX = renderWidth / 2;
             int offsetY = renderHeight / 2;
 
-            var sprites = new CellTargeting[renderWidth + 2, renderHeight + 2];
+            var sprites = new TargetingStatus[renderWidth + 2, renderHeight + 2];
 
             for (int y = 0; y < renderHeight; y++)
             {
@@ -55,18 +55,11 @@ namespace data_rogue_core.IOSystems.BLTTiles
                     var lookupY = cameraY - offsetY + y;
 
                     var currentCell = new MapCoordinate(currentMap.MapKey, lookupX, lookupY);
+                    var targetingStatus = targetingActivityData.GetTargetingStatus(currentCell);
 
-                    var targetable = targetableCells.Any(c => c == currentCell);
-                    var isTarget = targetingActivityData.IsTargeted(currentCell);
-
-                    var cellTargeting = CellTargeting.None;
-
-                    if (targetable) cellTargeting = CellTargeting.Targetable;
-                    if (isTarget) cellTargeting = CellTargeting.CurrentTarget;
-
-                    if (cellTargeting != CellTargeting.None)
+                    if (targetingStatus != TargetingStatus.NotTargeted)
                     {
-                        sprites[x + 1, y + 1] = cellTargeting;
+                        sprites[x + 1, y + 1] = targetingStatus;
                     }
                 }
             }
@@ -75,9 +68,9 @@ namespace data_rogue_core.IOSystems.BLTTiles
             {
                 for (int x = 0; x < renderWidth; x++)
                 {
-                    var cellTargeting = sprites[x + 1, y + 1];
+                    var targetingStatus = sprites[x + 1, y + 1];
 
-                    if (cellTargeting != CellTargeting.None)
+                    if (targetingStatus != TargetingStatus.NotTargeted)
                     {
 
                         var renderX = control.Position.Left + x * BLTTilesIOSystem.TILE_SPACING;
@@ -94,7 +87,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
                         if (leftConnect) directions |= TileDirections.Left;
                         if (rightConnect) directions |= TileDirections.Right;
 
-                        BLT.Put(renderX, renderY, targetingSprites[cellTargeting].Tile(directions));
+                        BLT.Put(renderX, renderY, targetingSprites[targetingStatus].Tile(directions));
                     }
                 }
             }

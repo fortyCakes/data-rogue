@@ -1,0 +1,56 @@
+﻿"BouncingBolt"
+[Prototype]
+Name: Skill:BouncingBolt
+Singleton: true
+[Skill]
+Cost: 50
+ScriptName: Script: BouncingBolt
+[Description]
+Name: Bouncing Bolt
+Detail: A skill that blasts the target square with lightning, and all squares on the path to it. It continues onwards until it runs out of power, bouncing off walls.
+[Targeting]
+Range: 10
+CellsHit: 0,0
+Rotatable: false
+MoveToCell: false
+PathToTarget: true
+[AttackDefinition]
+AttackClass: Blast
+SpendTime: false
+Damage: Intellect
+Accuracy: 35
+AttackName: Bouncing Bolt
+
+"Script: BouncingBolt"
+[Prototype]
+Name: Script: BouncingBolt
+Singleton: true
+[Script]
+Text: {
+	withTarget(
+	function(target)
+
+		power = 10
+
+		origin = SystemContainer.PositionSystem:CoordinateOf(User)
+		pathtotarget = SystemContainer.PositionSystem:DirectPath(origin, target)
+
+		attackAllCells(pathtotarget, User, Entity)
+
+		dx = origin.X - target.X
+		dy = origin.Y - target.Y
+		pathLength = math.sqrt(dx * dx + dy * dy)
+		power = power - pathLength
+
+		while (power > 0)
+		do
+			SystemContainer.MessageSystem:Write('Bolt power.' .. power)
+			power = power - 1
+		end
+
+
+		onComplete()
+	end)
+	
+	requestTarget(User, Entity)
+}

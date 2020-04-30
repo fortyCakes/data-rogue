@@ -37,19 +37,19 @@ namespace data_rogue_core.Activities
             get => _currentTarget;
             set
             {
+                _currentTarget = value;
+
                 if (TargetingData.PathToTarget)
                 {
                     if (CurrentTarget != null && TargetFrom != null)
                     {
-                        _path = _systemContainer.PositionSystem.Path(TargetFrom, CurrentTarget) ?? new List<MapCoordinate>();
+                        _path = _systemContainer.PositionSystem.DirectPath(TargetFrom, CurrentTarget) ?? new List<MapCoordinate>();
                     }
                     else
                     {
                         _path = new List<MapCoordinate>();
                     }
                 }
-
-                _currentTarget = value;
             }
         }
 
@@ -91,10 +91,6 @@ namespace data_rogue_core.Activities
                     return;
                 }
             }
-        }
-
-        public void Initialise()
-        {
         }
 
         public void Complete()
@@ -195,22 +191,22 @@ namespace data_rogue_core.Activities
             }
         }
 
-        public bool IsTargeted(MapCoordinate currentCell)
+        public TargetingStatus GetTargetingStatus(MapCoordinate currentCell)
         {
             foreach (var diff in TargetingData.CellsHit)
             {
                 if (currentCell == CurrentTarget + Rotation * diff)
                 {
-                    return true;
+                    return TargetingStatus.Targeted;
                 }
             }
 
             if (_path.Contains(currentCell))
             {
-                return true;
+                return TargetingStatus.Targeted;
             }
 
-            return false;
+            return TargetingStatus.NotTargeted;
         }
     }
 }

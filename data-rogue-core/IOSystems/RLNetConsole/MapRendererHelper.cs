@@ -12,7 +12,7 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
 {
     public static class MapRendererHelper
     {
-        public static void DrawCell(RLConsole mapConsole, int x, int y, IPositionSystem positionSystem, IMap currentMap, int lookupX, int lookupY, List<MapCoordinate> playerFov, CellTargeting cellTargeting = CellTargeting.None)
+        public static void DrawCell(RLConsole mapConsole, int x, int y, IPositionSystem positionSystem, IMap currentMap, int lookupX, int lookupY, List<MapCoordinate> playerFov, TargetingStatus cellTargeting = TargetingStatus.NotTargeted)
         {
             MapCoordinate coordinate = new MapCoordinate(currentMap.MapKey, lookupX, lookupY);
             var backColor = RLColor.Black;
@@ -28,16 +28,16 @@ namespace data_rogue_core.Renderers.ConsoleRenderers
             mapConsole.Set(x, y, foreColor, backColor, appearance.Glyph);
         }
 
-        private static RLColor ApplyTargetingColor(CellTargeting cellTargeting, RLColor backColor, bool isInFov)
+        private static RLColor ApplyTargetingColor(TargetingStatus cellTargeting, RLColor backColor, bool isInFov)
         {
             if (isInFov)
             {
-                if (cellTargeting.HasFlag(CellTargeting.CurrentTarget))
+                if (cellTargeting.HasFlag(TargetingStatus.Targeted))
                 {
                     return RLColor.Red;
                 }
 
-                if (cellTargeting.HasFlag(CellTargeting.Targetable))
+                if (cellTargeting.HasFlag(TargetingStatus.Targetable))
                 {
                     return RLColor.LightRed;
                 }

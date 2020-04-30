@@ -77,6 +77,7 @@
     <Compile Include="Activities\IDataRogueControl.cs" />
     <Compile Include="Activities\MouseControlHelper.cs" />
     <Compile Include="Activities\PositionEventHandler.cs" />
+    <Compile Include="Activities\TargetingStatus.cs" />
     <Compile Include="Components\AttackDefinition.cs" />
     <Compile Include="Components\Targeting.cs" />
     <Compile Include="Data\VectorList.cs" />
@@ -298,6 +299,7 @@
     <Compile Include="IOSystems\RLNetConsole\ControlRenderers\RLNetMessageLogRenderer.cs" />
     <Compile Include="IOSystems\RLNetConsole\ControlRenderers\RLNetMultipleChoiceRenderer.cs" />
     <Compile Include="IOSystems\RLNetConsole\ControlRenderers\RLNetStatArrayRenderer.cs" />
+    <Compile Include="IOSystems\RLNetConsole\ControlRenderers\RLNetTargetingOverlayRenderer.cs" />
     <Compile Include="IOSystems\RLNetConsole\ControlRenderers\RLNetTextFormDataRenderer.cs" />
     <Compile Include="IOSystems\RLNetConsole\IRenderingConfiguration.cs" />
     <Compile Include="IOSystems\RLNetConsole\RLNetConsoleIOSystem.cs" />
@@ -330,7 +332,6 @@
     <Compile Include="Menus\DynamicMenus\EquipmentMenu.cs" />
     <Compile Include="Menus\DynamicMenus\InventoryMenu.cs" />
     <Compile Include="Menus\MenuAction.cs" />
-    <Compile Include="IOSystems\RLNetConsole\CellTargeting.cs" />
     <Compile Include="Forms\Form.cs" />
     <Compile Include="IOSystems\RLNetConsole\ConsoleRendererHelper.cs" />
     <Compile Include="IOSystems\RLNetConsole\MapRendererHelper.cs" />
