@@ -27,27 +27,95 @@ Name: Script: BouncingBolt
 Singleton: true
 [Script]
 Text: {
+	import ('data_rogue_core', 'data_rogue_core.Maps')
+
+	local function coordinate_equal (c1, c2)
+		return c1[1] == c2[1] and c1[2] == c2[2]
+	end
+
+	local function has_value (tab, val)
+		for index, value in ipairs(tab) do
+			if coordinate_equal(value,val) then
+				return true
+			end
+		end
+
+		return false
+	end
+
 	withTarget(
 	function(target)
 
 		power = 10
 
 		origin = SystemContainer.PositionSystem:CoordinateOf(User)
-		pathtotarget = SystemContainer.PositionSystem:DirectPath(origin, target)
 
-		attackAllCells(pathtotarget, User, Entity)
-
-		dx = origin.X - target.X
-		dy = origin.Y - target.Y
+		dx = target.X - origin.X
+		dy = target.Y - origin.Y 
 		pathLength = math.sqrt(dx * dx + dy * dy)
-		power = power - pathLength
 
-		while (power > 0)
-		do
-			SystemContainer.MessageSystem:Write('Bolt power.' .. power)
-			power = power - 1
+		if pathLength > 0 then
+			key = origin.Key
+			currentX = origin.X + 0.5;
+			currentY = origin.Y + 0.5;
+			firstPass = true
+
+			stepLength = 0.1
+
+			ndx = stepLength * dx / pathLength
+			ndy = stepLength * dy / pathLength
+
+			originCoordinate = {origin.X, origin.Y}
+			lastCoordinate = originCoordinate
+			--SystemContainer.MessageSystem:Write('Starting lightning bolt resolution. Origin {' .. origin.X .. ',' .. origin.Y .. '}, ndx = ' .. ndx .. ', ndy = ' .. ndy)
+
+			list = {}
+
+			while (power > 0)
+			do
+				currentX = currentX + ndx
+				currentY = currentY + ndy
+
+				coordinate = { math.floor(currentX), math.floor(currentY) }
+
+
+				if (has_value(list, coordinate) or (firstPass and coordinate_equal(coordinate, originCoordinate))) then
+					-- skip over
+				else
+					mapCoordinate = MapCoordinate(origin.Key, math.floor(currentX), math.floor(currentY))
+					blocked = SystemContainer.PositionSystem:IsBlocked(mapCoordinate, true)
+
+					if (blocked) then
+						firstPass = false
+						-- resolve list
+						for i, coord in ipairs(list) do
+							attackCellsHit(MapCoordinate(origin.Key, coord[1], coord[2]), User, Entity)
+						end
+						--clear it
+						list = {}
+						
+						--then bounce
+						if (coordinate[1] ~= lastCoordinate[1]) then
+							ndx = -ndx
+						end
+
+						if (coordinate[2] ~= lastCoordinate[2]) then
+							ndy = -ndy
+						end
+					else
+						table.insert(list, coordinate)
+						lastCoordinate = coordinate
+					end
+				end
+
+				power = power - stepLength
+			end
+
+			for i, coord in ipairs(list) do
+				attackCellsHit(MapCoordinate(origin.Key, coord[1], coord[2]), User, Entity)
+			end
+
 		end
-
 
 		onComplete()
 	end)

@@ -30,7 +30,7 @@ Text: {
 	withTarget(
 	function(target)
 		
-		blocked = isCellBlocked(target, User)
+		blocked = isCellBlocked(target, false, User)
 
 		if blocked then
 			SystemContainer.MessageSystem:Write('You can\'t flash to there - it\'s blocked.')

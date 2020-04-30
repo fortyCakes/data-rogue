@@ -206,6 +206,11 @@ namespace data_rogue_core.Activities
                 return TargetingStatus.Targeted;
             }
 
+            if (_targetableCells.Contains(currentCell))
+            {
+                return TargetingStatus.Targetable;
+            }
+
             return TargetingStatus.NotTargeted;
         }
     }

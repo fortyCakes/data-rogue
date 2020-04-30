@@ -14,7 +14,7 @@ namespace data_rogue_core.Systems
         void SetPosition(IEntity entity, MapCoordinate mapCoordinate);
         void RemovePosition(IEntity entity);
         bool Any(MapCoordinate key);
-        bool IsBlocked(MapCoordinate key, IEntity except = null);
+        bool IsBlocked(MapCoordinate key, bool cellsOnly = false, IEntity except = null);
         IEnumerable<MapCoordinate> Path(MapCoordinate origin, MapCoordinate destination);
         IEnumerable<MapCoordinate> DirectPath(MapCoordinate targetFrom, MapCoordinate currentTarget);
     }

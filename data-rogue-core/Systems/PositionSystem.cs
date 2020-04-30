@@ -163,10 +163,11 @@ namespace data_rogue_core.Systems
             return path;
         }
 
-        public bool IsBlocked(MapCoordinate key, IEntity except = null)
+        public bool IsBlocked(MapCoordinate key, bool cellsOnly = false, IEntity except = null)
         {
-            var entities = EntitiesAt(key)
-                .Where(e => e != except);
+            var entities = cellsOnly ? 
+                new List<IEntity> { _mapSystem.MapCollection[key.Key].CellAt(key) } 
+                : EntitiesAt(key).Where(e => e != except);
 
             var components = entities
                 .Select(e => e.TryGet<Physical>())
