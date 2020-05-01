@@ -1,4 +1,5 @@
-﻿using data_rogue_core.Maps;
+﻿using data_rogue_core.EntityEngineSystem;
+using data_rogue_core.Maps;
 using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.Systems
@@ -12,5 +13,7 @@ namespace data_rogue_core.Systems
         }
 
         public MapCollection MapCollection { get; private set; }
+
+        public IEntity CellAt(MapCoordinate coordinate) => MapCollection[coordinate.Key].CellAt(coordinate);
     }
 }

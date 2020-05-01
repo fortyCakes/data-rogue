@@ -54,7 +54,7 @@ namespace data_rogue_core.Activities
             systemContainer.ControlSystem.HoveredCoordinate = mapCoordinate;
             var player = systemContainer.PlayerSystem.Player;
 
-            if (mouse.IsLeftClick && systemContainer.TimeSystem.WaitingForInput)
+            if (mouse.IsLeftClick && systemContainer.TimeSystem.WaitingForInput && CanAutowalkToCoordinate(systemContainer, mapCoordinate))
             {
                 var playerLocation = systemContainer.PositionSystem.CoordinateOf(player);
                 var map = systemContainer.MapSystem.MapCollection[systemContainer.RendererSystem.CameraPosition.Key];
@@ -92,13 +92,28 @@ namespace data_rogue_core.Activities
             }
         }
 
+        private bool CanAutowalkToCoordinate(ISystemContainer systemContainer, MapCoordinate mapCoordinate)
+        {
+            return
+                mapCoordinate != null &&
+                systemContainer.MapSystem.MapCollection[mapCoordinate.Key].SeenCoordinates.Contains(mapCoordinate);
+        }
+
         public override IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
         {
             yield return new LinesControl { Position = new Rectangle(0, 0, width, height), Configuration = _ioSystemConfiguration };
 
             foreach (var mapConfiguration in _ioSystemConfiguration.MapConfigurations)
             {
-                yield return new MapControl { Position = mapConfiguration.Position };
+                if (mapConfiguration.GetType() == typeof(MinimapConfiguration))
+                {
+                    yield return new MinimapControl { Position = mapConfiguration.Position };
+                }
+
+                if (mapConfiguration.GetType() == typeof(MapConfiguration))
+                {
+                    yield return new MapControl {Position = mapConfiguration.Position};
+                }
             }
 
             var player = systemContainer.PlayerSystem.Player;
@@ -112,7 +127,8 @@ namespace data_rogue_core.Activities
                 {
                     var controlType = display.ControlType;
 
-                    var control = (IDataRogueInfoControl)Activator.CreateInstance(controlType);
+                    var instance = Activator.CreateInstance(controlType);
+                    var control = (IDataRogueInfoControl)instance;
                     control.SetData(player, display);
                     control.Position = new Rectangle(control.Position.X, control.Position.Y, statsConfiguration.Position.Width, 0);
 

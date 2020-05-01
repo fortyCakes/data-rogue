@@ -4,7 +4,7 @@ using data_rogue_core.Renderers.ConsoleRenderers;
 
 namespace data_rogue_core.IOSystems
 {
-    public class StatsConfiguration : IRendereringConfiguration
+    public class StatsConfiguration : IRenderingConfiguration
     {
         public Rectangle Position { get; set; }
         public List<InfoDisplay> Displays { get; set; } = new List<InfoDisplay>();

@@ -10,7 +10,7 @@ namespace data_rogue_core.IOSystems.RLNetConsole
 {
     public class ConsoleUnifiedRenderer : IUnifiedRenderer
     {
-        private Dictionary<IRendereringConfiguration, RLConsole> Consoles = new Dictionary<IRendereringConfiguration, RLConsole>();
+        private Dictionary<IRenderingConfiguration, RLConsole> Consoles = new Dictionary<IRenderingConfiguration, RLConsole>();
         private IOSystemConfiguration _ioSystemConfiguration;
         private List<IDataRogueControlRenderer> _controlRenderers;
 

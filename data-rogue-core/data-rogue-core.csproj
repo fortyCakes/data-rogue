@@ -80,6 +80,7 @@
     <Compile Include="Activities\TargetingStatus.cs" />
     <Compile Include="Components\AttackDefinition.cs" />
     <Compile Include="Components\Targeting.cs" />
+    <Compile Include="Controls\MinimapControl.cs" />
     <Compile Include="Data\VectorList.cs" />
     <Compile Include="Controls\BackgroundControl.cs" />
     <Compile Include="Controls\ButtonControl.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMenuItemRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMenuSelectorControlRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMessageLogRenderer.cs" />
+    <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMinimapRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMultipleChoiceFormDataRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTStatsFormRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTTargetingOverlayRenderer.cs" />
@@ -183,7 +185,7 @@
     <Compile Include="IOSystems\BLTTiles\ISpriteManager.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTKeyConverter.cs" />
     <Compile Include="IOSystems\IOSystemConfiguration.cs" />
-    <Compile Include="IOSystems\IRendereringConfiguration.cs" />
+    <Compile Include="IOSystems\IRenderingConfiguration.cs" />
     <Compile Include="IOSystems\IUnifiedRenderer.cs" />
     <Compile Include="IOSystems\KeyCombination.cs" />
     <Compile Include="Data\Message.cs" />
@@ -285,6 +287,7 @@
     <Compile Include="IOSystems\IIOSystem.cs" />
     <Compile Include="IOSystems\MapConfiguration.cs" />
     <Compile Include="IOSystems\MessageConfiguration.cs" />
+    <Compile Include="IOSystems\MinimapConfiguration.cs" />
     <Compile Include="IOSystems\MouseData.cs" />
     <Compile Include="IOSystems\RLNetConsole\ConsoleUnifiedRenderer.cs" />
     <Compile Include="IOSystems\RLNetConsole\ControlRenderers\RLNetBackgroundRenderer.cs" />
@@ -477,6 +480,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Misc\current_target.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Misc\minimap_tile.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Misc\shade_1.png">

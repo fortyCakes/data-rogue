@@ -2,7 +2,7 @@
 
 namespace data_rogue_core.IOSystems
 {
-    public class MessageConfiguration : IRendereringConfiguration
+    public class MessageConfiguration : IRenderingConfiguration
     {
         public Rectangle Position { get; set; }
 

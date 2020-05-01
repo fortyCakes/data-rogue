@@ -2,7 +2,7 @@
 
 namespace data_rogue_core.IOSystems
 {
-    public interface IRendereringConfiguration
+    public interface IRenderingConfiguration
     {
         Rectangle Position { get; set; }
     }

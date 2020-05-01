@@ -23,7 +23,7 @@ Amount: 0
 Aura: 000/500
 BaseAura: 100
 [Health]
-HP: 25/25
+HP: 100/100
 [TiltFighter]
 Tilt: 0/100
 [Stat]

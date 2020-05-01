@@ -222,7 +222,7 @@ namespace data_rogue_core.UnitTests.Systems
             positionSystem.SetPosition(mover, testMapCoordinate);
             systemContainer.EntityEngine.AddComponent(mover, new Physical { Passable = false });
 
-            var result = positionSystem.IsBlocked(testMapCoordinate, mover);
+            var result = positionSystem.IsBlocked(testMapCoordinate, false, mover);
 
             result.Should().BeFalse();
         }
