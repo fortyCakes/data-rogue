@@ -54,7 +54,7 @@ namespace data_rogue_core.Activities
             systemContainer.ControlSystem.HoveredCoordinate = mapCoordinate;
             var player = systemContainer.PlayerSystem.Player;
 
-            if (mouse.IsLeftClick && systemContainer.TimeSystem.WaitingForInput)
+            if (mouse.IsLeftClick && systemContainer.TimeSystem.WaitingForInput && CanAutowalkToCoordinate(systemContainer, mapCoordinate))
             {
                 var playerLocation = systemContainer.PositionSystem.CoordinateOf(player);
                 var map = systemContainer.MapSystem.MapCollection[systemContainer.RendererSystem.CameraPosition.Key];
@@ -90,6 +90,13 @@ namespace data_rogue_core.Activities
                     systemContainer.EventSystem.Try(EventType.Action, player, action);
                 }
             }
+        }
+
+        private bool CanAutowalkToCoordinate(ISystemContainer systemContainer, MapCoordinate mapCoordinate)
+        {
+            return
+                mapCoordinate != null &&
+                systemContainer.MapSystem.MapCollection[mapCoordinate.Key].SeenCoordinates.Contains(mapCoordinate);
         }
 
         public override IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)

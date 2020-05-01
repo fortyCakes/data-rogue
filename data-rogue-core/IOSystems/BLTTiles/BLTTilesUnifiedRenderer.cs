@@ -55,15 +55,30 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
         public MapCoordinate GetMapCoordinateFromMousePosition(MapCoordinate cameraPosition, int x, int y)
         {
-            foreach (MapConfiguration map in _ioSystemConfiguration.MapConfigurations)
-            {
-                if (IsOnMap(map, x, y))
-                {
-                    var lookupX = cameraPosition.X - map.Position.Width / (2 * BLTTilesIOSystem.TILE_SPACING) + x / BLTTilesIOSystem.TILE_SPACING;
-                    var lookupY = cameraPosition.Y - map.Position.Height / (2 * BLTTilesIOSystem.TILE_SPACING) + y / BLTTilesIOSystem.TILE_SPACING;
+            var onMaps = _ioSystemConfiguration.MapConfigurations.Where(m => IsOnMap(m, x, y));
 
-                    return new MapCoordinate(cameraPosition.Key, lookupX, lookupY);
-                }
+            var map = onMaps.Last();
+
+            if (map.GetType() == typeof(MapConfiguration))
+            {
+                x -= map.Position.Left;
+                y -= map.Position.Top;
+                
+                var lookupX = cameraPosition.X - map.Position.Width / (2 * BLTTilesIOSystem.TILE_SPACING) + x / BLTTilesIOSystem.TILE_SPACING;
+                var lookupY = cameraPosition.Y - map.Position.Height / (2 * BLTTilesIOSystem.TILE_SPACING) + y / BLTTilesIOSystem.TILE_SPACING;
+
+                return new MapCoordinate(cameraPosition.Key, lookupX, lookupY);
+            }
+
+            if (map.GetType() == typeof(MinimapConfiguration))
+            {
+                x -= map.Position.Left;
+                y -= map.Position.Top;
+
+                var lookupX = cameraPosition.X - map.Position.Width / 2 + x;
+                var lookupY = cameraPosition.Y - map.Position.Height / 2 + y;
+
+                return new MapCoordinate(cameraPosition.Key, lookupX, lookupY);
             }
 
             return null;
