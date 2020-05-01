@@ -1,5 +1,12 @@
 ﻿"Sprites"
 [SpriteSheet]
+Name: minimap_tile
+Path: Images/Sprites/Misc/minimap_tile.png
+Type: SingleSprite
+SpriteWidth: 4
+SpriteHeight: 4
+Scaling: 2
+[SpriteSheet]
 Name: selector_left
 Path: Images/Sprites/Misc/selector-left.png
 Type: SingleSprite

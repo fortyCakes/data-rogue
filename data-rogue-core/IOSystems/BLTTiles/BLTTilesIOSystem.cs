@@ -28,14 +28,29 @@ namespace data_rogue_core.IOSystems.BLTTiles
             TileWidth = 32,
             WindowTitle = "data-rogue window title",
             MapConfigurations = new List<MapConfiguration> { new MapConfiguration { Position = new Rectangle(0, 0, 40 * TILE_SPACING, 25 * TILE_SPACING) } },
-            StatsConfigurations = new List<StatsConfiguration> { new StatsConfiguration { Position = new Rectangle(2, 2, 40 * TILE_SPACING - 2, 25 * TILE_SPACING - 2), Displays = new List<InfoDisplay> {
-                new InfoDisplay { ControlType = typeof(ComponentCounter), Parameters = "Health,HP", BackColor = Color.Red},
-                new InfoDisplay { ControlType = typeof(ComponentCounter), Parameters = "AuraFighter,Aura", BackColor = Color.Gold},
-                new InfoDisplay { ControlType = typeof(ComponentCounter), Parameters = "TiltFighter,Tilt", BackColor = Color.Purple},
-                new InfoDisplay { ControlType =  typeof(Spacer) },
-                new InfoDisplay { ControlType =  typeof(HoveredEntityDisplayBox), Parameters = "Health,HP;AuraFighter,Aura;TiltFighter,Tilt" }
-
-            } } },
+            StatsConfigurations = new List<StatsConfiguration>
+            {
+                new StatsConfiguration
+                {
+                    Position = new Rectangle(2, 2, 40 * TILE_SPACING - 2, 25 * TILE_SPACING - 2),
+                    Displays = new List<InfoDisplay>
+                    {
+                        new InfoDisplay { ControlType = typeof(ComponentCounter), Parameters = "Health,HP", BackColor = Color.Red },
+                        new InfoDisplay { ControlType = typeof(ComponentCounter), Parameters = "AuraFighter,Aura", BackColor = Color.Gold },
+                        new InfoDisplay { ControlType = typeof(ComponentCounter), Parameters = "TiltFighter,Tilt", BackColor = Color.Purple },
+                        new InfoDisplay { ControlType =  typeof(Spacer) },
+                        new InfoDisplay { ControlType =  typeof(HoveredEntityDisplayBox), Parameters = "Health,HP;AuraFighter,Aura;TiltFighter,Tilt" }
+                    }
+                },
+                new StatsConfiguration
+                {
+                    Position = new Rectangle(40 * TILE_SPACING - 40 -32, 0, 64, 64),
+                    Displays = new List<InfoDisplay>
+                    {
+                        new InfoDisplay { ControlType = typeof(MinimapControl), BackColor = Color.Black }
+                    }
+                }
+            },
             MessageConfigurations = new List<MessageConfiguration> { new MessageConfiguration {
                 Position = new Rectangle(2, 15 * TILE_SPACING, 40 * TILE_SPACING, 10 * TILE_SPACING - 2),
                 NumberOfMessages = 15} }

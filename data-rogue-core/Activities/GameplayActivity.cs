@@ -112,7 +112,8 @@ namespace data_rogue_core.Activities
                 {
                     var controlType = display.ControlType;
 
-                    var control = (IDataRogueInfoControl)Activator.CreateInstance(controlType);
+                    var instance = Activator.CreateInstance(controlType);
+                    var control = (IDataRogueInfoControl)instance;
                     control.SetData(player, display);
                     control.Position = new Rectangle(control.Position.X, control.Position.Y, statsConfiguration.Position.Width, 0);
 
