@@ -3,8 +3,8 @@
 Name: minimap_tile
 Path: Images/Sprites/Misc/minimap_tile.png
 Type: SingleSprite
-SpriteWidth: 4
-SpriteHeight: 4
+SpriteWidth: 2
+SpriteHeight: 2
 Scaling: 2
 [SpriteSheet]
 Name: selector_left

@@ -26,12 +26,12 @@ namespace data_rogue_core.IOSystems.BLTTiles
             var cameraX = cameraPosition.X;
             var cameraY = cameraPosition.Y;
 
-            int offsetX = 16;
-            int offsetY = 16;
+            int offsetX = 31;
+            int offsetY = 31;
 
-            for (int x = 0; x < 31; x++)
+            for (int x = 0; x < 64; x++)
             {
-                for (int y = 0; y < 31; y++)
+                for (int y = 0; y < 64; y++)
                 {
                     var lookupX = cameraX - offsetX + x;
                     var lookupY = cameraY - offsetY + y;
@@ -43,7 +43,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
                     if (color != Color.Transparent)
                     {
                         BLT.Color(color);
-                        BLT.Put(control.Position.Left + x * BLTTilesIOSystem.TILE_SPACING / 4, control.Position.Top + y * BLTTilesIOSystem.TILE_SPACING / 4, sprite);
+                        BLT.Put(control.Position.Left + x * BLTTilesIOSystem.TILE_SPACING / 8, control.Position.Top + y * BLTTilesIOSystem.TILE_SPACING / 8, sprite);
                     }
                 }
             }
@@ -126,7 +126,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
         protected override Size GetSizeInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
-            return new Size(32 * BLTTilesIOSystem.TILE_SPACING / 4, 32 * BLTTilesIOSystem.TILE_SPACING / 4);
+            return new Size(32 * BLTTilesIOSystem.TILE_SPACING / 8, 32 * BLTTilesIOSystem.TILE_SPACING / 8);
         }
     }
 }
