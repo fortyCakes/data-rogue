@@ -51,7 +51,7 @@ namespace data_rogue_one
                     typeof(RandomiseDamageRule),
                     typeof(ApplyAegisRule),
                     typeof(AddStatToAccuracyRule),
-                    typeof(OnAttackProcEnchantmentRule),
+                    typeof(OnAttackProcEnchantmentRule)
                 };
 
                 list.AddRange(ApplyActionRule.AllActionRules);
@@ -60,7 +60,8 @@ namespace data_rogue_one
                 var customActions = new List<Type>
                 {
                     typeof(RestAction),
-                    typeof(ExamineStatusAction)
+                    typeof(ExamineStatusAction),
+                    typeof(PlayerStatusAction)
                 };
 
                 list.AddRange(customActions);

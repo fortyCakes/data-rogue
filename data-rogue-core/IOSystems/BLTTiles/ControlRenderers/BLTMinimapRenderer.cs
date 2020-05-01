@@ -26,19 +26,30 @@ namespace data_rogue_core.IOSystems.BLTTiles
             var cameraX = cameraPosition.X;
             var cameraY = cameraPosition.Y;
 
-            int offsetX = 31;
-            int offsetY = 31;
+            var maxX = control.Position.Width;
+            var maxY = control.Position.Height;
 
-            for (int x = 0; x < 64; x++)
+            int offsetX = maxX / 2;
+            int offsetY = maxY / 2;
+
+            for (int x = 0; x < maxX; x++)
             {
-                for (int y = 0; y < 64; y++)
+                for (int y = 0; y < maxY; y++)
                 {
                     var lookupX = cameraX - offsetX + x;
                     var lookupY = cameraY - offsetY + y;
 
-                    MapCoordinate coordinate = new MapCoordinate(currentMap.MapKey, lookupX, lookupY);
-                    var isInFov = playerFov.Contains(coordinate);
-                    var color = DetermineMapColor(systemContainer, coordinate, currentMap, isInFov);
+                    Color color;
+                    if (x == 0 || y == 0 || x == maxX-1 || y == maxY-1)
+                    {
+                        color = Color.SaddleBrown;
+                    }
+                    else
+                    {
+                        MapCoordinate coordinate = new MapCoordinate(currentMap.MapKey, lookupX, lookupY);
+                        var isInFov = playerFov.Contains(coordinate);
+                        color = DetermineMapColor(systemContainer, coordinate, currentMap, isInFov);
+                    }
 
                     if (color != Color.Transparent)
                     {
@@ -51,7 +62,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
         private Color DetermineMapColor(ISystemContainer systemContainer, MapCoordinate coordinate, IMap currentMap, bool isInFov)
         {
-            if (!isInFov && !currentMap.SeenCoordinates.Contains(coordinate)) return Color.Transparent;
+            if (!isInFov && !currentMap.SeenCoordinates.Contains(coordinate)) return Color.SandyBrown;
 
             var color = DetermineBaseMapColor(isInFov, systemContainer, coordinate);
 
@@ -77,7 +88,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             Color baseColor;
             var entities = systemContainer.PositionSystem.EntitiesAt(coordinate);
 
-            if (entities.Any(e => e.Has<PlayerControlledBehaviour>()))
+            if (entities.Any(e => e == systemContainer.PlayerSystem.Player))
             {
                 return Color.Green;
             }

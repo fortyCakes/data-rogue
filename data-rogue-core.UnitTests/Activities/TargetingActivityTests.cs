@@ -233,7 +233,7 @@ namespace data_rogue_core.UnitTests.Activities
             _targetingActivity.CurrentTarget = new MapCoordinate("Map", 0, 0);
             _targetingActivity.TargetingData.CellsHit = new List<Vector> { new Vector(0, 0) };
 
-            _targetingActivity.GetTargetingStatus(new MapCoordinate("Map", 1, 0)).Should().Be(TargetingStatus.NotTargeted);
+            _targetingActivity.GetTargetingStatus(new MapCoordinate("Map", 15, 0)).Should().Be(TargetingStatus.NotTargeted);
         }
 
         [Test]

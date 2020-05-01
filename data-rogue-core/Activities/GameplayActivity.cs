@@ -98,7 +98,15 @@ namespace data_rogue_core.Activities
 
             foreach (var mapConfiguration in _ioSystemConfiguration.MapConfigurations)
             {
-                yield return new MapControl { Position = mapConfiguration.Position };
+                if (mapConfiguration.GetType() == typeof(MinimapConfiguration))
+                {
+                    yield return new MinimapControl { Position = mapConfiguration.Position };
+                }
+
+                if (mapConfiguration.GetType() == typeof(MapConfiguration))
+                {
+                    yield return new MapControl {Position = mapConfiguration.Position};
+                }
             }
 
             var player = systemContainer.PlayerSystem.Player;

@@ -185,7 +185,7 @@
     <Compile Include="IOSystems\BLTTiles\ISpriteManager.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTKeyConverter.cs" />
     <Compile Include="IOSystems\IOSystemConfiguration.cs" />
-    <Compile Include="IOSystems\IRendereringConfiguration.cs" />
+    <Compile Include="IOSystems\IRenderingConfiguration.cs" />
     <Compile Include="IOSystems\IUnifiedRenderer.cs" />
     <Compile Include="IOSystems\KeyCombination.cs" />
     <Compile Include="Data\Message.cs" />
@@ -287,6 +287,7 @@
     <Compile Include="IOSystems\IIOSystem.cs" />
     <Compile Include="IOSystems\MapConfiguration.cs" />
     <Compile Include="IOSystems\MessageConfiguration.cs" />
+    <Compile Include="IOSystems\MinimapConfiguration.cs" />
     <Compile Include="IOSystems\MouseData.cs" />
     <Compile Include="IOSystems\RLNetConsole\ConsoleUnifiedRenderer.cs" />
     <Compile Include="IOSystems\RLNetConsole\ControlRenderers\RLNetBackgroundRenderer.cs" />

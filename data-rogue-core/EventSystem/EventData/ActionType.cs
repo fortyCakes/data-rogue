@@ -20,6 +20,7 @@
         Rest,
         Examine,
         ResolveRangedAttack,
-        FollowPath
+        FollowPath,
+        PlayerStatus
     }
 }

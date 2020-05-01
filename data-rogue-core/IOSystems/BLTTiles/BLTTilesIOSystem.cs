@@ -27,7 +27,11 @@ namespace data_rogue_core.IOSystems.BLTTiles
             TileHeight = 32,
             TileWidth = 32,
             WindowTitle = "data-rogue window title",
-            MapConfigurations = new List<MapConfiguration> { new MapConfiguration { Position = new Rectangle(0, 0, 40 * TILE_SPACING, 25 * TILE_SPACING) } },
+            MapConfigurations = new List<MapConfiguration>
+            {
+                new MapConfiguration { Position = new Rectangle(0, 0, 40 * TILE_SPACING, 25 * TILE_SPACING) },
+                new MinimapConfiguration {Position = new Rectangle(40 * TILE_SPACING - 66, 2, 64, 64)}
+            },
             StatsConfigurations = new List<StatsConfiguration>
             {
                 new StatsConfiguration
@@ -40,14 +44,6 @@ namespace data_rogue_core.IOSystems.BLTTiles
                         new InfoDisplay { ControlType = typeof(ComponentCounter), Parameters = "TiltFighter,Tilt", BackColor = Color.Purple },
                         new InfoDisplay { ControlType =  typeof(Spacer) },
                         new InfoDisplay { ControlType =  typeof(HoveredEntityDisplayBox), Parameters = "Health,HP;AuraFighter,Aura;TiltFighter,Tilt" }
-                    }
-                },
-                new StatsConfiguration
-                {
-                    Position = new Rectangle(40 * TILE_SPACING - 40 -32, 0, 64, 64),
-                    Displays = new List<InfoDisplay>
-                    {
-                        new InfoDisplay { ControlType = typeof(MinimapControl), BackColor = Color.Black }
                     }
                 }
             },
