@@ -91,7 +91,7 @@ namespace data_rogue_core.World.GenerationStrategies
 
             for (int i = 0; i < retries; i++)
             {
-                emptyLocation = map.GetQuickEmptyPosition(systemContainer.PrototypeSystem, systemContainer.PositionSystem, random);
+                emptyLocation = map.GetQuickEmptyPosition(systemContainer.PositionSystem, random);
 
                 if (emptyLocation != null) break;
             }

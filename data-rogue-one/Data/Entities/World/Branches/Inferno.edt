@@ -1,0 +1,23 @@
+﻿"Branch:Inferno"
+[Prototype]
+Name: Branch:Inferno
+[Branch]
+BranchName: Branch:Inferno
+Depth: 3
+[Biome]
+Name: Inferno
+[BasicDungeonBranchMapGenerator]
+FloorCell: Cell:InfernoFloor
+WallCell: Cell:InfernoWall
+[BiomeBasedMonsterGeneration]
+BasePower: 3
+Density: 0.01
+[RandomItemGeneration]
+BasePower: 3
+Density: 0.005
+[DefaultEntrancePortalGeneration]
+[StairGeneration]
+[StairGeneration]
+[PlaceSpecificItem]
+Floor: 3
+Item: Item:MacGuffin

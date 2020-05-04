@@ -3,7 +3,7 @@
 Name: Branch:Dungeon
 [Branch]
 BranchName: Branch:Dungeon
-Depth: 5
+Depth: 2
 [Biome]
 Name: Dungeon
 [BasicDungeonBranchMapGenerator]
@@ -14,9 +14,7 @@ Density: 0.01
 BasePower: 0
 Density: 0.01
 [DefaultEntrancePortalGeneration]
+[DefaultExitPortalGeneration]
 [StairGeneration]
 [StairGeneration]
 [StairGeneration]
-[PlaceSpecificItem]
-Floor: 5
-Item: Item:MacGuffin

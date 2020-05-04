@@ -5,6 +5,8 @@ namespace data_rogue_core.Maps.Generators
 {
     public class BasicDungeonMapGenerator : IMapGenerator
     {
+        public string FloorCell { get; }
+        public string WallCell { get; }
         private IEntityEngine Engine { get; }
         public IPrototypeSystem PrototypeSystem { get; }
 
@@ -17,8 +19,10 @@ namespace data_rogue_core.Maps.Generators
         private IEntity wallCell;
         private IEntity floorCell;
 
-        public BasicDungeonMapGenerator(ISystemContainer systemContainer)
+        public BasicDungeonMapGenerator(ISystemContainer systemContainer, string floorCell, string wallCell)
         {
+            FloorCell = floorCell;
+            WallCell = wallCell;
             Engine = systemContainer.EntityEngine;
             PrototypeSystem = systemContainer.PrototypeSystem;
         }
@@ -27,8 +31,8 @@ namespace data_rogue_core.Maps.Generators
         {
             Random = random;
 
-            wallCell = PrototypeSystem.Get("Cell:Wall");
-            floorCell = PrototypeSystem.Get("Cell:Empty");
+            wallCell = PrototypeSystem.Get(WallCell);
+            floorCell = PrototypeSystem.Get(FloorCell);
 
             var map = new Map(mapName, wallCell);
 

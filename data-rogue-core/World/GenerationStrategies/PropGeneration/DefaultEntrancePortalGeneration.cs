@@ -16,4 +16,15 @@ namespace data_rogue_core.World.GenerationStrategies
         }
         
     }
+
+    public class DefaultExitPortalGeneration : BaseEntityGenerationStrategy
+    {
+        private class ItemList : Dictionary<int, HashSet<IEntity>> { }
+
+        public override void Generate(ISystemContainer systemContainer, GeneratedBranch generatedBranch, IEntity branch, IRandom random)
+        {
+            BranchGenerator.PlaceDefaultExitPortal(systemContainer, generatedBranch, random);
+        }
+
+    }
 }

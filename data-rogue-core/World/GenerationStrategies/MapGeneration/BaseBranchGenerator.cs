@@ -186,8 +186,8 @@ namespace data_rogue_core
         protected static void PlaceStairSet(ISystemContainer systemContainer, Map previousMap, Map map, IRandom random)
         {
 
-            var downStairsCoordinate = previousMap.GetEmptyPosition(systemContainer.PrototypeSystem, systemContainer.PositionSystem, random);
-            var upStairsCoordinate = map.GetEmptyPosition(systemContainer.PrototypeSystem, systemContainer.PositionSystem, random);
+            var downStairsCoordinate = previousMap.GetEmptyPosition(systemContainer.PositionSystem, random);
+            var upStairsCoordinate = map.GetEmptyPosition(systemContainer.PositionSystem, random);
 
             var downStairs = systemContainer.PrototypeSystem.CreateAt("Props:StairsDown", downStairsCoordinate);
             var upStairs = systemContainer.PrototypeSystem.CreateAt("Props:StairsUp", upStairsCoordinate);
@@ -197,11 +197,20 @@ namespace data_rogue_core
         {
             var firstLayer = generatedBranch.Maps.First();
 
-            MapCoordinate emptyPosition = firstLayer.GetEmptyPosition(systemContainer.PrototypeSystem, systemContainer.PositionSystem, random);
+            MapCoordinate emptyPosition = firstLayer.GetEmptyPosition(systemContainer.PositionSystem, random);
 
             systemContainer.PrototypeSystem.CreateAt("Props:Portal", emptyPosition);
         }
 
-        
+        public static void PlaceDefaultExitPortal(ISystemContainer systemContainer, GeneratedBranch generatedBranch, IRandom random)
+        {
+            var lastLayer = generatedBranch.Maps.Last();
+
+            MapCoordinate emptyPosition = lastLayer.GetEmptyPosition(systemContainer.PositionSystem, random);
+
+            systemContainer.PrototypeSystem.CreateAt("Props:Portal", emptyPosition);
+        }
+
+
     }
 }

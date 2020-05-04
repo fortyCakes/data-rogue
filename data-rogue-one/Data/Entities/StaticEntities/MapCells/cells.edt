@@ -136,3 +136,42 @@ Singleton: true
 [Description]
 Name: Boulder
 Detail: A large boulder.
+
+"Cell:InfernoWall"
+[Appearance]
+Glyph: #
+Color: #D34549
+ZOrder: 0
+[SpriteAppearance]
+Bottom: cobble_wall_orange
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:InfernoWall
+Singleton: true
+[Memorable]
+[Description]
+Name: Infernal Cobble Wall
+Detail: A wall made of pieces of hellstone mortared together in a haphazard fashion.
+
+"Cell:InfernoFloor"
+[Appearance]
+Glyph: .
+Color: #864D30
+ZOrder: 0
+[SpriteAppearance]
+Bottom: cobble_floor_red
+BottomConnect: stone_floor
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:InfernoFloor
+Singleton: true
+[Memorable]
+[Description]
+Name: Floor
+Detail: This is a hellstone floor.

@@ -8,9 +8,12 @@ namespace data_rogue_core
 {
     public class BasicDungeonBranchMapGenerator: BranchMapGenerationStrategy
     {
+        public string FloorCell = "Cell:Empty";
+        public string WallCell = "Cell:Wall";
+
         public override List<Map> Generate(ISystemContainer systemContainer, Branch branchDefinition)
         {
-            var mapgen = new BasicDungeonMapGenerator(systemContainer);
+            var mapgen = new BasicDungeonMapGenerator(systemContainer, FloorCell, WallCell);
 
             var generatedBranchMaps = new List<Map>();
 

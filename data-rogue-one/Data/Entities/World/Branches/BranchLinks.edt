@@ -2,3 +2,8 @@
 [BranchLink]
 From: BranchLinkEnd: Branch:Entrance 2-2
 To: BranchLinkEnd: Branch:Dungeon 1-1
+
+"BranchLink:DungeonToInferno"
+[BranchLink]
+From: BranchLinkEnd: Branch:Dungeon 2-2
+To: BranchLinkEnd: Branch:Inferno 1-1

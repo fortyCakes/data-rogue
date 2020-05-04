@@ -132,7 +132,7 @@
     <None Include="Data\Entities\keybindings.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Data\Entities\StaticEntities\MapCells\GenericCells.edt">
+    <None Include="Data\Entities\StaticEntities\MapCells\cells.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\Entities\StaticEntities\Monsters\stone imp.edt">
@@ -184,6 +184,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\Entities\World\Branches\BranchLinks.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Entities\World\Branches\Inferno.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\Entities\World\Branches\Dungeon.edt">
