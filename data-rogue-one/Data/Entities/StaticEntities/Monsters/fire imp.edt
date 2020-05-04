@@ -1,0 +1,42 @@
+﻿"Monster:FireImp"
+[Prototype]
+Name: Monster:FireImp
+Singleton: false
+[Biome]
+Name: Inferno
+[Challenge]
+ChallengeRating: 2
+[Appearance]
+Glyph: 1
+Color: #D34549
+ZOrder: 10
+[SpriteAppearance]
+Bottom: fire_imp
+[Position]
+[Physical]
+Passable: false
+Transparent: true
+[Health]
+HP: 10/10
+[TiltFighter]
+Tilt: 0/10
+[Stat]
+Name: Muscle
+Value: 4
+[Stat]
+Name: Agility
+Value: 4
+[Stat]
+Name: Willpower
+Value: 6
+[Stat]
+Name: Intellect
+Value: 8
+[Description]
+Name: Fire Imp
+Detail: This is a tiny devil made out of fire. They're not very strong, but they have been known to spit fire.
+[Actor]
+[MoveToPlayerBehaviour]
+Priority: 0
+[RandomlyMoveBehaviour]
+Priority: -1

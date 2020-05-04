@@ -1,0 +1,42 @@
+﻿"Monster:LivingFlame"
+[Prototype]
+Name: Monster:LivingFlame
+Singleton: false
+[Biome]
+Name: Inferno
+[Challenge]
+ChallengeRating: 5
+[Appearance]
+Glyph: ^
+Color: #D34549
+ZOrder: 10
+[SpriteAppearance]
+Bottom: living_flame
+[Position]
+[Physical]
+Passable: false
+Transparent: true
+[Health]
+HP: 20/20
+[TiltFighter]
+Tilt: 0/40
+[Stat]
+Name: Muscle
+Value: 6
+[Stat]
+Name: Agility
+Value: 10
+[Stat]
+Name: Willpower
+Value: 10
+[Stat]
+Name: Intellect
+Value: 10
+[Description]
+Name: LivingFlame
+Detail: This is a living mass of flame! Beware getting too close to it.
+[Actor]
+[MoveToPlayerBehaviour]
+Priority: 0
+[RandomlyMoveBehaviour]
+Priority: -1

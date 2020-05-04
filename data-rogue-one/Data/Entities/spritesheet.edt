@@ -189,6 +189,27 @@ SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
+Name: fire_imp
+Path: Images/Sprites/Entities/Creatures/fire_imp.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: fire_devil
+Path: Images/Sprites/Entities/Creatures/fire_devil.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: living_flame
+Path: Images/Sprites/Entities/Creatures/living_flame.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
 Name: helm_brown
 Path: Images/Sprites/Entities/helm_brown.png
 Type: SingleSprite

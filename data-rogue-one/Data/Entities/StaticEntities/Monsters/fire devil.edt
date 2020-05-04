@@ -1,0 +1,42 @@
+﻿"Monster:FireDevil"
+[Prototype]
+Name: Monster:FireDevil
+Singleton: false
+[Biome]
+Name: Inferno
+[Challenge]
+ChallengeRating: 3
+[Appearance]
+Glyph: 2
+Color: #D34549
+ZOrder: 10
+[SpriteAppearance]
+Bottom: fire_devil
+[Position]
+[Physical]
+Passable: false
+Transparent: true
+[Health]
+HP: 15/15
+[TiltFighter]
+Tilt: 0/40
+[Stat]
+Name: Muscle
+Value: 6
+[Stat]
+Name: Agility
+Value: 6
+[Stat]
+Name: Willpower
+Value: 6
+[Stat]
+Name: Intellect
+Value: 8
+[Description]
+Name: Fire Devil
+Detail: This is a devil made out of fire. Smarter devils like this occasionally cast spells.
+[Actor]
+[MoveToPlayerBehaviour]
+Priority: 0
+[RandomlyMoveBehaviour]
+Priority: -1
