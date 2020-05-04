@@ -8,17 +8,17 @@ namespace data_rogue_core.Components
 {
     public class AegisRecovery : ITickUpdate
     {
-        public void Tick(IEventSystem eventSystem, IPlayerSystem playerSystem, IStatSystem statSystem, IEntity entity, ulong currentTime)
+        public void Tick(ISystemContainer systemContainer, IEntity entity, ulong currentTime)
         {
-            var maxAegis = eventSystem.GetStat(entity, "Aegis");
+            var maxAegis = systemContainer.EventSystem.GetStat(entity, "Aegis");
 
-            var currentAegis = statSystem.GetEntityStat(entity, "CurrentAegisLevel");
+            var currentAegis = systemContainer.StatSystem.GetEntityStat(entity, "CurrentAegisLevel");
 
             if (currentAegis < maxAegis && currentTime % 1000 == 0)
             {
-                if (eventSystem.GetStat(entity, "Tension") == 0)
+                if (systemContainer.EventSystem.GetStat(entity, "Tension") == 0)
                 {
-                    statSystem.SetStat(entity, "CurrentAegisLevel", currentAegis + 1);
+                    systemContainer.StatSystem.SetStat(entity, "CurrentAegisLevel", currentAegis + 1);
                 }
             }
         }

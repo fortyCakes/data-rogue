@@ -11,13 +11,13 @@ namespace data_rogue_core.Components
     {
         public Counter Aura;
         public int BaseAura;
-        public void Tick(IEventSystem eventSystem, IPlayerSystem playerSystem, IStatSystem statSystem, IEntity entity, ulong currentTime)
+        public void Tick(ISystemContainer systemContainer, IEntity entity, ulong currentTime)
         {
             if (currentTime % 100 == 0)
             {
                 if (entity.IsPlayer)
                 {
-                    var tension = eventSystem.GetStat(entity, "Tension");
+                    var tension = systemContainer.EventSystem.GetStat(entity, "Tension");
 
                     if (tension > 0)
                     {

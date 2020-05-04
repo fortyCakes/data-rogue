@@ -14,17 +14,19 @@ namespace data_rogue_core.Systems
 {
     class TimeSystem : BaseSystem, ITimeSystem
     {
+        private readonly ISystemContainer _systemContainer;
         private MapKey ActiveMapKey;
         private readonly IPlayerSystem _playerSystem;
         private IEventSystem _eventSystem;
         private IStatSystem _statSystem;
         
 
-        public TimeSystem(IEventSystem eventSystem, IPlayerSystem playerSystem, IStatSystem statSystem)
+        public TimeSystem(ISystemContainer systemContainer)
         {
-            _eventSystem = eventSystem;
-            _playerSystem = playerSystem;
-            _statSystem = statSystem;
+            _systemContainer = systemContainer;
+            _eventSystem = systemContainer.EventSystem;
+            _playerSystem = systemContainer.PlayerSystem;
+            _statSystem = systemContainer.StatSystem;
         }
 
         public new void Initialise()
@@ -69,7 +71,7 @@ namespace data_rogue_core.Systems
 
             foreach (var updatable in updatables)
             {
-                ((ITickUpdate) updatable).Tick(_eventSystem, _playerSystem, _statSystem, entity, CurrentTime);
+                ((ITickUpdate) updatable).Tick(_systemContainer, entity, CurrentTime);
             }
         }
 

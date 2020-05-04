@@ -386,6 +386,7 @@
     <Compile Include="Utils\EventRuleSystemExtensions.cs" />
     <Compile Include="Utils\FlagsExtensions.cs" />
     <Compile Include="Utils\IPathfindingAlgorithm.cs" />
+    <Compile Include="Utils\MapCoordinateExtensions.cs" />
     <Compile Include="Utils\MapExtensions.cs" />
     <Compile Include="Utils\ReflectiveEnumerator.cs" />
     <Compile Include="Utils\StringExtensions.cs" />

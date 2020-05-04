@@ -85,7 +85,7 @@ namespace data_rogue_core.Systems
 
             Random = new RNG(rngSeed);
 
-            TimeSystem = new TimeSystem(EventSystem, PlayerSystem, StatSystem);
+            TimeSystem = new TimeSystem(this);
             EntityEngine.Register(TimeSystem);
 
             FighterSystem = new FighterSystem(EntityEngine, MessageSystem, EventSystem, TimeSystem, StatSystem);
