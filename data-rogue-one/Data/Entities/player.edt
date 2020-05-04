@@ -41,24 +41,6 @@ Value: 15
 [Description]
 Name: Player
 Detail: The player character. 
-[KnownSkill]
-Skill: Skill:Fireball
-Order: 1
-[KnownSkill]
-Skill: Skill:Cleave
-Order: 2
-[KnownSkill]
-Skill: Skill:Jump
-Order: 2
-[KnownSkill]
-Skill: Skill:SamuraiCut
-Order: 3
-[KnownSkill]
-Skill: Skill:IceBlast
-Order: 4
-[KnownSkill]
-Skill: Skill:BouncingBolt
-Order: 5
 [Wealth]
 Currency: Gold
 Amount: 0

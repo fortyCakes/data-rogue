@@ -89,13 +89,32 @@ namespace data_rogue_core
             systemContainer.PositionSystem.SetPosition(player, spawnPoint);
             player.Get<Description>().Name = form.Name;
 
+            SetInitialStats(systemContainer, form, player);
+
+            systemContainer.EntityEngine.AddComponent(player, new HasClass { Class = form.Class });
+
+            LearnClassSkills(systemContainer, form, player);
+
+            systemContainer.PlayerSystem.Player = player;
+        }
+
+        private static void SetInitialStats(ISystemContainer systemContainer, CharacterCreationForm form, IEntity player)
+        {
             systemContainer.StatSystem.SetStat(player, nameof(form.Muscle), form.Muscle);
             systemContainer.StatSystem.SetStat(player, nameof(form.Agility), form.Agility);
             systemContainer.StatSystem.SetStat(player, nameof(form.Intellect), form.Intellect);
             systemContainer.StatSystem.SetStat(player, nameof(form.Willpower), form.Willpower);
+        }
 
+        private static void LearnClassSkills(ISystemContainer systemContainer, CharacterCreationForm form, IEntity player)
+        {
+            var playerClass = systemContainer.PrototypeSystem.Get($"Class:{form.Class}");
+            var skills = playerClass.Components.OfType<KnownSkill>().Select(systemContainer.SkillSystem.GetSkillFromKnown);
 
-            systemContainer.PlayerSystem.Player = player;
+            foreach (var skill in skills)
+            {
+                systemContainer.SkillSystem.Learn(player, skill);
+            }
         }
     }
 }

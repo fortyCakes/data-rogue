@@ -1,19 +1,19 @@
-﻿"Cleave"
+﻿"Cardinal Attack"
 [Prototype]
-Name: Skill:Cleave
+Name: Skill:CardinalStrike
 Singleton: true
 [Skill]
 Cost: 50
 ScriptName: Script: AttackCellsHit
 [Description]
-Name: Cleave
+Name: Cardinal Strike
 [Targeting]
 Range: 0
-CellsHit: 0,0;0,-1;0,1
+CellsHit: 0,0;0,-2;-1,1;-1,-1
 Rotatable: true
 [AttackDefinition]
 AttackClass: Heavy
 SpendTime: false
 Damage: Muscle
 Accuracy: 40
-AttackName: Cleave
+AttackName: Cardinal Strike

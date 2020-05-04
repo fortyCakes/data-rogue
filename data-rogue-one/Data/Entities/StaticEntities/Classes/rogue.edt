@@ -1,0 +1,11 @@
+﻿"Rogue"
+[Class]
+[Prototype]
+Name: Class:Rogue
+Singleton: true
+[Description]
+Name: Rogue
+Detail: A class who focuses on light combat. They start with the Skirmish skill, which lets them attack and move away.
+[KnownSkill]
+Skill: Skill:Skirmish
+Order: 1

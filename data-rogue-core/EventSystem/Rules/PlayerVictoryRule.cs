@@ -29,7 +29,8 @@ namespace data_rogue_core.EventSystem.Rules
                 systemContainer.ActivitySystem.Push(new MenuActivity(new MainMenu(
                         systemContainer.ActivitySystem,
                         systemContainer.PlayerSystem,
-                        systemContainer.SaveSystem
+                        systemContainer.SaveSystem,
+                        systemContainer.EntityEngine
                     )));
                 systemContainer.ActivitySystem.Push(new EndGameScreenActivity(systemContainer, true));
             }

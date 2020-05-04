@@ -1,4 +1,5 @@
-﻿using data_rogue_core.Systems.Interfaces;
+﻿using data_rogue_core.EntityEngineSystem;
+using data_rogue_core.Systems.Interfaces;
 using data_rogue_core.Forms.StaticForms;
 
 namespace data_rogue_core.Menus.StaticMenus
@@ -9,8 +10,9 @@ namespace data_rogue_core.Menus.StaticMenus
 
         private readonly IPlayerSystem _playerSystem;
         private readonly ISaveSystem _saveSystem;
+        private readonly IEntityEngine _entityEngine;
 
-        public MainMenu(IActivitySystem activitySystem, IPlayerSystem playerSystem, ISaveSystem saveSystem) : base(
+        public MainMenu(IActivitySystem activitySystem, IPlayerSystem playerSystem, ISaveSystem saveSystem, IEntityEngine entityEngine) : base(
             activitySystem,
             "Main Menu",
             null,
@@ -20,6 +22,7 @@ namespace data_rogue_core.Menus.StaticMenus
         {
             _playerSystem = playerSystem;
             _saveSystem = saveSystem;
+            _entityEngine = entityEngine;
             OnSelectCallback += HandleMainMenuSelection;
         }
 
@@ -47,7 +50,7 @@ namespace data_rogue_core.Menus.StaticMenus
 
         private void StartCharacterCreation()
         {
-            _activitySystem.Push(CharacterCreationForm.GetCharacterCreationActivity(_activitySystem, _saveSystem, _playerSystem));
+            _activitySystem.Push(CharacterCreationForm.GetCharacterCreationActivity(_activitySystem, _saveSystem, _playerSystem, _entityEngine));
         }
     }
 }
