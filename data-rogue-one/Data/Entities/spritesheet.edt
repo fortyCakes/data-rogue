@@ -148,7 +148,7 @@ SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
 Name: dog_1
-Path: Images/Sprites/Entities/dog_1.png
+Path: Images/Sprites/Entities/Creatures/dog_1.png
 Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16
@@ -162,7 +162,14 @@ SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
 Name: goblin
-Path: Images/Sprites/Entities/goblin.png
+Path: Images/Sprites/Entities/Creatures/goblin.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: imp1
+Path: Images/Sprites/Entities/Creatures/imp_1.png
 Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16

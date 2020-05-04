@@ -1,40 +1,40 @@
-﻿"Monster:Goblin"
+﻿"Monster:StoneImp"
 [Prototype]
-Name: Monster:Goblin
+Name: Monster:StoneImp
 Singleton: false
 [Biome]
 Name: Dungeon
 [Challenge]
-ChallengeRating: 1
+ChallengeRating: 2
 [Appearance]
-Glyph: g
-Color: #aaffaa
+Glyph: 1
+Color: #864D30
 ZOrder: 10
 [SpriteAppearance]
-Bottom: goblin
+Bottom: imp1
 [Position]
 [Physical]
 Passable: false
 Transparent: true
 [Health]
-HP: 8/8
+HP: 10/10
 [TiltFighter]
-Tilt: 0/20
+Tilt: 0/80
 [Stat]
 Name: Muscle
 Value: 4
 [Stat]
 Name: Agility
-Value: 12
+Value: 4
 [Stat]
 Name: Willpower
-Value: 8
+Value: 6
 [Stat]
 Name: Intellect
-Value: 4
+Value: 8
 [Description]
-Name: Goblin
-Detail: This is a small, green-skinned humanoid. They are known to be highly aggressive towards humans, and fast. They're also weak and frail.
+Name: Stone Imp
+Detail: This is a tiny devil made out of rocks. They're not very strong, but they are slightly tougher than they look.
 [Actor]
 [MoveToPlayerBehaviour]
 Priority: 0

@@ -135,6 +135,9 @@
     <None Include="Data\Entities\StaticEntities\MapCells\GenericCells.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Entities\StaticEntities\Monsters\stone imp.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\Entities\StaticEntities\Monsters\goblin.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

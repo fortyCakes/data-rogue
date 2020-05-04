@@ -21,7 +21,7 @@ Level: 1
 Amount: 0
 [AuraFighter]
 Aura: 000/500
-BaseAura: 100
+BaseAura: 50
 [Health]
 HP: 100/100
 [TiltFighter]

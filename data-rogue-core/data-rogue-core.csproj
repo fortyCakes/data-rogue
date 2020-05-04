@@ -460,6 +460,9 @@
     <Content Include="Images\Sprites\Entities\bow.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\Sprites\Entities\Creatures\imp_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Sprites\Entities\junk.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -505,13 +508,13 @@
     <Content Include="Images\Sprites\Entities\boot_brown.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Entities\dog_1.png">
+    <Content Include="Images\Sprites\Entities\Creatures\dog_1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Entities\glove_brown.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Entities\goblin.png">
+    <Content Include="Images\Sprites\Entities\Creatures\goblin.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Tiles\cobble_wall_1.png">

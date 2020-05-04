@@ -17,7 +17,7 @@ Bottom: dog_1
 Passable: false
 Transparent: true
 [Health]
-HP: 2/2
+HP: 6/6
 [TiltFighter]
 Tilt: 0/10
 [Stat]

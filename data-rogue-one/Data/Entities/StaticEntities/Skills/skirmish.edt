@@ -3,7 +3,7 @@
 Name: Skill:Skirmish
 Singleton: true
 [Skill]
-Cost: 100
+Cost: 75
 ScriptName: Script: Skirmish
 [Description]
 Name: Skirmish

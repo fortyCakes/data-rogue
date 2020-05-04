@@ -3,7 +3,7 @@
 Name: Skill:ManaBolt
 Singleton: true
 [Skill]
-Cost: 50
+Cost: 80
 ScriptName: Script: Mana Bolt
 [Description]
 Name: Mana Bolt
