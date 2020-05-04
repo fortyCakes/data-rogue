@@ -1,0 +1,20 @@
+﻿"Script: AttackCellsHit"
+[Prototype]
+Name: Script: AttackCellsHit
+Singleton: true
+[Script]
+Text: {
+	withTarget(
+	function(target)
+		
+		attacked = attackCellsHit(target, User, Entity)
+
+		if not attacked then
+			SystemContainer.MessageSystem:Write('You swing at the air, and hit nothing.')
+		end
+
+		onComplete()
+	end)
+	
+	requestTarget(User, Entity)
+}

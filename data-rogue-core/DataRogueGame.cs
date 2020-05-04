@@ -96,7 +96,7 @@ namespace data_rogue_core
 
         private void DisplayMainMenu()
         {
-            SystemContainer.ActivitySystem.Push(new MenuActivity(new MainMenu(SystemContainer.ActivitySystem, SystemContainer.PlayerSystem, SystemContainer.SaveSystem)));
+            SystemContainer.ActivitySystem.Push(new MenuActivity(new MainMenu(SystemContainer.ActivitySystem, SystemContainer.PlayerSystem, SystemContainer.SaveSystem, SystemContainer.EntityEngine)));
         }
 
         private void OnRootConsoleRender(object sender, GameLoopEventArgs e)

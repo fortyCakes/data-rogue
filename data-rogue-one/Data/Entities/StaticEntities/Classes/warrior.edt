@@ -1,0 +1,11 @@
+﻿"Warrior"
+[Class]
+[Prototype]
+Name: Class:Warrior
+Singleton: true
+[Description]
+Name: Warrior
+Detail: A class who focuses on heavy melee combat. They start with the Cleave skill, to strike multiple adjacent enemies.Detail
+[KnownSkill]
+Skill: Skill:Cleave
+Order: 1

@@ -14,10 +14,19 @@ namespace data_rogue_core.Forms
     public class Form
     {
         protected readonly IActivitySystem _activitySystem;
+        private Dictionary<string, FormData> _fields;
         public virtual string Title { get; }
         public FormButton Buttons { get; }
         public FormButtonSelected OnSelectCallback { get; protected set; }
-        public Dictionary<string, FormData> Fields { get; set; }
+        public Dictionary<string, FormData> Fields
+        {
+            get => _fields;
+            set
+            {
+                _fields = value;
+                SelectField(_fields.First().Key, true);
+            }
+        }
         public FormActivity Activity { get; set; }
 
         private List<string> FieldsKeyList => Fields.OrderBy(f => f.Value.Order).Select(f => f.Key).ToList();
@@ -28,15 +37,12 @@ namespace data_rogue_core.Forms
 
         public FormSelection FormSelection { get; set; } = new FormSelection();
 
-        public Form(IActivitySystem activitySystem, string title, FormButton buttons, FormButtonSelected onSelectCallback, Dictionary<string, FormData> fields)
+        public Form(IActivitySystem activitySystem, string title, FormButton buttons, FormButtonSelected onSelectCallback)
         {
             _activitySystem = activitySystem;
             Buttons = buttons;
             OnSelectCallback = onSelectCallback;
-            Fields = fields;
             Title = title;
-
-            SelectField(Fields.First().Key, true);
         }
 
         public void HandleAction(ActionEventData action)
