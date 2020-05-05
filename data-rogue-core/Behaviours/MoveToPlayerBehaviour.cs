@@ -55,7 +55,7 @@ namespace data_rogue_core.Behaviours
                     if (targetPosition.Y > position.Y) vector.Y = 1;
                     if (targetPosition.Y < position.Y) vector.Y = -1;
 
-                    return new ActionEventData { Action = ActionType.Move, Parameters = vector.ToString() };
+                    return new ActionEventData { Action = ActionType.Move, Parameters = vector.ToString(), Speed = entity.Get<Actor>().Speed };
                 }
             }
 

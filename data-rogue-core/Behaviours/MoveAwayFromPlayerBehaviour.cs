@@ -39,8 +39,8 @@ namespace data_rogue_core.Behaviours
 
                 if (position == null ||
                     playerPosition == null ||
-                    Math.Abs(position.X - playerPosition.X) > 1 ||
-                    Math.Abs(position.Y - playerPosition.Y) > 1)
+                    Math.Abs(position.X - playerPosition.X) > 3 ||
+                    Math.Abs(position.Y - playerPosition.Y) > 3)
                 {
                     return null;
                 }
@@ -54,7 +54,7 @@ namespace data_rogue_core.Behaviours
                 {
                     var vector = _random.PickOne(validCells) - position;
 
-                    return new ActionEventData { Action = ActionType.Move, Parameters = vector.ToString() };
+                    return new ActionEventData { Action = ActionType.Move, Parameters = vector.ToString(), Speed = entity.Get<Actor>().Speed };
                 }
             }
 

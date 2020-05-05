@@ -7,6 +7,7 @@ using data_rogue_core.Systems.Interfaces;
 using data_rogue_core.Utils;
 using System.Collections.Generic;
 using System.Linq;
+using data_rogue_core.Components;
 
 namespace data_rogue_core.EventSystem.Rules
 {
@@ -55,7 +56,7 @@ namespace data_rogue_core.EventSystem.Rules
                 var coordinate = Path.First();
                 var vector = currentCoordinate - coordinate;
 
-                return new ActionEventData { Action = ActionType.Move, Parameters = vector.ToString() };
+                return new ActionEventData { Action = ActionType.Move, Parameters = vector.ToString(), Speed = entity.Get<Actor>().Speed };
             }
             else
             {

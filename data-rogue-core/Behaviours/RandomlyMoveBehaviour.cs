@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using data_rogue_core.Components;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.EventSystem;
 using data_rogue_core.EventSystem.EventData;
@@ -29,7 +30,7 @@ namespace data_rogue_core.Behaviours
 
             var vector = new Vector(isXMove ? move : 0, !isXMove ? move : 0);
 
-            return new ActionEventData { Action = ActionType.Move, Parameters = vector.ToString() };
+            return new ActionEventData { Action = ActionType.Move, Parameters = vector.ToString(), Speed = entity.Get<Actor>().Speed };
         }
     }
 }
