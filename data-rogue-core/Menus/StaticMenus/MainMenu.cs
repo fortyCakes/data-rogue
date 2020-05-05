@@ -43,6 +43,7 @@ namespace data_rogue_core.Menus.StaticMenus
                 case "Load Game":
                     CloseActivity();
                     _saveSystem.Load();
+                    _activitySystem.GameplayActivity.Running = true;
                     break;
 
             }
