@@ -1,0 +1,43 @@
+﻿"Monster:Ogre"
+[Prototype]
+Name: Monster:Ogre
+Singleton: false
+[Biome]
+Name: Dungeon
+[Challenge]
+ChallengeRating: 5
+[Appearance]
+Glyph: O
+Color: #DBD75D
+ZOrder: 10
+[SpriteAppearance]
+Bottom: ogre
+[Position]
+[Physical]
+Passable: false
+Transparent: true
+[Health]
+HP: 30/30
+[TiltFighter]
+Tilt: 0/80
+[Stat]
+Name: Muscle
+Value: 20
+[Stat]
+Name: Agility
+Value: 3
+[Stat]
+Name: Willpower
+Value: 3
+[Stat]
+Name: Intellect
+Value: 3
+[Description]
+Name: Ogre
+Detail: This is a monstrous giant. They're fond of eating human flesh. Fortunately, they're quite slow.
+[Actor]
+Speed: 1500
+[MoveToPlayerBehaviour]
+Priority: 0
+[RandomlyMoveBehaviour]
+Priority: -1

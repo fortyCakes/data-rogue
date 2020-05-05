@@ -1,0 +1,40 @@
+﻿"Monster:GreenSlime"
+[Prototype]
+Name: Monster:GreenSlime
+Singleton: false
+[Biome]
+Name: Dungeon
+[Challenge]
+ChallengeRating: 0
+[Appearance]
+Glyph: o
+Color: #6DAA2C
+ZOrder: 10
+[SpriteAppearance]
+Bottom: green_slime
+[Position]
+[Physical]
+Passable: false
+Transparent: true
+[Health]
+HP: 15/15
+[TiltFighter]
+Tilt: 0/10
+[Stat]
+Name: Muscle
+Value: 5
+[Stat]
+Name: Agility
+Value: 0
+[Stat]
+Name: Willpower
+Value: 1
+[Stat]
+Name: Intellect
+Value: 0
+[Description]
+Name: GreenSlime
+Detail: An aggressive puddle of green goop.
+[Actor]
+[MoveToPlayerBehaviour]
+Priority: 0

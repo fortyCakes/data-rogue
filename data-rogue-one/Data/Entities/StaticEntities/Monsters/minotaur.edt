@@ -1,0 +1,42 @@
+﻿"Monster:Minotaur"
+[Prototype]
+Name: Monster:Minotaur
+Singleton: false
+[Biome]
+Name: Dungeon
+[Challenge]
+ChallengeRating: 5
+[Appearance]
+Glyph: M
+Color: #864D30
+ZOrder: 10
+[SpriteAppearance]
+Bottom: minotaur
+[Position]
+[Physical]
+Passable: false
+Transparent: true
+[Health]
+HP: 20/20
+[TiltFighter]
+Tilt: 0/80
+[Stat]
+Name: Muscle
+Value: 16
+[Stat]
+Name: Agility
+Value: 8
+[Stat]
+Name: Willpower
+Value: 10
+[Stat]
+Name: Intellect
+Value: 3
+[Description]
+Name: Minotaur
+Detail: This is a large monster, half-human, half-bull. Watch out for their horns!
+[Actor]
+[MoveToPlayerBehaviour]
+Priority: 0
+[RandomlyMoveBehaviour]
+Priority: -1
