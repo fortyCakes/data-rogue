@@ -36,12 +36,9 @@ namespace data_rogue_core.EventSystem.Rules
                 {
                     experience.Level++;
 
-                    systemContainer.StatSystem.IncreaseStat(sender, "Agility", 2);
-                    systemContainer.StatSystem.IncreaseStat(sender, "Intellect", 2);
-                    systemContainer.StatSystem.IncreaseStat(sender, "Willpower", 2);
-                    systemContainer.StatSystem.IncreaseStat(sender, "Muscle", 2);
-
                     systemContainer.MessageSystem.Write($"Level up! {sender.DescriptionName} is now level {experience.Level}.");
+
+                    systemContainer.EventSystem.Try(EventType.LevelUp, sender, null);
                 }
             }
 

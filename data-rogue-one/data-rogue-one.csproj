@@ -65,6 +65,7 @@
     <Compile Include="Rules\Actions\ExamineStatusAction.cs" />
     <Compile Include="Rules\Actions\RestAction.cs" />
     <Compile Include="Rules\ApplyResistanceRule.cs" />
+    <Compile Include="Rules\IncreaseStatsOnLevelUpRule.cs" />
     <Compile Include="Utils\StatusHelper.cs" />
     <Compile Include="Rules\AddAgilityToEvasionRule.cs" />
     <Compile Include="Rules\AddStatToAccuracyRule.cs" />

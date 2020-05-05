@@ -24,6 +24,9 @@ Value: 6
 [Stat]
 Name: Speed
 Value: 700
+[Stat]
+Name: SH
+Value: 2
 
 "Bronze Sword"
 [Description]
@@ -56,6 +59,9 @@ Value: 11
 [Stat]
 Name: Speed
 Value: 1000
+[Stat]
+Name: SH
+Value: 4
 
 "Wooden Bow"
 [Description]

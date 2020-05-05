@@ -94,10 +94,10 @@ namespace data_rogue_core
             systemContainer.EntityEngine.AddComponent(player, new HasClass { Class = form.Class });
 
             LearnClassSkills(systemContainer, form, player);
+            GiveStartingGear(systemContainer, form, player);
 
             systemContainer.PlayerSystem.Player = player;
         }
-
         private static void SetInitialStats(ISystemContainer systemContainer, CharacterCreationForm form, IEntity player)
         {
             systemContainer.StatSystem.SetStat(player, nameof(form.Muscle), form.Muscle);
@@ -108,7 +108,7 @@ namespace data_rogue_core
 
         private static void LearnClassSkills(ISystemContainer systemContainer, CharacterCreationForm form, IEntity player)
         {
-            var playerClass = systemContainer.PrototypeSystem.Get($"Class:{form.Class}");
+            IEntity playerClass = GetPlayerClass(systemContainer, form);
             var skills = playerClass.Components.OfType<KnownSkill>().Select(systemContainer.SkillSystem.GetSkillFromKnown);
 
             foreach (var skill in skills)
@@ -116,5 +116,31 @@ namespace data_rogue_core
                 systemContainer.SkillSystem.Learn(player, skill);
             }
         }
+
+        private static void GiveStartingGear(ISystemContainer systemContainer, CharacterCreationForm form, IEntity player)
+        {
+            IEntity playerClass = GetPlayerClass(systemContainer, form);
+            var startingGear = playerClass.Components.OfType<StartsWithItem>();
+            var spawnPoint = systemContainer.PositionSystem.CoordinateOf(player);
+
+            foreach (var startingItem in startingGear)
+            {
+                var item = systemContainer.PrototypeSystem.CreateAt(startingItem.Item, spawnPoint);
+
+                var inventory = player.Get<Inventory>();
+                systemContainer.ItemSystem.MoveToInventory(item, inventory);
+
+                if (startingItem.Equipped)
+                {
+                    systemContainer.EquipmentSystem.Equip(player, item);
+                }
+            }
+        }
+        private static IEntity GetPlayerClass(ISystemContainer systemContainer, CharacterCreationForm form)
+        {
+            var playerClass = systemContainer.PrototypeSystem.Get($"Class:{form.Class}");
+            return playerClass;
+        }
+
     }
 }

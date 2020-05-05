@@ -22,6 +22,7 @@
         GainXP,
         Defence,
         Action,
-        Victory
+        Victory,
+        LevelUp
     }
 }

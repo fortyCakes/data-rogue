@@ -2,6 +2,7 @@
 using data_rogue_one.EventSystem.Rules;
 using System;
 using System.Collections.Generic;
+using data_rogue_one.Rules;
 
 namespace data_rogue_one
 {
@@ -35,6 +36,7 @@ namespace data_rogue_one
                     typeof(SpendTimeOnCompleteSkillRule),
                     typeof(DoXpGainRule),
                     typeof(LevelUpOnXPGainRule),
+                    typeof(IncreaseStatsOnLevelUpRule),
                     typeof(GainSingleXPOnKillRule),
                     typeof(ApplyEquipmentStatsRule),
                     typeof(SetSpeedOnAttackRule),

@@ -40,10 +40,10 @@ namespace data_rogue_core.Forms.StaticForms
                     {
                         "Stats", new StatsFormData("Stats", 3, 50, new List<FormStatInformation>
                         {
-                            new FormStatInformation("Muscle", 5, 10, 20),
-                            new FormStatInformation("Agility", 5, 10, 20),
-                            new FormStatInformation("Intellect", 5, 10, 20),
-                            new FormStatInformation("Willpower", 5, 10, 20),
+                            new FormStatInformation("Muscle", 5, 15, 20),
+                            new FormStatInformation("Agility", 5, 15, 20),
+                            new FormStatInformation("Intellect", 5, 5, 20),
+                            new FormStatInformation("Willpower", 5, 15, 20),
                         })
                     }
                 };

@@ -13,7 +13,7 @@ namespace data_rogue_core.EventSystem.Rules
 
     public class StartRangedAttackAction : ApplyActionRule
     {
-        public virtual List<string> RangedAttackClasses => new List<string> { "Launcher", "Thrown", "Blast", "Bolt" };
+        public virtual List<string> RangedAttackClasses => new List<string> { "Launcher", "Thrown" };
 
         public StartRangedAttackAction(ISystemContainer systemContainer) : base(systemContainer)
         {
