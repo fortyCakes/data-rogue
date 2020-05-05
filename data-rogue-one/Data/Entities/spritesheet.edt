@@ -182,6 +182,20 @@ SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
+Name: black_smoke
+Path: Images/Sprites/Entities/Misc/black_smoke.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: flame
+Path: Images/Sprites/Entities/Misc/flame.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
 Name: imp1
 Path: Images/Sprites/Entities/Creatures/imp_1.png
 Type: SingleSprite

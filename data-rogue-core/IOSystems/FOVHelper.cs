@@ -14,7 +14,7 @@ namespace data_rogue_core.IOSystems
 
             MapCoordinate playerPosition = systemContainer.PositionSystem.CoordinateOf(systemContainer.PlayerSystem.Player);
 
-            var playerFov = currentMap.FovFrom(playerPosition, 9);
+            var playerFov = currentMap.FovFrom(systemContainer.PositionSystem, playerPosition, 9);
 
             foreach (var coordinate in playerFov)
             {

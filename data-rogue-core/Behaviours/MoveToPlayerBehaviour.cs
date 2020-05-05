@@ -38,7 +38,7 @@ namespace data_rogue_core.Behaviours
                 return null;
             }
 
-            var monsterFov = _mapSystem.MapCollection[position.Key].FovFrom(position, 9);
+            var monsterFov = _mapSystem.MapCollection[position.Key].FovFrom(_positionSystem, position, 9);
 
             if (monsterFov.Contains(playerPosition))
             {

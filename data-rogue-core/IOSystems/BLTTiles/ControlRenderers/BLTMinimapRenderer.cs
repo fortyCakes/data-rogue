@@ -85,7 +85,6 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
         private static Color DetermineBaseMapColor(bool isInFov, ISystemContainer systemContainer, MapCoordinate coordinate)
         {
-            Color baseColor;
             var entities = systemContainer.PositionSystem.EntitiesAt(coordinate);
 
             if (entities.Any(e => e == systemContainer.PlayerSystem.Player))

@@ -21,3 +21,9 @@ Density: 0.005
 [PlaceSpecificItem]
 Floor: 3
 Item: Item:MacGuffin
+[ScatterSpecificItem]
+Item: Props:Smoke
+Density: 0.05
+[ScatterSpecificItem]
+Item: Props:Fire
+Density: 0.02

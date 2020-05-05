@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using data_rogue_core.Components;
 using data_rogue_core.EntityEngineSystem;
+using data_rogue_core.Systems;
 
 namespace data_rogue_core.Maps
 {
@@ -134,14 +135,19 @@ namespace data_rogue_core.Maps
             RemoveCell(new MapCoordinate(MapKey, x, y));
         }
 
-        public List<MapCoordinate> FovFrom(MapCoordinate mapCoordinate, int range)
+        public List<MapCoordinate> FovFrom(IPositionSystem positionSystem, MapCoordinate mapCoordinate, int range)
         {
             if (mapCoordinate.Key != MapKey)
             {
                 return new List<MapCoordinate>();
             }
 
-            bool GetTransparent(Vector v) => CellAt(mapCoordinate + v).Get<Physical>().Transparent;
+            bool GetTransparent(Vector v)
+            {
+                var entities = positionSystem.EntitiesAt(mapCoordinate + v);
+                var physicals = entities.Select(e => e.TryGet<Physical>()).Where(p => p != null);
+                return !physicals.Any(p => p.Transparent == false);
+            }
 
             var visibleVectors = ShadowcastingFovCalculator.InFov(range, GetTransparent);
 

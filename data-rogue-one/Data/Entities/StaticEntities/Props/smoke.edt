@@ -1,0 +1,19 @@
+﻿"Props:Smoke"
+[Portal]
+[Prototype]
+Name: Props:Smoke
+Singleton: false
+[Appearance]
+Glyph: ~
+Color: #30346D
+ZOrder: 1
+[SpriteAppearance]
+Top: black_smoke
+[Position]
+[Physical]
+Passable: true
+Transparent: false
+[Memorable]
+[Description]
+Name: Smoke
+Detail: Smoke that blocks your line of sight.

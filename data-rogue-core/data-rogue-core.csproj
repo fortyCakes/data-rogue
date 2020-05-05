@@ -429,6 +429,7 @@
     <Compile Include="Systems\PositionSystem.cs" />
     <Compile Include="Maps\Vector.cs" />
     <Compile Include="World\GenerationStrategies\ItemGeneration\PlaceSpecificItem.cs" />
+    <Compile Include="World\GenerationStrategies\ItemGeneration\ScatterSpecificItem.cs" />
     <Compile Include="World\GenerationStrategies\ItemGeneration\RandomItemGeneration.cs" />
     <Compile Include="World\GenerationStrategies\MapGeneration\BasicDungeonBranchMapGenerator.cs" />
     <Compile Include="World\GenerationStrategies\MapGeneration\StaticBranchMapGenerator.cs" />
@@ -474,6 +475,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Entities\junk.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Entities\Misc\black_smoke.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Entities\Misc\flame.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Entities\orb.png">

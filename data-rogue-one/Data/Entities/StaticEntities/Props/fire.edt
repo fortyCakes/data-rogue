@@ -1,0 +1,21 @@
+﻿"Props:Fire"
+[Portal]
+[Prototype]
+Name: Props:Fire
+Singleton: false
+[Appearance]
+Glyph: ^
+Color: #D37D2C
+ZOrder: 1
+[SpriteAppearance]
+Top: flame
+[Position]
+[Physical]
+Passable: true
+Transparent: true
+[Memorable]
+[Actor]
+[FlameAura]
+[Description]
+Name: Fire
+Detail: A raging fire. Don't get too close!

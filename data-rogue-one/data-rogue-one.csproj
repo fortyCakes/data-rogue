@@ -154,6 +154,12 @@
     <None Include="Data\Entities\StaticEntities\Monsters\jackal.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Entities\StaticEntities\Props\fire.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Entities\StaticEntities\Props\smoke.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\Entities\StaticEntities\Props\portal.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
