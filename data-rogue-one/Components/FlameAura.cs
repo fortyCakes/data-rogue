@@ -15,8 +15,9 @@ namespace data_rogue_core.Components
             if (IsFlameTick(currentTime))
             {
                 var location = systemContainer.PositionSystem.CoordinateOf(entity);
-                var adjacentLocations = location.AdjacentCells();
-                var adjacentEntities = adjacentLocations.SelectMany(l => systemContainer.PositionSystem.EntitiesAt(l));
+                var locations = location.AdjacentCells();
+                locations.Add(location);
+                var adjacentEntities = locations.SelectMany(l => systemContainer.PositionSystem.EntitiesAt(l));
 
                 foreach (var defender in adjacentEntities)
                 {
