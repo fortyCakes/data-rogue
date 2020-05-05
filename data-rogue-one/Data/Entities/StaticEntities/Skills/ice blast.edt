@@ -20,6 +20,7 @@ SpendTime: false
 Damage: Intellect
 Accuracy: 35
 AttackName: Ice Blast
+Tags: Ice
 
 "Script: IceBlast"
 [Prototype]

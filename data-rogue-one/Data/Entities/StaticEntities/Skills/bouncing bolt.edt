@@ -20,6 +20,7 @@ SpendTime: false
 Damage: Intellect
 Accuracy: 35
 AttackName: Bouncing Bolt
+Tags: Lightning
 
 "Script: BouncingBolt"
 [Prototype]

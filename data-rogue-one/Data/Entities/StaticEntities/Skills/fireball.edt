@@ -16,6 +16,7 @@ SpendTime: false
 Damage: Willpower
 Accuracy: 40
 AttackName: Fireball
+Tags: Fire
 
 "Script: Fireball"
 [Prototype]

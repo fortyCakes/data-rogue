@@ -106,6 +106,9 @@ namespace data_rogue_core.EventSystem.Rules
                 case "Absorbed":
                     message += " and hits, but is absorbed.";
                     break;
+                case "Resistance":
+                    message += " but it's immune to that sort of attack.";
+                    break;
                 default:
                     throw new ApplicationException("Unknown defence type in DescribeMissedAttack");
             }

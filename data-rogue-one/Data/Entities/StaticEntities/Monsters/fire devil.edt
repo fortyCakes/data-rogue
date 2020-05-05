@@ -40,3 +40,6 @@ Detail: This is a devil made out of fire. Smarter devils like this occasionally 
 Priority: 0
 [RandomlyMoveBehaviour]
 Priority: -1
+[Resistant]
+ResistantTo: Fire
+Power: 5

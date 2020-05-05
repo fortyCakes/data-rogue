@@ -41,3 +41,6 @@ Priority: 0
 [RandomlyMoveBehaviour]
 Priority: -1
 [FlameAura]
+[Resistant]
+ResistantTo: Fire
+Power: 100

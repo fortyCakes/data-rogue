@@ -40,3 +40,6 @@ Detail: This is a tiny devil made out of fire. They're not very strong, but they
 Priority: 0
 [RandomlyMoveBehaviour]
 Priority: -1
+[Resistant]
+ResistantTo: Fire
+Power: 5
