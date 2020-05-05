@@ -55,6 +55,6 @@ Type: Arms
 [BodyPart]
 Type: Legs
 [Equipped]
-[KnownSkill]
-Skill: Skill:Teleport
-Order: 1
+#[KnownSkill]
+#Skill: Skill:Teleport
+#Order: 1

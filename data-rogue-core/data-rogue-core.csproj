@@ -166,7 +166,6 @@
     <Compile Include="Data\EquipmentMappingList.cs" />
     <Compile Include="Data\EquipmentMappingListItem.cs" />
     <Compile Include="Data\EquipmentSlotDetails.cs" />
-    <Compile Include="Data\IEntityDataParser.cs" />
     <Compile Include="EntityEngineSystem\SpriteSheetDataProvider.cs" />
     <Compile Include="EventSystem\Rules\OnAttackProcEnchantmentRule.cs" />
     <Compile Include="EventSystem\Rules\PlayerVictoryRule.cs" />
@@ -517,6 +516,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Misc\arrow.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Misc\break.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Misc\current_target.png">

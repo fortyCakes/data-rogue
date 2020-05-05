@@ -37,13 +37,13 @@ namespace data_rogue_core.EventSystem.Rules
             if (data.DefenceType != _defenceName)
             {
                 // Don't try to apply it
-                return false;
+                return true;
             }
 
             var attackClass = data.ForAttack.AttackClass;
             if (!ValidAttackClasses.Contains(attackClass))
             {
-                return false;
+                return true;
             }
 
             var defender = data.ForAttack.Defender;
@@ -52,7 +52,7 @@ namespace data_rogue_core.EventSystem.Rules
 
             if (isBroken)
             {
-                return false;
+                return true;
             }
 
             var defence = _systemContainer.EventSystem.GetStat(defender, _statName);
@@ -60,13 +60,13 @@ namespace data_rogue_core.EventSystem.Rules
 
             var defenceRoll = _systemContainer.Random.Between(1,20);
 
-            if (defence + defenceRoll > data.ForAttack.AttackRoll || defenceRoll ==  20)
+            if (defence + defenceRoll > data.ForAttack.AttackRoll)
             {
                 IncreaseTiltForSucessfulDefence(tiltFighter, defenceRoll, data);
-                return true;
+                return false;
             }
 
-            return false;
+            return true;
         }
 
     }
@@ -78,7 +78,7 @@ namespace data_rogue_core.EventSystem.Rules
         {
             var tiltPercent = (decimal)tiltFighter.Tilt.Current / tiltFighter.Tilt.Max;
 
-            return defence * (0.5m + 0.5m * tiltPercent);
+            return defence * (1m - 0.5m * tiltPercent);
         }
 
         protected override void IncreaseTiltForSucessfulDefence(TiltFighter tiltFighter, decimal defenceRoll, DefenceEventData eventData)
@@ -102,7 +102,7 @@ namespace data_rogue_core.EventSystem.Rules
         {
             var tiltPercent = (decimal)tiltFighter.Tilt.Current / tiltFighter.Tilt.Max;
 
-            return defence * (0.8m + 0.2m * tiltPercent);
+            return defence * (1m - 0.2m * tiltPercent);
         }
 
         protected override void IncreaseTiltForSucessfulDefence(TiltFighter tiltFighter, decimal defenceRoll,  DefenceEventData eventData)
@@ -123,7 +123,7 @@ namespace data_rogue_core.EventSystem.Rules
         {
             var tiltPercent = (decimal)tiltFighter.Tilt.Current / tiltFighter.Tilt.Max;
 
-            return defence * (0.75m + 0.5m * tiltPercent);
+            return defence * (1.25m - 0.5m * tiltPercent);
         }
 
         protected override void IncreaseTiltForSucessfulDefence(TiltFighter tiltFighter, decimal defenceRoll, DefenceEventData eventData)

@@ -147,6 +147,13 @@ SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
+Name: break
+Path: Images/Sprites/Misc/break.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
 Name: armour_brown
 Path: Images/Sprites/Entities/Items/armour_brown.png
 Type: SingleSprite

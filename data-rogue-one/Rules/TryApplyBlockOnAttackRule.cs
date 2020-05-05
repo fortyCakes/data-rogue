@@ -24,7 +24,7 @@ namespace data_rogue_core.EventSystem.Rules
 
             var defenceEventData = new DefenceEventData { ForAttack = data, DefenceType = "Block" };
 
-            if (_systemContainer.EventSystem.Try(EventType.Defence, data.Defender, defenceEventData))
+            if (!_systemContainer.EventSystem.Try(EventType.Defence, data.Defender, defenceEventData))
             {
                 data.SuccessfulDefenceType = "Block";
             }

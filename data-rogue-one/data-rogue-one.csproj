@@ -55,7 +55,7 @@
   <ItemGroup>
     <Compile Include="Components\AegisRecovery.cs" />
     <Compile Include="Components\AuraFighter.cs" />
-    <Compile Include="Components\FlameAura - Copy.cs" />
+    <Compile Include="Components\Resistant.cs" />
     <Compile Include="Components\PlayerRestBehaviour.cs" />
     <Compile Include="Components\FlameAura.cs" />
     <Compile Include="Components\TiltFighter.cs" />
