@@ -8,7 +8,7 @@ namespace data_rogue_core.Systems
         public ActionType Action { get; set; }
         public string Parameters { get; set; }
         public KeyCombination KeyPress { get; set; }
-        public int? Speed { get; set; }
+        public ulong? Speed { get; set; }
         public bool IsAction { get; internal set; }
     }
 }

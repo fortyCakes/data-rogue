@@ -24,7 +24,7 @@ namespace data_rogue_core.EventSystem.Rules
 
             if (data.Speed == null)
             {
-                data.Speed = _systemContainer.StatSystem.GetEntityStat(data.Weapon, "Speed");
+                data.Speed = (ulong)_systemContainer.StatSystem.GetEntityStat(data.Weapon, "Speed");
             }
 
             return true;

@@ -138,6 +138,12 @@
     <None Include="Data\Entities\StaticEntities\MapCells\cells.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Entities\StaticEntities\Monsters\bat.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Entities\StaticEntities\Monsters\orc.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\Entities\StaticEntities\Monsters\living flame.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

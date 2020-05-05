@@ -9,7 +9,7 @@ namespace data_rogue_core.Components
         public string Damage;
         public int? Accuracy;
         public string AttackName;
-        public int? Speed;
+        public ulong? Speed;
         public string Tags;
     }
 }

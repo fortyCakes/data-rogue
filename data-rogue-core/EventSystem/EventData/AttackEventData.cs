@@ -7,7 +7,7 @@ namespace data_rogue_core.EventSystem.EventData
         public IEntity Attacker;
         public IEntity Defender;
         public string AttackClass;
-        public int? Speed;
+        public ulong? Speed;
         public int? Accuracy;
         public int? Damage;
         public int? AttackRoll;

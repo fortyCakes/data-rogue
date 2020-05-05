@@ -22,7 +22,8 @@ namespace data_rogue_core.EventSystem.Rules
             typeof(GetItemAction),
             typeof(SkillMenuAction),
             typeof(UseSkillAction),
-            typeof(FollowPathAction)
+            typeof(FollowPathAction),
+            typeof(WaitAction)
         };
 
         protected ISystemContainer _systemContainer;

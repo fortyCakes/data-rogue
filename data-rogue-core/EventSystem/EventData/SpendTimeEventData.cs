@@ -2,6 +2,6 @@
 {
     public class SpendTimeEventData
     {
-        public int Ticks;
+        public ulong Ticks;
     }
 }

@@ -141,21 +141,21 @@ SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
 Name: generic_person
-Path: Images/Sprites/Entities/generic_person.png
+Path: Images/Sprites/Entities/Creatures/generic_person.png
 Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
 Name: armour_brown
-Path: Images/Sprites/Entities/armour_brown.png
+Path: Images/Sprites/Entities/Items/armour_brown.png
 Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
 Name: boot_brown
-Path: Images/Sprites/Entities/boot_brown.png
+Path: Images/Sprites/Entities/Items/boot_brown.png
 Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16
@@ -169,7 +169,7 @@ SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
 Name: glove_brown
-Path: Images/Sprites/Entities/glove_brown.png
+Path: Images/Sprites/Entities/Items/glove_brown.png
 Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16
@@ -191,6 +191,41 @@ Scaling: 2
 [SpriteSheet]
 Name: flame
 Path: Images/Sprites/Entities/Misc/flame.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: bat
+Path: Images/Sprites/Entities/Creatures/bat.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: orc
+Path: Images/Sprites/Entities/Creatures/orc.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: minotaur
+Path: Images/Sprites/Entities/Creatures/minotaur.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: green_slime
+Path: Images/Sprites/Entities/Creatures/green_slime.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: ogre
+Path: Images/Sprites/Entities/Creatures/ogre.png
 Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16
@@ -225,63 +260,63 @@ SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
 Name: helm_brown
-Path: Images/Sprites/Entities/helm_brown.png
+Path: Images/Sprites/Entities/Items/helm_brown.png
 Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
 Name: lamp
-Path: Images/Sprites/Entities/lamp.png
+Path: Images/Sprites/Entities/Items/lamp.png
 Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
 Name: legs_brown
-Path: Images/Sprites/Entities/legs_brown.png
+Path: Images/Sprites/Entities/Items/legs_brown.png
 Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
 Name: potion_red
-Path: Images/Sprites/Entities/potion_red.png
+Path: Images/Sprites/Entities/Items/potion_red.png
 Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
 Name: stairs_down
-Path: Images/Sprites/Entities/stairs_down.png
+Path: Images/Sprites/Entities/Misc/stairs_down.png
 Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
 Name: stairs_up
-Path: Images/Sprites/Entities/stairs_up.png
+Path: Images/Sprites/Entities/Misc/stairs_up.png
 Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
 Name: portal
-Path: Images/Sprites/Entities/portal.png
+Path: Images/Sprites/Entities/Misc/portal.png
 Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
 Name: sword_1
-Path: Images/Sprites/Entities/sword_1.png
+Path: Images/Sprites/Entities/Items/sword_1.png
 Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
 Name: pile_of_gold
-Path: Images/Sprites/Entities/pile_of_gold.png
+Path: Images/Sprites/Entities/Items/pile_of_gold.png
 Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16
@@ -358,56 +393,56 @@ SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
 Name: bow
-Path: Images/Sprites/Entities/bow.png
+Path: Images/Sprites/Entities/Items/bow.png
 Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
 Name: arrow
-Path: Images/Sprites/Entities/arrow.png
+Path: Images/Sprites/Entities/Items/arrow.png
 Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
 Name: orb
-Path: Images/Sprites/Entities/orb.png
+Path: Images/Sprites/Entities/Items/orb.png
 Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
 Name: junk
-Path: Images/Sprites/Entities/junk.png
+Path: Images/Sprites/Entities/Items/junk.png
 Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
 Name: wooden_shield
-Path: Images/Sprites/Entities/wooden_shield.png
+Path: Images/Sprites/Entities/Items/wooden_shield.png
 Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
 Name: staff_1
-Path: Images/Sprites/Entities/staff_1.png
+Path: Images/Sprites/Entities/Items/staff_1.png
 Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
 Name: sword_dark_1
-Path: Images/Sprites/Entities/sword_dark_1.png
+Path: Images/Sprites/Entities/Items/sword_dark_1.png
 Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
 Name: book_1
-Path: Images/Sprites/Entities/book_1.png
+Path: Images/Sprites/Entities/Items/book_1.png
 Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16

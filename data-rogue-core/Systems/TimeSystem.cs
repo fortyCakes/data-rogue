@@ -119,7 +119,7 @@ namespace data_rogue_core.Systems
 
             if (actor.NextTick <= CurrentTime)
             {
-                actor.NextTick = CurrentTime + 1000;
+                actor.NextTick = CurrentTime + actor.Speed;
             }
         }
 
@@ -128,10 +128,10 @@ namespace data_rogue_core.Systems
             return entity.Components.OfType<IBehaviour>();
         }
 
-        public void SpendTicks(IEntity entity, int ticks)
+        public void SpendTicks(IEntity entity, ulong ticks)
         {
             var actor = entity.Get<Actor>();
-            actor.NextTick = CurrentTime + (ulong)ticks;
+            actor.NextTick = CurrentTime + ticks;
         }
 
         public bool WaitingForInput { get; set; }

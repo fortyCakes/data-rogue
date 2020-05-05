@@ -33,7 +33,7 @@ Value: 10
 Name: Intellect
 Value: 10
 [Description]
-Name: LivingFlame
+Name: Living Flame
 Detail: This is a living mass of flame! Beware getting too close to it.
 [Actor]
 [MoveToPlayerBehaviour]

@@ -1,0 +1,46 @@
+﻿"Monster:Bat"
+[Prototype]
+Name: Monster:Bat
+Singleton: false
+[Biome]
+Name: Dungeon
+[Challenge]
+ChallengeRating: 0
+[Appearance]
+Glyph: b
+Color: #efefef
+ZOrder: 10
+[SpriteAppearance]
+Bottom: bat
+[Position]
+[Physical]
+Passable: false
+Transparent: true
+[Health]
+HP: 2/2
+[TiltFighter]
+Tilt: 0/5
+[Stat]
+Name: Muscle
+Value: 2
+[Stat]
+Name: Agility
+Value: 15
+[Stat]
+Name: Willpower
+Value: 8
+[Stat]
+Name: Intellect
+Value: 4
+[Description]
+Name: Bat
+Detail: This is a fast-moving flying bat.
+[Actor]
+Speed: 600
+[MoveAwayFromPlayerBehaviour]
+Priority: 1
+Chance: 0.5
+[MoveToPlayerBehaviour]
+Priority: 0
+[RandomlyMoveBehaviour]
+Priority: -1

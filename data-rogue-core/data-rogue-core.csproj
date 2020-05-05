@@ -78,6 +78,7 @@
     <Compile Include="Activities\MouseControlHelper.cs" />
     <Compile Include="Activities\PositionEventHandler.cs" />
     <Compile Include="Activities\TargetingStatus.cs" />
+    <Compile Include="Behaviours\MoveAwayFromPlayerBehaviour.cs" />
     <Compile Include="Components\AttackDefinition.cs" />
     <Compile Include="Components\Class.cs" />
     <Compile Include="Components\HasClass.cs" />
@@ -100,6 +101,8 @@
     <Compile Include="EventSystem\Rules\Actions\ResolveRangedAttackAction.cs" />
     <Compile Include="EventSystem\Rules\Actions\SetIsActionFalseRule.cs" />
     <Compile Include="EventSystem\Rules\Actions\UseSkillAction.cs" />
+    <Compile Include="EventSystem\Rules\Actions\WaitAction.cs" />
+    <Compile Include="EventSystem\Rules\CantDealNoDamageRule.cs" />
     <Compile Include="Forms\StaticForms\TextFormData.cs" />
     <Compile Include="Forms\SubSelectableFormData.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTTilesUnifiedRenderer.cs" />
@@ -453,13 +456,16 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\Sprites\Entities\arrow.png">
+    <Content Include="Images\Sprites\Entities\Items\arrow.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Entities\book_1.png">
+    <Content Include="Images\Sprites\Entities\Items\book_1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Entities\bow.png">
+    <Content Include="Images\Sprites\Entities\Items\bow.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Entities\Creatures\bat.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Entities\Creatures\fire_devil.png">
@@ -468,13 +474,25 @@
     <Content Include="Images\Sprites\Entities\Creatures\fire_imp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\Sprites\Entities\Creatures\green_slime.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Sprites\Entities\Creatures\imp_1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Entities\Creatures\living_flame.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Entities\junk.png">
+    <Content Include="Images\Sprites\Entities\Creatures\minotaur.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Entities\Creatures\orc.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Entities\Creatures\ogre.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Entities\Items\junk.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Entities\Misc\black_smoke.png">
@@ -483,19 +501,19 @@
     <Content Include="Images\Sprites\Entities\Misc\flame.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Entities\orb.png">
+    <Content Include="Images\Sprites\Entities\Items\orb.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Entities\portal.png">
+    <Content Include="Images\Sprites\Entities\Misc\portal.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Entities\staff_1.png">
+    <Content Include="Images\Sprites\Entities\Items\staff_1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Entities\sword_dark_1.png">
+    <Content Include="Images\Sprites\Entities\Items\sword_dark_1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Entities\wooden_shield.png">
+    <Content Include="Images\Sprites\Entities\Items\wooden_shield.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Misc\arrow.png">
@@ -516,19 +534,19 @@
     <Content Include="Images\Sprites\Misc\unknown.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Entities\generic_person.png">
+    <Content Include="Images\Sprites\Entities\Creatures\generic_person.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Entities\armour_brown.png">
+    <Content Include="Images\Sprites\Entities\Items\armour_brown.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Entities\boot_brown.png">
+    <Content Include="Images\Sprites\Entities\Items\boot_brown.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Entities\Creatures\dog_1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Entities\glove_brown.png">
+    <Content Include="Images\Sprites\Entities\Items\glove_brown.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Entities\Creatures\goblin.png">
@@ -546,25 +564,25 @@
     <Content Include="Images\Sprites\Tiles\grass_1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Entities\helm_brown.png">
+    <Content Include="Images\Sprites\Entities\Items\helm_brown.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Entities\lamp.png">
+    <Content Include="Images\Sprites\Entities\Items\lamp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Entities\legs_brown.png">
+    <Content Include="Images\Sprites\Entities\Items\legs_brown.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Entities\pile_of_gold.png">
+    <Content Include="Images\Sprites\Entities\Items\pile_of_gold.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Entities\potion_red.png">
+    <Content Include="Images\Sprites\Entities\Items\potion_red.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Entities\stairs_down.png">
+    <Content Include="Images\Sprites\Entities\Misc\stairs_down.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Entities\stairs_up.png">
+    <Content Include="Images\Sprites\Entities\Misc\stairs_up.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Tiles\stones.png">
@@ -573,7 +591,7 @@
     <Content Include="Images\Sprites\Tiles\stone_floor_1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Entities\sword_1.png">
+    <Content Include="Images\Sprites\Entities\Items\sword_1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Tiles\stone_wall_box.png">

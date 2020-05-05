@@ -23,10 +23,12 @@ namespace data_rogue_core.EventSystem.Rules
 
         public bool Apply(EventType type, IEntity sender, object eventData)
         {
-            var resistances = sender.Components.OfType<Resistant>();
+            
             var data = eventData as AttackEventData;
 
-            var applicable = resistances.Where(r => data.Tags.Contains(r.ResistantTo));
+            var resistances = data.Defender.Components.OfType<Resistant>();
+
+            var applicable = resistances.Where(r => data?.Tags?.Contains(r.ResistantTo) ?? false);
 
             foreach (var resistance in applicable)
             {

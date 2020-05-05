@@ -21,6 +21,7 @@ namespace data_rogue_one
                     typeof(SetDamageOnAttackRule),
                     typeof(SetWeaponOnAttackRule),
                     typeof(DealDamageRule),
+                    typeof(CantDealNoDamageRule),
                     typeof(PeopleDieWhenTheyAreKilledRule),
                     typeof(SpendTimeRule),
                     typeof(PlayerDeathRule),

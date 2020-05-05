@@ -58,13 +58,16 @@ namespace data_rogue_core.EventSystem.Rules
             }
             else
             {
-                if (damageData.Absorbed)
+                if (string.IsNullOrEmpty(data.SuccessfulDefenceType))
                 {
-                    data.SuccessfulDefenceType = "Absorbed";
-                }
-                else
-                {
-                    data.SuccessfulDefenceType = "NoDamage";
+                    if (damageData.Absorbed)
+                    {
+                        data.SuccessfulDefenceType = "Absorbed";
+                    }
+                    else
+                    {
+                        data.SuccessfulDefenceType = "NoDamage";
+                    }
                 }
 
                 DescribeMissedAttack(data, messageContext);

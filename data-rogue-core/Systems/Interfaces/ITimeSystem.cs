@@ -9,7 +9,7 @@ namespace data_rogue_core.Systems.Interfaces
         bool WaitingForInput { get; set; }
         ulong CurrentTime { get; set; }
 
-        void SpendTicks(IEntity entity, int ticks);
+        void SpendTicks(IEntity entity, ulong ticks);
 
         string TimeString { get; }
     }

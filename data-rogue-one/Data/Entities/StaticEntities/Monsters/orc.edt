@@ -1,0 +1,42 @@
+﻿"Monster:Orc"
+[Prototype]
+Name: Monster:Orc
+Singleton: false
+[Biome]
+Name: Dungeon
+[Challenge]
+ChallengeRating: 3
+[Appearance]
+Glyph: o
+Color: #aaffaa
+ZOrder: 10
+[SpriteAppearance]
+Bottom: orc
+[Position]
+[Physical]
+Passable: false
+Transparent: true
+[Health]
+HP: 16/16
+[TiltFighter]
+Tilt: 0/50
+[Stat]
+Name: Muscle
+Value: 12
+[Stat]
+Name: Agility
+Value: 8
+[Stat]
+Name: Willpower
+Value: 8
+[Stat]
+Name: Intellect
+Value: 4
+[Description]
+Name: Orc
+Detail: This is a medium-sized, green-skinned humanoid. They are known to be highly aggressive towards humans. They're competent warriors.
+[Actor]
+[MoveToPlayerBehaviour]
+Priority: 0
+[RandomlyMoveBehaviour]
+Priority: -1
