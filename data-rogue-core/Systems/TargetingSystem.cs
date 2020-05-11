@@ -3,6 +3,8 @@ using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems.Interfaces;
 using System;
+using data_rogue_core.IOSystems;
+using data_rogue_core.Utils;
 
 namespace data_rogue_core.Systems
 {
@@ -44,7 +46,25 @@ namespace data_rogue_core.Systems
 
         private void GetTargetForNonPlayer(IEntity sender, TargetingData data, Action<MapCoordinate> callback)
         {
-            throw new NotImplementedException();
+            var position = _systemContainer.PositionSystem.CoordinateOf(sender);
+            var playerPosition = _systemContainer.PositionSystem.CoordinateOf(_systemContainer.PlayerSystem.Player);
+
+            if (data.Range.HasValue && data.Range > 0)
+            {
+                var currentMap = _systemContainer.MapSystem.MapCollection[position.Key];
+                var fov = currentMap.FovFrom(_systemContainer.PositionSystem, playerPosition, data.Range.Value);
+                
+                if (!fov.Contains(playerPosition)) return;
+            }
+
+            var targetableCells = data.TargetableCellsFrom(position);
+
+            if (targetableCells.Contains(playerPosition))
+            {
+                callback(playerPosition);
+            }
+
+            return;
         }
     }
 }

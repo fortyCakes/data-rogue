@@ -8,7 +8,9 @@ namespace data_rogue_core.Behaviours
         public int Priority;
         public int BehaviourPriority => Priority;
 
-        public double Chance { get; set; } = 1;
+        public double Chance = 1;
+
+        public double BehaviourChance => Chance;
 
         public abstract ActionEventData ChooseAction(IEntity entity);
     }

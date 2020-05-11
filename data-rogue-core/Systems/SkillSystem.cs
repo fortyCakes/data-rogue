@@ -2,6 +2,7 @@
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Systems.Interfaces;
 using System;
+using System.Collections.Generic;
 using data_rogue_core.EventSystem;
 using System.Linq;
 
@@ -59,6 +60,11 @@ namespace data_rogue_core.Systems
         {
             var skill = systemContainer.PrototypeSystem.Get(skillName);
 
+            Use(user, skill);
+        }
+
+        public void Use(IEntity user, IEntity skill)
+        {
             var scriptName = skill.Get<Skill>().ScriptName;
 
             var script = systemContainer.PrototypeSystem.Get(scriptName);
@@ -93,6 +99,11 @@ namespace data_rogue_core.Systems
         public IEntity GetSkillFromKnown(KnownSkill knownSkill)
         {
             return systemContainer.PrototypeSystem.Get(knownSkill.Skill);
+        }
+
+        public IEnumerable<IEntity> KnownSkills(IEntity entity)
+        {
+            return entity.Components.OfType<KnownSkill>().Select(GetSkillFromKnown);
         }
     }
 }

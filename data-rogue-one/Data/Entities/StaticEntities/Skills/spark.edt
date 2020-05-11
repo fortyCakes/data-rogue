@@ -1,0 +1,39 @@
+﻿"Spark"
+[Prototype]
+Name: Skill:Spark
+Singleton: true
+[Skill]
+Cost: 10
+ScriptName: Script: Spark
+[Description]
+Name: Spark
+[Targeting]
+Range: 4
+CellsHit: 0,0
+[AttackDefinition]
+AttackClass: Bolt
+SpendTime: false
+Damage: Intellect
+Accuracy: 30
+AttackName: Spark
+
+"Script: Spark"
+[Prototype]
+Name: Script: Spark
+Singleton: true
+[Script]
+Text: {
+	withTarget(
+	function(target)
+		
+		attacked = attackCellsHit(target, User, Entity)
+
+		if not attacked then
+			SystemContainer.MessageSystem:Write('The spark strikes empty space.')
+		end
+
+		onComplete()
+	end)
+	
+	requestTarget(User, Entity)
+}

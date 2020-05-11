@@ -27,16 +27,25 @@ namespace data_rogue_core.Components
                     }
                     else
                     {
-                        if (Aura.Current > BaseAura)
-                        {
-                            Aura.Subtract(1);
-                        }
-                        else if (Aura.Current < BaseAura)
-                        {
-                            Aura.Add(1);
-                        }
+                        MoveAuraToBase();
                     }
                 }
+                else
+                {
+                    MoveAuraToBase();
+                }
+            }
+        }
+
+        private void MoveAuraToBase()
+        {
+            if (Aura.Current > BaseAura)
+            {
+                Aura.Subtract(1);
+            }
+            else if (Aura.Current < BaseAura)
+            {
+                Aura.Add(1);
             }
         }
     }

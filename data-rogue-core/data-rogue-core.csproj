@@ -78,6 +78,7 @@
     <Compile Include="Activities\MouseControlHelper.cs" />
     <Compile Include="Activities\PositionEventHandler.cs" />
     <Compile Include="Activities\TargetingStatus.cs" />
+    <Compile Include="Behaviours\UseSkillBehaviour.cs" />
     <Compile Include="Behaviours\MoveAwayFromPlayerBehaviour.cs" />
     <Compile Include="Components\AttackDefinition.cs" />
     <Compile Include="Components\Class.cs" />
@@ -455,6 +456,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\Sprites\Entities\Creatures\mite.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Sprites\Entities\Items\arrow.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

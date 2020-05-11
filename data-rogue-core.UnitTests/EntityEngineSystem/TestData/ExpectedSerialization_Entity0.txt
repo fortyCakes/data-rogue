@@ -3,4 +3,5 @@
 Color: #FF0000
 Glyph: £
 [MoveToPlayerBehaviour]
+Chance: 1
 Priority: 100

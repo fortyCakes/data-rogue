@@ -98,7 +98,7 @@ namespace data_rogue_core.Systems
 
             foreach (IBehaviour behaviour in behaviours.OrderByDescending(b => b.BehaviourPriority))
             {
-                if (_systemContainer.Random.PercentageChance(behaviour.Chance))
+                if (_systemContainer.Random.PercentageChance(behaviour.BehaviourChance))
                 {
 
                     var chosenAction = behaviour.ChooseAction(entity);

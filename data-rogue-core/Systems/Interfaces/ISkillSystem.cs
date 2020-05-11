@@ -10,10 +10,12 @@ namespace data_rogue_core.Systems.Interfaces
         void Forget(IEntity learner, IEntity skill);
 
         void Use(IEntity user, string skillName);
+        void Use(IEntity user, IEntity skill);
         KnownSkill GetKnownSkillByIndex(IEntity entity, int index);
 
         IEntity GetSkillFromKnown(KnownSkill knownSkill);
 
         void OnComplete(IEntity user, IEntity skill);
+        IEnumerable<IEntity> KnownSkills(IEntity entity);
     }
 }

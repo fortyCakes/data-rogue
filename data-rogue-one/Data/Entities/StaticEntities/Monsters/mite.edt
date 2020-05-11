@@ -1,0 +1,55 @@
+﻿"Monster:SparkMite"
+[Prototype]
+Name: Monster:SparkMite
+Singleton: false
+[Biome]
+Name: Dungeon
+[Challenge]
+ChallengeRating: 0
+[Appearance]
+Glyph: m
+Color: #DBD75D
+ZOrder: 10
+[SpriteAppearance]
+Bottom: mite
+[Position]
+[Physical]
+Passable: false
+Transparent: true
+[Health]
+HP: 1/1
+[TiltFighter]
+Tilt: 0/1
+[AuraFighter]
+Aura: 50/100
+BaseAura: 50
+[Stat]
+Name: Muscle
+Value: 1
+[Stat]
+Name: Agility
+Value: 15
+[Stat]
+Name: Willpower
+Value: 2
+[Stat]
+Name: Intellect
+Value: 2
+[Description]
+Name: Spark Mite
+Detail: This is a spark mite. They throw short-ranged bolts of energy, and run away if approached.
+[Actor]
+Speed: 900
+[KnownSkill]
+Skill: Skill:Spark
+Order: 1
+[UseRandomSkillBehaviour]
+Priority: 2
+Chance: 0.2
+[MoveAwayFromPlayerBehaviour]
+Priority: 1
+Chance: 0.75
+[MoveToPlayerBehaviour]
+Priority: 0
+[RandomlyMoveBehaviour]
+Priority: -1

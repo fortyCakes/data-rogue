@@ -186,6 +186,19 @@ namespace data_rogue_core.UnitTests.Systems
             result.Should().Be(skill);
         }
 
+        [Test]
+        public void KnownSkills_ReturnsKnownSkills()
+        {
+            var skill = GetTestSkill();
+            var skill2 = GetTestSkill();
+            systemContainer.SkillSystem.Learn(learner, skill);
+            systemContainer.SkillSystem.Learn(learner, skill2);
+
+            var result = systemContainer.SkillSystem.KnownSkills(learner);
+
+            result.Should().BeEquivalentTo(skill, skill2);
+        }
+
         private IEntity GetTestEntity()
         {
             return systemContainer.EntityEngine.New("Learner");
