@@ -31,7 +31,7 @@ namespace data_rogue_core.Systems
             }
             else
             {
-                GetTargetForNonPlayer(sender, data, callback);
+                NonPlayerTargeter.GetTargetForNonPlayer(_systemContainer, sender, data, callback);
             }
         }
 
@@ -42,29 +42,6 @@ namespace data_rogue_core.Systems
             var activity = new TargetingActivity(data, callback, _systemContainer, playerPosition, _rendererSystem.IOSystemConfiguration);
 
             _activitySystem.Push(activity);
-        }
-
-        private void GetTargetForNonPlayer(IEntity sender, TargetingData data, Action<MapCoordinate> callback)
-        {
-            var position = _systemContainer.PositionSystem.CoordinateOf(sender);
-            var playerPosition = _systemContainer.PositionSystem.CoordinateOf(_systemContainer.PlayerSystem.Player);
-
-            if (data.Range.HasValue && data.Range > 0)
-            {
-                var currentMap = _systemContainer.MapSystem.MapCollection[position.Key];
-                var fov = currentMap.FovFrom(_systemContainer.PositionSystem, playerPosition, data.Range.Value);
-                
-                if (!fov.Contains(playerPosition)) return;
-            }
-
-            var targetableCells = data.TargetableCellsFrom(position);
-
-            if (targetableCells.Contains(playerPosition))
-            {
-                callback(playerPosition);
-            }
-
-            return;
         }
     }
 }
