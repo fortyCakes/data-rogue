@@ -13,8 +13,6 @@ namespace data_rogue_core.Behaviours
 {
     public class MoveAwayFromPlayerBehaviour : BaseBehaviour
     {
-        public decimal Chance = 1;
-
         private readonly IPositionSystem _positionSystem;
         private readonly IEventSystem _eventRuleSystem;
         private readonly IPlayerSystem _playerSystem;
@@ -32,30 +30,27 @@ namespace data_rogue_core.Behaviours
 
         public override ActionEventData ChooseAction(IEntity entity)
         {
-            if (Chance >= _random.Between(1, 100) / 100M)
+            var position = _positionSystem.CoordinateOf(entity);
+            var playerPosition = _positionSystem.CoordinateOf(_playerSystem.Player);
+
+            if (position == null ||
+                playerPosition == null ||
+                Math.Abs(position.X - playerPosition.X) > 3 ||
+                Math.Abs(position.Y - playerPosition.Y) > 3)
             {
-                var position = _positionSystem.CoordinateOf(entity);
-                var playerPosition = _positionSystem.CoordinateOf(_playerSystem.Player);
+                return null;
+            }
 
-                if (position == null ||
-                    playerPosition == null ||
-                    Math.Abs(position.X - playerPosition.X) > 3 ||
-                    Math.Abs(position.Y - playerPosition.Y) > 3)
-                {
-                    return null;
-                }
+            var adjacentToMe = position.AdjacentCells().Where(c => !_positionSystem.IsBlocked(c));
+            var adjacentToPlayer = playerPosition.AdjacentCells();
 
-                var adjacentToMe = position.AdjacentCells().Where(c => !_positionSystem.IsBlocked(c));
-                var adjacentToPlayer = playerPosition.AdjacentCells();
+            var validCells = adjacentToMe.Except(adjacentToPlayer).Except(new [] {playerPosition}).ToList();
 
-                var validCells = adjacentToMe.Except(adjacentToPlayer).Except(new [] {playerPosition}).ToList();
+            if (validCells.Any())
+            {
+                var vector = _random.PickOne(validCells) - position;
 
-                if (validCells.Any())
-                {
-                    var vector = _random.PickOne(validCells) - position;
-
-                    return new ActionEventData { Action = ActionType.Move, Parameters = vector.ToString(), Speed = entity.Get<Actor>().Speed };
-                }
+                return new ActionEventData { Action = ActionType.Move, Parameters = vector.ToString(), Speed = entity.Get<Actor>().Speed };
             }
 
             return null;
