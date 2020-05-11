@@ -98,22 +98,26 @@ namespace data_rogue_core.Systems
 
             foreach (IBehaviour behaviour in behaviours.OrderByDescending(b => b.BehaviourPriority))
             {
-                var chosenAction = behaviour.ChooseAction(entity);
-                
-                if (chosenAction != null)
+                if (_systemContainer.Random.PercentageChance(behaviour.Chance))
                 {
-                    if (chosenAction.Action == ActionType.WaitForInput)
+
+                    var chosenAction = behaviour.ChooseAction(entity);
+
+                    if (chosenAction != null)
                     {
-                        WaitingForInput = true;
-                        break;
+                        if (chosenAction.Action == ActionType.WaitForInput)
+                        {
+                            WaitingForInput = true;
+                            break;
+                        }
+
+                        _eventSystem.Try(EventType.Action, entity, chosenAction);
                     }
 
-                    _eventSystem.Try(EventType.Action, entity, chosenAction);
-                }
-
-                if (actor.NextTick > CurrentTime)
-                {
-                    break;
+                    if (actor.NextTick > CurrentTime)
+                    {
+                        break;
+                    }
                 }
             }
 

@@ -7,6 +7,8 @@ namespace data_rogue_core.Behaviours
     {
         int BehaviourPriority { get; }
 
+        double Chance { get; }
+
         ActionEventData ChooseAction(IEntity entity);
     }
 }
