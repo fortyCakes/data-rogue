@@ -68,8 +68,9 @@ namespace data_rogue_core.Systems
             var currentMap = systemContainer.MapSystem.MapCollection[position.Key];
             var fov = currentMap.FovFrom(systemContainer.PositionSystem, origin, data.Range.Value);
 
-            var canSeePlayer = fov.Contains(systemContainer.PositionSystem.CoordinateOf(target));
-            return canSeePlayer;
+            var checkCoord = systemContainer.PositionSystem.CoordinateOf(target);
+            var canSeeTarget = fov.Contains(checkCoord);
+            return canSeeTarget;
         }
     }
 }
