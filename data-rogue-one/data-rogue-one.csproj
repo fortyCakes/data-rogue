@@ -55,6 +55,8 @@
   <ItemGroup>
     <Compile Include="Components\AegisRecovery.cs" />
     <Compile Include="Components\AuraFighter.cs" />
+    <Compile Include="Components\ModifiedDamage.cs" />
+    <Compile Include="Components\ModifiedAccuracy.cs" />
     <Compile Include="Components\Resistant.cs" />
     <Compile Include="Components\PlayerRestBehaviour.cs" />
     <Compile Include="Components\FlameAura.cs" />
@@ -64,6 +66,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rules\Actions\ExamineStatusAction.cs" />
     <Compile Include="Rules\Actions\RestAction.cs" />
+    <Compile Include="Rules\ApplyModifiedAccuracyRule.cs" />
+    <Compile Include="Rules\ApplyModifiedDamageRule.cs" />
     <Compile Include="Rules\ApplyResistanceRule.cs" />
     <Compile Include="Rules\IncreaseStatsOnLevelUpRule.cs" />
     <Compile Include="Utils\StatusHelper.cs" />
@@ -140,6 +144,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\Entities\StaticEntities\Monsters\goblin shaman.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Entities\StaticEntities\Monsters\stone head.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\Entities\StaticEntities\Monsters\spark mite.edt">

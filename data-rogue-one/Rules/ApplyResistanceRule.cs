@@ -14,7 +14,7 @@ namespace data_rogue_core.EventSystem.Rules
             MessageSystem = systemContainer.MessageSystem;
         }
 
-        public EventTypeList EventTypes => new EventTypeList { EventType.Attack };
+        public EventTypeList EventTypes => new EventTypeList {EventType.Attack};
         public uint RuleOrder => 0;
         public EventRuleType RuleType => EventRuleType.BeforeEvent;
 
@@ -23,7 +23,7 @@ namespace data_rogue_core.EventSystem.Rules
 
         public bool Apply(EventType type, IEntity sender, object eventData)
         {
-            
+
             var data = eventData as AttackEventData;
 
             var resistances = data.Defender.Components.OfType<Resistant>();
@@ -43,5 +43,6 @@ namespace data_rogue_core.EventSystem.Rules
 
             return true;
         }
+
     }
 }

@@ -16,7 +16,7 @@ namespace data_rogue_core.Components
 
             if (currentAegis < maxAegis && currentTime % 1000 == 0)
             {
-                if (systemContainer.EventSystem.GetStat(entity, "Tension") == 0)
+                if (!entity.IsPlayer || systemContainer.EventSystem.GetStat(entity, "Tension") == 0)
                 {
                     systemContainer.StatSystem.SetStat(entity, "CurrentAegisLevel", currentAegis + 1);
                 }

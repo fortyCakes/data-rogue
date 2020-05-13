@@ -210,6 +210,13 @@ SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
+Name: stone_head
+Path: Images/Sprites/Entities/Creatures/stone_head.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
 Name: mite
 Path: Images/Sprites/Entities/Creatures/mite.png
 Type: SingleSprite

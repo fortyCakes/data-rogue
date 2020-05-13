@@ -59,8 +59,14 @@ namespace data_rogue_one.EventSystem.Utils
             {
                 auraStats.Add(new InfoDisplay { ControlType = typeof(StatControl), Parameters = "Tension" });
             }
-
             auraStats.Add(new InfoDisplay { ControlType = typeof(Spacer)});
+
+            var aegisStats = new List<InfoDisplay>()
+            {
+                new InfoDisplay {ControlType = typeof(StatControl), Parameters = "CurrentAegisLevel"},
+                new InfoDisplay {ControlType = typeof(StatControl), Parameters = "Aegis"},
+                new InfoDisplay {ControlType = typeof(Spacer)},
+            };
 
             var tiltStats =  new List<InfoDisplay> {
                 new InfoDisplay { ControlType = typeof(ComponentCounter), Parameters = "TiltFighter,Tilt", BackColor = Color.Purple },
@@ -75,7 +81,7 @@ namespace data_rogue_one.EventSystem.Utils
                 new InfoDisplay {ControlType = typeof(Spacer)},
                 new InfoDisplay {ControlType = typeof(StatControl), Parameters = "AC"},
                 new InfoDisplay {ControlType = typeof(StatControl), Parameters = "EV"},
-                new InfoDisplay {ControlType = typeof(StatControl), Parameters = "SH"}
+                new InfoDisplay {ControlType = typeof(StatControl), Parameters = "SH"},
             };
 
             if (entity.Has<Health>())
@@ -91,6 +97,11 @@ namespace data_rogue_one.EventSystem.Utils
             if (entity.Has<TiltFighter>())
             {
                 ret.AddRange(tiltStats);
+            }
+
+            if (entity.Has<AegisRecovery>())
+            {
+                ret.AddRange(aegisStats);
             }
 
             ret.AddRange(combatStats);

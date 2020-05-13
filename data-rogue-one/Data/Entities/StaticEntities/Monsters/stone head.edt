@@ -1,0 +1,49 @@
+﻿"Monster:StoneHead"
+[Prototype]
+Name: Monster:StoneHead
+Singleton: false
+[Biome]
+Name: Dungeon
+[Challenge]
+ChallengeRating: 3
+[Appearance]
+Glyph: h
+Color: #864D30
+ZOrder: 10
+[SpriteAppearance]
+Bottom: stone_head
+[Position]
+[Physical]
+Passable: false
+Transparent: true
+[Health]
+HP: 20/20
+[TiltFighter]
+Tilt: 0/30
+[Stat]
+Name: Muscle
+Value: 6
+[Stat]
+Name: Agility
+Value: 8
+[Stat]
+Name: Willpower
+Value: 8
+[Stat]
+Name: Intellect
+Value: 4
+[Description]
+Name: Stone Head
+Detail: This is a moving chunk of stone. It has natural armour that regenerates quickly.
+[Actor]
+[MoveToPlayerBehaviour]
+Priority: 0
+[RandomlyMoveBehaviour]
+Priority: -1
+[Stat]
+Name: Aegis
+Value: 10
+[Stat]
+Name: CurrentAegisLevel
+Value: 10
+[AegisRecovery]
