@@ -252,6 +252,13 @@ SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
+Name: goblin_shaman
+Path: Images/Sprites/Entities/Creatures/goblin_shaman.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
 Name: fire_imp
 Path: Images/Sprites/Entities/Creatures/fire_imp.png
 Type: SingleSprite
@@ -394,6 +401,13 @@ Scaling: 2
 [SpriteSheet]
 Name: targetable
 Path: Images/Sprites/Misc/targetable.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: targetable_friendly
+Path: Images/Sprites/Misc/targetable_friendly.png
 Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16

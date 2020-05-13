@@ -7,9 +7,10 @@ using data_rogue_core.Utils;
 
 namespace data_rogue_core.Components
 {
-    public class AuraFighter : IEntityComponent, ITickUpdate
+    public class AuraFighter : IEntityComponent, ITickUpdate, IHasCounter
     {
         public Counter Aura;
+        public Counter Counter => Aura;
         public int BaseAura;
         public void Tick(ISystemContainer systemContainer, IEntity entity, ulong currentTime)
         {

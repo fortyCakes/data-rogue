@@ -78,6 +78,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
                 {
                     var text = $"{counterText}: {counter}";
                     RenderText(x + 4, y, out var textSize, text, display.Color);
+                    y += 3;
                 }
             }
         }

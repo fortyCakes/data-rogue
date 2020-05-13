@@ -6,9 +6,11 @@ using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.Components
 {
-    public class TiltFighter : IEntityComponent, ITickUpdate
+    public class TiltFighter : IEntityComponent, ITickUpdate, IHasCounter
     {
         public Counter Tilt;
+
+        public Counter Counter => Tilt;
         public int BrokenTicks = 0;
         public void Tick(ISystemContainer systemContainer, IEntity entity, ulong currentTime)
         {

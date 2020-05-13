@@ -1,0 +1,54 @@
+﻿"Monster:GoblinShaman"
+[Prototype]
+Name: Monster:GoblinShaman
+Singleton: false
+[Biome]
+Name: Dungeon
+[Challenge]
+ChallengeRating: 1
+[Appearance]
+Glyph: g
+Color: #597DCF
+ZOrder: 10
+[SpriteAppearance]
+Bottom: goblin_shaman
+[Position]
+[Physical]
+Passable: false
+Transparent: true
+[Health]
+HP: 8/8
+[TiltFighter]
+Tilt: 0/20
+[AuraFighter]
+Aura: 30/60
+BaseAura: 30
+[Stat]
+Name: Muscle
+Value: 4
+[Stat]
+Name: Agility
+Value: 12
+[Stat]
+Name: Willpower
+Value: 8
+[Stat]
+Name: Intellect
+Value: 4
+[Description]
+Name: Goblin Shaman
+Detail: This is a small, green-skinned humanoid. This one is a shaman, knowing some simple magic.
+[Actor]
+[UseRandomSkillBehaviour]
+Priority: 2
+Chance: 0.5
+[MoveToPlayerBehaviour]
+Priority: 0
+[RandomlyMoveBehaviour]
+Priority: -1
+[KnownSkill]
+Skill: Skill:MinorHeal
+Order: 1
+[KnownSkill]
+Skill: Skill:Spark
+Order: 2

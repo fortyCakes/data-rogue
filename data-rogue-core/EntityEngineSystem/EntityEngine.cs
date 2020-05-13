@@ -98,6 +98,11 @@ namespace data_rogue_core.EntityEngineSystem
             _systems.Add(system);
         }
 
+        public IEnumerable<IEntity> FilterByComponentName(IEnumerable<IEntity> entities, string componentName)
+        {
+            return entities.Where(e => e.Components.Any(c => c.GetType().Name == componentName));
+        }
+
         public void Initialise(ISystemContainer systemContainer)
         {
             EntityKey = 0;

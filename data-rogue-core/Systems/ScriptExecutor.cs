@@ -76,6 +76,7 @@ namespace data_rogue_core.Systems
             state.RegisterFunction("attackCellsHit", this, GetType().GetMethod(nameof(AttackCellsHit)));
             state.RegisterFunction("attackAllCells", this, GetType().GetMethod(nameof(AttackAllCells)));
             state.RegisterFunction("isCellBlocked", this, GetType().GetMethod(nameof(IsCellBlocked)));
+            state.RegisterFunction("restoreCellsHit", this, GetType().GetMethod(nameof(RestoreCellsHit)));
         }
 
         private void RegisterValues(IEntity user, Lua state, IEntity withEntity)
@@ -164,6 +165,11 @@ namespace data_rogue_core.Systems
 
         public bool AttackCellsHit(MapCoordinate target, IEntity user, IEntity forSkill)
         {
+            return DetermineTargets(target, user, forSkill, AttackCell);
+        }
+
+        private static bool DetermineTargets(MapCoordinate target, IEntity user, IEntity forSkill, Func<MapCoordinate, IEntity, IEntity, Vector, bool> callback)
+        {
             var anyTargets = false;
             var targeting = forSkill.Get<Targeting>();
             Matrix rotation = Matrix.Identity;
@@ -177,15 +183,23 @@ namespace data_rogue_core.Systems
             {
                 var vectorToCell = rotation * vector;
 
-                var targetEntities = systemContainer.PositionSystem.EntitiesAt(target + vectorToCell);
+                anyTargets |= callback(target, user, forSkill, vectorToCell);
+            }
 
-                var targetFighters = systemContainer.FighterSystem.GetEntitiesWithFighter(targetEntities);
+            return anyTargets;
+        }
 
-                foreach (var defender in targetFighters)
-                {
-                    anyTargets = true;
-                    MakeAttack(user, defender, forSkill);
-                }
+        private bool AttackCell(MapCoordinate target, IEntity user, IEntity forSkill, Vector vectorToCell)
+        {
+            var anyTargets = false;
+            var targetEntities = systemContainer.PositionSystem.EntitiesAt(target + vectorToCell);
+
+            var targetFighters = systemContainer.FighterSystem.GetEntitiesWithFighter(targetEntities);
+
+            foreach (var defender in targetFighters)
+            {
+                anyTargets = true;
+                MakeAttack(user, defender, forSkill);
             }
 
             return anyTargets;
@@ -209,6 +223,27 @@ namespace data_rogue_core.Systems
             }
 
             return anyTargets;
+        }
+
+        public bool RestoreCellsHit(MapCoordinate target, IEntity user, IEntity forSkill, string counter, int amount)
+        {
+            bool HealCell(MapCoordinate cell, IEntity u, IEntity s, Vector vectorToCell)
+            {
+                var anyTargets = false;
+                var targetEntities = systemContainer.PositionSystem.EntitiesAt(target + vectorToCell);
+
+                var components = targetEntities.Select(e => e.Get(counter) as IHasCounter).Where(c => c != null);
+
+                foreach (var component in components)
+                {
+                    component.Counter.Add(amount);
+                    anyTargets = true;
+                }
+
+                return anyTargets;
+            }
+
+            return DetermineTargets(target, user, forSkill, HealCell);
         }
 
         public bool IsCellBlocked(MapCoordinate target, IEntity user)

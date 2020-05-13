@@ -50,11 +50,17 @@ namespace data_rogue_one.EventSystem.Utils
                 new InfoDisplay { ControlType = typeof(ComponentCounter), Parameters = "Health,HP", BackColor = Color.DarkRed },
                 new InfoDisplay { ControlType = typeof(Spacer) }};
 
-            var auraStats = new List<InfoDisplay> {
-                new InfoDisplay { ControlType = typeof(ComponentCounter), Parameters = "AuraFighter,Aura", BackColor = Color.Yellow },
-                new InfoDisplay { ControlType = typeof(StatControl), Parameters = "Tension" },
-                new InfoDisplay { ControlType = typeof(Spacer) }
+            var auraStats = new List<InfoDisplay>
+            {
+                new InfoDisplay {ControlType = typeof(ComponentCounter), Parameters = "AuraFighter,Aura", BackColor = Color.Yellow}
             };
+
+            if (entity.IsPlayer)
+            {
+                auraStats.Add(new InfoDisplay { ControlType = typeof(StatControl), Parameters = "Tension" });
+            }
+
+            auraStats.Add(new InfoDisplay { ControlType = typeof(Spacer)});
 
             var tiltStats =  new List<InfoDisplay> {
                 new InfoDisplay { ControlType = typeof(ComponentCounter), Parameters = "TiltFighter,Tilt", BackColor = Color.Purple },

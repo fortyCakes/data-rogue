@@ -1,0 +1,43 @@
+﻿"MinorHeal"
+[Prototype]
+Name: Skill:MinorHeal
+Singleton: true
+[Skill]
+Cost: 30
+ScriptName: Script: MinorHeal
+[Description]
+Name: Minor Heal
+Detail: Heal yourself or an ally for a small amount of damage.
+[Targeting]
+Range: 4
+CellsHit: 0,0
+MoveToCell: true
+Friendly: true
+
+"Script: MinorHeal"
+[Prototype]
+Name: Script: MinorHeal
+Singleton: true
+[Script]
+Text: {
+	withTarget(
+	function(target)
+		
+		healAmount = SystemContainer.Random:Between(3,6)
+
+		entitiesAtTarget = SystemContainer.PositionSystem:EntitiesAt(target)
+
+		for entity in each(entitiesAtTarget)
+		do
+			if entity:Has('Health') then
+				health = entity:Get('Health')
+				health.HP:Add(healAmount)
+				SystemContainer.MessageSystem:Write(User.DescriptionName .. ' casts Minor Heal! They heal ' .. entity.DescriptionName .. ' for ' .. healAmount .. ' HP.')
+			end
+		end
+
+		onComplete()
+	end)
+	
+	requestTarget(User, Entity)
+}

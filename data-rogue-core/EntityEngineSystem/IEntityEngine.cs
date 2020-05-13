@@ -23,6 +23,7 @@ namespace data_rogue_core.EntityEngineSystem
 
         IEnumerable<IEntity> EntitiesWith<T>(bool includePrototypes = false) where T: IEntityComponent;
         IEnumerable<T> GetAll<T>(bool includePrototypes = false) where T : IEntityComponent;
+        IEnumerable<IEntity> FilterByComponentName(IEnumerable<IEntity> entities, string componentName);
 
         void Initialise(ISystemContainer systemContainer);
 
