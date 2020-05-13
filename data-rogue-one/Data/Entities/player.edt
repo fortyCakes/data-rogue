@@ -23,9 +23,9 @@ Amount: 0
 Aura: 000/500
 BaseAura: 50
 [Health]
-HP: 100/100
+HP: 40/40
 [TiltFighter]
-Tilt: 0/50
+Tilt: 0/40
 [Stat]
 Name: Muscle
 Value: 15

@@ -102,6 +102,42 @@ namespace data_rogue_core.UnitTests.Systems
         }
 
         [Test]
+        public void DestroyItem_Stackable_DestroysOne()
+        {
+            var item = GetTestItem(stackable: true, stackSize: 2);
+
+            itemSystem.MoveToInventory(item, inventory);
+
+            itemSystem.DestroyItem(item, false);
+
+            item.Get<Stackable>().StackSize.Should().Be(1);
+        }
+
+        [Test]
+        public void DestroyItem_Stackable_DestroysAll()
+        {
+            var item = GetTestItem(stackable: true, stackSize: 2);
+
+            itemSystem.MoveToInventory(item, inventory);
+
+            itemSystem.DestroyItem(item, true);
+
+            inventory.Contents.Should().BeEmpty();
+        }
+
+        [Test]
+        public void DestroyItem_Stackable_OneLeft_DestroysAll()
+        {
+            var item = GetTestItem(stackable: true, stackSize: 1);
+
+            itemSystem.MoveToInventory(item, inventory);
+
+            itemSystem.DestroyItem(item, false);
+
+            inventory.Contents.Should().BeEmpty();
+        }
+
+        [Test]
         public void DropItemFromInventory_NotInInventory_CantDrop()
         {
             var item = GetTestItem();
@@ -322,7 +358,7 @@ namespace data_rogue_core.UnitTests.Systems
             inventory.Contents.Should().BeEmpty();
         }
 
-        private IEntity GetTestItem(string itemName = null, bool hasPosition = true, bool stackable = false)
+        private IEntity GetTestItem(string itemName = null, bool hasPosition = true, bool stackable = false, int stackSize = 1)
         {
             var components = new List<IEntityComponent> {new Item()};
 
@@ -333,7 +369,7 @@ namespace data_rogue_core.UnitTests.Systems
 
             if (stackable)
             {
-                components.Add(new Stackable {StackSize = 1, StacksWith = "TestStack"});
+                components.Add(new Stackable {StackSize = stackSize, StacksWith = "TestStack"});
             }
 
             var item = new Entity(entityId++, $"TestItem{entityId}", components.ToArray());

@@ -9,7 +9,7 @@ namespace data_rogue_core.Systems
         bool MoveToInventory(IEntity item, Inventory inventory);
         bool DropItemFromInventory(IEntity item);
         bool Use(IEntity user, IEntity item);
-        bool DestroyItem(IEntity item);
+        void DestroyItem(IEntity item, bool all = true);
 
         bool TransferWealth(IEntity sender, IEntity reciever, string currency, int amount);
         bool AddWealth(IEntity entity, string currency, int amount);

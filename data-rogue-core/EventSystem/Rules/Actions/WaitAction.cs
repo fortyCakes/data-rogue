@@ -16,7 +16,7 @@ namespace data_rogue_core.EventSystem.Rules
 
         public override bool ApplyInternal(IEntity sender, ActionEventData eventData)
         {
-            var waitTime = int.Parse(eventData.Parameters);
+            var waitTime = int.Parse(eventData.Parameters ?? "1");
 
             if (_systemContainer.EventSystem.Try(EventType.SpendTime, sender, new SpendTimeEventData {Ticks = (ulong)waitTime * sender.Get<Actor>().Speed}))
             {

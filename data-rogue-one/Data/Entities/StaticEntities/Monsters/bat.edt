@@ -22,7 +22,7 @@ HP: 2/2
 Tilt: 0/5
 [Stat]
 Name: Muscle
-Value: 2
+Value: 3
 [Stat]
 Name: Agility
 Value: 15
@@ -44,3 +44,5 @@ Chance: 0.5
 Priority: 0
 [RandomlyMoveBehaviour]
 Priority: -1
+[ModifiedDamage]
+By: -1

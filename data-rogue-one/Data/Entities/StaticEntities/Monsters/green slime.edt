@@ -33,7 +33,7 @@ Value: 1
 Name: Intellect
 Value: 0
 [Description]
-Name: GreenSlime
+Name: Green Slime
 Detail: An aggressive puddle of green goop.
 [Actor]
 [MoveToPlayerBehaviour]

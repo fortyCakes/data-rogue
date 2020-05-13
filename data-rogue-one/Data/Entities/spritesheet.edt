@@ -217,6 +217,13 @@ SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
+Name: orc_monk
+Path: Images/Sprites/Entities/Creatures/orc_monk.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
 Name: mite
 Path: Images/Sprites/Entities/Creatures/mite.png
 Type: SingleSprite

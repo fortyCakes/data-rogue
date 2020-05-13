@@ -2,9 +2,6 @@ Map:"Entrance"
 default:Cell:Tree
 -5,-9
 10,0: Entity(Props:StairsDown)
-10,1: Entity(Item:WoodenBow)
-10,1: Entity(Monster:StoneHead)
-10,1: EntityStack(Item:Arrow,50)
 .:Cell:Grass
 ,:Cell:SpawnPoint
 #:Cell:Tree

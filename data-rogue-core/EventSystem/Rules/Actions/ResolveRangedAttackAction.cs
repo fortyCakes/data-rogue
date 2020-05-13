@@ -42,7 +42,7 @@ namespace data_rogue_core.EventSystem.Rules
 
                 var ammo = _systemContainer.ItemSystem.GetInventory(attacker).Single(i => i.Has<Ammunition>() && i.Get<Ammunition>().AmmunitionType == ammunitionType);
 
-                _systemContainer.ItemSystem.RemoveItemFromInventory(ammo);
+                _systemContainer.ItemSystem.DestroyItem(ammo, false);
             }
         }
 

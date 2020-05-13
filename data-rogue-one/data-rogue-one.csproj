@@ -146,6 +146,9 @@
     <None Include="Data\Entities\StaticEntities\Monsters\goblin shaman.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Entities\StaticEntities\Monsters\orc pyromancer.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\Entities\StaticEntities\Monsters\stone head.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

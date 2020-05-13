@@ -112,11 +112,6 @@ namespace data_rogue_core.Systems
             if (inventory != null)
             {
                 RemoveSingleItemFromInventory(item, inventory);
-
-                var owner = GetInventoryOwner(inventory);
-                var position = owner.Get<Position>();
-
-                entityEngine.AddComponent(item, new Position { MapCoordinate = (MapCoordinate)position.MapCoordinate.Clone() });
             }
             else
             {
@@ -194,18 +189,37 @@ namespace data_rogue_core.Systems
             }
         }
 
-        public bool DestroyItem(IEntity item)
+        public void DestroyItem(IEntity item, bool all = true)
         {
             var inventory = GetInventoryContaining(item);
 
+            if (item.Has<Stackable>() && !all)
+            {
+                var stack = item.Get<Stackable>();
+
+                if (stack.StackSize > 1)
+                {
+                    stack.StackSize--;
+                }
+                else
+                {
+                    DestroyItem_Internal(item, inventory);
+                    
+                }
+            }
+            else
+            {
+                DestroyItem_Internal(item, inventory);
+            }
+        }
+        private void DestroyItem_Internal(IEntity item, Inventory inventory)
+        {
             if (inventory != null)
             {
                 inventory.Contents.Remove(item);
             }
 
             entityEngine.Destroy(item);
-
-            return true;
         }
 
         private Inventory GetInventoryContaining(IEntity item)
@@ -317,3 +331,5 @@ namespace data_rogue_core.Systems
         }
     }
 }
+
+       

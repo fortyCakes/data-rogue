@@ -40,3 +40,5 @@ Detail: This is a medium-sized, green-skinned humanoid. They are known to be hig
 Priority: 0
 [RandomlyMoveBehaviour]
 Priority: -1
+[ModifiedAccuracy]
+By: 10

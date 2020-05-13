@@ -57,7 +57,7 @@ namespace BLTWrapper
             var ok = BLT.Set(configString);
 
             if (!ok)
-                throw new Exception("BLT wasn't OK with sprite loading");
+                throw new Exception($"BLT wasn't OK with sprite loading (tried to load {imageFile}). Check that the sprite is set to 'Copy Always'.");
         }
 
         public BoxTilesetSpriteSheet LoadTileset_BoxType(string name, string imageFile, int spriteWidth, int spriteHeight, int scaling, int spacing)
