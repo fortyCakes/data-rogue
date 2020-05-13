@@ -128,23 +128,6 @@ namespace data_rogue_core.Systems
             return (ActionType)Enum.Parse(typeof(ActionType), action);
         }
 
-        private void UseSkill(int index)
-        {
-            IEntity player = _systemContainer.PlayerSystem.Player;
-
-            var skill = _systemContainer.SkillSystem.GetKnownSkillByIndex(player, index);
-
-            if (skill != null)
-            {
-                var ok = _systemContainer.EventSystem.Try(EventType.SelectSkill, player, new ActivateSkillEventData() { SkillName = skill.Skill });
-
-                if (ok)
-                {
-                    _systemContainer.SkillSystem.Use(player, skill.Skill);
-                }
-            }
-        }
-
         public void HandleMouseInput(MouseData mouse)
         {
             var x = mouse.X;

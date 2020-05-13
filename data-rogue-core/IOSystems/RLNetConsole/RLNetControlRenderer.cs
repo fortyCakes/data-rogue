@@ -35,16 +35,15 @@ namespace data_rogue_core.IOSystems
         protected abstract void DisplayInternal(RLConsole console, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov);
         protected abstract Size GetSizeInternal(RLConsole console, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov);
 
-        protected void PrintEntityDetails(IDataRogueInfoControl display, IEntity entity, RLConsole console)
+        protected void PrintEntityDetails(IDataRogueInfoControl display, IEntity entity, RLConsole console, int plusY)
         {
-            var line = display.Position.Y;
+            var line = display.Position.Y + plusY;
 
             var appearance = entity.Get<Appearance>();
-            console.Print(1, line, appearance.Glyph.ToString(), appearance.Color.ToRLColor(), display.BackColor.ToRLColor());
-            console.Print(3, line, entity.DescriptionName, display.Color.ToRLColor(), display.BackColor.ToRLColor());
+            console.Print(display.Position.X, line, appearance.Glyph.ToString(), appearance.Color.ToRLColor(), display.BackColor.ToRLColor());
             if (entity.Has<Health>())
             {
-                ConsoleRendererHelper.PrintBar(console, 1, line, console.Width - 2, nameof(Health.HP), entity.Get<Health>().HP, RLColor.Red);
+                ConsoleRendererHelper.PrintBar(console, display.Position.X + 2, line, display.Position.Width - 4, nameof(Health.HP), entity.Get<Health>().HP, RLColor.Red);
             }
         }
     }

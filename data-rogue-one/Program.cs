@@ -17,7 +17,7 @@ namespace data_rogue_one
         {
             var theGame = new DataRogueGame();
 
-            IIOSystem ioSystem = 
+            IIOSystem ioSystem =
                 //GetRLNetIOSystem();
                 GetBLTTilesIOSystem();
 

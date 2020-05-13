@@ -65,23 +65,30 @@ namespace data_rogue_core.Systems
 
         public void Use(IEntity user, IEntity skill)
         {
-            var scriptName = skill.Get<Skill>().ScriptName;
+            var eventData = new ActivateSkillEventData { SkillName = skill.Get<Prototype>().Name };
 
-            var script = systemContainer.PrototypeSystem.Get(scriptName);
+            var canSelectSkill = systemContainer.EventSystem.Try(EventType.SelectSkill, user, eventData);
 
-            var scriptText = script.Get<Script>().Text;
+            if (canSelectSkill)
+            {
+                var scriptName = skill.Get<Skill>().ScriptName;
 
-            var onCompleteAction = new Action(() => OnComplete(user, skill));
+                var script = systemContainer.PrototypeSystem.Get(scriptName);
 
-            // Construct a new one rather than using the one in container so that it doesn't use up the onComplete slot.
-            var scriptExecutor = new ScriptExecutor(systemContainer);
+                var scriptText = script.Get<Script>().Text;
 
-            scriptExecutor.Execute(user, scriptText, skill, onCompleteAction);
+                var onCompleteAction = new Action(() => OnComplete(user, skill));
+
+                // Construct a new one rather than using the one in container so that it doesn't use up the onComplete slot.
+                var scriptExecutor = new ScriptExecutor(systemContainer);
+
+                scriptExecutor.Execute(user, scriptText, skill, onCompleteAction);
+            }
         }
 
         public void OnComplete(IEntity user, IEntity skill)
         {
-            systemContainer.EventSystem.Try(EventType.CompleteSkill, user, new CompleteSkillEventData { SkillName = skill.Get<Prototype>().Name });
+            systemContainer.EventSystem.Try(EventType.CompleteSkill, user, new CompleteSkillEventData { Skill = skill });
         }
 
         public KnownSkill GetKnownSkillByIndex(IEntity entity, int index)

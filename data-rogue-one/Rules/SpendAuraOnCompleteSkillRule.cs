@@ -21,7 +21,7 @@ namespace data_rogue_core.EventSystem.Rules
         public bool Apply(EventType type, IEntity sender, object eventData)
         {
             var fighter = sender.Get<AuraFighter>();
-            var skill = systemContainer.PrototypeSystem.Get((eventData as CompleteSkillEventData).SkillName).Get<Skill>();
+            var skill = (eventData as CompleteSkillEventData).Skill.Get<Skill>();
             var cost = skill.Cost;
 
             fighter.Aura.Subtract(cost);

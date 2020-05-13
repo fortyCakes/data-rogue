@@ -33,7 +33,7 @@ namespace data_rogue_core.IOSystems
             }
 
             console.Print(control.Position.X, control.Position.Y, "Location:", display.Color.ToRLColor(), display.BackColor.ToRLColor());
-            console.Print(control.Position.X, control.Position.Y+1, mapname, display.Color.ToRLColor(), display.BackColor.ToRLColor());
+            console.Print(control.Position.X+1, control.Position.Y+1, mapname, display.Color.ToRLColor(), display.BackColor.ToRLColor());
         }
 
         protected override Size GetSizeInternal(RLConsole console, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)

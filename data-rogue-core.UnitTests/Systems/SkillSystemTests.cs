@@ -22,6 +22,8 @@ namespace data_rogue_core.UnitTests.Systems
             systemContainer = new SystemContainer();
 
             systemContainer.CreateSystems("seed");
+            systemContainer.EventSystem = Substitute.For<IEventSystem>();
+            systemContainer.EventSystem.Try(Arg.Any<EventType>(), Arg.Any<IEntity>(), Arg.Any<object>()).ReturnsForAnyArgs(true);
 
             systemContainer.EntityEngine.Initialise(systemContainer);
 

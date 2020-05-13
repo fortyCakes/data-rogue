@@ -33,7 +33,7 @@ namespace data_rogue_core.IOSystems
 
                 var hoveredEntity = entities.Where(e => e.Has<Appearance>()).OrderByDescending(e => e.Get<Appearance>().ZOrder).First();
 
-                PrintEntityDetails(display, hoveredEntity, console);
+                PrintEntityDetails(display, hoveredEntity, console, 0);
             }
         }
 

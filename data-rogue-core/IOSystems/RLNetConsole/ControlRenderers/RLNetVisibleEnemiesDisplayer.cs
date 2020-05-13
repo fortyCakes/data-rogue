@@ -20,18 +20,22 @@ namespace data_rogue_core.IOSystems
         {
             var display = control as IDataRogueInfoControl;
             var enemiesInFov = GetEnemiesInFov(systemContainer, playerFov);
-
+            var line = 0;
             foreach (var enemy in enemiesInFov.OrderBy(e => e.EntityId))
             {
-                PrintEntityDetails(display, enemy, console);
+                PrintEntityDetails(display, enemy, console, line);
+                line += 2;
+
+                if (control.Position.Top + line >= control.Position.Bottom) break;
             }
         }
 
-        protected override Size GetSizeInternal(RLConsole console, IDataRogueControl display, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        protected override Size GetSizeInternal(RLConsole console, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
+            var display = control as IDataRogueInfoControl;
             var enemiesInFov = GetEnemiesInFov(systemContainer, playerFov);
 
-            return new Size(console.Width, enemiesInFov.Count * 3);
+            return new Size(display.Position.Width, enemiesInFov.Count * 2);
         }
 
         private static IEntity GetEnemy(MapCoordinate mapCoordinate, ISystemContainer systemContainer)

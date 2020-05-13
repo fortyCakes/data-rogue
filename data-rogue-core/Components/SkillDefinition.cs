@@ -6,5 +6,6 @@ namespace data_rogue_core.Components
     {
         public string ScriptName;
         public int Cost;
+        public int Speed = 1000;
     }
 }

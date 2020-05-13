@@ -5,7 +5,7 @@ Singleton: false
 [Biome]
 Name: Dungeon
 [Challenge]
-ChallengeRating: 1
+ChallengeRating: 2
 [Appearance]
 Glyph: g
 Color: #597DCF
@@ -21,8 +21,8 @@ HP: 8/8
 [TiltFighter]
 Tilt: 0/20
 [AuraFighter]
-Aura: 30/60
-BaseAura: 30
+Aura: 0/60
+BaseAura: 0
 [Stat]
 Name: Muscle
 Value: 4
