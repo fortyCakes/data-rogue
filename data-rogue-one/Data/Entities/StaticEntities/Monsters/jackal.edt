@@ -12,6 +12,7 @@ Color: #654321
 ZOrder: 10
 [SpriteAppearance]
 Bottom: dog_1
+[Animated]
 [Position]
 [Physical]
 Passable: false

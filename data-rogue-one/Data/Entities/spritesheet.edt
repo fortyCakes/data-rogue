@@ -164,6 +164,7 @@ Scaling: 2
 Name: dog_1
 Path: Images/Sprites/Entities/Creatures/dog_1.png
 Type: SingleSprite
+Frames: Rest0,Rest1
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
@@ -178,6 +179,7 @@ Scaling: 2
 Name: goblin
 Path: Images/Sprites/Entities/Creatures/goblin.png
 Type: SingleSprite
+Frames: Rest0,Rest1
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
@@ -217,6 +219,7 @@ Scaling: 2
 Name: stone_head
 Path: Images/Sprites/Entities/Creatures/stone_head.png
 Type: SingleSprite
+Frames: Rest0,Rest1
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
@@ -224,6 +227,7 @@ Scaling: 2
 Name: orc_monk
 Path: Images/Sprites/Entities/Creatures/orc_monk.png
 Type: SingleSprite
+Frames: Rest0,Rest1
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
@@ -231,6 +235,7 @@ Scaling: 2
 Name: mite
 Path: Images/Sprites/Entities/Creatures/mite.png
 Type: SingleSprite
+Frames: Rest0,Rest1
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
@@ -238,6 +243,7 @@ Scaling: 2
 Name: orc
 Path: Images/Sprites/Entities/Creatures/orc.png
 Type: SingleSprite
+Frames: Rest0,Rest1
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
@@ -245,6 +251,7 @@ Scaling: 2
 Name: minotaur
 Path: Images/Sprites/Entities/Creatures/minotaur.png
 Type: SingleSprite
+Frames: Rest0,Rest1
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
@@ -252,6 +259,7 @@ Scaling: 2
 Name: green_slime
 Path: Images/Sprites/Entities/Creatures/green_slime.png
 Type: SingleSprite
+Frames: Rest0,Rest1
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
@@ -259,6 +267,7 @@ Scaling: 2
 Name: ogre
 Path: Images/Sprites/Entities/Creatures/ogre.png
 Type: SingleSprite
+Frames: Rest0,Rest1
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
@@ -268,11 +277,13 @@ Path: Images/Sprites/Entities/Creatures/imp_1.png
 Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16
+Frames: Rest0,Rest1
 Scaling: 2
 [SpriteSheet]
 Name: goblin_shaman
 Path: Images/Sprites/Entities/Creatures/goblin_shaman.png
 Type: SingleSprite
+Frames: Rest0,Rest1
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
@@ -280,6 +291,7 @@ Scaling: 2
 Name: fire_imp
 Path: Images/Sprites/Entities/Creatures/fire_imp.png
 Type: SingleSprite
+Frames: Rest0,Rest1
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
@@ -294,6 +306,7 @@ Scaling: 2
 [SpriteSheet]
 Name: living_flame
 Path: Images/Sprites/Entities/Creatures/living_flame.png
+Frames: Rest0,Rest1
 Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16

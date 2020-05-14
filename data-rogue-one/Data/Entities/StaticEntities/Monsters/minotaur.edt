@@ -12,6 +12,7 @@ Color: #864D30
 ZOrder: 10
 [SpriteAppearance]
 Bottom: minotaur
+[Animated]
 [Position]
 [Physical]
 Passable: false

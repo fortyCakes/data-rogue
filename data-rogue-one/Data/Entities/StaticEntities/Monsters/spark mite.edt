@@ -12,6 +12,8 @@ Color: #DBD75D
 ZOrder: 10
 [SpriteAppearance]
 Bottom: mite
+[Animated]
+FrameTicks: 5
 [Position]
 [Physical]
 Passable: false

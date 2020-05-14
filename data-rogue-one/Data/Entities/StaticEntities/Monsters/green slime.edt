@@ -12,6 +12,8 @@ Color: #6DAA2C
 ZOrder: 10
 [SpriteAppearance]
 Bottom: green_slime
+[Animated]
+FrameTicks: 25
 [Position]
 [Physical]
 Passable: false

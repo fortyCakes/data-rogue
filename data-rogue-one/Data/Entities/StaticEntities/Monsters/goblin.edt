@@ -12,6 +12,7 @@ Color: #aaffaa
 ZOrder: 10
 [SpriteAppearance]
 Bottom: goblin
+[Animated]
 [Position]
 [Physical]
 Passable: false

@@ -12,6 +12,7 @@ Color: #DBD75D
 ZOrder: 10
 [SpriteAppearance]
 Bottom: ogre
+[Animated]
 [Position]
 [Physical]
 Passable: false

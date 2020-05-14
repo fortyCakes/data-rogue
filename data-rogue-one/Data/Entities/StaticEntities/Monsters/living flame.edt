@@ -12,6 +12,8 @@ Color: #D34549
 ZOrder: 10
 [SpriteAppearance]
 Bottom: living_flame
+[Animated]
+RandomiseTicks: true
 [Position]
 [Physical]
 Passable: false
@@ -33,7 +35,7 @@ Value: 10
 Name: Intellect
 Value: 10
 [Description]
-Name: Living Flame
+Name: Flame Walker
 Detail: This is a living mass of flame! Beware getting too close to it.
 [Actor]
 [MoveToPlayerBehaviour]

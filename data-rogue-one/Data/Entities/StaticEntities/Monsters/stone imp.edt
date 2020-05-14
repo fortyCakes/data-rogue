@@ -12,6 +12,7 @@ Color: #864D30
 ZOrder: 10
 [SpriteAppearance]
 Bottom: imp1
+[Animated]
 [Position]
 [Physical]
 Passable: false

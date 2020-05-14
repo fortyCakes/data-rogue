@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Threading;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
@@ -101,6 +102,15 @@ namespace data_rogue_core.IOSystems.BLTTiles
                 _update(null, eventArgs);
                 _render(null, eventArgs);
                 
+            } while (!isClosed);
+        }
+
+        private void DoRender()
+        {
+            Thread.CurrentThread.IsBackground = true;
+            do
+            {
+                _render(null, null);
             } while (!isClosed);
         }
 

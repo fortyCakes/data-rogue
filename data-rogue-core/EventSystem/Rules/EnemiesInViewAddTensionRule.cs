@@ -69,7 +69,7 @@ namespace data_rogue_core.EventSystem.Rules
 
         private bool IsEnemy(IEntity entity)
         {
-            return entity.Has<Actor>() && entity != _playerSystem.Player;
+            return entity.Has<Health>() && entity != _playerSystem.Player;
         }
     }
 }

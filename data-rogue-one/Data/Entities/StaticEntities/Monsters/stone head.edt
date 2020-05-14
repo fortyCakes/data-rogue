@@ -12,6 +12,8 @@ Color: #864D30
 ZOrder: 10
 [SpriteAppearance]
 Bottom: stone_head
+[Animated]
+FrameTicks: 60
 [Position]
 [Physical]
 Passable: false

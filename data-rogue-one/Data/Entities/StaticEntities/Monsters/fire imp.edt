@@ -12,6 +12,7 @@ Color: #D34549
 ZOrder: 10
 [SpriteAppearance]
 Bottom: fire_imp
+[Animated]
 [Position]
 [Physical]
 Passable: false

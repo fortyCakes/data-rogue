@@ -12,6 +12,7 @@ Color: #597DCF
 ZOrder: 10
 [SpriteAppearance]
 Bottom: goblin_shaman
+[Animated]
 [Position]
 [Physical]
 Passable: false
