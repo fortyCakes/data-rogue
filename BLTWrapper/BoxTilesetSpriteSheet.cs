@@ -4,6 +4,8 @@ namespace BLTWrapper
 {
     public class BoxTilesetSpriteSheet : ISpriteSheet
     {
+        public int Frames => 1;
+
         public BoxTilesetSpriteSheet(string name, int offset)
         {
             _offset = offset;
@@ -12,10 +14,15 @@ namespace BLTWrapper
 
         public string Name { get; }
 
-        public int Tile(TileDirections directions)
+        public int Tile(TileDirections directions, int frame)
         {
             var map = mapping[directions];
             return _offset + map;
+        }
+
+        public int Tile(TileDirections directions)
+        {
+            return Tile(directions, 0);
         }
 
         private int _offset;

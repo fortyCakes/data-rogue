@@ -210,6 +210,14 @@ SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
+Name: generic_person_2
+Path: Images/Sprites/Entities/Creatures/generic_person_2.png
+Type: SingleSprite
+Frames: Rest0,Rest1
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
 Name: stone_head
 Path: Images/Sprites/Entities/Creatures/stone_head.png
 Type: SingleSprite

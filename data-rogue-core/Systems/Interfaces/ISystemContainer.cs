@@ -26,6 +26,7 @@ namespace data_rogue_core.Systems.Interfaces
         IPlayerSystem PlayerSystem { get; set; }
         IActivitySystem ActivitySystem { get; set; }
         IRendererSystem RendererSystem { get; set; }
+        IAnimationSystem AnimationSystem { get; set; }
         IMapSystem MapSystem { get; set; }
         ISaveSystem SaveSystem {get;set;}
         IStatSystem StatSystem { get; }

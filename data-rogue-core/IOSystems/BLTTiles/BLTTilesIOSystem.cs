@@ -248,7 +248,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
                     switch(sheet.Type)
                     {
                         case "SingleSprite":
-                            spriteManager.Add(_spriteLoader.LoadSingleSprite(sheet.Name, sheet.Path, sheet.SpriteWidth, sheet.SpriteHeight, sheet.Scaling, TILE_SPACING));
+                            spriteManager.Add(_spriteLoader.LoadSingleSprite(sheet.Name, sheet.Path, sheet.SpriteWidth, sheet.SpriteHeight, sheet.Scaling, TILE_SPACING, sheet.Frames.Count));
                             break;
                         case "TilesetBox":
                             spriteManager.Add(_spriteLoader.LoadTileset_BoxType(sheet.Name, sheet.Path, sheet.SpriteWidth, sheet.SpriteHeight, sheet.Scaling, TILE_SPACING));

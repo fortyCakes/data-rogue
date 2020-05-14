@@ -1,4 +1,5 @@
-﻿using data_rogue_core.EntityEngineSystem;
+﻿using System;
+using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Maps;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,5 +24,31 @@ namespace data_rogue_core.Components
         {
             return string.Join(";", this.Select(v => v.ToString()).ToArray());
         }
+    }
+
+    public class FrameList : List<AnimationFrame>, ICustomFieldSerialization
+    {
+        public void Deserialize(string value)
+        {
+            Clear();
+
+            foreach (string split in value.Split(','))
+            {
+                var frame = (AnimationFrame)Enum.Parse(typeof(AnimationFrame), split);
+
+                Add(frame);
+            }
+        }
+
+        public string Serialize()
+        {
+            return string.Join(",", this.Select(v => v.ToString()).ToArray());
+        }
+    }
+
+    public enum AnimationFrame
+    {
+        Rest0,
+        Rest1
     }
 }
