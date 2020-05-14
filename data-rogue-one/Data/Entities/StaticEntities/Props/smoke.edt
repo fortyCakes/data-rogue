@@ -8,6 +8,9 @@ Color: #30346D
 ZOrder: 1
 [SpriteAppearance]
 Top: black_smoke
+[Animated]
+FrameTicks: 30
+RandomiseTicks: true
 [Position]
 [Physical]
 Passable: true

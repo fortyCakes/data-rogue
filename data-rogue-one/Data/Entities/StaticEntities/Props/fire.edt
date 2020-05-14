@@ -8,6 +8,9 @@ Color: #D37D2C
 ZOrder: 1
 [SpriteAppearance]
 Top: flame
+[Animated]
+RandomiseTicks: true
+FrameTicks: 5
 [Position]
 [Physical]
 Passable: true

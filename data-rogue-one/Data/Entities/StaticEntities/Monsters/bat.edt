@@ -12,6 +12,8 @@ Color: #efefef
 ZOrder: 10
 [SpriteAppearance]
 Bottom: bat
+[Animated]
+FrameTicks: 7
 [Position]
 [Physical]
 Passable: false

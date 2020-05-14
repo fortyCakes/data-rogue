@@ -13,12 +13,14 @@ namespace data_rogue_core.Systems
     public class AnimationSystem: BaseSystem, IAnimationSystem
     {
         private IStopwatch _stopwatch;
+        private readonly IRandom _random;
         private long _lastKnownTime;
         public const int TICK_LENGTH = 33;
 
-        public AnimationSystem(IStopwatch stopwatch)
+        public AnimationSystem(IStopwatch stopwatch, IRandom random)
         {
             _stopwatch = stopwatch;
+            _random = random;
             _lastKnownTime = _stopwatch.ElapsedMilliseconds;
             _stopwatch.Start();
         }
@@ -38,6 +40,11 @@ namespace data_rogue_core.Systems
                 while (component.CurrentTick >= component.FrameTicks)
                 {
                     component.CurrentTick -= component.FrameTicks;
+                    if (component.RandomiseTicks)
+                    {
+                        component.CurrentTick -= _random.PickOneFrom(0, 1);
+                    }
+
                     component.CurrentFrame++;
 
                     if (component.CurrentFrame == component.FrameCount)

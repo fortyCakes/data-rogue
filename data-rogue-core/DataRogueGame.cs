@@ -103,6 +103,8 @@ namespace data_rogue_core
         {
             if (!_leaving)
             {
+                SystemContainer.AnimationSystem.Tick();
+
                 Stack<IActivity> renderStack = new Stack<IActivity>();
 
                 foreach (IActivity activity in SystemContainer.ActivitySystem.ActivityStack)

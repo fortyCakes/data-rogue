@@ -19,14 +19,16 @@ namespace data_rogue_core.UnitTests.Systems
         private IEntity _testObject;
         private Animated _animatedComponent;
         private IStopwatch _stopwatch;
+        private IRandom _random;
 
         [SetUp]
         public void SetUp()
         {
             _stopwatch = Substitute.For<IStopwatch>();
             _stopwatch.ElapsedMilliseconds.ReturnsForAnyArgs(0);
+            _random = Substitute.For<IRandom>();
 
-            _animationSystem = new AnimationSystem(_stopwatch);
+            _animationSystem = new AnimationSystem(_stopwatch, _random);
             _animationSystem.Initialise();
 
             _testObject = CreateTestObject();
@@ -57,6 +59,25 @@ namespace data_rogue_core.UnitTests.Systems
             _animationSystem.Tick();
             
             _animatedComponent.CurrentTick.Should().Be(0);
+            _animatedComponent.CurrentFrame.Should().Be(1);
+        }
+
+        [Test]
+        [TestCase(0)]
+        [TestCase(1)]
+        public void Tick_RandomiseTick_SometimesDecreasesCurrentTickMore(int randomReturn)
+        {
+            _animatedComponent.CurrentTick = 29;
+            _animatedComponent.FrameTicks = 30;
+            _animatedComponent.CurrentFrame = 0;
+            _animatedComponent.RandomiseTicks = true;
+
+            _random.PickOneFrom<int>().ReturnsForAnyArgs(randomReturn);
+
+            _stopwatch.ElapsedMilliseconds.Returns(AnimationSystem.TICK_LENGTH);
+            _animationSystem.Tick();
+
+            _animatedComponent.CurrentTick.Should().Be(-randomReturn);
             _animatedComponent.CurrentFrame.Should().Be(1);
         }
 

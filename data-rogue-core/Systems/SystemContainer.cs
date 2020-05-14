@@ -85,6 +85,7 @@ namespace data_rogue_core.Systems
             EntityEngine.Register(PositionSystem);
 
             Random = new RNG(rngSeed);
+            AnimationRandom = new RNG(rngSeed);
 
             TimeSystem = new TimeSystem(this);
             EntityEngine.Register(TimeSystem);
@@ -101,7 +102,7 @@ namespace data_rogue_core.Systems
             SkillSystem = new SkillSystem(this);
             EntityEngine.Register(SkillSystem);
 
-            AnimationSystem = new AnimationSystem(new EncapsulatedStopwatch());
+            AnimationSystem = new AnimationSystem(new EncapsulatedStopwatch(), AnimationRandom);
             EntityEngine.Register(AnimationSystem);
 
             Seed = rngSeed;
@@ -119,6 +120,8 @@ namespace data_rogue_core.Systems
 
             Verify();
         }
+
+        public RNG AnimationRandom { get; set; }
 
         public void Verify()
         {

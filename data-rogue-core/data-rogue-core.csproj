@@ -461,7 +461,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\Sprites\Entities\Creatures\generic_person_2.png" />
+    <Content Include="Images\Sprites\Entities\Creatures\generic_person.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Sprites\Entities\Creatures\goblin_shaman.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -559,9 +561,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Misc\unknown.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\Sprites\Entities\Creatures\generic_person.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Entities\Items\armour_brown.png">
