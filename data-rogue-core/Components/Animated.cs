@@ -1,4 +1,5 @@
 ﻿using data_rogue_core.EntityEngineSystem;
+using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.Components
 {
@@ -10,5 +11,29 @@ namespace data_rogue_core.Components
         public int CurrentFrame;
         public bool RandomiseTicks = false;
         public int FrameCount => Frames.Count;
+
+        public virtual void OnAnimationTick(int tickBy) { }
+    }
+
+    public class Fading : Animated, ITickUpdate
+    {
+        public long Opacity;
+
+        public void Tick(ISystemContainer systemContainer, IEntity entity, ulong currentTime)
+        {
+            if (Opacity <= 0)
+            {
+                systemContainer.EntityEngine.Destroy(entity);
+            }
+        }
+
+        public override void OnAnimationTick(int tickBy)
+        {
+            Opacity -= tickBy;
+            if (Opacity < 0)
+            {
+                Opacity = 0;
+            }
+        }
     }
 }

@@ -7,8 +7,8 @@ namespace data_rogue_core.Systems
 {
     public interface IPositionSystem : ISystem
     {
-        IList<IEntity> EntitiesAt(MapCoordinate coordinate);
-        IList<IEntity> EntitiesAt(MapKey mapKey, int x, int y);
+        IList<IEntity> EntitiesAt(MapCoordinate coordinate, bool includeMapCells = true);
+        IList<IEntity> EntitiesAt(MapKey mapKey, int x, int y, bool includeMapCells = true);
         MapCoordinate CoordinateOf(IEntity entity);
         void Move(IEntity entity, Vector vector);
         void SetPosition(IEntity entity, MapCoordinate mapCoordinate);

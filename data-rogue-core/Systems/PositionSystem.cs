@@ -28,9 +28,9 @@ namespace data_rogue_core.Systems
         public override SystemComponents RequiredComponents => new SystemComponents {typeof(Position)};
         public override SystemComponents ForbiddenComponents => new SystemComponents {typeof(Prototype)};
 
-        public IList<IEntity> EntitiesAt(MapCoordinate coordinate)
+        public IList<IEntity> EntitiesAt(MapCoordinate coordinate, bool includeMapCells = true)
         {
-            return EntitiesAt_Internal(coordinate).ToList();
+            return EntitiesAt_Internal(coordinate, includeMapCells).ToList();
         }
 
         public override void Initialise()
@@ -80,9 +80,9 @@ namespace data_rogue_core.Systems
             Move(entity, position, vector);
         }
 
-        public IList<IEntity> EntitiesAt(MapKey mapKey, int x, int y)
+        public IList<IEntity> EntitiesAt(MapKey mapKey, int x, int y, bool includeMapCells = true)
         {
-            return EntitiesAt(new MapCoordinate(mapKey, x, y));
+            return EntitiesAt(new MapCoordinate(mapKey, x, y), includeMapCells);
         }
 
         public void SetPosition(IEntity entity, MapCoordinate mapCoordinate)
@@ -176,7 +176,7 @@ namespace data_rogue_core.Systems
             return components.Any(p => !p.Passable);
         }
 
-        private IEnumerable<IEntity> EntitiesAt_Internal(MapCoordinate coordinate)
+        private IEnumerable<IEntity> EntitiesAt_Internal(MapCoordinate coordinate, bool includeMapCells = true)
         {
             if (_entityCache.ContainsKey(coordinate))
             {
@@ -186,8 +186,11 @@ namespace data_rogue_core.Systems
                 }
             }
 
-            IEntity cell = _mapSystem.MapCollection[coordinate.Key].CellAt(coordinate.X, coordinate.Y);
-            yield return cell;
+            if (includeMapCells)
+            {
+                IEntity cell = _mapSystem.MapCollection[coordinate.Key].CellAt(coordinate.X, coordinate.Y);
+                yield return cell;
+            }
         }
 
         private void Move(IEntity entity, Position position, Vector vector)

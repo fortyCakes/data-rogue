@@ -17,7 +17,7 @@ namespace data_rogue_core.Components
                 var location = systemContainer.PositionSystem.CoordinateOf(entity);
                 var locations = location.AdjacentCells();
                 locations.Add(location);
-                var adjacentEntities = locations.SelectMany(l => systemContainer.PositionSystem.EntitiesAt(l));
+                var adjacentEntities = locations.SelectMany(l => systemContainer.PositionSystem.EntitiesAt(l, false));
 
                 foreach (var defender in adjacentEntities)
                 {

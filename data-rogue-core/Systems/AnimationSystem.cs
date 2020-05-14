@@ -36,6 +36,7 @@ namespace data_rogue_core.Systems
             foreach (Animated component in this.Entities.Select(e => e.Get<Animated>()))
             {
                 component.CurrentTick += tickBy;
+                component.OnAnimationTick(tickBy);
 
                 while (component.CurrentTick >= component.FrameTicks)
                 {
