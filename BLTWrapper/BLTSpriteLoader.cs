@@ -29,13 +29,13 @@ namespace BLTWrapper
             return sheet;
         }
 
-        public SingleSpriteSheet LoadSingleSprite(string name, string imageFile, int spriteWidth, int spriteHeight, int scaling, int spacing)
+        public SingleSpriteSheet LoadSingleSprite(string name, string imageFile, int spriteWidth, int spriteHeight, int scaling, int spacing, int frames)
         {
-            var sheet = new SingleSpriteSheet(name, _offset);
+            var sheet = new SingleSpriteSheet(name, _offset, frames);
 
             LoadSpriteSheetFile(imageFile, spriteWidth, spriteHeight, scaling, spacing);
 
-            _offset += 1;
+            _offset += frames;
 
             return sheet;
         }

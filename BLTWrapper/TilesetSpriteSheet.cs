@@ -8,6 +8,8 @@ namespace BLTWrapper
 {
     public class TilesetSpriteSheet : ISpriteSheet
     {
+        public int Frames => 1;
+
         public TilesetSpriteSheet(string name, int offset)
         {
             _offset = offset;
@@ -16,9 +18,13 @@ namespace BLTWrapper
 
         public string Name { get; }
 
-        public int Tile(TileDirections directions)
+        public int Tile(TileDirections directions, int frame)
         {
             return _offset + mapping[directions];
+        }
+        public int Tile(TileDirections directions)
+        {
+            return Tile(directions, 0);
         }
 
         private int _offset;

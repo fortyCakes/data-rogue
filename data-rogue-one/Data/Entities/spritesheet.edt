@@ -140,13 +140,6 @@ SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
-Name: generic_person
-Path: Images/Sprites/Entities/Creatures/generic_person.png
-Type: SingleSprite
-SpriteWidth: 16
-SpriteHeight: 16
-Scaling: 2
-[SpriteSheet]
 Name: break
 Path: Images/Sprites/Misc/break.png
 Type: SingleSprite
@@ -192,6 +185,7 @@ Scaling: 2
 Name: black_smoke
 Path: Images/Sprites/Entities/Misc/black_smoke.png
 Type: SingleSprite
+Frames: Rest0, Rest1
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
@@ -199,6 +193,7 @@ Scaling: 2
 Name: flame
 Path: Images/Sprites/Entities/Misc/flame.png
 Type: SingleSprite
+Frames: Rest0, Rest1
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
@@ -206,6 +201,15 @@ Scaling: 2
 Name: bat
 Path: Images/Sprites/Entities/Creatures/bat.png
 Type: SingleSprite
+Frames: Rest0,Rest1
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: generic_person
+Path: Images/Sprites/Entities/Creatures/generic_person.png
+Type: SingleSprite
+Frames: Rest0,Rest1
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
@@ -283,6 +287,7 @@ Scaling: 2
 Name: fire_devil
 Path: Images/Sprites/Entities/Creatures/fire_devil.png
 Type: SingleSprite
+Frames: Rest0, Rest1
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2

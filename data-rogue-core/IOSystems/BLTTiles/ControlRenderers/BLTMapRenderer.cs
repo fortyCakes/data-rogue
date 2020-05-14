@@ -42,6 +42,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             int offsetY = renderHeight / 2;
 
             var tilesTracker = new SpriteAppearance[renderWidth + 2, renderHeight + 2, 2];
+            var frameTracker = new int[renderWidth + 2, renderHeight + 2, 2];
             var renderTracker = new bool[renderWidth + 2, renderHeight + 2];
             var fovTracker = new bool[renderWidth + 2, renderHeight + 2];
 
@@ -68,27 +69,49 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
                     tilesTracker[x + 1, y + 1, 0] = mapCell.Get<SpriteAppearance>();
 
+                    var animatedCell = mapCell.TryGet<Animated>();
+                    if (animatedCell != null)
+                    {
+                        frameTracker[x + 1, y + 1, 0] = animatedCell.CurrentFrame;
+                    }
+                    else
+                    {
+                        frameTracker[x + 1, y + 1, 0] = 0;
+                    }
+
                     if (topEntity != null)
                     {
-                        if (topEntity.Has<SpriteAppearance>())
+                        var spriteAppearance = topEntity.TryGet<SpriteAppearance>();
+
+                        if (spriteAppearance != null)
                         {
-                            tilesTracker[x + 1, y + 1, 1] = topEntity.Get<SpriteAppearance>();
+                            tilesTracker[x + 1, y + 1, 1] = spriteAppearance;
                         }
                         else
                         {
                             tilesTracker[x + 1, y + 1, 1] = new SpriteAppearance { Top = "unknown" };
                         }
+
+                        var animatedEntity = topEntity.TryGet<Animated>();
+                        if (animatedEntity != null)
+                        {
+                            frameTracker[x + 1, y + 1, 1] = animatedEntity.CurrentFrame;
+                        }
+                        else
+                        {
+                            frameTracker[x + 1, y + 1, 1] = 0;
+                        }
                     }
                 }
             }
 
-            RenderMapSprites(spriteManager, mapConfiguration, renderTracker, renderWidth, renderHeight, tilesTracker, 0, false);
+            RenderMapSprites(spriteManager, mapConfiguration, renderTracker, renderWidth, renderHeight, tilesTracker, frameTracker, 0, false);
 
-            RenderMapSprites(spriteManager, mapConfiguration, renderTracker, renderWidth, renderHeight, tilesTracker, 1, false);
+            RenderMapSprites(spriteManager, mapConfiguration, renderTracker, renderWidth, renderHeight, tilesTracker, frameTracker, 1, false);
 
-            RenderMapSprites(spriteManager, mapConfiguration, renderTracker, renderWidth, renderHeight, tilesTracker, 0, true);
+            RenderMapSprites(spriteManager, mapConfiguration, renderTracker, renderWidth, renderHeight, tilesTracker, frameTracker, 0, true);
 
-            RenderMapSprites(spriteManager, mapConfiguration, renderTracker, renderWidth, renderHeight, tilesTracker, 1, true);
+            RenderMapSprites(spriteManager, mapConfiguration, renderTracker, renderWidth, renderHeight, tilesTracker, frameTracker, 1, true);
 
             RenderMapShade(spriteManager, renderTracker, fovTracker, renderWidth, renderHeight, mapConfiguration);
         }
@@ -132,7 +155,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             }
         }
 
-        private void RenderMapSprites(ISpriteManager spriteManager, IDataRogueControl mapConfiguration, bool[,] renderTracker, int renderWidth, int renderHeight, SpriteAppearance[,,] tilesTracker, int z, bool top)
+        private void RenderMapSprites(ISpriteManager spriteManager, IDataRogueControl mapConfiguration, bool[,] renderTracker, int renderWidth, int renderHeight, SpriteAppearance[,,] tilesTracker, int[,,] frameTracker, int z, bool top)
         {
             if (z == 0)
             {
@@ -152,13 +175,14 @@ namespace data_rogue_core.IOSystems.BLTTiles
                     if (renderTracker[x + 1, y + 1])
                     {
                         var appearance = tilesTracker[x + 1, y + 1, z];
+                        var frame = frameTracker[x + 1, y + 1, z];
                         if (appearance != null)
                         {
                             var spriteName = top ? appearance.Top : appearance.Bottom;
                             if (spriteName != null)
                             {
                                 TileDirections directions = BLTTileDirectionHelper.GetDirections(tilesTracker, x + 1, y + 1, z, top);
-                                var sprite = spriteManager.Tile(spriteName, directions);
+                                var sprite = spriteManager.Tile(spriteName, directions, frame);
                                 BLT.Put(mapConfiguration.Position.Left + x * BLTTilesIOSystem.TILE_SPACING, mapConfiguration.Position.Top + y * BLTTilesIOSystem.TILE_SPACING, sprite);
                             }
                         }

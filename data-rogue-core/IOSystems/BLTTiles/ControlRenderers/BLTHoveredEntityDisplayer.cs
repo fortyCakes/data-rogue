@@ -56,14 +56,15 @@ namespace data_rogue_core.IOSystems.BLTTiles
         {
             BLT.Font("");
             SpriteAppearance appearance = hoveredEntity.Has<SpriteAppearance>() ? hoveredEntity.Get<SpriteAppearance>() : new SpriteAppearance { Bottom = "unknown" };
+            int frame = hoveredEntity.Has<Animated>() ? hoveredEntity.Get<Animated>().CurrentFrame : 0;
 
             BLT.Layer(BLTLayers.UIElementPieces);
             string appearanceBottom = appearance.Bottom;
-            RenderSpriteIfSpecified(x, y, spriteManager, appearanceBottom);
+            RenderSpriteIfSpecified(x, y, spriteManager, appearanceBottom, frame);
 
             BLT.Layer(BLTLayers.UIElementPieces + 1);
             string appearanceTop = appearance.Top;
-            RenderSpriteIfSpecified(x, y, spriteManager, appearanceTop);
+            RenderSpriteIfSpecified(x, y, spriteManager, appearanceTop, frame);
 
             BLT.Layer(BLTLayers.Text);
             BLT.Font("text");
@@ -101,11 +102,11 @@ namespace data_rogue_core.IOSystems.BLTTiles
             }
         }
 
-        private static void RenderSpriteIfSpecified(int x, int y, ISpriteManager spriteManager, string spriteName)
+        private static void RenderSpriteIfSpecified(int x, int y, ISpriteManager spriteManager, string spriteName, int frame)
         {
             if (!string.IsNullOrEmpty(spriteName))
             {
-                BLT.Put(x + 2, y + 3, spriteManager.Tile(spriteName));
+                BLT.Put(x + 2, y + 3, spriteManager.Tile(spriteName, frame));
             }
         }
     }

@@ -22,14 +22,24 @@ namespace data_rogue_core.IOSystems.BLTTiles
             return _spriteDictionary[name];
         }
 
+        public int Tile(string name, TileDirections directions, int frame)
+        {
+            return _spriteDictionary[name].Tile(directions, frame);
+        }
+
+        public int Tile(string name, int frame)
+        {
+            return Tile(name, TileDirections.None, frame);
+        }
+
         public int Tile(string name, TileDirections directions)
         {
-            return _spriteDictionary[name].Tile(directions);
+            return Tile(name, directions, 0);
         }
 
         public int Tile(string name)
         {
-            return Tile(name, TileDirections.None);
+            return Tile(name, TileDirections.None, 0);
         }
     }
 }

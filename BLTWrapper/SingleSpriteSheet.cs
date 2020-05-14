@@ -11,17 +11,25 @@ namespace BLTWrapper
     {
         public string Name { get; }
 
+        public int Frames { get; }
+
         private int _offset;
 
-        public SingleSpriteSheet(string name, int offset)
+        public SingleSpriteSheet(string name, int offset, int frames)
         {
             Name = name;
+            Frames = frames;
             _offset = offset;
+        }
+
+        public int Tile(TileDirections directions, int frame)
+        {
+            return _offset + frame;
         }
 
         public int Tile(TileDirections directions)
         {
-            return _offset;
+            return Tile(directions, 0);
         }
     }
 }

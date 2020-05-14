@@ -79,6 +79,7 @@
     <Compile Include="Maps\MatrixTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EntityEngineSystem\EntityEngineTests.cs" />
+    <Compile Include="Systems\AnimationSystemTests.cs" />
     <Compile Include="Systems\EquipmentSystemTests.cs" />
     <Compile Include="Systems\ItemSystemTests.cs" />
     <Compile Include="Systems\NonPlayerTargeterTests.cs" />

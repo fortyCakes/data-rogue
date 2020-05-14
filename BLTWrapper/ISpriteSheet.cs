@@ -10,6 +10,9 @@ namespace BLTWrapper
     {
         string Name { get; }
 
+        int Tile(TileDirections directions, int frame);
         int Tile(TileDirections directions);
+
+        int Frames { get; }
     }
 }

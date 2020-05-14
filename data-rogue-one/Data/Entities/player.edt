@@ -5,6 +5,7 @@ Color: #FFFFFF
 ZOrder: 9999
 [SpriteAppearance]
 Bottom: generic_person
+[Animated]
 [Physical]
 Passable: false
 Transparent: true

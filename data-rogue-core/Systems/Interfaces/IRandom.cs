@@ -12,6 +12,7 @@ namespace data_rogue_core
         T PickOne<T>(IList<T> items);
 
         bool PercentageChance(double percent);
+        T PickOneFrom<T>(params T[] items);
     }
 
     public class RNG : IRandom
@@ -51,6 +52,16 @@ namespace data_rogue_core
         public bool PercentageChance(double percent)
         {
             return _random.NextDouble() <= percent;
+        }
+
+        public T PickOneFrom<T>(params T[] items)
+        {
+            var max = items.Length;
+
+            if (max == 1) return items[0];
+
+            var index = Between(1, max) - 1;
+            return items[index];
         }
     }
 }

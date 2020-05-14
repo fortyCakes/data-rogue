@@ -80,6 +80,7 @@
     <Compile Include="Activities\TargetingStatus.cs" />
     <Compile Include="Behaviours\UseSkillBehaviour.cs" />
     <Compile Include="Behaviours\MoveAwayFromPlayerBehaviour.cs" />
+    <Compile Include="Components\Animated.cs" />
     <Compile Include="Components\AttackDefinition.cs" />
     <Compile Include="Components\Class.cs" />
     <Compile Include="Components\HasClass.cs" />
@@ -346,13 +347,16 @@
     <Compile Include="EventSystem\EventData\ActivateSkillEventData.cs" />
     <Compile Include="EventSystem\EventData\ActionEventData.cs" />
     <Compile Include="Systems\ActivitySystem.cs" />
+    <Compile Include="Systems\AnimationSystem.cs" />
     <Compile Include="Systems\EntityCache.cs" />
     <Compile Include="Systems\EntityDataProviders.cs" />
+    <Compile Include="Systems\Interfaces\IAnimationSystem.cs" />
     <Compile Include="Systems\Interfaces\IMapSystem.cs" />
     <Compile Include="Systems\Interfaces\IRendererSystem.cs" />
     <Compile Include="Systems\Interfaces\ISaveSystem.cs" />
     <Compile Include="Systems\Interfaces\IStatSystem.cs" />
     <Compile Include="Systems\Interfaces\TargetingData.cs" />
+    <Compile Include="Utils\IStopwatch.cs" />
     <Compile Include="Systems\MapSystem.cs" />
     <Compile Include="Systems\NonPlayerTargeter.cs" />
     <Compile Include="Systems\RendererSystem.cs" />
@@ -457,6 +461,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\Sprites\Entities\Creatures\generic_person.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Sprites\Entities\Creatures\goblin_shaman.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -554,9 +561,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Misc\unknown.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\Sprites\Entities\Creatures\generic_person.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Entities\Items\armour_brown.png">
