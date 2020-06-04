@@ -137,7 +137,13 @@ namespace data_rogue_core
                 SystemContainer.ControlSystem.HandleInput(keyPress, IOSystem.GetMouseData());
 
                 var throttle = 100000;
-                while (!SystemContainer.TimeSystem.WaitingForInput && SystemContainer.ActivitySystem.ActivityStack.Count > 0 && SystemContainer.ActivitySystem.Peek().Type == ActivityType.Gameplay && SystemContainer.PlayerSystem.Player != null && !_leaving && throttle-- > 0)
+                while (
+                   !SystemContainer.TimeSystem.WaitingForInput 
+                   && SystemContainer.ActivitySystem.ActivityStack.Count > 0 
+                   && SystemContainer.ActivitySystem.GetActivityAcceptingInput().Type == ActivityType.Gameplay 
+                   && SystemContainer.PlayerSystem.Player != null 
+                   && !_leaving 
+                   && throttle-- > 0)
                 {
                     SystemContainer.TimeSystem.Tick();
                 }

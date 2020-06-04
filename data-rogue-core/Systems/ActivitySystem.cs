@@ -33,5 +33,16 @@ namespace data_rogue_core.Systems
         public Action QuitAction { get; set; }
 
         public GameplayActivity GameplayActivity => ActivityStack.OfType<GameplayActivity>().Single();
+
+        public IActivity GetActivityAcceptingInput()
+        {
+            foreach (var activity in ActivityStack)
+            {
+                if (activity.AcceptsInput)
+                    return activity;
+            }
+
+            return null;
+        }
     }
 }

@@ -15,6 +15,7 @@ namespace data_rogue_core.Activities
     {
         public override ActivityType Type => ActivityType.StaticDisplay;
         public override bool RendersEntireSpace => false;
+        public override bool AcceptsInput => true;
 
         public string Text { get; set; }
         public bool CloseOnKeyPress { get; }

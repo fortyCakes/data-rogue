@@ -23,6 +23,8 @@ namespace data_rogue_core.Activities
         public bool Running { get; set; } = false;
 
         public override bool RendersEntireSpace => true;
+        public override bool AcceptsInput => true;
+
         private IPathfindingAlgorithm _pathfindingAlgorithm = new AStarPathfindingAlgorithm();
         private readonly IOSystemConfiguration _ioSystemConfiguration;
 

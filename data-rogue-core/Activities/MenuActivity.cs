@@ -17,6 +17,7 @@ namespace data_rogue_core.Activities
     {
         public override ActivityType Type => ActivityType.Menu;
         public override bool RendersEntireSpace => true;
+        public override bool AcceptsInput => true;
         public Menu Menu { get; }
 
         public bool Running => true;

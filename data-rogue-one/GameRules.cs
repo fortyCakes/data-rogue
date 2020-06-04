@@ -57,7 +57,8 @@ namespace data_rogue_one
                     typeof(OnAttackProcEnchantmentRule),
                     typeof(ApplyResistanceRule),
                     typeof(ApplyModifiedAccuracyRule),
-                    typeof(ApplyModifiedDamageRule)
+                    typeof(ApplyModifiedDamageRule),
+                    typeof(ShowToastWhenEnteringBranchRule)
                 };
 
                 list.AddRange(ApplyActionRule.AllActionRules);

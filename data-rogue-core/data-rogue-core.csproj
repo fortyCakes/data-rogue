@@ -78,6 +78,7 @@
     <Compile Include="Activities\MouseControlHelper.cs" />
     <Compile Include="Activities\PositionEventHandler.cs" />
     <Compile Include="Activities\TargetingStatus.cs" />
+    <Compile Include="Activities\ToastActivity.cs" />
     <Compile Include="Behaviours\UseSkillBehaviour.cs" />
     <Compile Include="Behaviours\MoveAwayFromPlayerBehaviour.cs" />
     <Compile Include="Components\Animated.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="EventSystem\Rules\Actions\UseSkillAction.cs" />
     <Compile Include="EventSystem\Rules\Actions\WaitAction.cs" />
     <Compile Include="EventSystem\Rules\CantDealNoDamageRule.cs" />
+    <Compile Include="EventSystem\Rules\ShowToastWhenEnteringBranchRule.cs" />
     <Compile Include="Forms\StaticForms\TextFormData.cs" />
     <Compile Include="Forms\SubSelectableFormData.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTTilesUnifiedRenderer.cs" />

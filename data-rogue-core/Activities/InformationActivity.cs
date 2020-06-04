@@ -21,6 +21,7 @@ namespace data_rogue_core.Activities
         public IEntity Entity { get; }
         public List<StatsConfiguration> StatsConfigs { get; set; }
         public bool CloseOnKeyPress { get; }
+        public override bool AcceptsInput => true;
 
         private readonly IActivitySystem _activitySystem;
 

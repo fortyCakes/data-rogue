@@ -62,23 +62,23 @@ namespace data_rogue_core.Systems
             var actionData = GetActionFromBoundKey(keyPress);
             if (_activitySystem.ActivityStack.Any())
             {
-                IActivity currentActivity = _activitySystem.Peek();
+                IActivity inputActivity = _activitySystem.GetActivityAcceptingInput();
 
-                if ((currentActivity as GameplayActivity)?.Running ?? true)
+                if (inputActivity != null && ((inputActivity as GameplayActivity)?.Running ?? true))
                 {
                     if (actionData != null)
                     {
-                        currentActivity.HandleAction(_systemContainer, actionData);
+                        inputActivity.HandleAction(_systemContainer, actionData);
                     }
 
                     if (keyPress != null)
                     {
-                        currentActivity.HandleKeyboard(_systemContainer, keyPress);
+                        inputActivity.HandleKeyboard(_systemContainer, keyPress);
                     }
 
                     if (mouse != null)
                     {
-                        currentActivity.HandleMouse(_systemContainer, mouse);
+                        inputActivity.HandleMouse(_systemContainer, mouse);
                     }
                 }
             }

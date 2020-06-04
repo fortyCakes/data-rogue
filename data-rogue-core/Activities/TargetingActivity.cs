@@ -19,6 +19,7 @@ namespace data_rogue_core.Activities
         public override ActivityType Type => ActivityType.Targeting;
 
         public override bool RendersEntireSpace => false;
+        public override bool AcceptsInput => true;
 
         public bool Running => true;
 

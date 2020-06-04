@@ -18,5 +18,6 @@ namespace data_rogue_core.Systems.Interfaces
         GameplayActivity GameplayActivity { get; }
 
         void RemoveActivity(IActivity activity);
+        IActivity GetActivityAcceptingInput();
     }
 }
