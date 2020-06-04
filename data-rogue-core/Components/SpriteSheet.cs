@@ -2,7 +2,6 @@
 
 namespace data_rogue_core.Components
 {
-
     public class SpriteSheet : IEntityComponent
     {
         public string Name;

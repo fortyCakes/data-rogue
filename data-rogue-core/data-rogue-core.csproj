@@ -85,6 +85,7 @@
     <Compile Include="Components\AttackDefinition.cs" />
     <Compile Include="Components\Class.cs" />
     <Compile Include="Components\HasClass.cs" />
+    <Compile Include="Components\Sound.cs" />
     <Compile Include="Components\Targeting.cs" />
     <Compile Include="Controls\MinimapControl.cs" />
     <Compile Include="Data\VectorList.cs" />
@@ -356,8 +357,10 @@
     <Compile Include="Systems\Interfaces\IMapSystem.cs" />
     <Compile Include="Systems\Interfaces\IRendererSystem.cs" />
     <Compile Include="Systems\Interfaces\ISaveSystem.cs" />
+    <Compile Include="Systems\Interfaces\ISoundSystem.cs" />
     <Compile Include="Systems\Interfaces\IStatSystem.cs" />
     <Compile Include="Systems\Interfaces\TargetingData.cs" />
+    <Compile Include="Systems\SoundSystem.cs" />
     <Compile Include="Utils\IStopwatch.cs" />
     <Compile Include="Systems\MapSystem.cs" />
     <Compile Include="Systems\NonPlayerTargeter.cs" />
@@ -686,6 +689,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Tileset\terminal8x8.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\door.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\step.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\strike.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
