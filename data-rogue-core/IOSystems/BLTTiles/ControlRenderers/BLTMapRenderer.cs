@@ -42,7 +42,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             int offsetY = renderHeight / 2;
 
             var tilesTracker = new SpriteAppearance[renderWidth + 2, renderHeight + 2, 2];
-            var frameTracker = new int[renderWidth + 2, renderHeight + 2, 2];
+            var frameTracker = new AnimationFrame[renderWidth + 2, renderHeight + 2, 2];
             var renderTracker = new bool[renderWidth + 2, renderHeight + 2];
             var fovTracker = new bool[renderWidth + 2, renderHeight + 2];
 
@@ -72,7 +72,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
                     var animatedCell = mapCell.TryGet<Animated>();
                     if (animatedCell != null)
                     {
-                        frameTracker[x + 1, y + 1, 0] = animatedCell.CurrentFrame;
+                        frameTracker[x + 1, y + 1, 0] = systemContainer.AnimationSystem.GetFrame(mapCell);
                     }
                     else
                     {
@@ -95,7 +95,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
                         var animatedEntity = topEntity.TryGet<Animated>();
                         if (animatedEntity != null)
                         {
-                            frameTracker[x + 1, y + 1, 1] = animatedEntity.CurrentFrame;
+                            frameTracker[x + 1, y + 1, 1] = systemContainer.AnimationSystem.GetFrame(topEntity);
                         }
                         else
                         {
@@ -155,7 +155,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             }
         }
 
-        private void RenderMapSprites(ISpriteManager spriteManager, IDataRogueControl mapConfiguration, bool[,] renderTracker, int renderWidth, int renderHeight, SpriteAppearance[,,] tilesTracker, int[,,] frameTracker, int z, bool top)
+        private void RenderMapSprites(ISpriteManager spriteManager, IDataRogueControl mapConfiguration, bool[,] renderTracker, int renderWidth, int renderHeight, SpriteAppearance[,,] tilesTracker, AnimationFrame[,,] frameTracker, int z, bool top)
         {
             if (z == 0)
             {

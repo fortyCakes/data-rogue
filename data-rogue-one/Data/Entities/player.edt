@@ -6,6 +6,10 @@ ZOrder: 9999
 [SpriteAppearance]
 Bottom: generic_person
 [Animated]
+[Animation]
+[Animation]
+AnimationType: Attack
+Frames: Attack0
 [Physical]
 Passable: false
 Transparent: true

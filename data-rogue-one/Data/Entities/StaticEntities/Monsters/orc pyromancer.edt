@@ -15,6 +15,7 @@ ZOrder: 10
 [SpriteAppearance]
 Bottom: orc_monk
 [Animated]
+[Animation]
 [Position]
 [Physical]
 Passable: false

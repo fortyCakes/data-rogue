@@ -13,6 +13,7 @@ ZOrder: 10
 [SpriteAppearance]
 Bottom: goblin
 [Animated]
+[Animation]
 [Position]
 [Physical]
 Passable: false

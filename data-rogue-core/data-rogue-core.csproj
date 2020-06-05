@@ -82,6 +82,8 @@
     <Compile Include="Behaviours\UseSkillBehaviour.cs" />
     <Compile Include="Behaviours\MoveAwayFromPlayerBehaviour.cs" />
     <Compile Include="Components\Animated.cs" />
+    <Compile Include="Components\Animation.cs" />
+    <Compile Include="Components\AnimationType.cs" />
     <Compile Include="Components\AttackDefinition.cs" />
     <Compile Include="Components\Class.cs" />
     <Compile Include="Components\HasClass.cs" />
@@ -106,7 +108,10 @@
     <Compile Include="EventSystem\Rules\Actions\SetIsActionFalseRule.cs" />
     <Compile Include="EventSystem\Rules\Actions\UseSkillAction.cs" />
     <Compile Include="EventSystem\Rules\Actions\WaitAction.cs" />
-    <Compile Include="EventSystem\Rules\BumpAttackRule - Copy.cs" />
+    <Compile Include="EventSystem\Rules\AttackAnimationRule.cs" />
+    <Compile Include="EventSystem\Rules\HitMakesSoundRule.cs" />
+    <Compile Include="EventSystem\Rules\MissMakesSoundRule.cs" />
+    <Compile Include="EventSystem\Rules\PlayerStepMakesSoundRule.cs" />
     <Compile Include="EventSystem\Rules\CantDealNoDamageRule.cs" />
     <Compile Include="EventSystem\Rules\ShowToastWhenEnteringBranchRule.cs" />
     <Compile Include="Forms\StaticForms\TextFormData.cs" />
@@ -693,6 +698,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Sounds\door.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\miss.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Sounds\step.wav">

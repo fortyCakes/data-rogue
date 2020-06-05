@@ -33,39 +33,72 @@ namespace data_rogue_core.Systems
             int tickBy = (int)(elapsed / TICK_LENGTH);
             _lastKnownTime += tickBy * TICK_LENGTH;
 
-            foreach (Animated component in this.Entities.Select(e => e.Get<Animated>()))
+            foreach (IEntity entity in Entities)
             {
-                component.CurrentTick += tickBy;
-                component.OnAnimationTick(tickBy);
-
-                while (component.CurrentTick >= component.FrameTicks)
+                var component = entity.Get<Animated>();
+                if (component.CurrentAnimation == null)
                 {
-                    component.CurrentTick -= component.FrameTicks;
-                    if (component.RandomiseTicks)
+                    component.CurrentAnimation = GetComponentAnimation(entity, component.DefaultAnimation);
+                }
+
+                var currentAnimation = component.CurrentAnimation;
+                currentAnimation.CurrentTick += tickBy;
+
+                while (currentAnimation.CurrentTick >= currentAnimation.FrameTicks)
+                {
+                    currentAnimation.CurrentTick -= currentAnimation.FrameTicks;
+                    if (currentAnimation.RandomiseTicks)
                     {
-                        component.CurrentTick -= _random.PickOneFrom(0, 1);
+                        currentAnimation.CurrentTick -= _random.PickOneFrom(0, 1);
                     }
 
-                    component.CurrentFrame++;
+                    currentAnimation.CurrentFrame++;
 
-                    if (component.CurrentFrame == component.FrameCount)
+                    if (currentAnimation.CurrentFrame == currentAnimation.FrameCount)
                     {
-                        component.CurrentFrame = 0;
+                        if (currentAnimation.Repeat)
+                        {
+                            currentAnimation.CurrentFrame = 0;
+                        }
+                        else
+                        {
+                            SetAnimation(entity, component.DefaultAnimation);
+                        }
                     }
                 }
             }
         }
 
-        public int GetFrame(IEntity entity)
+        private Animation GetComponentAnimation(IEntity entity, AnimationType animationType)
         {
-            return entity.Get<Animated>().CurrentFrame;
+            return entity.Components.OfType<Animation>().SingleOrDefault(a => a.AnimationType == animationType);
+        }
+
+        public AnimationFrame GetFrame(IEntity entity)
+        {
+            Animation currentAnimation = entity.Get<Animated>().CurrentAnimation;
+            return currentAnimation.Frames[currentAnimation.CurrentFrame];
         }
 
         public void SetFrame(IEntity entity, int frame)
         {
             Animated component = entity.Get<Animated>();
-            component.CurrentFrame = frame;
-            component.CurrentTick = 0;
+            component.CurrentAnimation.CurrentFrame = frame;
+            component.CurrentAnimation.CurrentTick = 0;
+        }
+
+        public void SetAnimation(IEntity entity, AnimationType animationType)
+        {
+            Animated component = entity.Get<Animated>();
+            Animation animation = GetComponentAnimation(entity, animationType);
+
+            if (animation != null)
+            {
+                animation.CurrentFrame = 0;
+                animation.CurrentTick = 0;
+
+                component.CurrentAnimation = animation;
+            }
         }
     }
 }

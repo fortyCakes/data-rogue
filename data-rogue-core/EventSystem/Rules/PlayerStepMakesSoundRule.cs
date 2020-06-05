@@ -8,12 +8,12 @@ using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.EventSystem.Rules
 {
-    public class PlaySoundOnPlayerStepRule : IEventRule
+    public class PlayerStepMakesSoundRule : IEventRule
     {
         private ISoundSystem _soundSystem;
         private IPrototypeSystem _prototypeSystem;
 
-        public PlaySoundOnPlayerStepRule(ISystemContainer systemContainer)
+        public PlayerStepMakesSoundRule(ISystemContainer systemContainer)
         {
             _soundSystem = systemContainer.SoundSystem;
             _prototypeSystem = systemContainer.PrototypeSystem;

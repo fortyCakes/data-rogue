@@ -9,6 +9,7 @@ ZOrder: 1
 [SpriteAppearance]
 Top: black_smoke
 [Animated]
+[Animation]
 FrameTicks: 30
 RandomiseTicks: true
 [Position]

@@ -13,6 +13,7 @@ ZOrder: 10
 [SpriteAppearance]
 Bottom: dog_1
 [Animated]
+[Animation]
 [Position]
 [Physical]
 Passable: false

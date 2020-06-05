@@ -40,26 +40,36 @@ namespace data_rogue_core.UnitTests.Systems
         [Test]
         public void Tick_CurrentTickLow_IncreasesCurrentTick()
         {
-            _animatedComponent.CurrentTick = 0;
+            _animatedComponent.CurrentAnimation.CurrentTick = 0;
             _stopwatch.ElapsedMilliseconds.Returns(AnimationSystem.TICK_LENGTH);
 
             _animationSystem.Tick();
 
-            _animatedComponent.CurrentTick.Should().Be(1);
+            _animatedComponent.CurrentAnimation.CurrentTick.Should().Be(1);
         }
 
         [Test]
         public void Tick_CurrentTickHigh_IncreasesCurrentFrameAndResetsTick()
         {
-            _animatedComponent.CurrentTick = 29;
-            _animatedComponent.FrameTicks = 30;
-            _animatedComponent.CurrentFrame = 0;
+            _animatedComponent.CurrentAnimation.CurrentTick = 29;
+            _animatedComponent.CurrentAnimation.FrameTicks = 30;
+            _animatedComponent.CurrentAnimation.CurrentFrame = 0;
             
             _stopwatch.ElapsedMilliseconds.Returns(AnimationSystem.TICK_LENGTH);
             _animationSystem.Tick();
             
-            _animatedComponent.CurrentTick.Should().Be(0);
-            _animatedComponent.CurrentFrame.Should().Be(1);
+            _animatedComponent.CurrentAnimation.CurrentTick.Should().Be(0);
+            _animatedComponent.CurrentAnimation.CurrentFrame.Should().Be(1);
+        }
+
+        [Test]
+        public void Tick_AnimationNotSet_SetsToDefault()
+        {
+            _animatedComponent.CurrentAnimation = null;
+            _stopwatch.ElapsedMilliseconds.Returns(AnimationSystem.TICK_LENGTH);
+            _animationSystem.Tick();
+
+            _animatedComponent.CurrentAnimation.AnimationType.Should().Be(AnimationType.Idle);
         }
 
         [Test]
@@ -67,38 +77,38 @@ namespace data_rogue_core.UnitTests.Systems
         [TestCase(1)]
         public void Tick_RandomiseTick_SometimesDecreasesCurrentTickMore(int randomReturn)
         {
-            _animatedComponent.CurrentTick = 29;
-            _animatedComponent.FrameTicks = 30;
-            _animatedComponent.CurrentFrame = 0;
-            _animatedComponent.RandomiseTicks = true;
+            _animatedComponent.CurrentAnimation.CurrentTick = 29;
+            _animatedComponent.CurrentAnimation.FrameTicks = 30;
+            _animatedComponent.CurrentAnimation.CurrentFrame = 0;
+            _animatedComponent.CurrentAnimation.RandomiseTicks = true;
 
             _random.PickOneFrom<int>().ReturnsForAnyArgs(randomReturn);
 
             _stopwatch.ElapsedMilliseconds.Returns(AnimationSystem.TICK_LENGTH);
             _animationSystem.Tick();
 
-            _animatedComponent.CurrentTick.Should().Be(-randomReturn);
-            _animatedComponent.CurrentFrame.Should().Be(1);
+            _animatedComponent.CurrentAnimation.CurrentTick.Should().Be(-randomReturn);
+            _animatedComponent.CurrentAnimation.CurrentFrame.Should().Be(1);
         }
 
         [Test]
         public void Tick_CurrentTickHigh_FrameHigh_ResetsCurrentFrameAndResetsTick()
         {
-            _animatedComponent.CurrentTick = 29;
-            _animatedComponent.FrameTicks = 30;
-            _animatedComponent.CurrentFrame = 1;
+            _animatedComponent.CurrentAnimation.CurrentTick = 29;
+            _animatedComponent.CurrentAnimation.FrameTicks = 30;
+            _animatedComponent.CurrentAnimation.CurrentFrame = 1;
 
             _stopwatch.ElapsedMilliseconds.Returns(AnimationSystem.TICK_LENGTH);
             _animationSystem.Tick();
 
-            _animatedComponent.CurrentTick.Should().Be(0);
-            _animatedComponent.CurrentFrame.Should().Be(0);
+            _animatedComponent.CurrentAnimation.CurrentTick.Should().Be(0);
+            _animatedComponent.CurrentAnimation.CurrentFrame.Should().Be(0);
         }
 
         [Test]
         public void GetFrame_ReturnsCorrectFrame()
         {
-            _animatedComponent.CurrentFrame = 1;
+            _animatedComponent.CurrentAnimation.CurrentFrame = 1;
 
             _animationSystem.GetFrame(_testObject).Should().Be(1);
         }
@@ -108,30 +118,82 @@ namespace data_rogue_core.UnitTests.Systems
         {
             _animationSystem.SetFrame(_testObject, 1);
 
-            _animatedComponent.CurrentFrame.Should().Be(1);
+            _animatedComponent.CurrentAnimation.CurrentFrame.Should().Be(1);
         }
 
         [Test]
         public void SetFrame_ResetsTick()
         {
-            _animatedComponent.CurrentTick = 1;
+            _animatedComponent.CurrentAnimation.CurrentTick = 1;
             _animationSystem.SetFrame(_testObject, 1);
 
-            _animatedComponent.CurrentTick.Should().Be(0);
+            _animatedComponent.CurrentAnimation.CurrentTick.Should().Be(0);
+        }
+
+        [Test]
+        public void SetAnimation_ChangesAnimationType()
+        {
+            _animationSystem.SetAnimation(_testObject, AnimationType.Attack);
+
+            _animatedComponent.CurrentAnimation.AnimationType.Should().Be(AnimationType.Attack);
+            _animatedComponent.CurrentAnimation.CurrentTick.Should().Be(0);
+            _animatedComponent.CurrentAnimation.CurrentFrame.Should().Be(0);
+        }
+
+        [Test]
+        public void Tick_AnimationComplete_Repeat_Repeats()
+        {
+            _animatedComponent.CurrentAnimation.CurrentTick = 29;
+            _animatedComponent.CurrentAnimation.FrameTicks = 30;
+            _animatedComponent.CurrentAnimation.CurrentFrame = 1;
+
+            _stopwatch.ElapsedMilliseconds.Returns(AnimationSystem.TICK_LENGTH);
+            _animationSystem.Tick();
+
+            _animatedComponent.CurrentAnimation.AnimationType.Should().Be(AnimationType.Idle);
+        }
+
+        [Test]
+        public void Tick_AnimationComplete_NotRepeat_SwitchesToDefault()
+        {
+            _animationSystem.SetAnimation(_testObject, AnimationType.Attack);
+            _animatedComponent.CurrentAnimation.CurrentTick = 29;
+            _animatedComponent.CurrentAnimation.FrameTicks = 30;
+            _animatedComponent.CurrentAnimation.CurrentFrame = 0;
+
+            _stopwatch.ElapsedMilliseconds.Returns(AnimationSystem.TICK_LENGTH);
+            _animationSystem.Tick();
+
+            _animatedComponent.CurrentAnimation.AnimationType.Should().Be(AnimationType.Idle);
         }
 
         private IEntity CreateTestObject()
         {
+            var animated = new Animated();
+            var animation = new Animation
+            {
+                AnimationType = AnimationType.Idle,
+                CurrentFrame = 0,
+                CurrentTick = 0,
+                Frames = new FrameList {AnimationFrame.Idle0, AnimationFrame.Idle1},
+                FrameTicks = 30,
+                Repeat = true
+            };
+
+            var animation2 = new Animation
+            {
+                AnimationType = AnimationType.Attack,
+                CurrentFrame = 0,
+                CurrentTick = 0,
+                Frames = new FrameList { AnimationFrame.Attack0 },
+                FrameTicks = 30,
+                Repeat = false
+            };
+
+            animated.CurrentAnimation = animation;
+
             var animatedEntity = new Entity(1, "animated entity", 
-                new []{
-                    new Animated
-                    {
-                        CurrentFrame = 0,
-                        CurrentTick = 0,
-                        Frames = new FrameList { AnimationFrame.Rest0, AnimationFrame.Rest1 },
-                        FrameTicks = 30
-                    }
-                });
+                new IEntityComponent[]{ animated, animation, animation2 });
             return animatedEntity;
         }
     }

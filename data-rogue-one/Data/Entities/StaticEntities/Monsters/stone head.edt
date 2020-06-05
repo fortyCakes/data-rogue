@@ -13,6 +13,7 @@ ZOrder: 10
 [SpriteAppearance]
 Bottom: stone_head
 [Animated]
+[Animation]
 FrameTicks: 60
 [Position]
 [Physical]

@@ -10,7 +10,7 @@ namespace data_rogue_core.Components
         public int SpriteWidth;
         public int SpriteHeight;
         public int Scaling;
-        public FrameList Frames = new FrameList { AnimationFrame.Rest0 };
+        public FrameList Frames = new FrameList { AnimationFrame.Idle0 };
 
         public bool HasMultipleFrames => Frames.Count > 1;
     }
