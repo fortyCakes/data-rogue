@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Media;
 using data_rogue_core.Components;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Systems.Interfaces;
@@ -7,40 +10,42 @@ namespace data_rogue_core.Systems
 {
     public class SoundSystem : BaseSystem, ISoundSystem
     {
-        private Dictionary<IEntity, Sound> _soundCache;
+        private Dictionary<IEntity, SoundPlayer> _entityCache;
 
         public void Initialise()
         {
             base.Initialise();
-            _soundCache = new Dictionary<IEntity, Sound>();
+            _entityCache = new Dictionary<IEntity, SoundPlayer>();
         }
 
         public void AddEntity(IEntity entity)
         {
-            _soundCache.Add(entity, entity.Get<Sound>());
+            var sound = entity.Get<Sound>();
+            var soundPlayer = LoadSound(sound);
+            _entityCache.Add(entity, soundPlayer);
+        }
+
+        private SoundPlayer LoadSound(Sound sound)
+        {
+            return new SoundPlayer(sound.Path);
         }
 
         public void RemoveEntity(IEntity entity)
         {
-            _soundCache.Remove(entity);
+            _entityCache.Remove(entity);
         }
 
         public bool HasEntity(IEntity entity)
         {
-            throw new System.NotImplementedException();
+            return _entityCache.ContainsKey(entity);
         }
 
         public override SystemComponents RequiredComponents => new SystemComponents {typeof(Sound)};
         public override SystemComponents ForbiddenComponents => new SystemComponents();
 
-        public void Play(Sound sound)
+        public void PlaySound(IEntity entity)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public void Play(IEntity soundEntity)
-        {
-            throw new System.NotImplementedException();
+            _entityCache[entity].Play();
         }
     }
 }

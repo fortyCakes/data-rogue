@@ -58,7 +58,8 @@ namespace data_rogue_one
                     typeof(ApplyResistanceRule),
                     typeof(ApplyModifiedAccuracyRule),
                     typeof(ApplyModifiedDamageRule),
-                    typeof(ShowToastWhenEnteringBranchRule)
+                    typeof(ShowToastWhenEnteringBranchRule),
+                    typeof(PlaySoundOnPlayerStepRule)
                 };
 
                 list.AddRange(ApplyActionRule.AllActionRules);

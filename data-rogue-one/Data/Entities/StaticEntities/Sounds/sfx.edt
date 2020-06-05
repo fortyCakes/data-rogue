@@ -1,0 +1,17 @@
+﻿"Door"
+[Prototype]
+Name: Sound:Door
+[Sound]
+Path: Sounds/door.wav
+
+"Step"
+[Prototype]
+Name: Sound:Step
+[Sound]
+Path: Sounds/step.wav
+
+"Strike"
+[Prototype]
+Name: Sound:Strike
+[Sound]
+Path: Sounds/strike.wav

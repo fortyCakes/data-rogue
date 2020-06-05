@@ -136,7 +136,7 @@ namespace data_rogue_core
 
                 SystemContainer.ControlSystem.HandleInput(keyPress, IOSystem.GetMouseData());
 
-                var throttle = 100000;
+                var throttle = 1000;
                 while (
                    !SystemContainer.TimeSystem.WaitingForInput 
                    && SystemContainer.ActivitySystem.ActivityStack.Count > 0 

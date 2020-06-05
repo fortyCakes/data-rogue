@@ -30,6 +30,7 @@ namespace data_rogue_core.Systems.Interfaces
         IMapSystem MapSystem { get; set; }
         ISaveSystem SaveSystem {get;set;}
         IStatSystem StatSystem { get; }
+        ISoundSystem SoundSystem { get; }
 
         void Verify();
         void CreateSystems(string rngSeed);

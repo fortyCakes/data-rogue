@@ -106,6 +106,7 @@
     <Compile Include="EventSystem\Rules\Actions\SetIsActionFalseRule.cs" />
     <Compile Include="EventSystem\Rules\Actions\UseSkillAction.cs" />
     <Compile Include="EventSystem\Rules\Actions\WaitAction.cs" />
+    <Compile Include="EventSystem\Rules\BumpAttackRule - Copy.cs" />
     <Compile Include="EventSystem\Rules\CantDealNoDamageRule.cs" />
     <Compile Include="EventSystem\Rules\ShowToastWhenEnteringBranchRule.cs" />
     <Compile Include="Forms\StaticForms\TextFormData.cs" />
