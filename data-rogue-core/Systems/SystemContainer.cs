@@ -103,7 +103,7 @@ namespace data_rogue_core.Systems
             SkillSystem = new SkillSystem(this);
             EntityEngine.Register(SkillSystem);
 
-            AnimationSystem = new AnimationSystem(new EncapsulatedStopwatch(), AnimationRandom);
+            AnimationSystem = new AnimationSystem(EntityEngine, new EncapsulatedStopwatch(), AnimationRandom);
             EntityEngine.Register(AnimationSystem);
 
             SoundSystem = new SoundSystem();

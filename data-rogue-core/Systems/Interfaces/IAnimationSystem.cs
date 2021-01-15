@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using data_rogue_core.Components;
+using data_rogue_core.Data;
 using data_rogue_core.EntityEngineSystem;
 
 namespace data_rogue_core.Systems.Interfaces
@@ -15,5 +16,7 @@ namespace data_rogue_core.Systems.Interfaces
         AnimationFrame GetFrame(IEntity entity);
         void SetFrame(IEntity entity, int frame);
         void SetAnimation(IEntity entity, AnimationType animationType);
+        void StartAnimatedMovement(IEntity entity, List<AnimationMovement> movements);
+        bool IsBlockingAnimationPlaying();
     }
 }

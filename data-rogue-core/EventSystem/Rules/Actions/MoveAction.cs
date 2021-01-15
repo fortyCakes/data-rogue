@@ -1,8 +1,10 @@
-﻿using data_rogue_core.EntityEngineSystem;
+﻿using data_rogue_core.Data;
+using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
+using System.Collections.Generic;
 
 namespace data_rogue_core.EventSystem.Rules
 {
@@ -22,6 +24,13 @@ namespace data_rogue_core.EventSystem.Rules
             if (_systemContainer.EventSystem.Try(EventType.Move, sender, vector))
             {
                 eventData.IsAction = true;
+                if (_systemContainer.PlayerSystem.IsPlayer(sender))
+                {
+                    _systemContainer.AnimationSystem.StartAnimatedMovement(sender, new List<AnimationMovement>
+                    {
+                        new AnimationMovement{ Duration = 500, TimeLeft = 500, Vector = vector }
+                    });
+                }
             }
 
             return true;

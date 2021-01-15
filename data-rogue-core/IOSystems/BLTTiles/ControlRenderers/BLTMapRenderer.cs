@@ -43,6 +43,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
             var tilesTracker = new SpriteAppearance[renderWidth + 2, renderHeight + 2, 2];
             var frameTracker = new AnimationFrame[renderWidth + 2, renderHeight + 2, 2];
+            var offsetTracker = new BLTMapRendererOffset[renderWidth + 2, renderHeight + 2, 2];
             var renderTracker = new bool[renderWidth + 2, renderHeight + 2];
             var fovTracker = new bool[renderWidth + 2, renderHeight + 2];
 
@@ -79,6 +80,16 @@ namespace data_rogue_core.IOSystems.BLTTiles
                         frameTracker[x + 1, y + 1, 0] = 0;
                     }
 
+                    var movingCell = mapCell.TryGet<Moving>();
+                    if (movingCell != null)
+                    {
+                        offsetTracker[x + 1, y + 1, 0] = new BLTMapRendererOffset(movingCell.OffsetX, movingCell.OffsetY);
+                    }
+                    else
+                    {
+                        offsetTracker[x + 1, y + 1, 0] = new BLTMapRendererOffset();
+                    }
+
                     if (topEntity != null)
                     {
                         var spriteAppearance = topEntity.TryGet<SpriteAppearance>();
@@ -101,17 +112,27 @@ namespace data_rogue_core.IOSystems.BLTTiles
                         {
                             frameTracker[x + 1, y + 1, 1] = 0;
                         }
+
+                        var moving = topEntity.TryGet<Moving>();
+                        if (moving != null)
+                        {
+                            offsetTracker[x + 1, y + 1, 1] = new BLTMapRendererOffset(moving.OffsetX, moving.OffsetY);
+                        }
+                        else
+                        {
+                            offsetTracker[x + 1, y + 1, 1] = new BLTMapRendererOffset();
+                        }
                     }
                 }
             }
 
-            RenderMapSprites(spriteManager, mapConfiguration, renderTracker, renderWidth, renderHeight, tilesTracker, frameTracker, 0, false);
+            RenderMapSprites(spriteManager, mapConfiguration, renderTracker, renderWidth, renderHeight, tilesTracker, frameTracker, offsetTracker, 0, false);
 
-            RenderMapSprites(spriteManager, mapConfiguration, renderTracker, renderWidth, renderHeight, tilesTracker, frameTracker, 1, false);
+            RenderMapSprites(spriteManager, mapConfiguration, renderTracker, renderWidth, renderHeight, tilesTracker, frameTracker, offsetTracker, 1, false);
 
-            RenderMapSprites(spriteManager, mapConfiguration, renderTracker, renderWidth, renderHeight, tilesTracker, frameTracker, 0, true);
+            RenderMapSprites(spriteManager, mapConfiguration, renderTracker, renderWidth, renderHeight, tilesTracker, frameTracker, offsetTracker, 0, true);
 
-            RenderMapSprites(spriteManager, mapConfiguration, renderTracker, renderWidth, renderHeight, tilesTracker, frameTracker, 1, true);
+            RenderMapSprites(spriteManager, mapConfiguration, renderTracker, renderWidth, renderHeight, tilesTracker, frameTracker, offsetTracker, 1, true);
 
             RenderMapShade(spriteManager, renderTracker, fovTracker, renderWidth, renderHeight, mapConfiguration);
         }
@@ -155,7 +176,11 @@ namespace data_rogue_core.IOSystems.BLTTiles
             }
         }
 
-        private void RenderMapSprites(ISpriteManager spriteManager, IDataRogueControl mapConfiguration, bool[,] renderTracker, int renderWidth, int renderHeight, SpriteAppearance[,,] tilesTracker, AnimationFrame[,,] frameTracker, int z, bool top)
+        private void RenderMapSprites(
+            ISpriteManager spriteManager, IDataRogueControl mapConfiguration, 
+            bool[,] renderTracker, int renderWidth, int renderHeight, 
+            SpriteAppearance[,,] tilesTracker, AnimationFrame[,,] frameTracker, BLTMapRendererOffset[,,] offsetTracker,
+            int z, bool top)
         {
             if (z == 0)
             {
@@ -183,7 +208,12 @@ namespace data_rogue_core.IOSystems.BLTTiles
                             {
                                 TileDirections directions = BLTTileDirectionHelper.GetDirections(tilesTracker, x + 1, y + 1, z, top);
                                 var sprite = spriteManager.Tile(spriteName, directions, frame);
-                                BLT.Put(mapConfiguration.Position.Left + x * BLTTilesIOSystem.TILE_SPACING, mapConfiguration.Position.Top + y * BLTTilesIOSystem.TILE_SPACING, sprite);
+                                var offsetX = (int)Math.Floor(offsetTracker[x + 1, y + 1, z].OffsetX * BLTTilesIOSystem.TILE_SPACING);
+                                var offsetY = (int)Math.Floor(offsetTracker[x + 1, y + 1, z].OffsetY * BLTTilesIOSystem.TILE_SPACING);
+                                BLT.Put(
+                                    mapConfiguration.Position.Left + x * BLTTilesIOSystem.TILE_SPACING + offsetX, 
+                                    mapConfiguration.Position.Top  + y * BLTTilesIOSystem.TILE_SPACING + offsetY, 
+                                    sprite);
                             }
                         }
                     }
@@ -194,6 +224,22 @@ namespace data_rogue_core.IOSystems.BLTTiles
         private bool IsRemembered(IMap currentMap, MapCoordinate coordinate, IEntity e)
         {
             return currentMap.SeenCoordinates.Contains(coordinate) && e.Has<Memorable>();
+        }
+    }
+
+    internal class BLTMapRendererOffset
+    {
+        public double OffsetX;
+        public double OffsetY;
+
+        public BLTMapRendererOffset()
+        {
+        }
+
+        public BLTMapRendererOffset(double offsetX, double offsetY)
+        {
+            OffsetX = offsetX;
+            OffsetY = offsetY;
         }
     }
 }

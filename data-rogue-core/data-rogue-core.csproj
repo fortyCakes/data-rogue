@@ -87,6 +87,7 @@
     <Compile Include="Components\AttackDefinition.cs" />
     <Compile Include="Components\Class.cs" />
     <Compile Include="Components\HasClass.cs" />
+    <Compile Include="Components\Moving.cs" />
     <Compile Include="Components\Sound.cs" />
     <Compile Include="Components\Targeting.cs" />
     <Compile Include="Controls\MinimapControl.cs" />
@@ -356,6 +357,7 @@
     <Compile Include="EventSystem\EventData\ActivateSkillEventData.cs" />
     <Compile Include="EventSystem\EventData\ActionEventData.cs" />
     <Compile Include="Systems\ActivitySystem.cs" />
+    <Compile Include="Data\AnimationMovement.cs" />
     <Compile Include="Systems\AnimationSystem.cs" />
     <Compile Include="Systems\EntityCache.cs" />
     <Compile Include="Systems\EntityDataProviders.cs" />
