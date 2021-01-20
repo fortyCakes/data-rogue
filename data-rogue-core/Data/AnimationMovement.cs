@@ -4,7 +4,13 @@ namespace data_rogue_core.Data
 {
     public class AnimationMovement
     {
-        public Vector Vector;
+        public AnimationMovement(VectorDouble vector, int duration)
+        {
+            Vector = vector;
+            TimeLeft = Duration = duration;
+        }
+
+        public VectorDouble Vector;
         public int Duration;
         public int TimeLeft;
     }

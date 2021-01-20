@@ -24,13 +24,6 @@ namespace data_rogue_core.EventSystem.Rules
             if (_systemContainer.EventSystem.Try(EventType.Move, sender, vector))
             {
                 eventData.IsAction = true;
-                if (_systemContainer.PlayerSystem.IsPlayer(sender))
-                {
-                    _systemContainer.AnimationSystem.StartAnimatedMovement(sender, new List<AnimationMovement>
-                    {
-                        new AnimationMovement{ Duration = 500, TimeLeft = 500, Vector = vector }
-                    });
-                }
             }
 
             return true;

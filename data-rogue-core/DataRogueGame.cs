@@ -104,6 +104,8 @@ namespace data_rogue_core
             if (!_leaving)
             {
                 SystemContainer.AnimationSystem.Tick();
+                SystemContainer.AnimatedMovementSystem.Tick();
+                SystemContainer.ParticleSystem.Tick();
 
                 Stack<IActivity> renderStack = new Stack<IActivity>();
 
@@ -136,7 +138,7 @@ namespace data_rogue_core
 
                 SystemContainer.ControlSystem.HandleInput(keyPress, IOSystem.GetMouseData());
 
-                if (!SystemContainer.AnimationSystem.IsBlockingAnimationPlaying())
+                if (!SystemContainer.AnimatedMovementSystem.IsBlockingAnimationPlaying())
                 {
                     var throttle = 1000;
                     while (

@@ -27,10 +27,12 @@ namespace data_rogue_core.Systems.Interfaces
         IActivitySystem ActivitySystem { get; set; }
         IRendererSystem RendererSystem { get; set; }
         IAnimationSystem AnimationSystem { get; set; }
+        IAnimatedMovementSystem AnimatedMovementSystem { get; set; }
         IMapSystem MapSystem { get; set; }
         ISaveSystem SaveSystem {get;set;}
         IStatSystem StatSystem { get; }
         ISoundSystem SoundSystem { get; }
+        IParticleSystem ParticleSystem { get; }
 
         void Verify();
         void CreateSystems(string rngSeed);

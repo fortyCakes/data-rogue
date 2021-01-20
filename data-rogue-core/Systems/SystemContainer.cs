@@ -35,7 +35,9 @@ namespace data_rogue_core.Systems
         public IStatSystem StatSystem { get; set; }
         public ISaveSystem SaveSystem { get; set; }
         public IAnimationSystem AnimationSystem { get; set; }
+        public IAnimatedMovementSystem AnimatedMovementSystem { get; set; }
         public ISoundSystem SoundSystem { get; set; }
+        public IParticleSystem ParticleSystem { get; set; }
 
         public string Seed { get; set; }
 
@@ -106,6 +108,12 @@ namespace data_rogue_core.Systems
             AnimationSystem = new AnimationSystem(EntityEngine, new EncapsulatedStopwatch(), AnimationRandom);
             EntityEngine.Register(AnimationSystem);
 
+            AnimatedMovementSystem = new AnimatedMovementSystem(EntityEngine, new EncapsulatedStopwatch());
+            EntityEngine.Register(AnimatedMovementSystem);
+
+            ParticleSystem = new ParticleSystem(AnimationSystem, EntityEngine);
+            EntityEngine.Register(ParticleSystem);
+
             SoundSystem = new SoundSystem();
             EntityEngine.Register(SoundSystem);
 
@@ -154,6 +162,7 @@ namespace data_rogue_core.Systems
             Check(SaveSystem, "SaveSystem", msg, ref valid);
             Check(StatSystem, "StatSystem", msg, ref valid);
             Check(SoundSystem, "SoundSystem", msg, ref valid);
+            Check(ParticleSystem, "ParticleSystem", msg, ref valid);
 
             if (!valid)
                 throw new ContainerNotValidException(msg.ToString());

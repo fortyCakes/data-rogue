@@ -34,6 +34,9 @@ namespace data_rogue_core.IOSystems.BLTTiles
             var currentMap = systemContainer.MapSystem.MapCollection[cameraPosition.Key];
             var cameraX = cameraPosition.X;
             var cameraY = cameraPosition.Y;
+            var playerMoving = systemContainer.PlayerSystem.Player.TryGet<Moving>();
+            var playerMovingOffsetX = playerMoving == null ? 0 : -playerMoving.OffsetX;
+            var playerMovingOffsetY = playerMoving == null ? 0 : -playerMoving.OffsetY;
 
             var renderWidth = mapConfiguration.Position.Width / BLTTilesIOSystem.TILE_SPACING;
             var renderHeight = mapConfiguration.Position.Height / BLTTilesIOSystem.TILE_SPACING;
@@ -44,6 +47,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             var tilesTracker = new SpriteAppearance[renderWidth + 2, renderHeight + 2, 2];
             var frameTracker = new AnimationFrame[renderWidth + 2, renderHeight + 2, 2];
             var offsetTracker = new BLTMapRendererOffset[renderWidth + 2, renderHeight + 2, 2];
+            var particlesTracker = new List<IEntity>[renderWidth + 2, renderHeight + 2];
             var renderTracker = new bool[renderWidth + 2, renderHeight + 2];
             var fovTracker = new bool[renderWidth + 2, renderHeight + 2];
 
@@ -61,10 +65,18 @@ namespace data_rogue_core.IOSystems.BLTTiles
                     fovTracker[x + 1, y + 1] = isInFov;
 
                     var entities = systemContainer.PositionSystem.EntitiesAt(coordinate);
+
+                    var particles = entities.Where(e => e.Has<TextParticle>()).ToList();
+                    foreach(var particle in particles)
+                    {
+                        entities.Remove(particle);
+                    }
+
                     var mapCell = entities.Last();
                     var topEntity = entities
                         .OrderByDescending(a => a.Get<Appearance>().ZOrder)
                         .FirstOrDefault(e => isInFov || IsRemembered(currentMap, coordinate, e));
+                    
 
                     if (topEntity == mapCell) topEntity = null;
 
@@ -83,11 +95,11 @@ namespace data_rogue_core.IOSystems.BLTTiles
                     var movingCell = mapCell.TryGet<Moving>();
                     if (movingCell != null)
                     {
-                        offsetTracker[x + 1, y + 1, 0] = new BLTMapRendererOffset(movingCell.OffsetX, movingCell.OffsetY);
+                        offsetTracker[x + 1, y + 1, 0] = new BLTMapRendererOffset(movingCell.OffsetX + playerMovingOffsetX, movingCell.OffsetY + playerMovingOffsetY);
                     }
                     else
                     {
-                        offsetTracker[x + 1, y + 1, 0] = new BLTMapRendererOffset();
+                        offsetTracker[x + 1, y + 1, 0] = new BLTMapRendererOffset(playerMovingOffsetX, playerMovingOffsetY);
                     }
 
                     if (topEntity != null)
@@ -116,13 +128,15 @@ namespace data_rogue_core.IOSystems.BLTTiles
                         var moving = topEntity.TryGet<Moving>();
                         if (moving != null)
                         {
-                            offsetTracker[x + 1, y + 1, 1] = new BLTMapRendererOffset(moving.OffsetX, moving.OffsetY);
+                            offsetTracker[x + 1, y + 1, 1] = new BLTMapRendererOffset(moving.OffsetX + playerMovingOffsetX, moving.OffsetY + playerMovingOffsetY);
                         }
                         else
                         {
-                            offsetTracker[x + 1, y + 1, 1] = new BLTMapRendererOffset();
+                            offsetTracker[x + 1, y + 1, 1] = new BLTMapRendererOffset(playerMovingOffsetX, playerMovingOffsetY);
                         }
                     }
+
+                    particlesTracker[x + 1, y + 1] = particles.ToList();
                 }
             }
 
@@ -134,15 +148,49 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
             RenderMapSprites(spriteManager, mapConfiguration, renderTracker, renderWidth, renderHeight, tilesTracker, frameTracker, offsetTracker, 1, true);
 
-            RenderMapShade(spriteManager, renderTracker, fovTracker, renderWidth, renderHeight, mapConfiguration);
+            RenderMapParticles(systemContainer, renderTracker, fovTracker, particlesTracker, renderWidth, renderHeight, mapConfiguration);
+
+            RenderMapShade(spriteManager, renderTracker, fovTracker, renderWidth, renderHeight, offsetTracker, mapConfiguration);
         }
 
-        private void RenderMapShade(ISpriteManager spriteManager, bool[,] renderTracker, bool[,] fovTracker, int renderWidth, int renderHeight, IDataRogueControl mapConfiguration)
+        private void RenderMapParticles(ISystemContainer systemContainer, bool[,] renderTracker, bool[,] fovTracker, List<IEntity>[,] particlesTracker, int renderWidth, int renderHeight, IDataRogueControl mapConfiguration)
+        {
+            BLT.Layer(BLTLayers.MapParticles);
+            BLT.Font("text");
+
+            for (int x = 0; x < renderWidth; x++)
+            {
+                for (int y = 0; y < renderHeight; y++)
+                {
+                    if (renderTracker[x + 1, y + 1] && fovTracker[x + 1, y + 1] && particlesTracker[x+1, y+1].Any())
+                    {
+                        foreach(var particle in particlesTracker[x+1, y+1])
+                        {
+                            var textParticle = particle.Get<TextParticle>();
+                            BLT.Color(textParticle.Color);
+
+                            var moving = particle.TryGet<Moving>();
+                            var offsetX = (int)Math.Floor((moving?.OffsetX ?? 0) * BLTTilesIOSystem.TILE_SPACING);
+                            var offsetY = (int)Math.Floor((moving?.OffsetY ?? 0) * BLTTilesIOSystem.TILE_SPACING);
+
+                            BLT.Print(
+                                (int)(mapConfiguration.Position.Left + x * BLTTilesIOSystem.TILE_SPACING + offsetX),
+                                (int)(mapConfiguration.Position.Top + y * BLTTilesIOSystem.TILE_SPACING + offsetY),
+                                textParticle.Text);
+
+                        }
+                    }
+                }
+            }
+        }
+
+        private void RenderMapShade(ISpriteManager spriteManager, bool[,] renderTracker, bool[,] fovTracker, int renderWidth, int renderHeight, BLTMapRendererOffset[,,] offsetTracker, IDataRogueControl mapConfiguration)
         {
             var shadeSprite = spriteManager.Get("shade");
 
             BLT.Layer(BLTLayers.MapShade);
             BLT.Font("");
+            BLT.Color(Color.White);
 
             for (int x = 0; x < renderWidth; x++)
             {
@@ -169,7 +217,14 @@ namespace data_rogue_core.IOSystems.BLTTiles
                             if (rightConnect) directions |= TileDirections.Right;
 
                             var sprite = shadeSprite.Tile(directions);
-                            BLT.Put(mapConfiguration.Position.Left + x * BLTTilesIOSystem.TILE_SPACING, mapConfiguration.Position.Top + y * BLTTilesIOSystem.TILE_SPACING, sprite);
+
+                            var offsetX = (int)Math.Floor(offsetTracker[x + 1, y + 1, 0].OffsetX * BLTTilesIOSystem.TILE_SPACING);
+                            var offsetY = (int)Math.Floor(offsetTracker[x + 1, y + 1, 0].OffsetY * BLTTilesIOSystem.TILE_SPACING);
+
+                            BLT.Put(
+                                mapConfiguration.Position.Left + x * BLTTilesIOSystem.TILE_SPACING + offsetX,
+                                mapConfiguration.Position.Top + y * BLTTilesIOSystem.TILE_SPACING + offsetY, 
+                                sprite);
                         }
                     }
                 }
@@ -192,6 +247,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             }
 
             BLT.Font("");
+            BLT.Color(Color.White);
 
             for (int x = 0; x < renderWidth; x++)
             {

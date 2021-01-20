@@ -62,7 +62,8 @@ namespace data_rogue_one
                     typeof(PlayerStepMakesSoundRule),
                     typeof(HitMakesSoundRule),
                     typeof(MissMakesSoundRule),
-                    typeof(AttackAnimationRule)
+                    typeof(AttackAnimationRule),
+                    typeof(DamageNumbersPopOutRule)
                 };
 
                 list.AddRange(ApplyActionRule.AllActionRules);

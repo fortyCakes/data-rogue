@@ -71,6 +71,12 @@
             return !(thisVector == thatVector);
         }
 
+        public static Vector operator /(Vector thisVector, int divideBy)
+        {
+            if (ReferenceEquals(thisVector, null)) return null;
+            return new Vector(thisVector.X / divideBy, thisVector.Y / divideBy);
+        }
+
         public Vector Transpose()
         {
             return new Vector(Y, X);
