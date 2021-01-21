@@ -10,11 +10,12 @@ using System.Drawing;
 
 namespace data_rogue_core.EventSystem.Rules
 {
-    public class DamageNumbersPopOutRule : IEventRule
+    public class DamageSplatParticlesRule : IEventRule
     {
+        private const int NUM_SPLATS = 15;
         private ISystemContainer _systemContainer;
 
-        public DamageNumbersPopOutRule(ISystemContainer systemContainer)
+        public DamageSplatParticlesRule(ISystemContainer systemContainer)
         {
             _systemContainer = systemContainer;
         }
@@ -31,13 +32,25 @@ namespace data_rogue_core.EventSystem.Rules
             var location = sender.TryGet<Position>();
             var data = eventData as DamageEventData;
 
-            _systemContainer.ParticleSystem.CreateTextParticle(location.MapCoordinate, new List<AnimationMovement> {
-                new AnimationMovement(new VectorDouble(0.5, 0.5), 1),
-                new AnimationMovement(new VectorDouble(0, -1),1000),
-                new AnimationMovement(new VectorDouble(0, 0),250)
-               }, data.Damage.ToString(), Color.Red);
+            for (int i = 0; i < NUM_SPLATS; i++)
+            {
+                CreateSplat(location);
+            }
+          
 
             return true;
+        }
+
+        private void CreateSplat(Position location)
+        {
+            var theta = Math.PI * _systemContainer.Random.ZeroToOne() * 2;
+            int randomTime = (int)Math.Floor(500 * _systemContainer.Random.ZeroToOne());
+
+            _systemContainer.ParticleSystem.CreateTextParticle(location.MapCoordinate, new List<AnimationMovement> {
+                new AnimationMovement(new VectorDouble(0.5, 0.5), 1),
+                new AnimationMovement(new VectorDouble(Math.Sin(theta), Math.Cos(theta)), randomTime),
+                new AnimationMovement(new VectorDouble(0,0), 250)
+               }, ".", Color.DarkRed);
         }
     }
 }

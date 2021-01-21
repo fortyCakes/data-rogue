@@ -13,6 +13,7 @@ namespace data_rogue_core
 
         bool PercentageChance(double percent);
         T PickOneFrom<T>(params T[] items);
+        double ZeroToOne();
     }
 
     public class RNG : IRandom
@@ -62,6 +63,11 @@ namespace data_rogue_core
 
             var index = Between(1, max) - 1;
             return items[index];
+        }
+
+        public double ZeroToOne()
+        {
+            return _random.NextDouble();
         }
     }
 }

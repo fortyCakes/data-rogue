@@ -112,6 +112,7 @@
     <Compile Include="EventSystem\Rules\Actions\WaitAction.cs" />
     <Compile Include="EventSystem\Rules\AttackAnimationRule.cs" />
     <Compile Include="EventSystem\Rules\DamageNumbersPopOutRule.cs" />
+    <Compile Include="EventSystem\Rules\DamageSplatParticlesRule.cs" />
     <Compile Include="EventSystem\Rules\HitMakesSoundRule.cs" />
     <Compile Include="EventSystem\Rules\MissMakesSoundRule.cs" />
     <Compile Include="EventSystem\Rules\PlayerStepMakesSoundRule.cs" />

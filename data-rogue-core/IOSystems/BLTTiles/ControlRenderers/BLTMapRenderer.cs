@@ -198,10 +198,13 @@ namespace data_rogue_core.IOSystems.BLTTiles
                 {
                     if (renderTracker[x + 1, y + 1])
                     {
+                        var offsetX = (int)Math.Floor(offsetTracker[x + 1, y + 1, 0].OffsetX * BLTTilesIOSystem.TILE_SPACING);
+                        var offsetY = (int)Math.Floor(offsetTracker[x + 1, y + 1, 0].OffsetY * BLTTilesIOSystem.TILE_SPACING);
+
                         if (!fovTracker[x + 1, y + 1])
                         {
                             var sprite = shadeSprite.Tile(TileDirections.None);
-                            BLT.Put(mapConfiguration.Position.Left + x * BLTTilesIOSystem.TILE_SPACING, mapConfiguration.Position.Top + y * BLTTilesIOSystem.TILE_SPACING, sprite);
+                            BLT.Put(mapConfiguration.Position.Left + x * BLTTilesIOSystem.TILE_SPACING + offsetX, mapConfiguration.Position.Top + y * BLTTilesIOSystem.TILE_SPACING + offsetY, sprite);
                         }
                         else
                         {
@@ -218,8 +221,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
                             var sprite = shadeSprite.Tile(directions);
 
-                            var offsetX = (int)Math.Floor(offsetTracker[x + 1, y + 1, 0].OffsetX * BLTTilesIOSystem.TILE_SPACING);
-                            var offsetY = (int)Math.Floor(offsetTracker[x + 1, y + 1, 0].OffsetY * BLTTilesIOSystem.TILE_SPACING);
+                            
 
                             BLT.Put(
                                 mapConfiguration.Position.Left + x * BLTTilesIOSystem.TILE_SPACING + offsetX,
