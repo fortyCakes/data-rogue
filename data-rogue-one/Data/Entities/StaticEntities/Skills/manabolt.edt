@@ -3,13 +3,14 @@
 Name: Skill:ManaBolt
 Singleton: true
 [Skill]
-Cost: 80
+Cost: 10
 ScriptName: Script: Mana Bolt
 [Description]
 Name: Mana Bolt
 [Targeting]
 Range: 10
 CellsHit: 0,0
+PathToTarget: true
 [AttackDefinition]
 AttackClass: Bolt
 SpendTime: false

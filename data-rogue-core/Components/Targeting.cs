@@ -19,5 +19,7 @@ namespace data_rogue_core.Components
         public VectorList ValidVectors = new VectorList();
 
         public bool PathToTarget;
+
+        public bool HitCellsOnPath;
     }
 }

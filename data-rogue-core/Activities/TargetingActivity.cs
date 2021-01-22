@@ -41,7 +41,7 @@ namespace data_rogue_core.Activities
             {
                 _currentTarget = value;
 
-                if (TargetingData.PathToTarget)
+                if (TargetingData.HitCellsOnPath)
                 {
                     if (CurrentTarget != null && TargetFrom != null)
                     {

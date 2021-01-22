@@ -9,3 +9,6 @@ Detail: A class who focuses on magical combat. They start with the Mana Bolt ski
 [KnownSkill]
 Skill: Skill:ManaBolt
 Order: 1
+[KnownSkill]
+Skill: Skill:IceBlast
+Order: 2

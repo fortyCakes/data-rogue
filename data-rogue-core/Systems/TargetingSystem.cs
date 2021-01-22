@@ -80,6 +80,8 @@ namespace data_rogue_core.Systems
 
                 if (range > 1)
                 {
+                    List<MapCoordinate> cellsWithPathToTarget = new List<MapCoordinate>();
+
                     if (data.PathToTarget)
                     {
                         var map = _systemContainer.MapSystem.MapCollection[playerPosition.Key];
@@ -91,17 +93,21 @@ namespace data_rogue_core.Systems
                             return !physicals.Any(p => p.Passable == false);
                         };
 
-                        var cellsWithPathTo = map.FovFrom(_systemContainer.PositionSystem, playerPosition, data.Range, passableTest);
+                        cellsWithPathToTarget = map.FovFrom(_systemContainer.PositionSystem, playerPosition, data.Range + 2, passableTest);
                     }
 
                     for (int x = -range; x <= range; x++)
+                    {
                         for (int y = -range; y <= range; y++)
                         {
                             if (x * x + y * y <= range * range && (data.TargetOrigin || x != 0 || y != 0))
                             {
-                                targetableCells.Add(playerPosition + new Vector(x, y));
+                                var coordinate = playerPosition + new Vector(x, y);
+                                if (!data.PathToTarget || cellsWithPathToTarget.Contains(coordinate))
+                                targetableCells.Add(coordinate);
                             }
                         }
+                    }
                 }
             }
 

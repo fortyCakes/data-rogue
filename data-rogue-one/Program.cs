@@ -28,7 +28,10 @@ namespace data_rogue_one
 
         private static BLTTilesIOSystem GetBLTTilesIOSystem()
         {
-            return new BLTTilesIOSystem(BLTTilesIOSystem.DefaultConfiguration);
+            var config = BLTTilesIOSystem.DefaultConfiguration;
+            config.WindowTitle = "Data Rogue One";
+
+            return new BLTTilesIOSystem(config);
         }
 
         private static RLNetConsoleIOSystem GetRLNetIOSystem()
