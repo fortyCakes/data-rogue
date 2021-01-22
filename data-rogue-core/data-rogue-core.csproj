@@ -374,7 +374,6 @@
     <Compile Include="Systems\Interfaces\ISaveSystem.cs" />
     <Compile Include="Systems\Interfaces\ISoundSystem.cs" />
     <Compile Include="Systems\Interfaces\IStatSystem.cs" />
-    <Compile Include="Systems\Interfaces\TargetingData.cs" />
     <Compile Include="Systems\ParticleSystem.cs" />
     <Compile Include="Systems\SoundSystem.cs" />
     <Compile Include="Utils\IStopwatch.cs" />

@@ -18,7 +18,7 @@ namespace data_rogue_core.UnitTests.Activities
     [TestFixture]
     public class TargetingActivityTests
     {
-        private TargetingData _targetingData;
+        private Targeting _targetingData;
         private TargetingActivity _targetingActivity;
         private bool _callbackHappened;
         private MapCoordinate _callbackTarget;
@@ -26,6 +26,7 @@ namespace data_rogue_core.UnitTests.Activities
         private ActivityStack _activityStack;
         private IActivitySystem _activitySystem;
         private IPositionSystem _positionSystem;
+        private ITargetingSystem _targetingSystem;
         private ISystemContainer _systemContainer;
         private IOSystemConfiguration _ioConfig;
 
@@ -46,25 +47,35 @@ namespace data_rogue_core.UnitTests.Activities
             _activitySystem = Substitute.For<IActivitySystem>();
             _activitySystem.ActivityStack.Returns(_activityStack);
             _positionSystem = Substitute.For<IPositionSystem>();
+            _targetingSystem = Substitute.For<ITargetingSystem>();
             _systemContainer = Substitute.For<ISystemContainer>();
             _systemContainer.ActivitySystem.Returns(_activitySystem);
             _systemContainer.PositionSystem.Returns(_positionSystem);
             _systemContainer.RendererSystem.Returns(rendererSystem);
+            _systemContainer.TargetingSystem.Returns(_targetingSystem);
+
+            SetTargetableCells(new MapCoordinate("Map", 1, 0));
 
             _targetingActivity = new TargetingActivity(_targetingData, _callback, _systemContainer, new MapCoordinate("Map", 0, 0), _ioConfig);
             _activityStack.Push(_targetingActivity);
         }
 
-        private TargetingData GetTargetingData()
+        private Targeting GetTargetingData()
         {
-            return new TargetingData
+            return new Targeting
             {
-                CellsHit = new List<Vector> { new Vector(0, 0) },
+                CellsHit = new VectorList { new Vector(1, 0) },
                 Friendly = false,
                 MoveToCell = false,
                 Range = 4,
                 ValidVectors = null
             };
+        }
+
+        private void SetTargetableCells(params MapCoordinate[] cells)
+        {
+            _targetingSystem.TargetableCellsFrom(Arg.Any<Targeting>(), Arg.Any<MapCoordinate>()).ReturnsForAnyArgs(new HashSet<MapCoordinate> ( cells ));
+            _targetingActivity = new TargetingActivity(_targetingData, _callback, _systemContainer, new MapCoordinate("Map", 0, 0), _ioConfig);
         }
 
         private void _callback(MapCoordinate obj)
@@ -90,7 +101,7 @@ namespace data_rogue_core.UnitTests.Activities
         }
 
         [Test]
-        public void Complete_WithDefaultTarget_ReturnsTargetNextToOrigin()
+        public void Complete_WithDefaultTarget_ReturnsDefaultTarget()
         {
             var entity = Substitute.For<IEntity>();
             var entityList = new List<IEntity> { entity };
@@ -118,6 +129,8 @@ namespace data_rogue_core.UnitTests.Activities
         [Test]
         public void HandleAction_Move_CurrentTarget_MovesFromCurrentTarget()
         {
+            SetTargetableCells(new MapCoordinate("Map", 1, 0), new MapCoordinate("Map", 2, 0));
+
             _targetingActivity.CurrentTarget = new MapCoordinate("Map", 1, 0);
 
            var action = new ActionEventData { Action = ActionType.Move, Parameters = "1,0" };
@@ -191,6 +204,7 @@ namespace data_rogue_core.UnitTests.Activities
         [Test]
         public void HandleMouse_ActiveInTargetArea_SetsTarget()
         {
+            SetTargetableCells(new MapCoordinate("Map", 1, 0), new MapCoordinate("Map", 2, 2));
             var mouse = new MouseData() { MouseActive = true };
 
             _renderer
@@ -206,6 +220,7 @@ namespace data_rogue_core.UnitTests.Activities
         [Test]
         public void HandleMouse_LeftClick_CompletesActivity()
         {
+            SetTargetableCells(new MapCoordinate("Map", 1, 0), new MapCoordinate("Map", 2, 2));
             var mouse = new MouseData() { MouseActive = true, IsLeftClick = true };
 
             _renderer
@@ -222,7 +237,7 @@ namespace data_rogue_core.UnitTests.Activities
         public void IsTargeted_CurrentTarget_ReturnsTrue()
         {
             _targetingActivity.CurrentTarget = new MapCoordinate("Map", 0, 0);
-            _targetingActivity.TargetingData.CellsHit = new List<Vector>{new Vector(0,0)};
+            _targetingActivity.TargetingData.CellsHit = new VectorList{new Vector(0,0)};
 
             _targetingActivity.GetTargetingStatus(new MapCoordinate("Map", 0, 0)).Should().Be(TargetingStatus.Targeted);
         }
@@ -231,7 +246,7 @@ namespace data_rogue_core.UnitTests.Activities
         public void IsTargeted_NotCurrentTarget_ReturnsFalse()
         {
             _targetingActivity.CurrentTarget = new MapCoordinate("Map", 0, 0);
-            _targetingActivity.TargetingData.CellsHit = new List<Vector> { new Vector(0, 0) };
+            _targetingActivity.TargetingData.CellsHit = new VectorList { new Vector(0, 0) };
 
             _targetingActivity.GetTargetingStatus(new MapCoordinate("Map", 15, 0)).Should().Be(TargetingStatus.NotTargeted);
         }
@@ -240,7 +255,7 @@ namespace data_rogue_core.UnitTests.Activities
         public void IsTargeted_InCellsHit_ReturnsTrue()
         {
             _targetingActivity.CurrentTarget = new MapCoordinate("Map", 0, 0);
-            _targetingActivity.TargetingData.CellsHit = new List<Vector> { new Vector(0, 0), new Vector(1, 1) };
+            _targetingActivity.TargetingData.CellsHit = new VectorList { new Vector(0, 0), new Vector(1, 1) };
 
             _targetingActivity.GetTargetingStatus(new MapCoordinate("Map", 1, 1)).Should().Be(TargetingStatus.Targeted);
         }
@@ -259,7 +274,7 @@ namespace data_rogue_core.UnitTests.Activities
 
             _targetingActivity.TargetingData.PathToTarget = true;
             _targetingActivity.CurrentTarget = new MapCoordinate("Map", 5, -5);
-            _targetingActivity.TargetingData.CellsHit = new List<Vector> { new Vector(0, 0) };
+            _targetingActivity.TargetingData.CellsHit = new VectorList { new Vector(0, 0) };
 
             _targetingActivity.GetTargetingStatus(new MapCoordinate("Map", 1, -1)).Should().Be(TargetingStatus.Targeted);
         }

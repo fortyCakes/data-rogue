@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Systems;
 
@@ -23,7 +24,7 @@ namespace data_rogue_core.Maps
         IEntity CellAt(MapCoordinate coordinate);
         bool CellExists(int x, int y);
         void ClearCell(MapCoordinate coordinate);
-        List<MapCoordinate> FovFrom(IPositionSystem positionSystem, MapCoordinate mapCoordinate, int range);
+        List<MapCoordinate> FovFrom(IPositionSystem positionSystem, MapCoordinate mapCoordinate, int range, Func<Vector, bool> transparentTest = null);
         void RemoveCell(int x, int y);
         void RemoveCell(MapCoordinate mapCoordinate);
         void RemoveCellsInRange(int x1, int x2, int y1, int y2);

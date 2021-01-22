@@ -8,7 +8,7 @@ namespace data_rogue_core.Components
 
         public bool MoveToCell;
 
-        public VectorList CellsHit;
+        public VectorList CellsHit = new VectorList();
 
         public bool Rotatable;
 
@@ -16,7 +16,7 @@ namespace data_rogue_core.Components
 
         public bool Friendly;
 
-        public VectorList ValidVectors;
+        public VectorList ValidVectors = new VectorList();
 
         public bool PathToTarget;
     }

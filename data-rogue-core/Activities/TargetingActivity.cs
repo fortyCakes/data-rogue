@@ -26,12 +26,13 @@ namespace data_rogue_core.Activities
         private readonly IActivitySystem _activitySystem;
         
         private IPositionSystem _positionSystem;
+        private ITargetingSystem _targetingSystem;
         private HashSet<MapCoordinate> _targetableCells;
         private IOSystemConfiguration _ioSystemConfiguration;
         private readonly ISystemContainer _systemContainer;
         private MapCoordinate _currentTarget;
         private IEnumerable<MapCoordinate> _path = new List<MapCoordinate>();
-        public TargetingData TargetingData { get; set; }
+        public Targeting TargetingData { get; set; }
 
         public MapCoordinate CurrentTarget
         {
@@ -57,18 +58,19 @@ namespace data_rogue_core.Activities
         public Action<MapCoordinate> Callback { get; set; }
         public MapCoordinate TargetFrom { get; internal set; }
 
-        public TargetingActivity(TargetingData targetingData, Action<MapCoordinate> callback, ISystemContainer systemContainer, MapCoordinate targetFrom, IOSystemConfiguration ioSystemConfiguration)
+        public TargetingActivity(Targeting targetingData, Action<MapCoordinate> callback, ISystemContainer systemContainer, MapCoordinate targetFrom, IOSystemConfiguration ioSystemConfiguration)
         {
             _activitySystem = systemContainer.ActivitySystem;
             _systemContainer = systemContainer;
             _positionSystem = systemContainer.PositionSystem;
+            _targetingSystem = systemContainer.TargetingSystem;
 
             TargetingData = targetingData;
             CurrentTarget = null;
             Callback = callback;
             TargetFrom = targetFrom;
 
-            _targetableCells = targetingData.TargetableCellsFrom(TargetFrom);
+            _targetableCells = _targetingSystem.TargetableCellsFrom(TargetingData, TargetFrom);
 
             PickInitialTarget();
             _ioSystemConfiguration = ioSystemConfiguration;

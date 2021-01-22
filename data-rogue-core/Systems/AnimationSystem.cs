@@ -13,15 +13,13 @@ namespace data_rogue_core.Systems
     {
         private IStopwatch _stopwatch;
         private readonly IRandom _random;
-        private readonly IEntityEngine _entityEngine;
         private long _lastKnownTime;
         public const int TICK_LENGTH = 33;
 
         private bool _blockingAnimationPlaying = false;
 
-        public AnimationSystem(IEntityEngine engine, IStopwatch stopwatch, IRandom random)
+        public AnimationSystem( IStopwatch stopwatch, IRandom random)
         {
-            _entityEngine = engine;
             _stopwatch = stopwatch;
             _random = random;
             _lastKnownTime = _stopwatch.ElapsedMilliseconds;
