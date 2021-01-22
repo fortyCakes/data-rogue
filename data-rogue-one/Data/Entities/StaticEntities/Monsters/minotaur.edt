@@ -13,6 +13,7 @@ ZOrder: 10
 [SpriteAppearance]
 Bottom: minotaur
 [Animated]
+[Animation]
 [Position]
 [Physical]
 Passable: false

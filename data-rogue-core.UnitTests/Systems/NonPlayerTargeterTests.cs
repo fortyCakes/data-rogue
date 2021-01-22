@@ -22,9 +22,10 @@ namespace data_rogue_core.UnitTests.Systems
         private ISystemContainer _systemContainer;
         private IPositionSystem _positionSystem;
         private IEntity _sender;
-        private TargetingData _data;
+        private Targeting _data;
         private IEntity _player;
         private IPlayerSystem _playerSystem;
+        private ITargetingSystem _targetingSystem;
         private IMapSystem _mapSystem;
         private MapCollection _mapCollection;
         private IMap _map;
@@ -42,6 +43,7 @@ namespace data_rogue_core.UnitTests.Systems
             _systemContainer = Substitute.For<ISystemContainer>();
             _positionSystem = Substitute.For<IPositionSystem>();
             _playerSystem = Substitute.For<IPlayerSystem>();
+            _targetingSystem = Substitute.For<ITargetingSystem>();
             _mapSystem = Substitute.For<IMapSystem>();
             _mapCollection = new MapCollection();
             _map = Substitute.For<IMap>();
@@ -49,8 +51,11 @@ namespace data_rogue_core.UnitTests.Systems
             _systemContainer.PlayerSystem.ReturnsForAnyArgs(_playerSystem);
             _systemContainer.MapSystem.ReturnsForAnyArgs(_mapSystem);
             _systemContainer.Random.ReturnsForAnyArgs(new RNG("test seed"));
+            _systemContainer.TargetingSystem.ReturnsForAnyArgs(_targetingSystem);
             _mapSystem.MapCollection.ReturnsForAnyArgs(_mapCollection);
             _mapCollection[new MapKey("test")] = _map;
+
+            SetTargetableCells(new MapCoordinate(MAP_KEY, 0, 0));
             
             _playerSystem.Player.ReturnsForAnyArgs(_player);
 
@@ -69,14 +74,19 @@ namespace data_rogue_core.UnitTests.Systems
             SetPosition(_sender, _senderLocation);
         }
 
+        private void SetTargetableCells(params MapCoordinate[] cells)
+        {
+            _targetingSystem.TargetableCellsFrom(Arg.Any<Targeting>(), Arg.Any<MapCoordinate>()).ReturnsForAnyArgs(new HashSet<MapCoordinate>(cells));
+        }
+
         private void FovIs(params MapCoordinate[] coordinates)
         {
             _map.FovFrom(Arg.Any<IPositionSystem>(), Arg.Any<MapCoordinate>(), Arg.Any<int>()).ReturnsForAnyArgs(coordinates.ToList());
         }
 
-        private TargetingData CreateTargetingData()
+        private Targeting CreateTargetingData()
         {
-            return new TargetingData();
+            return new Targeting();
         }
 
         private static IEntity CreateSkillUser()
@@ -108,6 +118,11 @@ namespace data_rogue_core.UnitTests.Systems
         [Test]
         public void NonPlayerTargeter_GetTargetForNonPlayer_HostileAndPlayerInRange_TargetsPlayer()
         {
+            SetTargetableCells(
+                new MapCoordinate(MAP_KEY, 0, 0),
+                new MapCoordinate(MAP_KEY, 0, 2)
+            );
+
             var playerLocation = new MapCoordinate(MAP_KEY, 0, 2);
             SetPosition(_player, playerLocation);
             _data.Range = 5;
@@ -121,6 +136,11 @@ namespace data_rogue_core.UnitTests.Systems
         [Test]
         public void NonPlayerTargeter_GetTargetForNonPlayer_MeleeRangeSkill_HostileAndPlayerInMelee_TargetsPlayer()
         {
+            SetTargetableCells(
+                new MapCoordinate(MAP_KEY, 0, 0),
+                new MapCoordinate(MAP_KEY, 0, 1)
+            );
+
             var playerLocation = new MapCoordinate(MAP_KEY, 0, 1);
             SetPosition(_player, playerLocation);
             _data.Range = 0;

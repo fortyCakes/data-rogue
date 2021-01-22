@@ -13,6 +13,7 @@ ZOrder: 10
 [SpriteAppearance]
 Bottom: green_slime
 [Animated]
+[Animation]
 FrameTicks: 25
 [Position]
 [Physical]

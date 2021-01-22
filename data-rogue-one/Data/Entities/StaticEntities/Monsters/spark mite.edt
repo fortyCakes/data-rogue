@@ -13,6 +13,7 @@ ZOrder: 10
 [SpriteAppearance]
 Bottom: mite
 [Animated]
+[Animation]
 FrameTicks: 5
 [Position]
 [Physical]

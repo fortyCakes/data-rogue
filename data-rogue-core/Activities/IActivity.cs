@@ -13,6 +13,7 @@ namespace data_rogue_core.Activities
     {
         ActivityType Type { get; }
         bool RendersEntireSpace { get; }
+        bool AcceptsInput { get; }
 
         void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard);
         void HandleMouse(ISystemContainer systemContainer, MouseData mouse);

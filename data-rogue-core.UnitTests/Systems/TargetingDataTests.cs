@@ -3,21 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using data_rogue_core.Components;
 using data_rogue_core.Maps;
+using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
 using FluentAssertions;
+using NSubstitute;
 using NUnit.Framework;
 
 namespace data_rogue_core.UnitTests.Systems
 {
     [TestFixture]
-    public class TargetingDataTests
+    public class TargetingSystemTests
     {
+        public TargetingSystem TargetingSystem { get; private set; }
+
         private MapCoordinate testCoordinate;
 
         [SetUp]
         public void SetUp()
         {
+            var systemContainer = Substitute.For<ISystemContainer>();
+
+            TargetingSystem = new TargetingSystem(systemContainer);
             testCoordinate = new MapCoordinate("key", 0, 0);
         }
 
@@ -26,7 +34,7 @@ namespace data_rogue_core.UnitTests.Systems
         {
             var targetingData = SetUpTestTargetingData(range: 0);
 
-            var results = targetingData.TargetableCellsFrom(testCoordinate);
+            var results = TargetingSystem.TargetableCellsFrom(targetingData, testCoordinate);
 
             var expected = new List<MapCoordinate>
             {
@@ -44,7 +52,7 @@ namespace data_rogue_core.UnitTests.Systems
         {
             var targetingData = SetUpTestTargetingData(range: 1);
 
-            var results = targetingData.TargetableCellsFrom(testCoordinate);
+            var results = TargetingSystem.TargetableCellsFrom(targetingData, testCoordinate);
 
             var expected = new List<MapCoordinate>
             {
@@ -66,7 +74,7 @@ namespace data_rogue_core.UnitTests.Systems
         {
             var targetingData = SetUpTestTargetingData(range: 2);
 
-            var results = targetingData.TargetableCellsFrom(testCoordinate);
+            var results = TargetingSystem.TargetableCellsFrom(targetingData, testCoordinate);
 
             var expected = new List<MapCoordinate>
             {
@@ -92,10 +100,10 @@ namespace data_rogue_core.UnitTests.Systems
             results.Should().BeEquivalentTo(expected);
         }
 
-        private static TargetingData SetUpTestTargetingData(int range, List<Vector> cellsHit = null, bool friendly = false, bool moveToCell = false, bool rotatable = false, List<Vector> validVectors = null, bool targetOrigin = false)
+        private static Targeting SetUpTestTargetingData(int range, VectorList cellsHit = null, bool friendly = false, bool moveToCell = false, bool rotatable = false, VectorList validVectors = null, bool targetOrigin = false)
         {
-            if (cellsHit == null) cellsHit = new List<Vector> {new Vector(0, 0)};
-            return new TargetingData { Range = range, CellsHit = cellsHit, Friendly = friendly, MoveToCell = moveToCell, Rotatable = rotatable, ValidVectors = validVectors, TargetOrigin = targetOrigin};
+            if (cellsHit == null) cellsHit = new VectorList {new Vector(0, 0)};
+            return new Targeting { Range = range, CellsHit = cellsHit, Friendly = friendly, MoveToCell = moveToCell, Rotatable = rotatable, ValidVectors = validVectors, TargetOrigin = targetOrigin};
         }
     }
 }

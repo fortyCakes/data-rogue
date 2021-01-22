@@ -37,7 +37,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
             MapCoordinate playerPosition = systemContainer.PositionSystem.CoordinateOf(systemContainer.PlayerSystem.Player);
 
-            var targetableCells = targetingActivityData.TargetingData.TargetableCellsFrom(playerPosition);
+            var targetableCells = systemContainer.TargetingSystem.TargetableCellsFrom(targetingActivityData.TargetingData, playerPosition);
 
             var renderWidth = control.Position.Width / BLTTilesIOSystem.TILE_SPACING;
             var renderHeight = control.Position.Height / BLTTilesIOSystem.TILE_SPACING;

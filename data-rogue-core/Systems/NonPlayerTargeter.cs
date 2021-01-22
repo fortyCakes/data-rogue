@@ -9,7 +9,7 @@ namespace data_rogue_core.Systems
 {
     public static class NonPlayerTargeter
     {
-        public static void GetTargetForNonPlayer(ISystemContainer systemContainer, IEntity sender, TargetingData data, Action<MapCoordinate> callback)
+        public static void GetTargetForNonPlayer(ISystemContainer systemContainer, IEntity sender, Targeting data, Action<MapCoordinate> callback)
         {
             var position = systemContainer.PositionSystem.CoordinateOf(sender);
             var player = systemContainer.PlayerSystem.Player;
@@ -25,7 +25,7 @@ namespace data_rogue_core.Systems
                 intendedTarget = systemContainer.PlayerSystem.Player;
             }
 
-            if (data.Range.HasValue && data.Range > 0)
+            if (data.Range > 0)
             {
                 bool canSeeTarget = CanSeeTarget(systemContainer, data, position, origin, intendedTarget);
 
@@ -39,7 +39,7 @@ namespace data_rogue_core.Systems
 
             MapCoordinate targetCoordinate = systemContainer.PositionSystem.CoordinateOf(intendedTarget);
 
-            var targetableCells = data.TargetableCellsFrom(position);
+            var targetableCells = systemContainer.TargetingSystem.TargetableCellsFrom(data, position);
 
             if (targetableCells.Contains(targetCoordinate))
             {
@@ -47,11 +47,11 @@ namespace data_rogue_core.Systems
             }
         }
 
-        private static IEntity PickRandomFriendlyTarget(ISystemContainer systemContainer, TargetingData data, MapCoordinate position, MapCoordinate origin, IEntity player)
+        private static IEntity PickRandomFriendlyTarget(ISystemContainer systemContainer, Targeting data, MapCoordinate position, MapCoordinate origin, IEntity player)
         {
             IEntity intendedTarget;
             var currentMap = systemContainer.MapSystem.MapCollection[position.Key];
-            var fov = currentMap.FovFrom(systemContainer.PositionSystem, origin, data.Range.Value);
+            var fov = currentMap.FovFrom(systemContainer.PositionSystem, origin, data.Range);
 
             var friendlies = fov
                 .SelectMany(c => systemContainer.PositionSystem.EntitiesAt(c))
@@ -63,10 +63,10 @@ namespace data_rogue_core.Systems
             return intendedTarget;
         }
 
-        private static bool CanSeeTarget(ISystemContainer systemContainer, TargetingData data, MapCoordinate position, MapCoordinate origin, IEntity target)
+        private static bool CanSeeTarget(ISystemContainer systemContainer, Targeting data, MapCoordinate position, MapCoordinate origin, IEntity target)
         {
             var currentMap = systemContainer.MapSystem.MapCollection[position.Key];
-            var fov = currentMap.FovFrom(systemContainer.PositionSystem, origin, data.Range.Value);
+            var fov = currentMap.FovFrom(systemContainer.PositionSystem, origin, data.Range);
 
             var checkCoord = systemContainer.PositionSystem.CoordinateOf(target);
             var canSeeTarget = fov.Contains(checkCoord);

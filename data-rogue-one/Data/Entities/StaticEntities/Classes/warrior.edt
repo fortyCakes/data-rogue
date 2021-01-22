@@ -9,6 +9,9 @@ Detail: A class who focuses on heavy melee combat. They start with the Cleave sk
 [KnownSkill]
 Skill: Skill:Cleave
 Order: 1
+[KnownSkill]
+Skill: Skill:Charge
+Order: 2
 [StartsWithItem]
 Item: Item:LeatherArmourChest
 Equipped: true

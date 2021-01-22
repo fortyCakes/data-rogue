@@ -32,7 +32,7 @@ namespace data_rogue_core.IOSystems
 
             MapCoordinate playerPosition = systemContainer.PositionSystem.CoordinateOf(systemContainer.PlayerSystem.Player);
 
-            var targetableCells = targetingActivityData.TargetingData.TargetableCellsFrom(playerPosition);
+            var targetableCells = systemContainer.TargetingSystem.TargetableCellsFrom(targetingActivityData.TargetingData, playerPosition);
 
             var consoleWidth = mapConsole.Width;
             var consoleHeight = mapConsole.Height;

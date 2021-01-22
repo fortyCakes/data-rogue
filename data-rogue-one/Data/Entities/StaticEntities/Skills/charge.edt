@@ -1,0 +1,67 @@
+﻿"Charge"
+[Prototype]
+Name: Skill:Charge
+Singleton: true
+[Skill]
+Cost: 20
+ScriptName: Script: Charge
+[Description]
+Name: Charge
+Detail: Charge next to a nearby target and make a melee attack at them.
+[Targeting]
+Range: 3
+CellsHit: 0,0
+Rotatable: false
+MoveToCell: false
+PathToTarget: true
+[AttackDefinition]
+AttackClass: Heavy
+SpendTime: false
+Damage: Muscle
+Accuracy: 40
+AttackName: Charge
+
+"Script: Charge"
+[Prototype]
+Name: Script: Charge
+Singleton: true
+[Script]
+Text: {
+	import ('data_rogue_core', 'data_rogue_core.Maps')
+
+	withTarget(
+	function(target)
+
+		origin = SystemContainer.PositionSystem:CoordinateOf(User)
+		
+		chargeToSpace = MapCoordinate('NOTFOUND', 0, 0)
+		minRangeFound = 9999
+
+		adjacentCells = { MapCoordinate(target.Key, target.X, target.Y - 1), MapCoordinate(target.Key, target.X, target.Y + 1), MapCoordinate(target.Key, target.X - 1, target.Y), MapCoordinate(target.Key, target.X + 1, target.Y), MapCoordinate(target.Key, target.X - 1, target.Y - 1), MapCoordinate(target.Key, target.X + 1, target.Y - 1), MapCoordinate(target.Key, target.X - 1, target.Y + 1), MapCoordinate(target.Key, target.X + 1, target.Y + 1) }
+		cellsWithUnblockedPath = {}
+
+		for _, c in ipairs(adjacentCells) do
+			if (SystemContainer.PositionSystem:UnblockedPathExists(origin, c) and not SystemContainer.PositionSystem:IsBlocked(c, false, User)) then
+				--SystemContainer.MessageSystem:Write('Found a square with unblocked path at (' .. c.X .. ', ' .. c.Y .. ').')
+				squaredDistance = (origin.X - c.X) * (origin.X - c.X) + (origin.Y - c.Y) * (origin.Y - c.Y) 
+				if (squaredDistance < minRangeFound) then
+					--SystemContainer.MessageSystem:Write('Set charge to space to (' .. c.X .. ', ' .. c.Y .. ') with sqdistance ' .. squaredDistance .. '.')
+					minRangeFound = squaredDistance
+					chargeToSpace = c
+				end
+			end
+		end
+
+		if (chargeToSpace.Key == 'NOTFOUND') then
+			SystemContainer.MessageSystem:Write('There isn\'t a space to charge to near that.')
+		else
+			SystemContainer.MessageSystem:Write('You charge!')
+			SystemContainer.PositionSystem:SetPosition(User, chargeToSpace)
+			attackCellsHit(target, User, Entity)
+		end
+
+		onComplete()
+	end)
+	
+	requestTarget(User, Entity)
+}

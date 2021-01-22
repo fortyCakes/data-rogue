@@ -73,14 +73,14 @@ namespace data_rogue_core.UnitTests.Systems
             SystemContainer.EntityEngine.AddComponent(TestSkill, new Targeting { Range = 25 });
 
             var mapCoordinate = new MapCoordinate(new MapKey("test map key"), new Vector(0, 0));
-            TargetingData targetingData = null;
+            Targeting targetingData = null;
 
             SystemContainer.TargetingSystem
-                .WhenForAnyArgs(a => a.GetTarget(Arg.Any<IEntity>(), Arg.Any<TargetingData>(), Arg.Any<Action<MapCoordinate>>()))
+                .WhenForAnyArgs(a => a.GetTarget(Arg.Any<IEntity>(), Arg.Any<Targeting>(), Arg.Any<Action<MapCoordinate>>()))
                 .Do(a => {
 
                     a.ArgAt<Action<MapCoordinate>>(2).Invoke(mapCoordinate);
-                    targetingData = a.ArgAt<TargetingData>(1);
+                    targetingData = a.ArgAt<Targeting>(1);
                     }); 
 
 
@@ -116,14 +116,14 @@ namespace data_rogue_core.UnitTests.Systems
 
             SystemContainer.EntityEngine.AddComponent(TestSkill, new AttackDefinition());
 
-            TargetingData targetingData = null;
+            Targeting targetingData = null;
 
             SystemContainer.TargetingSystem
-                .WhenForAnyArgs(a => a.GetTarget(Arg.Any<IEntity>(), Arg.Any<TargetingData>(), Arg.Any<Action<MapCoordinate>>()))
+                .WhenForAnyArgs(a => a.GetTarget(Arg.Any<IEntity>(), Arg.Any<Targeting>(), Arg.Any<Action<MapCoordinate>>()))
                 .Do(a => {
 
                     a.ArgAt<Action<MapCoordinate>>(2).Invoke(mapCoordinate);
-                    targetingData = a.ArgAt<TargetingData>(1);
+                    targetingData = a.ArgAt<Targeting>(1);
                 });
 
             var script = @"

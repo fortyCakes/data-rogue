@@ -30,7 +30,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
                 var hoveredEntity = entities.Where(e => e.Has<Appearance>()).OrderByDescending(e => e.Get<Appearance>().ZOrder).First();
 
-                RenderEntityDetails(x, y, display, hoveredEntity, spriteManager);
+                RenderEntityDetails(x, y, display, hoveredEntity, systemContainer, spriteManager);
 
                 RenderBackgroundBox(x, y, GetSizeInternal(spriteManager, control, systemContainer, playerFov), spriteManager);
 
@@ -52,11 +52,11 @@ namespace data_rogue_core.IOSystems.BLTTiles
             return new Size(10 * BLTTilesIOSystem.TILE_SPACING, height);
         }
 
-        protected static void RenderEntityDetails(int x, int y, IDataRogueInfoControl display, IEntity hoveredEntity, ISpriteManager spriteManager)
+        protected static void RenderEntityDetails(int x, int y, IDataRogueInfoControl display, IEntity hoveredEntity, ISystemContainer systemContainer, ISpriteManager spriteManager)
         {
             BLT.Font("");
             SpriteAppearance appearance = hoveredEntity.Has<SpriteAppearance>() ? hoveredEntity.Get<SpriteAppearance>() : new SpriteAppearance { Bottom = "unknown" };
-            int frame = hoveredEntity.Has<Animated>() ? hoveredEntity.Get<Animated>().CurrentFrame : 0;
+            AnimationFrame frame = hoveredEntity.Has<Animated>() ? systemContainer.AnimationSystem.GetFrame(hoveredEntity) : AnimationFrame.Idle0;
 
             BLT.Layer(BLTLayers.UIElementPieces);
             string appearanceBottom = appearance.Bottom;
@@ -102,7 +102,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             }
         }
 
-        private static void RenderSpriteIfSpecified(int x, int y, ISpriteManager spriteManager, string spriteName, int frame)
+        private static void RenderSpriteIfSpecified(int x, int y, ISpriteManager spriteManager, string spriteName, AnimationFrame frame)
         {
             if (!string.IsNullOrEmpty(spriteName))
             {

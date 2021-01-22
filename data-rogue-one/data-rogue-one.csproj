@@ -200,6 +200,9 @@
     <None Include="Data\Entities\StaticEntities\Props\stairs.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Entities\StaticEntities\Skills\charge.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\Entities\StaticEntities\Skills\bouncing bolt.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -271,6 +274,10 @@
       <Name>data-rogue-core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Data\Entities\StaticEntities\Sounds\sfx.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

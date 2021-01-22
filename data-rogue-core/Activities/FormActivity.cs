@@ -21,6 +21,7 @@ namespace data_rogue_core.Activities
     {
         public override ActivityType Type => ActivityType.Form;
         public override bool RendersEntireSpace => true;
+        public override bool AcceptsInput => true;
 
         public bool Running => true;
 

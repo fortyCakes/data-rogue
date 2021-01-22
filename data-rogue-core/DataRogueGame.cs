@@ -104,6 +104,8 @@ namespace data_rogue_core
             if (!_leaving)
             {
                 SystemContainer.AnimationSystem.Tick();
+                SystemContainer.AnimatedMovementSystem.Tick();
+                SystemContainer.ParticleSystem.Tick();
 
                 Stack<IActivity> renderStack = new Stack<IActivity>();
 
@@ -136,10 +138,19 @@ namespace data_rogue_core
 
                 SystemContainer.ControlSystem.HandleInput(keyPress, IOSystem.GetMouseData());
 
-                var throttle = 100000;
-                while (!SystemContainer.TimeSystem.WaitingForInput && SystemContainer.ActivitySystem.ActivityStack.Count > 0 && SystemContainer.ActivitySystem.Peek().Type == ActivityType.Gameplay && SystemContainer.PlayerSystem.Player != null && !_leaving && throttle-- > 0)
+                if (!SystemContainer.AnimatedMovementSystem.IsBlockingAnimationPlaying())
                 {
-                    SystemContainer.TimeSystem.Tick();
+                    var throttle = 1000;
+                    while (
+                       !SystemContainer.TimeSystem.WaitingForInput
+                       && SystemContainer.ActivitySystem.ActivityStack.Count > 0
+                       && SystemContainer.ActivitySystem.GetActivityAcceptingInput().Type == ActivityType.Gameplay
+                       && SystemContainer.PlayerSystem.Player != null
+                       && !_leaving
+                       && throttle-- > 0)
+                    {
+                        SystemContainer.TimeSystem.Tick();
+                    }
                 }
             }
         }

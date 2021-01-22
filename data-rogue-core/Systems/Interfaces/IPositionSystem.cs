@@ -17,5 +17,7 @@ namespace data_rogue_core.Systems
         bool IsBlocked(MapCoordinate key, bool cellsOnly = false, IEntity except = null);
         IEnumerable<MapCoordinate> Path(MapCoordinate origin, MapCoordinate destination);
         IEnumerable<MapCoordinate> DirectPath(MapCoordinate targetFrom, MapCoordinate currentTarget);
+
+        bool UnblockedPathExists(MapCoordinate from, MapCoordinate to);
     }
 }

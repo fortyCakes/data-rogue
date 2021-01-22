@@ -6,6 +6,7 @@
         Gameplay = 3,
         Form = 4,
         Targeting = 5,
-        Information = 6
+        Information = 6,
+        Toast = 7
     }
 }

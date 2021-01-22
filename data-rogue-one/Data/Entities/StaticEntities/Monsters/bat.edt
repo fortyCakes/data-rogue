@@ -13,6 +13,7 @@ ZOrder: 10
 [SpriteAppearance]
 Bottom: bat
 [Animated]
+[Animation]
 FrameTicks: 7
 [Position]
 [Physical]

@@ -48,7 +48,8 @@ namespace data_rogue_core.Components
 
     public enum AnimationFrame
     {
-        Rest0,
-        Rest1
+        Idle0,
+        Idle1,
+        Attack0
     }
 }

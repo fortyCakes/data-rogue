@@ -13,6 +13,7 @@ ZOrder: 10
 [SpriteAppearance]
 Bottom: living_flame
 [Animated]
+[Animation]
 RandomiseTicks: true
 [Position]
 [Physical]

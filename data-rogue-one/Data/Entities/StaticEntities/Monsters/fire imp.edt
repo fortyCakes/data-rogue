@@ -13,6 +13,7 @@ ZOrder: 10
 [SpriteAppearance]
 Bottom: fire_imp
 [Animated]
+[Animation]
 [Position]
 [Physical]
 Passable: false

@@ -9,6 +9,7 @@ ZOrder: 1
 [SpriteAppearance]
 Top: flame
 [Animated]
+[Animation]
 RandomiseTicks: true
 FrameTicks: 5
 [Position]

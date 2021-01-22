@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using data_rogue_core.Components;
+using data_rogue_core.Data;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.Maps;
@@ -11,12 +13,14 @@ namespace data_rogue_core.EventSystem.Rules
     public class BumpAttackRule : IEventRule
     {
         private IEventSystem _eventSystem;
+        private IAnimatedMovementSystem _animatedMovementSystem;
         private IPositionSystem _positionSystem;
 
         public BumpAttackRule(ISystemContainer systemContainer)
         {
             _positionSystem = systemContainer.PositionSystem;
             _eventSystem = systemContainer.EventSystem;
+            _animatedMovementSystem = systemContainer.AnimatedMovementSystem;
         }
 
         public EventTypeList EventTypes => new EventTypeList{ EventType.Move };
@@ -39,7 +43,10 @@ namespace data_rogue_core.EventSystem.Rules
 
                     var action = new ActionEventData { Action = ActionType.MeleeAttack, Parameters = $"{sender.EntityId},{defender.EntityId}", Speed = null, KeyPress = null };
 
-                    _eventSystem.Try(EventType.Action, sender, action);
+                    if (_eventSystem.Try(EventType.Action, sender, action))
+                    {
+                        _animatedMovementSystem.StartAnimatedMovement(sender, new List<AnimationMovement> { new AnimationMovement(new VectorDouble((double)vector.X / (double)-2, (double)vector.Y / (double)-2), 750) });
+                    }
 
                     return false;
                 }

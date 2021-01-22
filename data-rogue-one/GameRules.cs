@@ -25,7 +25,7 @@ namespace data_rogue_one
                     typeof(CantDealNoDamageRule),
                     typeof(PeopleDieWhenTheyAreKilledRule),
                     typeof(SpendTimeRule),
-                    typeof(PlayerDeathRule),
+                    typeof(ReturnToMenuOnDeathRule),
                     typeof(PlayerVictoryRule),
                     typeof(CompleteMoveRule),
                     typeof(GetBaseStatRule),
@@ -57,7 +57,15 @@ namespace data_rogue_one
                     typeof(OnAttackProcEnchantmentRule),
                     typeof(ApplyResistanceRule),
                     typeof(ApplyModifiedAccuracyRule),
-                    typeof(ApplyModifiedDamageRule)
+                    typeof(ApplyModifiedDamageRule),
+                    typeof(ShowToastWhenEnteringBranchRule),
+                    typeof(PlayerStepMakesSoundRule),
+                    typeof(HitMakesSoundRule),
+                    typeof(MissMakesSoundRule),
+                    typeof(AttackAnimationRule),
+                    typeof(DamageNumbersPopOutRule),
+                    typeof(DamageSplatParticlesRule),
+                    typeof(DisplayMorgueScreenOnDeathRule)
                 };
 
                 list.AddRange(ApplyActionRule.AllActionRules);

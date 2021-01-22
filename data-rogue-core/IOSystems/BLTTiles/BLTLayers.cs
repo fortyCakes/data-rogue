@@ -8,12 +8,13 @@
         public static int MapTileTop = 3;
         public static int MapEntityBottom = 4;
         public static int MapEntityTop = 5;
-        public static int MapShade = 6;
+        public static int MapParticles = 6;
+        public static int MapShade = 8;
 
-        public static int UIElements = 7;
-        public static int UIElementPieces = 8;
-        public static int UIMasks = 9;
-        public static int Text = 10;
+        public static int UIElements = 12;
+        public static int UIElementPieces = 13;
+        public static int UIMasks = 14;
+        public static int Text = 15;
         public static int Top = 24;
 
         public static int FULL_LAYER_SIZE = 25;

@@ -14,6 +14,8 @@ namespace data_rogue_core.Activities
     {
         private readonly ISystemContainer _systemContainer;
 
+        public override bool RendersEntireSpace => true;
+
         public EndGameScreenActivity(ISystemContainer systemContainer, bool victory) : base(systemContainer.ActivitySystem, null, true)
         {
             _systemContainer = systemContainer;
@@ -25,10 +27,11 @@ namespace data_rogue_core.Activities
         {
             var stringBuilder = new StringBuilder();
 
-            stringBuilder.AppendLine(victory ? "You win!" : "You are dead.");
-            stringBuilder.Append("Name: ").AppendLine(_systemContainer.PlayerSystem.Player.Get<Description>().Name);
             stringBuilder.AppendLine();
-            stringBuilder.Append("Time: ").Append(_systemContainer.TimeSystem.CurrentTime).AppendLine(" aut");
+            stringBuilder.AppendLine(victory ? " You win!" : " You are dead.");
+            stringBuilder.Append(" Name: ").AppendLine(_systemContainer.PlayerSystem.Player.Get<Description>().Name);
+            stringBuilder.AppendLine();
+            stringBuilder.Append(" Time: ").Append(_systemContainer.TimeSystem.CurrentTime).AppendLine(" aut");
 
             var text = stringBuilder.ToString();
 

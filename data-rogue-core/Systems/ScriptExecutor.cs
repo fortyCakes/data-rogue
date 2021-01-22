@@ -146,22 +146,7 @@ namespace data_rogue_core.Systems
             return (int)systemContainer.EventSystem.GetStat(attacker, input);
         }
 
-        private static TargetingData GetTargetingData(IEntity forSkill)
-        {
-            var targeting = forSkill.Get<Targeting>();
-
-            return new TargetingData
-            {
-                MoveToCell = targeting.MoveToCell,
-                Range = targeting.Range,
-                CellsHit = targeting.CellsHit,
-                Rotatable = targeting.Rotatable,
-                TargetOrigin = targeting.TargetOrigin,
-                ValidVectors = targeting.ValidVectors,
-                Friendly = targeting.Friendly,
-                PathToTarget = targeting.PathToTarget
-            };
-        }
+        private static Targeting GetTargetingData(IEntity forSkill) => forSkill.Get<Targeting>();
 
         public bool AttackCellsHit(MapCoordinate target, IEntity user, IEntity forSkill)
         {

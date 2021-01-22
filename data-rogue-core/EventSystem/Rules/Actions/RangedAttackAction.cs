@@ -28,7 +28,7 @@ namespace data_rogue_core.EventSystem.Rules
                 return false;
             }
 
-            _systemContainer.TargetingSystem.GetTarget(sender, new TargetingData { Range = 10, TargetOrigin = false }, (mapCoordinate) => ResolveRangedAttack(sender, mapCoordinate));
+            _systemContainer.TargetingSystem.GetTarget(sender, new Targeting { Range = 10, TargetOrigin = false }, (mapCoordinate) => ResolveRangedAttack(sender, mapCoordinate));
             
             return false;
         }
