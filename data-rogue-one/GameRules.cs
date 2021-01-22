@@ -25,7 +25,7 @@ namespace data_rogue_one
                     typeof(CantDealNoDamageRule),
                     typeof(PeopleDieWhenTheyAreKilledRule),
                     typeof(SpendTimeRule),
-                    typeof(PlayerDeathRule),
+                    typeof(ReturnToMenuOnDeathRule),
                     typeof(PlayerVictoryRule),
                     typeof(CompleteMoveRule),
                     typeof(GetBaseStatRule),
@@ -64,7 +64,8 @@ namespace data_rogue_one
                     typeof(MissMakesSoundRule),
                     typeof(AttackAnimationRule),
                     typeof(DamageNumbersPopOutRule),
-                    typeof(DamageSplatParticlesRule)
+                    typeof(DamageSplatParticlesRule),
+                    typeof(DisplayMorgueScreenOnDeathRule)
                 };
 
                 list.AddRange(ApplyActionRule.AllActionRules);

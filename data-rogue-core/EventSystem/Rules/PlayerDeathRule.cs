@@ -6,9 +6,9 @@ using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.EventSystem.Rules
 {
-    public class PlayerDeathRule : IEventRule
+    public class ReturnToMenuOnDeathRule : IEventRule
     {
-        public PlayerDeathRule(ISystemContainer systemContainer)
+        public ReturnToMenuOnDeathRule(ISystemContainer systemContainer)
         {
             this.systemContainer = systemContainer;
         }
@@ -31,7 +31,6 @@ namespace data_rogue_core.EventSystem.Rules
                         systemContainer.SaveSystem,
                         systemContainer.EntityEngine
                     )));
-                systemContainer.ActivitySystem.Push(new EndGameScreenActivity(systemContainer, false));
             }
 
             return true;
