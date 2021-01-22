@@ -35,7 +35,7 @@ namespace data_rogue_core.Forms.StaticForms
 
                 var creationFields = new Dictionary<string, FormData>
                 {
-                    {"Name", new TextFormData("Name", FormDataType.Text, "Steve", 1)},
+                    {"Name", new TextFormData("Name", FormDataType.Text, "Rowan", 1)},
                     {"Class", new MultipleChoiceFormData("Class", classNames.First(), 2, classNames) },
                     {
                         "Stats", new StatsFormData("Stats", 3, 50, new List<FormStatInformation>
