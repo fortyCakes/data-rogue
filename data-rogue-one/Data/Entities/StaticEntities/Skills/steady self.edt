@@ -1,0 +1,38 @@
+﻿"Steady Self"
+[Prototype]
+Name: Skill:SteadySelf
+Singleton: true
+[Skill]
+Cost: 20
+ScriptName: Script: SteadySelf
+Speed: 500
+[Description]
+Name: Steady Self
+Detail: Spend Aura to massively reduce your own Tilt, quickly. If you are in a Broken state, this restores your defences but only removes 25% of your Tilt.
+[Targeting]
+Range: 4
+CellsHit: 0,0
+MoveToCell: true
+Friendly: true
+
+"Script: SteadySelf"
+[Prototype]
+Name: Script: SteadySelf
+Singleton: true
+[Script]
+Text: {
+	var tilt = User:Get('TiltFighter')
+
+	if (tilt.BrokenTicks > 0) then
+		tilt.BrokenTicks = 1
+		tilt.Current = tilt.Max * 3 / 4
+		SystemContainer.MessageSystem:Write(User.DescriptionName .. ' steadies themself, restoring their defences.')
+	else
+		tilt.Current = tilt.Current - (tilt.Max / 2)
+		if (tilt.Current < 0) then
+			tilt.Current = 0
+		end
+		SystemContainer.MessageSystem:Write(User.DescriptionName .. ' steadies themself, restoring their defences.')
+	end
+
+}
