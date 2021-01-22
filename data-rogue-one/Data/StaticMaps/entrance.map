@@ -2,7 +2,7 @@ Map:"Entrance"
 default:Cell:Tree
 -5,-9
 10,0: Entity(Props:StairsDown)
-11,1: Entity(Monster:Bat)
+15,1: Entity(Monster:Bat)
 .:Cell:Grass
 ,:Cell:SpawnPoint
 #:Cell:Tree

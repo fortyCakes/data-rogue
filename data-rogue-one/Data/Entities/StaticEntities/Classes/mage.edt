@@ -1,8 +1,8 @@
 ﻿"Mage"
-[Class]
-[Prototype]
-Name: Class:Mage
-Singleton: true
+#[Class]
+#[Prototype]
+#Name: Class:Mage
+#Singleton: true
 [Description]
 Name: Mage
 Detail: A class who focuses on magical combat. They start with the Mana Bolt skill, to attack enemies at range.

@@ -200,6 +200,9 @@
     <None Include="Data\Entities\StaticEntities\Props\stairs.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Entities\StaticEntities\Skills\charge.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\Entities\StaticEntities\Skills\bouncing bolt.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -272,7 +272,7 @@ namespace data_rogue_core.UnitTests.Activities
                 new MapCoordinate("Map", 5, -5)
             });
 
-            _targetingActivity.TargetingData.PathToTarget = true;
+            _targetingActivity.TargetingData.HitCellsOnPath = true;
             _targetingActivity.CurrentTarget = new MapCoordinate("Map", 5, -5);
             _targetingActivity.TargetingData.CellsHit = new VectorList { new Vector(0, 0) };
 
