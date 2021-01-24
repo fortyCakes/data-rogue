@@ -7,6 +7,7 @@ namespace data_rogue_core
         void Create(CharacterCreationForm characterCreationForm);
 
         void Save();
+        void SaveMorgueFile(string morgueFileText);
 
         void Load();
         SaveState GetSaveState();

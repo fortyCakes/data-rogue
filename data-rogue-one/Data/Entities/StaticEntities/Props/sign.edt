@@ -1,0 +1,23 @@
+﻿"Props:Sign"
+[Prototype]
+Name: Props:Sign
+Singleton: false
+[Appearance]
+Glyph: =
+Color: #964B00
+ZOrder: 1
+[SpriteAppearance]
+Top: sign
+[Position]
+[Physical]
+Passable: false
+Transparent: true
+[Memorable]
+[Description]
+Name: Sign
+Detail: It's a sign. Interact with it to read it.
+[Interactable]
+Verb: Read
+Script: BasicDialog
+[Dialog]
+Text: Hello World!

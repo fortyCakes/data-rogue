@@ -21,6 +21,7 @@
         Examine,
         ResolveRangedAttack,
         FollowPath,
-        PlayerStatus
+        PlayerStatus,
+        Morgue
     }
 }

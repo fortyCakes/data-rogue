@@ -7,7 +7,7 @@ using data_rogue_core.IOSystems;
 
 namespace data_rogue_one.EventSystem.Utils
 {
-    public class StatusHelper
+    public static class StatusHelper
     {
         public static List<StatsConfiguration> GetStatusConfigurations(IEntity entity)
         {

@@ -7,6 +7,7 @@ using data_rogue_core.Data;
 using System.Drawing;
 using System.Linq;
 using data_rogue_core.Forms.StaticForms;
+using System;
 
 namespace data_rogue_core
 {
@@ -77,18 +78,23 @@ namespace data_rogue_core
 
         public void Save(string fileName)
         {
-            var directoryName = Path.GetDirectoryName(fileName);
-
-            if (!Directory.Exists(directoryName))
-            {
-                Directory.CreateDirectory(directoryName);
-            }
+            EnsureDirectoryExists(fileName);
 
             var saveState = GetSaveState();
 
             File.WriteAllText(fileName, SaveStateSerializer.Serialize(saveState));
 
             _systemContainer.MessageSystem.Write("Saved!", Color.Blue);
+        }
+
+        private static void EnsureDirectoryExists(string fileName)
+        {
+            var directoryName = Path.GetDirectoryName(fileName);
+
+            if (!Directory.Exists(directoryName))
+            {
+                Directory.CreateDirectory(directoryName);
+            }
         }
 
         public SaveState GetSaveState()
@@ -100,6 +106,20 @@ namespace data_rogue_core
                 Time = _systemContainer.TimeSystem.CurrentTime,
                 Messages = _systemContainer.MessageSystem.AllMessages.Select(m => MessageSerializer.Serialize(m)).ToList()
             };
+        }
+
+        public void SaveMorgueFile(string morgueFileText)
+        {
+            var directoryName = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Morgue");
+
+            var time = DateTime.Now.ToUniversalTime().ToString("O").Replace(":", "");
+
+            var fileName = Path.Combine(directoryName, $"morgue-{time}.txt");
+            EnsureDirectoryExists(fileName);
+
+            File.WriteAllText(fileName, morgueFileText);
+
+            _systemContainer.MessageSystem.Write("Morgue file saved!", Color.Blue);
         }
     }
 }

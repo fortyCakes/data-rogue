@@ -86,9 +86,12 @@
     <Compile Include="Components\AnimationType.cs" />
     <Compile Include="Components\AttackDefinition.cs" />
     <Compile Include="Components\Class.cs" />
+    <Compile Include="Components\Dialog.cs" />
     <Compile Include="Components\HasClass.cs" />
+    <Compile Include="Components\Interactable.cs" />
     <Compile Include="Components\Moving.cs" />
     <Compile Include="Components\Sound.cs" />
+    <Compile Include="Components\StartDetails.cs" />
     <Compile Include="Components\Targeting.cs" />
     <Compile Include="Components\TextParticle.cs" />
     <Compile Include="Controls\MinimapControl.cs" />
@@ -111,6 +114,7 @@
     <Compile Include="EventSystem\Rules\Actions\UseSkillAction.cs" />
     <Compile Include="EventSystem\Rules\Actions\WaitAction.cs" />
     <Compile Include="EventSystem\Rules\AttackAnimationRule.cs" />
+    <Compile Include="EventSystem\Rules\BumpInteractRule.cs" />
     <Compile Include="EventSystem\Rules\DamageNumbersPopOutRule.cs" />
     <Compile Include="EventSystem\Rules\DamageSplatParticlesRule.cs" />
     <Compile Include="EventSystem\Rules\DisplayMorgueScreenOnDeathRule.cs" />
@@ -555,6 +559,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Entities\Items\wooden_shield.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Entities\Misc\sign.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Misc\arrow.png">

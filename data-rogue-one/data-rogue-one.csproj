@@ -65,11 +65,14 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rules\Actions\ExamineStatusAction.cs" />
+    <Compile Include="Rules\Actions\MorgueAction.cs" />
     <Compile Include="Rules\Actions\RestAction.cs" />
     <Compile Include="Rules\ApplyModifiedAccuracyRule.cs" />
     <Compile Include="Rules\ApplyModifiedDamageRule.cs" />
     <Compile Include="Rules\ApplyResistanceRule.cs" />
+    <Compile Include="Rules\DisplayAdvancedMorgueScreenOnDeathRule.cs" />
     <Compile Include="Rules\IncreaseStatsOnLevelUpRule.cs" />
+    <Compile Include="Utils\MorgueHelper.cs" />
     <Compile Include="Utils\StatusHelper.cs" />
     <Compile Include="Rules\AddAgilityToEvasionRule.cs" />
     <Compile Include="Rules\AddStatToAccuracyRule.cs" />
@@ -188,6 +191,9 @@
     <None Include="Data\Entities\StaticEntities\Monsters\jackal.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Entities\StaticEntities\Props\sign.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\Entities\StaticEntities\Props\fire.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -198,6 +204,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\Entities\StaticEntities\Props\stairs.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Entities\StaticEntities\Scripts\basic dialog.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\Entities\StaticEntities\Skills\charge.edt">

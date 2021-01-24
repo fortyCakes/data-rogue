@@ -16,6 +16,7 @@ namespace data_rogue_one
                 var list = new List<Type> {
                     typeof(PhysicalCollisionRule),
                     typeof(BumpAttackRule),
+                    typeof(BumpInteractRule),
                     typeof(BranchGeneratorRule),
                     typeof(SetAttackClassOnAttackRule),
                     typeof(SpendTimeOnActionRule),
@@ -65,7 +66,8 @@ namespace data_rogue_one
                     typeof(AttackAnimationRule),
                     typeof(DamageNumbersPopOutRule),
                     typeof(DamageSplatParticlesRule),
-                    typeof(DisplayMorgueScreenOnDeathRule)
+                    typeof(DisplayAdvancedMorgueScreenOnDeathRule),
+                    typeof(SaveMorgueFileOnDeathRule)
                 };
 
                 list.AddRange(ApplyActionRule.AllActionRules);
@@ -75,7 +77,8 @@ namespace data_rogue_one
                 {
                     typeof(RestAction),
                     typeof(ExamineStatusAction),
-                    typeof(PlayerStatusAction)
+                    typeof(PlayerStatusAction),
+                    typeof(MorgueAction)
                 };
 
                 list.AddRange(customActions);

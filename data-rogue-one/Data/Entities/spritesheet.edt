@@ -507,3 +507,10 @@ Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
+[SpriteSheet]
+Name: sign
+Path: Images/Sprites/Entities/Misc/sign.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2

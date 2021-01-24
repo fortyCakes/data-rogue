@@ -1,0 +1,10 @@
+﻿"Script: BasicDialog"
+[Prototype]
+Name: BasicDialog
+Singleton: true
+[Script]
+Text: {
+	dialog = User:Get('Dialog')
+	text = dialog.Text
+	SystemContainer.MessageSystem:Write(User.DescriptionName .. ' says "' .. text .. '"')
+}

@@ -96,8 +96,17 @@ namespace data_rogue_core
             LearnClassSkills(systemContainer, form, player);
             GiveStartingGear(systemContainer, form, player);
 
+            SetStartDetails(systemContainer, form, player);
+
             systemContainer.PlayerSystem.Player = player;
         }
+
+        private void SetStartDetails(ISystemContainer systemContainer, CharacterCreationForm form, IEntity player)
+        {
+            var startDetails = new StartDetails { Class = form.Class, StartTime = DateTime.Now.ToString("f") };
+            systemContainer.EntityEngine.AddComponent(player, startDetails);
+        }
+
         private static void SetInitialStats(ISystemContainer systemContainer, CharacterCreationForm form, IEntity player)
         {
             systemContainer.StatSystem.SetStat(player, nameof(form.Muscle), form.Muscle);
@@ -136,10 +145,10 @@ namespace data_rogue_core
                 }
             }
         }
+
         private static IEntity GetPlayerClass(ISystemContainer systemContainer, CharacterCreationForm form)
         {
-            var playerClass = systemContainer.PrototypeSystem.Get($"Class:{form.Class}");
-            return playerClass;
+            return systemContainer.PrototypeSystem.Get($"Class:{form.Class}");
         }
 
     }

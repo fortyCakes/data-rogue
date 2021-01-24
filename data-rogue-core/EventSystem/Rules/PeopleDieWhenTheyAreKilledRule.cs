@@ -11,6 +11,7 @@ namespace data_rogue_core.EventSystem.Rules
         {
             EntityEngine = systemContainer.EntityEngine;
             MessageSystem = systemContainer.MessageSystem;
+            PlayerSystem = systemContainer.PlayerSystem;
         }
 
         public EventTypeList EventTypes => new EventTypeList{ EventType.Death };
@@ -20,11 +21,15 @@ namespace data_rogue_core.EventSystem.Rules
 
         private IEntityEngine EntityEngine { get; }
         public IMessageSystem MessageSystem { get; }
+        public IPlayerSystem PlayerSystem { get; }
 
         public bool Apply(EventType type, IEntity sender, object eventData)
         {
-            MessageSystem.Write($"{sender.Get<Description>().Name} dies.", Color.DarkRed);
-            EntityEngine.Destroy(sender.EntityId);
+            if (sender != PlayerSystem.Player)
+            {
+                MessageSystem.Write($"{sender.Get<Description>().Name} dies.", Color.DarkRed);
+                EntityEngine.Destroy(sender.EntityId);
+            }
 
             return true;
         }

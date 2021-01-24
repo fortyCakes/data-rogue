@@ -33,6 +33,9 @@ Action: PlayerStatus
 Key: Shift+S
 Action: Save
 [KeyBinding]
+Key: Shift+M
+Action: Morgue
+[KeyBinding]
 Key: I
 Action: InventoryMenu
 [KeyBinding]
