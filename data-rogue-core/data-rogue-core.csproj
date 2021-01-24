@@ -109,6 +109,7 @@
     <Compile Include="Controls\TargetingOverlayControl.cs" />
     <Compile Include="EventSystem\Rules\Actions\FollowPathAction.cs" />
     <Compile Include="Behaviours\FollowPathBehaviour.cs" />
+    <Compile Include="EventSystem\Rules\Actions\InteractAction.cs" />
     <Compile Include="EventSystem\Rules\Actions\ResolveRangedAttackAction.cs" />
     <Compile Include="EventSystem\Rules\Actions\SetIsActionFalseRule.cs" />
     <Compile Include="EventSystem\Rules\Actions\UseSkillAction.cs" />
@@ -132,6 +133,7 @@
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTButtonRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTDescriptionDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTExperienceDisplayer.cs" />
+    <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTInteractionDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTLargeTextDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTLineControlRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTLinesRenderer.cs" />
@@ -373,7 +375,9 @@
     <Compile Include="Systems\AnimationSystem.cs" />
     <Compile Include="Systems\EntityCache.cs" />
     <Compile Include="Systems\EntityDataProviders.cs" />
+    <Compile Include="Systems\InteractableSystem.cs" />
     <Compile Include="Systems\Interfaces\IAnimationSystem.cs" />
+    <Compile Include="Systems\Interfaces\IInteractableSystem.cs" />
     <Compile Include="Systems\Interfaces\IMapSystem.cs" />
     <Compile Include="Systems\Interfaces\IParticleSystem.cs" />
     <Compile Include="Systems\Interfaces\IRendererSystem.cs" />
@@ -548,6 +552,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Entities\Items\orb.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Entities\Misc\grave.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Entities\Misc\portal.png">

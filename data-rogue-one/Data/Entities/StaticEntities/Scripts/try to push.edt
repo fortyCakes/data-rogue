@@ -1,0 +1,8 @@
+﻿"Script: TryToPush"
+[Prototype]
+Name: TryToPush
+Singleton: true
+[Script]
+Text: {
+	SystemContainer.MessageSystem:Write('You try to push ' .. User.DescriptionName .. ', but it doesn\'t budge.')
+}

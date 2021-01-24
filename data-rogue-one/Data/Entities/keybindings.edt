@@ -68,4 +68,7 @@ Action: GetItem
 [KeyBinding]
 Key: F
 Action: RangedAttack
+[KeyBinding]
+Key: Space
+Action: Interact
 

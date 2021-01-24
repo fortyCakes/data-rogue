@@ -114,7 +114,7 @@ namespace data_rogue_core.Systems
             return targetableCells;
         }
 
-        private static Vector[] GetAdjacentCellVectors()
+        public static Vector[] GetAdjacentCellVectors()
         {
             return new[]
             {
@@ -124,7 +124,7 @@ namespace data_rogue_core.Systems
             };
         }
 
-        private static Vector[] GetAdjacentAndDiagonalCellVectors()
+        public static Vector[] GetAdjacentAndDiagonalCellVectors()
         {
             return new[]
             {

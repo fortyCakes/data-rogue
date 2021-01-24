@@ -31,4 +31,6 @@
     public class LargeTextControl : BaseInfoControl { }
 
     public class ExperienceControl : BaseInfoControl { }
+
+    public class InteractionControl : BaseInfoControl { }
 }

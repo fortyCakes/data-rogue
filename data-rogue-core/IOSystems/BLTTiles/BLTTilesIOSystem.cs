@@ -46,6 +46,15 @@ namespace data_rogue_core.IOSystems.BLTTiles
                         new InfoDisplay { ControlType =  typeof(Spacer) },
                         new InfoDisplay { ControlType =  typeof(HoveredEntityDisplayBox), Parameters = "Health,HP;AuraFighter,Aura;TiltFighter,Tilt" },
                     }
+                },
+                new StatsConfiguration
+                {
+                    Position = new Rectangle(40 * TILE_SPACING - 38, 25 * TILE_SPACING - 22, 32, 16),
+                    Displays = new List<InfoDisplay>
+                    {
+                        new InfoDisplay { ControlType = typeof(InteractionControl) }
+                    }
+
                 }
             },
             MessageConfigurations = new List<MessageConfiguration> { new MessageConfiguration {

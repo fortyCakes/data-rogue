@@ -22,6 +22,7 @@
         ResolveRangedAttack,
         FollowPath,
         PlayerStatus,
-        Morgue
+        Morgue,
+        Interact
     }
 }

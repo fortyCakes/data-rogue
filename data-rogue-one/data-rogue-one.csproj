@@ -191,6 +191,9 @@
     <None Include="Data\Entities\StaticEntities\Monsters\jackal.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Entities\StaticEntities\Props\grave.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\Entities\StaticEntities\Props\sign.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -204,6 +207,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\Entities\StaticEntities\Props\stairs.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Entities\StaticEntities\Scripts\try to push.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\Entities\StaticEntities\Scripts\basic dialog.edt">

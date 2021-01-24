@@ -1,0 +1,26 @@
+﻿"Props:Grave"
+[Prototype]
+Name: Props:Grave
+Singleton: false
+[Appearance]
+Glyph: `
+Color: #969696
+ZOrder: 1
+[SpriteAppearance]
+Top: grave
+[Position]
+[Physical]
+Passable: false
+Transparent: true
+[Memorable]
+[Description]
+Name: Grave
+Detail: A gravestone. It's spooky.
+[Interactable]
+Verb: Read
+Script: BasicDialog
+[Interactable]
+Verb: Push
+Script: TryToPush
+[Dialog]
+Text: This grave's text has not been set.
