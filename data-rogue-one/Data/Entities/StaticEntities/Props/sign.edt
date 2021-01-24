@@ -20,4 +20,4 @@ Detail: It's a sign. Interact with it to read it.
 Verb: Read
 Script: BasicDialog
 [Dialog]
-Text: Hello World!
+Text: This sign's text has not been set.

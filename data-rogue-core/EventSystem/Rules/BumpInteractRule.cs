@@ -31,6 +31,11 @@ namespace data_rogue_core.EventSystem.Rules
 
                 if (entitiesAtPosition.Any(IsInteractable))
                 {
+                    if (sender.Has<FollowPathBehaviour>())
+                    {
+                        _systemContainer.EntityEngine.RemoveComponent(sender, sender.Get<FollowPathBehaviour>());
+                    }
+
                     var interactWith = entitiesAtPosition.First(e => IsInteractable(e));
 
                     Interactable interaction = interactWith.Components.OfType<Interactable>().First();

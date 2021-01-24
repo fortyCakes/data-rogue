@@ -2,7 +2,8 @@ Map:"Entrance"
 default:Cell:Tree
 -5,-9
 10,0: Entity(Props:StairsDown)
-15,1: Entity(Props:Sign)
+15,1: Entity(Props:Sign|Dialog.Text=I am a sign!)
+16,1: Entity(Props:Sign|Dialog.Text=I am another sign!)
 .:Cell:Grass
 ,:Cell:SpawnPoint
 #:Cell:Tree

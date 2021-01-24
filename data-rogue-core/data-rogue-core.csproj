@@ -351,6 +351,7 @@
     <Compile Include="IOSystems\StatsConfiguration.cs" />
     <Compile Include="Maps\Generators\BasicDungeonMapGenerator.cs" />
     <Compile Include="Maps\IMap.cs" />
+    <Compile Include="Maps\MapGenCommands\EntityStackCommandExecutor.cs" />
     <Compile Include="Maps\MapGenCommands\MapGenCommandExecutorFactory.cs" />
     <Compile Include="Maps\MapGenCommands\EntityCommandExecutor.cs" />
     <Compile Include="Maps\MapGenCommands\ICommandExecutor.cs" />

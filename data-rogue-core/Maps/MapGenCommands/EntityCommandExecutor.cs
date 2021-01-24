@@ -1,9 +1,12 @@
 ﻿using data_rogue_core.Components;
+using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Systems.Interfaces;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace data_rogue_core.Maps.MapGenCommands
 {
-    class EntityCommandExecutor : ICommandExecutor
+    public class EntityCommandExecutor : ICommandExecutor
     {
         public MapGenCommandType CommandType => MapGenCommandType.Entity;
 
@@ -11,24 +14,28 @@ namespace data_rogue_core.Maps.MapGenCommands
         {
             var coordinate = new MapCoordinate(map.MapKey, offset + command.Vector);
 
-            systemContainer.PrototypeSystem.CreateAt(command.Parameters, coordinate);
-        }
-    }
+            var splits = command.Parameters.Split('|').ToList();
 
-    class EntityStackCommandExecutor : ICommandExecutor
-    {
-        public MapGenCommandType CommandType => MapGenCommandType.EntityStack;
-
-        public void Execute(ISystemContainer systemContainer, Map map, MapGenCommand command, Vector offset)
-        {
-            var coordinate = new MapCoordinate(map.MapKey, offset + command.Vector);
-
-            var splits = command.Parameters.Split(',');
             var entityName = splits[0];
-            var stackSize = int.Parse(splits[1]);
 
             var entity = systemContainer.PrototypeSystem.CreateAt(entityName, coordinate);
-            entity.Get<Stackable>().StackSize = stackSize;
+
+            splits.Remove(splits.First());
+
+            var regexParse = new Regex("(.*)\\.(.*)=(.*)");
+
+            foreach (var entityParameterUpdate in splits)
+            {
+                var results = regexParse.Match(entityParameterUpdate);
+
+                var componentName = results.Groups[1].Value;
+                var fieldName = results.Groups[2].Value;
+                var value = results.Groups[3].Value;
+
+                var component = entity.Get(componentName);
+
+                ComponentSerializer.BindSingleValue(component, fieldName, value);
+            }
         }
     }
 }

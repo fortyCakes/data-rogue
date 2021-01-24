@@ -140,7 +140,7 @@ namespace data_rogue_core.EntityEngineSystem
             }
         }
 
-        private static void BindSingleValue(IEntityComponent component, string key, string value)
+        public static void BindSingleValue(IEntityComponent component, string key, string value)
         {
             var fieldInfo = component.GetType().GetField(key);
             Type fieldType = Nullable.GetUnderlyingType(fieldInfo.FieldType) ?? fieldInfo.FieldType;
