@@ -33,7 +33,7 @@ namespace data_rogue_core.Systems.Interfaces
         IStatSystem StatSystem { get; }
         ISoundSystem SoundSystem { get; }
         IParticleSystem ParticleSystem { get; }
-        IInteractableSystem InteractableSystem { get; }
+        IInteractionSystem InteractableSystem { get; }
 
         void Verify();
         void CreateSystems(string rngSeed);

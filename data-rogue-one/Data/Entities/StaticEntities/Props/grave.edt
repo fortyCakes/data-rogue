@@ -16,10 +16,10 @@ Transparent: true
 [Description]
 Name: Grave
 Detail: A gravestone. It's spooky.
-[Interactable]
+[Interaction]
 Verb: Read
 Script: BasicDialog
-[Interactable]
+[Interaction]
 Verb: Push
 Script: TryToPush
 [Dialog]

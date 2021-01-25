@@ -16,7 +16,7 @@ Transparent: true
 [Description]
 Name: Sign
 Detail: It's a sign. Interact with it to read it.
-[Interactable]
+[Interaction]
 Verb: Read
 Script: BasicDialog
 [Dialog]

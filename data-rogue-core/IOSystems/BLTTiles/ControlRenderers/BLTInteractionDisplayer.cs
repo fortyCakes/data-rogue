@@ -27,10 +27,10 @@ namespace data_rogue_core.IOSystems.BLTTiles
             if (interactables.Any())
             {
                 var possibleInteractions = interactables
-                    .SelectMany(e => e.Components.OfType<Interactable>()
+                    .SelectMany(e => e.Components.OfType<Interaction>()
                     .Select(i => new { Entity = e, Interactable = i }));
 
-                (IEntity, Interactable) currentInteraction = systemContainer.InteractableSystem.GetCurrentInteractionFor(systemContainer.PlayerSystem.Player);
+                (IEntity, Interaction) currentInteraction = systemContainer.InteractableSystem.GetCurrentInteractionFor(systemContainer.PlayerSystem.Player);
 
                 var interactEntity = currentInteraction.Item1;
                 var interactable = currentInteraction.Item2;

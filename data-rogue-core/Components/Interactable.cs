@@ -2,7 +2,7 @@
 
 namespace data_rogue_core.Components
 {
-    public class Interactable: IEntityComponent
+    public class Interaction: IEntityComponent
     {
         public string Verb;
         public string Script;

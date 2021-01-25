@@ -4,10 +4,12 @@ using data_rogue_core.EntityEngineSystem;
 
 namespace data_rogue_core.Systems.Interfaces
 {
-    public interface IInteractableSystem : ISystem
+    public interface IInteractionSystem : ISystem
     {
         List<IEntity> GetInteractablesNear(IEntity player);
 
-        (IEntity, Interactable) GetCurrentInteractionFor(IEntity player);
+        (IEntity, Interaction) GetCurrentInteractionFor(IEntity player);
+
+        void NextInteraction(IEntity sender);
     }
 }

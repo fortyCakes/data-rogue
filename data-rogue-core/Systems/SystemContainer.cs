@@ -38,7 +38,7 @@ namespace data_rogue_core.Systems
         public IAnimatedMovementSystem AnimatedMovementSystem { get; set; }
         public ISoundSystem SoundSystem { get; set; }
         public IParticleSystem ParticleSystem { get; set; }
-        public IInteractableSystem InteractableSystem { get; set; }
+        public IInteractionSystem InteractableSystem { get; set; }
 
         public string Seed { get; set; }
 
@@ -118,7 +118,7 @@ namespace data_rogue_core.Systems
             SoundSystem = new SoundSystem();
             EntityEngine.Register(SoundSystem);
 
-            InteractableSystem = new InteractableSystem(PositionSystem);
+            InteractableSystem = new InteractionSystem(PositionSystem);
             EntityEngine.Register(InteractableSystem);
 
             Seed = rngSeed;

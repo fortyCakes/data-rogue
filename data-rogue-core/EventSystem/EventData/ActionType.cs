@@ -23,6 +23,7 @@
         FollowPath,
         PlayerStatus,
         Morgue,
-        Interact
+        Interact,
+        NextInteraction
     }
 }

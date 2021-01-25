@@ -38,7 +38,7 @@ namespace data_rogue_core.EventSystem.Rules
 
                     var interactWith = entitiesAtPosition.First(e => IsInteractable(e));
 
-                    Interactable interaction = interactWith.Components.OfType<Interactable>().First();
+                    Interaction interaction = interactWith.Components.OfType<Interaction>().First();
 
                     _systemContainer.ScriptExecutor.ExecuteByName(interactWith, interaction.Script, sender);
 
@@ -51,7 +51,7 @@ namespace data_rogue_core.EventSystem.Rules
 
         private bool IsInteractable(IEntity entity)
         {
-            return entity.Has<Interactable>();
+            return entity.Has<Interaction>();
         }
     }
 }

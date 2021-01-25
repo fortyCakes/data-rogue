@@ -36,6 +36,9 @@ Action: Save
 Key: Shift+M
 Action: Morgue
 [KeyBinding]
+Key: M
+Action: NextInteraction
+[KeyBinding]
 Key: I
 Action: InventoryMenu
 [KeyBinding]
