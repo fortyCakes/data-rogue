@@ -41,10 +41,8 @@ namespace data_rogue_core.IOSystems.BLTTiles
                     Displays = new List<InfoDisplay>
                     {
                         new InfoDisplay { ControlType = typeof(ComponentCounter), Parameters = "Health,HP", BackColor = Color.Red },
-                        new InfoDisplay { ControlType = typeof(ComponentCounter), Parameters = "AuraFighter,Aura", BackColor = Color.Gold },
-                        new InfoDisplay { ControlType = typeof(ComponentCounter), Parameters = "TiltFighter,Tilt", BackColor = Color.Purple },
                         new InfoDisplay { ControlType =  typeof(Spacer) },
-                        new InfoDisplay { ControlType =  typeof(HoveredEntityDisplayBox), Parameters = "Health,HP;AuraFighter,Aura;TiltFighter,Tilt" },
+                        new InfoDisplay { ControlType =  typeof(HoveredEntityDisplayBox), Parameters = "Health,HP;" },
                     }
                 },
                 new StatsConfiguration

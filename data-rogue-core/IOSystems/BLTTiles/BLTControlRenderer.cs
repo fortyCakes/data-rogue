@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Linq;
 using data_rogue_core.Activities;
 using data_rogue_core.Utils;
+using data_rogue_core.Components;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
@@ -42,6 +43,32 @@ namespace data_rogue_core.IOSystems.BLTTiles
             textSize.Height += 1;
 
             BLT.Color("");
+        }
+
+        protected static void RenderBackgroundBox(int x, int y, Size size, ISpriteManager spriteManager)
+        {
+            BLT.Layer(BLTLayers.UIElements);
+            BLT.Font("");
+            var width = size.Width / BLTTilesIOSystem.TILE_SPACING;
+            var height = size.Height / BLTTilesIOSystem.TILE_SPACING;
+
+            var spriteSheet = spriteManager.Get("textbox_blue");
+
+            for (int xCoord = 0; xCoord < width; xCoord++)
+            {
+                for (int yCoord = 0; yCoord < height; yCoord++)
+                {
+                    BLT.Put(x + xCoord * BLTTilesIOSystem.TILE_SPACING, y + yCoord * BLTTilesIOSystem.TILE_SPACING, spriteSheet.Tile(BLTTileDirectionHelper.GetDirections(xCoord, width, yCoord, height)));
+                }
+            }
+        }
+
+        protected static void RenderSpriteIfSpecified(int x, int y, ISpriteManager spriteManager, string spriteName, AnimationFrame frame)
+        {
+            if (!string.IsNullOrEmpty(spriteName))
+            {
+                BLT.Put(x, y, spriteManager.Tile(spriteName, frame));
+            }
         }
 
         protected static Counter GetCounter(string parameters, IEntity entity, out string counterText)
