@@ -542,3 +542,17 @@ Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
+[SpriteSheet]
+Name: aegis
+Path: Images/Sprites/UITiles/Aegis.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: aegis_none
+Path: Images/Sprites/UITiles/Aegis_None.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2

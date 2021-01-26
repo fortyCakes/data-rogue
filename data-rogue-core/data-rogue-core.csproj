@@ -666,6 +666,12 @@
     <Content Include="Images\Sprites\UITiles\AC.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\Sprites\UITiles\Aegis.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\UITiles\Aegis_None.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Sprites\UITiles\bar_container_left.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

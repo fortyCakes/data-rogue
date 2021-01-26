@@ -26,16 +26,6 @@ namespace data_rogue_one.IOSystems
             var y = control.Position.Y;
             var display = control as IDataRogueInfoControl;
 
-            BLT.Font("");
-            BLT.Layer(BLTLayers.UIElements);
-            RenderSpriteIfSpecified(x, y, spriteManager, "AC", AnimationFrame.Idle0);
-            RenderSpriteIfSpecified(x + 10, y, spriteManager, "SH", AnimationFrame.Idle0);
-            RenderSpriteIfSpecified(x + 20, y, spriteManager, "EV", AnimationFrame.Idle0);
-            
-            BLT.Layer(BLTLayers.Text);
-            BLT.Font("text");
-            //BLT.Print(x, y, "Defenses: ");
-
             var player = systemContainer.PlayerSystem.Player;
 
             var ac = Math.Floor(systemContainer.EventSystem.GetStat(player, "AC"));
@@ -43,15 +33,29 @@ namespace data_rogue_one.IOSystems
             var sh = Math.Floor(systemContainer.EventSystem.GetStat(player, "SH"));
             var currentAegis = Math.Floor(systemContainer.EventSystem.GetStat(player, "CurrentAegisLevel"));
             var aegis = Math.Floor(systemContainer.EventSystem.GetStat(player, "Aegis"));
-            var aegisText = $"Aegis: {currentAegis}/{aegis}";
+            var aegisText = $"{currentAegis}/{aegis}";
+            var renderAegis = aegis > 0;
+
+            BLT.Font("");
+            BLT.Layer(BLTLayers.UIElements);
+            RenderSpriteIfSpecified(x, y, spriteManager, "AC", AnimationFrame.Idle0);
+            RenderSpriteIfSpecified(x + 10, y, spriteManager, "SH", AnimationFrame.Idle0);
+            RenderSpriteIfSpecified(x + 20, y, spriteManager, "EV", AnimationFrame.Idle0);
+            if (renderAegis)
+            {
+                var aegisSprite = currentAegis > 0 ? "aegis" : "aegis_none";
+                RenderSpriteIfSpecified(x + 30, y, spriteManager, aegisSprite, AnimationFrame.Idle0);
+            }            
+
+            BLT.Layer(BLTLayers.Text);
+            BLT.Font("text");
 
             PrintTextCentered(ac.ToString(), x + 4, y + 2);
             PrintTextCentered(sh.ToString(), x + 4 + 10, y + 2);
             PrintTextCentered(ev.ToString(), x + 4 + 20, y + 2);
-
-            if (aegis > 0)
+            if (renderAegis)
             {
-                BLT.Print(x + 30, y + 2, aegisText);
+                PrintTextCentered(aegisText, x + 4 + 30, y + 2);
             }
 
         }
