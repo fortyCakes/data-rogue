@@ -104,6 +104,9 @@
     <None Include="Data\Entities\StaticEntities\Classes\mage.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Entities\StaticEntities\Classes\tester.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\Entities\StaticEntities\Classes\warrior.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

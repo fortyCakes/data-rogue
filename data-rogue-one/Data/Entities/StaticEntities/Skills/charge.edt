@@ -20,6 +20,8 @@ SpendTime: false
 Damage: Muscle
 Accuracy: 40
 AttackName: Charge
+[SpriteAppearance]
+Bottom: charge
 
 "Script: Charge"
 [Prototype]

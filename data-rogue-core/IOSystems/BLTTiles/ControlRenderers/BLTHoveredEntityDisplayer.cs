@@ -60,11 +60,11 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
             BLT.Layer(BLTLayers.UIElementPieces);
             string appearanceBottom = appearance.Bottom;
-            RenderSpriteIfSpecified(x, y, spriteManager, appearanceBottom, frame);
+            RenderSpriteIfSpecified(x + 2, y + 3, spriteManager, appearanceBottom, frame);
 
             BLT.Layer(BLTLayers.UIElementPieces + 1);
             string appearanceTop = appearance.Top;
-            RenderSpriteIfSpecified(x, y, spriteManager, appearanceTop, frame);
+            RenderSpriteIfSpecified(x + 2, y + 3, spriteManager, appearanceTop, frame);
 
             BLT.Layer(BLTLayers.Text);
             BLT.Font("text");
@@ -81,32 +81,6 @@ namespace data_rogue_core.IOSystems.BLTTiles
                     RenderText(x + 4, y, out var textSize, text, display.Color);
                     y += 3;
                 }
-            }
-        }
-
-        private static void RenderBackgroundBox(int x, int y, Size size, ISpriteManager spriteManager)
-        {
-            BLT.Layer(BLTLayers.UIElements);
-            BLT.Font("");
-            var width = size.Width / BLTTilesIOSystem.TILE_SPACING;
-            var height = size.Height / BLTTilesIOSystem.TILE_SPACING;
-
-            var spriteSheet = spriteManager.Get("textbox_blue");
-
-            for (int xCoord = 0; xCoord < width; xCoord++)
-            {
-                for (int yCoord = 0; yCoord < height; yCoord++)
-                {
-                    BLT.Put(x + xCoord * BLTTilesIOSystem.TILE_SPACING, y + yCoord * BLTTilesIOSystem.TILE_SPACING, spriteSheet.Tile(BLTTileDirectionHelper.GetDirections(xCoord, width, yCoord, height)));
-                }
-            }
-        }
-
-        private static void RenderSpriteIfSpecified(int x, int y, ISpriteManager spriteManager, string spriteName, AnimationFrame frame)
-        {
-            if (!string.IsNullOrEmpty(spriteName))
-            {
-                BLT.Put(x + 2, y + 3, spriteManager.Tile(spriteName, frame));
             }
         }
     }

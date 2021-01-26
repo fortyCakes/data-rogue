@@ -1,0 +1,29 @@
+﻿"Tester"
+[Class]
+[Prototype]
+Name: Class:Tester
+Singleton: true
+[Description]
+Name: Tester
+Detail: A class who focuses on testing the game. They start with whatever skills are given to them.
+[KnownSkill]
+Skill: Skill:Cleave
+Order: 1
+[KnownSkill]
+Skill: Skill:Charge
+Order: 2
+[KnownSkill]
+Skill: Skill:Teleport
+Order: 3
+[KnownSkill]
+Skill: Skill:ManaBolt
+Order: 4
+[KnownSkill]
+Skill: Skill:MinorHeal
+Order: 5
+[StartsWithItem]
+Item: Item:LeatherArmourChest
+Equipped: true
+[StartsWithItem]
+Item: Item:BronzeSword
+Equipped: true

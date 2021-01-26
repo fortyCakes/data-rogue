@@ -17,3 +17,5 @@ SpendTime: false
 Damage: Muscle
 Accuracy: 40
 AttackName: Cleave
+[SpriteAppearance]
+Bottom: cleave_1

@@ -20,6 +20,7 @@ namespace data_rogue_one.IOSystems
             config.WindowTitle = "Data Rogue One";
 
             config.StatsConfigurations = StatsConfigurations;
+            config.MessageConfigurations = MessageConfigurations;
 
             config.AdditionalControlRenderers = new List<IDataRogueControlRenderer> { new BLTDefencesDisplayer() };
 
@@ -48,7 +49,19 @@ namespace data_rogue_one.IOSystems
                         new InfoDisplay { ControlType = typeof(InteractionControl) }
                     }
 
+                },
+                new StatsConfiguration
+                {
+                    Position = new Rectangle(0,25 * TILE_SPACING - 18, 24*10, 24),
+                    Displays = new List<InfoDisplay>
+                    {
+                        new InfoDisplay { ControlType = typeof(SkillBarControl) }
+                    }
                 }
             };
+
+        public static List<MessageConfiguration> MessageConfigurations => new List<MessageConfiguration> { new MessageConfiguration {
+                Position = new Rectangle(2, (int)(13.5 * TILE_SPACING), 40 * TILE_SPACING, 10 * TILE_SPACING - 2),
+                NumberOfMessages = 15} };
     }
 }

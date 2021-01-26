@@ -33,4 +33,6 @@
     public class ExperienceControl : BaseInfoControl { }
 
     public class InteractionControl : BaseInfoControl { }
+
+    public class SkillBarControl : BaseInfoControl { }
 }

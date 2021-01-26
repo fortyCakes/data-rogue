@@ -9,11 +9,8 @@ namespace data_rogue_core.EventSystem.Rules
 
     public class MorgueAction : ApplyActionRule
     {
-        private ISystemContainer _systemContainer;
-
         public MorgueAction(ISystemContainer systemContainer) : base(systemContainer)
         {
-            _systemContainer = systemContainer;
         }
 
         public override ActionType actionType => ActionType.Morgue;

@@ -145,6 +145,7 @@
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMessageLogRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMinimapRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMultipleChoiceFormDataRenderer.cs" />
+    <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTSkillBarDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTStatsFormRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTTargetingOverlayRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTTextDisplayer.cs" />
@@ -573,6 +574,21 @@
     <Content Include="Images\Sprites\Entities\Misc\sign.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\Sprites\Entities\Skills\charge.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Entities\Skills\cleave_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Entities\Skills\default_skill_icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Entities\Skills\slash_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Entities\Skills\slash_2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Sprites\Misc\arrow.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -715,6 +731,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\UITiles\SH.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\UITiles\skill_frame.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\UITiles\textbox_blue.png">

@@ -563,3 +563,31 @@ Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
+[SpriteSheet]
+Name: skill_frame
+Path: Images/Sprites/UITiles/skill_frame.png
+Type: SingleSprite
+SpriteWidth: 24
+SpriteHeight: 24
+Scaling: 2
+[SpriteSheet]
+Name: default_skill_icon
+Path: Images/Sprites/Entities/Skills/default_skill_icon.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: charge
+Path: Images/Sprites/Entities/Skills/charge.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: cleave_1
+Path: Images/Sprites/Entities/Skills/cleave_1.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
