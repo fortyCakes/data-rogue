@@ -530,14 +530,14 @@ SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
 Name: EV
-Path: Images/Sprites/UITiles/AC.png
+Path: Images/Sprites/UITiles/EV.png
 Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
 Name: SH
-Path: Images/Sprites/UITiles/AC.png
+Path: Images/Sprites/UITiles/SH.png
 Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16

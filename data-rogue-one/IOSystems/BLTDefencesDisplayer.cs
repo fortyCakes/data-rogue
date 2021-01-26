@@ -10,6 +10,7 @@ using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.IOSystems.BLTTiles;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems.Interfaces;
+using data_rogue_core.Utils;
 
 namespace data_rogue_one.IOSystems
 {
@@ -25,15 +26,45 @@ namespace data_rogue_one.IOSystems
             var y = control.Position.Y;
             var display = control as IDataRogueInfoControl;
 
-            //RenderBackgroundBox(x, y, GetSizeInternal(spriteManager, control, systemContainer, playerFov), spriteManager);
-            BLT.Font("Text");
-            BLT.Print(x, y, "Defenses: ");
-            BLT.Print(x, y + 4, "AC: ?, SH: ?, EV: ?");
+            BLT.Font("");
+            BLT.Layer(BLTLayers.UIElements);
+            RenderSpriteIfSpecified(x, y, spriteManager, "AC", AnimationFrame.Idle0);
+            RenderSpriteIfSpecified(x + 10, y, spriteManager, "SH", AnimationFrame.Idle0);
+            RenderSpriteIfSpecified(x + 20, y, spriteManager, "EV", AnimationFrame.Idle0);
+            
+            BLT.Layer(BLTLayers.Text);
+            BLT.Font("text");
+            //BLT.Print(x, y, "Defenses: ");
+
+            var player = systemContainer.PlayerSystem.Player;
+
+            var ac = Math.Floor(systemContainer.EventSystem.GetStat(player, "AC"));
+            var ev = Math.Floor(systemContainer.EventSystem.GetStat(player, "EV"));
+            var sh = Math.Floor(systemContainer.EventSystem.GetStat(player, "SH"));
+            var currentAegis = Math.Floor(systemContainer.EventSystem.GetStat(player, "CurrentAegisLevel"));
+            var aegis = Math.Floor(systemContainer.EventSystem.GetStat(player, "Aegis"));
+            var aegisText = $"Aegis: {currentAegis}/{aegis}";
+
+            PrintTextCentered(ac.ToString(), x + 4, y + 2);
+            PrintTextCentered(sh.ToString(), x + 4 + 10, y + 2);
+            PrintTextCentered(ev.ToString(), x + 4 + 20, y + 2);
+
+            if (aegis > 0)
+            {
+                BLT.Print(x + 30, y + 2, aegisText);
+            }
+
+        }
+
+        private void PrintTextCentered(string text, int x, int y)
+        {
+            var textWidth = BLT.Measure(text).Width;
+            BLT.Print(x - textWidth / 2, y, text);
         }
 
         protected override Size GetSizeInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
-            return new Size(64, 8);
+            return new Size(64, 10);
         }
     }
 }

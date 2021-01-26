@@ -5,6 +5,7 @@ default:Cell:Tree
 15,1: Entity(Props:Sign|Dialog.Text=I am a sign!)
 16,1: Entity(Props:Sign|Dialog.Text=I am another sign!)
 16,3: Entity(Props:Grave|Dialog.Text=RIP PLACEHOLDER the cat)
+10,1: Entity(Item:WoodenOrb);
 .:Cell:Grass
 ,:Cell:SpawnPoint
 #:Cell:Tree
