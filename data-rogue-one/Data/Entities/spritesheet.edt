@@ -556,3 +556,10 @@ Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
+[SpriteSheet]
+Name: defence_broken
+Path: Images/Sprites/UITiles/defence_broken.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2

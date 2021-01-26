@@ -708,6 +708,9 @@
     <Content Include="Images\Sprites\Misc\selector-right.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\Sprites\UITiles\defence_broken.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Sprites\UITiles\EV.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
