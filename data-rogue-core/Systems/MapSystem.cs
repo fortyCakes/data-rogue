@@ -15,5 +15,14 @@ namespace data_rogue_core.Systems
         public MapCollection MapCollection { get; private set; }
 
         public IEntity CellAt(MapCoordinate coordinate) => MapCollection[coordinate.Key].CellAt(coordinate);
+
+        public IMap TryGetMap(MapKey mapKey)
+        {
+            if (MapCollection.ContainsKey(mapKey))
+            {
+                return MapCollection[mapKey];
+            }
+            return null;
+        }
     }
 }

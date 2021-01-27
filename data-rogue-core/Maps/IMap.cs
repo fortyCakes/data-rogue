@@ -33,5 +33,7 @@ namespace data_rogue_core.Maps
         void SetCellsInRange(int x1, int x2, int y1, int y2, IEntity cell);
         void SetSeen(int x, int y, bool seen = true);
         void SetSeen(MapCoordinate coordinate, bool seen = true);
+
+        void InvalidateCache();
     }
 }

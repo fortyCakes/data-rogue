@@ -33,12 +33,15 @@ namespace data_rogue_core.Maps
         public int BottomY => Cells.Any() ? Cells.Max(c => c.Key.Y) : 0;
         public Vector Origin => new Vector(LeftX, TopY);
 
+        private IFovCache FovCache;
+
         public Map(string key, IEntity defaultCell)
         {
             CheckEntityIsCell(defaultCell);
 
             MapKey = new MapKey(key);
             DefaultCell = defaultCell;
+            FovCache = new FovCache();
         }
 
         private static void CheckEntityIsCell(IEntity defaultCell)
@@ -96,6 +99,8 @@ namespace data_rogue_core.Maps
             CheckEntityIsCell(cell);
 
             Cells[coordinate] = cell;
+
+            InvalidateCache();
         }
 
         public void SetCellsInRange(int x1, int x2, int y1, int y2, IEntity cell)
@@ -127,6 +132,7 @@ namespace data_rogue_core.Maps
             if (Cells.ContainsKey(mapCoordinate))
             {
                 Cells.Remove(mapCoordinate);
+                InvalidateCache();
             }
         }
 
@@ -137,6 +143,13 @@ namespace data_rogue_core.Maps
 
         public List<MapCoordinate> FovFrom(IPositionSystem positionSystem, MapCoordinate mapCoordinate, int range, Func<Vector, bool> transparentTest = null)
         {
+            var cachedFov = FovCache.TryGetCachedFov(mapCoordinate, range);
+
+            if (cachedFov != null)
+            {
+                return cachedFov;
+            }
+
             if (mapCoordinate.Key != MapKey)
             {
                 return new List<MapCoordinate>();
@@ -156,6 +169,8 @@ namespace data_rogue_core.Maps
 
             var visibleCells = visibleVectors.Select(v => mapCoordinate + v).ToList();
 
+            FovCache.Cache(mapCoordinate, range, visibleCells);
+
             return visibleCells;
         }
 
@@ -164,6 +179,8 @@ namespace data_rogue_core.Maps
             if (Cells.ContainsKey(coordinate))
             {
                 Cells.Remove(coordinate);
+
+                InvalidateCache();
             }
         }
 
@@ -175,6 +192,11 @@ namespace data_rogue_core.Maps
         public void SetSeen(int x, int y, bool seen = true)
         {
             SeenCoordinates.Add(new MapCoordinate(MapKey, x, y));
+        }
+
+        public void InvalidateCache()
+        {
+            FovCache.Invalidate();
         }
     }
 }

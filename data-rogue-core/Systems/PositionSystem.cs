@@ -249,6 +249,15 @@ namespace data_rogue_core.Systems
 
         private void UpdateCache(IEntity entity, MapCoordinate mapCoordinate, MapCoordinate oldMapCoordinate)
         {
+            if (mapCoordinate != null)
+            {
+                _mapSystem.TryGetMap(mapCoordinate.Key)?.InvalidateCache();
+            }
+            if (oldMapCoordinate != null)
+            {
+                _mapSystem.TryGetMap(oldMapCoordinate.Key)?.InvalidateCache();
+            }
+
             _positionCache[entity] = mapCoordinate;
             _entityCache.UpdatePosition(entity, mapCoordinate, oldMapCoordinate);
         }

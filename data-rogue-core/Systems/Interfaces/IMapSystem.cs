@@ -11,5 +11,6 @@ namespace data_rogue_core.Systems.Interfaces
         IEntity CellAt(MapCoordinate coordinate);
 
         void Initialise();
+        IMap TryGetMap(MapKey key);
     }
 }

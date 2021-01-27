@@ -74,6 +74,7 @@
     <Compile Include="EntityEngineSystem\EntitySerializerTests.cs" />
     <Compile Include="EventSystem\EventSystemTests.cs" />
     <Compile Include="Maps\EntityCommandExecutorTests.cs" />
+    <Compile Include="Maps\FovCacheTests.cs" />
     <Compile Include="Maps\MapCoordinateTests.cs" />
     <Compile Include="Maps\MapKeyTests.cs" />
     <Compile Include="Maps\MapSerializerTests.cs" />
