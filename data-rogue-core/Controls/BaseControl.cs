@@ -18,7 +18,7 @@ namespace data_rogue_core.Controls
 
         public Rectangle Position { get; set; }
 
-        public Color Color { get; protected set; } = Color.White;
+        public Color Color { get; set; } = Color.White;
         public Color BackColor { get; protected set; } = Color.Black;
 
         public virtual void Click(object sender, PositionEventHandlerArgs eventArgs)

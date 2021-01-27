@@ -19,5 +19,20 @@ namespace data_rogue_core.IOSystems.BLTTiles
         {
             return (control as MenuItem).Text;
         }
+
+        protected override void DisplayInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        {
+            var menuItem = control as MenuItem;
+            if (menuItem.Enabled)
+            {
+                menuItem.Color = Color.White;
+            }
+            else
+            {
+                menuItem.Color = Color.Gray;
+            }
+
+            base.DisplayInternal(spriteManager, control, systemContainer, playerFov);
+        }
     }
 }
