@@ -26,6 +26,11 @@ namespace data_rogue_core.IOSystems
             DisplayInternal(console, display, systemContainer, playerFov);
         }
 
+        public virtual IEntity EntityFromMouseData(IDataRogueControl display, ISystemContainer systemContainer, MouseData mouse)
+        {
+            return null;
+        }
+
         public Size GetSize(object handle, IDataRogueControl display, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
             var console = handle as RLConsole;

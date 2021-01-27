@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using data_rogue_core.EntityEngineSystem;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
@@ -37,20 +38,25 @@ namespace data_rogue_core.IOSystems.BLTTiles
                 BLT.Clear();
             }
 
+
             var playerFov = systemContainer.ActivitySystem.GameplayActivity.Running ? FOVHelper.CalculatePlayerFov(systemContainer) : null;
+            DoLayout(systemContainer, activity, playerFov);
 
-            _height = BLT.State(BLT.TK_HEIGHT);
-            _width = BLT.State(BLT.TK_WIDTH);
-
-            activity.Layout(this, systemContainer, _spriteManager, _controlRenderers, playerFov, _width, _height);
             foreach (var control in activity.Controls)
             {
                 if (control.Visible)
                 {
-                    IDataRogueControlRenderer statsDisplayer = _controlRenderers.Single(s => s.DisplayType == control.GetType());
-                    statsDisplayer.Display(_spriteManager, control, systemContainer, playerFov);
+                    GetRendererFor(control).Display(_spriteManager, control, systemContainer, playerFov);
                 }
             }
+        }
+
+        private void DoLayout(ISystemContainer systemContainer, IActivity activity, List<MapCoordinate> playerFov)
+        {
+            _height = BLT.State(BLT.TK_HEIGHT);
+            _width = BLT.State(BLT.TK_WIDTH);
+
+            activity.Layout(this, systemContainer, _spriteManager, _controlRenderers, playerFov, _width, _height);
         }
 
         public MapCoordinate GetMapCoordinateFromMousePosition(MapCoordinate cameraPosition, int x, int y)
@@ -87,6 +93,23 @@ namespace data_rogue_core.IOSystems.BLTTiles
         private bool IsOnMap(MapConfiguration map, int x, int y)
         {
             return x >= map.Position.Left && x <= map.Position.Right && y >= map.Position.Top && y < map.Position.Bottom;
+        }
+
+        public IDataRogueControlRenderer GetRendererFor(IDataRogueControl control)
+        {
+            return _controlRenderers.Single(s => s.DisplayType == control.GetType());
+        }
+
+        public IDataRogueControl GetControlFromMousePosition(ISystemContainer systemContainer, IActivity activity, MapCoordinate cameraPosition, int x, int y)
+        {
+            var playerFov = systemContainer.ActivitySystem.GameplayActivity.Running ? FOVHelper.CalculatePlayerFov(systemContainer) : null;
+            DoLayout(systemContainer, activity, playerFov);
+
+            var mousePoint = new Point(x, y);
+
+            var onControls = activity.Controls.Where(c => c.Position.Contains(mousePoint));
+
+            return onControls.LastOrDefault();
         }
     }
 }

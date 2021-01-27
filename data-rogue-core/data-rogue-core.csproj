@@ -95,6 +95,7 @@
     <Compile Include="Components\Targeting.cs" />
     <Compile Include="Components\TextParticle.cs" />
     <Compile Include="Controls\MinimapControl.cs" />
+    <Compile Include="Controls\SkillBarControl.cs" />
     <Compile Include="Data\VectorList.cs" />
     <Compile Include="Controls\BackgroundControl.cs" />
     <Compile Include="Controls\ButtonControl.cs" />

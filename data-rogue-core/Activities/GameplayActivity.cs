@@ -54,6 +54,26 @@ namespace data_rogue_core.Activities
         {
             MapCoordinate mapCoordinate = systemContainer.RendererSystem.Renderer.GetMapCoordinateFromMousePosition(systemContainer.RendererSystem.CameraPosition, mouse.X, mouse.Y);
             systemContainer.ControlSystem.HoveredCoordinate = mapCoordinate;
+
+            IDataRogueControl mouseOverControl = systemContainer.RendererSystem.Renderer.GetControlFromMousePosition(
+                systemContainer, 
+                this, 
+                systemContainer.RendererSystem.CameraPosition, 
+                mouse.X, 
+                mouse.Y);
+
+            if (mouseOverControl != null && mouseOverControl.CanHandleMouse)
+            {
+                var renderer = systemContainer.RendererSystem.Renderer.GetRendererFor(mouseOverControl);
+
+                var action = mouseOverControl.HandleMouse(mouse, renderer, systemContainer);
+                if (action != null)
+                {
+                    systemContainer.EventSystem.Try(EventType.Action, systemContainer.PlayerSystem.Player, action);
+                    return; // If the control tried to do an action, it handled the mouse. Stop here.
+                }
+            }
+            
             var player = systemContainer.PlayerSystem.Player;
 
             if (mouse.IsLeftClick && systemContainer.TimeSystem.WaitingForInput && CanAutowalkToCoordinate(systemContainer, mapCoordinate))

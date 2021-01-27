@@ -15,5 +15,7 @@ namespace data_rogue_core.IOSystems
         Size GetSize(object handle, IDataRogueControl display, ISystemContainer systemContainer, List<MapCoordinate> playerFov);
 
         void Display(object handle, IDataRogueControl display, ISystemContainer systemContainer, List<MapCoordinate> playerFov);
+
+        IEntity EntityFromMouseData(IDataRogueControl display, ISystemContainer systemContainer, MouseData mouse);
     }
 }

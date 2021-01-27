@@ -24,9 +24,8 @@ namespace data_rogue_core.IOSystems.BLTTiles.ControlRenderers
             var y = control.Position.Y;
             var display = control as IDataRogueInfoControl;
 
-            var playerSkills = systemContainer.SkillSystem.KnownSkills(systemContainer.PlayerSystem.Player);
+            var skillsOnBar = GetSkillsOnBar(systemContainer);
 
-            var skillsOnBar = playerSkills.Take(10);
             var previousSkills = 0;
 
             BLT.Font("");
@@ -58,6 +57,51 @@ namespace data_rogue_core.IOSystems.BLTTiles.ControlRenderers
         protected override Size GetSizeInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
             return new Size(24 * 10, 24);
+        }
+
+        public override IEntity EntityFromMouseData(IDataRogueControl control, ISystemContainer systemContainer, MouseData mouse)
+        {
+            var x = control.Position.X;
+            var y = control.Position.Y;
+            var display = control as IDataRogueInfoControl;
+            var skillsOnBar = GetSkillsOnBar(systemContainer);
+
+            var relativeX = mouse.X - x;
+            var relativeY = mouse.Y - y;
+
+            if (relativeY <= 1 || relativeY >= 10)
+            {
+                return null;
+            }
+
+            var xFromLeftOfFirstFrame = relativeX - 2;
+            var xIndex = xFromLeftOfFirstFrame / 12;
+            var xFromLeftOfCurrentFrame = xFromLeftOfFirstFrame - xIndex * 12;
+
+            if (IsInsideFrame(xFromLeftOfCurrentFrame))
+            {
+                return null;
+            }
+
+            if (xIndex >= 0 && xIndex < skillsOnBar.Count())
+            {
+                return skillsOnBar[xIndex];
+            }
+
+            return null;
+        }
+
+        private static bool IsInsideFrame(int xFromLeftOfCurrentFrame)
+        {
+            return xFromLeftOfCurrentFrame < 0 || xFromLeftOfCurrentFrame >= 8;
+        }
+
+        private static List<IEntity> GetSkillsOnBar(ISystemContainer systemContainer)
+        {
+            var playerSkills = systemContainer.SkillSystem.KnownSkills(systemContainer.PlayerSystem.Player);
+
+            var skillsOnBar = playerSkills.Take(10);
+            return skillsOnBar.ToList();
         }
     }
 }

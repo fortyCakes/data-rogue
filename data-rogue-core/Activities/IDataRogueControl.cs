@@ -1,5 +1,7 @@
 ﻿using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.IOSystems;
+using data_rogue_core.Systems;
+using data_rogue_core.Systems.Interfaces;
 using System;
 using System.Drawing;
 
@@ -9,6 +11,11 @@ namespace data_rogue_core.Activities
     {
         bool IsFocused { get; set; }
         bool IsPressed { get; set; }
+
+        bool CanHandleMouse { get; }
+
+        ActionEventData HandleMouse(MouseData mouse, IDataRogueControlRenderer renderer, ISystemContainer systemContainer);
+
         Rectangle Position { get; set; }
 
         Color Color { get; }

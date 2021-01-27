@@ -88,5 +88,10 @@ namespace data_rogue_core.IOSystems.BLTTiles
             var field = fields.Single(f => f.Name == counterName);
             return (Counter)field.GetValue(component);
         }
+
+        public virtual IEntity EntityFromMouseData(IDataRogueControl display, ISystemContainer systemContainer, MouseData mouse)
+        {
+            return null;
+        }
     }
 }

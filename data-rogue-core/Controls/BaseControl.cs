@@ -1,4 +1,7 @@
 ﻿using data_rogue_core.Activities;
+using data_rogue_core.IOSystems;
+using data_rogue_core.Systems;
+using data_rogue_core.Systems.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -8,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace data_rogue_core.Controls
 {
-    public class BaseControl : IDataRogueControl
+    public abstract class BaseControl : IDataRogueControl
     {
         public bool IsFocused { get; set; }
         public bool IsPressed { get; set; }
@@ -22,8 +25,12 @@ namespace data_rogue_core.Controls
         {
             OnClick?.Invoke(sender, eventArgs);
         }
+
+        public virtual ActionEventData HandleMouse(MouseData mouse, IDataRogueControlRenderer renderer, ISystemContainer systemContainer) => null;
+
         public event PositionEventHandler OnClick;
 
         public bool Visible { get; set; } = true;
+        public virtual bool CanHandleMouse => false;
     }
 }
