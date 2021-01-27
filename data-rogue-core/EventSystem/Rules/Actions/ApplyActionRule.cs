@@ -19,6 +19,7 @@ namespace data_rogue_core.EventSystem.Rules
             typeof(EnterAction),
             typeof(EquipmentMenuAction),
             typeof(InventoryMenuAction),
+            typeof(DebugMenuAction),
             typeof(GetItemAction),
             typeof(SkillMenuAction),
             typeof(UseSkillAction),

@@ -104,5 +104,8 @@ Action: Hotbar(8)
 [KeyBinding]
 Key: Number0
 Action: Hotbar(9)
+[KeyBinding]
+Key: Ctrl+W
+Action: DebugMenu
 
 

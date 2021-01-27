@@ -108,6 +108,7 @@
     <Compile Include="Controls\BaseControl.cs" />
     <Compile Include="Controls\BaseStatsControl.cs" />
     <Compile Include="Controls\TargetingOverlayControl.cs" />
+    <Compile Include="EventSystem\Rules\Actions\DebugMenuAction.cs" />
     <Compile Include="EventSystem\Rules\Actions\FollowPathAction.cs" />
     <Compile Include="Behaviours\FollowPathBehaviour.cs" />
     <Compile Include="EventSystem\Rules\Actions\HotbarAction.cs" />
@@ -366,6 +367,7 @@
     <Compile Include="Maps\MapGenCommands\MapGenCommand.cs" />
     <Compile Include="EventSystem\EventData\DropItemEventData.cs" />
     <Compile Include="Maps\VectorDouble.cs" />
+    <Compile Include="Menus\DynamicMenus\DebugMenu.cs" />
     <Compile Include="Menus\DynamicMenus\SkillMenu.cs" />
     <Compile Include="Menus\DynamicMenus\EquipmentMenu.cs" />
     <Compile Include="Menus\DynamicMenus\InventoryMenu.cs" />

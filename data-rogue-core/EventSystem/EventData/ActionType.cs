@@ -25,6 +25,7 @@
         Morgue,
         Interact,
         NextInteraction,
-        Hotbar
+        Hotbar,
+        DebugMenu
     }
 }
