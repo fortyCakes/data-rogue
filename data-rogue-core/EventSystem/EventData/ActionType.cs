@@ -24,6 +24,7 @@
         PlayerStatus,
         Morgue,
         Interact,
-        NextInteraction
+        NextInteraction,
+        Hotbar
     }
 }

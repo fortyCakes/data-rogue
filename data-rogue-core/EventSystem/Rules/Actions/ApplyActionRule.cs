@@ -25,7 +25,8 @@ namespace data_rogue_core.EventSystem.Rules
             typeof(FollowPathAction),
             typeof(WaitAction),
             typeof(InteractAction),
-            typeof(NextInteractionAction)
+            typeof(NextInteractionAction),
+            typeof(HotbarAction)
         };
 
         protected ISystemContainer _systemContainer;

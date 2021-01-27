@@ -110,6 +110,7 @@
     <Compile Include="Controls\TargetingOverlayControl.cs" />
     <Compile Include="EventSystem\Rules\Actions\FollowPathAction.cs" />
     <Compile Include="Behaviours\FollowPathBehaviour.cs" />
+    <Compile Include="EventSystem\Rules\Actions\HotbarAction.cs" />
     <Compile Include="EventSystem\Rules\Actions\InteractAction.cs" />
     <Compile Include="EventSystem\Rules\Actions\NextInteractionAction.cs" />
     <Compile Include="EventSystem\Rules\Actions\ResolveRangedAttackAction.cs" />

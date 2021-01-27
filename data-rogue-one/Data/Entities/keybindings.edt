@@ -74,4 +74,35 @@ Action: RangedAttack
 [KeyBinding]
 Key: Space
 Action: Interact
+[KeyBinding]
+Key: Number1
+Action: Hotbar(0)
+[KeyBinding]
+Key: Number2
+Action: Hotbar(1)
+[KeyBinding]
+Key: Number3
+Action: Hotbar(2)
+[KeyBinding]
+Key: Number4
+Action: Hotbar(3)
+[KeyBinding]
+Key: Number5
+Action: Hotbar(4)
+[KeyBinding]
+Key: Number6
+Action: Hotbar(5)
+[KeyBinding]
+Key: Number7
+Action: Hotbar(6)
+[KeyBinding]
+Key: Number8
+Action: Hotbar(7)
+[KeyBinding]
+Key: Number9
+Action: Hotbar(8)
+[KeyBinding]
+Key: Number0
+Action: Hotbar(9)
+
 
