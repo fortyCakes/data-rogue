@@ -39,22 +39,22 @@ namespace data_rogue_core.IOSystems.BLTTiles
                 SpriteAppearance appearance = interactEntity.Has<SpriteAppearance>() ? interactEntity.Get<SpriteAppearance>() : new SpriteAppearance { Bottom = "unknown" };
                 AnimationFrame frame = interactEntity.Has<Animated>() ? systemContainer.AnimationSystem.GetFrame(interactEntity) : AnimationFrame.Idle0;
 
-                BLT.Layer(BLTLayers.UIElementPieces);
+                BLTLayers.Set(BLTLayers.UIElementPieces, display.ActivityIndex);
                 string appearanceBottom = appearance.Bottom;
                 RenderSpriteIfSpecified(x + 4, y + 4, spriteManager, appearanceBottom, frame);
 
-                BLT.Layer(BLTLayers.UIElementPieces + 1);
+                BLTLayers.Set(BLTLayers.UIElementPieces + 1, display.ActivityIndex);
                 string appearanceTop = appearance.Top;
                 RenderSpriteIfSpecified(x + 4, y + 4, spriteManager, appearanceTop, frame);
 
-                BLT.Layer(BLTLayers.Text);
+                BLTLayers.Set(BLTLayers.Text, display.ActivityIndex);
                 BLT.Font("text");
                 BLT.Color(Color.LightBlue);
                 BLT.Print(x + BLTTilesIOSystem.TILE_SPACING + 6, y + BLTTilesIOSystem.TILE_SPACING / 2, interactable.Verb);
                 BLT.Color(Color.White);
                 BLT.Print(x + BLTTilesIOSystem.TILE_SPACING + 6, y + 4 + BLTTilesIOSystem.TILE_SPACING / 2, interactEntity.DescriptionName);
 
-                RenderBackgroundBox(x, y, GetSizeInternal(spriteManager, control, systemContainer, playerFov), spriteManager);
+                RenderBackgroundBox(x, y, display.ActivityIndex, GetSizeInternal(spriteManager, control, systemContainer, playerFov), spriteManager);
             }
         }
 

@@ -30,7 +30,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
             if (control.IsFocused)
             {
-                BLT.Layer(BLTLayers.UIElements);
+                BLTLayers.Set(BLTLayers.UIElements, control.ActivityIndex);
                 BLT.Font("");
                 BLT.Put(x, y - 2, spriteManager.Tile("ui_arrow", TileDirections.Left));
                 BLT.Put(x + textSize.Width + 12, y - 2, spriteManager.Tile("ui_arrow", TileDirections.Right));

@@ -26,7 +26,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
                 { TargetingStatus.Targeted, spriteManager.Get("current_target") }
             };
 
-            BLT.Layer(BLTLayers.MapShade);
+            BLTLayers.Set(BLTLayers.MapShade, control.ActivityIndex);
             BLT.Font("");
 
             var cameraPosition = systemContainer.RendererSystem.CameraPosition;

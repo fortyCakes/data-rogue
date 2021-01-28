@@ -155,7 +155,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
         private void RenderMapParticles(ISystemContainer systemContainer, bool[,] renderTracker, bool[,] fovTracker, List<IEntity>[,] particlesTracker, int renderWidth, int renderHeight, IDataRogueControl mapConfiguration)
         {
-            BLT.Layer(BLTLayers.MapParticles);
+            BLTLayers.Set(BLTLayers.MapParticles, mapConfiguration.ActivityIndex);
             BLT.Font("text");
 
             for (int x = 0; x < renderWidth; x++)
@@ -188,7 +188,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
         {
             var shadeSprite = spriteManager.Get("shade");
 
-            BLT.Layer(BLTLayers.MapShade);
+            BLTLayers.Set(BLTLayers.MapShade, mapConfiguration.ActivityIndex);
             BLT.Font("");
             BLT.Color(Color.White);
 
@@ -241,11 +241,11 @@ namespace data_rogue_core.IOSystems.BLTTiles
         {
             if (z == 0)
             {
-                BLT.Layer(top ? BLTLayers.MapTileTop : BLTLayers.MapTileBottom);
+                BLTLayers.Set(top ? BLTLayers.MapTileTop : BLTLayers.MapTileBottom, mapConfiguration.ActivityIndex);
             }
             else
             {
-                BLT.Layer(top ? BLTLayers.MapEntityTop : BLTLayers.MapEntityBottom);
+                BLTLayers.Set(top ? BLTLayers.MapEntityTop : BLTLayers.MapEntityBottom, mapConfiguration.ActivityIndex);
             }
 
             BLT.Font("");

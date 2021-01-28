@@ -24,7 +24,7 @@ namespace data_rogue_core.IOSystems
             if (display.AvailableActions.Count > 1)
             {
                 BLT.Font("text");
-                BLT.Layer(BLTLayers.Text);
+                BLTLayers.Set(BLTLayers.Text, display.ActivityIndex);
 
                 BLT.Color(display.Color);
 

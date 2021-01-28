@@ -1,4 +1,6 @@
-﻿namespace data_rogue_core.Forms.StaticForms
+﻿using data_rogue_core.Controls;
+
+namespace data_rogue_core.Forms.StaticForms
 {
     public class TextFormData : FormData
     {

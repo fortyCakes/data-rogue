@@ -21,7 +21,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             var text = display.Parameters;
             BLT.Font("textLarge");
 
-            BLT.Layer(BLTLayers.Text);
+            BLTLayers.Set(BLTLayers.Text, display.ActivityIndex);
             BLT.Color(display.Color);
             BLT.Print(display.Position.X, display.Position.Y, text);
 

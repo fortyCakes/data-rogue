@@ -17,7 +17,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
         public override Type DisplayType => typeof(MinimapControl);
         protected override void DisplayInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
-            BLT.Layer(BLTLayers.UIElements);
+            BLTLayers.Set(BLTLayers.UIElements, control.ActivityIndex);
             BLT.Font("");
             var sprite = spriteManager.Tile("minimap_tile");
 

@@ -118,11 +118,13 @@ namespace data_rogue_core
                     }
                 }
 
+                var activityIndex = 0;
+
                 foreach (IActivity activity in renderStack)
                 {
                     if ((activity as GameplayActivity)?.Running ?? true)
                     {
-                        SystemContainer.RendererSystem.Renderer.Render(SystemContainer, activity);
+                        SystemContainer.RendererSystem.Renderer.Render(SystemContainer, activity, activityIndex++);
                     }
                 }
 

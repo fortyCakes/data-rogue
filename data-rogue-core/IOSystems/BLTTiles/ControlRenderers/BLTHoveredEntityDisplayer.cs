@@ -32,7 +32,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
                 RenderEntityDetails(x, y, display, hoveredEntity, systemContainer, spriteManager);
 
-                RenderBackgroundBox(x, y, GetSizeInternal(spriteManager, control, systemContainer, playerFov), spriteManager);
+                RenderBackgroundBox(x, y, control.ActivityIndex, GetSizeInternal(spriteManager, control, systemContainer, playerFov), spriteManager);
 
             }
         }
@@ -58,15 +58,15 @@ namespace data_rogue_core.IOSystems.BLTTiles
             SpriteAppearance appearance = hoveredEntity.Has<SpriteAppearance>() ? hoveredEntity.Get<SpriteAppearance>() : new SpriteAppearance { Bottom = "unknown" };
             AnimationFrame frame = hoveredEntity.Has<Animated>() ? systemContainer.AnimationSystem.GetFrame(hoveredEntity) : AnimationFrame.Idle0;
 
-            BLT.Layer(BLTLayers.UIElementPieces);
+            BLTLayers.Set(BLTLayers.UIElementPieces, display.ActivityIndex);
             string appearanceBottom = appearance.Bottom;
             RenderSpriteIfSpecified(x + 2, y + 3, spriteManager, appearanceBottom, frame);
 
-            BLT.Layer(BLTLayers.UIElementPieces + 1);
+            BLTLayers.Set(BLTLayers.UIElementPieces + 1, display.ActivityIndex);
             string appearanceTop = appearance.Top;
             RenderSpriteIfSpecified(x + 2, y + 3, spriteManager, appearanceTop, frame);
 
-            BLT.Layer(BLTLayers.Text);
+            BLTLayers.Set(BLTLayers.Text, display.ActivityIndex);
             BLT.Font("text");
             BLT.Print(x + BLTTilesIOSystem.TILE_SPACING + 4, y - 1 + BLTTilesIOSystem.TILE_SPACING / 2, hoveredEntity.DescriptionName);
             
@@ -78,7 +78,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
                 if (counter != null)
                 {
                     var text = $"{counterText}: {counter}";
-                    RenderText(x + 4, y, out var textSize, text, display.Color);
+                    RenderText(x + 4, y, display.ActivityIndex, out var textSize, text, display.Color);
                     y += 3;
                 }
             }

@@ -1,4 +1,7 @@
-﻿namespace data_rogue_core.IOSystems.BLTTiles
+﻿using BearLib;
+using System;
+
+namespace data_rogue_core.IOSystems.BLTTiles
 {
     public static class BLTLayers
     {
@@ -18,5 +21,15 @@
         public static int Top = 24;
 
         public static int FULL_LAYER_SIZE = 25;
+
+        public static void Set(int layer, int activityIndex)
+        {
+            if (activityIndex > 11)
+            {
+                throw new ApplicationException("Can't have more than 11 layers of activities");
+            }
+
+            BLT.Layer(layer + activityIndex * FULL_LAYER_SIZE);
+        }
     }
 }

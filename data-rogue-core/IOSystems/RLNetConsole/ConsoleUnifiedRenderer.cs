@@ -26,7 +26,7 @@ namespace data_rogue_core.IOSystems.RLNetConsole
 
         public Padding ActivityPadding => new Padding(1);
 
-        public void Render(ISystemContainer systemContainer, IActivity activity)
+        public void Render(ISystemContainer systemContainer, IActivity activity, int activityIndex)
         {
             if (activity.RendersEntireSpace)
             {
@@ -38,6 +38,7 @@ namespace data_rogue_core.IOSystems.RLNetConsole
 
             foreach (var control in activity.Controls)
             {
+                control.ActivityIndex = activityIndex;
                 IDataRogueControlRenderer controlRenderer = GetRendererFor(control);
                 controlRenderer.Display(_console, control, systemContainer, playerFov);
             }

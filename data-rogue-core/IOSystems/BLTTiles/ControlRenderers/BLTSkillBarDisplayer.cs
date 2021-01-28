@@ -45,9 +45,9 @@ namespace data_rogue_core.IOSystems.BLTTiles.ControlRenderers
                     skillSpriteTop = appearance.Top;
                 }
 
-                BLT.Layer(BLTLayers.UIElements);
+                BLTLayers.Set(BLTLayers.UIElements, control.ActivityIndex);
                 RenderSpriteIfSpecified(x + previousSkills * 12 + 2, y + 2, spriteManager, skillSpriteBottom, AnimationFrame.Idle0);
-                BLT.Layer(BLTLayers.UIElementPieces);
+                BLTLayers.Set(BLTLayers.UIElementPieces, control.ActivityIndex);
                 RenderSpriteIfSpecified(x + previousSkills * 12 + 2, y + 2, spriteManager, skillSpriteTop, AnimationFrame.Idle0);
 
                 previousSkills++;

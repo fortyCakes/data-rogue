@@ -4,24 +4,24 @@ using System.Drawing;
 using BearLib;
 using BLTWrapper;
 using data_rogue_core.Activities;
-using data_rogue_core.Forms;
+using data_rogue_core.Controls;
 using data_rogue_core.Forms.StaticForms;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
-    public class BLTTextFormDataRenderer : BLTTextBoxRenderer
-    {
-        const int TILE_SIZE = BLTTilesIOSystem.TILE_SPACING / 2;
+    public class BLTTextBoxRenderer : BLTControlRenderer
+    { 
+        const int TILE_SIZE = BLTTilesIOSystem.TILE_SPACING/2;
 
-        public override Type DisplayType => typeof(TextFormData);
+        public override Type DisplayType => typeof(TextBoxControl);
 
         protected override void DisplayInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
             var x = control.Position.X;
             var y = control.Position.Y;
-            var text = (control as TextFormData).Value.ToString();
+            var text = (control as TextBoxControl).Value.ToString();
 
             var spriteSheet = spriteManager.Get("textbox_grey_small");
             BLTLayers.Set(BLTLayers.Text, control.ActivityIndex);

@@ -78,6 +78,7 @@
     <Compile Include="Activities\MouseControlHelper.cs" />
     <Compile Include="Activities\PositionEventHandler.cs" />
     <Compile Include="Activities\TargetingStatus.cs" />
+    <Compile Include="Activities\TextInputActivity.cs" />
     <Compile Include="Activities\ToastActivity.cs" />
     <Compile Include="Behaviours\UseSkillBehaviour.cs" />
     <Compile Include="Behaviours\MoveAwayFromPlayerBehaviour.cs" />
@@ -151,6 +152,7 @@
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTSkillBarDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTStatsFormRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTTargetingOverlayRenderer.cs" />
+    <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTTextBoxRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTTextDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTTextFormDataRenderer.cs" />
     <Compile Include="IOSystems\FOVHelper.cs" />

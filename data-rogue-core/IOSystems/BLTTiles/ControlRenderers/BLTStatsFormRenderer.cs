@@ -44,10 +44,10 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
                 if (statSelected)
                 {
-                    BLT.Layer(BLTLayers.UIElements);
+                    BLTLayers.Set(BLTLayers.UIElements, control.ActivityIndex);
                     BLT.Font("");
                     BLT.Put(6, y, spriteManager.Tile("selector_left", TileDirections.Left));
-                    BLT.Layer(BLTLayers.Text);
+                    BLTLayers.Set(BLTLayers.Text, control.ActivityIndex);
                     BLT.Font("text");
                 }
 

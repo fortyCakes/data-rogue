@@ -24,7 +24,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
             BLT.Font("");
 
-            BLT.Layer(BLTLayers.MapTileBottom);
+            BLTLayers.Set(BLTLayers.MapTileBottom, statsControl.ActivityIndex);
             var boxSprite = spriteManager.Get("textbox_grey");
             BLT.Put(x, y, boxSprite.Tile(TileDirections.Down | TileDirections.Right));
             BLT.Put(x + BLTTilesIOSystem.TILE_SPACING, y, boxSprite.Tile(TileDirections.Down | TileDirections.Left));
@@ -35,21 +35,21 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
             if (!string.IsNullOrEmpty(appearance.Bottom))
             {
-                BLT.Layer(BLTLayers.MapEntityBottom);
+                BLTLayers.Set(BLTLayers.MapEntityBottom, statsControl.ActivityIndex);
                 BLT.Put(x + 4, y + 4, spriteManager.Tile(appearance.Bottom));
             }
             if (!string.IsNullOrEmpty(appearance.Top))
             {
-                BLT.Layer(BLTLayers.MapEntityTop);
+                BLTLayers.Set(BLTLayers.MapEntityTop, statsControl.ActivityIndex);
                 BLT.Put(x + 4, y + 4, spriteManager.Tile(appearance.Top));
             }
 
-            BLT.Layer(BLTLayers.Text);
+            BLTLayers.Set(BLTLayers.Text, statsControl.ActivityIndex);
 
             var text = $"{entity.DescriptionName}";
 
             y += 5;
-            RenderText(x + 18, y, out _, text, statsControl.Color, false, font: "textLarge");
+            RenderText(x + 18, y, statsControl.ActivityIndex, out _, text, statsControl.Color, false, font: "textLarge");
             y += 13;
         }
 

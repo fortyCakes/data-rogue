@@ -18,6 +18,8 @@ namespace data_rogue_core.Activities
 
         Rectangle Position { get; set; }
 
+        int ActivityIndex { get; set; }
+
         Color Color { get; }
         Color BackColor { get; }
 

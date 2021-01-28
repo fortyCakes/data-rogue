@@ -25,8 +25,8 @@ namespace data_rogue_core.IOSystems.BLTTiles
             var text1 = $"Level: {experience.Level}";
             var text2 = $"   XP: {experience.Amount}";
 
-            RenderText(display.Position.X, display.Position.Y, out var textSize, text1, display.Color);
-            RenderText(display.Position.X, display.Position.Y + textSize.Height, out _, text2, display.Color);
+            RenderText(display.Position.X, display.Position.Y, control.ActivityIndex, out var textSize, text1, display.Color);
+            RenderText(display.Position.X, display.Position.Y + textSize.Height, control.ActivityIndex, out _, text2, display.Color);
         }
 
         protected override Size GetSizeInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)

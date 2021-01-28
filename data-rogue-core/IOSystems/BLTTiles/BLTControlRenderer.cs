@@ -33,9 +33,9 @@ namespace data_rogue_core.IOSystems.BLTTiles
         protected abstract void DisplayInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov);
         protected abstract Size GetSizeInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov);
 
-        protected static void RenderText(int x, int y, out Size textSize, string text, Color color, bool updateY = true, string font = "text")
+        protected static void RenderText(int x, int y, int activityIndex, out Size textSize, string text, Color color, bool updateY = true, string font = "text")
         {
-            BLT.Layer(BLTLayers.Text);
+            BLTLayers.Set(BLTLayers.Text, activityIndex);
             BLT.Font(font);
             BLT.Color(color);
             BLT.Print(x, y, text);
@@ -45,9 +45,9 @@ namespace data_rogue_core.IOSystems.BLTTiles
             BLT.Color("");
         }
 
-        protected static void RenderBackgroundBox(int x, int y, Size size, ISpriteManager spriteManager)
+        protected static void RenderBackgroundBox(int x, int y, int activityIndex, Size size, ISpriteManager spriteManager)
         {
-            BLT.Layer(BLTLayers.UIElements);
+            BLTLayers.Set(BLTLayers.UIElements, activityIndex);
             BLT.Font("");
             var width = size.Width / BLTTilesIOSystem.TILE_SPACING;
             var height = size.Height / BLTTilesIOSystem.TILE_SPACING;

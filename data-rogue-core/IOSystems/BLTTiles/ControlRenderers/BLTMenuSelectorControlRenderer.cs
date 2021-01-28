@@ -22,7 +22,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             var y = control.Position.Top;
             var sprite = spriteManager.Get(display.Direction == TileDirections.Left ? "selector_left" : "selector_right");
 
-            BLT.Layer(BLTLayers.UIElementPieces);
+            BLTLayers.Set(BLTLayers.UIElementPieces, display.ActivityIndex);
             BLT.Font("");
             BLT.PutExt(baseX, y, 0, -1, sprite.Tile(display.Direction));
         }

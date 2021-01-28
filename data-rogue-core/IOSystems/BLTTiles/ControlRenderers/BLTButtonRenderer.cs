@@ -35,7 +35,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             var numberOfTiles = buttonSize / 8;
 
             BLT.Font("");
-            BLT.Layer((int)BLTLayers.UIElements);
+            BLTLayers.Set((int)BLTLayers.UIElements, control.ActivityIndex);
             for (int i = 0; i < numberOfTiles; i++)
             {
                 TileDirections direction = TileDirections.None;
@@ -53,7 +53,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             }
 
             BLT.Font("text");
-            BLT.Layer((int)BLTLayers.Text);
+            BLTLayers.Set((int)BLTLayers.Text, control.ActivityIndex);
             BLT.Print(x + buttonSize / 2 - textSize / 2, y + (focused ? 3 : 2), display.Text);
         }
 

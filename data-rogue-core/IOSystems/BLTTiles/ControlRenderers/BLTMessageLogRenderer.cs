@@ -18,7 +18,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
         {
             var messageLog = control as MessageLogControl;
 
-            BLT.Layer(BLTLayers.Text);
+            BLTLayers.Set(BLTLayers.Text, control.ActivityIndex);
             BLT.Font("text");
 
             var messagesToRender = systemContainer.MessageSystem.RecentMessages(messageLog.NumberOfMessages);

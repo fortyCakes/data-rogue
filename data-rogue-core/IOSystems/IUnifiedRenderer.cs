@@ -12,7 +12,7 @@ namespace data_rogue_core.Activities
     {
         Padding ActivityPadding { get; }
 
-        void Render(ISystemContainer systemContainer, IActivity activity);
+        void Render(ISystemContainer systemContainer, IActivity activity, int activityIndex);
         MapCoordinate GetMapCoordinateFromMousePosition(MapCoordinate cameraPosition, int x, int y);
         IDataRogueControlRenderer GetRendererFor(IDataRogueControl mouseOverControl);
         IDataRogueControl GetControlFromMousePosition(ISystemContainer systemContainer, IActivity activity, MapCoordinate cameraPosition, int x, int y);

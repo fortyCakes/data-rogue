@@ -11,9 +11,10 @@ using OpenTK.Input;
 
 namespace data_rogue_core.Activities
 {
+
     public class StaticTextActivity : BaseActivity
     {
-        public override ActivityType Type => ActivityType.StaticDisplay;
+        public override ActivityType Type => ActivityType.TextInput;
         public override bool RendersEntireSpace => false;
         public override bool AcceptsInput => true;
 

@@ -13,7 +13,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
         protected override void DisplayInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
-            RenderText(control.Position.X, control.Position.Y, out _, GetText(control, systemContainer, playerFov), control.Color);
+            RenderText(control.Position.X, control.Position.Y, control.ActivityIndex, out _, GetText(control, systemContainer, playerFov), control.Color);
         }
 
         protected override Size GetSizeInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)

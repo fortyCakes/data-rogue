@@ -31,7 +31,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             _ioSystemConfiguration = configuration;
         }
 
-        public void Render(ISystemContainer systemContainer, IActivity activity)
+        public void Render(ISystemContainer systemContainer, IActivity activity, int activityIndex)
         {
             if (activity.RendersEntireSpace)
             {
@@ -46,6 +46,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             {
                 if (control.Visible)
                 {
+                    control.ActivityIndex = activityIndex;
                     GetRendererFor(control).Display(_spriteManager, control, systemContainer, playerFov);
                 }
             }

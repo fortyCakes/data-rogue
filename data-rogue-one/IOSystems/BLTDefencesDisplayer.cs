@@ -42,17 +42,17 @@ namespace data_rogue_one.IOSystems
             if (broken)
             {
                 BLT.Font("");
-                BLT.Layer(BLTLayers.UIElements);
+                BLTLayers.Set(BLTLayers.UIElements, control.ActivityIndex);
                 RenderSpriteIfSpecified(x, y, spriteManager, "defence_broken", AnimationFrame.Idle0);
 
-                BLT.Layer(BLTLayers.Text);
+                BLTLayers.Set(BLTLayers.Text, control.ActivityIndex);
                 BLT.Font("text");
                 BLT.Print(x + 10, y + 2, $"DEFENCE BROKEN (Recovery: {100 - brokenTicks / 200}%)");
             }
             else
             {
                 BLT.Font("");
-                BLT.Layer(BLTLayers.UIElements);
+                BLTLayers.Set(BLTLayers.UIElements, control.ActivityIndex);
                 RenderSpriteIfSpecified(x, y, spriteManager, "AC", AnimationFrame.Idle0);
                 RenderSpriteIfSpecified(x + 10, y, spriteManager, "SH", AnimationFrame.Idle0);
                 RenderSpriteIfSpecified(x + 20, y, spriteManager, "EV", AnimationFrame.Idle0);
@@ -62,7 +62,7 @@ namespace data_rogue_one.IOSystems
                     RenderSpriteIfSpecified(x + 30, y, spriteManager, aegisSprite, AnimationFrame.Idle0);
                 }
 
-                BLT.Layer(BLTLayers.Text);
+                BLTLayers.Set(BLTLayers.Text, control.ActivityIndex);
                 BLT.Font("text");
 
                 PrintTextCentered(ac.ToString(), x + 4, y + 2);

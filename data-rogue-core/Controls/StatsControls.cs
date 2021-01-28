@@ -26,6 +26,10 @@
 
     public class TextControl : BaseInfoControl { }
 
+    public class TextBoxControl : BaseInfoControl {
+        public string Value { get; set; }
+    }
+
     public class WealthControl : BaseInfoControl { }
 
     public class LargeTextControl : BaseInfoControl { }
