@@ -36,7 +36,10 @@ namespace data_rogue_core.Activities
 
         public override IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
         {
-            yield return new BackgroundControl { Position = new Rectangle(0, 0, width, height) };
+            List<IDataRogueControl> controls = new List<IDataRogueControl>();
+
+            var maxX = 0;
+            var maxY = 0;
 
             foreach(var config in StatsConfigs)
             {
@@ -57,9 +60,39 @@ namespace data_rogue_core.Activities
 
                     y += size.Height;
 
-                    yield return control;
+                    if (control.Position.Width > maxX) { maxX = control.Position.Width; }
+                    maxY = y;
+
+                    controls.Add(control);
                 }
             }
+
+            maxX += 8;
+            maxY += 8;
+
+            var spareWidth = width - maxX;
+            var spareHeight = height - maxY;
+
+            var left = spareWidth / 2;
+            var top = spareHeight / 2;
+
+            if (!RendersEntireSpace)
+            {
+
+                foreach (var control in controls)
+                {
+                    control.Position = new Rectangle(control.Position.Left + left, control.Position.Top + top, control.Position.Width, control.Position.Height);
+                }
+
+                controls.Add(new BackgroundControl { Position = new Rectangle(spareWidth / 2, spareHeight / 2, maxX, maxY) });
+
+            }
+            else
+            {
+                controls.Add(new BackgroundControl { Position = new Rectangle(0, 0, width, height) });
+            }
+
+            return controls;
         }
 
         public void Initialise()

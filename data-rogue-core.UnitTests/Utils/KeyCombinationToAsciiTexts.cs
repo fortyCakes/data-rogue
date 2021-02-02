@@ -14,7 +14,7 @@ using System.Windows.Forms;
 namespace data_rogue_core.UnitTests.Utils
 {
     [TestFixture]
-    public class User32InteropTests
+    public class KeyCombinationToAsciiTexts
     {
         [Test]
         [TestCase(Key.A, false, false, false, 'a')]
@@ -33,7 +33,7 @@ namespace data_rogue_core.UnitTests.Utils
                 Ctrl = ctrl
             };
 
-            var ascii = User32Interop.ToAscii(keyCombination);
+            var ascii = keyCombination.ToAscii();
 
             ascii.Should().Be(output);
         }
