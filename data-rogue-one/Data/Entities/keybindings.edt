@@ -45,7 +45,7 @@ Action: InventoryMenu
 Key: Escape
 Action: EscapeMenu
 [KeyBinding]
-Key: Number5
+Key: Shift+R
 Action: Rest
 [KeyBinding]
 Key: Z
