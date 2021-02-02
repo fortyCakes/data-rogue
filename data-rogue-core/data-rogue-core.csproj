@@ -439,6 +439,7 @@
     <Compile Include="Utils\ReflectiveEnumerator.cs" />
     <Compile Include="Utils\StringExtensions.cs" />
     <Compile Include="Utils\TargetingRotationHelper.cs" />
+    <Compile Include="Utils\User32Interop.cs" />
     <Compile Include="Utils\WordWrap.cs" />
     <Compile Include="Menus\StaticMenus\MainMenu.cs" />
     <Compile Include="Activities\MenuActivity.cs" />

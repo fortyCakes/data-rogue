@@ -1,13 +1,19 @@
 ﻿using System;
+using System.Drawing;
 using data_rogue_core.Activities;
+using data_rogue_core.Components;
+using data_rogue_core.Maps;
 using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.Menus.DynamicMenus
 {
     public class DebugMenu : Menu
     {
+        private ISystemContainer _systemContainer;
+
         public DebugMenu(ISystemContainer systemContainer) : base(systemContainer.ActivitySystem, "Debug", null, GetDebugMenuItems())
         {
+            _systemContainer = systemContainer;
             OnSelectCallback += GetCallback(systemContainer);
         }
 
@@ -25,6 +31,7 @@ namespace data_rogue_core.Menus.DynamicMenus
                     return;
                 case "Spawn":
                     var textInput = new TextInputActivity(systemContainer.ActivitySystem, "Spawn what entity?", ExecuteSpawnCommand);
+                    textInput.InputText = "Monster:Bat";
                     systemContainer.ActivitySystem.Push(textInput);
                     break;
                 default:
@@ -34,7 +41,24 @@ namespace data_rogue_core.Menus.DynamicMenus
 
         private void ExecuteSpawnCommand(string command)
         {
-            throw new NotImplementedException();
+            var entityToSpawn = _systemContainer.PrototypeSystem.Get(command);
+            if (entityToSpawn != null)
+            {
+                Targeting targetingData = new Targeting
+                {
+                    CellsHit = new VectorList { new Vector(0, 0) },
+                    Range = 20
+                };
+
+                Action<MapCoordinate> spawnTarget = (target) => { _systemContainer.PositionSystem.SetPosition(entityToSpawn, target); };
+
+                CloseActivity();
+                _systemContainer.TargetingSystem.GetTarget(_systemContainer.PlayerSystem.Player, targetingData, spawnTarget);
+            }
+            else
+            {
+                _activitySystem.Push(new ToastActivity(_activitySystem, $"Could not find prototype for entity '{command}'", Color.Red));
+            }
         }
 
         private static MenuItem[] GetDebugMenuItems()

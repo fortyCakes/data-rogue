@@ -1,4 +1,5 @@
 ﻿using data_rogue_core.Controls;
+using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.IOSystems;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems;
@@ -21,18 +22,18 @@ namespace data_rogue_core.Activities
         public string InputText { get; set; } = "";
 
         private readonly IActivitySystem _activitySystem;
-        private Action<string> callback;
+        private Action<string> _callback;
 
-        public TextInputActivity(IActivitySystem activitySystem, string staticText, Action<string> executeSpawnCommand = null) 
+        public TextInputActivity(IActivitySystem activitySystem, string staticText, Action<string> callback = null) 
         {
             Text = staticText;
             _activitySystem = activitySystem;
-            callback = executeSpawnCommand;
+            _callback = callback;
         }
 
         public override void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard)
         {
-            if (keyboard != null && keyboard.Key != Key.Unknown)
+            if (keyboard != null && keyboard.Key == Key.Escape)
             {
                 Close();
             }
@@ -48,7 +49,44 @@ namespace data_rogue_core.Activities
 
         public override void HandleAction(ISystemContainer systemContainer, ActionEventData action)
         {
-            //throw new System.NotImplementedException();
+            if (action != null)
+            {
+                if (action.Action == ActionType.Select)
+                {
+                    Select();
+                    return;
+                }
+
+                if (action.KeyPress.Key == Key.BackSpace || action.KeyPress.Key == Key.Back)
+                {
+                    string text = (string)InputText;
+
+                    if (text.Length > 0)
+                    {
+                        text = text.Substring(0, text.Length - 1);
+                        InputText = text;
+                    }
+
+                    return;
+                }
+                
+                var enteredChar = action.KeyPress.ToChar();
+                if (enteredChar != null)
+                {
+                    if (InputText.ToString().Length < 29)
+                    {
+                        var key = action.KeyPress.Key == Key.Space ? " " : action.KeyPress.Key.ToString();
+
+                        InputText += action.KeyPress.Shift ? key.ToUpper() : key.ToLower();
+                    }
+                }
+            }
+        }
+
+        private void Select()
+        {
+            _callback(InputText);
+            Close();
         }
 
         public override IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
