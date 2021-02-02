@@ -9,6 +9,7 @@ using data_rogue_core.Controls;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.IOSystems;
 using data_rogue_core.Systems.Interfaces;
+using data_rogue_core.Utils;
 
 namespace data_rogue_one.EventSystem.Utils
 {
@@ -117,6 +118,7 @@ namespace data_rogue_one.EventSystem.Utils
             var startDetails = player.Get<StartDetails>();
             text.AppendLine($" Started as a {startDetails.Class} at {startDetails.StartTime}");
             text.AppendLine(" " + (dead ? "... and died" : "...and are still going!"));
+            text.AppendLine($" Score: {systemContainer.EventSystem.GetStat(player, "Score")}");
             text.AppendLine();
 
             text.AppendLine("Stats:");
