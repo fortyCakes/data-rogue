@@ -1,6 +1,8 @@
 ﻿using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Systems.Interfaces;
 using data_rogue_core.Forms.StaticForms;
+using data_rogue_core.Activities;
+using System.Linq;
 
 namespace data_rogue_core.Menus.StaticMenus
 {
@@ -18,6 +20,7 @@ namespace data_rogue_core.Menus.StaticMenus
             null,
             new MenuItem("New Game"),
             new MenuItem("Load Game"),
+            new MenuItem("High Scores"),
             new MenuItem("Quit"))
         {
             _playerSystem = playerSystem;
@@ -44,6 +47,9 @@ namespace data_rogue_core.Menus.StaticMenus
                     CloseActivity();
                     _saveSystem.Load();
                     _activitySystem.GameplayActivity.Running = true;
+                    break;
+                case "High Scores":
+                    _activitySystem.Push(new HighScoresActivity(_activitySystem, _saveSystem));
                     break;
 
             }

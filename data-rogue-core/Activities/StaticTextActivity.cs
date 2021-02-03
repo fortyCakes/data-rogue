@@ -29,7 +29,7 @@ namespace data_rogue_core.Activities
             CloseOnKeyPress = closeOnKeyPress;
             _activitySystem = activitySystem;
         }
-        
+
         public override void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard)
         {
             if (keyboard != null && keyboard.Key != Key.Unknown && CloseOnKeyPress)

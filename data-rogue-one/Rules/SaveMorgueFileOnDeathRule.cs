@@ -1,13 +1,12 @@
-﻿using data_rogue_core.Activities;
-using data_rogue_core.EntityEngineSystem;
+﻿using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Systems.Interfaces;
 using data_rogue_one.EventSystem.Utils;
 
 namespace data_rogue_core.EventSystem.Rules
 {
-    public class DisplayAdvancedMorgueScreenOnDeathRule : IEventRule
+    public class SaveMorgueFileOnDeathRule: IEventRule
     {
-        public DisplayAdvancedMorgueScreenOnDeathRule(ISystemContainer systemContainer)
+        public SaveMorgueFileOnDeathRule(ISystemContainer systemContainer)
         {
             this.systemContainer = systemContainer;
         }
@@ -22,7 +21,9 @@ namespace data_rogue_core.EventSystem.Rules
         {
             if (systemContainer.PlayerSystem.IsPlayer(sender))
             {
-                systemContainer.ActivitySystem.Push(new InformationActivity(systemContainer.ActivitySystem, MorgueHelper.GetStatusConfigurations(sender), sender, true, true));
+                var morgueFileText = MorgueHelper.GenerateMorgueText(systemContainer);
+
+                systemContainer.SaveSystem.SaveMorgueFile(morgueFileText);
             }
 
             return true;

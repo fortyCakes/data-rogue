@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Linq;
 using data_rogue_core.Forms.StaticForms;
 using System;
+using System.Collections.Generic;
 
 namespace data_rogue_core
 {
@@ -120,6 +121,48 @@ namespace data_rogue_core
             File.WriteAllText(fileName, morgueFileText);
 
             _systemContainer.MessageSystem.Write("Morgue file saved!", Color.Blue);
+        }
+
+        public void SaveHighScore(string name, decimal score)
+        {
+            var newScore = new HighScore(name, score);
+
+            var highScores = GetHighScores();
+
+            highScores.Add(newScore);
+            highScores.Sort((x, y) => x.Score.CompareTo(y.Score));
+
+            SaveHighScoreFile(highScores);
+        }
+
+        private void SaveHighScoreFile(List<HighScore> highScores)
+        {
+            var fileName = GetHighScoreFile();
+
+            File.WriteAllLines(fileName, highScores.Select(s => s.Serialise()));
+        }
+
+        public List<HighScore> GetHighScores()
+        {
+            string fileName = GetHighScoreFile();
+
+            if (File.Exists(fileName))
+            {
+                return File.ReadAllLines(fileName)
+                    .Select(f => HighScore.Deserialise(f))
+                    .ToList();
+            }
+            else
+            {
+                return new List<HighScore>();
+            }
+        }
+
+        private static string GetHighScoreFile()
+        {
+            var directoryName = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Saves");
+            var fileName = Path.Combine(directoryName, "highscores.txt");
+            return fileName;
         }
     }
 }

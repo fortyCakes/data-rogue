@@ -75,6 +75,8 @@
     <Compile Include="Rules\ApplyResistanceRule.cs" />
     <Compile Include="Rules\DisplayAdvancedMorgueScreenOnDeathRule.cs" />
     <Compile Include="Rules\IncreaseStatsOnLevelUpRule.cs" />
+    <Compile Include="Rules\SaveMorgueFileOnDeathRule.cs" />
+    <Compile Include="Rules\UpdateHighScoreFileOnDeathRule.cs" />
     <Compile Include="Utils\MorgueHelper.cs" />
     <Compile Include="Utils\StatusHelper.cs" />
     <Compile Include="Rules\AddAgilityToEvasionRule.cs" />
