@@ -15,7 +15,7 @@ namespace data_rogue_core.Activities
 
             var highScoreText = GetHighScoreText();
 
-            var highScoresActivity = new StaticTextActivity(activitySystem, highScoreText);
+            this.Text = highScoreText;
         }
 
         private string GetHighScoreText()
@@ -23,17 +23,19 @@ namespace data_rogue_core.Activities
             var highScores = _saveSystem.GetHighScores().Take(10);
 
             var highScoreText = new StringBuilder();
-
-            highScoreText.AppendLine("High Scores:");
+            
             highScoreText.AppendLine();
+            highScoreText.AppendLine(" High Scores:");
+            highScoreText.AppendLine();
+            int i = 1;
             foreach(var highScore in highScores)
             {
-                highScoreText.AppendLine($"{highScore.Name}: {highScore.Score}");
+                highScoreText.AppendLine($" {i++}: {highScore.Name}: {highScore.Score}");
             }
 
             if (!highScores.Any())
             {
-                highScoreText.AppendLine("( no high scores )");
+                highScoreText.AppendLine(" ( no high scores )");
             }
 
             return highScoreText.ToString();
