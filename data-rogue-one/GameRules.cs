@@ -70,6 +70,7 @@ namespace data_rogue_one
                     typeof(SaveMorgueFileOnDeathRule),
                     typeof(GoldAddsScoreRule),
                     typeof(XPAddsScoreRule),
+                    typeof(ExplorationAddsScoreRule),
                     typeof(UpdateHighScoreFileOnDeathRule)
                 };
 

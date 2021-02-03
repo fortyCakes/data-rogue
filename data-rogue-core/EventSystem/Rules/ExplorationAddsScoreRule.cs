@@ -1,17 +1,16 @@
-﻿using System;
-using data_rogue_core.Components;
-using data_rogue_core.EntityEngineSystem;
+﻿using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.EventSystem.EventData;
-using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.EventSystem.Rules
 {
-
-    public class XPAddsScoreRule : IEventRule
+    public class ExplorationAddsScoreRule : IEventRule
     {
-        public XPAddsScoreRule(ISystemContainer systemContainer)
+        private readonly IMapSystem _mapSystem;
+
+        public ExplorationAddsScoreRule(ISystemContainer systemContainer)
         {
+            _mapSystem = systemContainer.MapSystem;
         }
 
         public EventTypeList EventTypes => new EventTypeList { EventType.GetStat };
@@ -26,12 +25,23 @@ namespace data_rogue_core.EventSystem.Rules
             switch (data.Stat)
             {
                 case "Score":
-                    if (sender.Has<Experience>())
-                    data.Value += sender.Get<Experience>().Amount * 100;
+                    data.Value += GetExplorationAmount();
                     break;
             }
 
             return true;
+        }
+
+        private decimal GetExplorationAmount()
+        {
+            var accumulator = 0;
+
+            foreach(var map in _mapSystem.MapCollection.Values)
+            {
+                accumulator += map.SeenCoordinates.Count;
+            }
+
+            return accumulator;
         }
     }
 }

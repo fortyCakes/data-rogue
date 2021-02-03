@@ -127,6 +127,7 @@
     <Compile Include="EventSystem\Rules\DamageNumbersPopOutRule.cs" />
     <Compile Include="EventSystem\Rules\DamageSplatParticlesRule.cs" />
     <Compile Include="EventSystem\Rules\DisplayMorgueScreenOnDeathRule.cs" />
+    <Compile Include="EventSystem\Rules\ExplorationAddsScoreRule.cs" />
     <Compile Include="EventSystem\Rules\GoldAddsScoreRule.cs" />
     <Compile Include="EventSystem\Rules\HitMakesSoundRule.cs" />
     <Compile Include="EventSystem\Rules\MissMakesSoundRule.cs" />
