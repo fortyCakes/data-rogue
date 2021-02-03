@@ -66,7 +66,6 @@ namespace data_rogue_core.Activities
                 if (action != null)
                 {
                     systemContainer.EventSystem.Try(EventType.Action, systemContainer.PlayerSystem.Player, action);
-                    return; // If the control tried to do an action, it handled the mouse. Stop here.
                 }
             }
         }
