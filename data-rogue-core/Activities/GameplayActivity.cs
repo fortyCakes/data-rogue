@@ -51,8 +51,6 @@ namespace data_rogue_core.Activities
 
         public override void HandleMouse(ISystemContainer systemContainer, MouseData mouse)
         {
-            
-
             IDataRogueControl mouseOverControl = systemContainer.RendererSystem.Renderer.GetControlFromMousePosition(
                 systemContainer, 
                 this, 
