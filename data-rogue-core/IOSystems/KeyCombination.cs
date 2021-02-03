@@ -42,6 +42,30 @@ namespace data_rogue_core.IOSystems
             return (Ctrl ? "Ctrl+" : "") + (Shift ? "Shift+" : "") + (Alt ? "Alt+" : "") + Key.ToString();
         }
 
+        public char? ToAscii()
+        {
+            if (Ctrl || Alt)
+            {
+                return null;
+            }
+
+            if (Key >= Key.A && Key <= Key.Z)
+            {
+                var theChar = Key.ToString();
+
+                if (Shift) return theChar.ToUpper().First(); else return theChar.ToLower().First();
+            }
+            
+            switch (Key)
+            {
+                case Key.Semicolon: return Shift ? ':' : ';';
+                case Key.Comma: return Shift ? '<' : ',';
+                case Key.Period: return Shift ? '>' : '.';
+            }
+
+            return null;
+        }
+
         public bool Equals(KeyCombination other)
         {
             if (this == other) return true;

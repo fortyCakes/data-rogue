@@ -127,11 +127,13 @@
     <Compile Include="EventSystem\Rules\DamageNumbersPopOutRule.cs" />
     <Compile Include="EventSystem\Rules\DamageSplatParticlesRule.cs" />
     <Compile Include="EventSystem\Rules\DisplayMorgueScreenOnDeathRule.cs" />
+    <Compile Include="EventSystem\Rules\GoldAddsScoreRule.cs" />
     <Compile Include="EventSystem\Rules\HitMakesSoundRule.cs" />
     <Compile Include="EventSystem\Rules\MissMakesSoundRule.cs" />
     <Compile Include="EventSystem\Rules\PlayerStepMakesSoundRule.cs" />
     <Compile Include="EventSystem\Rules\CantDealNoDamageRule.cs" />
     <Compile Include="EventSystem\Rules\ShowToastWhenEnteringBranchRule.cs" />
+    <Compile Include="EventSystem\Rules\XPAddsScoreRule.cs" />
     <Compile Include="Forms\StaticForms\TextFormData.cs" />
     <Compile Include="Forms\SubSelectableFormData.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTTilesUnifiedRenderer.cs" />
@@ -442,7 +444,6 @@
     <Compile Include="Utils\ReflectiveEnumerator.cs" />
     <Compile Include="Utils\StringExtensions.cs" />
     <Compile Include="Utils\TargetingRotationHelper.cs" />
-    <Compile Include="Utils\User32Interop.cs" />
     <Compile Include="Utils\WordWrap.cs" />
     <Compile Include="Menus\StaticMenus\MainMenu.cs" />
     <Compile Include="Activities\MenuActivity.cs" />

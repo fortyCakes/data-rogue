@@ -99,7 +99,7 @@
     <Compile Include="Systems\SystemContainerTests.cs" />
     <Compile Include="Systems\TargetingDataTests.cs" />
     <Compile Include="TestHelpers\EntityListEquivalence.cs" />
-    <Compile Include="Utils\User32InteropTests.cs" />
+    <Compile Include="Utils\KeyCombinationToAsciiTexts.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
