@@ -33,7 +33,7 @@ namespace data_rogue_core.UnitTests.Utils
                 Ctrl = ctrl
             };
 
-            var ascii = keyCombination.ToAscii();
+            var ascii = keyCombination.ToChar();
 
             ascii.Should().Be(output);
         }

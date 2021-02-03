@@ -75,9 +75,7 @@ namespace data_rogue_core.Activities
                 {
                     if (InputText.ToString().Length < 29)
                     {
-                        var key = action.KeyPress.Key == Key.Space ? " " : action.KeyPress.Key.ToString();
-
-                        InputText += action.KeyPress.Shift ? key.ToUpper() : key.ToLower();
+                        InputText += enteredChar;
                     }
                 }
             }

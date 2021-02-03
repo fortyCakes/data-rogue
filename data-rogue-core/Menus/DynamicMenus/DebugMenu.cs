@@ -54,7 +54,8 @@ namespace data_rogue_core.Menus.DynamicMenus
 
         private void ExecuteSpawnCommand(string command)
         {
-            var entityToSpawn = _systemContainer.PrototypeSystem.Get(command);
+            var entityToSpawn = _systemContainer.PrototypeSystem.TryGet(command);
+
             if (entityToSpawn != null)
             {
                 Action<MapCoordinate> spawnTarget = (target) => { _systemContainer.PositionSystem.SetPosition(entityToSpawn, target); };

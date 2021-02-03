@@ -41,6 +41,15 @@ namespace data_rogue_core.Systems
             return MakeInstanceOf(entity);
         }
 
+        public IEntity TryGet(string entityName)
+        {
+            var entity = Entities.SingleOrDefault(e => e.Get<Prototype>().Name == entityName);
+
+            if (entity == null) return null;
+
+            return MakeInstanceOf(entity);
+        }
+
         public IEntity Get(IEntity entity)
         {
             return MakeInstanceOf(entity);

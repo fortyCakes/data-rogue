@@ -69,7 +69,8 @@ namespace data_rogue_one
                     typeof(DisplayAdvancedMorgueScreenOnDeathRule),
                     typeof(SaveMorgueFileOnDeathRule),
                     typeof(GoldAddsScoreRule),
-                    typeof(XPAddsScoreRule)
+                    typeof(XPAddsScoreRule),
+                    typeof(UpdateHighScoreFileOnDeathRule)
                 };
 
                 list.AddRange(ApplyActionRule.AllActionRules);

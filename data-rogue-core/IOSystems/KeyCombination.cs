@@ -42,7 +42,7 @@ namespace data_rogue_core.IOSystems
             return (Ctrl ? "Ctrl+" : "") + (Shift ? "Shift+" : "") + (Alt ? "Alt+" : "") + Key.ToString();
         }
 
-        public char? ToAscii()
+        public char? ToChar()
         {
             if (Ctrl || Alt)
             {
@@ -73,24 +73,6 @@ namespace data_rogue_core.IOSystems
             if (this == null || other == null) return false;
 
             return this.Key == other.Key && this.Shift == other.Shift && this.Ctrl == other.Ctrl && this.Alt == other.Alt;
-        }
-
-        public char? ToChar()
-        {
-            if (!Ctrl && !Alt)
-            {
-                var theChar = Key.ToString().First();
-                if (Shift)
-                {
-                    return char.ToUpper(theChar);
-                }
-                else
-                {
-                    return char.ToLower(theChar);
-                }
-            }
-
-            return null;
         }
     }
 }
