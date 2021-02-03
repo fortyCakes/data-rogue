@@ -20,6 +20,7 @@ namespace data_rogue_one.EventSystem.Utils
             if (entity.Has<Description>())
             {
                 statsDisplays.Add(new InfoDisplay {ControlType = typeof(TextControl), Parameters = entity.Get<Description>().Detail });
+                statsDisplays.Add(new InfoDisplay { ControlType = typeof(Spacer) });
             }
 
             if (entity.Has<Experience>())

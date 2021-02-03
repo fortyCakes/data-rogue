@@ -25,7 +25,6 @@ namespace data_rogue_core.Activities
         public override bool RendersEntireSpace => true;
         public override bool AcceptsInput => true;
 
-        private IPathfindingAlgorithm _pathfindingAlgorithm = new AStarPathfindingAlgorithm();
         private readonly IOSystemConfiguration _ioSystemConfiguration;
 
         public GameplayActivity(IOSystemConfiguration ioSystemConfiguration)
@@ -52,8 +51,7 @@ namespace data_rogue_core.Activities
 
         public override void HandleMouse(ISystemContainer systemContainer, MouseData mouse)
         {
-            MapCoordinate mapCoordinate = systemContainer.RendererSystem.Renderer.GetMapCoordinateFromMousePosition(systemContainer.RendererSystem.CameraPosition, mouse.X, mouse.Y);
-            systemContainer.ControlSystem.HoveredCoordinate = mapCoordinate;
+            
 
             IDataRogueControl mouseOverControl = systemContainer.RendererSystem.Renderer.GetControlFromMousePosition(
                 systemContainer, 
@@ -73,52 +71,6 @@ namespace data_rogue_core.Activities
                     return; // If the control tried to do an action, it handled the mouse. Stop here.
                 }
             }
-            
-            var player = systemContainer.PlayerSystem.Player;
-
-            if (mouse.IsLeftClick && systemContainer.TimeSystem.WaitingForInput && CanAutowalkToCoordinate(systemContainer, mapCoordinate))
-            {
-                var playerLocation = systemContainer.PositionSystem.CoordinateOf(player);
-                var map = systemContainer.MapSystem.MapCollection[systemContainer.RendererSystem.CameraPosition.Key];
-                var path = _pathfindingAlgorithm.Path(map, playerLocation, mapCoordinate);
-
-                if (path != null)
-                {
-                    var action = new ActionEventData { Action = ActionType.FollowPath, Parameters = string.Join(";", path.Select(m => m.ToString())) };
-
-                    systemContainer.EventSystem.Try(EventType.Action, player, action);
-                }
-            }
-
-            if (mouse.IsRightClick && systemContainer.TimeSystem.WaitingForInput)
-            {
-                var map = systemContainer.MapSystem.MapCollection[systemContainer.RendererSystem.CameraPosition.Key];
-
-                if (map.SeenCoordinates.Contains(mapCoordinate))
-                {
-                    var playerFov = FOVHelper.CalculatePlayerFov(systemContainer);
-
-                    var entities = systemContainer.PositionSystem.EntitiesAt(mapCoordinate);
-
-                    if (!playerFov.Contains(mapCoordinate))
-                    {
-                        entities = entities.Where(e => e.Has<Memorable>()).ToList();
-                    }
-
-                    IEntity entityToShow = entities.OrderByDescending(e => e.Has<Appearance>() ? e.Get<Appearance>().ZOrder : int.MinValue).First();
-
-                    var action = new ActionEventData {Action = ActionType.Examine, Parameters = entityToShow.EntityId.ToString()};
-
-                    systemContainer.EventSystem.Try(EventType.Action, player, action);
-                }
-            }
-        }
-
-        private bool CanAutowalkToCoordinate(ISystemContainer systemContainer, MapCoordinate mapCoordinate)
-        {
-            return
-                mapCoordinate != null &&
-                systemContainer.MapSystem.MapCollection[mapCoordinate.Key].SeenCoordinates.Contains(mapCoordinate);
         }
 
         public override IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
