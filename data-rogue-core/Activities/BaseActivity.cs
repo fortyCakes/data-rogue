@@ -1,4 +1,5 @@
-﻿using data_rogue_core.IOSystems;
+﻿using data_rogue_core.EventSystem;
+using data_rogue_core.IOSystems;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
@@ -21,8 +22,33 @@ namespace data_rogue_core.Activities
         }
 
         public abstract IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height);
-        public abstract void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard);
-        public abstract void HandleMouse(ISystemContainer systemContainer, MouseData mouse);
+
         public abstract void HandleAction(ISystemContainer systemContainer, ActionEventData action);
+        public abstract void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard);
+        public virtual void HandleMouse(ISystemContainer systemContainer, MouseData mouse)
+        {
+            var mouseOverControl = GetMouseOverControl(systemContainer, mouse);
+
+            if (mouseOverControl != null && mouseOverControl.CanHandleMouse)
+            {
+                var renderer = systemContainer.RendererSystem.Renderer.GetRendererFor(mouseOverControl);
+
+                var action = mouseOverControl.HandleMouse(mouse, renderer, systemContainer);
+                if (action != null)
+                {
+                    systemContainer.EventSystem.Try(EventType.Action, systemContainer.PlayerSystem.Player, action);
+                }
+            }
+        }
+
+        protected IDataRogueControl GetMouseOverControl(ISystemContainer systemContainer, MouseData mouse)
+        {
+            return systemContainer.RendererSystem.Renderer.GetControlFromMousePosition(
+                systemContainer,
+                this,
+                systemContainer.RendererSystem.CameraPosition,
+                mouse.X,
+                mouse.Y);
+        }
     }
 }
