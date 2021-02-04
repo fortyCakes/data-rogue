@@ -36,6 +36,44 @@ Singleton: true
 Name: Grass
 Detail: A patch of grass.
 
+"Cell:Dirt"
+[Appearance]
+Glyph: .
+Color: #D27D2C
+ZOrder: 0
+[SpriteAppearance]
+Bottom: dirt_light
+BottomConnect: dirt
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:Dirt
+Singleton: true
+[Memorable]
+[Description]
+Name: Dirt
+Detail: A patch of bare dirt.
+
+"Cell:DarkDirt"
+[Appearance]
+Glyph: .
+Color: #4E4A4E
+ZOrder: 0
+[SpriteAppearance]
+Bottom: dirt_dark
+BottomConnect: dirt
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:DarkDirt
+Singleton: true
+[Memorable]
+[Description]
+Name: Dark Dirt
+Detail: A patch of bare dirt. It's discoloured and dark.
+
 "Cell:Tree"
 [Appearance]
 Glyph: 
@@ -61,11 +99,11 @@ Detail: A large, sturdy-looking tree.
 [SpawnPoint]
 [Appearance]
 Glyph: .
-Color: #aaaaaa
+Color: #4E4A4E
 ZOrder: 0
 [SpriteAppearance]
-Bottom: stone_floor_1
-BottomConnect: stone_floor
+Bottom: dirt_dark
+BottomConnect: dirt
 [Physical]
 Passable: true
 Transparent: true
@@ -74,8 +112,8 @@ Name: Cell:SpawnPoint
 Singleton: true
 [Memorable]
 [Description]
-Name: Floor
-Detail: This is a stone floor.
+Name: Dark Dirt
+Detail: A patch of bare dirt. It's discoloured and dark.
 
 "Cell:Wall"
 [Appearance]

@@ -126,6 +126,20 @@ SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
+Name: dirt_light
+Path: Images/Sprites/Tiles/dirt_light.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: dirt_dark
+Path: Images/Sprites/Tiles/dirt_dark.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
 Name: trees_1
 Path: Images/Sprites/Tiles/trees_1.png
 Type: TilesetBox

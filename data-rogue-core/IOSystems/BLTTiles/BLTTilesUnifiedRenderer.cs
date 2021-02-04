@@ -108,7 +108,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
             var mousePoint = new Point(x, y);
 
-            var onControls = activity.Controls.Where(c => c.Position.Contains(mousePoint));
+            var onControls = activity.Controls.Where(c => c.CanHandleMouse && c.Position.Contains(mousePoint));
 
             return onControls.LastOrDefault();
         }
