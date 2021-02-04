@@ -1,4 +1,5 @@
-﻿using data_rogue_core.Data;
+﻿using data_rogue_core.Activities;
+using data_rogue_core.Data;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.Maps;
@@ -16,6 +17,7 @@ namespace data_rogue_core.EventSystem.Rules
         }
 
         public override ActionType actionType => ActionType.Move;
+        public override ActivityType activityType => ActivityType.Gameplay;
 
         public override bool ApplyInternal(IEntity sender, ActionEventData eventData)
         {

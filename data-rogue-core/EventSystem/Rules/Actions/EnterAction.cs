@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using data_rogue_core.Activities;
 using data_rogue_core.Components;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.EventSystem.EventData;
@@ -16,6 +17,7 @@ namespace data_rogue_core.EventSystem.Rules
         }
 
         public override ActionType actionType => ActionType.Enter;
+        public override ActivityType activityType => ActivityType.Gameplay;
 
         public override bool ApplyInternal(IEntity sender, ActionEventData eventData)
         {

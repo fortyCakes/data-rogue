@@ -16,6 +16,7 @@ using System.Drawing;
 
 namespace data_rogue_core.Activities
 {
+
     public class GameplayActivity : BaseActivity
     {
         public override ActivityType Type => ActivityType.Gameplay;

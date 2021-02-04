@@ -17,8 +17,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "data-rogue-core.UnitTests",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E2C0DEF6-A5FA-4DFE-A7DE-A2FC0EF77D9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataRogueWorldEditor", "DataRogueWorldEditor\DataRogueWorldEditor.csproj", "{9BEAEB28-F420-4B63-9A70-9D275A3D68D0}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "data-rogue-one", "data-rogue-one\data-rogue-one.csproj", "{EB725E82-DAA7-4F21-AA3C-4CCABFC11AAA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLTWrapper", "BLTWrapper\BLTWrapper.csproj", "{81288AB7-EF21-4660-86E4-A477DEB7C75C}"
@@ -39,10 +37,6 @@ Global
 		{31317BB6-97F1-486F-8306-808B552BEBC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31317BB6-97F1-486F-8306-808B552BEBC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31317BB6-97F1-486F-8306-808B552BEBC6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9BEAEB28-F420-4B63-9A70-9D275A3D68D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9BEAEB28-F420-4B63-9A70-9D275A3D68D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9BEAEB28-F420-4B63-9A70-9D275A3D68D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9BEAEB28-F420-4B63-9A70-9D275A3D68D0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EB725E82-DAA7-4F21-AA3C-4CCABFC11AAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EB725E82-DAA7-4F21-AA3C-4CCABFC11AAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB725E82-DAA7-4F21-AA3C-4CCABFC11AAA}.Release|Any CPU.ActiveCfg = Release|Any CPU

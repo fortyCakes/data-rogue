@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using data_rogue_core.Activities;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.Systems;
@@ -40,6 +41,7 @@ namespace data_rogue_core.EventSystem.Rules
         public EventTypeList EventTypes => new EventTypeList { EventType.Action };
 
         public abstract ActionType actionType { get; }
+        public abstract ActivityType activityType { get; }
 
         public uint RuleOrder => 0;
         public EventRuleType RuleType => EventRuleType.EventResolution;
@@ -47,8 +49,9 @@ namespace data_rogue_core.EventSystem.Rules
         public bool Apply(EventType type, IEntity sender, object eventData)
         {
             var data = eventData as ActionEventData;
+            var currentActivityType = _systemContainer.ActivitySystem.ActivityStack.Peek().Type;
 
-            if (data.Action == actionType)
+            if (data.Action == actionType && activityType == currentActivityType)
             {
                 return ApplyInternal(sender, data);
             }

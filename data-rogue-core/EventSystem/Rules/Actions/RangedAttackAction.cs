@@ -1,4 +1,5 @@
-﻿using data_rogue_core.Components;
+﻿using data_rogue_core.Activities;
+using data_rogue_core.Components;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.Maps;
@@ -20,6 +21,7 @@ namespace data_rogue_core.EventSystem.Rules
         }
 
         public override ActionType actionType => ActionType.RangedAttack;
+        public override ActivityType activityType => ActivityType.Gameplay;
 
         public override bool ApplyInternal(IEntity sender, ActionEventData eventData)
         {

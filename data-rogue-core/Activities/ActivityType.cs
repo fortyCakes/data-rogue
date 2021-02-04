@@ -7,6 +7,7 @@
         Form = 4,
         Targeting = 5,
         Information = 6,
-        Toast = 7
+        Toast = 7,
+        MapEditor = 8
     }
 }

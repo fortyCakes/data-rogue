@@ -15,6 +15,7 @@ namespace data_rogue_core.EventSystem.Rules
         }
 
         public override ActionType actionType => ActionType.EquipmentMenu;
+        public override ActivityType activityType => ActivityType.Gameplay;
 
         public override bool ApplyInternal(IEntity sender, ActionEventData eventData)
         {

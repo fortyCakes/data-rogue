@@ -76,6 +76,7 @@
     <Compile Include="Activities\FormActivity.cs" />
     <Compile Include="Activities\HighScoresActivity.cs" />
     <Compile Include="Activities\IDataRogueControl.cs" />
+    <Compile Include="Activities\MapEditorActivity.cs" />
     <Compile Include="Activities\MouseControlHelper.cs" />
     <Compile Include="Activities\PositionEventHandler.cs" />
     <Compile Include="Activities\TargetingStatus.cs" />

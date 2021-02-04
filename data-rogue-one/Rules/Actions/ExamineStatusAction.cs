@@ -18,6 +18,8 @@ namespace data_rogue_one.EventSystem.Rules
 
         public override ActionType actionType => ActionType.Examine;
 
+        public override ActivityType activityType => ActivityType.Gameplay;
+
         public override bool ApplyInternal(IEntity sender, ActionEventData eventData)
         {
             var entityId = uint.Parse(eventData.Parameters);
@@ -36,6 +38,8 @@ namespace data_rogue_one.EventSystem.Rules
         }
 
         public override ActionType actionType => ActionType.PlayerStatus;
+
+        public override ActivityType activityType => ActivityType.Gameplay;
 
         public override bool ApplyInternal(IEntity sender, ActionEventData eventData)
         {
