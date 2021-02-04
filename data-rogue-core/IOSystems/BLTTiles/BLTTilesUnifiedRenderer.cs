@@ -62,7 +62,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
         public MapCoordinate GetMapCoordinateFromMousePosition(MapCoordinate cameraPosition, int x, int y)
         {
-            var onMaps = _ioSystemConfiguration.MapConfigurations.Where(m => IsOnMap(m, x, y));
+            var onMaps = _ioSystemConfiguration.GameplayRenderingConfiguration.OfType<MapConfiguration>().Where(m => IsOnMap(m, x, y));
 
             var map = onMaps.Last();
 

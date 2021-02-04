@@ -34,5 +34,7 @@ namespace data_rogue_core.Controls
 
         public bool Visible { get; set; } = true;
         public virtual bool CanHandleMouse => false;
+
+        public virtual bool FillsContainer => false;
     }
 }

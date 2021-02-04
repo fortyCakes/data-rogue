@@ -12,27 +12,8 @@ namespace data_rogue_core.Controls
 {
     public class ControlFactory
     {
-        public static IEnumerable<IDataRogueControl> GetMapControls(IEnumerable<MapConfiguration> mapConfigurations)
-        {
-            foreach (var mapConfiguration in mapConfigurations)
-            {
-                if (mapConfiguration.GetType() == typeof(MinimapConfiguration))
-                {
-                    yield return new MinimapControl
-                    {
-                        Position = mapConfiguration.Position
-                    };
-                }
-
-                if (mapConfiguration.GetType() == typeof(MapConfiguration))
-                {
-                    yield return new MapControl { Position = mapConfiguration.Position };
-                }
-            }
-        }
-
-        public static IEnumerable<IDataRogueControl> GetStatsControls(
-            List<StatsConfiguration> statsConfigurations, 
+        public static IEnumerable<IDataRogueControl> GetControls(
+            List<IRenderingConfiguration> configurations, 
             IUnifiedRenderer renderer, 
             ISystemContainer systemContainer, 
             object rendererHandle, 
@@ -40,19 +21,40 @@ namespace data_rogue_core.Controls
             List<MapCoordinate> playerFov, 
             IEntity player)
         {
-            foreach (var statsConfiguration in statsConfigurations)
+            var controls = new List<IDataRogueControl>();
+
+            foreach (IRenderingConfiguration statsConfiguration in configurations)
             {
-                var x = statsConfiguration.Position.X + renderer.ActivityPadding.Left;
-                var y = statsConfiguration.Position.Y + renderer.ActivityPadding.Top;
+                controls.AddRange(CreateControls(renderer, systemContainer, rendererHandle, controlRenderers, playerFov, player, statsConfiguration));
+            }
 
-                foreach (var display in statsConfiguration.Displays)
+            return controls;
+        }
+
+        private static IEnumerable<IDataRogueControl> CreateControls(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, IEntity player, IRenderingConfiguration renderingConfiguration)
+        {
+            var x = renderingConfiguration.Position.X + renderer.ActivityPadding.Left;
+            var y = renderingConfiguration.Position.Y + renderer.ActivityPadding.Top;
+
+            foreach (var display in renderingConfiguration.Displays)
+            {
+                var controlType = display.ControlType;
+
+                var instance = Activator.CreateInstance(controlType);
+                var control = (IDataRogueControl)instance;
+
+                if (control is IDataRogueInfoControl)
                 {
-                    var controlType = display.ControlType;
+                    (control as IDataRogueInfoControl).SetData(player, display);
+                }
 
-                    var instance = Activator.CreateInstance(controlType);
-                    var control = (IDataRogueInfoControl)instance;
-                    control.SetData(player, display);
-                    control.Position = new Rectangle(control.Position.X, control.Position.Y, statsConfiguration.Position.Width, 0);
+                if (control.FillsContainer)
+                {
+                    control.Position = renderingConfiguration.Position;
+                }
+                else
+                {
+                    control.Position = new Rectangle(control.Position.X, control.Position.Y, renderingConfiguration.Position.Width, 0);
 
                     var controlRenderer = controlRenderers.Single(s => s.DisplayType == control.GetType());
                     var size = controlRenderer.GetSize(rendererHandle, control, systemContainer, playerFov);
@@ -60,17 +62,9 @@ namespace data_rogue_core.Controls
                     control.Position = new Rectangle(x, y, size.Width, size.Height);
 
                     y += size.Height;
+                }                
 
-                    yield return control;
-                }
-            }
-        }
-
-        internal static IEnumerable<IDataRogueControl> GetMessageControls(List<MessageConfiguration> messageConfigurations)
-        {
-            foreach (var messageConfiguration in messageConfigurations)
-            {
-                yield return new MessageLogControl { Position = messageConfiguration.Position, NumberOfMessages = messageConfiguration.NumberOfMessages };
+                yield return control;
             }
         }
     }

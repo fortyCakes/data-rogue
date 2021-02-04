@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace data_rogue_core.Controls
 {
-    public class MessageLogControl : BaseControl
+    public class MessageLogControl : BaseInfoControl
     {
         public int NumberOfMessages { get; internal set; }
     }

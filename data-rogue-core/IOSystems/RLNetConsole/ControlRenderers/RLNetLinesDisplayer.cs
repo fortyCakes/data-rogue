@@ -114,23 +114,7 @@ namespace data_rogue_core.IOSystems
 
         private bool IsInSubconsole(IOSystemConfiguration configuration, int x, int y)
         {
-            foreach (var config in configuration.MapConfigurations)
-            {
-                if (config.Position.Contains(x, y))
-                {
-                    return true;
-                }
-            }
-
-            foreach (var config in configuration.StatsConfigurations)
-            {
-                if (config.Position.Contains(x, y))
-                {
-                    return true;
-                }
-            }
-
-            foreach (var config in configuration.MessageConfigurations)
+            foreach (var config in configuration.GameplayRenderingConfiguration)
             {
                 if (config.Position.Contains(x, y))
                 {

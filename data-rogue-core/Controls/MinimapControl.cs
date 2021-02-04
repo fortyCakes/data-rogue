@@ -2,6 +2,6 @@
 {
     public class MinimapControl : BaseInfoControl
     {
-
+        public override bool FillsContainer => true;
     }
 }

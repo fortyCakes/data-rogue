@@ -79,11 +79,7 @@ namespace data_rogue_core.Activities
 
             controls.Add( new LinesControl { Position = new Rectangle(0, 0, width, height), Configuration = _ioSystemConfiguration });
 
-            controls.AddRange(ControlFactory.GetMapControls(_ioSystemConfiguration.MapConfigurations));
-
-            controls.AddRange(ControlFactory.GetStatsControls(_ioSystemConfiguration.StatsConfigurations, renderer, systemContainer, rendererHandle, controlRenderers, playerFov, player));
-
-            controls.AddRange(ControlFactory.GetMessageControls(_ioSystemConfiguration.MessageConfigurations));
+            controls.AddRange(ControlFactory.GetControls(_ioSystemConfiguration.GameplayRenderingConfiguration, renderer, systemContainer, rendererHandle, controlRenderers, playerFov, player));
 
             return controls;
         }

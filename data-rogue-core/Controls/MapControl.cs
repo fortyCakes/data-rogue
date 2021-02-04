@@ -22,6 +22,7 @@ namespace data_rogue_core.Controls
         private IPathfindingAlgorithm _pathfindingAlgorithm = new AStarPathfindingAlgorithm();
 
         public override bool CanHandleMouse => true;
+        public override bool FillsContainer => true;
 
         public override ActionEventData HandleMouse(MouseData mouse, IDataRogueControlRenderer renderer, ISystemContainer systemContainer)
         {

@@ -54,7 +54,7 @@ namespace data_rogue_core.IOSystems.RLNetConsole
 
         public MapCoordinate GetMapCoordinateFromMousePosition(MapCoordinate cameraPosition, int x, int y)
         {
-            foreach (MapConfiguration map in _ioSystemConfiguration.MapConfigurations)
+            foreach (MapConfiguration map in _ioSystemConfiguration.GameplayRenderingConfiguration)
             {
                 if (IsOnMap(map, x, y))
                 {

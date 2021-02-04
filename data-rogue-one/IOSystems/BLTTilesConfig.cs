@@ -19,15 +19,22 @@ namespace data_rogue_one.IOSystems
             var config = BLTTilesIOSystem.DefaultConfiguration;
             config.WindowTitle = "Data Rogue One";
 
-            config.StatsConfigurations = StatsConfigurations;
-            config.MessageConfigurations = MessageConfigurations;
+            config.GameplayRenderingConfiguration = new List<IRenderingConfiguration>
+            {
+                BLTTilesIOSystem.DefaultMap,
+                BLTTilesIOSystem.DefaultMinimap,
+                StatsConfiguration,
+                SkillBar,
+                BLTTilesIOSystem.DefaultInteraction,
+                MessageConfiguration
+            };
 
             config.AdditionalControlRenderers = new List<IDataRogueControlRenderer> { new BLTDefencesDisplayer() };
 
             return new BLTTilesIOSystem(config);
         }
 
-        public static List<StatsConfiguration> StatsConfigurations => new List<StatsConfiguration> {
+        public static StatsConfiguration StatsConfiguration =>
                 new StatsConfiguration
                 {
                     Position = new Rectangle(2, 2, 40 * TILE_SPACING - 2, 27 * TILE_SPACING - 2),
@@ -40,28 +47,19 @@ namespace data_rogue_one.IOSystems
                         new InfoDisplay { ControlType = typeof(DefencesControl) },
                         new InfoDisplay { ControlType =  typeof(HoveredEntityDisplayBox), Parameters = "Health,HP;AuraFighter,Aura;TiltFighter,Tilt" }
                     }
-                },
+                };
+        public static StatsConfiguration SkillBar =>
                 new StatsConfiguration
                 {
-                    Position = new Rectangle(40 * TILE_SPACING - 38, 25 * TILE_SPACING - 22, 32, 16),
-                    Displays = new List<InfoDisplay>
-                    {
-                        new InfoDisplay { ControlType = typeof(InteractionControl) }
-                    }
-
-                },
-                new StatsConfiguration
-                {
-                    Position = new Rectangle(0,25 * TILE_SPACING - 18, 24*10, 24),
+                    Position = new Rectangle(0, 25 * TILE_SPACING - 18, 24 * 10, 24),
                     Displays = new List<InfoDisplay>
                     {
                         new InfoDisplay { ControlType = typeof(SkillBarControl) }
                     }
-                }
-            };
+                };
 
-        public static List<MessageConfiguration> MessageConfigurations => new List<MessageConfiguration> { new MessageConfiguration {
+        public static MessageConfiguration MessageConfiguration => new MessageConfiguration {
                 Position = new Rectangle(2, (int)(13.5 * TILE_SPACING), 40 * TILE_SPACING, 10 * TILE_SPACING - 2),
-                NumberOfMessages = 15} };
+                NumberOfMessages = 15} ;
     }
 }

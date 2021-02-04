@@ -27,6 +27,8 @@ namespace data_rogue_core.Activities
         event PositionEventHandler OnClick;
 
         bool Visible { get; set; }
+
+        bool FillsContainer { get; }
     }
 
     public interface IDataRogueInfoControl : IDataRogueControl

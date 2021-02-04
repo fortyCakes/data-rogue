@@ -21,22 +21,27 @@ namespace data_rogue_core.IOSystems.RLNetConsole
             TileHeight = 12,
             TileWidth = 12,
             WindowTitle = "data-rogue window title",
-            MapConfigurations = new List<MapConfiguration> { new MapConfiguration { Position = new Rectangle(0, 0, 76, 54) } },
-            StatsConfigurations = new List<StatsConfiguration> { new StatsConfiguration { Position = new Rectangle(77, 0, 23, 70), Displays = new List<InfoDisplay> {
-                new InfoDisplay { ControlType = typeof(NameControl) },
-                new InfoDisplay {ControlType =  typeof(TitleControl)},
-                new InfoDisplay { ControlType = typeof(Spacer)},
-                new InfoDisplay { ControlType = typeof(ComponentCounter), Parameters = "Health,HP", BackColor = Color.DarkRed},
-                new InfoDisplay { ControlType = typeof(Spacer)},
-                new InfoDisplay { ControlType = typeof(LocationControl) },
-                new InfoDisplay { ControlType = typeof(TimeControl) },
-                new InfoDisplay { ControlType = typeof(Spacer)},
-                new InfoDisplay { ControlType = typeof(VisibleEnemiesControl) }
-
-            } } },
-            MessageConfigurations = new List<MessageConfiguration> { new MessageConfiguration { Position = new Rectangle(0, 55, 76, 15) ,
-                NumberOfMessages = 10} }
+            GameplayRenderingConfiguration = new List<IRenderingConfiguration> {
+                new MapConfiguration { Position = new Rectangle(0, 0, 76, 54) },
+                new StatsConfiguration {
+                    Position = new Rectangle(77, 0, 23, 70),
+                    Displays = new List<InfoDisplay>
+                    {
+                        new InfoDisplay { ControlType = typeof(NameControl) },
+                        new InfoDisplay { ControlType =  typeof(TitleControl)},
+                        new InfoDisplay { ControlType = typeof(Spacer)},
+                        new InfoDisplay { ControlType = typeof(ComponentCounter), Parameters = "Health,HP", BackColor = Color.DarkRed},
+                        new InfoDisplay { ControlType = typeof(Spacer)},
+                        new InfoDisplay { ControlType = typeof(LocationControl) },
+                        new InfoDisplay { ControlType = typeof(TimeControl) },
+                        new InfoDisplay { ControlType = typeof(Spacer)},
+                        new InfoDisplay { ControlType = typeof(VisibleEnemiesControl)}
+                    }
+                },
+                new MessageConfiguration { Position = new Rectangle(0, 55, 76, 15), NumberOfMessages = 10}
+            }
         };
+        
 
         public RLNetConsoleIOSystem(IOSystemConfiguration ioSystemConfiguration)
         {
