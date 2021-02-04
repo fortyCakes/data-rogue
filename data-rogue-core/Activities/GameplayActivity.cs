@@ -73,52 +73,19 @@ namespace data_rogue_core.Activities
 
         public override IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
         {
-            yield return new LinesControl { Position = new Rectangle(0, 0, width, height), Configuration = _ioSystemConfiguration };
-
-            foreach (var mapConfiguration in _ioSystemConfiguration.MapConfigurations)
-            {
-                if (mapConfiguration.GetType() == typeof(MinimapConfiguration))
-                {
-                    yield return new MinimapControl { Position = mapConfiguration.Position };
-                }
-
-                if (mapConfiguration.GetType() == typeof(MapConfiguration))
-                {
-                    yield return new MapControl {Position = mapConfiguration.Position};
-                }
-            }
+            var controls = new List<IDataRogueControl>();
 
             var player = systemContainer.PlayerSystem.Player;
 
-            foreach (var statsConfiguration in _ioSystemConfiguration.StatsConfigurations)
-            {
-                var x = statsConfiguration.Position.X + renderer.ActivityPadding.Left;
-                var y = statsConfiguration.Position.Y + renderer.ActivityPadding.Top;
+            controls.Add( new LinesControl { Position = new Rectangle(0, 0, width, height), Configuration = _ioSystemConfiguration });
 
-                foreach (var display in statsConfiguration.Displays)
-                {
-                    var controlType = display.ControlType;
+            controls.AddRange(ControlFactory.GetMapControls(_ioSystemConfiguration.MapConfigurations));
 
-                    var instance = Activator.CreateInstance(controlType);
-                    var control = (IDataRogueInfoControl)instance;
-                    control.SetData(player, display);
-                    control.Position = new Rectangle(control.Position.X, control.Position.Y, statsConfiguration.Position.Width, 0);
+            controls.AddRange(ControlFactory.GetStatsControls(_ioSystemConfiguration.StatsConfigurations, renderer, systemContainer, rendererHandle, controlRenderers, playerFov, player));
 
-                    var controlRenderer = controlRenderers.Single(s => s.DisplayType == control.GetType());
-                    var size = controlRenderer.GetSize(rendererHandle, control, systemContainer, playerFov);
+            controls.AddRange(ControlFactory.GetMessageControls(_ioSystemConfiguration.MessageConfigurations));
 
-                    control.Position = new Rectangle(x, y, size.Width, size.Height);
-
-                    y += size.Height;
-
-                    yield return control;
-                }
-            }
-
-            foreach(var messageConfiguration in _ioSystemConfiguration.MessageConfigurations)
-            {
-                yield return new MessageLogControl { Position = messageConfiguration.Position, NumberOfMessages = messageConfiguration.NumberOfMessages };
-            }
+            return controls;
         }
     }
 }
