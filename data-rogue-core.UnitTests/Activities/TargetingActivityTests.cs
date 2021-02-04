@@ -41,9 +41,11 @@ namespace data_rogue_core.UnitTests.Activities
             var rendererSystem = Substitute.For<IRendererSystem>();
             rendererSystem.Renderer.Returns(_renderer);
 
+            var playerSystem = Substitute.For<IPlayerSystem>();
+
             _activityStack = new ActivityStack();
             _ioConfig = new IOSystemConfiguration();
-            _activityStack.Push(new GameplayActivity(_ioConfig));
+            _activityStack.Push(new GameplayActivity(_ioConfig, playerSystem));
             _activitySystem = Substitute.For<IActivitySystem>();
             _activitySystem.ActivityStack.Returns(_activityStack);
             _positionSystem = Substitute.For<IPositionSystem>();

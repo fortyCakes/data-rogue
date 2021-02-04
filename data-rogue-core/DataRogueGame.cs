@@ -64,7 +64,7 @@ namespace data_rogue_core
         {
             SystemContainer.ActivitySystem.Initialise();
 
-            SystemContainer.ActivitySystem.Push(new GameplayActivity(IOSystem.Configuration));
+            SystemContainer.ActivitySystem.Push(new GameplayActivity(IOSystem.Configuration, SystemContainer.PlayerSystem));
 
             DisplayLoadingScreen("Loading...");
         }
@@ -96,7 +96,7 @@ namespace data_rogue_core
 
         private void DisplayMainMenu()
         {
-            SystemContainer.ActivitySystem.Push(new MenuActivity(new MainMenu(SystemContainer.ActivitySystem, SystemContainer.PlayerSystem, SystemContainer.SaveSystem, SystemContainer.EntityEngine)));
+            SystemContainer.ActivitySystem.Push(new MenuActivity(new MainMenu(SystemContainer)));
         }
 
         private void OnRootConsoleRender(object sender, GameLoopEventArgs e)

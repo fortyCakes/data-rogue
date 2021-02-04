@@ -19,5 +19,6 @@ namespace data_rogue_core.Systems.Interfaces
 
         void RemoveActivity(IActivity activity);
         IActivity GetActivityAcceptingInput();
+        IMapActivity GetMapActivity();
     }
 }

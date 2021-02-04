@@ -34,7 +34,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             var currentMap = systemContainer.MapSystem.MapCollection[cameraPosition.Key];
             var cameraX = cameraPosition.X;
             var cameraY = cameraPosition.Y;
-            var playerMoving = systemContainer.PlayerSystem.Player.TryGet<Moving>();
+            var playerMoving = systemContainer.PlayerSystem.Player?.TryGet<Moving>();
             var playerMovingOffsetX = playerMoving == null ? 0 : -playerMoving.OffsetX;
             var playerMovingOffsetY = playerMoving == null ? 0 : -playerMoving.OffsetY;
 
@@ -59,7 +59,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
                     var lookupY = cameraY - offsetY + y;
 
                     MapCoordinate coordinate = new MapCoordinate(currentMap.MapKey, lookupX, lookupY);
-                    var isInFov = playerFov.Contains(coordinate);
+                    var isInFov = playerFov?.Contains(coordinate) ?? true;
 
                     renderTracker[x + 1, y + 1] = isInFov || currentMap.SeenCoordinates.Contains(coordinate);
                     fovTracker[x + 1, y + 1] = isInFov;

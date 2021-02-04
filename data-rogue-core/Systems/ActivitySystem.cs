@@ -44,5 +44,18 @@ namespace data_rogue_core.Systems
 
             return null;
         }
+
+        public IMapActivity GetMapActivity()
+        {
+            foreach(var activity in ActivityStack)
+            {
+                if (activity is IMapActivity)
+                {
+                    return (IMapActivity)activity;
+                }
+            }
+
+            return null;
+        }
     }
 }

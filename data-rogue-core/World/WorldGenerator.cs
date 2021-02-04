@@ -23,11 +23,7 @@ namespace data_rogue_core
 
         public void Create(ISystemContainer systemContainer, CharacterCreationForm characterCreationForm)
         {
-            systemContainer.MessageSystem.Initialise();
-
-            systemContainer.MapSystem.Initialise();
-
-            systemContainer.EntityEngine.Initialise(systemContainer);
+            InitialiseBasicSystems(systemContainer);
 
             var worldData = worldEntityDataProvider.GetData();
 
@@ -38,6 +34,15 @@ namespace data_rogue_core
             AddPlayerToWorld(systemContainer, spawnPoint, characterCreationForm);
 
             StartGameplayRunning(systemContainer);
+        }
+
+        private static void InitialiseBasicSystems(ISystemContainer systemContainer)
+        {
+            systemContainer.MessageSystem.Initialise();
+
+            systemContainer.MapSystem.Initialise();
+
+            systemContainer.EntityEngine.Initialise(systemContainer);
         }
 
         private static void StartGameplayRunning(ISystemContainer systemContainer)

@@ -8,18 +8,29 @@ using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.Systems
 {
-    public class RendererSystem: IRendererSystem
+    public class RendererSystem : IRendererSystem
     {
-        private IPlayerSystem playerSystem;
+        private readonly IPlayerSystem _playerSystem;
+        private readonly IActivitySystem _activitySystem;
 
-        public RendererSystem(IPlayerSystem playerSystem, IUnifiedRenderer renderer)
+        public RendererSystem(IPlayerSystem playerSystem, IActivitySystem activitySystem, IUnifiedRenderer renderer)
         {
-            this.playerSystem = playerSystem;
-            this.Renderer = renderer;
+            _playerSystem = playerSystem;
+            _activitySystem = activitySystem;
+            Renderer = renderer;
         }
 
         public IUnifiedRenderer Renderer { get; set; }
-        public MapCoordinate CameraPosition => playerSystem.Player.Get<Position>().MapCoordinate;
+
+        public bool LockCameraToPlayer { get; set; } = true;
+        public MapCoordinate CameraPosition {
+            get
+            {
+                var mapActivity = _activitySystem.GetMapActivity();
+
+                return mapActivity.CameraPosition;
+            }
+        }
 
         public IOSystemConfiguration IOSystemConfiguration { get; set; }
     }

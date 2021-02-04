@@ -79,7 +79,7 @@ namespace data_rogue_core.Systems
             MapSystem = new MapSystem();
 
 
-            RendererSystem = new RendererSystem(PlayerSystem, _renderer);
+            RendererSystem = new RendererSystem(PlayerSystem, ActivitySystem, _renderer);
 
             EntityEngine = new EntityEngine(_prototypeEntityDataProvider, _additionalComponentTypes);
 

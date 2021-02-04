@@ -13,25 +13,24 @@ namespace data_rogue_core.Controls
     public class ControlFactory
     {
         public static IEnumerable<IDataRogueControl> GetControls(
-            List<IRenderingConfiguration> configurations, 
+            IEnumerable<IRenderingConfiguration> configurations, 
             IUnifiedRenderer renderer, 
             ISystemContainer systemContainer, 
             object rendererHandle, 
             List<IDataRogueControlRenderer> controlRenderers, 
-            List<MapCoordinate> playerFov, 
-            IEntity player)
+            List<MapCoordinate> playerFov)
         {
             var controls = new List<IDataRogueControl>();
 
             foreach (IRenderingConfiguration statsConfiguration in configurations)
             {
-                controls.AddRange(CreateControls(renderer, systemContainer, rendererHandle, controlRenderers, playerFov, player, statsConfiguration));
+                controls.AddRange(CreateControls(renderer, systemContainer, rendererHandle, controlRenderers, playerFov, statsConfiguration));
             }
 
             return controls;
         }
 
-        private static IEnumerable<IDataRogueControl> CreateControls(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, IEntity player, IRenderingConfiguration renderingConfiguration)
+        private static IEnumerable<IDataRogueControl> CreateControls(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, IRenderingConfiguration renderingConfiguration)
         {
             var x = renderingConfiguration.Position.X + renderer.ActivityPadding.Left;
             var y = renderingConfiguration.Position.Y + renderer.ActivityPadding.Top;
@@ -45,7 +44,7 @@ namespace data_rogue_core.Controls
 
                 if (control is IDataRogueInfoControl)
                 {
-                    (control as IDataRogueInfoControl).SetData(player, display);
+                    (control as IDataRogueInfoControl).SetData(systemContainer.PlayerSystem.Player, display);
                 }
 
                 if (control.FillsContainer)

@@ -3,6 +3,7 @@ using data_rogue_core.Systems.Interfaces;
 using data_rogue_core.Forms.StaticForms;
 using data_rogue_core.Activities;
 using System.Linq;
+using data_rogue_core.Maps;
 
 namespace data_rogue_core.Menus.StaticMenus
 {
@@ -10,22 +11,19 @@ namespace data_rogue_core.Menus.StaticMenus
     {
         public override bool Centred => true;
 
-        private readonly IPlayerSystem _playerSystem;
-        private readonly ISaveSystem _saveSystem;
-        private readonly IEntityEngine _entityEngine;
+        private readonly ISystemContainer _systemContainer;
 
-        public MainMenu(IActivitySystem activitySystem, IPlayerSystem playerSystem, ISaveSystem saveSystem, IEntityEngine entityEngine) : base(
-            activitySystem,
+        public MainMenu(ISystemContainer systemContainer) : base(
+            systemContainer.ActivitySystem,
             "Main Menu",
             null,
             new MenuItem("New Game"),
             new MenuItem("Load Game"),
             new MenuItem("High Scores"),
+            new MenuItem("Map Editor"),
             new MenuItem("Quit"))
         {
-            _playerSystem = playerSystem;
-            _saveSystem = saveSystem;
-            _entityEngine = entityEngine;
+            _systemContainer = systemContainer;
             OnSelectCallback += HandleMainMenuSelection;
         }
 
@@ -45,11 +43,19 @@ namespace data_rogue_core.Menus.StaticMenus
                     break;
                 case "Load Game":
                     CloseActivity();
-                    _saveSystem.Load();
+                    _systemContainer.SaveSystem.Load();
                     _activitySystem.GameplayActivity.Running = true;
                     break;
                 case "High Scores":
-                    _activitySystem.Push(new HighScoresActivity(_activitySystem, _saveSystem));
+                    _activitySystem.Push(new HighScoresActivity(_activitySystem, _systemContainer.SaveSystem));
+                    break;
+                case "Map Editor":
+
+                    _systemContainer.MapSystem.Initialise();
+
+                    var newMap = new Map("NewMap", _systemContainer.PrototypeSystem.Get("Cell:Empty"));
+                    _systemContainer.MapSystem.MapCollection.Add(newMap.MapKey, newMap);
+                    _activitySystem.Push(new MapEditorActivity(newMap));
                     break;
 
             }
@@ -57,7 +63,7 @@ namespace data_rogue_core.Menus.StaticMenus
 
         private void StartCharacterCreation()
         {
-            _activitySystem.Push(CharacterCreationForm.GetCharacterCreationActivity(_activitySystem, _saveSystem, _playerSystem, _entityEngine));
+            _activitySystem.Push(CharacterCreationForm.GetCharacterCreationActivity(_systemContainer));
         }
     }
 }

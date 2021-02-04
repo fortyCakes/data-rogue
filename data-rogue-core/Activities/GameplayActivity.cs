@@ -6,11 +6,12 @@ using data_rogue_core.Systems.Interfaces;
 using System.Collections.Generic;
 using data_rogue_core.Controls;
 using System.Drawing;
+using data_rogue_core.Components;
 
 namespace data_rogue_core.Activities
 {
 
-    public class GameplayActivity : BaseActivity
+    public class GameplayActivity : BaseActivity, IMapActivity
     {
         public override ActivityType Type => ActivityType.Gameplay;
 
@@ -19,11 +20,15 @@ namespace data_rogue_core.Activities
         public override bool RendersEntireSpace => true;
         public override bool AcceptsInput => true;
 
-        private readonly IOSystemConfiguration _ioSystemConfiguration;
+        public MapCoordinate CameraPosition => _playerSystem.Player.Get<Position>().MapCoordinate;
 
-        public GameplayActivity(IOSystemConfiguration ioSystemConfiguration)
+        private readonly IOSystemConfiguration _ioSystemConfiguration;
+        private readonly IPlayerSystem _playerSystem;
+
+        public GameplayActivity(IOSystemConfiguration ioSystemConfiguration, IPlayerSystem playerSystem)
         {
             _ioSystemConfiguration = ioSystemConfiguration;
+            _playerSystem = playerSystem;
         }
 
         public void Initialise()
@@ -50,7 +55,7 @@ namespace data_rogue_core.Activities
             var player = systemContainer.PlayerSystem.Player;
 
             controls.Add( new LinesControl { Position = new Rectangle(0, 0, width, height), Configuration = _ioSystemConfiguration });
-            controls.AddRange(ControlFactory.GetControls(_ioSystemConfiguration.GameplayRenderingConfiguration, renderer, systemContainer, rendererHandle, controlRenderers, playerFov, player));
+            controls.AddRange(ControlFactory.GetControls(_ioSystemConfiguration.GameplayRenderingConfiguration, renderer, systemContainer, rendererHandle, controlRenderers, playerFov));
 
             return controls;
         }

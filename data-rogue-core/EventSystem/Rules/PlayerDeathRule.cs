@@ -25,12 +25,7 @@ namespace data_rogue_core.EventSystem.Rules
             {
                 systemContainer.ActivitySystem.ActivityStack.OfType<GameplayActivity>().Single().Running = false;
 
-                systemContainer.ActivitySystem.Push(new MenuActivity(new MainMenu(
-                        systemContainer.ActivitySystem,
-                        systemContainer.PlayerSystem,
-                        systemContainer.SaveSystem,
-                        systemContainer.EntityEngine
-                    )));
+                systemContainer.ActivitySystem.Push(new MenuActivity(new MainMenu(systemContainer)));
             }
 
             return true;

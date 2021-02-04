@@ -14,5 +14,7 @@ namespace data_rogue_core.Systems.Interfaces
         IUnifiedRenderer Renderer {get;set;}
 
         MapCoordinate CameraPosition { get; }
+
+        bool LockCameraToPlayer { get; set; }
     }
 }

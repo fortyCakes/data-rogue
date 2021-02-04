@@ -11,16 +11,12 @@ namespace data_rogue_core.Forms.StaticForms
 {
     public class CharacterCreationForm : Form
     {
-        private readonly ISaveSystem _saveSystem;
-        private readonly IPlayerSystem _playerSystem;
-        private readonly IEntityEngine _entityEngine;
+        private readonly ISystemContainer _systemContainer;
 
-        public CharacterCreationForm(IActivitySystem activitySystem, ISaveSystem saveSystem, IPlayerSystem playerSystem, IEntityEngine entityEngine) : base(activitySystem, "Character Creation", FormButton.Ok | FormButton.Cancel,
+        public CharacterCreationForm(ISystemContainer systemContainer) : base(systemContainer.ActivitySystem, "Character Creation", FormButton.Ok | FormButton.Cancel,
                 null)
         {
-            _entityEngine = entityEngine;
-            _saveSystem = saveSystem;
-            _playerSystem = playerSystem;
+            _systemContainer = systemContainer;
 
             OnSelectCallback += HandleCharacterCreationFormSelection;
 
@@ -31,7 +27,7 @@ namespace data_rogue_core.Forms.StaticForms
         {
             get
             {
-                var classNames = _entityEngine.EntitiesWith<Class>(true).Select(e => (object)e.DescriptionName).ToList();
+                var classNames = _systemContainer.EntityEngine.EntitiesWith<Class>(true).Select(e => (object)e.DescriptionName).ToList();
 
                 var creationFields = new Dictionary<string, FormData>
                 {
@@ -64,9 +60,9 @@ namespace data_rogue_core.Forms.StaticForms
 
         public string Class => Fields["Class"].Value.ToString();
 
-        public static FormActivity GetCharacterCreationActivity(IActivitySystem activitySystem, ISaveSystem saveSystem, IPlayerSystem playerSystem, IEntityEngine entityEngine)
+        public static FormActivity GetCharacterCreationActivity(ISystemContainer systemContainer)
         {
-            return new FormActivity(new CharacterCreationForm(activitySystem, saveSystem, playerSystem, entityEngine));
+            return new FormActivity(new CharacterCreationForm(systemContainer));
         }
 
         public void HandleCharacterCreationFormSelection(FormButton button, Form form)
@@ -77,11 +73,11 @@ namespace data_rogue_core.Forms.StaticForms
             {
                 case FormButton.Ok:
                     CloseActivity();
-                    _saveSystem.Create(characterCreationForm);
+                    _systemContainer.SaveSystem.Create(characterCreationForm);
                     break;
                 case FormButton.Cancel:
                     _activitySystem.Pop();
-                    _activitySystem.Push(new MenuActivity(new MainMenu(_activitySystem, _playerSystem, _saveSystem, _entityEngine)));
+                    _activitySystem.Push(new MenuActivity(new MainMenu(_systemContainer)));
                     break;
                 default:
                     throw new ApplicationException("Unknown form button");
