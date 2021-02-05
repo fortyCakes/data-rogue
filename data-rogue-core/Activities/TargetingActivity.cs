@@ -113,7 +113,7 @@ namespace data_rogue_core.Activities
                 var x = mouse.X;
                 var y = mouse.Y;
 
-                var hoveredLocation = systemContainer.RendererSystem.Renderer.GetMapCoordinateFromMousePosition(_systemContainer.RendererSystem.CameraPosition, x, y);
+                var hoveredLocation = systemContainer.RendererSystem.Renderer.GetGameplayMapCoordinateFromMousePosition(_systemContainer.RendererSystem.CameraPosition, x, y);
 
                 if (hoveredLocation != null)
                 {
@@ -160,7 +160,7 @@ namespace data_rogue_core.Activities
 
         public override IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
         {
-            foreach (MapConfiguration mapConfiguration in _ioSystemConfiguration.GameplayRenderingConfiguration)
+            foreach (MapConfiguration mapConfiguration in _ioSystemConfiguration.GameplayRenderingConfiguration.OfType<MapConfiguration>())
             {
                 yield return new TargetingOverlayControl { Position = mapConfiguration.Position, TargetingActivity = this };
             }

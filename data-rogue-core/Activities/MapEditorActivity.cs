@@ -1,5 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
 using data_rogue_core.Controls;
+using data_rogue_core.Controls.MapEditorTools;
+using data_rogue_core.EntityEngineSystem;
+using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.IOSystems;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems;
@@ -10,23 +15,51 @@ namespace data_rogue_core.Activities
     public class MapEditorActivity: BaseActivity, IMapActivity
     {
         private IMap _map;
+        private IEntity _currentCell;
+        private readonly ISystemContainer _systemContainer;
 
         public override ActivityType Type => ActivityType.MapEditor;
         public override bool RendersEntireSpace => true;
         public override bool AcceptsInput => true;
 
+        public IMapEditorTool CurrentTool { get; set; } = new PenTool(); 
+
+        public IEntity CurrentCell { get { return _currentCell; } set {
+                _currentCell = value;
+                _systemContainer?.MessageSystem.Write("Current cell set to " + _currentCell.DescriptionName);
+            } }
+
+        public void ApplyTool(MapCoordinate mapCoordinate)
+        {
+            CurrentTool.Apply(_map, mapCoordinate, CurrentCell);
+        }
+
         public MapCoordinate CameraPosition => new MapCoordinate(_map.MapKey, 0, 0);
 
-        public MapEditorActivity(IMap map)
+        public MapEditorActivity(ISystemContainer systemContainer, IMap map)
         {
             _map = map;
+            CurrentCell = map.DefaultCell;
+            _systemContainer = systemContainer;
+        }
+
+        public void SetTool(string toolName)
+        {
+            switch (toolName)
+            {
+                case "Pen Tool":
+                    CurrentTool = new PenTool();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(toolName), "Unknown tool");
+            }
         }
 
         public override IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
         {
             var config = GetRenderingConfiguration(width, height);
 
-            return ControlFactory.GetControls(config, renderer, systemContainer, rendererHandle, controlRenderers, playerFov);
+            return ControlFactory.GetControls(config, renderer, systemContainer, rendererHandle, controlRenderers, playerFov, systemContainer.ActivitySystem.ActivityStack.IndexOf(this));
         }
 
         public override void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard)
@@ -36,14 +69,36 @@ namespace data_rogue_core.Activities
 
         public override void HandleAction(ISystemContainer systemContainer, ActionEventData action)
         {
-            //throw new System.NotImplementedException();
+            if (action.Action == ActionType.ChangeMapEditorCell)
+            {
+                ShowChangeCellDialogue();
+            }
         }
 
-        private IEnumerable<IRenderingConfiguration> GetRenderingConfiguration(int width, int height)
+        private void ShowChangeCellDialogue()
+        {
+            var inputActivity = new TextInputActivity(_systemContainer.ActivitySystem, "Enter cell name:", SetCurrentCell);
+            inputActivity.InputText = "Cell:Grass";
+
+            _systemContainer.ActivitySystem.Push(inputActivity);
+
+        }
+
+        private void SetCurrentCell(string parameter)
+        {
+            var cell = _systemContainer.PrototypeSystem.Get(parameter);
+            CurrentCell = cell;
+        }
+
+        public IEnumerable<IRenderingConfiguration> GetRenderingConfiguration(int width, int height)
         {
             return new List<IRenderingConfiguration>
             {
-                new MapConfiguration {Position=new System.Drawing.Rectangle(0,0, width, height)}
+                new MapEditorConfiguration {Position=new Rectangle(0,0, width, height)},
+                new StatsConfiguration {Position = new Rectangle(0,0,width, height),
+                    Displays = new List<InfoDisplay> { new InfoDisplay { ControlType=typeof(MapEditorToolbarControl) } }
+                },
+                new MessageConfiguration{Position = new Rectangle(1,height-25, width, 25), NumberOfMessages = 5}
             };
         }
     }

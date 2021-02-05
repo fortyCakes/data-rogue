@@ -55,7 +55,7 @@ namespace data_rogue_core.Menus.StaticMenus
 
                     var newMap = new Map("NewMap", _systemContainer.PrototypeSystem.Get("Cell:Empty"));
                     _systemContainer.MapSystem.MapCollection.Add(newMap.MapKey, newMap);
-                    _activitySystem.Push(new MapEditorActivity(newMap));
+                    _activitySystem.Push(new MapEditorActivity(_systemContainer, newMap));
                     break;
 
             }

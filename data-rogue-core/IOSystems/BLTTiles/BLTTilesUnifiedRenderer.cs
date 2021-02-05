@@ -60,13 +60,27 @@ namespace data_rogue_core.IOSystems.BLTTiles
             activity.Layout(this, systemContainer, _spriteManager, _controlRenderers, playerFov, _width, _height);
         }
 
-        public MapCoordinate GetMapCoordinateFromMousePosition(MapCoordinate cameraPosition, int x, int y)
+        public MapCoordinate GetGameplayMapCoordinateFromMousePosition(MapCoordinate cameraPosition, int x, int y)
         {
-            var onMaps = _ioSystemConfiguration.GameplayRenderingConfiguration.OfType<MapConfiguration>().Where(m => IsOnMap(m, x, y));
+            return GetMapCoordinateFromMousePosition(_ioSystemConfiguration.GameplayRenderingConfiguration.OfType<MapConfiguration>(), cameraPosition, x, y);
+        }
+
+        public MapCoordinate GetMapEditorMapCoordinateFromMousePosition(MapCoordinate cameraPosition, int x, int y)
+        {
+            var lookupX = cameraPosition.X - BLT.State(BLT.TK_WIDTH) / (2 * BLTTilesIOSystem.TILE_SPACING) + x / BLTTilesIOSystem.TILE_SPACING;
+            var lookupY = cameraPosition.Y - BLT.State(BLT.TK_HEIGHT) / (2 * BLTTilesIOSystem.TILE_SPACING) + y / BLTTilesIOSystem.TILE_SPACING;
+
+            return new MapCoordinate(cameraPosition.Key, lookupX, lookupY);
+        }
+
+        public MapCoordinate GetMapCoordinateFromMousePosition(IEnumerable<MapConfiguration> maps, MapCoordinate cameraPosition, int x, int y)
+        {
+
+            var onMaps = maps.Where(m => IsOnMap(m, x, y));
 
             var map = onMaps.Last();
 
-            if (map.GetType() == typeof(MapConfiguration))
+            if (map.GetType() == typeof(MapConfiguration) || map.GetType() == typeof(MapEditorConfiguration))
             {
                 x -= map.Position.Left;
                 y -= map.Position.Top;

@@ -26,6 +26,8 @@
         Interact,
         NextInteraction,
         Hotbar,
-        DebugMenu
+        DebugMenu,
+        ChangeMapEditorTool,
+        ChangeMapEditorCell
     }
 }

@@ -13,7 +13,7 @@ using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
-    internal class BLTMapRenderer : BLTControlRenderer
+    public class BLTMapRenderer : BLTControlRenderer
     {
         public override Type DisplayType => typeof(MapControl);
 

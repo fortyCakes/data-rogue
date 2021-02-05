@@ -16,6 +16,7 @@ namespace data_rogue_core.Systems.Interfaces
 
         Action QuitAction { get; set; }
         GameplayActivity GameplayActivity { get; }
+        MapEditorActivity MapEditorActivity { get; }
 
         void RemoveActivity(IActivity activity);
         IActivity GetActivityAcceptingInput();

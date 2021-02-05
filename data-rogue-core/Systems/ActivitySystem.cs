@@ -33,6 +33,7 @@ namespace data_rogue_core.Systems
         public Action QuitAction { get; set; }
 
         public GameplayActivity GameplayActivity => ActivityStack.OfType<GameplayActivity>().Single();
+        public MapEditorActivity MapEditorActivity => ActivityStack.OfType<MapEditorActivity>().Single();
 
         public IActivity GetActivityAcceptingInput()
         {

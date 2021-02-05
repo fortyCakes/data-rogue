@@ -52,7 +52,7 @@ namespace data_rogue_core.IOSystems.RLNetConsole
             activity.Layout(this, systemContainer, _console, _controlRenderers, playerFov, width, height);
         }
 
-        public MapCoordinate GetMapCoordinateFromMousePosition(MapCoordinate cameraPosition, int x, int y)
+        public MapCoordinate GetGameplayMapCoordinateFromMousePosition(MapCoordinate cameraPosition, int x, int y)
         {
             foreach (MapConfiguration map in _ioSystemConfiguration.GameplayRenderingConfiguration)
             {
@@ -88,6 +88,11 @@ namespace data_rogue_core.IOSystems.RLNetConsole
             var onControls = activity.Controls.Where(c => c.Position.Contains(mousePoint));
 
             return onControls.LastOrDefault();
+        }
+
+        public MapCoordinate GetMapEditorMapCoordinateFromMousePosition(MapCoordinate cameraPosition, int x, int y)
+        {
+            return new MapCoordinate(cameraPosition.Key, x, y);
         }
     }
 }

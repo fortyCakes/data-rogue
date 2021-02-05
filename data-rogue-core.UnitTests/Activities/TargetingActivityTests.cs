@@ -179,7 +179,7 @@ namespace data_rogue_core.UnitTests.Activities
             var mouse = new MouseData() { MouseActive = true };
 
             _renderer
-                .GetMapCoordinateFromMousePosition(Arg.Any<MapCoordinate>(), Arg.Any<int>(), Arg.Any<int>())
+                .GetGameplayMapCoordinateFromMousePosition(Arg.Any<MapCoordinate>(), Arg.Any<int>(), Arg.Any<int>())
                 .Returns(new MapCoordinate("Map", 1000, 1000));
 
             _targetingActivity.HandleMouse(_systemContainer, mouse);
@@ -194,7 +194,7 @@ namespace data_rogue_core.UnitTests.Activities
             var mouse = new MouseData() { MouseActive = true };
 
             _renderer
-                .GetMapCoordinateFromMousePosition(Arg.Any<MapCoordinate>(), Arg.Any<int>(), Arg.Any<int>())
+                .GetGameplayMapCoordinateFromMousePosition(Arg.Any<MapCoordinate>(), Arg.Any<int>(), Arg.Any<int>())
                 .Returns((MapCoordinate)null);
 
             _targetingActivity.HandleMouse(_systemContainer, mouse);
@@ -210,7 +210,7 @@ namespace data_rogue_core.UnitTests.Activities
             var mouse = new MouseData() { MouseActive = true };
 
             _renderer
-                .GetMapCoordinateFromMousePosition(Arg.Any<MapCoordinate>(), Arg.Any<int>(), Arg.Any<int>())
+                .GetGameplayMapCoordinateFromMousePosition(Arg.Any<MapCoordinate>(), Arg.Any<int>(), Arg.Any<int>())
                 .Returns(new MapCoordinate("Map", 2, 2));
 
             _targetingActivity.HandleMouse(_systemContainer, mouse);
@@ -226,7 +226,7 @@ namespace data_rogue_core.UnitTests.Activities
             var mouse = new MouseData() { MouseActive = true, IsLeftClick = true };
 
             _renderer
-                .GetMapCoordinateFromMousePosition(Arg.Any<MapCoordinate>(), Arg.Any<int>(), Arg.Any<int>())
+                .GetGameplayMapCoordinateFromMousePosition(Arg.Any<MapCoordinate>(), Arg.Any<int>(), Arg.Any<int>())
                 .Returns(new MapCoordinate("Map", 2, 2));
 
             _targetingActivity.HandleMouse(_systemContainer, mouse);

@@ -17,6 +17,7 @@ using System.Threading.Tasks;
 
 namespace data_rogue_core.Controls
 {
+
     public class MapControl : BaseControl
     {
         private IPathfindingAlgorithm _pathfindingAlgorithm = new AStarPathfindingAlgorithm();
@@ -26,7 +27,7 @@ namespace data_rogue_core.Controls
 
         public override ActionEventData HandleMouse(MouseData mouse, IDataRogueControlRenderer renderer, ISystemContainer systemContainer)
         {
-            MapCoordinate mapCoordinate = systemContainer.RendererSystem.Renderer.GetMapCoordinateFromMousePosition(systemContainer.RendererSystem.CameraPosition, mouse.X, mouse.Y);
+            MapCoordinate mapCoordinate = systemContainer.RendererSystem.Renderer.GetGameplayMapCoordinateFromMousePosition(systemContainer.RendererSystem.CameraPosition, mouse.X, mouse.Y);
             systemContainer.ControlSystem.HoveredCoordinate = mapCoordinate;
 
             var player = systemContainer.PlayerSystem.Player;

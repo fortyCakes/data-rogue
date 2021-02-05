@@ -55,7 +55,7 @@ namespace data_rogue_core.Activities
             var player = systemContainer.PlayerSystem.Player;
 
             controls.Add( new LinesControl { Position = new Rectangle(0, 0, width, height), Configuration = _ioSystemConfiguration });
-            controls.AddRange(ControlFactory.GetControls(_ioSystemConfiguration.GameplayRenderingConfiguration, renderer, systemContainer, rendererHandle, controlRenderers, playerFov));
+            controls.AddRange(ControlFactory.GetControls(_ioSystemConfiguration.GameplayRenderingConfiguration, renderer, systemContainer, rendererHandle, controlRenderers, playerFov, systemContainer.ActivitySystem.ActivityStack.IndexOf(this)));
 
             return controls;
         }

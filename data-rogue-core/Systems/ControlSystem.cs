@@ -59,16 +59,19 @@ namespace data_rogue_core.Systems
 
         public void HandleInput(KeyCombination keyPress, MouseData mouse)
         {
-            var actionData = GetActionFromBoundKey(keyPress);
+            var boundActions = GetActionsFromBoundKey(keyPress);
             if (_activitySystem.ActivityStack.Any())
             {
                 IActivity inputActivity = _activitySystem.GetActivityAcceptingInput();
 
                 if (inputActivity != null && ((inputActivity as GameplayActivity)?.Running ?? true))
                 {
-                    if (actionData != null)
+                    if (boundActions.Any())
                     {
-                        inputActivity.HandleAction(_systemContainer, actionData);
+                        foreach (var action in boundActions)
+                        {
+                            inputActivity.HandleAction(_systemContainer, action);
+                        }
                     }
 
                     if (keyPress != null)
@@ -84,23 +87,24 @@ namespace data_rogue_core.Systems
             }
         }
 
-        private ActionEventData GetActionFromBoundKey(KeyCombination keyPress)
+        private IEnumerable<ActionEventData> GetActionsFromBoundKey(KeyCombination keyPress)
         {
-            var keyBinding = _keyBindings.SingleOrDefault(k => k.Key.Equals(keyPress));
-
-            if (keyBinding == null)
+            foreach (var keyBinding in _keyBindings.Where(k => k.Key.Equals(keyPress)))
             {
-                if (keyPress == null || keyPress.Key == Key.Unknown) return null;
+                if (keyBinding == null)
+                {
+                    if (keyPress == null || keyPress.Key == Key.Unknown) break;
 
-                return new ActionEventData{ Action =  ActionType.None, Parameters = null, KeyPress = keyPress};
+                    yield return new ActionEventData { Action = ActionType.None, Parameters = null, KeyPress = keyPress };
+                }
+
+                var action = keyBinding.Action;
+
+                ActionType actionType = ExtractActionType(action);
+                var parameters = ExtractParameters(action);
+
+                yield return new ActionEventData { Action = actionType, Parameters = parameters, KeyPress = keyPress, Speed = 1000 };
             }
-
-            var action = keyBinding.Action;
-
-            ActionType actionType = ExtractActionType(action);
-            var parameters = ExtractParameters(action);
-
-            return new ActionEventData { Action = actionType, Parameters = parameters, KeyPress = keyPress, Speed = 1000 };
         }
 
         public static string ExtractParameters(string action)
@@ -136,7 +140,7 @@ namespace data_rogue_core.Systems
             if (_activitySystem.Peek() is GameplayActivity activity && _systemContainer.PlayerSystem.Player != null)
             {
                 IUnifiedRenderer renderer = _systemContainer.RendererSystem.Renderer;
-                var hoveredLocation = renderer.GetMapCoordinateFromMousePosition(_systemContainer.RendererSystem.CameraPosition, x, y);
+                var hoveredLocation = renderer.GetGameplayMapCoordinateFromMousePosition(_systemContainer.RendererSystem.CameraPosition, x, y);
 
                 SetHoveredLocation(hoveredLocation);
             }

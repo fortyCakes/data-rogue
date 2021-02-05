@@ -73,6 +73,8 @@
   <ItemGroup>
     <Compile Include="Activities\BaseActivity.cs" />
     <Compile Include="Activities\IMapActivity.cs" />
+    <Compile Include="Controls\MapEditorControl.cs" />
+    <Compile Include="Controls\MapEditorTools\IMapEditorTool.cs" />
     <Compile Include="Controls\ControlFactory.cs" />
     <Compile Include="Activities\EndGameScreenActivity.cs" />
     <Compile Include="Activities\FormActivity.cs" />
@@ -100,6 +102,8 @@
     <Compile Include="Components\StartDetails.cs" />
     <Compile Include="Components\Targeting.cs" />
     <Compile Include="Components\TextParticle.cs" />
+    <Compile Include="Controls\MapEditorToolbarControl.cs" />
+    <Compile Include="Controls\MapEditorTools\PenTool.cs" />
     <Compile Include="Controls\MinimapControl.cs" />
     <Compile Include="Controls\SkillBarControl.cs" />
     <Compile Include="Data\HighScore.cs" />
@@ -115,6 +119,7 @@
     <Compile Include="Controls\BaseControl.cs" />
     <Compile Include="Controls\BaseStatsControl.cs" />
     <Compile Include="Controls\TargetingOverlayControl.cs" />
+    <Compile Include="EventSystem\Rules\Actions\ChangeMapEditorToolAction.cs" />
     <Compile Include="EventSystem\Rules\Actions\DebugMenuAction.cs" />
     <Compile Include="EventSystem\Rules\Actions\FollowPathAction.cs" />
     <Compile Include="Behaviours\FollowPathBehaviour.cs" />
@@ -151,6 +156,8 @@
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTLargeTextDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTLineControlRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTLinesRenderer.cs" />
+    <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMapEditorRenderer.cs" />
+    <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMapEditorToolbarDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMapRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMenuActionRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMenuItemRenderer.cs" />
@@ -329,6 +336,7 @@
     <Compile Include="Forms\StatsFormData.cs" />
     <Compile Include="IOSystems\IIOSystem.cs" />
     <Compile Include="IOSystems\MapConfiguration.cs" />
+    <Compile Include="IOSystems\MapEditorConfiguration.cs" />
     <Compile Include="IOSystems\MessageConfiguration.cs" />
     <Compile Include="IOSystems\MinimapConfiguration.cs" />
     <Compile Include="IOSystems\MouseData.cs" />
@@ -574,6 +582,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Entities\Misc\grave.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Entities\Misc\pen_tool.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Entities\Misc\portal.png">

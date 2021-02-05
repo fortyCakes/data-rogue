@@ -37,6 +37,28 @@ namespace data_rogue_core.Activities
             {
                 Close();
             }
+
+            if (keyboard.Key == Key.BackSpace || keyboard.Key == Key.Back)
+            {
+                string text = (string)InputText;
+
+                if (text.Length > 0)
+                {
+                    text = text.Substring(0, text.Length - 1);
+                    InputText = text;
+                }
+
+                return;
+            }
+
+            var enteredChar = keyboard.ToChar();
+            if (enteredChar != null)
+            {
+                if (InputText.ToString().Length < 29)
+                {
+                    InputText += enteredChar;
+                }
+            }
         }
 
         public override void HandleMouse(ISystemContainer systemContainer, MouseData mouse)
@@ -49,35 +71,9 @@ namespace data_rogue_core.Activities
 
         public override void HandleAction(ISystemContainer systemContainer, ActionEventData action)
         {
-            if (action != null)
+            if (action != null && action.Action == ActionType.Select)
             {
-                if (action.Action == ActionType.Select)
-                {
-                    Select();
-                    return;
-                }
-
-                if (action.KeyPress.Key == Key.BackSpace || action.KeyPress.Key == Key.Back)
-                {
-                    string text = (string)InputText;
-
-                    if (text.Length > 0)
-                    {
-                        text = text.Substring(0, text.Length - 1);
-                        InputText = text;
-                    }
-
-                    return;
-                }
-                
-                var enteredChar = action.KeyPress.ToChar();
-                if (enteredChar != null)
-                {
-                    if (InputText.ToString().Length < 29)
-                    {
-                        InputText += enteredChar;
-                    }
-                }
+                Select();
             }
         }
 

@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace data_rogue_core.Controls
 {
-    public class ControlFactory
+    public static class ControlFactory
     {
         public static IEnumerable<IDataRogueControl> GetControls(
             IEnumerable<IRenderingConfiguration> configurations, 
@@ -18,19 +18,20 @@ namespace data_rogue_core.Controls
             ISystemContainer systemContainer, 
             object rendererHandle, 
             List<IDataRogueControlRenderer> controlRenderers, 
-            List<MapCoordinate> playerFov)
+            List<MapCoordinate> playerFov,
+            int activityIndex)
         {
             var controls = new List<IDataRogueControl>();
 
             foreach (IRenderingConfiguration statsConfiguration in configurations)
             {
-                controls.AddRange(CreateControls(renderer, systemContainer, rendererHandle, controlRenderers, playerFov, statsConfiguration));
+                controls.AddRange(CreateControls(renderer, systemContainer, rendererHandle, controlRenderers, playerFov, statsConfiguration, activityIndex));
             }
 
             return controls;
         }
 
-        private static IEnumerable<IDataRogueControl> CreateControls(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, IRenderingConfiguration renderingConfiguration)
+        private static IEnumerable<IDataRogueControl> CreateControls(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, IRenderingConfiguration renderingConfiguration, int activityIndex)
         {
             var x = renderingConfiguration.Position.X + renderer.ActivityPadding.Left;
             var y = renderingConfiguration.Position.Y + renderer.ActivityPadding.Top;
@@ -41,6 +42,7 @@ namespace data_rogue_core.Controls
 
                 var instance = Activator.CreateInstance(controlType);
                 var control = (IDataRogueControl)instance;
+                control.ActivityIndex = activityIndex; 
 
                 if (control is IDataRogueInfoControl)
                 {

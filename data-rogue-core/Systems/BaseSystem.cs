@@ -15,7 +15,7 @@ namespace data_rogue_core.Systems
             Entities.Remove(entity);
         }
 
-        public bool HasEntity(IEntity entity)
+        public virtual bool HasEntity(IEntity entity)
         {
             return Entities.Contains(entity);
         }

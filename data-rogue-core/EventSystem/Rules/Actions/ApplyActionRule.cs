@@ -28,7 +28,8 @@ namespace data_rogue_core.EventSystem.Rules
             typeof(WaitAction),
             typeof(InteractAction),
             typeof(NextInteractionAction),
-            typeof(HotbarAction)
+            typeof(HotbarAction),
+            typeof(ChangeMapEditorToolAction)
         };
 
         protected ISystemContainer _systemContainer;

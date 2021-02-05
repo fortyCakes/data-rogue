@@ -5,6 +5,8 @@
         public int X { get; set; }
         public int Y { get; set; }
         public bool IsLeftClick { get; set; }
+        public bool LeftButtonDown { get; set; }
+        public bool RightButtonDown { get; set; }
         public bool IsRightClick { get; set; }
         public bool MouseActive { get; set; }
     }

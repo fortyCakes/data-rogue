@@ -122,7 +122,9 @@ namespace data_rogue_core.IOSystems.RLNetConsole
                 IsRightClick = rightClick,
                 X = rlMouse.X,
                 Y = rlMouse.Y,
-                MouseActive = (leftClick || rightClick || _lastMouse?.X != rlMouse.X || _lastMouse?.Y != rlMouse.Y)
+                MouseActive = (leftClick || rightClick || _lastMouse?.X != rlMouse.X || _lastMouse?.Y != rlMouse.Y),
+                LeftButtonDown = rlMouse.LeftPressed,
+                RightButtonDown = rlMouse.RightPressed
             };
 
             _lastMouse = mouse;

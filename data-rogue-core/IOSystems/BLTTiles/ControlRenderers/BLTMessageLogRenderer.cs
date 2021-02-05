@@ -18,10 +18,12 @@ namespace data_rogue_core.IOSystems.BLTTiles
         {
             var messageLog = control as MessageLogControl;
 
+            var numberOfMessages = int.Parse(messageLog.Parameters);
+
             BLTLayers.Set(BLTLayers.Text, control.ActivityIndex);
             BLT.Font("text");
 
-            var messagesToRender = systemContainer.MessageSystem.RecentMessages(messageLog.NumberOfMessages);
+            var messagesToRender = systemContainer.MessageSystem.RecentMessages(numberOfMessages);
             messagesToRender.Reverse();
 
             var x = control.Position.Left;

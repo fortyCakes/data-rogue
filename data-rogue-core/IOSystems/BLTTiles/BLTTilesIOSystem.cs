@@ -211,7 +211,9 @@ namespace data_rogue_core.IOSystems.BLTTiles
                 IsRightClick = _rightClick,
                 X = _mouseX,
                 Y = _mouseY,
-                MouseActive = _mouseActive
+                MouseActive = _mouseActive,
+                LeftButtonDown = _leftMouseDown,
+                RightButtonDown = _rightMouseDown
             };
 
             ResetMouseFlags();

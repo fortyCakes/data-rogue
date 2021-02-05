@@ -107,5 +107,8 @@ Action: Hotbar(9)
 [KeyBinding]
 Key: Ctrl+W
 Action: DebugMenu
+[KeyBinding]
+Key: Space
+Action: ChangeMapEditorCell
 
 

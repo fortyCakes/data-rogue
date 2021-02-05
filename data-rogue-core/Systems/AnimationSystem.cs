@@ -16,8 +16,6 @@ namespace data_rogue_core.Systems
         private long _lastKnownTime;
         public const int TICK_LENGTH = 33;
 
-        private bool _blockingAnimationPlaying = false;
-
         public AnimationSystem( IStopwatch stopwatch, IRandom random)
         {
             _stopwatch = stopwatch;

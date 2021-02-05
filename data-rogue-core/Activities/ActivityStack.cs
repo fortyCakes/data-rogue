@@ -1,6 +1,7 @@
 ﻿using data_rogue_core.Renderers;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace data_rogue_core.Activities
 {
@@ -17,6 +18,11 @@ namespace data_rogue_core.Activities
         internal void PushAndInitialise(IActivity activity)
         {
             Push(activity);
+        }
+
+        internal int IndexOf(IActivity activity)
+        {
+            return this.ToList().IndexOf(activity);
         }
     }
 }

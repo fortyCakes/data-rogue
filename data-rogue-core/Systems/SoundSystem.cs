@@ -12,13 +12,13 @@ namespace data_rogue_core.Systems
     {
         private Dictionary<IEntity, SoundPlayer> _entityCache;
 
-        public void Initialise()
+        public override void Initialise()
         {
             base.Initialise();
             _entityCache = new Dictionary<IEntity, SoundPlayer>();
         }
 
-        public void AddEntity(IEntity entity)
+        public override void AddEntity(IEntity entity)
         {
             var sound = entity.Get<Sound>();
             var soundPlayer = LoadSound(sound);
@@ -30,12 +30,12 @@ namespace data_rogue_core.Systems
             return new SoundPlayer(sound.Path);
         }
 
-        public void RemoveEntity(IEntity entity)
+        public override void RemoveEntity(IEntity entity)
         {
             _entityCache.Remove(entity);
         }
 
-        public bool HasEntity(IEntity entity)
+        public override bool HasEntity(IEntity entity)
         {
             return _entityCache.ContainsKey(entity);
         }
