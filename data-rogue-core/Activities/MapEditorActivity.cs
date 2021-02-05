@@ -34,13 +34,14 @@ namespace data_rogue_core.Activities
             CurrentTool.Apply(_map, mapCoordinate, CurrentCell);
         }
 
-        public MapCoordinate CameraPosition => new MapCoordinate(_map.MapKey, 0, 0);
+        public MapCoordinate CameraPosition { get; set; }
 
         public MapEditorActivity(ISystemContainer systemContainer, IMap map)
         {
             _map = map;
             CurrentCell = map.DefaultCell;
             _systemContainer = systemContainer;
+            CameraPosition = new MapCoordinate(_map.MapKey, 0, 0);
         }
 
         public void SetTool(string toolName)
@@ -72,6 +73,11 @@ namespace data_rogue_core.Activities
             if (action.Action == ActionType.ChangeMapEditorCell)
             {
                 ShowChangeCellDialogue();
+            }
+
+            if (action.Action == ActionType.Move)
+            {
+                CameraPosition += Vector.Parse(action.Parameters);
             }
         }
 
