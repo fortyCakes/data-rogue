@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using data_rogue_core;
@@ -14,6 +15,7 @@ namespace data_rogue_one
 {
     public static class Program
     {
+        [STAThread]
         static void Main(string[] args)
         {
             var dataRogueGame = new DataRogueGame();

@@ -28,6 +28,7 @@
         Hotbar,
         DebugMenu,
         ChangeMapEditorTool,
-        ChangeMapEditorCell
+        ChangeMapEditorCell,
+        Open
     }
 }

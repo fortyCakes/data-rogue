@@ -110,5 +110,8 @@ Action: DebugMenu
 [KeyBinding]
 Key: Space
 Action: ChangeMapEditorCell
+[KeyBinding]
+Key: Shift+O
+Action: Open
 
 

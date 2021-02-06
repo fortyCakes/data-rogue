@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using data_rogue_core.Controls;
 using data_rogue_core.Controls.MapEditorTools;
 using data_rogue_core.EntityEngineSystem;
@@ -15,14 +19,17 @@ namespace data_rogue_core.Activities
     public class MapEditorActivity: BaseActivity, IMapActivity
     {
         private IMap _map;
+        public string _mapName;
         private IEntity _currentCell;
         private readonly ISystemContainer _systemContainer;
 
         public override ActivityType Type => ActivityType.MapEditor;
         public override bool RendersEntireSpace => true;
+        
         public override bool AcceptsInput => true;
 
-        public IMapEditorTool CurrentTool { get; set; } = new PenTool(); 
+        public IMapEditorTool CurrentTool { get; set; } = new PenTool();
+
 
         public IEntity CurrentCell { get { return _currentCell; } set {
                 _currentCell = value;
@@ -39,6 +46,7 @@ namespace data_rogue_core.Activities
         public MapEditorActivity(ISystemContainer systemContainer, IMap map)
         {
             _map = map;
+            _mapName = map.MapKey.Key;
             CurrentCell = map.DefaultCell;
             _systemContainer = systemContainer;
             CameraPosition = new MapCoordinate(_map.MapKey, 0, 0);
@@ -79,6 +87,16 @@ namespace data_rogue_core.Activities
             {
                 CameraPosition += Vector.Parse(action.Parameters);
             }
+
+            if (action.Action == ActionType.Save)
+            {
+                SaveMap();
+            }
+
+            if (action.Action == ActionType.Open)
+            {
+                OpenMap();
+            }
         }
 
         private void ShowChangeCellDialogue()
@@ -106,6 +124,36 @@ namespace data_rogue_core.Activities
                 },
                 new MessageConfiguration{Position = new Rectangle(1,height-25, width, 25), NumberOfMessages = 5}
             };
+        }
+
+        public void SaveMap()
+        {
+            var saveDialog = new SaveFileDialog();
+            saveDialog.Filter = "Map file|*.map";
+            saveDialog.Title = "Save map...";
+            saveDialog.ShowDialog();
+
+            if (saveDialog.FileName != "")
+            {
+                var serialisedMap = MapSerializer.Serialize(_map);
+                File.WriteAllText(saveDialog.FileName, serialisedMap);
+                _systemContainer.MessageSystem.Write($"Saved to {saveDialog.FileName}", Color.Blue);
+            }           
+        }
+
+        public void OpenMap()
+        {
+            var openDialog = new OpenFileDialog();
+            openDialog.Filter = "Map file|*.map";
+            openDialog.Title = "Open map...";
+            openDialog.ShowDialog();
+
+            if (openDialog.FileName != "")
+            {
+                var serialisedMap = File.ReadAllText(openDialog.FileName);
+                _map = MapSerializer.Deserialize(_systemContainer, serialisedMap);
+                _systemContainer.MessageSystem.Write($"Opened {openDialog.FileName}", Color.Blue);
+            }
         }
     }
 }
