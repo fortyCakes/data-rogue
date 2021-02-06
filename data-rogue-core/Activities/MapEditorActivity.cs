@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -52,16 +53,15 @@ namespace data_rogue_core.Activities
             CameraPosition = new MapCoordinate(_map.MapKey, 0, 0);
         }
 
+        public static IEnumerable<IMapEditorTool> GetToolbarControls() => new List<IMapEditorTool>
+        {
+            new PenTool(),
+            new EraserTool()
+        };
+
         public void SetTool(string toolName)
         {
-            switch (toolName)
-            {
-                case "Pen Tool":
-                    CurrentTool = new PenTool();
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(toolName), "Unknown tool");
-            }
+            CurrentTool = GetToolbarControls().SingleOrDefault(s => s.Entity.DescriptionName == toolName);
         }
 
         public override IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)

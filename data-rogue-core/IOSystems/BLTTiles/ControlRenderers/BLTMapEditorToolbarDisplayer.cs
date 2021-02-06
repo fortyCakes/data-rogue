@@ -24,7 +24,7 @@ namespace data_rogue_core.IOSystems.BLTTiles.ControlRenderers
             var y = control.Position.Y;
             var display = control as IDataRogueInfoControl;
 
-            var toolsOnBar = MapEditorToolbarControl.GetToolbarControls();
+            var toolsOnBar = MapEditorActivity.GetToolbarControls();
 
             var previousSkills = 0;
 
@@ -64,7 +64,7 @@ namespace data_rogue_core.IOSystems.BLTTiles.ControlRenderers
             var x = control.Position.X;
             var y = control.Position.Y;
             var display = control as IDataRogueInfoControl;
-            var toolsOnBar = MapEditorToolbarControl.GetToolbarControls().ToList();
+            var toolsOnBar = MapEditorActivity.GetToolbarControls().ToList();
 
             var relativeX = mouse.X - x;
             var relativeY = mouse.Y - y;

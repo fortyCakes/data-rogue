@@ -74,6 +74,7 @@
     <Compile Include="Activities\BaseActivity.cs" />
     <Compile Include="Activities\IMapActivity.cs" />
     <Compile Include="Controls\MapEditorControl.cs" />
+    <Compile Include="Controls\MapEditorTools\EraserTool.cs" />
     <Compile Include="Controls\MapEditorTools\IMapEditorTool.cs" />
     <Compile Include="Controls\ControlFactory.cs" />
     <Compile Include="Activities\EndGameScreenActivity.cs" />
@@ -573,6 +574,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Entities\Misc\black_smoke.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Entities\Misc\eraser_tool.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Entities\Misc\flame.png">

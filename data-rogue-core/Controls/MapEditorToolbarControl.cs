@@ -30,13 +30,7 @@ namespace data_rogue_core.Controls
             }
 
             return null;
-        }
-
-        public static IEnumerable<IMapEditorTool> GetToolbarControls() => new List<IMapEditorTool>
-        {
-            new PenTool()
-        };
-        
+        }        
     }
 
 }
