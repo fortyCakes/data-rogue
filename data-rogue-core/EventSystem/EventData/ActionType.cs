@@ -29,6 +29,7 @@
         DebugMenu,
         ChangeMapEditorTool,
         ChangeMapEditorCell,
-        Open
+        Open,
+        ChangeMapEditorDefaultCell
     }
 }

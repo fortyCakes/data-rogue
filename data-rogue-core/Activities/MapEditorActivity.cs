@@ -97,6 +97,19 @@ namespace data_rogue_core.Activities
             {
                 OpenMap();
             }
+
+            if (action.Action == ActionType.ChangeMapEditorDefaultCell)
+            {
+                ShowChangeDefaultCellDialogue();
+            }
+        }
+
+        private void ShowChangeDefaultCellDialogue()
+        {
+            var inputActivity = new TextInputActivity(_systemContainer.ActivitySystem, "Enter cell name:", SetDefaultCell);
+            inputActivity.InputText = "Cell:Grass";
+
+            _systemContainer.ActivitySystem.Push(inputActivity);
         }
 
         private void ShowChangeCellDialogue()
@@ -106,6 +119,12 @@ namespace data_rogue_core.Activities
 
             _systemContainer.ActivitySystem.Push(inputActivity);
 
+        }
+
+        private void SetDefaultCell(string parameter)
+        {
+            var cell = _systemContainer.PrototypeSystem.Get(parameter);
+            _map.DefaultCell = cell;
         }
 
         private void SetCurrentCell(string parameter)

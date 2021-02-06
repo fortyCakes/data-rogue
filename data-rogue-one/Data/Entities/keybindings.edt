@@ -113,5 +113,8 @@ Action: ChangeMapEditorCell
 [KeyBinding]
 Key: Shift+O
 Action: Open
+[KeyBinding]
+Key: Shift+D
+Action: ChangeMapEditorDefaultCell
 
 
