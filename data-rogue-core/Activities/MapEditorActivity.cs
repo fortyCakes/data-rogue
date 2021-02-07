@@ -34,7 +34,7 @@ namespace data_rogue_core.Activities
 
         public IEntity CurrentCell { get { return _currentCell; } set {
                 _currentCell = value;
-                _systemContainer?.MessageSystem.Write("Current cell set to " + _currentCell.DescriptionName);
+                _systemContainer?.MessageSystem.Write("Current cell set to " + (_currentCell == null ? "null" : _currentCell.DescriptionName));
             } }
 
         public void ApplyTool(MapCoordinate mapCoordinate)
@@ -106,31 +106,27 @@ namespace data_rogue_core.Activities
 
         private void ShowChangeDefaultCellDialogue()
         {
-            var inputActivity = new TextInputActivity(_systemContainer.ActivitySystem, "Enter cell name:", SetDefaultCell);
-            inputActivity.InputText = "Cell:Grass";
+            var inputActivity = new MapEditorCellMenuActivity(_systemContainer, "Choose a new default cell:", SetDefaultCell);
 
             _systemContainer.ActivitySystem.Push(inputActivity);
         }
 
         private void ShowChangeCellDialogue()
         {
-            var inputActivity = new TextInputActivity(_systemContainer.ActivitySystem, "Enter cell name:", SetCurrentCell);
-            inputActivity.InputText = "Cell:Grass";
+            var inputActivity = new MapEditorCellMenuActivity(_systemContainer, "Choose a cell to use:", SetCurrentCell);
 
             _systemContainer.ActivitySystem.Push(inputActivity);
 
         }
 
-        private void SetDefaultCell(string parameter)
+        private void SetDefaultCell(IEntity parameter)
         {
-            var cell = _systemContainer.PrototypeSystem.Get(parameter);
-            _map.DefaultCell = cell;
+            _map.DefaultCell = parameter;
         }
 
-        private void SetCurrentCell(string parameter)
+        private void SetCurrentCell(IEntity parameter)
         {
-            var cell = _systemContainer.PrototypeSystem.Get(parameter);
-            CurrentCell = cell;
+            CurrentCell = parameter;
         }
 
         public IEnumerable<IRenderingConfiguration> GetRenderingConfiguration(int width, int height)

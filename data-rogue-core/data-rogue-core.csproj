@@ -73,6 +73,8 @@
   <ItemGroup>
     <Compile Include="Activities\BaseActivity.cs" />
     <Compile Include="Activities\IMapActivity.cs" />
+    <Compile Include="Activities\MapEditorCellMenuActivity.cs" />
+    <Compile Include="Components\Cell.cs" />
     <Compile Include="Controls\MapEditorControl.cs" />
     <Compile Include="Controls\MapEditorTools\EraserTool.cs" />
     <Compile Include="Controls\MapEditorTools\IMapEditorTool.cs" />
@@ -105,6 +107,7 @@
     <Compile Include="Components\TextParticle.cs" />
     <Compile Include="Controls\MapEditorToolbarControl.cs" />
     <Compile Include="Controls\MapEditorTools\PenTool.cs" />
+    <Compile Include="Controls\MenuEntityControl.cs" />
     <Compile Include="Controls\MinimapControl.cs" />
     <Compile Include="Controls\SkillBarControl.cs" />
     <Compile Include="Data\HighScore.cs" />
@@ -161,6 +164,7 @@
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMapEditorToolbarDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMapRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMenuActionRenderer.cs" />
+    <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMenuEntityRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMenuItemRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMenuSelectorControlRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMessageLogRenderer.cs" />

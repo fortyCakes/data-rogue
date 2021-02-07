@@ -1,4 +1,5 @@
 ﻿"Cell:Empty"
+[Cell]
 [Appearance]
 Glyph: .
 Color: #aaaaaa
@@ -18,6 +19,7 @@ Name: Floor
 Detail: This is a stone floor.
 
 "Cell:Grass"
+[Cell]
 [Appearance]
 Glyph: ,
 Color: #567E3A
@@ -37,6 +39,7 @@ Name: Grass
 Detail: A patch of grass.
 
 "Cell:Dirt"
+[Cell]
 [Appearance]
 Glyph: .
 Color: #D27D2C
@@ -56,6 +59,7 @@ Name: Dirt
 Detail: A patch of bare dirt.
 
 "Cell:DarkDirt"
+[Cell]
 [Appearance]
 Glyph: .
 Color: #4E4A4E
@@ -75,6 +79,7 @@ Name: Dark Dirt
 Detail: A patch of bare dirt. It's discoloured and dark.
 
 "Cell:Tree"
+[Cell]
 [Appearance]
 Glyph: 
 Color: #567E3A
@@ -96,6 +101,7 @@ Name: Tree
 Detail: A large, sturdy-looking tree.
 
 "Cell:SpawnPoint"
+[Cell]
 [SpawnPoint]
 [Appearance]
 Glyph: .
@@ -116,6 +122,7 @@ Name: Dark Dirt
 Detail: A patch of bare dirt. It's discoloured and dark.
 
 "Cell:Wall"
+[Cell]
 [Appearance]
 Glyph: #
 Color: #aaaaaa
@@ -136,6 +143,7 @@ Name: Wall
 Detail: A wall made of smooth stone bricks.
 
 "Cell:CobbleWall"
+[Cell]
 [Appearance]
 Glyph: #
 Color: #cccccc
@@ -156,6 +164,7 @@ Name: Cobble Wall
 Detail: A wall made of pieces of stone mortared together in a haphazard fashion.
 
 "Cell:Boulder"
+[Cell]
 [Appearance]
 Glyph: O
 Color: #efefef
@@ -176,6 +185,7 @@ Name: Boulder
 Detail: A large boulder.
 
 "Cell:InfernoWall"
+[Cell]
 [Appearance]
 Glyph: #
 Color: #D34549
@@ -196,6 +206,7 @@ Name: Infernal Cobble Wall
 Detail: A wall made of pieces of hellstone mortared together in a haphazard fashion.
 
 "Cell:InfernoFloor"
+[Cell]
 [Appearance]
 Glyph: .
 Color: #864D30
