@@ -27,13 +27,12 @@ namespace data_rogue_core.Controls
         {
             OnClick?.Invoke(sender, eventArgs);
         }
-
-        public virtual ActionEventData HandleMouse(MouseData mouse, IDataRogueControlRenderer renderer, ISystemContainer systemContainer) => null;
-
+        
         public event PositionEventHandler OnClick;
 
         public bool Visible { get; set; } = true;
-        public virtual bool CanHandleMouse => false;
+        public virtual bool CanHandleMouse => OnClick != null;
+        public virtual ActionEventData HandleMouse(MouseData mouse, IDataRogueControlRenderer renderer, ISystemContainer systemContainer) => null;
 
         public virtual bool FillsContainer => false;
     }

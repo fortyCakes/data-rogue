@@ -29,16 +29,25 @@ namespace data_rogue_core.Activities
         {
             var mouseOverControl = GetMouseOverControl(systemContainer, mouse);
 
-            if (mouseOverControl != null && mouseOverControl.CanHandleMouse)
+            if (mouseOverControl != null)
             {
-                var renderer = systemContainer.RendererSystem.Renderer.GetRendererFor(mouseOverControl);
-
-                var action = mouseOverControl.HandleMouse(mouse, renderer, systemContainer);
-                if (action != null)
+                if (mouseOverControl.CanHandleMouse)
                 {
-                    systemContainer.EventSystem.Try(EventType.Action, systemContainer.PlayerSystem.Player, action);
+                    var renderer = systemContainer.RendererSystem.Renderer.GetRendererFor(mouseOverControl);
+
+                    var action = mouseOverControl.HandleMouse(mouse, renderer, systemContainer);
+                    if (action != null)
+                    {
+                        systemContainer.EventSystem.Try(EventType.Action, systemContainer.PlayerSystem.Player, action);
+                    }
+                }
+
+                if (mouse.IsLeftClick)
+                {
+                    mouseOverControl.Click(mouse, new PositionEventHandlerArgs(mouse.X, mouse.Y));
                 }
             }
+            
         }
 
         protected IDataRogueControl GetMouseOverControl(ISystemContainer systemContainer, MouseData mouse)
