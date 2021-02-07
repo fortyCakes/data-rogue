@@ -60,14 +60,14 @@ namespace BLTWrapper
                 throw new Exception($"BLT wasn't OK with sprite loading (tried to load {imageFile}). Check that the sprite is set to 'Copy Always'.");
         }
 
-        public BoxTilesetSpriteSheet LoadTileset_BoxType(string name, string imageFile, int spriteWidth, int spriteHeight, int scaling, int spacing)
+        public BoxTilesetSpriteSheet LoadTileset_BoxType(string name, string imageFile, int spriteWidth, int spriteHeight, int scaling, int spacing, int frames)
         {
-            var sheet = new BoxTilesetSpriteSheet(name, _offset);
+            var sheet = new BoxTilesetSpriteSheet(name, _offset, frames);
 
             LoadSpriteSheetFile(imageFile, spriteWidth, spriteHeight, scaling, spacing);
 
             // We assume loading a 8x3 tile set
-            _offset += 8*3;
+            _offset += 8*3 * frames;
 
             return sheet;
         }

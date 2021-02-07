@@ -275,7 +275,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
                             spriteManager.AddAnimated(_spriteLoader.LoadSingleSprite(sheet.Name, sheet.Path, sheet.SpriteWidth, sheet.SpriteHeight, sheet.Scaling, TILE_SPACING, sheet.Frames.Count), sheet.Frames);
                             break;
                         case "TilesetBox":
-                            spriteManager.Add(_spriteLoader.LoadTileset_BoxType(sheet.Name, sheet.Path, sheet.SpriteWidth, sheet.SpriteHeight, sheet.Scaling, TILE_SPACING));
+                            spriteManager.AddAnimated(_spriteLoader.LoadTileset_BoxType(sheet.Name, sheet.Path, sheet.SpriteWidth, sheet.SpriteHeight, sheet.Scaling, TILE_SPACING, sheet.Frames.Count), sheet.Frames);
                             break;
                         case "TilesetWall":
                             spriteManager.Add(_spriteLoader.LoadTileset_WallType(sheet.Name, sheet.Path, sheet.SpriteWidth, sheet.SpriteHeight, sheet.Scaling, TILE_SPACING));

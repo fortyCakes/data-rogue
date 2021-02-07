@@ -98,6 +98,14 @@ SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
+Name: water
+Path: Images/Sprites/Tiles/water_0.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+Frames: Idle0, Idle1
+[SpriteSheet]
 Name: stone_wall_1
 Path: Images/Sprites/Tiles/stone_wall_box.png
 Type: TilesetBox
@@ -580,6 +588,13 @@ Scaling: 2
 [SpriteSheet]
 Name: skill_frame
 Path: Images/Sprites/UITiles/skill_frame.png
+Type: SingleSprite
+SpriteWidth: 24
+SpriteHeight: 24
+Scaling: 2
+[SpriteSheet]
+Name: skill_frame_selected
+Path: Images/Sprites/UITiles/skill_frame_selected.png
 Type: SingleSprite
 SpriteWidth: 24
 SpriteHeight: 24

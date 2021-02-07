@@ -784,6 +784,9 @@
     <Content Include="Images\Sprites\Tiles\trees_1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\Sprites\Tiles\water_0.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Sprites\Tiles\wood_floor_brown.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -851,6 +854,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\UITiles\skill_frame.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\UITiles\skill_frame_selected.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\UITiles\textbox_blue.png">

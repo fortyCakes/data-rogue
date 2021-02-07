@@ -32,7 +32,14 @@ namespace data_rogue_core.IOSystems.BLTTiles.ControlRenderers
 
             foreach (var skill in skillsOnBar)
             {
-                RenderSpriteIfSpecified(x + previousSkills * 12, y, spriteManager, "skill_frame", AnimationFrame.Idle0);
+                if (SkillSelected(skill))
+                {
+                    RenderSpriteIfSpecified(x + previousSkills * 12, y, spriteManager, "skill_frame_selected", AnimationFrame.Idle0);
+                }
+                else
+                {
+                    RenderSpriteIfSpecified(x + previousSkills * 12, y, spriteManager, "skill_frame", AnimationFrame.Idle0);
+                }
 
                 var appearance = skill.Get<SpriteAppearance>();
 
@@ -52,6 +59,11 @@ namespace data_rogue_core.IOSystems.BLTTiles.ControlRenderers
 
                 previousSkills++;
             }
+        }
+
+        private bool SkillSelected(IEntity skill)
+        {
+            return false;
         }
 
         protected override Size GetSizeInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)

@@ -8,6 +8,7 @@ using BearLib;
 using data_rogue_core.Activities;
 using data_rogue_core.Components;
 using data_rogue_core.Controls;
+using data_rogue_core.Controls.MapEditorTools;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems.Interfaces;
@@ -32,7 +33,14 @@ namespace data_rogue_core.IOSystems.BLTTiles.ControlRenderers
 
             foreach (var tool in toolsOnBar)
             {
-                RenderSpriteIfSpecified(x + previousSkills * 12, y, spriteManager, "skill_frame", AnimationFrame.Idle0);
+                if (ToolSelected(systemContainer, tool))
+                {
+                    RenderSpriteIfSpecified(x + previousSkills * 12, y, spriteManager, "skill_frame_selected", AnimationFrame.Idle0);
+                }
+                else
+                {
+                    RenderSpriteIfSpecified(x + previousSkills * 12, y, spriteManager, "skill_frame", AnimationFrame.Idle0);
+                }
 
                 var appearance = tool.Entity.Get<SpriteAppearance>();
 
@@ -52,6 +60,13 @@ namespace data_rogue_core.IOSystems.BLTTiles.ControlRenderers
 
                 previousSkills++;
             }
+        }
+
+        private bool ToolSelected(ISystemContainer systemContainer, IMapEditorTool tool)
+        {
+            var mapEditor = systemContainer.ActivitySystem.MapEditorActivity;
+
+            return mapEditor.CurrentTool.GetType() == tool.GetType();
         }
 
         protected override Size GetSizeInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)

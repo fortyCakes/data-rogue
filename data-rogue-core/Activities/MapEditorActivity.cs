@@ -137,7 +137,7 @@ namespace data_rogue_core.Activities
                 new StatsConfiguration {Position = new Rectangle(0,0,width, height),
                     Displays = new List<InfoDisplay> { new InfoDisplay { ControlType=typeof(MapEditorToolbarControl) } }
                 },
-                new MessageConfiguration{Position = new Rectangle(1,height-25, width, 25), NumberOfMessages = 5}
+                new MessageConfiguration{Position = new Rectangle(1,height-50, width, 25), NumberOfMessages = 10}
             };
         }
 
