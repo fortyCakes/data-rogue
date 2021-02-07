@@ -56,7 +56,7 @@ namespace data_rogue_core.IOSystems.BLTTiles.ControlRenderers
 
         protected override Size GetSizeInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
-            return new Size(24 * 10, 24);
+            return new Size(12 * GetSkillsOnBar(systemContainer).Count(), 12);
         }
 
         public override IEntity EntityFromMouseData(IDataRogueControl control, ISystemContainer systemContainer, MouseData mouse)
