@@ -81,6 +81,7 @@
     <Compile Include="Controls\MapEditorTools\BaseShapeTool.cs" />
     <Compile Include="Controls\MapEditorTools\CircleTool.cs" />
     <Compile Include="Controls\MapEditorTools\EraserTool.cs" />
+    <Compile Include="Controls\MapEditorTools\FilledCircleTool.cs" />
     <Compile Include="Controls\MapEditorTools\FilledSquareTool.cs" />
     <Compile Include="Controls\MapEditorTools\FillTool.cs" />
     <Compile Include="Controls\MapEditorTools\IMapEditorTool.cs" />
@@ -116,6 +117,7 @@
     <Compile Include="Controls\MapEditorTools\EntityTool.cs" />
     <Compile Include="Controls\MapEditorTools\SquareTool.cs" />
     <Compile Include="Controls\MapEditorTools\PenTool.cs" />
+    <Compile Include="Controls\MapEditorTools\TinyEraserTool.cs" />
     <Compile Include="Controls\MenuEntityControl.cs" />
     <Compile Include="Controls\MinimapControl.cs" />
     <Compile Include="Controls\SkillBarControl.cs" />
@@ -703,9 +705,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Entities\Creatures\goblin.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\Sprites\Tiles\cobble_floor_red.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Tiles\cobble_wall_1.png">

@@ -6,6 +6,6 @@ BranchName: Branch:Entrance
 Depth: 2
 [StaticBranchMapGenerator]
 StaticMaps: {
-entrance.map
+town.map
 entrance2.map
 }

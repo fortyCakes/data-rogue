@@ -3,6 +3,7 @@ using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Maps;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace data_rogue_core.Controls.MapEditorTools
 {

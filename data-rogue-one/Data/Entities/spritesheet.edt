@@ -91,8 +91,169 @@ SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
-Name: cobble_floor_red
-Path: Images/Sprites/Tiles/cobble_floor_red.png
+Name: rock_red
+Path: Images/Sprites/Tiles/rock_red.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: dirt_orange
+Path: Images/Sprites/Tiles/dirt_orange.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: dirt_brown
+Path: Images/Sprites/Tiles/dirt_brown.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: grass_2
+Path: Images/Sprites/Tiles/grass_2.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: grass_3
+Path: Images/Sprites/Tiles/grass_3.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: grass_dark
+Path: Images/Sprites/Tiles/grass_dark.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: rock_dark
+Path: Images/Sprites/Tiles/rock_dark.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: rock_light
+Path: Images/Sprites/Tiles/rock_light.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: rock_orange
+Path: Images/Sprites/Tiles/rock_orange.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: sand_blue
+Path: Images/Sprites/Tiles/sand_blue.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: sand_dark
+Path: Images/Sprites/Tiles/sand_dark.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: sand_light
+Path: Images/Sprites/Tiles/sand_light.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: sand_white
+Path: Images/Sprites/Tiles/sand_white.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: stone_floor_blue
+Path: Images/Sprites/Tiles/stone_floor_blue.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: stone_floor_dark
+Path: Images/Sprites/Tiles/stone_floor_dark.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: stone_floor_darkgrey
+Path: Images/Sprites/Tiles/stone_floor_darkgrey.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: tilled_dirt_black
+Path: Images/Sprites/Tiles/tilled_dirt_black.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: tilled_dirt_brown
+Path: Images/Sprites/Tiles/tilled_dirt_brown.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: tilled_dirt_dark
+Path: Images/Sprites/Tiles/tilled_dirt_dark.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: tilled_dirt_orange
+Path: Images/Sprites/Tiles/tilled_dirt_orange.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: wood_floor_brown
+Path: Images/Sprites/Tiles/wood_floor_brown.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: wood_floor_grey
+Path: Images/Sprites/Tiles/wood_floor_grey.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: wood_floor_light
+Path: Images/Sprites/Tiles/wood_floor_light.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: wood_floor_orange
+Path: Images/Sprites/Tiles/wood_floor_orange.png
 Type: TilesetBox
 SpriteWidth: 16
 SpriteHeight: 16

@@ -53,7 +53,7 @@ namespace data_rogue_core.Activities
             new LineTool(),
             new SquareTool(),
             new FilledSquareTool(),
-            //new CircleTool(),
+            new CircleTool(),
             //new FilledCircleTool(),
             new FillTool(),
             new EntityTool(),

@@ -6,7 +6,7 @@ Color: #aaaaaa
 ZOrder: 0
 [SpriteAppearance]
 Bottom: stone_floor_1
-BottomConnect: stone_floor
+BottomConnect: stone
 [Physical]
 Passable: true
 Transparent: true
@@ -184,7 +184,7 @@ Singleton: true
 Name: Boulder
 Detail: A large boulder.
 
-"Cell:InfernoWall"
+"Cell:OrangeWall"
 [Cell]
 [Appearance]
 Glyph: #
@@ -198,32 +198,32 @@ BottomConnectType: Wall
 Passable: false
 Transparent: false
 [Prototype]
-Name: Cell:InfernoWall
+Name: Cell:OrangeWall
 Singleton: true
 [Memorable]
 [Description]
 Name: Infernal Cobble Wall
-Detail: A wall made of pieces of hellstone mortared together in a haphazard fashion.
+Detail: A wall made of pieces of orange-coloured stone mortared together in a haphazard fashion.
 
-"Cell:InfernoFloor"
+"Cell:RedRockFloor"
 [Cell]
 [Appearance]
 Glyph: .
 Color: #864D30
 ZOrder: 0
 [SpriteAppearance]
-Bottom: cobble_floor_red
+Bottom: rock_red
 BottomConnect: stone_floor
 [Physical]
 Passable: true
 Transparent: true
 [Prototype]
-Name: Cell:InfernoFloor
+Name: Cell:RedRockFloor
 Singleton: true
 [Memorable]
 [Description]
 Name: Floor
-Detail: This is a hellstone floor.
+Detail: This is a red rock floor.
 
 "Cell:Water"
 [Cell]
@@ -248,3 +248,483 @@ Detail: A pit filled with water.
 [Animation]
 RandomiseTicks: true
 FrameTicks: 25
+
+"Cell:DirtBrown"
+[Cell]
+[Appearance]
+Glyph: ,
+Color: #854C30
+ZOrder: 0
+[SpriteAppearance]
+Bottom: dirt_brown
+BottomConnect: dirt
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:DirtBrown
+Singleton: true
+[Memorable]
+[Description]
+Name: Dirt
+Detail: This is brown dirt.
+
+"Cell:DirtLight"
+[Cell]
+[Appearance]
+Glyph: ,
+Color: #DAD45E
+ZOrder: 0
+[SpriteAppearance]
+Bottom: dirt_light
+BottomConnect: dirt
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:DirtLight
+Singleton: true
+[Memorable]
+[Description]
+Name: Dirt
+Detail: This is light-coloured dirt.
+
+"Cell:DirtOrange"
+[Cell]
+[Appearance]
+Glyph: ,
+Color: #DAD45E
+ZOrder: 0
+[SpriteAppearance]
+Bottom: dirt_orange
+BottomConnect: dirt
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:DirtOrange
+Singleton: true
+[Memorable]
+[Description]
+Name: Dirt
+Detail: This is orange dirt.
+
+"Cell:Grass2"
+[Cell]
+[Appearance]
+Glyph: `
+Color: #346524
+ZOrder: 0
+[SpriteAppearance]
+Bottom: grass_2
+BottomConnect: grass
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:Grass2
+Singleton: true
+[Memorable]
+[Description]
+Name: Grass
+Detail: This is grass.
+
+"Cell:Grass3"
+[Cell]
+[Appearance]
+Glyph: `
+Color: #346524
+ZOrder: 0
+[SpriteAppearance]
+Bottom: grass_3
+BottomConnect: grass
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:Grass3
+Singleton: true
+[Memorable]
+[Description]
+Name: Grass
+Detail: This is grass. The dirt is slightly damp.
+
+"Cell:DarkGrass"
+[Cell]
+[Appearance]
+Glyph: `
+Color: #30346D
+ZOrder: 0
+[SpriteAppearance]
+Bottom: grass_dark
+BottomConnect: grass
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:DarkGrass
+Singleton: true
+[Memorable]
+[Description]
+Name: Dark Grass
+Detail: This is dark black grass.
+
+"Cell:DarkRock"
+[Cell]
+[Appearance]
+Glyph: .
+Color: #30346D
+ZOrder: 0
+[SpriteAppearance]
+Bottom: rock_dark
+BottomConnect: rock
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:DarkRock
+Singleton: true
+[Memorable]
+[Description]
+Name: Dark Rock
+Detail: This is a dark black stone floor.
+
+"Cell:LightRock"
+[Cell]
+[Appearance]
+Glyph: .
+Color: #DAD45E
+ZOrder: 0
+[SpriteAppearance]
+Bottom: rock_light
+BottomConnect: rock
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:LightRock
+Singleton: true
+[Memorable]
+[Description]
+Name: Light Rock
+Detail: This is a light yellow sandstone floor.
+
+"Cell:OrangeRock"
+[Cell]
+[Appearance]
+Glyph: .
+Color: #D27D2C
+ZOrder: 0
+[SpriteAppearance]
+Bottom: rock_orange
+BottomConnect: rock
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:OrangeRock
+Singleton: true
+[Memorable]
+[Description]
+Name: Orange Rock
+Detail: This is an orange sandstone floor.
+
+"Cell:BlueSand"
+[Cell]
+[Appearance]
+Glyph: ,
+Color: #6DC2CA
+ZOrder: 0
+[SpriteAppearance]
+Bottom: sand_blue
+BottomConnect: dirt
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:BlueSand
+Singleton: true
+[Memorable]
+[Description]
+Name: Blue Sand
+Detail: This is a blue sand floor.
+
+"Cell:DarkSand"
+[Cell]
+[Appearance]
+Glyph: ,
+Color: #757161
+ZOrder: 0
+[SpriteAppearance]
+Bottom: sand_dark
+BottomConnect: dirt
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:DarkSand
+Singleton: true
+[Memorable]
+[Description]
+Name: Dark Sand
+Detail: This is a dark grey sand floor.
+
+"Cell:LightSand"
+[Cell]
+[Appearance]
+Glyph: ,
+Color: #DAD45E
+ZOrder: 0
+[SpriteAppearance]
+Bottom: sand_light
+BottomConnect: dirt
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:LightSand
+Singleton: true
+[Memorable]
+[Description]
+Name: Light Sand
+Detail: This is a light coloured sand floor.
+
+"Cell:WhiteSand"
+[Cell]
+[Appearance]
+Glyph: ,
+Color: #DEEED6
+ZOrder: 0
+[SpriteAppearance]
+Bottom: sand_white
+BottomConnect: dirt
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:WhiteSand
+Singleton: true
+[Memorable]
+[Description]
+Name: White Sand
+Detail: This is a bright white sand floor.
+
+"Cell:BlueStoneFloor"
+[Cell]
+[Appearance]
+Glyph: .
+Color: #597DCE
+ZOrder: 0
+[SpriteAppearance]
+Bottom: stone_floor_blue
+BottomConnect: stone
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:BlueStoneFloor
+Singleton: true
+[Memorable]
+[Description]
+Name: Blue Stone Floor
+Detail: This is a floor made from bricks of blue stone.
+
+"Cell:DarkStoneFloor"
+[Cell]
+[Appearance]
+Glyph: .
+Color: #30346D
+ZOrder: 0
+[SpriteAppearance]
+Bottom: stone_floor_dark
+BottomConnect: stone
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:DarkStoneFloor
+Singleton: true
+[Memorable]
+[Description]
+Name: Dark Stone Floor
+Detail: This is a floor made from bricks of dark stone.
+
+"Cell:DarkGreyFloor"
+[Cell]
+[Appearance]
+Glyph: .
+Color: #4E4A4E
+ZOrder: 0
+[SpriteAppearance]
+Bottom: stone_floor_darkgrey
+BottomConnect: stone
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:DarkGreyFloor
+Singleton: true
+[Memorable]
+[Description]
+Name: Dark Grey Stone Floor
+Detail: This is a floor made from bricks of dark grey stone.
+
+"Cell:TilledDirtBlack"
+[Cell]
+[Appearance]
+Glyph: '
+Color: #140C1C
+ZOrder: 0
+[SpriteAppearance]
+Bottom: tilled_dirt_black
+BottomConnect: tilled_dirt
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:TilledDirtBlack
+Singleton: true
+[Memorable]
+[Description]
+Name: Black Tilled Dirt
+Detail: This is a patch of tilled dirt. The dirt is black.
+
+"Cell:TilledDirtDark"
+[Cell]
+[Appearance]
+Glyph: '
+Color: #30346D
+ZOrder: 0
+[SpriteAppearance]
+Bottom: tilled_dirt_dark
+BottomConnect: tilled_dirt
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:TilledDirtDark
+Singleton: true
+[Memorable]
+[Description]
+Name: Tilled Dirt
+Detail: This is a patch of tilled dirt. The dirt is a dark brown.
+
+"Cell:TilledDirtBrown"
+[Cell]
+[Appearance]
+Glyph: '
+Color: #854C30
+ZOrder: 0
+[SpriteAppearance]
+Bottom: tilled_dirt_brown
+BottomConnect: tilled_dirt
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:TilledDirtBrown
+Singleton: true
+[Memorable]
+[Description]
+Name: Tilled Dirt
+Detail: This is a patch of tilled dirt. The dirt is brown.
+
+"Cell:TilledDirtOrange"
+[Cell]
+[Appearance]
+Glyph: '
+Color: #D27D2C
+ZOrder: 0
+[SpriteAppearance]
+Bottom: tilled_dirt_orange
+BottomConnect: tilled_dirt
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:TilledDirtOrange
+Singleton: true
+[Memorable]
+[Description]
+Name: Tilled Dirt
+Detail: This is a patch of tilled dirt. The dirt is orange.
+
+"Cell:WoodFloorBrown"
+[Cell]
+[Appearance]
+Glyph: .
+Color: #854C30
+ZOrder: 0
+[SpriteAppearance]
+Bottom: wood_floor_brown
+BottomConnect: wood
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:WoodFloorBrown
+Singleton: true
+[Memorable]
+[Description]
+Name: Wood Floor
+Detail: This is a brown wooden floor.
+
+"Cell:WoodFloorGrey"
+[Cell]
+[Appearance]
+Glyph: .
+Color: #8595A1
+ZOrder: 0
+[SpriteAppearance]
+Bottom: wood_floor_grey
+BottomConnect: wood
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:WoodFloorGrey
+Singleton: true
+[Memorable]
+[Description]
+Name: Wood Floor
+Detail: This is a grey wooden floor.
+
+"Cell:WoodFloorLight"
+[Cell]
+[Appearance]
+Glyph: .
+Color: #DAD45E
+ZOrder: 0
+[SpriteAppearance]
+Bottom: wood_floor_light
+BottomConnect: wood
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:WoodFloorLight
+Singleton: true
+[Memorable]
+[Description]
+Name: Wood Floor
+Detail: This is a light wooden floor.
+
+"Cell:WoodFloorOrange"
+[Cell]
+[Appearance]
+Glyph: .
+Color: #D27D2C
+ZOrder: 0
+[SpriteAppearance]
+Bottom: wood_floor_orange
+BottomConnect: wood
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:WoodFloorOrange
+Singleton: true
+[Memorable]
+[Description]
+Name: Wood Floor
+Detail: This is an orange wooden floor.

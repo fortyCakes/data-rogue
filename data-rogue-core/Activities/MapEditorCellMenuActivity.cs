@@ -45,7 +45,7 @@ namespace data_rogue_core.Activities
             var offsetX = renderer.ActivityPadding.Left * 2;
             var offsetY = renderer.ActivityPadding.Top * 2;
 
-            var maxWidth = width - renderer.ActivityPadding.Right;
+            var maxWidth = width - renderer.ActivityPadding.Right - 150;
             var maxHeight = height - renderer.ActivityPadding.Bottom;
 
             var x = 0;
@@ -83,7 +83,7 @@ namespace data_rogue_core.Activities
                 if (offsetX + x + cellSize.Width >= maxWidth)
                 {
                     x = 0;
-                    
+                    y += cellSize.Height + 1;
                 }
             }
 

@@ -27,7 +27,7 @@ Text: {
 		if blocked then
 			SystemContainer.MessageSystem:Write('You can\'t teleport there - it\'s blocked.')
 		else
-			SystemContainer.MessageSystem:Write('You teleport.')
+			SystemContainer.MessageSystem:Write('You teleport to (' .. target.X .. ', ' .. target.Y .. ')')
 			SystemContainer.PositionSystem:SetPosition(User, target)
 		end
 
