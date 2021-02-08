@@ -1,5 +1,6 @@
 ﻿using data_rogue_core.Components;
 using data_rogue_core.EntityEngineSystem;
+using data_rogue_core.Maps;
 using data_rogue_core.Systems.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -68,7 +69,7 @@ namespace data_rogue_core.Systems
         {
             var playerPosition = _positionSystem.CoordinateOf(entity);
 
-            var nearbyPositions = TargetingSystem.GetAdjacentAndDiagonalCellVectors().Select(v => playerPosition + v);
+            var nearbyPositions = Vector.GetAdjacentAndDiagonalCellVectors().Select(v => playerPosition + v);
 
             var interactables = Entities.Where(e => nearbyPositions.Contains(_positionSystem.CoordinateOf(e))).ToList();
 

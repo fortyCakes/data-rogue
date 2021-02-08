@@ -75,9 +75,14 @@
     <Compile Include="Activities\IMapActivity.cs" />
     <Compile Include="Activities\MapEditorCellMenuActivity.cs" />
     <Compile Include="Components\Cell.cs" />
+    <Compile Include="Controls\MapEditorCellPickerControl.cs" />
     <Compile Include="Controls\MapEditorControl.cs" />
-    <Compile Include="Controls\MapEditorSelectedCellControl.cs" />
+    <Compile Include="Controls\MapEditorTools\BaseFilledShapeTool.cs" />
+    <Compile Include="Controls\MapEditorTools\BaseShapeTool.cs" />
+    <Compile Include="Controls\MapEditorTools\CircleTool.cs" />
     <Compile Include="Controls\MapEditorTools\EraserTool.cs" />
+    <Compile Include="Controls\MapEditorTools\FilledSquareTool.cs" />
+    <Compile Include="Controls\MapEditorTools\FillTool.cs" />
     <Compile Include="Controls\MapEditorTools\IMapEditorTool.cs" />
     <Compile Include="Controls\ControlFactory.cs" />
     <Compile Include="Activities\EndGameScreenActivity.cs" />
@@ -107,6 +112,8 @@
     <Compile Include="Components\Targeting.cs" />
     <Compile Include="Components\TextParticle.cs" />
     <Compile Include="Controls\MapEditorToolbarControl.cs" />
+    <Compile Include="Controls\MapEditorTools\LineTool.cs" />
+    <Compile Include="Controls\MapEditorTools\SquareTool.cs" />
     <Compile Include="Controls\MapEditorTools\PenTool.cs" />
     <Compile Include="Controls\MenuEntityControl.cs" />
     <Compile Include="Controls\MinimapControl.cs" />
@@ -174,6 +181,7 @@
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMultipleChoiceFormDataRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTSkillBarDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTStatsFormRenderer.cs" />
+    <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMapEditorSelectedCellsRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTTargetingOverlayRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTTextBoxRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTTextDisplayer.cs" />
@@ -344,6 +352,7 @@
     <Compile Include="IOSystems\IIOSystem.cs" />
     <Compile Include="IOSystems\MapConfiguration.cs" />
     <Compile Include="IOSystems\MapEditorConfiguration.cs" />
+    <Compile Include="IOSystems\MapEditorTargetingConfiguration.cs" />
     <Compile Include="IOSystems\MessageConfiguration.cs" />
     <Compile Include="IOSystems\MinimapConfiguration.cs" />
     <Compile Include="IOSystems\MouseData.cs" />
@@ -420,6 +429,8 @@
     <Compile Include="Systems\Interfaces\IStatSystem.cs" />
     <Compile Include="Systems\ParticleSystem.cs" />
     <Compile Include="Systems\SoundSystem.cs" />
+    <Compile Include="Utils\BresenhamLineDrawingAlgorithm.cs" />
+    <Compile Include="Utils\ILineDrawingAlgorithm.cs" />
     <Compile Include="Utils\IStopwatch.cs" />
     <Compile Include="Systems\MapSystem.cs" />
     <Compile Include="Systems\NonPlayerTargeter.cs" />
@@ -633,16 +644,34 @@
     <Content Include="Images\Sprites\Misc\break.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\Sprites\Entities\Misc\circle_tool.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Sprites\Misc\current_target.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Misc\current_target_friendly.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\Sprites\Entities\Misc\filled_circle_tool.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Entities\Misc\filled_square_tool.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Entities\Misc\fill_tool.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Entities\Misc\line_tool.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Sprites\Misc\minimap_tile.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Misc\shade_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Entities\Misc\square_tool.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Misc\targetable.png">

@@ -12,9 +12,9 @@ using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
-    public class BLTMapEditorSelectedCellDisplayer : BLTControlRenderer
+    public class BLTMapEditorCellPickerDisplayer : BLTControlRenderer
     {
-        public override Type DisplayType => typeof(MapEditorSelectedCellControl);
+        public override Type DisplayType => typeof(MapEditorCellPickerControl);
 
         Rectangle PrimaryCell = new Rectangle(4, 9, 8, 8);
         Rectangle SecondaryCell = new Rectangle(16, 9, 8, 8);
@@ -24,7 +24,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
         {
             var x = control.Position.X;
             var y = control.Position.Y;
-            var display = control as MapEditorSelectedCellControl;
+            var display = control as MapEditorCellPickerControl;
 
             RenderText(x + 2, y + 2, control.ActivityIndex, out _, "Selected Cells", Color.LightSkyBlue, false);
 

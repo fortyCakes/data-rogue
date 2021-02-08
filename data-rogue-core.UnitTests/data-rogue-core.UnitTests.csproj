@@ -99,6 +99,7 @@
     <Compile Include="Systems\SystemContainerTests.cs" />
     <Compile Include="Systems\TargetingDataTests.cs" />
     <Compile Include="TestHelpers\EntityListEquivalence.cs" />
+    <Compile Include="Utils\BresenhamLineDrawingAlgorithmTests.cs" />
     <Compile Include="Utils\KeyCombinationToAsciiTexts.cs" />
   </ItemGroup>
   <ItemGroup>

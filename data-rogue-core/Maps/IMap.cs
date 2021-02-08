@@ -23,6 +23,7 @@ namespace data_rogue_core.Maps
         IEntity CellAt(int lookupX, int lookupY);
         IEntity CellAt(MapCoordinate coordinate);
         bool CellExists(int x, int y);
+        bool CellExists(MapCoordinate coordinate);
         void ClearCell(MapCoordinate coordinate);
         List<MapCoordinate> FovFrom(IPositionSystem positionSystem, MapCoordinate mapCoordinate, int range, Func<Vector, bool> transparentTest = null);
         void RemoveCell(int x, int y);

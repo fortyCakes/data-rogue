@@ -57,6 +57,11 @@ namespace data_rogue_core.Controls
                 {
                     control.Position = new Rectangle(control.Position.X, control.Position.Y, renderingConfiguration.Position.Width, 0);
 
+                    if (!controlRenderers.Any(s => s.DisplayType == control.GetType()))
+                    {
+                        throw new ApplicationException($"No renderer was found for control type {control.GetType()}. If this is a custom control type, you may be missing an implementation of IDataRogueControlRenderer.");
+                    }
+
                     var controlRenderer = controlRenderers.Single(s => s.DisplayType == control.GetType());
                     var size = controlRenderer.GetSize(rendererHandle, control, systemContainer, playerFov);
 

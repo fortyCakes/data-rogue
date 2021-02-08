@@ -64,7 +64,7 @@ namespace data_rogue_core.Systems
 
                 if (range == 0)
                 {
-                    foreach (var vector in GetAdjacentCellVectors())
+                    foreach (var vector in Vector.GetAdjacentCellVectors())
                     {
                         targetableCells.Add(playerPosition + vector);
                     }
@@ -72,7 +72,7 @@ namespace data_rogue_core.Systems
 
                 if (range == 1)
                 {
-                    foreach (var vector in GetAdjacentAndDiagonalCellVectors())
+                    foreach (var vector in Vector.GetAdjacentAndDiagonalCellVectors())
                     {
                         targetableCells.Add(playerPosition + vector);
                     }
@@ -112,26 +112,6 @@ namespace data_rogue_core.Systems
             }
 
             return targetableCells;
-        }
-
-        public static Vector[] GetAdjacentCellVectors()
-        {
-            return new[]
-            {
-                new Vector(-1, 0),
-                new Vector(0, -1), new Vector(0, 1),
-                new Vector(1, 0)
-            };
-        }
-
-        public static Vector[] GetAdjacentAndDiagonalCellVectors()
-        {
-            return new[]
-            {
-                new Vector(-1, -1), new Vector(-1, 0), new Vector(-1, 1),
-                new Vector(0, -1), new Vector(0, 1),
-                new Vector(1, -1), new Vector(1, 0), new Vector(1, 1)
-            };
         }
     }
 }

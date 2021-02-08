@@ -26,16 +26,21 @@ namespace data_rogue_core.Controls
             if ((mouse.LeftButtonDown && !mapEditor.CurrentTool.RequiresClick) || mouse.IsLeftClick)
             {
                 MapCoordinate mapCoordinate = systemContainer.RendererSystem.Renderer.GetMapEditorMapCoordinateFromMousePosition(systemContainer.RendererSystem.CameraPosition, mouse.X, mouse.Y);
-                mapEditor.ApplyTool(mapCoordinate, mapEditor.PrimaryCell);
+                mapEditor.ApplyTool(mapCoordinate, mapEditor.PrimaryCell, mapEditor.SecondaryCell);
             }
 
             if ((mouse.RightButtonDown && !mapEditor.CurrentTool.RequiresClick) || mouse.IsRightClick)
             {
                 MapCoordinate mapCoordinate = systemContainer.RendererSystem.Renderer.GetMapEditorMapCoordinateFromMousePosition(systemContainer.RendererSystem.CameraPosition, mouse.X, mouse.Y);
-                mapEditor.ApplyTool(mapCoordinate, mapEditor.SecondaryCell);
+                mapEditor.ApplyTool(mapCoordinate, mapEditor.SecondaryCell, mapEditor.PrimaryCell);
             }
 
             return null;
         }
+    }
+
+    public class MapEditorHighlightControl : BaseControl
+    {
+        public override bool FillsContainer => true;
     }
 }

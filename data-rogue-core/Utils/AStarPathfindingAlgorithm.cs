@@ -6,6 +6,7 @@ using data_rogue_core.Maps;
 
 namespace data_rogue_core.Utils
 {
+
     public class AStarPathfindingAlgorithm : IPathfindingAlgorithm
     {
         private class AStarLocation

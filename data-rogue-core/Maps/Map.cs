@@ -62,6 +62,11 @@ namespace data_rogue_core.Maps
             return Cells.ContainsKey(new MapCoordinate(MapKey, x, y));
         }
 
+        public bool CellExists(MapCoordinate coordinate)
+        {
+            return Cells.ContainsKey(coordinate);
+        }
+
         public void SetCell(int x, int y, IEntity cell)
         {
             SetCell(new MapCoordinate(MapKey, x, y), cell);

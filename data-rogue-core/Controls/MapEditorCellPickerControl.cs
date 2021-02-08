@@ -5,7 +5,7 @@ using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.Controls
 {
-    public class MapEditorSelectedCellControl : BaseControl
+    public class MapEditorCellPickerControl : BaseControl
     {
         public override bool CanHandleMouse => true;
         public override ActionEventData HandleMouse(MouseData mouse, IDataRogueControlRenderer renderer, ISystemContainer systemContainer)

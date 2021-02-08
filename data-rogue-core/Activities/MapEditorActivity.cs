@@ -21,10 +21,47 @@ namespace data_rogue_core.Activities
     public class MapEditorActivity: BaseActivity, IMapActivity
     {
         private IMap _map;
+
+        private IMap Map {
+            get => _map;
+            set
+            {
+                _map = value;
+                _mapName = _map.MapKey.Key;
+                PrimaryCell = _map.DefaultCell;
+                SecondaryCell = _map.DefaultCell;
+                CameraPosition = new MapCoordinate(_map.MapKey, 0, 0);
+            }
+        }
+
         public string _mapName;
         private IEntity _primaryCell;
         private IEntity _secondaryCell;
+        private MapCoordinate _mousePosition;
         private readonly ISystemContainer _systemContainer;
+
+        public MapEditorActivity(ISystemContainer systemContainer)
+        {
+            _systemContainer = systemContainer;
+            NewMap();
+        }
+
+        public static IEnumerable<IMapEditorTool> GetToolbarControls() => new List<IMapEditorTool>
+        {
+            new PenTool(),
+            new EraserTool(),
+            new LineTool(),
+            new SquareTool(),
+            new FilledSquareTool(),
+            //new CircleTool(),
+            //new FilledCircleTool(),
+            new FillTool()
+        };
+
+        public List<MapCoordinate> GetHighlightedCells()
+        {
+            return CurrentTool.GetTargetedCoordinates(Map, _mousePosition).ToList();
+        }
 
         public override ActivityType Type => ActivityType.MapEditor;
         public override bool RendersEntireSpace => true;
@@ -42,6 +79,13 @@ namespace data_rogue_core.Activities
             }
         }
 
+        public void NewMap()
+        {
+            _systemContainer.MapSystem.Initialise();
+            Map = new Map("NewMap", _systemContainer.PrototypeSystem.Get("Cell:Empty"));
+            _systemContainer.MapSystem.MapCollection.Add(Map.MapKey, Map);
+        }
+
         public IEntity SecondaryCell
         {
             get { return _secondaryCell; }
@@ -54,27 +98,12 @@ namespace data_rogue_core.Activities
 
         public IEntity DefaultCell => _map.DefaultCell;
 
-        public void ApplyTool(MapCoordinate mapCoordinate, IEntity cell)
+        public void ApplyTool(MapCoordinate mapCoordinate, IEntity cell, IEntity alternateCell)
         {
-            CurrentTool.Apply(_map, mapCoordinate, cell);
+            CurrentTool.Apply(_map, mapCoordinate, cell, alternateCell);
         }
 
         public MapCoordinate CameraPosition { get; set; }
-
-        public MapEditorActivity(ISystemContainer systemContainer, IMap map)
-        {
-            _map = map;
-            _mapName = map.MapKey.Key;
-            PrimaryCell = map.DefaultCell;
-            _systemContainer = systemContainer;
-            CameraPosition = new MapCoordinate(_map.MapKey, 0, 0);
-        }
-
-        public static IEnumerable<IMapEditorTool> GetToolbarControls() => new List<IMapEditorTool>
-        {
-            new PenTool(),
-            new EraserTool()
-        };
 
         public void SetTool(string toolName)
         {
@@ -90,9 +119,17 @@ namespace data_rogue_core.Activities
             return controls;
         }
 
+        public override void HandleMouse(ISystemContainer systemContainer, MouseData mouse)
+        {
+            if (mouse.MouseActive)
+            {
+                _mousePosition = systemContainer.RendererSystem.Renderer.GetMapEditorMapCoordinateFromMousePosition(systemContainer.RendererSystem.CameraPosition, mouse.X, mouse.Y);
+            }
+            base.HandleMouse(systemContainer, mouse);
+        }
         public override void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard)
         {
-            //throw new System.NotImplementedException();
+            // Keyboard interaction handled through keybinding -> Actions
         }
 
         public override void HandleAction(ISystemContainer systemContainer, ActionEventData action)
@@ -164,13 +201,14 @@ namespace data_rogue_core.Activities
             return new List<IRenderingConfiguration>
             {
                 new MapEditorConfiguration {Position=new Rectangle(0,0, width, height)},
+                new MapEditorTargetingConfiguration {Position=new Rectangle(0,0, width, height)},
                 new StatsConfiguration {Position = new Rectangle(0,0,width, height),
                     Displays = new List<InfoDisplay> {
                         new InfoDisplay { ControlType=typeof(MapEditorToolbarControl) }
                     }
                 },
                 new StatsConfiguration{ Position = new Rectangle(width - 6 * 8, 0, 6 * 8, 24), Displays = new List<InfoDisplay>{
-                    new InfoDisplay { ControlType=typeof(MapEditorSelectedCellControl)}
+                    new InfoDisplay { ControlType=typeof(MapEditorCellPickerControl)}
                 } },
                 new MessageConfiguration{Position = new Rectangle(1,height-50, width, 25), NumberOfMessages = 10}
             };
@@ -205,5 +243,7 @@ namespace data_rogue_core.Activities
                 _systemContainer.MessageSystem.Write($"Opened {openDialog.FileName}", Color.Blue);
             }
         }
+
+        
     }
 }

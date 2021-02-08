@@ -634,3 +634,45 @@ Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
+[SpriteSheet]
+Name: line_tool
+Path: Images/Sprites/Entities/Misc/line_tool.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: square_tool
+Path: Images/Sprites/Entities/Misc/square_tool.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: circle_tool
+Path: Images/Sprites/Entities/Misc/circle_tool.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: filled_square_tool
+Path: Images/Sprites/Entities/Misc/filled_square_tool.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: filled_circle_tool
+Path: Images/Sprites/Entities/Misc/filled_circle_tool.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: fill_tool
+Path: Images/Sprites/Entities/Misc/fill_tool.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2

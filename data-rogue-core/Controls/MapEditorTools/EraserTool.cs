@@ -1,6 +1,7 @@
 ﻿using data_rogue_core.Components;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Maps;
+using System.Collections.Generic;
 
 namespace data_rogue_core.Controls.MapEditorTools
 {
@@ -16,9 +17,14 @@ namespace data_rogue_core.Controls.MapEditorTools
 
         public bool RequiresClick => false;
 
-        public void Apply(IMap map, MapCoordinate mapCoordinate, IEntity currentCell)
+        public void Apply(IMap map, MapCoordinate mapCoordinate, IEntity currentCell, IEntity alternateCell)
         {
             map.RemoveCell(mapCoordinate);
+        }
+
+        public IEnumerable<MapCoordinate> GetTargetedCoordinates(IMap map, MapCoordinate mapCoordinate)
+        {
+            return new List<MapCoordinate> { mapCoordinate };
         }
     }
 }

@@ -1,9 +1,13 @@
-﻿namespace data_rogue_core.Maps
+﻿using System;
+
+namespace data_rogue_core.Maps
 {
     public class Vector
     {
         public int X;
         public int Y;
+
+        public double Length => Math.Sqrt(X * X + Y * Y);
 
         public Vector(int x, int y)
         {
@@ -80,6 +84,26 @@
         public Vector Transpose()
         {
             return new Vector(Y, X);
+        }
+
+        public static Vector[] GetAdjacentCellVectors()
+        {
+            return new[]
+            {
+                new Vector(-1, 0),
+                new Vector(0, -1), new Vector(0, 1),
+                new Vector(1, 0)
+            };
+        }
+
+        public static Vector[] GetAdjacentAndDiagonalCellVectors()
+        {
+            return new[]
+            {
+                new Vector(-1, -1), new Vector(-1, 0), new Vector(-1, 1),
+                new Vector(0, -1), new Vector(0, 1),
+                new Vector(1, -1), new Vector(1, 0), new Vector(1, 1)
+            };
         }
     }
 }
