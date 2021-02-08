@@ -21,7 +21,8 @@ namespace data_rogue_core.Activities
     {
         private IMap _map;
         public string _mapName;
-        private IEntity _currentCell;
+        private IEntity _primaryCell;
+        private IEntity _secondaryCell;
         private readonly ISystemContainer _systemContainer;
 
         public override ActivityType Type => ActivityType.MapEditor;
@@ -32,14 +33,29 @@ namespace data_rogue_core.Activities
         public IMapEditorTool CurrentTool { get; set; } = new PenTool();
 
 
-        public IEntity CurrentCell { get { return _currentCell; } set {
-                _currentCell = value;
-                _systemContainer?.MessageSystem.Write("Current cell set to " + (_currentCell == null ? "null" : _currentCell.DescriptionName));
-            } }
+        public IEntity PrimaryCell {
+            get { return _primaryCell; }
+            set {
+                _primaryCell = value;
+                _systemContainer?.MessageSystem.Write("Current cell set to " + (_primaryCell == null ? "null" : _primaryCell.DescriptionName));
+            }
+        }
 
-        public void ApplyTool(MapCoordinate mapCoordinate)
+        public IEntity SecondaryCell
         {
-            CurrentTool.Apply(_map, mapCoordinate, CurrentCell);
+            get { return _secondaryCell; }
+            set
+            {
+                _secondaryCell = value;
+                _systemContainer?.MessageSystem.Write("Secondary cell set to " + (_secondaryCell == null ? "null" : _secondaryCell.DescriptionName));
+            }
+        }
+
+        public IEntity DefaultCell => _map.DefaultCell;
+
+        public void ApplyTool(MapCoordinate mapCoordinate, IEntity cell)
+        {
+            CurrentTool.Apply(_map, mapCoordinate, cell);
         }
 
         public MapCoordinate CameraPosition { get; set; }
@@ -48,7 +64,7 @@ namespace data_rogue_core.Activities
         {
             _map = map;
             _mapName = map.MapKey.Key;
-            CurrentCell = map.DefaultCell;
+            PrimaryCell = map.DefaultCell;
             _systemContainer = systemContainer;
             CameraPosition = new MapCoordinate(_map.MapKey, 0, 0);
         }
@@ -68,7 +84,9 @@ namespace data_rogue_core.Activities
         {
             var config = GetRenderingConfiguration(width, height);
 
-            return ControlFactory.GetControls(config, renderer, systemContainer, rendererHandle, controlRenderers, playerFov, systemContainer.ActivitySystem.ActivityStack.IndexOf(this));
+            var controls = ControlFactory.GetControls(config, renderer, systemContainer, rendererHandle, controlRenderers, playerFov, systemContainer.ActivitySystem.ActivityStack.IndexOf(this));
+
+            return controls;
         }
 
         public override void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard)
@@ -80,7 +98,7 @@ namespace data_rogue_core.Activities
         {
             if (action.Action == ActionType.ChangeMapEditorCell)
             {
-                ShowChangeCellDialogue();
+                ShowChangePrimaryCellDialogue();
             }
 
             if (action.Action == ActionType.Move)
@@ -104,19 +122,25 @@ namespace data_rogue_core.Activities
             }
         }
 
-        private void ShowChangeDefaultCellDialogue()
+        public void ShowChangeDefaultCellDialogue()
         {
             var inputActivity = new MapEditorCellMenuActivity(_systemContainer, "Choose a new default cell:", SetDefaultCell);
 
             _systemContainer.ActivitySystem.Push(inputActivity);
         }
 
-        private void ShowChangeCellDialogue()
+        public void ShowChangePrimaryCellDialogue()
         {
-            var inputActivity = new MapEditorCellMenuActivity(_systemContainer, "Choose a cell to use:", SetCurrentCell);
+            var inputActivity = new MapEditorCellMenuActivity(_systemContainer, "Choose a cell to use:", SetPrimaryCell);
 
             _systemContainer.ActivitySystem.Push(inputActivity);
+        }
 
+        public void ShowChangeSecondaryCellDialogue()
+        {
+            var inputActivity = new MapEditorCellMenuActivity(_systemContainer, "Choose a cell to use:", SetSecondaryCell);
+
+            _systemContainer.ActivitySystem.Push(inputActivity);
         }
 
         private void SetDefaultCell(IEntity parameter)
@@ -124,9 +148,14 @@ namespace data_rogue_core.Activities
             _map.DefaultCell = parameter;
         }
 
-        private void SetCurrentCell(IEntity parameter)
+        private void SetPrimaryCell(IEntity parameter)
         {
-            CurrentCell = parameter;
+            PrimaryCell = parameter;
+        }
+
+        private void SetSecondaryCell(IEntity parameter)
+        {
+            SecondaryCell = parameter;
         }
 
         public IEnumerable<IRenderingConfiguration> GetRenderingConfiguration(int width, int height)
@@ -135,7 +164,10 @@ namespace data_rogue_core.Activities
             {
                 new MapEditorConfiguration {Position=new Rectangle(0,0, width, height)},
                 new StatsConfiguration {Position = new Rectangle(0,0,width, height),
-                    Displays = new List<InfoDisplay> { new InfoDisplay { ControlType=typeof(MapEditorToolbarControl) } }
+                    Displays = new List<InfoDisplay> {
+                        new InfoDisplay { ControlType=typeof(MapEditorToolbarControl) },
+                        new InfoDisplay { ControlType=typeof(MapEditorSelectedCellControl)}
+                    }
                 },
                 new MessageConfiguration{Position = new Rectangle(1,height-50, width, 25), NumberOfMessages = 10}
             };

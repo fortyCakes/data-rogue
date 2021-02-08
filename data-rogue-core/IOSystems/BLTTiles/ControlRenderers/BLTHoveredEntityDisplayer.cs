@@ -12,7 +12,7 @@ using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
-    public class BLTHoveredEntityDisplayer : BLTControlRenderer
+    public partial class BLTHoveredEntityDisplayer : BLTControlRenderer
     {
         public override Type DisplayType => typeof(HoveredEntityDisplayBox);
 
@@ -69,7 +69,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             BLTLayers.Set(BLTLayers.Text, display.ActivityIndex);
             BLT.Font("text");
             BLT.Print(x + BLTTilesIOSystem.TILE_SPACING + 4, y - 1 + BLTTilesIOSystem.TILE_SPACING / 2, hoveredEntity.DescriptionName);
-            
+
             y += 12;
 
             foreach (var split in display.Parameters.Split(';'))

@@ -37,6 +37,11 @@ namespace data_rogue_core.IOSystems
             return GetSizeInternal(console, display, systemContainer, playerFov);
         }
 
+        public string StringFromMouseData(IDataRogueControl display, ISystemContainer systemContainer, MouseData mouse)
+        {
+            return null;
+        }
+
         protected abstract void DisplayInternal(RLConsole console, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov);
         protected abstract Size GetSizeInternal(RLConsole console, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov);
 

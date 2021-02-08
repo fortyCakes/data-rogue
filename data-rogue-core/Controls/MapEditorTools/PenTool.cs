@@ -13,6 +13,8 @@ namespace data_rogue_core.Controls.MapEditorTools
                 new SpriteAppearance { Bottom = "pen_tool" }
             });
 
+        public bool RequiresClick => false;
+
         public void Apply(IMap map, MapCoordinate mapCoordinate, IEntity currentCell)
         {
             map.SetCell(mapCoordinate, currentCell);

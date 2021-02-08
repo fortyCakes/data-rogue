@@ -14,6 +14,8 @@ namespace data_rogue_core.Controls.MapEditorTools
                 new SpriteAppearance { Bottom = "eraser_tool" }
             });
 
+        public bool RequiresClick => false;
+
         public void Apply(IMap map, MapCoordinate mapCoordinate, IEntity currentCell)
         {
             map.RemoveCell(mapCoordinate);

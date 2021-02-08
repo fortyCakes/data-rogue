@@ -76,6 +76,7 @@
     <Compile Include="Activities\MapEditorCellMenuActivity.cs" />
     <Compile Include="Components\Cell.cs" />
     <Compile Include="Controls\MapEditorControl.cs" />
+    <Compile Include="Controls\MapEditorSelectedCellControl.cs" />
     <Compile Include="Controls\MapEditorTools\EraserTool.cs" />
     <Compile Include="Controls\MapEditorTools\IMapEditorTool.cs" />
     <Compile Include="Controls\ControlFactory.cs" />
@@ -161,6 +162,7 @@
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTLineControlRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTLinesRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMapEditorRenderer.cs" />
+    <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMapEditorSelectedCellDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMapEditorToolbarDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMapRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMenuActionRenderer.cs" />

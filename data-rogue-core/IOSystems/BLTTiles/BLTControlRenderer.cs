@@ -63,6 +63,22 @@ namespace data_rogue_core.IOSystems.BLTTiles
             }
         }
 
+        protected static void RenderEntitySprite(int x, int y, IDataRogueControl display, ISystemContainer systemContainer, ISpriteManager spriteManager, IEntity entity)
+        {
+            if (entity != null)
+            {
+                BLT.Font("");
+                SpriteAppearance appearance = entity.Has<SpriteAppearance>() ? entity.Get<SpriteAppearance>() : new SpriteAppearance { Bottom = "unknown" };
+                AnimationFrame frame = entity.Has<Animated>() ? systemContainer.AnimationSystem.GetFrame(entity) : AnimationFrame.Idle0;
+                BLTLayers.Set(BLTLayers.UIElementPieces, display.ActivityIndex);
+                string appearanceBottom = appearance.Bottom;
+                RenderSpriteIfSpecified(x, y, spriteManager, appearanceBottom, frame);
+                BLTLayers.Set(BLTLayers.UIElementPieces + 1, display.ActivityIndex);
+                string appearanceTop = appearance.Top;
+                RenderSpriteIfSpecified(x, y, spriteManager, appearanceTop, frame);
+            }
+        }
+
         protected static void RenderSpriteIfSpecified(int x, int y, ISpriteManager spriteManager, string spriteName, AnimationFrame frame)
         {
             if (!string.IsNullOrEmpty(spriteName))
@@ -90,6 +106,11 @@ namespace data_rogue_core.IOSystems.BLTTiles
         }
 
         public virtual IEntity EntityFromMouseData(IDataRogueControl display, ISystemContainer systemContainer, MouseData mouse)
+        {
+            return null;
+        }
+
+        public virtual string StringFromMouseData(IDataRogueControl display, ISystemContainer systemContainer, MouseData mouse)
         {
             return null;
         }

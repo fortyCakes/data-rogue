@@ -21,10 +21,18 @@ namespace data_rogue_core.Controls
     {
         public override ActionEventData HandleMouse(MouseData mouse, IDataRogueControlRenderer renderer, ISystemContainer systemContainer)
         {
-            if (mouse.LeftButtonDown)
+            var mapEditor = systemContainer.ActivitySystem.MapEditorActivity;
+
+            if ((mouse.LeftButtonDown && !mapEditor.CurrentTool.RequiresClick) || mouse.IsLeftClick)
             {
                 MapCoordinate mapCoordinate = systemContainer.RendererSystem.Renderer.GetMapEditorMapCoordinateFromMousePosition(systemContainer.RendererSystem.CameraPosition, mouse.X, mouse.Y);
-                systemContainer.ActivitySystem.MapEditorActivity.ApplyTool(mapCoordinate);
+                mapEditor.ApplyTool(mapCoordinate, mapEditor.PrimaryCell);
+            }
+
+            if ((mouse.RightButtonDown && !mapEditor.CurrentTool.RequiresClick) || mouse.IsRightClick)
+            {
+                MapCoordinate mapCoordinate = systemContainer.RendererSystem.Renderer.GetMapEditorMapCoordinateFromMousePosition(systemContainer.RendererSystem.CameraPosition, mouse.X, mouse.Y);
+                mapEditor.ApplyTool(mapCoordinate, mapEditor.SecondaryCell);
             }
 
             return null;
