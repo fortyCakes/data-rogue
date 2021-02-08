@@ -67,6 +67,11 @@ namespace data_rogue_core.Maps
             Y = int.Parse(match.Groups[3].Value);
         }
 
+        public Vector ToVector()
+        {
+            return new Vector(X, Y);
+        }
+
         public static bool operator== (MapCoordinate a, MapCoordinate b)
         {
             if (ReferenceEquals(a, null))

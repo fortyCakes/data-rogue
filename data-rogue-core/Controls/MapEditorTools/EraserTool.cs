@@ -1,6 +1,7 @@
 ﻿using data_rogue_core.Components;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Maps;
+using data_rogue_core.Systems.Interfaces;
 using System.Collections.Generic;
 
 namespace data_rogue_core.Controls.MapEditorTools
@@ -17,7 +18,7 @@ namespace data_rogue_core.Controls.MapEditorTools
 
         public bool RequiresClick => false;
 
-        public void Apply(IMap map, MapCoordinate mapCoordinate, IEntity currentCell, IEntity alternateCell)
+        public void Apply(IMap map, MapCoordinate mapCoordinate, IEntity currentCell, IEntity alternateCell, IActivitySystem activitySystem)
         {
             map.RemoveCell(mapCoordinate);
         }

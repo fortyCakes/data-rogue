@@ -55,7 +55,8 @@ namespace data_rogue_core.Activities
             new FilledSquareTool(),
             //new CircleTool(),
             //new FilledCircleTool(),
-            new FillTool()
+            new FillTool(),
+            new EntityTool()
         };
 
         public List<MapCoordinate> GetHighlightedCells()
@@ -100,7 +101,7 @@ namespace data_rogue_core.Activities
 
         public void ApplyTool(MapCoordinate mapCoordinate, IEntity cell, IEntity alternateCell)
         {
-            CurrentTool.Apply(_map, mapCoordinate, cell, alternateCell);
+            CurrentTool.Apply(_map, mapCoordinate, cell, alternateCell, _systemContainer.ActivitySystem);
         }
 
         public MapCoordinate CameraPosition { get; set; }

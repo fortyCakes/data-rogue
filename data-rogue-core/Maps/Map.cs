@@ -203,5 +203,29 @@ namespace data_rogue_core.Maps
         {
             FovCache.Invalidate();
         }
+
+        public void AddCommand(MapGenCommand command)
+        {
+            MapGenCommands.Add(command);
+        }
+
+        public void RemoveCommandsAt(int x, int y)
+        {
+            Vector vector = new Vector(x, y);
+            var commandsToRemove = MapGenCommands.Where(m => m.Vector == vector).ToList();
+
+            foreach(var command in commandsToRemove)
+            {
+                MapGenCommands.Remove(command);
+            }
+        }
+
+        public void RemoveCommandsAt(MapCoordinate mapCoordinate)
+        {
+            if (mapCoordinate.Key == MapKey)
+            {
+                RemoveCommandsAt(mapCoordinate.X, mapCoordinate.Y);
+            }
+        }
     }
 }

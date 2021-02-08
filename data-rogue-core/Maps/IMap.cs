@@ -36,5 +36,9 @@ namespace data_rogue_core.Maps
         void SetSeen(MapCoordinate coordinate, bool seen = true);
 
         void InvalidateCache();
+        void AddCommand(MapGenCommand entityCommand);
+
+        void RemoveCommandsAt(int x, int y);
+        void RemoveCommandsAt(MapCoordinate mapCoordinate);
     }
 }
