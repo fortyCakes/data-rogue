@@ -1,7 +1,7 @@
 Map:"Town"
 default:Cell:Tree
 -50,-29
-64,2: Entity(Props:StairsDown)
+14,-25: Entity(Props:StairsDown)
 .:Cell:Empty
 ,:Cell:Grass
 ~:Cell:Dirt

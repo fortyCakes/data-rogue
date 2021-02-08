@@ -90,7 +90,7 @@ namespace data_rogue_core.Maps
 
             var mapName = mapNameOverride ?? Extract(lines[0], "Map:\"(.*)\"");
             var defaultCellName = Extract(lines[1], "default:(.*)").Trim();
-            var coordinateMatch = Regex.Match(lines[2], "(-?[0-9]),(-?[0-9])");
+            var coordinateMatch = Regex.Match(lines[2], "(-?[0-9]*),(-?[0-9]*)");
             var leftX = int.Parse(coordinateMatch.Groups[1].Value);
             var topY = int.Parse(coordinateMatch.Groups[2].Value);
 
@@ -105,6 +105,8 @@ namespace data_rogue_core.Maps
             Map deserialisedMap = new Map(mapName, defaultCell);
 
             bool seenMode = false;
+            int seenleftX = 0;
+            int seentopY = 0;
             int yOffset = 0;
 
             for (int j = 0; j + lineIndex < lines.Length; j++)
@@ -115,8 +117,8 @@ namespace data_rogue_core.Maps
                 {
                     seenMode = true;
                     var match = Regex.Match(line, "Seen:(.*),(.*)");
-                    leftX = int.Parse(match.Groups[1].Value);
-                    topY = int.Parse(match.Groups[2].Value);
+                    seenleftX = int.Parse(match.Groups[1].Value);
+                    seentopY = int.Parse(match.Groups[2].Value);
                     yOffset = -j-1;
                     continue;
                 }
@@ -128,7 +130,7 @@ namespace data_rogue_core.Maps
                         char glyph = line[i];
                         if (glyph == '+')
                         {
-                            deserialisedMap.SetSeen(leftX + i, topY + j + yOffset);
+                            deserialisedMap.SetSeen(seenleftX + i, seentopY + j + yOffset);
                         }
                     }
                 }
