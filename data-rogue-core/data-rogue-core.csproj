@@ -113,6 +113,7 @@
     <Compile Include="Components\TextParticle.cs" />
     <Compile Include="Controls\MapEditorToolbarControl.cs" />
     <Compile Include="Controls\MapEditorTools\LineTool.cs" />
+    <Compile Include="Controls\MapEditorTools\EntityTool.cs" />
     <Compile Include="Controls\MapEditorTools\SquareTool.cs" />
     <Compile Include="Controls\MapEditorTools\PenTool.cs" />
     <Compile Include="Controls\MenuEntityControl.cs" />
