@@ -90,7 +90,7 @@ namespace data_rogue_core.Activities
             y += cellSize.Height * 2 + 4;
 
 
-            var finalWidth = maxX + cellSize.Width + 1;
+            var finalWidth = maxX + cellSize.Width + 8;
             var buttonControl = new ButtonControl { Position = new Rectangle(offsetX, y, 0, 0), Text = "Cancel" };
             buttonControl.OnClick += buttonControl_OnClick;
 

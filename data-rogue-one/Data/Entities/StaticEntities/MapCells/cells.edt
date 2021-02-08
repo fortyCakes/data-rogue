@@ -242,7 +242,7 @@ Name: Cell:Water
 Singleton: true
 [Memorable]
 [Description]
-Name: Floor
+Name: Water
 Detail: A pit filled with water.
 [Animated]
 [Animation]

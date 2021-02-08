@@ -16,15 +16,21 @@ namespace data_rogue_core.IOSystems.BLTTiles
     {
         public override Type DisplayType => typeof(MapEditorSelectedCellControl);
 
-        Rectangle PrimaryCell = new Rectangle(5, 4, 8, 8);
-        Rectangle SecondaryCell = new Rectangle(19, 4, 8, 8);
-        Rectangle DefaultCell = new Rectangle(12, 18, 8, 8);
+        Rectangle PrimaryCell = new Rectangle(4, 9, 8, 8);
+        Rectangle SecondaryCell = new Rectangle(16, 9, 8, 8);
+        Rectangle DefaultCell = new Rectangle(28, 9, 8, 8);
 
         protected override void DisplayInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
             var x = control.Position.X;
             var y = control.Position.Y;
             var display = control as MapEditorSelectedCellControl;
+
+            RenderText(x + 2, y + 2, control.ActivityIndex, out _, "Selected Cells", Color.LightSkyBlue, false);
+
+            RenderText(x + 4, y + 19, control.ActivityIndex, out _, "Left", Color.White, false);
+            RenderText(x + 16, y + 19, control.ActivityIndex, out _, "Right", Color.White, false);
+            RenderText(x + 28, y + 19, control.ActivityIndex, out _, "Back", Color.White, false);
 
             RenderBackgroundBox(x, y, control.ActivityIndex, GetSizeInternal(spriteManager, control, systemContainer, playerFov), spriteManager);
 
@@ -39,7 +45,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
         protected override Size GetSizeInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
-            return new Size(4 * BLTTilesIOSystem.TILE_SPACING, 4 * BLTTilesIOSystem.TILE_SPACING);
+            return new Size(5 * BLTTilesIOSystem.TILE_SPACING, 3 * BLTTilesIOSystem.TILE_SPACING);
         }
 
         public override string StringFromMouseData(IDataRogueControl display, ISystemContainer systemContainer, MouseData mouse)

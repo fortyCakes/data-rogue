@@ -11,6 +11,7 @@ using data_rogue_core.Controls.MapEditorTools;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.IOSystems;
+using data_rogue_core.IOSystems.BLTTiles;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
@@ -165,10 +166,12 @@ namespace data_rogue_core.Activities
                 new MapEditorConfiguration {Position=new Rectangle(0,0, width, height)},
                 new StatsConfiguration {Position = new Rectangle(0,0,width, height),
                     Displays = new List<InfoDisplay> {
-                        new InfoDisplay { ControlType=typeof(MapEditorToolbarControl) },
-                        new InfoDisplay { ControlType=typeof(MapEditorSelectedCellControl)}
+                        new InfoDisplay { ControlType=typeof(MapEditorToolbarControl) }
                     }
                 },
+                new StatsConfiguration{ Position = new Rectangle(width - 6 * 8, 0, 6 * 8, 24), Displays = new List<InfoDisplay>{
+                    new InfoDisplay { ControlType=typeof(MapEditorSelectedCellControl)}
+                } },
                 new MessageConfiguration{Position = new Rectangle(1,height-50, width, 25), NumberOfMessages = 10}
             };
         }
