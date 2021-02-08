@@ -227,5 +227,21 @@ namespace data_rogue_core.Maps
                 RemoveCommandsAt(mapCoordinate.X, mapCoordinate.Y);
             }
         }
+
+        public bool HasCommandAt(int x, int y)
+        {
+            Vector vector = new Vector(x, y);
+            return MapGenCommands.Any(m => m.Vector == vector);
+        }
+
+        public bool HasCommandAt(MapCoordinate mapCoordinate)
+        {
+            if (mapCoordinate.Key == MapKey)
+            {
+                return HasCommandAt(mapCoordinate.X, mapCoordinate.Y);
+            }
+
+            throw new ApplicationException("MapCoordinate is not for this map.");
+        }
     }
 }

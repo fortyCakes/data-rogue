@@ -642,6 +642,13 @@ SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
+Name: tiny_eraser_tool
+Path: Images/Sprites/Entities/Misc/tiny_eraser_tool.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
 Name: line_tool
 Path: Images/Sprites/Entities/Misc/line_tool.png
 Type: SingleSprite

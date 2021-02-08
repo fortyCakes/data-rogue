@@ -40,5 +40,6 @@ namespace data_rogue_core.Maps
 
         void RemoveCommandsAt(int x, int y);
         void RemoveCommandsAt(MapCoordinate mapCoordinate);
+        bool HasCommandAt(MapCoordinate mapCoordinate);
     }
 }

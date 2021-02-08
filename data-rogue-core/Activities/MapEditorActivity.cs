@@ -56,7 +56,8 @@ namespace data_rogue_core.Activities
             //new CircleTool(),
             //new FilledCircleTool(),
             new FillTool(),
-            new EntityTool()
+            new EntityTool(),
+            new TinyEraserTool()
         };
 
         public List<MapCoordinate> GetHighlightedCells()

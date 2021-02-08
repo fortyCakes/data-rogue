@@ -627,6 +627,9 @@
     <Content Include="Images\Sprites\Entities\Misc\sign.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\Sprites\Entities\Misc\tiny_eraser_tool.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Sprites\Entities\Skills\charge.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
