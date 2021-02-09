@@ -2,6 +2,7 @@
 [Prototype]
 Name: Monster:SparkMite
 Singleton: false
+[CanAddToMap]
 [Biome]
 Name: Dungeon
 [Challenge]
@@ -14,7 +15,7 @@ ZOrder: 10
 Bottom: mite
 [Animated]
 [Animation]
-FrameTicks: 5
+FrameTicks: 2
 [Position]
 [Physical]
 Passable: false

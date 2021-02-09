@@ -2,6 +2,7 @@
 [Prototype]
 Name: Monster:Ogre
 Singleton: false
+[CanAddToMap]
 [Biome]
 Name: Dungeon
 [Challenge]

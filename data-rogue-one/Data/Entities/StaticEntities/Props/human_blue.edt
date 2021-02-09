@@ -1,25 +1,27 @@
-﻿"Props:Sign"
+﻿"NPC:HumanBlue"
 [Prototype]
-Name: Props:Sign
+Name: NPC:HumanBlue
 Singleton: false
 [CanAddToMap]
 SettableProperty: Dialog.Text
 [Appearance]
-Glyph: =
-Color: #964B00
+Glyph: @
+Color: #597DCE
 ZOrder: 1
 [SpriteAppearance]
-Top: sign
+Top: human_blue
+[Animated]
+[Animation]
 [Position]
 [Physical]
 Passable: false
 Transparent: true
 [Memorable]
 [Description]
-Name: Sign
-Detail: It's a sign. Interact with it to read it.
+Name: Human
+Detail: A person. Generally peaceful. Why don't you talk to them?
 [Interaction]
-Verb: Read
+Verb: Talk
 Script: BasicDialog
 [Dialog]
-Text: This sign's text has not been set.
+Text: Dialog not set.

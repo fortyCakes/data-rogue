@@ -248,7 +248,9 @@ namespace data_rogue_core.Activities
             if (openDialog.FileName != "")
             {
                 var serialisedMap = File.ReadAllText(openDialog.FileName);
-                _map = MapSerializer.Deserialize(_systemContainer, serialisedMap);
+                Map = MapSerializer.Deserialize(_systemContainer, serialisedMap);
+                _systemContainer.MapSystem.MapCollection.Clear();
+                _systemContainer.MapSystem.MapCollection.Add(Map.MapKey, Map);
                 _systemContainer.MessageSystem.Write($"Opened {openDialog.FileName}", Color.Blue);
             }
         }

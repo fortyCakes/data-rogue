@@ -2,5 +2,8 @@
 
 namespace data_rogue_core.Components
 {
-    public class CanAddToMap : IEntityComponent { }
+    public class CanAddToMap : IEntityComponent
+    {
+        public string SettableProperty = null;
+    }
 }

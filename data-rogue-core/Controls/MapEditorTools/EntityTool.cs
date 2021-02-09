@@ -22,7 +22,7 @@ namespace data_rogue_core.Controls.MapEditorTools
 
         public void Apply(IMap map, MapCoordinate mapCoordinate, IEntity currentCell, IEntity alternateCell, ISystemContainer systemContainer)
         {
-            Action<IEntity> action = (entityToAdd) => { AddEntityCommandToMap(map, mapCoordinate, entityToAdd); };
+            Action<IEntity> action = (entityToAdd) => { AddEntityCommandToMap(map, mapCoordinate, entityToAdd, systemContainer); };
 
             var entities = systemContainer.EntityEngine.AllEntities.Where(e => e.Has<CanAddToMap>());
 
@@ -31,11 +31,38 @@ namespace data_rogue_core.Controls.MapEditorTools
             systemContainer.ActivitySystem.ActivityStack.Push(entityCreationActivity);
         }
 
-        private void AddEntityCommandToMap(IMap map, MapCoordinate mapCoordinate, IEntity entityToAdd)
+        private void AddEntityCommandToMap(IMap map, MapCoordinate mapCoordinate, IEntity entityToAdd, ISystemContainer systemContainer)
         {
-            var prototypeName = entityToAdd.Get<Prototype>().Name;
+            var entityName = entityToAdd.Get<Prototype>().Name;
 
-            var entityCommand = new MapGenCommand { MapGenCommandType = MapGenCommandType.Entity, Parameters = prototypeName, Vector = mapCoordinate.ToVector() };
+            var mapAdd = entityToAdd.Get<CanAddToMap>();
+
+            if (mapAdd.SettableProperty != null)
+            {
+                Action<string> callback = (settablePropertyValue) => 
+                    CompleteEntityCommand(
+                        map, 
+                        mapCoordinate.ToVector(), 
+                        Parameterise(entityName, mapAdd.SettableProperty, settablePropertyValue));
+
+                var inputBox = new TextInputActivity(systemContainer.ActivitySystem, "Enter a value for property {mapAdd.SettableProperty}:", callback);
+
+                systemContainer.ActivitySystem.ActivityStack.Push(inputBox);
+            }
+            else
+            {
+                CompleteEntityCommand(map, mapCoordinate.ToVector(), entityName);
+            }
+        }
+
+        private string Parameterise(string entityName, string settableProperty, string settablePropertyValue)
+        {
+            return $"{entityName}|{settableProperty}={settablePropertyValue}";
+        }
+
+        private void CompleteEntityCommand(IMap map, Vector vector, string parameters)
+        {
+            var entityCommand = new MapGenCommand { MapGenCommandType = MapGenCommandType.Entity, Parameters = parameters, Vector = vector };
             map.AddCommand(entityCommand);
         }
 

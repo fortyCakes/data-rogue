@@ -2,6 +2,8 @@
 [Prototype]
 Name: Monster:Orc
 Singleton: false
+[CanAddToMap]
+[CanAddToMap]
 [Biome]
 Name: Dungeon
 [Challenge]

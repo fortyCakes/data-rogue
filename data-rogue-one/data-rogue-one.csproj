@@ -202,6 +202,9 @@
     <None Include="Data\Entities\StaticEntities\Props\grave.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Entities\StaticEntities\Props\human_blue.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\Entities\StaticEntities\Props\sign.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

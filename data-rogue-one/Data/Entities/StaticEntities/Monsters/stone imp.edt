@@ -2,6 +2,7 @@
 [Prototype]
 Name: Monster:StoneImp
 Singleton: false
+[CanAddToMap]
 [Biome]
 Name: Dungeon
 [Challenge]

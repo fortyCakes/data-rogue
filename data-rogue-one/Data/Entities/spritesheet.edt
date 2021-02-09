@@ -399,6 +399,14 @@ SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
+Name: human_blue
+Path: Images/Sprites/Entities/Creatures/human_blue.png
+Type: SingleSprite
+Frames: Idle0,Idle1
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
 Name: stone_head
 Path: Images/Sprites/Entities/Creatures/stone_head.png
 Type: SingleSprite

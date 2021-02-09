@@ -2,6 +2,7 @@
 [Prototype]
 Name: Monster:FireImp
 Singleton: false
+[CanAddToMap]
 [Biome]
 Name: Inferno
 [Challenge]
