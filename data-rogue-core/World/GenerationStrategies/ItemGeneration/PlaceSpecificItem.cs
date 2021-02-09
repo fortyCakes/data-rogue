@@ -22,7 +22,7 @@ namespace data_rogue_core.World.GenerationStrategies
             SpawnItemRandomly(generatedBranch.Maps[Floor-1], systemContainer, Item, random);
         }
 
-        private void SpawnItemRandomly(Map map, ISystemContainer systemContainer, string item, IRandom random)
+        private void SpawnItemRandomly(IMap map, ISystemContainer systemContainer, string item, IRandom random)
         {
             int retries = 25;
 

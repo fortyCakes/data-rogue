@@ -1,5 +1,6 @@
 ﻿using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Maps;
+using System.Collections.Generic;
 
 namespace data_rogue_core.Systems.Interfaces
 {
@@ -7,6 +8,7 @@ namespace data_rogue_core.Systems.Interfaces
     public interface IMapSystem
     {
         MapCollection MapCollection { get; }
+        IEnumerable<IMap> Vaults { get; }
 
         IEntity CellAt(MapCoordinate coordinate);
 

@@ -9,7 +9,7 @@ namespace data_rogue_core.Utils
 {
     public static class MapExtensions
     {
-        public static MapCoordinate GetEmptyPosition(this Map map, IPositionSystem positionSystem, IRandom random)
+        public static MapCoordinate GetEmptyPosition(this IMap map, IPositionSystem positionSystem, IRandom random)
         {
             var emptyPositions = map.Cells
                 .Where(c => c.Value.Get<Physical>().Passable && c.Value.Get<Physical>().Transparent)
@@ -18,7 +18,7 @@ namespace data_rogue_core.Utils
             return random.PickOne(emptyPositions).Key;
         }
 
-        public static MapCoordinate GetQuickEmptyPosition(this Map map, IPositionSystem positionSystem, IRandom random, int tries = 5)
+        public static MapCoordinate GetQuickEmptyPosition(this IMap map, IPositionSystem positionSystem, IRandom random, int tries = 5)
         {
             for (int i = 0; i < tries; i++)
             {

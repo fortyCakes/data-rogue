@@ -27,7 +27,7 @@ namespace data_rogue_core
             CreateEntities(systemContainer, generatedBranch, branchEntity);
             ExecuteMapGenCommands(systemContainer, generatedBranch, branch);
 
-            Map previousMap = null;
+            IMap previousMap = null;
             foreach (var map in generatedBranch.Maps.OrderBy(m => m.MapKey.Key))
             {
                 if (previousMap != null)
@@ -45,11 +45,11 @@ namespace data_rogue_core
             return generatedBranch;
         }
 
-        private List<Map> GenerateMaps(ISystemContainer systemContainer, Branch branch, IEntity branchEntity)
+        private List<IMap> GenerateMaps(ISystemContainer systemContainer, Branch branch, IEntity branchEntity)
         {
             var mapGenerator = branchEntity.Components.OfType<BranchMapGenerationStrategy>().Single();
 
-            return mapGenerator.Generate(systemContainer, branch);
+            return mapGenerator.Generate(systemContainer, branch, branchEntity);
         }
 
         protected virtual void CreateEntities(ISystemContainer systemContainer, GeneratedBranch generatedBranch, IEntity branchEntity)
@@ -124,7 +124,7 @@ namespace data_rogue_core
             }
         }
 
-        protected virtual void LinkStairs(ISystemContainer systemContainer, Map previousMap, Map map)
+        protected virtual void LinkStairs(ISystemContainer systemContainer, IMap previousMap, IMap map)
         {
             var stairsDown = GetStairs(previousMap, StairDirection.Down, systemContainer.EntityEngine);
             var stairsUp = GetStairs(map, StairDirection.Up, systemContainer.EntityEngine);
@@ -160,7 +160,7 @@ namespace data_rogue_core
             }
         }
 
-        protected virtual List<KeyValuePair<MapCoordinate, Stairs>> GetStairs(Map map, StairDirection direction, IEntityEngine engine)
+        protected virtual List<KeyValuePair<MapCoordinate, Stairs>> GetStairs(IMap map, StairDirection direction, IEntityEngine engine)
         {
             return engine.EntitiesWith<Stairs>()
                 .Where(e => e.Get<Position>().MapCoordinate.Key == map.MapKey)

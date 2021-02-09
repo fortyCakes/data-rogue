@@ -70,7 +70,7 @@ namespace data_rogue_core.World.GenerationStrategies
             return entity.Components.OfType<Biome>().Select(b => b.Name);
         }
 
-        private void FillMap(Map map, ISystemContainer systemContainer, int power, MonsterList monsterList, IRandom random)
+        private void FillMap(IMap map, ISystemContainer systemContainer, int power, MonsterList monsterList, IRandom random)
         {
             var mapSize = map.Cells.Count;
 
@@ -82,7 +82,7 @@ namespace data_rogue_core.World.GenerationStrategies
             }
         }
 
-        private void SpawnMonster(Map map, ISystemContainer systemContainer, int power, MonsterList monsterList, IRandom random)
+        private void SpawnMonster(IMap map, ISystemContainer systemContainer, int power, MonsterList monsterList, IRandom random)
         {
             int retries = 25;
 

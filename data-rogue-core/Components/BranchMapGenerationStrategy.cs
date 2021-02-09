@@ -8,6 +8,6 @@ namespace data_rogue_core.Components
 
     public abstract class BranchMapGenerationStrategy : IEntityComponent, IBranchMapGenerator
     {
-        public abstract List<Map> Generate(ISystemContainer systemContainer, Branch branchDefinition);
+        public abstract List<IMap> Generate(ISystemContainer systemContainer, Branch branchDefinition, IEntity branchEntity);
     }
 }

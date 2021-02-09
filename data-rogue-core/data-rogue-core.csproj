@@ -397,6 +397,7 @@
     <Compile Include="IOSystems\StatsConfiguration.cs" />
     <Compile Include="Maps\FovCache.cs" />
     <Compile Include="Maps\Generators\BasicDungeonMapGenerator.cs" />
+    <Compile Include="Maps\Generators\VaultBasedDungeonMapGenerator.cs" />
     <Compile Include="Maps\IFovCache.cs" />
     <Compile Include="Maps\IMap.cs" />
     <Compile Include="Maps\MapGenCommands\EntityStackCommandExecutor.cs" />
@@ -520,6 +521,7 @@
     <Compile Include="World\GenerationStrategies\ItemGeneration\RandomItemGeneration.cs" />
     <Compile Include="World\GenerationStrategies\MapGeneration\BasicDungeonBranchMapGenerator.cs" />
     <Compile Include="World\GenerationStrategies\MapGeneration\StaticBranchMapGenerator.cs" />
+    <Compile Include="World\GenerationStrategies\MapGeneration\VaultBasedDungeonBranchMapGenerator.cs" />
     <Compile Include="World\GenerationStrategies\MonsterGeneration\BiomeBasedMonsterGeneration.cs" />
     <Compile Include="World\GenerationStrategies\IEntityGenerator.cs" />
     <Compile Include="World\GenerationStrategies\MapGeneration\BaseBranchGenerator.cs" />

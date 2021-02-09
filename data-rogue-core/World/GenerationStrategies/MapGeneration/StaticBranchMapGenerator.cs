@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using data_rogue_core.Systems.Interfaces;
 using System.Linq;
 using System;
+using data_rogue_core.EntityEngineSystem;
 
 namespace data_rogue_core
 {
@@ -14,9 +15,9 @@ namespace data_rogue_core
         private readonly string STATIC_MAP_ROOT = "StaticMaps/";
         public string StaticMaps;
 
-        public override List<Map> Generate(ISystemContainer systemContainer, Branch branchDefinition)
+        public override List<IMap> Generate(ISystemContainer systemContainer, Branch branchDefinition, IEntity branchEntity)
         {
-            var maps = new List<Map>();
+            var maps = new List<IMap>();
             int floor = 1;
 
             foreach (string mapName in StaticMaps.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim()))

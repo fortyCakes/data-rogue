@@ -5,6 +5,6 @@ namespace data_rogue_core
 {
     public class GeneratedBranch
     {
-        public IList<Map> Maps { get; internal set; }
+        public IList<IMap> Maps { get; internal set; }
     }
 }

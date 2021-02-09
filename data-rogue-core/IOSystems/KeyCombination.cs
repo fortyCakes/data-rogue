@@ -61,6 +61,18 @@ namespace data_rogue_core.IOSystems
                 case Key.Semicolon: return Shift ? ':' : ';';
                 case Key.Comma: return Shift ? '<' : ',';
                 case Key.Period: return Shift ? '>' : '.';
+                case Key.Space: return ' ';
+                case Key.Number1: return Shift ? '!' : '1';
+                case Key.Number2: return Shift ? '"' : '2';
+                case Key.Number3: return Shift ? '£' : '3';
+                case Key.Number4: return Shift ? '$' : '4';
+                case Key.Number5: return Shift ? '%' : '5';
+                case Key.Number6: return Shift ? '^' : '6';
+                case Key.Number7: return Shift ? '&' : '7';
+                case Key.Number8: return Shift ? '*' : '8';
+                case Key.Number9: return Shift ? '(' : '9';
+                case Key.Number0: return Shift ? ')' : '0'; 
+
             }
 
             return null;

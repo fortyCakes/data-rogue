@@ -27,7 +27,7 @@ namespace data_rogue_core.World.GenerationStrategies
             }
         }
 
-        private void FillMap(Map map, ISystemContainer systemContainer, IEntity item, IRandom random)
+        private void FillMap(IMap map, ISystemContainer systemContainer, IEntity item, IRandom random)
         {
             var mapSize = map.Cells.Count;
 
@@ -39,7 +39,7 @@ namespace data_rogue_core.World.GenerationStrategies
             }
         }
 
-        private void SpawnMonster(Map map, ISystemContainer systemContainer, IEntity item, IRandom random)
+        private void SpawnMonster(IMap map, ISystemContainer systemContainer, IEntity item, IRandom random)
         {
             int retries = 25;
 

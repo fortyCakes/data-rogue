@@ -7,14 +7,16 @@ using data_rogue_core.EntityEngineSystem;
 
 namespace data_rogue_core
 {
-    public class BasicDungeonBranchMapGenerator: BranchMapGenerationStrategy
+
+    public class VaultBasedDungeonBranchMapGenerator: BranchMapGenerationStrategy
     {
         public string FloorCell = "Cell:Empty";
         public string WallCell = "Cell:Wall";
+        public int NumberOfVaults = 10;
 
-        public override List<IMap> Generate(ISystemContainer systemContainer, Branch branchDefinition, IEntity branchEntity)
+        public override List<IMap> Generate(ISystemContainer systemContainer, Branch branchDefinition, IEntity branch)
         {
-            var mapgen = new BasicDungeonMapGenerator(systemContainer, FloorCell, WallCell);
+            var mapgen = new VaultBasedDungeonMapGenerator(systemContainer, FloorCell, WallCell, NumberOfVaults, branch);
 
             var generatedBranchMaps = new List<IMap>();
 

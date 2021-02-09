@@ -27,7 +27,7 @@ namespace data_rogue_core.Maps.Generators
             PrototypeSystem = systemContainer.PrototypeSystem;
         }
 
-        public Map Generate(string mapName, IRandom random)
+        public IMap Generate(string mapName, IRandom random)
         {
             Random = random;
 

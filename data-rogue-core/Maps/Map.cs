@@ -19,6 +19,8 @@ namespace data_rogue_core.Maps
 
         public List<MapGenCommand> MapGenCommands { get; set; } = new List<MapGenCommand>();
 
+        public IEnumerable<MapKey> Vaults { get; set; } = new List<MapKey>();
+
         public uint DefaultCellId
         {
             get
@@ -32,6 +34,8 @@ namespace data_rogue_core.Maps
         public int RightX => Cells.Any() ? Cells.Max(c => c.Key.X) : 0;
         public int BottomY => Cells.Any() ? Cells.Max(c => c.Key.Y) : 0;
         public Vector Origin => new Vector(LeftX, TopY);
+
+        public IEnumerable<Biome> Biomes => throw new NotImplementedException();
 
         private IFovCache FovCache;
 
@@ -242,6 +246,11 @@ namespace data_rogue_core.Maps
             }
 
             throw new ApplicationException("MapCoordinate is not for this map.");
+        }
+
+        public bool IsFullyConnected()
+        {
+            throw new NotImplementedException(); //TODO
         }
     }
 }

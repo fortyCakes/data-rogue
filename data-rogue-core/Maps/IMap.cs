@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using data_rogue_core.Components;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Systems;
 
@@ -19,6 +20,8 @@ namespace data_rogue_core.Maps
 
         Dictionary<MapCoordinate, IEntity> Cells { get; set; }
         HashSet<MapCoordinate> SeenCoordinates { get; set; }
+        IEnumerable<Biome> Biomes { get; }
+        IEnumerable<MapKey> Vaults { get; set; }
 
         IEntity CellAt(int lookupX, int lookupY);
         IEntity CellAt(MapCoordinate coordinate);
@@ -41,5 +44,6 @@ namespace data_rogue_core.Maps
         void RemoveCommandsAt(int x, int y);
         void RemoveCommandsAt(MapCoordinate mapCoordinate);
         bool HasCommandAt(MapCoordinate mapCoordinate);
+        bool IsFullyConnected();
     }
 }
