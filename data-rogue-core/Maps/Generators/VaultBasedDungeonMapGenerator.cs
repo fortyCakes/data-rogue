@@ -29,12 +29,9 @@ namespace data_rogue_core.Maps.Generators
         public IMap Generate(string mapName, IRandom random)
         {
             IMap map = new Map(mapName, _wallCell);
-            var vaults = new List<VaultPlacement>();
+            var vaultPlacements = new List<VaultPlacement>();
 
-            var biomes = _branch.Components.OfType<Biome>();
-            var validVaults = _systemContainer.MapSystem.Vaults
-                .Where(v => v.Biomes.Any(b => biomes.Any(biome => biome.Name == b.Name)))
-                .ToList();
+            List<IMap> validVaults = GetValidVaults();
 
             for (int i = 0; i <= _numberOfVaults; i++)
             {
@@ -42,21 +39,36 @@ namespace data_rogue_core.Maps.Generators
 
                 var vaultPlacement = PlaceVault(map, vaultToPlace);
 
-                vaults.Add(vaultPlacement);
+                vaultPlacements.Add(vaultPlacement);
             }
 
-            while(!map.IsFullyConnected())
+            while (!map.IsFullyConnected())
             {
-                var possibleVaultConnections = GetPossibleVaultConnections(map, vaults).ToList();
+                var possibleVaultConnections = GetPossibleVaultConnections(map, vaultPlacements).ToList();
 
                 var vaultConnection = SelectVaultConnection(possibleVaultConnections, random);
 
                 AddVaultConnectionToMap(map, vaultConnection);
             }
 
-            map.Vaults = vaults.Select(v => v.Vault.MapKey);
+            map.Vaults = vaultPlacements.Select(v => v.Vault.MapKey);
 
             return map;
+        }
+
+        private List<IMap> GetValidVaults()
+        {
+            var biomes = _branch.Components.OfType<Biome>();
+            var validVaults = _systemContainer.MapSystem.Vaults
+                .Where(v => v.Biomes.Any(b => biomes.Any(biome => biome.Name == b.Name)))
+                .ToList();
+
+            if (!validVaults.Any())
+            {
+                throw new ApplicationException($"No valid vaults found for branch {_branch.Name}");
+            }
+
+            return validVaults;
         }
 
         private void AddVaultConnectionToMap(IMap map, object vaultConnection)
