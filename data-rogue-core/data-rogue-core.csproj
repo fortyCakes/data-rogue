@@ -74,6 +74,7 @@
     <Compile Include="Activities\BaseActivity.cs" />
     <Compile Include="Activities\IMapActivity.cs" />
     <Compile Include="Activities\MapEditorCellMenuActivity.cs" />
+    <Compile Include="Components\CanAddToMap.cs" />
     <Compile Include="Components\Cell.cs" />
     <Compile Include="Controls\MapEditorCellPickerControl.cs" />
     <Compile Include="Controls\MapEditorControl.cs" />

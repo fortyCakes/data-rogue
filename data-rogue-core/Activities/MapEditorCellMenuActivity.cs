@@ -12,23 +12,23 @@ using data_rogue_core.Systems.Interfaces;
 
 namespace data_rogue_core.Activities
 {
-    internal class MapEditorCellMenuActivity : BaseActivity
+    internal class EntityPickerMenuActivity : BaseActivity
     {
         private ISystemContainer _systemContainer;
         private string _caption;
         private Action<IEntity> _callback;
         private IEntity SelectedCell;
 
-        private IEnumerable<IEntity> AllCells;
+        private IEnumerable<IEntity> Entities;
         private string HoveredCellText => "Cell:" + (SelectedCell?.DescriptionName ?? "(no cell selected)");
 
-        public MapEditorCellMenuActivity(ISystemContainer systemContainer, string caption, Action<IEntity> callback)
+        public EntityPickerMenuActivity(IEnumerable<IEntity> entities, ISystemContainer systemContainer, string caption, Action<IEntity> callback)
         {
             _systemContainer = systemContainer;
             _caption = caption;
             _callback = callback;
 
-            AllCells = systemContainer.EntityEngine.AllEntities.Where(e => e.Has<Cell>());
+            Entities = entities;
         }
 
         public override ActivityType Type => ActivityType.Menu;
@@ -72,7 +72,7 @@ namespace data_rogue_core.Activities
 
             var cellSize = renderer.GetRendererFor(exampleCell).GetSize(rendererHandle, exampleCell, systemContainer, playerFov);
 
-            foreach(var cell in AllCells)
+            foreach(var cell in Entities)
             {
                 controls.Add(new MenuEntityControl { Position = new Rectangle(offsetX + x, offsetY + y, cellSize.Width, cellSize.Height), Entity = cell });
 

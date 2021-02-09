@@ -21,7 +21,7 @@ namespace data_rogue_core.Controls.MapEditorTools
             return SquareTool.GetSquareCells(firstCoordinate, mapCoordinate);
         }
 
-        protected override IEnumerable<MapCoordinate> GetInternalCoordinates(MapCoordinate firstCoordinate, MapCoordinate mapCoordinate)
+        protected override IEnumerable<MapCoordinate> GetInternalAffected(MapCoordinate firstCoordinate, MapCoordinate mapCoordinate)
         {
             var minX = Math.Min(firstCoordinate.X, mapCoordinate.X) + 1;
             var maxX = Math.Max(firstCoordinate.X, mapCoordinate.X) - 1;

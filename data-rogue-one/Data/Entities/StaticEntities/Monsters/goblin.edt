@@ -2,6 +2,7 @@
 [Prototype]
 Name: Monster:Goblin
 Singleton: false
+[CanAddToMap]
 [Biome]
 Name: Dungeon
 [Challenge]

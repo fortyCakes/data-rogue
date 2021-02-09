@@ -1,6 +1,7 @@
 ﻿using data_rogue_core.Components;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Maps;
+using data_rogue_core.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,42 +23,17 @@ namespace data_rogue_core.Controls.MapEditorTools
             return CircleTool.GetCircleCells(firstCoordinate, mapCoordinate);
         }
 
-        protected override IEnumerable<MapCoordinate> GetInternalCoordinates(MapCoordinate firstCoordinate, MapCoordinate mapCoordinate)
+        protected override IEnumerable<MapCoordinate> GetInternalAffected(MapCoordinate firstCoordinate, MapCoordinate mapCoordinate)
         {
-            throw new NotImplementedException();
+            var algorithm = new BresenhamLineDrawingAlgorithm();
 
-            //var onCircleCells = GetAffectedCoordinates(firstCoordinate, mapCoordinate).ToList();
+            var onCircleCells = GetAffectedCoordinates(firstCoordinate, mapCoordinate).ToList();
 
-            //var minX = Math.Min(firstCoordinate.X, mapCoordinate.X);
-            //var maxX = Math.Max(firstCoordinate.X, mapCoordinate.X);
-            //var minY = Math.Min(firstCoordinate.Y, mapCoordinate.Y);
-            //var maxY = Math.Max(firstCoordinate.Y, mapCoordinate.Y);
+            var midPoint = new MapCoordinate(firstCoordinate.Key, (firstCoordinate.X + mapCoordinate.X) / 2, (firstCoordinate.Y + mapCoordinate.Y) / 2);
 
-            //double xRadius = (maxX - minX) / 2;
-            //double yRadius = (maxY - minY) / 2;
-            //double centerX = minX + xRadius + 0.5;
-            //double centerY = minY + yRadius + 0.5;
+            Func<MapCoordinate, bool> canFillInto = (coordinate) => { return !onCircleCells.Contains(coordinate); };
 
-            //if (minX <= maxX && minY <= maxY)
-            //{
-            //    for (int x = minX; x <= maxX; x++)
-            //    {
-            //        for (int y = minY; y <= maxY; y++)
-            //        {
-            //            var normalisedX = x - centerX;
-            //            var normalisedY = y - centerY;
-
-            //            var normalisedDistance = (normalisedX * normalisedX) / (xRadius * xRadius) + (normalisedY * normalisedY) / (yRadius * yRadius);
-
-            //            var coordinate = new MapCoordinate(firstCoordinate.Key, x, y);
-
-            //            if (normalisedDistance <= 1 && !onCircleCells.Contains(coordinate))
-            //            {
-            //                yield return coordinate;
-            //            }
-            //        }
-            //    }
-            //}
+            return FillTool.FloodFill(midPoint, canFillInto);
         }
     }
 }

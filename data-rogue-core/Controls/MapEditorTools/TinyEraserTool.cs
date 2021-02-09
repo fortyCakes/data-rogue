@@ -17,7 +17,7 @@ namespace data_rogue_core.Controls.MapEditorTools
 
         public bool RequiresClick => true;
 
-        public void Apply(IMap map, MapCoordinate mapCoordinate, IEntity currentCell, IEntity alternateCell, IActivitySystem activitySystem)
+        public void Apply(IMap map, MapCoordinate mapCoordinate, IEntity currentCell, IEntity alternateCell, ISystemContainer systemContainer)
         {
             if (map.HasCommandAt(mapCoordinate))
             {
@@ -33,5 +33,7 @@ namespace data_rogue_core.Controls.MapEditorTools
         {
             return new List<MapCoordinate> { mapCoordinate };
         }
+
+        public virtual IEnumerable<MapCoordinate> GetInternalCoordinates(IMap map, MapCoordinate secondCoordinate) => new List<MapCoordinate>();
     }
 }

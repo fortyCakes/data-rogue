@@ -27,7 +27,9 @@ namespace data_rogue_core.IOSystems.BLTTiles
             return control.Position.Size;
         }
 
-        private void RenderMap(ISpriteManager spriteManager, IDataRogueControl mapConfiguration, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        protected virtual List<IEntity> GetEntitiesAt(ISystemContainer systemContainer, IMap map, MapCoordinate mapCoordinate) => systemContainer.PositionSystem.EntitiesAt(mapCoordinate).ToList();
+
+        protected virtual void RenderMap(ISpriteManager spriteManager, IDataRogueControl mapConfiguration, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
             var cameraPosition = systemContainer.RendererSystem.CameraPosition;
 
@@ -64,7 +66,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
                     renderTracker[x + 1, y + 1] = isInFov || currentMap.SeenCoordinates.Contains(coordinate);
                     fovTracker[x + 1, y + 1] = isInFov;
 
-                    var entities = systemContainer.PositionSystem.EntitiesAt(coordinate);
+                    var entities = GetEntitiesAt(systemContainer, currentMap, coordinate);
 
                     var particles = entities.Where(e => e.Has<TextParticle>()).ToList();
                     foreach(var particle in particles)

@@ -12,7 +12,7 @@ namespace data_rogue_core.Controls.MapEditorTools
 
         public bool RequiresClick => true;
 
-        public virtual void Apply(IMap map, MapCoordinate mapCoordinate, IEntity currentCell, IEntity alternateCell, IActivitySystem activitySystem)
+        public virtual void Apply(IMap map, MapCoordinate mapCoordinate, IEntity currentCell, IEntity alternateCell, ISystemContainer systemContainer)
         {
             if (FirstCoordinate == null)
             {
@@ -33,6 +33,8 @@ namespace data_rogue_core.Controls.MapEditorTools
         }
 
         protected abstract IEnumerable<MapCoordinate> GetAffectedCoordinates(MapCoordinate firstCoordinate, MapCoordinate mapCoordinate);
+
+        public virtual IEnumerable<MapCoordinate> GetInternalCoordinates(IMap map, MapCoordinate secondCoordinate) => new List<MapCoordinate>();
 
         protected static IEnumerable<MapCoordinate> HorizontalLine(MapKey key, int minX, int maxX, int y)
         {

@@ -2,6 +2,7 @@
 [Prototype]
 Name: Props:Sign
 Singleton: false
+[CanAddToMap]
 [Appearance]
 Glyph: =
 Color: #964B00

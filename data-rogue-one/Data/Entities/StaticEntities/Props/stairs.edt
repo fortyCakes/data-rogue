@@ -1,6 +1,7 @@
 ﻿"Props:StairsDown"
 [Stairs]
 Direction: Down
+[CanAddToMap]
 [Prototype]
 Name: Props:StairsDown
 Singleton: false
@@ -19,6 +20,7 @@ Detail: A set of stairs, leading downwards.
 "Props:StairsUp"
 [Stairs]
 Direction: Up
+[CanAddToMap]
 [Prototype]
 Name: Props:StairsUp
 Singleton: false

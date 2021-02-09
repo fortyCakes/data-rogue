@@ -3,6 +3,7 @@
 [Prototype]
 Name: Props:Portal
 Singleton: false
+[CanAddToMap]
 [Appearance]
 Glyph: >
 Color: #aaaaff

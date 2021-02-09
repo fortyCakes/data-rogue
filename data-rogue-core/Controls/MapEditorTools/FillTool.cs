@@ -3,6 +3,7 @@ using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems.Interfaces;
 using data_rogue_core.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -19,7 +20,7 @@ namespace data_rogue_core.Controls.MapEditorTools
 
         public bool RequiresClick => true;
 
-        public void Apply(IMap map, MapCoordinate mapCoordinate, IEntity currentCell, IEntity alternateCell, IActivitySystem activitySystem)
+        public void Apply(IMap map, MapCoordinate mapCoordinate, IEntity currentCell, IEntity alternateCell, ISystemContainer systemContainer)
         {
             foreach(var coordinate in GetTargetedCoordinates(map, mapCoordinate))
             {
@@ -29,8 +30,16 @@ namespace data_rogue_core.Controls.MapEditorTools
 
         public IEnumerable<MapCoordinate> GetTargetedCoordinates(IMap map, MapCoordinate mapCoordinate)
         {
-            var targetedCoordinates =  new List<MapCoordinate>();
             var cell = map.CellAt(mapCoordinate);
+
+            Func<MapCoordinate, bool> CanFillInto = (coordinate) => { return map.CellAt(coordinate) == cell; };
+            
+            return FloodFill(mapCoordinate, CanFillInto);
+        }
+
+        public static IEnumerable<MapCoordinate> FloodFill(MapCoordinate mapCoordinate, Func<MapCoordinate, bool> canFillInto)
+        {
+            var targetedCoordinates = new List<MapCoordinate>();
 
             var coordinatesToCheck = new Queue<MapCoordinate>();
             coordinatesToCheck.Enqueue(mapCoordinate);
@@ -41,7 +50,7 @@ namespace data_rogue_core.Controls.MapEditorTools
             {
                 var coordinate = coordinatesToCheck.Dequeue();
 
-                if (map.CellAt(coordinate) == cell)
+                if (canFillInto(coordinate))
                 {
                     targetedCoordinates.Add(coordinate);
 
@@ -57,8 +66,6 @@ namespace data_rogue_core.Controls.MapEditorTools
 
                 alreadyChecked.Add(coordinate);
 
-                
-
                 var vector = mapCoordinate - coordinate;
 
                 if (vector.Length > 1000 || alreadyChecked.Count > 1000)
@@ -70,5 +77,7 @@ namespace data_rogue_core.Controls.MapEditorTools
 
             return targetedCoordinates;
         }
+
+        public virtual IEnumerable<MapCoordinate> GetInternalCoordinates(IMap map, MapCoordinate secondCoordinate) => new List<MapCoordinate>();
     }
 }

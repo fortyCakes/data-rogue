@@ -2,6 +2,7 @@
 [Prototype]
 Name: Props:Smoke
 Singleton: false
+[CanAddToMap]
 [Appearance]
 Glyph: ~
 Color: #30346D

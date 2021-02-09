@@ -7,7 +7,7 @@ namespace data_rogue_core.Controls.MapEditorTools
 {
     public abstract class BaseFilledShapeTool : BaseShapeTool
     {
-        public override void Apply(IMap map, MapCoordinate mapCoordinate, IEntity currentCell, IEntity alternateCell, IActivitySystem activitySystem)
+        public override void Apply(IMap map, MapCoordinate mapCoordinate, IEntity currentCell, IEntity alternateCell, ISystemContainer systemContainer)
         {
             if (FirstCoordinate == null)
             {
@@ -16,17 +16,30 @@ namespace data_rogue_core.Controls.MapEditorTools
             }
             else
             {
-                var fill = GetInternalCoordinates(FirstCoordinate, mapCoordinate);
+                var fill = GetInternalAffected(FirstCoordinate, mapCoordinate);
 
                 foreach (var coordinate in fill)
                 {
                     map.SetCell(coordinate, alternateCell);
                 }
 
-                base.Apply(map, mapCoordinate, currentCell, alternateCell, activitySystem);
+                base.Apply(map, mapCoordinate, currentCell, alternateCell, systemContainer);
             }
         }
 
-        protected abstract IEnumerable<MapCoordinate> GetInternalCoordinates(MapCoordinate firstCoordinate, MapCoordinate mapCoordinate);
+        protected abstract IEnumerable<MapCoordinate> GetInternalAffected(MapCoordinate firstCoordinate, MapCoordinate mapCoordinate);
+
+        public override IEnumerable<MapCoordinate> GetInternalCoordinates(IMap map, MapCoordinate secondCoordinate)
+        {
+            if (FirstCoordinate == null)
+            {
+                return new List<MapCoordinate>();
+            }
+            else
+            {
+                return GetInternalAffected(FirstCoordinate, secondCoordinate);
+            }
+        
+        }
     }
 }

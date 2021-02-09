@@ -2,6 +2,7 @@
 [Prototype]
 Name: Props:Grave
 Singleton: false
+[CanAddToMap]
 [Appearance]
 Glyph: `
 Color: #969696

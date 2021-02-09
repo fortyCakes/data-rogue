@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using data_rogue_core.Activities;
 using data_rogue_core.Components;
 using data_rogue_core.EntityEngineSystem;
@@ -19,19 +20,22 @@ namespace data_rogue_core.Controls.MapEditorTools
 
         public bool RequiresClick => true;
 
-        public void Apply(IMap map, MapCoordinate mapCoordinate, IEntity currentCell, IEntity alternateCell, IActivitySystem activitySystem)
+        public void Apply(IMap map, MapCoordinate mapCoordinate, IEntity currentCell, IEntity alternateCell, ISystemContainer systemContainer)
         {
-            Action<string> action = (entityToAdd) => { AddCommandToMap(map, mapCoordinate, entityToAdd); };
+            Action<IEntity> action = (entityToAdd) => { AddEntityCommandToMap(map, mapCoordinate, entityToAdd); };
 
-            var entityCreationActivity = new TextInputActivity(activitySystem, "Entity name", action);
-            entityCreationActivity.InputText = "Props:Smoke";
+            var entities = systemContainer.EntityEngine.AllEntities.Where(e => e.Has<CanAddToMap>());
 
-            activitySystem.ActivityStack.Push(entityCreationActivity);
+            var entityCreationActivity = new EntityPickerMenuActivity(entities, systemContainer, "Pick an entity to add", action);
+
+            systemContainer.ActivitySystem.ActivityStack.Push(entityCreationActivity);
         }
 
-        private void AddCommandToMap(IMap map, MapCoordinate mapCoordinate, string entityToAdd)
+        private void AddEntityCommandToMap(IMap map, MapCoordinate mapCoordinate, IEntity entityToAdd)
         {
-            var entityCommand = new MapGenCommand { MapGenCommandType = MapGenCommandType.Entity, Parameters = entityToAdd, Vector = mapCoordinate.ToVector() };
+            var prototypeName = entityToAdd.Get<Prototype>().Name;
+
+            var entityCommand = new MapGenCommand { MapGenCommandType = MapGenCommandType.Entity, Parameters = prototypeName, Vector = mapCoordinate.ToVector() };
             map.AddCommand(entityCommand);
         }
 
@@ -39,5 +43,7 @@ namespace data_rogue_core.Controls.MapEditorTools
         {
             return new List<MapCoordinate> { mapCoordinate };
         }
+
+        public virtual IEnumerable<MapCoordinate> GetInternalCoordinates(IMap map, MapCoordinate secondCoordinate) => new List<MapCoordinate>();
     }
 }

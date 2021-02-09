@@ -1,6 +1,7 @@
 ﻿using data_rogue_core.Components;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Systems.Interfaces;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -13,10 +14,8 @@ namespace data_rogue_core.Maps.MapGenCommands
         public void Execute(ISystemContainer systemContainer, Map map, MapGenCommand command, Vector offset)
         {
             var coordinate = new MapCoordinate(map.MapKey, offset + command.Vector);
-
-            var splits = command.Parameters.Split('|').ToList();
-
-            var entityName = splits[0];
+            List<string> splits;
+            string entityName = GetEntityName(command, out splits);
 
             var entity = systemContainer.PrototypeSystem.CreateAt(entityName, coordinate);
 
@@ -36,6 +35,12 @@ namespace data_rogue_core.Maps.MapGenCommands
 
                 ComponentSerializer.BindSingleValue(component, fieldName, value);
             }
+        }
+
+        public static string GetEntityName(MapGenCommand command, out List<string> splits)
+        {
+            splits = command.Parameters.Split('|').ToList();
+            return splits[0];
         }
     }
 }

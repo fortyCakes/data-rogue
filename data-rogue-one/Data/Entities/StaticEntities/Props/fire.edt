@@ -2,6 +2,7 @@
 [Prototype]
 Name: Props:Fire
 Singleton: false
+[CanAddToMap]
 [Appearance]
 Glyph: ^
 Color: #D37D2C

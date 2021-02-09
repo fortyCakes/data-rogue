@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using data_rogue_core.Components;
 using data_rogue_core.Controls;
 using data_rogue_core.Controls.MapEditorTools;
 using data_rogue_core.EntityEngineSystem;
@@ -54,7 +55,7 @@ namespace data_rogue_core.Activities
             new SquareTool(),
             new FilledSquareTool(),
             new CircleTool(),
-            //new FilledCircleTool(),
+            new FilledCircleTool(),
             new FillTool(),
             new EntityTool(),
             new TinyEraserTool()
@@ -65,13 +66,17 @@ namespace data_rogue_core.Activities
             return CurrentTool.GetTargetedCoordinates(Map, _mousePosition).ToList();
         }
 
+        public List<MapCoordinate> GetSecondaryCells()
+        {
+            return CurrentTool.GetInternalCoordinates(Map, _mousePosition).ToList();
+        }
+
         public override ActivityType Type => ActivityType.MapEditor;
         public override bool RendersEntireSpace => true;
         
         public override bool AcceptsInput => true;
 
         public IMapEditorTool CurrentTool { get; set; } = new PenTool();
-
 
         public IEntity PrimaryCell {
             get { return _primaryCell; }
@@ -102,7 +107,7 @@ namespace data_rogue_core.Activities
 
         public void ApplyTool(MapCoordinate mapCoordinate, IEntity cell, IEntity alternateCell)
         {
-            CurrentTool.Apply(_map, mapCoordinate, cell, alternateCell, _systemContainer.ActivitySystem);
+            CurrentTool.Apply(_map, mapCoordinate, cell, alternateCell, _systemContainer);
         }
 
         public MapCoordinate CameraPosition { get; set; }
@@ -162,23 +167,25 @@ namespace data_rogue_core.Activities
             }
         }
 
+        private IEnumerable<IEntity> AllCells => _systemContainer.EntityEngine.AllEntities.Where(e => e.Has<Cell>());
+
         public void ShowChangeDefaultCellDialogue()
         {
-            var inputActivity = new MapEditorCellMenuActivity(_systemContainer, "Choose a new default cell:", SetDefaultCell);
+            var inputActivity = new EntityPickerMenuActivity(AllCells, _systemContainer, "Choose a new default cell:", SetDefaultCell);
 
             _systemContainer.ActivitySystem.Push(inputActivity);
         }
 
         public void ShowChangePrimaryCellDialogue()
         {
-            var inputActivity = new MapEditorCellMenuActivity(_systemContainer, "Choose a cell to use:", SetPrimaryCell);
+            var inputActivity = new EntityPickerMenuActivity(AllCells, _systemContainer, "Choose a cell to use:", SetPrimaryCell);
 
             _systemContainer.ActivitySystem.Push(inputActivity);
         }
 
         public void ShowChangeSecondaryCellDialogue()
         {
-            var inputActivity = new MapEditorCellMenuActivity(_systemContainer, "Choose a cell to use:", SetSecondaryCell);
+            var inputActivity = new EntityPickerMenuActivity(AllCells, _systemContainer, "Choose a cell to use:", SetSecondaryCell);
 
             _systemContainer.ActivitySystem.Push(inputActivity);
         }

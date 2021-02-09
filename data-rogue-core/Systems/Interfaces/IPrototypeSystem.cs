@@ -17,5 +17,6 @@ namespace data_rogue_core.Systems.Interfaces
 
         IEntity CreateAt(int entityId, MapCoordinate mapCoordinate);
         IEntity TryGet(string entityName);
+        IEntity GetPrototype(string entityName);
     }
 }
