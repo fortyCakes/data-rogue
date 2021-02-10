@@ -46,6 +46,7 @@ namespace data_rogue_core.Systems
         private readonly IEntityDataProvider _keyBindingsDataProvider;
         private readonly IEntityDataProvider _worldEntityDataProvider;
         private readonly IEntityDataProvider _playerEntityDataProvider;
+        private readonly IEntityDataProvider _vaultDataProvider;
         private readonly IUnifiedRenderer _renderer;
         private readonly IList<Type> _additionalComponentTypes;
 
@@ -64,6 +65,7 @@ namespace data_rogue_core.Systems
             _keyBindingsDataProvider = entityDataProviderContainer.KeyBindingsDataProvider ?? new NullDataProvider();
             _worldEntityDataProvider = entityDataProviderContainer.WorldEntityDataProvider ?? new NullDataProvider();
             _playerEntityDataProvider = entityDataProviderContainer.PlayerEntityDataProvider ?? new NullDataProvider();
+            _vaultDataProvider = entityDataProviderContainer.VaultDataProvider ?? new NullDataProvider();
             _renderer = renderer;
             _additionalComponentTypes = additionalComponentTypes;
         }
@@ -129,7 +131,7 @@ namespace data_rogue_core.Systems
 
             ControlSystem = new ControlSystem(this, _keyBindingsDataProvider);
 
-            SaveSystem = new SaveSystem(this, new WorldGenerator(_worldEntityDataProvider, _playerEntityDataProvider));
+            SaveSystem = new SaveSystem(this, new WorldGenerator(_worldEntityDataProvider, _playerEntityDataProvider, _vaultDataProvider));
 
 
             EntityEngine.Initialise(this);

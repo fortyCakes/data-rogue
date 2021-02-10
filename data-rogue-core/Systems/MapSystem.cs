@@ -8,15 +8,17 @@ namespace data_rogue_core.Systems
 
     public class MapSystem : IMapSystem
     {
+        private List<IMap> _vaults;
+
         public void Initialise()
         {
             MapCollection = new MapCollection();
-            Vaults = new List<IMap>();
+            _vaults = new List<IMap>();
         }
 
         public MapCollection MapCollection { get; private set; }
 
-        public IEnumerable<IMap> Vaults { get; private set; }
+        public IEnumerable<IMap> Vaults => _vaults;
 
         public IEntity CellAt(MapCoordinate coordinate) => MapCollection[coordinate.Key].CellAt(coordinate);
 
@@ -27,6 +29,11 @@ namespace data_rogue_core.Systems
                 return MapCollection[mapKey];
             }
             return null;
+        }
+
+        public void AddVault(IMap vault)
+        {
+            _vaults.Add(vault);
         }
     }
 }

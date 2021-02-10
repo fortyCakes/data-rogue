@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,9 +36,9 @@ namespace data_rogue_core.Maps.Generators
 
             for (int i = 0; i <= _numberOfVaults; i++)
             {
-                var vaultToPlace = SelectVault(validVaults, random);
+                var selectedVault = SelectVault(validVaults, random);
 
-                var vaultPlacement = PlaceVault(map, vaultToPlace);
+                var vaultPlacement = PlaceVault(map, selectedVault);
 
                 vaultPlacements.Add(vaultPlacement);
             }
@@ -60,7 +61,7 @@ namespace data_rogue_core.Maps.Generators
         {
             var biomes = _branch.Components.OfType<Biome>();
             var validVaults = _systemContainer.MapSystem.Vaults
-                .Where(v => v.Biomes.Any(b => biomes.Any(biome => biome.Name == b.Name)))
+                .Where(v => BiomesMatch(v, biomes))
                 .ToList();
 
             if (!validVaults.Any())
@@ -69,6 +70,11 @@ namespace data_rogue_core.Maps.Generators
             }
 
             return validVaults;
+        }
+
+        private static bool BiomesMatch(IMap vault, IEnumerable<Biome> branchBiomes)
+        {
+            return !vault.Biomes.Any() || vault.Biomes.Any(b => branchBiomes.Any(biome => biome.Name == b.Name));
         }
 
         private void AddVaultConnectionToMap(IMap map, object vaultConnection)
@@ -86,7 +92,19 @@ namespace data_rogue_core.Maps.Generators
             throw new NotImplementedException();
         }
 
-        private VaultPlacement PlaceVault(IMap map, IMap vaultToPlace)
+        private VaultPlacement PlaceVault(IMap map, IMap selectedVault)
+        {
+            var placedVault = selectedVault.Clone();
+            placedVault.Spin();
+
+            var position = FindPosition(map, selectedVault);
+
+            map.PlaceSubMap(position, selectedVault);
+
+            return new VaultPlacement { Vault = placedVault, Position = position };
+        }
+
+        private Rectangle FindPosition(IMap map, IMap selectedVault)
         {
             throw new NotImplementedException();
         }
@@ -106,5 +124,6 @@ namespace data_rogue_core.Maps.Generators
     internal class VaultPlacement
     {
         public IMap Vault;
+        public Rectangle Position;
     }
 }

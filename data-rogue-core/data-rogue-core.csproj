@@ -135,6 +135,7 @@
     <Compile Include="Controls\BaseControl.cs" />
     <Compile Include="Controls\BaseStatsControl.cs" />
     <Compile Include="Controls\TargetingOverlayControl.cs" />
+    <Compile Include="EntityEngineSystem\VaultDataProvider.cs" />
     <Compile Include="EventSystem\Rules\Actions\ChangeMapEditorToolAction.cs" />
     <Compile Include="EventSystem\Rules\Actions\DebugMenuAction.cs" />
     <Compile Include="EventSystem\Rules\Actions\FollowPathAction.cs" />

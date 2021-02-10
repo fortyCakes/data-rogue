@@ -10,7 +10,8 @@ namespace data_rogue_core.Systems
             KeyBindingsDataProvider = new KeyBindingsDataProvider(),
             WorldEntityDataProvider = new WorldEntityDataProvider(),
             PlayerEntityDataProvider = new PlayerEntityDataProvider(),
-            GraphicsDataProvider = new SpriteSheetDataProvider()
+            GraphicsDataProvider = new SpriteSheetDataProvider(),
+            VaultDataProvider = new VaultDataProvider()
 
         };
 
@@ -19,5 +20,6 @@ namespace data_rogue_core.Systems
         public IEntityDataProvider WorldEntityDataProvider { get; set; }
         public IEntityDataProvider PlayerEntityDataProvider { get; set; }
         public IEntityDataProvider GraphicsDataProvider { get; set; }
+        public IEntityDataProvider VaultDataProvider { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using data_rogue_core.Components;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Systems;
@@ -45,5 +46,8 @@ namespace data_rogue_core.Maps
         void RemoveCommandsAt(MapCoordinate mapCoordinate);
         bool HasCommandAt(MapCoordinate mapCoordinate);
         bool IsFullyConnected();
+        IMap Clone();
+        void Spin();
+        void PlaceSubMap(Rectangle position, IMap selectedVault);
     }
 }

@@ -14,5 +14,6 @@ namespace data_rogue_core.Systems.Interfaces
 
         void Initialise();
         IMap TryGetMap(MapKey key);
+        void AddVault(IMap vault);
     }
 }

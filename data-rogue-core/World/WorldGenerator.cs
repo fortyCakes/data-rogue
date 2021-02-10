@@ -7,33 +7,59 @@ using System.Linq;
 using data_rogue_core.Activities;
 using data_rogue_core.Systems.Interfaces;
 using data_rogue_core.Forms.StaticForms;
+using System.IO;
+using System.Collections.Generic;
 
 namespace data_rogue_core
 {
     public class WorldGenerator : IWorldGenerator
     {
-        private readonly IEntityDataProvider worldEntityDataProvider;
-        private readonly IEntityDataProvider playerEntityDataProvider;
+        private readonly IEntityDataProvider _worldEntityDataProvider;
+        private readonly IEntityDataProvider _playerEntityDataProvider;
+        private readonly IEntityDataProvider _vaultDataProvider;
 
-        public WorldGenerator(IEntityDataProvider worldEntityDataProvider, IEntityDataProvider playerEntityDataProvider)
+        public WorldGenerator(IEntityDataProvider worldEntityDataProvider, IEntityDataProvider playerEntityDataProvider, IEntityDataProvider vaultDataProvider)
         {
-            this.worldEntityDataProvider = worldEntityDataProvider;
-            this.playerEntityDataProvider = playerEntityDataProvider;
+            _worldEntityDataProvider = worldEntityDataProvider;
+            _vaultDataProvider = vaultDataProvider;
+            _playerEntityDataProvider = playerEntityDataProvider;
         }
 
         public void Create(ISystemContainer systemContainer, CharacterCreationForm characterCreationForm)
         {
             InitialiseBasicSystems(systemContainer);
 
-            var worldData = worldEntityDataProvider.GetData();
-
-            EntitySerializer.DeserializeAll(systemContainer, worldData);
+            LoadEntityData(systemContainer);
+            LoadVaultData(systemContainer);
 
             var spawnPoint = CreateInitialMapAndGetSpawnPoint(systemContainer);
 
             AddPlayerToWorld(systemContainer, spawnPoint, characterCreationForm);
 
             StartGameplayRunning(systemContainer);
+        }
+
+        private void LoadVaultData(ISystemContainer systemContainer)
+        {
+            var vaultFiles = _vaultDataProvider.GetData();
+
+            foreach(var vaultFile in vaultFiles)
+            {
+                var mapData = File.ReadAllText(vaultFile);
+                var vaultName = Path.GetFileName(vaultFile);
+
+                var vault = MapSerializer.Deserialize(systemContainer, mapData, vaultName);
+                systemContainer.MapSystem.AddVault(vault);
+            }
+
+            
+        }
+
+        private void LoadEntityData(ISystemContainer systemContainer)
+        {
+            var worldData = _worldEntityDataProvider.GetData();
+
+            EntitySerializer.DeserializeAll(systemContainer, worldData);
         }
 
         private static void InitialiseBasicSystems(ISystemContainer systemContainer)
@@ -88,7 +114,7 @@ namespace data_rogue_core
 
         private void AddPlayerToWorld(ISystemContainer systemContainer, MapCoordinate spawnPoint, CharacterCreationForm form)
         {
-            var playerData = playerEntityDataProvider.GetData().Single();
+            var playerData = _playerEntityDataProvider.GetData().Single();
 
             var player = EntitySerializer.Deserialize(systemContainer, playerData);
             systemContainer.PositionSystem.SetPosition(player, spawnPoint);

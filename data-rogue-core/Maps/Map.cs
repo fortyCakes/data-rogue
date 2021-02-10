@@ -35,7 +35,7 @@ namespace data_rogue_core.Maps
         public int BottomY => Cells.Any() ? Cells.Max(c => c.Key.Y) : 0;
         public Vector Origin => new Vector(LeftX, TopY);
 
-        public IEnumerable<Biome> Biomes => throw new NotImplementedException();
+        public IEnumerable<Biome> Biomes => new List<Biome>();
 
         private IFovCache FovCache;
 
