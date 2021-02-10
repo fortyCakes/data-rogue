@@ -27,7 +27,12 @@ namespace data_rogue_core.IOSystems.BLTTiles
             return control.Position.Size;
         }
 
-        protected virtual List<IEntity> GetEntitiesAt(ISystemContainer systemContainer, IMap map, MapCoordinate mapCoordinate) => systemContainer.PositionSystem.EntitiesAt(mapCoordinate).ToList();
+        protected virtual List<IEntity> GetEntitiesAt(ISystemContainer systemContainer, IMap map, MapCoordinate mapCoordinate)
+        {
+            return systemContainer.PositionSystem.EntitiesAt(mapCoordinate)
+                .Where(e => !e.Has<CanAddToMap>() || e.Get<CanAddToMap>().VisibleDuringPlay)
+                .ToList();
+        }
 
         protected virtual void RenderMap(ISpriteManager spriteManager, IDataRogueControl mapConfiguration, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {

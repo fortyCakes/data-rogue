@@ -1,4 +1,24 @@
-﻿"Cell:Empty"
+﻿"Cell:Void"
+[Cell]
+[Appearance]
+Glyph: 0
+Color: #aaaaaa
+ZOrder: 0
+[SpriteAppearance]
+Bottom: void
+BottomConnect: void
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:Void
+Singleton: true
+[Memorable]
+[Description]
+Name: Void
+Detail: There's nothing here.
+
+"Cell:Empty"
 [Cell]
 [Appearance]
 Glyph: .

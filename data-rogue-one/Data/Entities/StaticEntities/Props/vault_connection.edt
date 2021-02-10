@@ -1,0 +1,15 @@
+﻿"Props:VaultConnection"
+[Prototype]
+Name: Props:VaultConnection
+Singleton: false
+[CanAddToMap]
+[Appearance]
+Glyph: V
+Color: #D37D2C
+ZOrder: 1
+[SpriteAppearance]
+Top: vault_connection
+[Position]
+[Description]
+Name: Vault Connection
+Detail: Connects out from this vault to the rest of the map.

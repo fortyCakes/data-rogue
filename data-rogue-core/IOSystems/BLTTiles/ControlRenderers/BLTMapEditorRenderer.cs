@@ -19,7 +19,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
             var entities = GetEntitiesForMapGenCommands(systemContainer, commands);
 
-            entities.AddRange(base.GetEntitiesAt(systemContainer, map, mapCoordinate));
+            entities.AddRange(systemContainer.PositionSystem.EntitiesAt(mapCoordinate));
 
             return entities;
         }

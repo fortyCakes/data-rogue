@@ -288,6 +288,13 @@ SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
+Name: void
+Path: Images/Sprites/Tiles/void.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
 Name: grass_1
 Path: Images/Sprites/Tiles/grass_1.png
 Type: TilesetBox
@@ -620,6 +627,13 @@ Path: Images/Sprites/UITiles/bar_full_right.png
 Type: SingleSprite
 SpriteWidth: 4
 SpriteHeight: 8
+Scaling: 2
+[SpriteSheet]
+Name: vault_connection
+Path: Images/Sprites/Entities/Misc/vault_connection.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
 Name: targetable

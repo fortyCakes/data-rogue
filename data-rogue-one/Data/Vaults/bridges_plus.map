@@ -1,0 +1,33 @@
+Map:"bridges_plus"
+default:Cell:Void
+-15,-8
+-6,-8: Entity(Props:VaultConnection)
+-2,-8: Entity(Props:VaultConnection)
+4,-2: Entity(Props:VaultConnection)
+4,2: Entity(Props:VaultConnection)
+-2,8: Entity(Props:VaultConnection)
+-6,8: Entity(Props:VaultConnection)
+-12,2: Entity(Props:VaultConnection)
+-12,-2: Entity(Props:VaultConnection)
+0:Cell:Void
+.:Cell:Empty
+#:Cell:Wall
+~:Cell:Water
+,:Cell:WoodFloorOrange
+   ######.###.######
+   #.......~.......#
+   #.......,.......#
+   #.......~.......#
+   #.......~.......#
+   #.......~.......#
+   ........,........
+   #.......~.......#
+000#~,~~~,~~~,~~~,~#
+   #.......~.......#
+   ........,........
+   #.......~.......#
+   #.......~.......#
+   #.......~.......#
+   #.......,.......#
+   #.......~.......#
+   ######.###.######

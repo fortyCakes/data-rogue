@@ -89,7 +89,7 @@ namespace data_rogue_core.Activities
         public void NewMap()
         {
             _systemContainer.MapSystem.Initialise();
-            Map = new Map("NewMap", _systemContainer.PrototypeSystem.Get("Cell:Empty"));
+            Map = new Map("NewMap", _systemContainer.PrototypeSystem.Get("Cell:Void"));
             _systemContainer.MapSystem.MapCollection.Add(Map.MapKey, Map);
         }
 
