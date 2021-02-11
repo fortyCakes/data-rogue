@@ -399,6 +399,9 @@
     <Compile Include="Maps\FovCache.cs" />
     <Compile Include="Maps\Generators\BasicDungeonMapGenerator.cs" />
     <Compile Include="Maps\Generators\VaultBasedDungeonMapGenerator.cs" />
+    <Compile Include="Maps\Generators\VaultConnectionPoint.cs" />
+    <Compile Include="Maps\Generators\VaultPlacement.cs" />
+    <Compile Include="Maps\Generators\VaultPossibleConnection.cs" />
     <Compile Include="Maps\IFovCache.cs" />
     <Compile Include="Maps\IMap.cs" />
     <Compile Include="Maps\MapGenCommands\EntityStackCommandExecutor.cs" />

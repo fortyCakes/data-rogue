@@ -13,10 +13,11 @@ namespace data_rogue_core
         public string FloorCell = "Cell:Empty";
         public string WallCell = "Cell:Wall";
         public int NumberOfVaults = 10;
+        public int MaxTries = 50;
 
         public override List<IMap> Generate(ISystemContainer systemContainer, Branch branchDefinition, IEntity branch)
         {
-            var mapgen = new VaultBasedDungeonMapGenerator(systemContainer, FloorCell, WallCell, NumberOfVaults, branch);
+            var mapgen = new VaultBasedDungeonMapGenerator(systemContainer, FloorCell, WallCell, NumberOfVaults, MaxTries, branch);
 
             var generatedBranchMaps = new List<IMap>();
 

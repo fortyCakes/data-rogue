@@ -1,0 +1,19 @@
+Map:"the_donut"
+default:Cell:Void
+-9,-3
+-5,-3: Entity(Props:VaultConnection)
+-1,1: Entity(Props:VaultConnection)
+-5,5: Entity(Props:VaultConnection)
+-9,1: Entity(Props:VaultConnection)
+0:Cell:Void
+.:Cell:Empty
+#:Cell:Wall
+####.####
+#.......#
+#.......#
+#..###..#
+...###...
+#..###..#
+#.......#
+#.......#
+####.####

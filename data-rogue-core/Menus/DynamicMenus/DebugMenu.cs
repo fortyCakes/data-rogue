@@ -47,6 +47,9 @@ namespace data_rogue_core.Menus.DynamicMenus
                 case "God Mode":
                     systemContainer.EntityEngine.AddComponent(systemContainer.PlayerSystem.Player, new GodMode());
                     break;
+                case "Toggle NoClip":
+                    systemContainer.PlayerSystem.Player.Get<Physical>().Passable = !systemContainer.PlayerSystem.Player.Get<Physical>().Passable;
+                    break;
                 default:
                     throw new ApplicationException($"Unhandled menu action {item.Text} in DebugMenu.");
             }

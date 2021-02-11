@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using data_rogue_core.Components;
 using data_rogue_core.EntityEngineSystem;
@@ -248,9 +249,34 @@ namespace data_rogue_core.Maps
             throw new ApplicationException("MapCoordinate is not for this map.");
         }
 
-        public bool IsFullyConnected()
+        public IEnumerable<IEnumerable<MapCoordinate>> GetSections()
         {
             throw new NotImplementedException(); //TODO
+        }
+
+        public IMap Clone()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Spin(IRandom random)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void PlaceSubMap(MapCoordinate position, IMap selectedVault)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Size GetSize()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsEmpty(MapCoordinate coordinate, Size vaultSize)
+        {
+            throw new NotImplementedException();
         }
     }
 }

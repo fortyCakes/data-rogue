@@ -45,9 +45,13 @@ namespace data_rogue_core.Maps
         void RemoveCommandsAt(int x, int y);
         void RemoveCommandsAt(MapCoordinate mapCoordinate);
         bool HasCommandAt(MapCoordinate mapCoordinate);
-        bool IsFullyConnected();
+
+
+        IEnumerable<IEnumerable<MapCoordinate>> GetSections();
         IMap Clone();
-        void Spin();
-        void PlaceSubMap(Rectangle position, IMap selectedVault);
+        void Spin(IRandom random);
+        void PlaceSubMap(MapCoordinate position, IMap selectedVault);
+        Size GetSize();
+        bool IsEmpty(MapCoordinate coordinate, Size vaultSize);
     }
 }

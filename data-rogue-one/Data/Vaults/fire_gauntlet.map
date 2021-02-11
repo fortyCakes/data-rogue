@@ -1,0 +1,15 @@
+Map:"fire_gauntlet"
+default:Cell:Void
+-9,-6
+-9,-3: Entity(Props:VaultConnection)
+8,-3: Entity(Props:Fire)
+0:Cell:Void
+.:Cell:Empty
+#:Cell:Wall
+####################
+#....###....###....#
+#....###....###....#
+...................#
+#....###....###....#
+#....###....###....#
+####################

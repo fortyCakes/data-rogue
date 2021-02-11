@@ -79,6 +79,7 @@
     <Compile Include="EventSystem\EventSystemTests.cs" />
     <Compile Include="Maps\EntityCommandExecutorTests.cs" />
     <Compile Include="Maps\FovCacheTests.cs" />
+    <Compile Include="Maps\Generators\VaultPossibleConnectionTests.cs" />
     <Compile Include="Maps\MapCoordinateTests.cs" />
     <Compile Include="Maps\MapKeyTests.cs" />
     <Compile Include="Maps\MapSerializerTests.cs" />
@@ -142,6 +143,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BLTWrapper\BLTWrapper.csproj">
+      <Project>{81288AB7-EF21-4660-86E4-A477DEB7C75C}</Project>
+      <Name>BLTWrapper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\data-rogue-core\data-rogue-core.csproj">
       <Project>{2c899088-9f23-4411-bad7-e175a886c67c}</Project>
       <Name>data-rogue-core</Name>

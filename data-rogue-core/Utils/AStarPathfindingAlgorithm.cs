@@ -9,14 +9,18 @@ namespace data_rogue_core.Utils
 
     public class AStarPathfindingAlgorithm : IPathfindingAlgorithm
     {
-        public bool AllowDiagonalMovement { get; }
+        private Func<IMap, AStarLocation, bool> _isPassable;
 
-        public AStarPathfindingAlgorithm(bool AllowDiagonalMovement = true)
+        public bool _allowDiagonalMovement { get; }
+
+        public AStarPathfindingAlgorithm(bool allowDiagonalMovement = true, Func<IMap, AStarLocation, bool> passableFunction = null)
         {
-            this.AllowDiagonalMovement = AllowDiagonalMovement;
+            _allowDiagonalMovement = allowDiagonalMovement;
+
+            _isPassable = passableFunction ?? IsPassable;
         }
 
-        private class AStarLocation
+        public class AStarLocation
         {
             public AStarLocation Parent;
 
@@ -119,7 +123,7 @@ namespace data_rogue_core.Utils
 
             List<AStarLocation> proposedLocations;
 
-            if (AllowDiagonalMovement)
+            if (_allowDiagonalMovement)
             {
                 proposedLocations = new List<AStarLocation>()
                 {
