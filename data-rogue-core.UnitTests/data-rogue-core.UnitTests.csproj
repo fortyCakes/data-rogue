@@ -83,6 +83,7 @@
     <Compile Include="Maps\MapCoordinateTests.cs" />
     <Compile Include="Maps\MapKeyTests.cs" />
     <Compile Include="Maps\MapSerializerTests.cs" />
+    <Compile Include="Maps\MapTests.cs" />
     <Compile Include="Maps\MatrixTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EntityEngineSystem\EntityEngineTests.cs" />
