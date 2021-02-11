@@ -301,6 +301,12 @@
     <None Include="Data\Vaults\bridges_plus.map">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Vaults\fire_gauntlet.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Vaults\the_donut.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\Vaults\three_pillars.map">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

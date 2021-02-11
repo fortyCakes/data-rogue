@@ -50,6 +50,15 @@ namespace data_rogue_core.Menus.DynamicMenus
                 case "Toggle NoClip":
                     systemContainer.PlayerSystem.Player.Get<Physical>().Passable = !systemContainer.PlayerSystem.Player.Get<Physical>().Passable;
                     break;
+                case "Reveal Map":
+                    var map = systemContainer.MapSystem.MapCollection[systemContainer.RendererSystem.CameraPosition.Key];
+
+                    foreach(var cell in map.Cells)
+                    {
+                        map.SetSeen(cell.Key);
+                    }
+
+                    break;
                 default:
                     throw new ApplicationException($"Unhandled menu action {item.Text} in DebugMenu.");
             }
@@ -108,6 +117,8 @@ namespace data_rogue_core.Menus.DynamicMenus
             var setCell = new MenuItem("SetMapCell", null);
 
             var godmode = new MenuItem("God Mode", null);
+            var noclip = new MenuItem("Toggle NoClip", null);
+            var seeAll = new MenuItem("Reveal Map");
 
             var cancelItem = new MenuItem("Cancel", null);
 
@@ -117,6 +128,8 @@ namespace data_rogue_core.Menus.DynamicMenus
                 learn,
                 setCell,
                 godmode,
+                noclip,
+                seeAll,
                 cancelItem
             };
         }

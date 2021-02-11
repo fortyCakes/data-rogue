@@ -14,12 +14,7 @@ namespace data_rogue_core.Maps
             return $"{Vector.X},{Vector.Y}: {MapGenCommandType}({Parameters})";
         }
 
-        internal MapGenCommand Clone()
-        {
-            throw new NotImplementedException();
-        }
-
-        object ICloneable.Clone()
+        public object Clone()
         {
             return new MapGenCommand
             {

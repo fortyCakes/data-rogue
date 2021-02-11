@@ -45,10 +45,7 @@ namespace data_rogue_core
 
             foreach(var vaultFile in vaultFiles)
             {
-                var mapData = File.ReadAllText(vaultFile);
-                var vaultName = Path.GetFileName(vaultFile);
-
-                var vault = MapSerializer.Deserialize(systemContainer, mapData, vaultName);
+                var vault = MapSerializer.Deserialize(systemContainer, vaultFile);
                 systemContainer.MapSystem.AddVault(vault);
             }
 

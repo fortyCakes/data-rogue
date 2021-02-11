@@ -8,7 +8,7 @@ namespace data_rogue_core
     {
         public override List<string> GetData()
         {
-            return Load("Data/Vaults").ToList();
+            return Load("Data/Vaults", "*.map").ToList();
         }
     }
 }

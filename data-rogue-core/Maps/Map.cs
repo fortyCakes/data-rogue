@@ -278,7 +278,7 @@ namespace data_rogue_core.Maps
 
             clone.Cells = new Dictionary<MapCoordinate, IEntity>(Cells);
             clone.SeenCoordinates = new HashSet<MapCoordinate>(SeenCoordinates);
-            clone.MapGenCommands = new List<MapGenCommand>(MapGenCommands.Select(c => c.Clone()));
+            clone.MapGenCommands = new List<MapGenCommand>(MapGenCommands.Select(c => (MapGenCommand)c.Clone()));
             clone.Vaults = new List<MapKey>(Vaults);
             clone.Biomes = new List<Biome>(Biomes);
 
@@ -296,6 +296,11 @@ namespace data_rogue_core.Maps
                 var newCoordinate = new MapCoordinate(MapKey, randomRotation * cell.Key.ToVector());
 
                 newLocations.Add(newCoordinate, cell.Value);
+            }
+
+            foreach(var mapGenCommand in MapGenCommands)
+            {
+                mapGenCommand.Vector = randomRotation * mapGenCommand.Vector;
             }
 
             Cells = newLocations;

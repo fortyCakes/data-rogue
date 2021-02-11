@@ -106,7 +106,7 @@ namespace data_rogue_core.Maps.Generators
             var mapSections = map.GetSections().ToList();
             var attempts = 0;
 
-            while (mapSections.Count() > 1 && attempts++ < 1000)
+            while (mapSections.Count() > 1 && attempts++ < 10)
             {
                 var firstSection = random.PickOne(mapSections);
                 var secondSection = random.PickOne(mapSections.Except(new[] { firstSection }).ToList());
@@ -121,14 +121,20 @@ namespace data_rogue_core.Maps.Generators
         {
             var connectionPoints = vaultPlacements.SelectMany(v => v.VaultConnectionPoints.Select(cp => cp.Coordinate));
 
-            var firstSectionConnectionPoint = random.PickOne(firstSection.Intersect(connectionPoints).ToList());
-            var secondSectionConnectionPoint = random.PickOne(secondSection.Intersect(connectionPoints).ToList());
+            var firstSectionValidConnections = firstSection.Intersect(connectionPoints).ToList();
+            var secondSectionValidConnections = secondSection.Intersect(connectionPoints).ToList();
 
-            var path = _tunnelPathfinding.Path(map, firstSectionConnectionPoint, secondSectionConnectionPoint);
-
-            if (path != null && path.Any())
+            if (firstSectionValidConnections.Any() && secondSectionValidConnections.Any())
             {
-                CarveTunnel(map, path);
+                var firstSectionConnectionPoint = random.PickOne(firstSectionValidConnections);
+                var secondSectionConnectionPoint = random.PickOne(secondSectionValidConnections);
+
+                var path = _tunnelPathfinding.Path(map, firstSectionConnectionPoint, secondSectionConnectionPoint);
+
+                if (path != null && path.Any())
+                {
+                    CarveTunnel(map, path);
+                }
             }
         }
 
