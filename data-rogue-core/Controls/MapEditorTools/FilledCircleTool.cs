@@ -33,7 +33,7 @@ namespace data_rogue_core.Controls.MapEditorTools
 
             Func<MapCoordinate, bool> canFillInto = (coordinate) => { return !onCircleCells.Contains(coordinate); };
 
-            return FillTool.FloodFill(midPoint, canFillInto);
+            return FloodFillHelper.FloodFill(midPoint, canFillInto);
         }
     }
 }
