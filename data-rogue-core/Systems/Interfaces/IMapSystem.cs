@@ -7,7 +7,7 @@ namespace data_rogue_core.Systems.Interfaces
 
     public interface IMapSystem
     {
-        MapCollection MapCollection { get; }
+        Atlas MapCollection { get; }
         IEnumerable<IMap> Vaults { get; }
 
         IEntity CellAt(MapCoordinate coordinate);

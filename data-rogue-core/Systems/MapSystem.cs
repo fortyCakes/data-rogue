@@ -12,11 +12,11 @@ namespace data_rogue_core.Systems
 
         public void Initialise()
         {
-            MapCollection = new MapCollection();
+            MapCollection = new Atlas();
             _vaults = new List<IMap>();
         }
 
-        public MapCollection MapCollection { get; private set; }
+        public Atlas MapCollection { get; private set; }
 
         public IEnumerable<IMap> Vaults => _vaults;
 

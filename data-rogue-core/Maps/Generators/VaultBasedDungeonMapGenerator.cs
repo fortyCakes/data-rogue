@@ -223,7 +223,7 @@ namespace data_rogue_core.Maps.Generators
 
         private VaultPlacement PlaceVault(IMap map, IMap selectedVault, IRandom random)
         {
-            var placedVault = selectedVault.Clone();
+            var placedVault = (IMap)selectedVault.Clone();
             placedVault.Spin(random);
 
             var position = FindPosition(map, selectedVault, random);
@@ -247,7 +247,7 @@ namespace data_rogue_core.Maps.Generators
             {
                 var coordinate = PickRandomCoordinate(map, random, vaultSize, i);
 
-                if (map.IsEmpty(coordinate, vaultSize))
+                if (map.IsLocationEmpty(coordinate, vaultSize))
                 {
                     return coordinate;
                 }

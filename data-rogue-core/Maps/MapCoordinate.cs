@@ -121,6 +121,19 @@ namespace data_rogue_core.Maps
             return newCoordinate;
         }
 
+        public static MapCoordinate operator -(MapCoordinate position, Vector vector)
+        {
+            if (position == null) return null;
+
+            var newCoordinate = new MapCoordinate(
+                    mapKey: position.Key,
+                    x: position.X - vector.X,
+                    y: position.Y - vector.Y
+                );
+
+            return newCoordinate;
+        }
+
         public static Vector operator -(MapCoordinate from, MapCoordinate to)
         {
             if (from == null || to == null)

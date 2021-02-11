@@ -1,6 +1,8 @@
-﻿namespace data_rogue_core.Maps
+﻿using System;
+
+namespace data_rogue_core.Maps
 {
-    public class MapGenCommand
+    public class MapGenCommand : ICloneable
     {
         public MapGenCommandType MapGenCommandType { get; set; }
 
@@ -10,6 +12,21 @@
         public override string ToString()
         {
             return $"{Vector.X},{Vector.Y}: {MapGenCommandType}({Parameters})";
+        }
+
+        internal MapGenCommand Clone()
+        {
+            throw new NotImplementedException();
+        }
+
+        object ICloneable.Clone()
+        {
+            return new MapGenCommand
+            {
+                MapGenCommandType = MapGenCommandType,
+                Parameters = Parameters,
+                Vector = new Vector(Vector.X, Vector.Y)
+            };
         }
     }
 

@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace data_rogue_core.Maps
 {
-    public class MapCollection : Dictionary<MapKey, IMap>
+    public class Atlas : Dictionary<MapKey, IMap>
     {
         public void AddMap(IMap map)
         {

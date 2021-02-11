@@ -396,6 +396,7 @@
     <Compile Include="IOSystems\RLNetConsole\ControlRenderers\RLNetVisibleEnemiesDisplayer.cs" />
     <Compile Include="IOSystems\RLNetConsole\ControlRenderers\RLNetWealthDisplayer.cs" />
     <Compile Include="IOSystems\StatsConfiguration.cs" />
+    <Compile Include="Maps\Atlas.cs" />
     <Compile Include="Maps\FovCache.cs" />
     <Compile Include="Maps\Generators\BasicDungeonMapGenerator.cs" />
     <Compile Include="Maps\Generators\VaultBasedDungeonMapGenerator.cs" />
@@ -439,6 +440,7 @@
     <Compile Include="Systems\ParticleSystem.cs" />
     <Compile Include="Systems\SoundSystem.cs" />
     <Compile Include="Utils\BresenhamLineDrawingAlgorithm.cs" />
+    <Compile Include="Utils\FloodFillHelper.cs" />
     <Compile Include="Utils\ILineDrawingAlgorithm.cs" />
     <Compile Include="Utils\IStopwatch.cs" />
     <Compile Include="Systems\MapSystem.cs" />
@@ -508,7 +510,6 @@
     <Compile Include="EventSystem\EventRuleSystem.cs" />
     <Compile Include="EventSystem\RuleBook.cs" />
     <Compile Include="EventSystem\Rules\PhysicalCollisionRule.cs" />
-    <Compile Include="Maps\MapCollection.cs" />
     <Compile Include="Menus\Menu.cs" />
     <Compile Include="Menus\MenuItem.cs" />
     <Compile Include="Activities\ActivityStack.cs" />

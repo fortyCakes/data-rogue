@@ -27,7 +27,7 @@ namespace data_rogue_core.UnitTests.Systems
         private IPlayerSystem _playerSystem;
         private ITargetingSystem _targetingSystem;
         private IMapSystem _mapSystem;
-        private MapCollection _mapCollection;
+        private Atlas _mapCollection;
         private IMap _map;
         private MapCoordinate UNUSED;
         private MapCoordinate _callbackCoordinate;
@@ -45,7 +45,7 @@ namespace data_rogue_core.UnitTests.Systems
             _playerSystem = Substitute.For<IPlayerSystem>();
             _targetingSystem = Substitute.For<ITargetingSystem>();
             _mapSystem = Substitute.For<IMapSystem>();
-            _mapCollection = new MapCollection();
+            _mapCollection = new Atlas();
             _map = Substitute.For<IMap>();
             _systemContainer.PositionSystem.ReturnsForAnyArgs(_positionSystem);
             _systemContainer.PlayerSystem.ReturnsForAnyArgs(_playerSystem);

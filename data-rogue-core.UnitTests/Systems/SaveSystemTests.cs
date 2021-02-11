@@ -22,7 +22,7 @@ namespace data_rogue_core.UnitTests.Systems
         private IWorldGenerator _worldGenerator;
         private ISaveSystem _saveSystem;
         private IMapSystem _mapSystem;
-        private MapCollection _mapCollection;
+        private Atlas _mapCollection;
         private IMessageSystem _messageSystem;
         private List<Message> _messages;
         private ITimeSystem _timeSystem;
@@ -40,7 +40,7 @@ namespace data_rogue_core.UnitTests.Systems
 
             _mapSystem = Substitute.For<IMapSystem>();
             _systemContainer.MapSystem.Returns(_mapSystem);
-            _mapCollection = new MapCollection();
+            _mapCollection = new Atlas();
             _mapSystem.MapCollection.Returns(_mapCollection);
 
             _messageSystem = Substitute.For<IMessageSystem>();

@@ -7,7 +7,7 @@ using data_rogue_core.Systems;
 
 namespace data_rogue_core.Maps
 {
-    public interface IMap
+    public interface IMap : ICloneable
     {
         int BottomY { get; }
         IEntity DefaultCell { get; set; }
@@ -48,10 +48,9 @@ namespace data_rogue_core.Maps
 
 
         IEnumerable<IEnumerable<MapCoordinate>> GetSections();
-        IMap Clone();
         void Spin(IRandom random);
         void PlaceSubMap(MapCoordinate position, IMap selectedVault);
         Size GetSize();
-        bool IsEmpty(MapCoordinate coordinate, Size vaultSize);
+        bool IsLocationEmpty(MapCoordinate coordinate, Size vaultSize);
     }
 }

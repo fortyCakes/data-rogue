@@ -5,10 +5,11 @@ using System.Linq;
 using data_rogue_core.Components;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Systems;
+using data_rogue_core.Utils;
 
 namespace data_rogue_core.Maps
 {
-    public class Map : IMap
+    public class Map : IMap, ICloneable
     {
         public MapKey MapKey { get; set; }
 
@@ -21,6 +22,10 @@ namespace data_rogue_core.Maps
         public List<MapGenCommand> MapGenCommands { get; set; } = new List<MapGenCommand>();
 
         public IEnumerable<MapKey> Vaults { get; set; } = new List<MapKey>();
+
+        public IEnumerable<Biome> Biomes { get; set; } = new List<Biome>();
+
+        private IFovCache FovCache;
 
         public uint DefaultCellId
         {
@@ -35,10 +40,6 @@ namespace data_rogue_core.Maps
         public int RightX => Cells.Any() ? Cells.Max(c => c.Key.X) : 0;
         public int BottomY => Cells.Any() ? Cells.Max(c => c.Key.Y) : 0;
         public Vector Origin => new Vector(LeftX, TopY);
-
-        public IEnumerable<Biome> Biomes => new List<Biome>();
-
-        private IFovCache FovCache;
 
         public Map(string key, IEntity defaultCell)
         {
@@ -251,32 +252,87 @@ namespace data_rogue_core.Maps
 
         public IEnumerable<IEnumerable<MapCoordinate>> GetSections()
         {
-            throw new NotImplementedException(); //TODO
+            var uncheckedCells = new List<MapCoordinate>(Cells.Keys);
+            var sections = new List<IEnumerable<MapCoordinate>>();
+
+            while(uncheckedCells.Any())
+            {
+                var startCell = uncheckedCells.First();
+
+                var section = FloodFillHelper.FloodFill(startCell, CellExists, 100000);
+
+                sections.Add(section);
+
+                foreach(var cellToRemove in section)
+                {
+                    uncheckedCells.Remove(cellToRemove);
+                }
+            }
+
+            return sections;
         }
 
-        public IMap Clone()
+        public object Clone()
         {
-            throw new NotImplementedException();
+            var clone = new Map(MapKey.Key, DefaultCell);
+
+            clone.Cells = new Dictionary<MapCoordinate, IEntity>(Cells);
+            clone.SeenCoordinates = new HashSet<MapCoordinate>(SeenCoordinates);
+            clone.MapGenCommands = new List<MapGenCommand>(MapGenCommands.Select(c => c.Clone()));
+            clone.Vaults = new List<MapKey>(Vaults);
+            clone.Biomes = new List<Biome>(Biomes);
+
+            return clone;
         }
 
         public void Spin(IRandom random)
         {
-            throw new NotImplementedException();
+            var randomRotation = random.PickOneFrom(Matrix.Identity, Matrix.Rotate90, Matrix.Rotate180, Matrix.Rotate270);
+
+            var newLocations = new Dictionary<MapCoordinate, IEntity>();
+
+            foreach(var cell in Cells)
+            {
+                var newCoordinate = new MapCoordinate(MapKey, randomRotation * cell.Key.ToVector());
+
+                newLocations.Add(newCoordinate, cell.Value);
+            }
+
+            Cells = newLocations;
         }
 
         public void PlaceSubMap(MapCoordinate position, IMap selectedVault)
         {
-            throw new NotImplementedException();
+            position = position - selectedVault.Origin;
+
+            foreach(var cell in selectedVault.Cells)
+            {
+                SetCell(position + cell.Key.ToVector(), cell.Value);
+            }
+
+            foreach(var mapCommand in selectedVault.MapGenCommands)
+            {
+                mapCommand.Vector += position.ToVector();
+                MapGenCommands.Add(mapCommand);
+            }
         }
 
         public Size GetSize()
         {
-            throw new NotImplementedException();
+            return new Size(RightX - LeftX, BottomY - TopY);
         }
 
-        public bool IsEmpty(MapCoordinate coordinate, Size vaultSize)
+        public bool IsLocationEmpty(MapCoordinate coordinate, Size size)
         {
-            throw new NotImplementedException();
+            for(int x = coordinate.X; x <= coordinate.X + size.Width; x++)
+            {
+                for (int y = coordinate.Y; y <= coordinate.Y + size.Height; y++)
+                {
+                    if (CellExists(x, y)) return false;
+                }
+            }
+
+            return true;
         }
     }
 }

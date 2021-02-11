@@ -232,7 +232,7 @@ namespace data_rogue_core.UnitTests.Systems
             pathfindingAlgorithm = Substitute.For<IPathfindingAlgorithm>();
             IEntityEngine entityEngine = Substitute.For<IEntityEngine>();
             IMapSystem mapSystem = Substitute.For<IMapSystem>();
-            mapSystem.MapCollection.Returns(new MapCollection() {{new MapKey(TEST_MAP_NAME), Substitute.For<IMap>()}});
+            mapSystem.MapCollection.Returns(new Atlas() {{new MapKey(TEST_MAP_NAME), Substitute.For<IMap>()}});
             var testPositionSystem = new PositionSystem(mapSystem, entityEngine, pathfindingAlgorithm);
             return testPositionSystem;
         }
