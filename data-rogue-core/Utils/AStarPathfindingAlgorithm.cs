@@ -9,6 +9,13 @@ namespace data_rogue_core.Utils
 
     public class AStarPathfindingAlgorithm : IPathfindingAlgorithm
     {
+        public bool AllowDiagonalMovement { get; }
+
+        public AStarPathfindingAlgorithm(bool AllowDiagonalMovement = true)
+        {
+            this.AllowDiagonalMovement = AllowDiagonalMovement;
+        }
+
         private class AStarLocation
         {
             public AStarLocation Parent;
@@ -105,22 +112,37 @@ namespace data_rogue_core.Utils
         }
         
 
-        private static IEnumerable<AStarLocation> GetPassableAdjacentSquares(AStarLocation current, IMap map)
+        private IEnumerable<AStarLocation> GetPassableAdjacentSquares(AStarLocation current, IMap map)
         {
             var x = current.X;
             var y = current.Y;
 
-            var proposedLocations = new List<AStarLocation>()
+            List<AStarLocation> proposedLocations;
+
+            if (AllowDiagonalMovement)
             {
-                new AStarLocation { X = x, Y = y - 1 },
-                new AStarLocation { X = x, Y = y + 1 },
-                new AStarLocation { X = x - 1, Y = y },
-                new AStarLocation { X = x + 1, Y = y },
-                new AStarLocation { X = x + 1, Y = y - 1 },
-                new AStarLocation { X = x - 1, Y = y + 1 },
-                new AStarLocation { X = x - 1, Y = y - 1 },
-                new AStarLocation { X = x + 1, Y = y + 1 },
-            };
+                proposedLocations = new List<AStarLocation>()
+                {
+                    new AStarLocation { X = x, Y = y - 1 },
+                    new AStarLocation { X = x, Y = y + 1 },
+                    new AStarLocation { X = x - 1, Y = y },
+                    new AStarLocation { X = x + 1, Y = y },
+                    new AStarLocation { X = x + 1, Y = y - 1 },
+                    new AStarLocation { X = x - 1, Y = y + 1 },
+                    new AStarLocation { X = x - 1, Y = y - 1 },
+                    new AStarLocation { X = x + 1, Y = y + 1 },
+                };
+            }
+            else
+            {
+                proposedLocations = new List<AStarLocation>()
+                {
+                    new AStarLocation { X = x, Y = y - 1 },
+                    new AStarLocation { X = x, Y = y + 1 },
+                    new AStarLocation { X = x - 1, Y = y },
+                    new AStarLocation { X = x + 1, Y = y }
+                };
+            }
 
             return proposedLocations.Where(loc => IsPassable(map, loc));
         }
