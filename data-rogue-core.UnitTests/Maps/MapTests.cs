@@ -31,7 +31,7 @@ namespace data_rogue_core.UnitTests.Maps
         }
 
         [Test]
-        public void SubMap_OffCentre_PlacesCorrectly()
+        public void PlaceSubMap_OffCentre_PlacesCorrectly()
         {
             var map = new Map("Main", _defaultCell);
             var subMap = new Map("Vault", _voidCell);
@@ -50,6 +50,34 @@ namespace data_rogue_core.UnitTests.Maps
             map.CellAt(10, 12).Should().Be(_floorCell);
 
             map.MapGenCommands.Single().Vector.Should().Be(new Vector(10, 12));
+
+        }
+
+        [Test]
+        public void Rotate_By90_RotatesCorrectly()
+        {
+            var subMap = new Map("Vault", _voidCell);
+
+            subMap.SetCell(3, 0, _floorCell);
+            subMap.SetCell(4, 0, _floorCell);
+            subMap.SetCell(5, 0, _floorCell);
+            subMap.SetCell(3, 5, _floorCell);
+            subMap.MapGenCommands.Add(new MapGenCommand { MapGenCommandType = MapGenCommandType.Entity, Parameters = "Test", Vector = new Vector(3, 5) });
+
+            subMap.Rotate(Matrix.Rotate90);
+
+            subMap.CellAt(0, 3).Should().Be(_floorCell);
+            subMap.CellAt(3, 0).Should().Be(_voidCell);
+            subMap.CellAt(0, 4).Should().Be(_floorCell);
+            subMap.CellAt(4, 0).Should().Be(_voidCell);
+            subMap.CellAt(0, 5).Should().Be(_floorCell);
+            subMap.CellAt(5, 0).Should().Be(_voidCell);
+
+            subMap.CellAt(-5, 3).Should().Be(_floorCell);
+
+            var rotatedVector = new Vector(-5, 3);
+
+            subMap.MapGenCommands.Single().Vector.Should().Be(rotatedVector);
 
         }
     }

@@ -6,9 +6,9 @@ namespace data_rogue_core.Maps.Generators
     {
         public VaultConnectionPoint(MapCoordinate position, Vector vector, IMap vault)
         {
-            Coordinate = new MapCoordinate(position.Key, position.X + vector.X, position.Y + vector.Y);
-
             var origin = vault.Origin;
+            Coordinate = new MapCoordinate(position.Key, position.X - origin.X + vector.X, position.Y - origin.Y + vector.Y);
+
             var size = vault.GetSize();
 
             if (vector.X == origin.X) Facing = TileDirections.Left;

@@ -10,14 +10,17 @@ namespace data_rogue_core.Utils
     public class AStarPathfindingAlgorithm : IPathfindingAlgorithm
     {
         private Func<IMap, AStarLocation, bool> _isPassable;
+        private int? _cutoff;
 
         public bool _allowDiagonalMovement { get; }
 
-        public AStarPathfindingAlgorithm(bool allowDiagonalMovement = true, Func<IMap, AStarLocation, bool> passableFunction = null)
+        public AStarPathfindingAlgorithm(bool allowDiagonalMovement = true, Func<IMap, AStarLocation, bool> passableFunction = null, int? cutoff = null)
         {
             _allowDiagonalMovement = allowDiagonalMovement;
 
             _isPassable = passableFunction ?? IsPassable;
+
+            _cutoff = cutoff;
         }
 
         public class AStarLocation
@@ -56,6 +59,12 @@ namespace data_rogue_core.Utils
                 current = openList.OrderBy(l => l.LocationScore).First();
 
                 closedList.Add(current);
+
+                if (_cutoff.HasValue && closedList.Count() > _cutoff)
+                {
+                    break;
+                }
+
                 openList.Remove(current);
 
                 if (IsSameLocation(current, target))
@@ -63,7 +72,7 @@ namespace data_rogue_core.Utils
                     break;
                 }
 
-                var adjacentSquares = GetPassableAdjacentSquares(current, map);
+                var adjacentSquares = GetPassableAdjacentSquares(current, map, target);
                 distanceFromStart = current.DistanceFromStart + 1;
 
                 foreach (var adjacentSquare in adjacentSquares)
@@ -116,7 +125,7 @@ namespace data_rogue_core.Utils
         }
         
 
-        private IEnumerable<AStarLocation> GetPassableAdjacentSquares(AStarLocation current, IMap map)
+        private IEnumerable<AStarLocation> GetPassableAdjacentSquares(AStarLocation current, IMap map, AStarLocation target)
         {
             var x = current.X;
             var y = current.Y;
@@ -148,7 +157,7 @@ namespace data_rogue_core.Utils
                 };
             }
 
-            return proposedLocations.Where(loc => IsPassable(map, loc));
+            return proposedLocations.Where(loc => _isPassable(map, loc) || IsSameLocation(loc, target));
         }
 
         private static bool IsPassable(IMap map, AStarLocation location)

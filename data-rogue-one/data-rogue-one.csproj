@@ -298,6 +298,7 @@
     <None Include="Data\StaticMaps\town.map">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Vaults\breakin_cave.map" />
     <None Include="Data\Vaults\bridges_plus.map">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

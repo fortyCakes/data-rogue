@@ -3,6 +3,7 @@
 Name: Props:VaultConnection
 Singleton: false
 [CanAddToMap]
+VisibleDuringPlay: false
 [Appearance]
 Glyph: V
 Color: #D37D2C

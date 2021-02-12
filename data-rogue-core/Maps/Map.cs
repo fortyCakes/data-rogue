@@ -289,18 +289,23 @@ namespace data_rogue_core.Maps
         {
             var randomRotation = random.PickOneFrom(Matrix.Identity, Matrix.Rotate90, Matrix.Rotate180, Matrix.Rotate270);
 
+            Rotate(randomRotation);
+        }
+
+        public void Rotate(Matrix matrix)
+        {
             var newLocations = new Dictionary<MapCoordinate, IEntity>();
 
-            foreach(var cell in Cells)
+            foreach (var cell in Cells)
             {
-                var newCoordinate = new MapCoordinate(MapKey, randomRotation * cell.Key.ToVector());
+                var newCoordinate = new MapCoordinate(MapKey, matrix * cell.Key.ToVector());
 
                 newLocations.Add(newCoordinate, cell.Value);
             }
 
-            foreach(var mapGenCommand in MapGenCommands)
+            foreach (var mapGenCommand in MapGenCommands)
             {
-                mapGenCommand.Vector = randomRotation * mapGenCommand.Vector;
+                mapGenCommand.Vector = matrix * mapGenCommand.Vector;
             }
 
             Cells = newLocations;
@@ -317,8 +322,13 @@ namespace data_rogue_core.Maps
 
             foreach(var mapCommand in selectedVault.MapGenCommands)
             {
-                mapCommand.Vector += position.ToVector();
-                MapGenCommands.Add(mapCommand);
+                var newMapCommand = new MapGenCommand
+                {
+                    MapGenCommandType = mapCommand.MapGenCommandType,
+                    Vector = mapCommand.Vector + position.ToVector(),
+                    Parameters = mapCommand.Parameters
+                };
+                MapGenCommands.Add(newMapCommand);
             }
         }
 

@@ -1,0 +1,22 @@
+Map:"breakin_cave"
+default:Cell:Void
+-15,-4
+-8,-4: Entity(Props:VaultConnection)
+-8,5: Entity(Props:VaultConnection)
+0:Cell:Void
+#:Cell:Wall
+,:Cell:CobbleWall
+O:Cell:Boulder
+.:Cell:OrangeWall
+~:Cell:Water
+@:Cell:OrangeRock
+######,@,######
+#..~~OO@OO@@~~.
+#.~~@@@@@@@@@~.
+..~@@@@@@@O@@~.
+.~~~@@~~@@O@~~.
+.~~~@@~@@@@@~..
+..~OO@@@@@@~~.#
+#.~~OO@O@@~~..#
+#..O~~@@@....##
+######,@,######

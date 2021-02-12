@@ -49,6 +49,7 @@ namespace data_rogue_core.Maps
 
         IEnumerable<IEnumerable<MapCoordinate>> GetSections();
         void Spin(IRandom random);
+        void Rotate(Matrix matrix);
         void PlaceSubMap(MapCoordinate position, IMap selectedVault);
         Size GetSize();
         bool IsLocationEmpty(MapCoordinate coordinate, Size vaultSize);

@@ -47,9 +47,10 @@ namespace data_rogue_core.Maps.Generators
             _wallCell = systemContainer.PrototypeSystem.Get(wallCell);
             _numberOfVaults = numberOfVaults;
             _branch = branch;
+            _maxTries = maxTries;
 
             _lineDrawing = new BresenhamLineDrawingAlgorithm();
-            _tunnelPathfinding = new AStarPathfindingAlgorithm(false, PassableToTunneling);
+            _tunnelPathfinding = new AStarPathfindingAlgorithm(false, PassableToTunneling, 5000);
         }
 
         public IMap Generate(string mapName, IRandom random)
@@ -65,9 +66,23 @@ namespace data_rogue_core.Maps.Generators
 
             ConnectDisconnectedSections(random, map, vaultPlacements);
 
+            ConnectUnusedConnectionPoints(random, map, vaultPlacements);
+
+            PlaceWallOnUnusedConnectionPoints(map, vaultPlacements);
+
             map.Vaults = vaultPlacements.Select(v => v.Vault.MapKey);
 
             return map;
+        }
+
+        private void PlaceWallOnUnusedConnectionPoints(IMap map, List<VaultPlacement> vaultPlacements)
+        {
+            var connectionPoints = vaultPlacements.SelectMany(v => v.VaultConnectionPoints.Select(cp => cp.Coordinate)).ToList();
+
+            foreach(var connectionPoint in connectionPoints)
+            {
+                map.SetCell(connectionPoint, _wallCell);
+            }
         }
 
         private void PlaceVaults(IRandom random, IMap map, List<VaultPlacement> vaultPlacements, List<IMap> validVaults)
@@ -106,18 +121,42 @@ namespace data_rogue_core.Maps.Generators
             var mapSections = map.GetSections().ToList();
             var attempts = 0;
 
-            while (mapSections.Count() > 1 && attempts++ < 10)
+            while (mapSections.Count() > 1 && attempts++ < _maxTries)
             {
                 var firstSection = random.PickOne(mapSections);
                 var secondSection = random.PickOne(mapSections.Except(new[] { firstSection }).ToList());
 
-                TryConnectSections(map, random, firstSection, secondSection, vaultPlacements);
+                var connected = TryConnectSections(map, random, firstSection, secondSection, vaultPlacements);
 
-                mapSections = map.GetSections().ToList();
+                if (connected)
+                {
+                    mapSections.Remove(firstSection);
+                    mapSections.Remove(secondSection);
+
+                    var combinedSection = firstSection.ToList();
+                    combinedSection.AddRange(secondSection);
+
+                    mapSections.Add(combinedSection);
+                }
             }
         }
 
-        private void TryConnectSections(IMap map, IRandom random, IEnumerable<MapCoordinate> firstSection, IEnumerable<MapCoordinate> secondSection, List<VaultPlacement> vaultPlacements)
+        private void ConnectUnusedConnectionPoints(IRandom random, IMap map, List<VaultPlacement> vaultPlacements)
+        {
+            var connectionPoints = vaultPlacements.SelectMany(v => v.VaultConnectionPoints.Select(cp => cp.Coordinate)).ToList();
+
+            int i = 0;
+
+            while(connectionPoints.Count() > 1 && i++ < _maxTries)
+            {
+                var firstPoint = random.PickOne(connectionPoints);
+                var secondPoint = random.PickOne(connectionPoints.Except(new[] { firstPoint }).ToList());
+
+                TryCarveTunnel(map, firstPoint, secondPoint, vaultPlacements);
+            }
+        }
+
+        private bool TryConnectSections(IMap map, IRandom random, IEnumerable<MapCoordinate> firstSection, IEnumerable<MapCoordinate> secondSection, List<VaultPlacement> vaultPlacements)
         {
             var connectionPoints = vaultPlacements.SelectMany(v => v.VaultConnectionPoints.Select(cp => cp.Coordinate));
 
@@ -129,11 +168,43 @@ namespace data_rogue_core.Maps.Generators
                 var firstSectionConnectionPoint = random.PickOne(firstSectionValidConnections);
                 var secondSectionConnectionPoint = random.PickOne(secondSectionValidConnections);
 
-                var path = _tunnelPathfinding.Path(map, firstSectionConnectionPoint, secondSectionConnectionPoint);
+                return TryCarveTunnel(map, firstSectionConnectionPoint, secondSectionConnectionPoint, vaultPlacements);
+            }
 
-                if (path != null && path.Any())
+            return false;
+        }
+
+        private bool TryCarveTunnel(IMap map, MapCoordinate firstPoint, MapCoordinate secondPoint, List<VaultPlacement> vaultPlacements)
+        {
+            var path = _tunnelPathfinding.Path(map, firstPoint, secondPoint);
+
+            if (path != null && path.Any())
+            {
+                CarveTunnel(map, path);
+
+                RemoveConnectionPoints(vaultPlacements, firstPoint, secondPoint);
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private void RemoveConnectionPoints(List<VaultPlacement> vaultPlacements, MapCoordinate firstPoint, MapCoordinate secondPoint)
+        {
+            foreach(var vault in vaultPlacements)
+            {
+                var toRemove = vault.VaultConnectionPoints.FirstOrDefault(f => f.Coordinate == firstPoint);
+                if (toRemove != null)
                 {
-                    CarveTunnel(map, path);
+                    vault.VaultConnectionPoints.Remove(toRemove);
+                }
+                toRemove = vault.VaultConnectionPoints.FirstOrDefault(f => f.Coordinate == secondPoint);
+                if (toRemove != null)
+                {
+                    vault.VaultConnectionPoints.Remove(toRemove);
                 }
             }
         }
@@ -232,13 +303,17 @@ namespace data_rogue_core.Maps.Generators
             var placedVault = (IMap)selectedVault.Clone();
             placedVault.Spin(random);
 
-            var position = FindPosition(map, selectedVault, random);
+            var position = FindPosition(map, placedVault, random);
 
             if (position != null)
             {
-                map.PlaceSubMap(position, selectedVault);
+                map.PlaceSubMap(position, placedVault);
 
-                return new VaultPlacement(placedVault, position);
+                var placement = new VaultPlacement(placedVault, position);
+
+                Console.WriteLine($"Placed {placedVault.MapKey} on {map.MapKey}, connections are:{string.Concat(placement.VaultConnectionPoints.Select(cp => $"({cp.Coordinate.X},{cp.Coordinate.Y})").ToArray()) }");
+
+                return placement;
             }
 
             return null;
@@ -251,9 +326,11 @@ namespace data_rogue_core.Maps.Generators
 
             for (int i = 0; i <= _maxTries; i++)
             {
-                var coordinate = PickRandomCoordinate(map, random, vaultSize, i);
+                var coordinate = PickRandomCoordinate(map, random, i);
 
-                if (map.IsLocationEmpty(coordinate, vaultSize))
+                // We check that the area around where the vault will be is empty as well. This lets us place corridors etc in it.
+                Size largerSize = new Size(vaultSize.Width + 2, vaultSize.Height + 2);
+                if (map.IsLocationEmpty(coordinate - new Vector(1,1), largerSize))
                 {
                     return coordinate;
                 }
@@ -262,10 +339,11 @@ namespace data_rogue_core.Maps.Generators
             return null;
         }
 
-        private MapCoordinate PickRandomCoordinate(IMap map, IRandom random, Size size, int i)
+        private MapCoordinate PickRandomCoordinate(IMap map, IRandom random, int i)
         {
+            var size = map.GetSize();
             var key = map.MapKey;
-            var temperature = 1 + (double)i / 10;
+            var temperature = (double)i / 20;
             var randWidth = (int)(size.Width * temperature);
             var randHeight = (int)(size.Height * temperature);
 

@@ -49,6 +49,10 @@ namespace data_rogue_core.Maps
         {
             return new Vector(thisVector.X + thatVector.X, thisVector.Y + thatVector.Y);
         }
+        public static Vector operator -(Vector thisVector, Vector thatVector)
+        {
+            return new Vector(thisVector.X - thatVector.X, thisVector.Y - thatVector.Y);
+        }
 
         public static bool operator == (Vector thisVector, Vector thatVector)
         {
