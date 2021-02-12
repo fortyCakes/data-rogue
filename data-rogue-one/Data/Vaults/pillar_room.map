@@ -1,0 +1,21 @@
+Map:"pillar_room"
+default:Cell:Void
+-12,-6
+-7,-6: Entity(Props:VaultConnection)
+-2,-1: Entity(Props:VaultConnection)
+-7,4: Entity(Props:VaultConnection)
+-12,-1: Entity(Props:VaultConnection)
+0:Cell:Void
+.:Cell:Empty
+#:Cell:Wall
+#####.#####
+#.........#
+#.#.#.#.#.#
+#.........#
+#.#.#.#.#.#
+...........
+#.#.#.#.#.#
+#.........#
+#.#.#.#.#.#
+#.........#
+#####.#####

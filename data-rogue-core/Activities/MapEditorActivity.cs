@@ -151,6 +151,11 @@ namespace data_rogue_core.Activities
                 CameraPosition += Vector.Parse(action.Parameters);
             }
 
+            if (action.Action == ActionType.CreateNew)
+            {
+                NewMap();
+            }
+
             if (action.Action == ActionType.Save)
             {
                 SaveMap();
@@ -232,6 +237,9 @@ namespace data_rogue_core.Activities
 
             if (saveDialog.FileName != "")
             {
+                var mapName = Path.GetFileName(saveDialog.FileName).Replace(".map", "");
+                _map.MapKey = new MapKey(mapName);
+
                 var serialisedMap = MapSerializer.Serialize(_map);
                 File.WriteAllText(saveDialog.FileName, serialisedMap);
                 _systemContainer.MessageSystem.Write($"Saved to {saveDialog.FileName}", Color.Blue);

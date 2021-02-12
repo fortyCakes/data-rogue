@@ -30,7 +30,7 @@ Action: Move(1,1)
 Key: C
 Action: PlayerStatus
 [KeyBinding]
-Key: Shift+S
+Key: Ctrl+S
 Action: Save
 [KeyBinding]
 Key: Shift+M
@@ -111,10 +111,13 @@ Action: DebugMenu
 Key: Space
 Action: ChangeMapEditorCell
 [KeyBinding]
-Key: Shift+O
+Key: Ctrl+O
 Action: Open
 [KeyBinding]
 Key: Shift+D
 Action: ChangeMapEditorDefaultCell
+[KeyBinding]
+Key: Ctrl+N
+Action: CreateNew
 
 
