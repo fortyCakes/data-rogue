@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\BaseActivity.cs" />
+    <Compile Include="Activities\BranchLoadingScreenActivity.cs" />
     <Compile Include="Activities\IMapActivity.cs" />
     <Compile Include="Activities\MapEditorCellMenuActivity.cs" />
     <Compile Include="Components\CanAddToMap.cs" />

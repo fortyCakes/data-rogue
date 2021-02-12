@@ -87,6 +87,7 @@ namespace data_rogue_core.Maps.Generators
 
         private void PlaceVaults(IRandom random, IMap map, List<VaultPlacement> vaultPlacements, List<IMap> validVaults)
         {
+            SetGenerationStatus("Placing vaults");
             for (int i = 0; i <= _numberOfVaults; i++)
             {
                 var selectedVault = SelectVault(validVaults, random);
@@ -359,6 +360,10 @@ namespace data_rogue_core.Maps.Generators
         {
             var coordinate = new MapCoordinate(map.MapKey, location.X, location.Y);
             return !map.CellExists(coordinate);
+        }
+
+        private void SetGenerationStatus(string status)
+        {
         }
     }
 }

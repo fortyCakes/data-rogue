@@ -21,8 +21,8 @@ namespace data_rogue_core.IOSystems.BLTTiles
             BLTLayers.Set(BLTLayers.Background, control.ActivityIndex);
             BLT.Font("");
 
-            var width = control.Position.Width / BLTTilesIOSystem.TILE_SPACING;
-            var height = control.Position.Height / BLTTilesIOSystem.TILE_SPACING;
+            var width = (int)Math.Ceiling(control.Position.Width / (double)BLTTilesIOSystem.TILE_SPACING);
+            var height = (int)Math.Ceiling(control.Position.Height / (double)BLTTilesIOSystem.TILE_SPACING);
 
             for (int x = 0; x < width; x++)
             {
