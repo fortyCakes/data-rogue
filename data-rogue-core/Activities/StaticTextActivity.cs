@@ -22,7 +22,7 @@ namespace data_rogue_core.Activities
         public bool CloseOnKeyPress { get; }
 
         private readonly IActivitySystem _activitySystem;
-        protected readonly IEntity _displayEntity;
+        protected IEntity _displayEntity;
 
         public StaticTextActivity(IActivitySystem activitySystem, string staticText, bool closeOnKeyPress = true, IEntity displayEntity = null)
         {
@@ -118,7 +118,7 @@ namespace data_rogue_core.Activities
             }
         }
 
-        private void Close()
+        protected virtual void Close()
         {
             _activitySystem.RemoveActivity(this);
         }

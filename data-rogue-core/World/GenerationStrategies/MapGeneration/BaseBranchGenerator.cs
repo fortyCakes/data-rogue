@@ -14,13 +14,13 @@ namespace data_rogue_core
     {    
         protected IRandom Random { get; set; }
 
-        public GeneratedBranch Generate(ISystemContainer systemContainer, IEntity branchEntity)
+        public GeneratedBranch Generate(ISystemContainer systemContainer, IEntity branchEntity, IProgress<string> progress)
         {
             var branch = branchEntity.Get<Branch>();
 
             Random = new RNG(systemContainer.Seed + branch.BranchName);
 
-            var generatedBranchMaps = GenerateMaps(systemContainer, branch, branchEntity);
+            var generatedBranchMaps = GenerateMaps(systemContainer, branch, branchEntity, progress);
 
             var generatedBranch = new GeneratedBranch() { Maps = generatedBranchMaps };
 
@@ -45,11 +45,11 @@ namespace data_rogue_core
             return generatedBranch;
         }
 
-        private List<IMap> GenerateMaps(ISystemContainer systemContainer, Branch branch, IEntity branchEntity)
+        private List<IMap> GenerateMaps(ISystemContainer systemContainer, Branch branch, IEntity branchEntity, IProgress<string> progress)
         {
             var mapGenerator = branchEntity.Components.OfType<BranchMapGenerationStrategy>().Single();
 
-            return mapGenerator.Generate(systemContainer, branch, branchEntity);
+            return mapGenerator.Generate(systemContainer, branch, branchEntity, progress);
         }
 
         protected virtual void CreateEntities(ISystemContainer systemContainer, GeneratedBranch generatedBranch, IEntity branchEntity)

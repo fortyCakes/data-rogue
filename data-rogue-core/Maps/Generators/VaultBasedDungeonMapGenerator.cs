@@ -50,28 +50,37 @@ namespace data_rogue_core.Maps.Generators
             _maxTries = maxTries;
 
             _lineDrawing = new BresenhamLineDrawingAlgorithm();
-            _tunnelPathfinding = new AStarPathfindingAlgorithm(false, PassableToTunneling, 5000);
+            _tunnelPathfinding = new AStarPathfindingAlgorithm(false, PassableToTunneling, 500);
         }
 
-        public IMap Generate(string mapName, IRandom random)
+        public IMap Generate(string mapName, IRandom random, IProgress<string> progress)
         {
+            progress.Report("Generating branch... Starting generation");
+
             IMap map = new Map(mapName, _wallCell);
             var vaultPlacements = new List<VaultPlacement>();
 
+            progress.Report("Generating branch... Getting vault list");
             List<IMap> validVaults = GetValidVaults();
 
+            progress.Report("Generating branch... Placing vaults");
             PlaceVaults(random, map, vaultPlacements, validVaults);
 
+            progress.Report("Generating branch... Adding initial vault connections");
             ConnectAsManyVaultsAsPossible(random, map, vaultPlacements);
 
+            progress.Report("Generating branch... Connecting disjoint sections");
             ConnectDisconnectedSections(random, map, vaultPlacements);
 
-            ConnectUnusedConnectionPoints(random, map, vaultPlacements);
+            progress.Report("Generating branch... Connecting unused doors");
+            ConnectUnusedConnectionPoints(random, map, vaultPlacements, progress);
 
+            progress.Report("Generating branch... Removing unused doors");
             PlaceWallOnUnusedConnectionPoints(map, vaultPlacements);
 
             map.Vaults = vaultPlacements.Select(v => v.Vault.MapKey);
 
+            progress.Report("Generating branch... Done!");
             return map;
         }
 
@@ -142,7 +151,7 @@ namespace data_rogue_core.Maps.Generators
             }
         }
 
-        private void ConnectUnusedConnectionPoints(IRandom random, IMap map, List<VaultPlacement> vaultPlacements)
+        private void ConnectUnusedConnectionPoints(IRandom random, IMap map, List<VaultPlacement> vaultPlacements, IProgress<string> progress)
         {
             var connectionPoints = vaultPlacements.SelectMany(v => v.VaultConnectionPoints.Select(cp => cp.Coordinate)).ToList();
 
@@ -150,6 +159,8 @@ namespace data_rogue_core.Maps.Generators
 
             while(connectionPoints.Count() > 1 && i++ < _maxTries)
             {
+                progress.Report($"Generating branch... Connecting unused doors ({i}/{_maxTries})");
+
                 var firstPoint = random.PickOne(connectionPoints);
                 var secondPoint = random.PickOne(connectionPoints.Except(new[] { firstPoint }).ToList());
 

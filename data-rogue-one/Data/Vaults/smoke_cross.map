@@ -14,6 +14,18 @@ default:Cell:Void
 -1,-1: Entity(Props:VaultConnection)
 -7,4: Entity(Props:VaultConnection)
 -13,-1: Entity(Props:VaultConnection)
+-9,-2: Entity(Props:Smoke)
+-9,-1: Entity(Props:Smoke)
+-9,0: Entity(Props:Smoke)
+-8,1: Entity(Props:Smoke)
+-7,1: Entity(Props:Smoke)
+-6,1: Entity(Props:Smoke)
+-5,0: Entity(Props:Smoke)
+-5,-1: Entity(Props:Smoke)
+-5,-2: Entity(Props:Smoke)
+-6,-3: Entity(Props:Smoke)
+-7,-3: Entity(Props:Smoke)
+-8,-3: Entity(Props:Smoke)
 0:Cell:Void
 .:Cell:Empty
 #:Cell:Wall

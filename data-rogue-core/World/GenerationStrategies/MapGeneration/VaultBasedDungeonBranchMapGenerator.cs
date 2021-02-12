@@ -4,6 +4,7 @@ using data_rogue_core.Maps.Generators;
 using System.Collections.Generic;
 using data_rogue_core.Systems.Interfaces;
 using data_rogue_core.EntityEngineSystem;
+using System;
 
 namespace data_rogue_core
 {
@@ -15,7 +16,7 @@ namespace data_rogue_core
         public int NumberOfVaults = 10;
         public int MaxTries = 50;
 
-        public override List<IMap> Generate(ISystemContainer systemContainer, Branch branchDefinition, IEntity branch)
+        public override List<IMap> Generate(ISystemContainer systemContainer, Branch branchDefinition, IEntity branch, IProgress<string> progress)
         {
             var mapgen = new VaultBasedDungeonMapGenerator(systemContainer, FloorCell, WallCell, NumberOfVaults, MaxTries, branch);
 
@@ -23,7 +24,7 @@ namespace data_rogue_core
 
             for (int i = 1; i <= branchDefinition.Depth; i++)
             {
-                var map = mapgen.Generate($"{branchDefinition.BranchName}:{i}", systemContainer.Random);
+                var map = mapgen.Generate($"{branchDefinition.BranchName}:{i}", systemContainer.Random, progress);
 
                 generatedBranchMaps.Add(map);
             }

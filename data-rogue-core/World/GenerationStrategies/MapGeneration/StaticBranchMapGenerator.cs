@@ -15,7 +15,7 @@ namespace data_rogue_core
         private readonly string STATIC_MAP_ROOT = "StaticMaps/";
         public string StaticMaps;
 
-        public override List<IMap> Generate(ISystemContainer systemContainer, Branch branchDefinition, IEntity branchEntity)
+        public override List<IMap> Generate(ISystemContainer systemContainer, Branch branchDefinition, IEntity branchEntity, IProgress<string> progress)
         {
             var maps = new List<IMap>();
             int floor = 1;
@@ -23,7 +23,7 @@ namespace data_rogue_core
             foreach (string mapName in StaticMaps.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim()))
             {
                 var generator = new StaticMapGenerator(systemContainer, STATIC_MAP_ROOT + mapName);
-                var map = generator.Generate($"{branchDefinition.BranchName}:{floor++}", systemContainer.Random);
+                var map = generator.Generate($"{branchDefinition.BranchName}:{floor++}", systemContainer.Random, progress);
 
                 maps.Add(map);
             }

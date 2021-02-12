@@ -1,5 +1,6 @@
 ﻿using data_rogue_core.Data;
 using data_rogue_core.Systems.Interfaces;
+using System;
 
 namespace data_rogue_core.Maps.Generators
 {
@@ -15,7 +16,7 @@ namespace data_rogue_core.Maps.Generators
 
         public string MapFile { get; }
 
-        public IMap Generate(string mapName, IRandom random)
+        public IMap Generate(string mapName, IRandom random, IProgress<string> progress)
         {
             var mapData = DataFileLoader.LoadFile(MapFile);
             var map = MapSerializer.Deserialize(SystemContainer, mapData, mapName);

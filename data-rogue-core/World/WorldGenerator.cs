@@ -100,8 +100,9 @@ namespace data_rogue_core
         public static void GenerateBranch(ISystemContainer systemContainer, IEntity branchEntity)
         {
             var branchGenerator = new BranchGenerator();
+            var progress = new Progress<string>();
 
-            GeneratedBranch branch = branchGenerator.Generate(systemContainer, branchEntity);
+            GeneratedBranch branch = branchGenerator.Generate(systemContainer, branchEntity, progress);
 
             foreach (Map map in branch.Maps)
             {

@@ -1,5 +1,6 @@
 ﻿using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Systems.Interfaces;
+using System;
 
 namespace data_rogue_core.Maps.Generators
 {
@@ -27,7 +28,7 @@ namespace data_rogue_core.Maps.Generators
             PrototypeSystem = systemContainer.PrototypeSystem;
         }
 
-        public IMap Generate(string mapName, IRandom random)
+        public IMap Generate(string mapName, IRandom random, IProgress<string> progress)
         {
             Random = random;
 
