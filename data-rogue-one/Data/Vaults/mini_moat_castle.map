@@ -1,0 +1,35 @@
+Map:"mini_moat_castle"
+default:Cell:Void
+-12,-8
+0,-8: Entity(Props:VaultConnection)
+-2,9: Entity(Props:VaultConnection)
+2,9: Entity(Props:VaultConnection)
+-12,-4: Entity(Props:VaultConnection)
+-12,5: Entity(Props:VaultConnection)
+12,-4: Entity(Props:VaultConnection)
+12,5: Entity(Props:VaultConnection)
+0:Cell:Void
+,:Cell:Grass
+#:Cell:Wall
+~:Cell:Water
+.:Cell:DarkStoneFloor
+@:Cell:DarkGreyFloor
+}:Cell:WoodFloorOrange
+############,############
+#,,,,,,,,,,,,,,,,,,,,,,,#
+#,,,,,,,,,,,,,,,,,,,,,,,#
+#,,,,,,,,,,,,,,,,,,,,,,,#
+,,,,~~~~~~~~~~~~~~~~~,,,,
+#,,,~###############~,,,#
+#,,,~#.@.@.@.@.@.@.#~,,,#
+#,,,~#@.@.@.@.@.@.@#~,,,#
+#,,,~#.@.@.@.@.@.@.#~,,,#
+#,,,~#@.@.@.@.@.@.@#~,,,#
+#,,,~#.@.@.@.@.@.@.#~,,,#
+#,,,~#@.@.@.@.@.@.@#~,,,#
+#,,,~#######}#######~,,,#
+,,,,~~~~~~~~}~~~~~~~~,,,,
+#,,,,,,,,,,,,,,,,,,,,,,,#
+#,,,,,,,,,,,,,,,,,,,,,,,#
+#,,,,,,,,,,,,,,,,,,,,,,,#
+##########,###,##########

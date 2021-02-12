@@ -1,0 +1,26 @@
+Map:"concentric"
+default:Cell:Void
+-13,-7
+-11,8: Entity(Props:VaultConnection)
+1,8: Entity(Props:VaultConnection)
+-13,-6: Entity(Props:VaultConnection)
+3,-6: Entity(Props:VaultConnection)
+0:Cell:Void
+.:Cell:Empty
+#:Cell:Wall
+#################
+.................
+#...............#
+#..####...####..#
+#..#.........#..#
+#..#.........#..#
+#..#..#####..#..#
+#..#..#...#..#..#
+#..#..#...#..#..#
+#..#..#...#..#..#
+#..#.........#..#
+#..#.........#..#
+#..###########..#
+#...............#
+#...............#
+##.###########.##

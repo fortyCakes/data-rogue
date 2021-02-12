@@ -1,0 +1,31 @@
+Map:"smoke_cross"
+default:Cell:Void
+-13,-7
+-7,-1: Entity(Props:Smoke)
+-8,-2: Entity(Props:Smoke)
+-6,0: Entity(Props:Smoke)
+-6,-2: Entity(Props:Smoke)
+-7,-2: Entity(Props:Smoke)
+-6,-1: Entity(Props:Smoke)
+-7,0: Entity(Props:Smoke)
+-8,-1: Entity(Props:Smoke)
+-8,0: Entity(Props:Smoke)
+-7,-7: Entity(Props:VaultConnection)
+-1,-1: Entity(Props:VaultConnection)
+-7,4: Entity(Props:VaultConnection)
+-13,-1: Entity(Props:VaultConnection)
+0:Cell:Void
+.:Cell:Empty
+#:Cell:Wall
+    ##.##    
+    #...#    
+    #...#    
+    #...#    
+#####...#####
+#...........#
+.............
+#...........#
+#####...#####
+    #...#    
+    #...#    
+    ##.##    
