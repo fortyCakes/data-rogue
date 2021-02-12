@@ -6,7 +6,7 @@ BranchName: Branch:Dungeon
 Depth: 2
 [Biome]
 Name: Dungeon
-[VaultBasedDungeonBranchMapGenerator]
+[BasicDungeonBranchMapGenerator]
 #[BiomeBasedMonsterGeneration]
 #BasePower: 0
 #Density: 0.01

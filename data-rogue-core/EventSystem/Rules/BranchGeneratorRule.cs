@@ -53,7 +53,8 @@ namespace data_rogue_core.EventSystem.Rules
                     _systemContainer.ActivitySystem.Pop();
 
                     _systemContainer.EntityEngine.Destroy(branchGenerationDisplayEntity);
-
+                    
+                    _systemContainer.PositionSystem.SetPosition(sender, portal.Destination);
                     _systemContainer.EventSystem.Try(type, sender, eventData);
 
                     return generatedBranch;
