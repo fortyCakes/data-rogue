@@ -1,0 +1,25 @@
+Map:"sacred_tree"
+default:Cell:Void
+-9,-8
+-4,-8: Entity(Props:VaultConnection)
+-9,-3: Entity(Props:VaultConnection)
+-4,2: Entity(Props:VaultConnection)
+1,-3: Entity(Props:VaultConnection)
+-3,-2: Entity(Monster:StoneHead)
+0:Cell:Void
+.:Cell:Empty
+,:Cell:Grass
+:Cell:Tree
+#:Cell:Wall
+~:Cell:Water
+#####.#####
+#####.#####
+##.......##
+##.~~~~~.##
+##.~,,,~.##
+...~,,~...
+##.~,,,~.##
+##.~~~~~.##
+##.......##
+#####.#####
+#####.#####

@@ -29,8 +29,8 @@ namespace data_rogue_core.Activities
             {
                 _map = value;
                 _mapName = _map.MapKey.Key;
-                PrimaryCell = _map.DefaultCell;
-                SecondaryCell = _map.DefaultCell;
+                PrimaryCell = _systemContainer.PrototypeSystem.Get("Cell:Wall");
+                SecondaryCell = _systemContainer.PrototypeSystem.Get("Cell:Empty");
                 CameraPosition = new MapCoordinate(_map.MapKey, 0, 0);
             }
         }
