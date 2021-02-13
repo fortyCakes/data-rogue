@@ -7,6 +7,7 @@ Depth: 2
 [Biome]
 Name: Dungeon
 [VaultBasedDungeonBranchMapGenerator]
+VaultChance: 0.8
 [BiomeBasedMonsterGeneration]
 BasePower: 0
 Density: 0.01

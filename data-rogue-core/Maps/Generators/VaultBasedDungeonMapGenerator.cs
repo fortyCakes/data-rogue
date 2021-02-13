@@ -39,8 +39,9 @@ namespace data_rogue_core.Maps.Generators
         private readonly ILineDrawingAlgorithm _lineDrawing;
         private readonly IPathfindingAlgorithm _tunnelPathfinding;
         private readonly int _maxTries;
+        private readonly double _vaultChance;
 
-        public VaultBasedDungeonMapGenerator(ISystemContainer systemContainer, string floorCell, string wallCell, int numberOfVaults, int maxTries, IEntity branch)
+        public VaultBasedDungeonMapGenerator(ISystemContainer systemContainer, string floorCell, string wallCell, int numberOfVaults, int maxTries, double vaultChance, IEntity branch)
         {
             _systemContainer = systemContainer;
             _floorCell = systemContainer.PrototypeSystem.Get(floorCell);
@@ -51,6 +52,7 @@ namespace data_rogue_core.Maps.Generators
 
             _lineDrawing = new BresenhamLineDrawingAlgorithm();
             _tunnelPathfinding = new AStarPathfindingAlgorithm(false, PassableToTunneling, 500);
+            _vaultChance = vaultChance;
         }
 
         public IMap Generate(string mapName, IRandom random, IProgress<string> progress)
@@ -364,7 +366,28 @@ namespace data_rogue_core.Maps.Generators
 
         private IMap SelectVault(List<IMap> validVaults, IRandom random)
         {
-            return random.PickOne<IMap>(validVaults);
+            if (random.PercentageChance(_vaultChance))
+            {
+                return random.PickOne(validVaults);
+            }
+            else
+            {
+                return CreateBlankRoom(random);
+            }
+        }
+
+        private IMap CreateBlankRoom(IRandom random)
+        {
+            var map = new Map("Blank Room", _wallCell);
+
+            var xSize = random.Between(3, 12);
+            var ySize = random.Between(3, 12);
+
+            for (int x = 0; x <= xSize; x++)
+                for (int y = 0; y <= ySize; y++)
+                    map.SetCell(new MapCoordinate(map.MapKey, x, y), _floorCell);
+
+            return map;
         }
 
         private bool PassableToTunneling(IMap map, AStarPathfindingAlgorithm.AStarLocation location)
