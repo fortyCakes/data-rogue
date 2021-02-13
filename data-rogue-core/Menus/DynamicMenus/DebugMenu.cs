@@ -46,12 +46,15 @@ namespace data_rogue_core.Menus.DynamicMenus
                     break;
                 case "God Mode":
                     systemContainer.EntityEngine.AddComponent(systemContainer.PlayerSystem.Player, new GodMode());
+                    ShowToast("GodMode enabled");
                     break;
                 case "Toggle NoClip":
                     systemContainer.PlayerSystem.Player.Get<Physical>().Passable = !systemContainer.PlayerSystem.Player.Get<Physical>().Passable;
+                    ShowToast("NoClip " + (systemContainer.PlayerSystem.Player.Get<Physical>().Passable ? "enabled" : "disabled"));
                     break;
                 case "Reveal Map":
                     var map = systemContainer.MapSystem.MapCollection[systemContainer.RendererSystem.CameraPosition.Key];
+                    ShowToast("Map revealed");
 
                     foreach(var cell in map.Cells)
                     {
@@ -62,6 +65,11 @@ namespace data_rogue_core.Menus.DynamicMenus
                 default:
                     throw new ApplicationException($"Unhandled menu action {item.Text} in DebugMenu.");
             }
+        }
+
+        private void ShowToast(string message)
+        {
+            _systemContainer.ActivitySystem.ActivityStack.Push(new ToastActivity(_systemContainer.ActivitySystem, message, Color.White));
         }
 
         private void ExecuteSpawnCommand(string command)
