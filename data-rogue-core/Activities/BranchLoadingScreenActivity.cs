@@ -7,7 +7,6 @@ namespace data_rogue_core.Activities
 {
     public class BranchLoadingScreenActivity : StaticTextActivity
     {
-        private readonly IProgress<string> _progress;
         private IEntityEngine _engine;
 
         public BranchLoadingScreenActivity(ISystemContainer systemContainer) : base(systemContainer.ActivitySystem, "Generating branch...", false, null)

@@ -385,9 +385,20 @@ namespace data_rogue_core.Maps.Generators
 
             for (int x = 0; x <= xSize; x++)
                 for (int y = 0; y <= ySize; y++)
+                {
                     map.SetCell(new MapCoordinate(map.MapKey, x, y), _floorCell);
+                    if (IsOnWall(xSize, ySize, x, y) && random.PercentageChance(0.1))
+                    {
+                        map.MapGenCommands.Add(new MapGenCommand { MapGenCommandType = MapGenCommandType.Entity, Parameters = "Props:VaultConnection", Vector = new Vector(x, y) });
+                    }
+                }
 
             return map;
+        }
+
+        private static bool IsOnWall(int xSize, int ySize, int x, int y)
+        {
+            return (x == 0 || x == xSize) ^ (y == 0 || y == ySize);
         }
 
         private bool PassableToTunneling(IMap map, AStarPathfindingAlgorithm.AStarLocation location)
