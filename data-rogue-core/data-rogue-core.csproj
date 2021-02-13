@@ -159,6 +159,7 @@
     <Compile Include="EventSystem\Rules\MissMakesSoundRule.cs" />
     <Compile Include="EventSystem\Rules\PlayerStepMakesSoundRule.cs" />
     <Compile Include="EventSystem\Rules\CantDealNoDamageRule.cs" />
+    <Compile Include="EventSystem\Rules\PreventDamageIfGodModeRule.cs" />
     <Compile Include="EventSystem\Rules\ShowToastWhenEnteringBranchRule.cs" />
     <Compile Include="EventSystem\Rules\XPAddsScoreRule.cs" />
     <Compile Include="Forms\StaticForms\TextFormData.cs" />
