@@ -25,6 +25,8 @@ namespace data_rogue_core.Maps
 
         public IEnumerable<Biome> Biomes { get; set; } = new List<Biome>();
 
+        public double VaultWeight { get; set; } = 1.0;
+
         private IFovCache FovCache;
 
         public uint DefaultCellId

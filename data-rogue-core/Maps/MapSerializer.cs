@@ -22,6 +22,16 @@ namespace data_rogue_core.Maps
 
             stringBuilder.AppendLine($"default:" + map.DefaultCell.Name);
 
+            if (map.Biomes.Any())
+            {
+                stringBuilder.AppendLine($"Biomes: " + string.Join(",", map.Biomes.Select(b => b.Name)));
+            }
+
+            if (map.VaultWeight != 1)
+            {
+                stringBuilder.AppendLine($"VaultWeight: " + map.VaultWeight.ToString());
+            }
+
             stringBuilder.AppendLine($"{map.LeftX},{map.TopY}");
 
             foreach(MapGenCommand command in map.MapGenCommands)
@@ -90,13 +100,29 @@ namespace data_rogue_core.Maps
 
             var mapName = mapNameOverride ?? Extract(lines[0], "Map:\"(.*)\"");
             var defaultCellName = Extract(lines[1], "default:(.*)").Trim();
-            var coordinateMatch = Regex.Match(lines[2], "(-?[0-9]*),(-?[0-9]*)");
+            var lineIndex = 2;
+
+            var biomesMatch = Regex.Match(lines[lineIndex], "Biomes: (.*)");
+
+            if (biomesMatch.Success) {
+                lineIndex++;
+            }
+
+            var vaultWeightMatch = Regex.Match(lines[lineIndex], "VaultWeight: ([0-9]*\\.[0-9]*)");
+
+            if (vaultWeightMatch.Success)
+            {
+                lineIndex++;
+            }
+
+            var coordinateMatch = Regex.Match(lines[lineIndex], "(-?[0-9]*),(-?[0-9]*)");
             var leftX = int.Parse(coordinateMatch.Groups[1].Value);
             var topY = int.Parse(coordinateMatch.Groups[2].Value);
+            lineIndex++;
 
             IEntity defaultCell = systemContainer.PrototypeSystem.Get(defaultCellName);
 
-            var lineIndex = 3;
+            
 
             var commands = GetCommandsInMap(lines, ref lineIndex);
 
@@ -153,6 +179,18 @@ namespace data_rogue_core.Maps
                         deserialisedMap.SetCell(x, y, cell);
                     }
                 }
+            }
+
+            if (biomesMatch.Success)
+            {
+                var biomesText = biomesMatch.Groups[1].Value;
+                deserialisedMap.Biomes = biomesText.Trim().Split(',').Select(b => new Biome { Name = b }).ToList();
+            }
+
+            if (vaultWeightMatch.Success)
+            {
+                var vaultWeightText = vaultWeightMatch.Groups[1].Value;
+                deserialisedMap.VaultWeight = double.Parse(vaultWeightText);
             }
 
             deserialisedMap.MapGenCommands = commands;

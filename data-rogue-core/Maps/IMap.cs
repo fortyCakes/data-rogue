@@ -22,6 +22,7 @@ namespace data_rogue_core.Maps
         Dictionary<MapCoordinate, IEntity> Cells { get; set; }
         HashSet<MapCoordinate> SeenCoordinates { get; set; }
         IEnumerable<Biome> Biomes { get; }
+        double VaultWeight { get; }
         IEnumerable<MapKey> Vaults { get; set; }
 
         IEntity CellAt(int lookupX, int lookupY);

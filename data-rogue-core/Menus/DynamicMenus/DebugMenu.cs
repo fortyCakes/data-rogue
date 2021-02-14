@@ -59,6 +59,13 @@ namespace data_rogue_core.Menus.DynamicMenus
                     foreach(var cell in map.Cells)
                     {
                         map.SetSeen(cell.Key);
+                        if (cell.Value.Get<Physical>().Transparent)
+                        {
+                            foreach (var adjacentVector in Vector.GetAdjacentCellVectors())
+                            {
+                                map.SetSeen(cell.Key + adjacentVector);
+                            }
+                        }
                     }
 
                     break;

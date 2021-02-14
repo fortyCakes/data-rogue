@@ -6,6 +6,7 @@ using data_rogue_core.Systems.Interfaces;
 using FluentAssertions;
 using NSubstitute;
 using NUnit.Framework;
+using System.Collections.Generic;
 using System.IO;
 
 namespace data_rogue_core.UnitTests.Maps
@@ -41,6 +42,7 @@ namespace data_rogue_core.UnitTests.Maps
         [TestCase(0)]
         [TestCase(1)]
         [TestCase(2)]
+        [TestCase(3)]
         public void Serialize_File1_TestMap_ReturnsExpectedSerialization(int testCase)
         {
             var testMap = GetTestMap(testCase);
@@ -56,6 +58,7 @@ namespace data_rogue_core.UnitTests.Maps
         [TestCase(0)]
         [TestCase(1)]
         [TestCase(2)]
+        [TestCase(3)]
         public void Deserialize_File1_ReturnsTestMap(int testCase)
         {
             string serialisedText = LoadSerializedData(testCase);
@@ -114,7 +117,24 @@ namespace data_rogue_core.UnitTests.Maps
                     Vector = new Vector(1,2)
             });
 
-            return new[] { testMap0, testMap1, testMap2 };
+            var testMap3 = new Map("testMapKey4", wallCell);
+
+            testMap3.SetCellsInRange(0, 11, 0, 4, floorCell);
+            testMap3.RemoveCellsInRange(1, 2, 1, 1);
+            testMap3.RemoveCellsInRange(5, 6, 2, 3);
+
+            testMap3.MapGenCommands.Add(
+                new MapGenCommand
+                {
+                    MapGenCommandType = MapGenCommandType.Entity,
+                    Parameters = "Portal:Portal",
+                    Vector = new Vector(1, 2)
+                });
+
+            testMap3.Biomes = new List<Biome> { new Biome { Name = "Forest" }, new Biome { Name = "Swamp" } };
+            testMap3.VaultWeight = 0.5;
+
+            return new[] { testMap0, testMap1, testMap2, testMap3 };
         }
 
         private IEntity CreateCell(char glyph, string name)

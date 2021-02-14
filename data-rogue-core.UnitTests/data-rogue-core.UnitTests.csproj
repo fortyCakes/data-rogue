@@ -124,6 +124,9 @@
     <Content Include="EntityEngineSystem\TestData\ExpectedSerialization_Entity0.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Maps\TestData\ExpectedSerialization_Map3.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Maps\TestData\ExpectedSerialization_Map2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
