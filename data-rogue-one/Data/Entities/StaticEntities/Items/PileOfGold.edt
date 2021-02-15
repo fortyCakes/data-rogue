@@ -2,6 +2,7 @@
 [Description]
 Name: Pile of Gold
 Detail: A pile of valuable gold coins.
+[CanAddToMap]
 [Prototype]
 Name: Item:PileOfGold
 Singleton: false

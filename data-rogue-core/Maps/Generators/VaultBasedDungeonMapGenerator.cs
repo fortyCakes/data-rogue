@@ -57,33 +57,56 @@ namespace data_rogue_core.Maps.Generators
 
         public IMap Generate(string mapName, IRandom random, IProgress<string> progress)
         {
-            progress.Report("Generating branch... Starting generation");
+            progress.Report("Starting generation");
 
             IMap map = new Map(mapName, _wallCell);
             var vaultPlacements = new List<VaultPlacement>();
+            var connectionPoints = vaultPlacements.SelectMany(vp => vp.VaultConnectionPoints);
 
-            progress.Report("Generating branch... Getting vault list");
+            progress.Report("Getting vault list");
             List<IMap> validVaults = GetValidVaults();
 
-            progress.Report("Generating branch... Placing vaults");
+            progress.Report("Placing vaults");
             PlaceVaults(random, map, vaultPlacements, validVaults);
 
-            progress.Report("Generating branch... Adding initial vault connections");
+            progress.Report("Adding initial vault connections");
             ConnectAsManyVaultsAsPossible(random, map, vaultPlacements);
 
-            progress.Report("Generating branch... Connecting disjoint sections");
+            progress.Report("Connecting disjoint sections");
             ConnectDisconnectedSections(random, map, vaultPlacements);
 
-            progress.Report("Generating branch... Connecting unused doors");
+            progress.Report("Connecting unused connection points");
             ConnectUnusedConnectionPoints(random, map, vaultPlacements, progress);
 
-            progress.Report("Generating branch... Removing unused doors");
+            progress.Report("Removing unused connection points");
             PlaceWallOnUnusedConnectionPoints(map, vaultPlacements);
+
+            progress.Report("Cleaning up connection points");
+            RemoveConnectionPoints(map, connectionPoints);
 
             map.Vaults = vaultPlacements.Select(v => v.Vault.MapKey);
 
-            progress.Report("Generating branch... Done!");
+            progress.Report("Map generation complete!");
             return map;
+        }
+
+        private void RemoveConnectionPoints(IMap map, IEnumerable<VaultConnectionPoint> connectionPoints)
+        {
+            List<IEntity> entitiesToRemove = new List<IEntity>();
+
+            foreach(var cp in connectionPoints)
+            {
+                var entitiesAt = _systemContainer.PositionSystem.EntitiesAt(cp.Coordinate, false);
+
+                var vaultConnections = entitiesAt.Where(e => e.DescriptionName == "Vault Connection");
+
+                entitiesToRemove.AddRange(vaultConnections);
+            }
+
+            foreach(var entity in entitiesToRemove)
+            {
+                _systemContainer.EntityEngine.Destroy(entity);
+            }
         }
 
         private void PlaceWallOnUnusedConnectionPoints(IMap map, List<VaultPlacement> vaultPlacements)
@@ -368,12 +391,17 @@ namespace data_rogue_core.Maps.Generators
         {
             if (random.PercentageChance(_vaultChance))
             {
-                return random.PickOne(validVaults);
+                return random.WeightedPickOne<IMap>(validVaults, GetVaultWeight);
             }
             else
             {
                 return CreateBlankRoom(random);
             }
+        }
+
+        private double GetVaultWeight(IMap vault)
+        {
+            return (vault as IMap)?.VaultWeight ?? 0;
         }
 
         private IMap CreateBlankRoom(IRandom random)

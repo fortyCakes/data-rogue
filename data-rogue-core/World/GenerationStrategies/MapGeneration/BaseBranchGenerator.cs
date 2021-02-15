@@ -24,7 +24,7 @@ namespace data_rogue_core
 
             var generatedBranch = new GeneratedBranch() { Maps = generatedBranchMaps };
 
-            CreateEntities(systemContainer, generatedBranch, branchEntity);
+            CreateEntities(systemContainer, generatedBranch, branchEntity, progress);
             ExecuteMapGenCommands(systemContainer, generatedBranch, branch);
 
             IMap previousMap = null;
@@ -52,13 +52,13 @@ namespace data_rogue_core
             return mapGenerator.Generate(systemContainer, branch, branchEntity, progress);
         }
 
-        protected virtual void CreateEntities(ISystemContainer systemContainer, GeneratedBranch generatedBranch, IEntity branchEntity)
+        protected virtual void CreateEntities(ISystemContainer systemContainer, GeneratedBranch generatedBranch, IEntity branchEntity, IProgress<string> progress)
         {
             var entityGenerationSteps = branchEntity.Components.OfType<BaseEntityGenerationStrategy>();
 
             foreach(var step in entityGenerationSteps)
             {
-                step.Generate(systemContainer, generatedBranch, branchEntity, Random);
+                step.Generate(systemContainer, generatedBranch, branchEntity, Random, progress);
             }
         }
 

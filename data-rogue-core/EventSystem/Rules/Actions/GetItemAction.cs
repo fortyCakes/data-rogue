@@ -43,6 +43,8 @@ namespace data_rogue_core.EventSystem.Rules
 
                     if (ok)
                     {
+                        _systemContainer.MessageSystem.Write($"{sender.DescriptionName} picks up the {firstItem.Get<Description>().Name}. {sender.DescriptionName} gains {wealth.Amount} {wealth.Currency}.");
+
                         _systemContainer.ItemSystem.TransferWealth(firstItem, sender, wealth.Currency, wealth.Amount);
 
                         _systemContainer.EntityEngine.Destroy(firstItem);

@@ -1,0 +1,122 @@
+﻿"Chain Mail"
+[Description]
+Name: Chain Mail
+Detail: A set of chain mail, sized to fit a normal humanoid. This is heavy armour.
+[Prototype]
+Name: Item:ChainMail
+Singleton: false
+[Appearance]
+Glyph: [
+Color: #6B4D46
+[SpriteAppearance]
+Bottom: armour_chain
+[Position]
+[Item]
+ItemLevel: 1
+[Equipment]
+EquipmentSlot: Chest
+[Stat]
+Name: AC
+Value: 3
+[Stat]
+Name: EV
+Value: -3
+
+"Breastplate"
+[Description]
+Name: Chain Mail
+Detail: A metal breastplate, sized to fit a normal humanoid. This is heavy armour.
+[Prototype]
+Name: Item:ChainMail
+Singleton: false
+[Appearance]
+Glyph: [
+Color: #6B4D46
+[SpriteAppearance]
+Bottom: armour_breastplate
+[Position]
+[Item]
+ItemLevel: 2
+[Equipment]
+EquipmentSlot: Chest
+[Stat]
+Name: AC
+Value: 2
+[Stat]
+Name: EV
+Value: -2
+
+"Full Plate"
+[Description]
+Name: Plate Armour
+Detail: A metal breastplate, with articulated arms and pauldrons, sized to fit a normal humanoid. This is heavy armour.
+[Prototype]
+Name: Item:FullPlate
+Singleton: false
+[Appearance]
+Glyph: [
+Color: #6B4D46
+[SpriteAppearance]
+Bottom: armour_plate
+[Position]
+[Item]
+ItemLevel: 2
+[Equipment]
+EquipmentSlot: Chest
+[Stat]
+Name: AC
+Value: 5
+[Stat]
+Name: EV
+Value: -4
+
+"Leather Armour"
+[Description]
+Name: Leather Armour
+Detail: A chestpiece made of leather. This is light armour. 
+[Prototype]
+Name: Item:LeatherArmourChest
+Singleton: false
+[Appearance]
+Glyph: (
+Color: #6B4D46
+[SpriteAppearance]
+Bottom: armour_leather
+[Position]
+[Item]
+ItemLevel: 1
+[Equipment]
+EquipmentSlot: Chest
+[Stat]
+Name: AC
+Value: 2
+[Stat]
+Name: EV
+Value: -1
+
+"Robe"
+[Description]
+Name: Robe
+Detail: A cloth robe. This is light armour. 
+[Prototype]
+Name: Item:Robe
+Singleton: false
+[Appearance]
+Glyph: (
+Color: #6B4D46
+[SpriteAppearance]
+Bottom: armour_robe
+[Position]
+[Item]
+ItemLevel: 1
+[Equipment]
+EquipmentSlot: Chest
+[Stat]
+Name: AC
+Value: 1
+[Stat]
+Name: EV
+Value: 0
+[Stat]
+Name: Aegis
+Value: 1

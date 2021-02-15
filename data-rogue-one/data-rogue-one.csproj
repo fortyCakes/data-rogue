@@ -112,7 +112,22 @@
     <None Include="Data\Entities\StaticEntities\Classes\warrior.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Entities\StaticEntities\Items\ArmourBoots.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Entities\StaticEntities\Items\ArmourGloves.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Entities\StaticEntities\Items\ArmourHead.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\Entities\StaticEntities\Items\BookOfSkill.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Entities\StaticEntities\Items\ArmourLeg.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Entities\StaticEntities\Items\ArmourBody.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\Entities\StaticEntities\Items\MacGuffin.edt">
@@ -127,25 +142,10 @@
     <None Include="Data\Entities\StaticEntities\Items\PotionMinorHealing.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Data\Entities\StaticEntities\Items\T1HeavyArmour.edt">
+    <None Include="Data\Entities\StaticEntities\Items\Weapons.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Data\Entities\StaticEntities\Items\T1LightArmour.edt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Data\Entities\StaticEntities\Items\T1Weapons.edt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Data\Entities\StaticEntities\Items\T2HeavyArmour.edt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Data\Entities\StaticEntities\Items\T2LightArmour.edt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Data\Entities\StaticEntities\Items\T2Weapons.edt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Data\Entities\StaticEntities\Items\VampiricBlade.edt">
+    <None Include="Data\Entities\StaticEntities\Items\VampiricBlade.edt_old">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\Entities\keybindings.edt">

@@ -17,8 +17,9 @@ namespace data_rogue_core.World.GenerationStrategies
 
         private class ItemList: Dictionary<int, HashSet<IEntity>> { }
 
-        public override void Generate(ISystemContainer systemContainer, GeneratedBranch generatedBranch, IEntity branch, IRandom random)
-        {   
+        public override void Generate(ISystemContainer systemContainer, GeneratedBranch generatedBranch, IEntity branch, IRandom random, IProgress<string> progress)
+        {
+            progress.Report("Placing specific items");
             SpawnItemRandomly(generatedBranch.Maps[Floor-1], systemContainer, Item, random);
         }
 

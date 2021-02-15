@@ -1,49 +1,52 @@
-﻿"Leather Armour"
+﻿"Helm"
 [Description]
-Name: Leather Armour
-Detail: A chestpiece made of leather. This is light armour. 
+Name: Helmet
+Detail: A metal helm. This is heavy armour.
 [Prototype]
-Name: Item:LeatherArmourChest
+Name: Item:Helm
 Singleton: false
 [Appearance]
-Glyph: (
+Glyph: [
 Color: #6B4D46
 [SpriteAppearance]
-Bottom: armour_brown
+Bottom: armour_helm
 [Position]
 [Item]
 ItemLevel: 1
 [Equipment]
-EquipmentSlot: Chest
+EquipmentSlot: Head
 [Stat]
 Name: AC
-Value: 2
+Value: 3
 [Stat]
 Name: EV
 Value: -1
 
-"Leather Chaps"
+"Helmet"
 [Description]
-Name: Leather Chaps
-Detail: Some leggings made of leather. This is light armour. 
+Name: Helmet
+Detail: A metal full-face helmet. This is heavy armour.
 [Prototype]
-Name: Item:LeatherArmourLegs
+Name: Item:FullHelmet
 Singleton: false
 [Appearance]
-Glyph: (
+Glyph: [
 Color: #6B4D46
 [SpriteAppearance]
-Bottom: legs_brown
+Bottom: armour_fullhelmet
 [Position]
 [Item]
-ItemLevel: 1
+ItemLevel: 2
 [Equipment]
-EquipmentSlot: Legs
+EquipmentSlot: Head
 [Stat]
 Name: AC
-Value: 2
+Value: 4
 [Stat]
 Name: EV
+Value: -1
+[Stat]
+Name: SH
 Value: -1
 
 "Leather Cap"
@@ -70,50 +73,56 @@ Value: 1
 Name: EV
 Value: 0
 
-"Leather Gloves"
+"Hat"
 [Description]
-Name: Leather Gloves
-Detail: A pair of leather gloves. This is light armour. 
+Name: Hat
+Detail: A hat made from fine cloth. This is light armour. 
 [Prototype]
-Name: Item:LeatherArmourGloves
+Name: Item:Hat
 Singleton: false
 [Appearance]
 Glyph: (
 Color: #6B4D46
 [SpriteAppearance]
-Bottom: glove_brown
+Bottom: hat
 [Position]
 [Item]
 ItemLevel: 1
 [Equipment]
-EquipmentSlot: Gloves
+EquipmentSlot: Head
 [Stat]
 Name: AC
-Value: 1
+Value: 0
 [Stat]
 Name: EV
 Value: 0
+[Stat]
+Name: Aegis
+Value: 2
 
-"Leather Boots"
+"Circlet"
 [Description]
-Name: Leather Boots
-Detail: A pair of leather boots. This is light armour. 
+Name: Circlet
+Detail: A band of metal worn around the forehead. This is light armour. 
 [Prototype]
-Name: Item:LeatherArmourBoots
+Name: Item:Circlet
 Singleton: false
 [Appearance]
 Glyph: (
 Color: #6B4D46
 [SpriteAppearance]
-Bottom: boot_brown
+Bottom: circlet
 [Position]
 [Item]
-ItemLevel: 1
+ItemLevel: 2
 [Equipment]
-EquipmentSlot: Boots
+EquipmentSlot: Head
 [Stat]
 Name: AC
 Value: 1
 [Stat]
 Name: EV
-Value: 0
+Value: -1
+[Stat]
+Name: Aegis
+Value: 1

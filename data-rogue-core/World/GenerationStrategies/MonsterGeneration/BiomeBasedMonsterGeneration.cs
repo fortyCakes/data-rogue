@@ -14,8 +14,10 @@ namespace data_rogue_core.World.GenerationStrategies
     {
         private class MonsterList: Dictionary<int, HashSet<IEntity>> { }
 
-        public override void Generate(ISystemContainer systemContainer, GeneratedBranch generatedBranch, IEntity branch, IRandom random)
+        public override void Generate(ISystemContainer systemContainer, GeneratedBranch generatedBranch, IEntity branch, IRandom random, IProgress<string> progress)
         {
+            progress.Report("Placing biome-appropriate monsters");
+
             var power = BasePower;
 
             var monsterList = GetMonsterList(systemContainer, branch);

@@ -1,0 +1,74 @@
+﻿"Gauntlets"
+[Description]
+Name: Gauntlets
+Detail: A set of metal gauntlets. This is heavy armour.
+[Prototype]
+Name: Item:Gauntlets
+Singleton: false
+[Appearance]
+Glyph: [
+Color: #6B4D46
+[SpriteAppearance]
+Bottom: armour_gauntlet
+[Position]
+[Item]
+ItemLevel: 1
+[Equipment]
+EquipmentSlot: Gloves
+[Stat]
+Name: AC
+Value: 2
+[Stat]
+Name: EV
+Value: -1
+[Stat]
+Name: SH
+Value: 1
+
+"Leather Gloves"
+[Description]
+Name: Leather Gloves
+Detail: A pair of leather gloves. This is light armour. 
+[Prototype]
+Name: Item:LeatherArmourGloves
+Singleton: false
+[Appearance]
+Glyph: (
+Color: #6B4D46
+[SpriteAppearance]
+Bottom: glove_brown
+[Position]
+[Item]
+ItemLevel: 1
+[Equipment]
+EquipmentSlot: Gloves
+[Stat]
+Name: AC
+Value: 1
+[Stat]
+Name: EV
+Value: 0
+
+"Mittens"
+[Description]
+Name: Mittens
+Detail: A pair of mittens. This is light armour. 
+[Prototype]
+Name: Item:Mittens
+Singleton: false
+[Appearance]
+Glyph: (
+Color: #6B4D46
+[SpriteAppearance]
+Bottom: glove_brown
+[Position]
+[Item]
+ItemLevel: 1
+[Equipment]
+EquipmentSlot: Gloves
+[Stat]
+Name: AC
+Value: 0
+[Stat]
+Name: EV
+Value: 0
