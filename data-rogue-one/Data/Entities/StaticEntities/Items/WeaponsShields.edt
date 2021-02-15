@@ -1,0 +1,71 @@
+﻿"Wooden Orb"
+[Description]
+Name: Wooden Orb
+Detail: A wooden orb carved with defensive runes.
+[Prototype]
+Name: Item:WoodenOrb
+Singleton: false
+[Appearance]
+Glyph: *
+Color: #6B4D46
+[SpriteAppearance]
+Top: orb
+[Position]
+[Item]
+ItemLevel: 1
+[Equipment]
+EquipmentSlot: Hand
+[Stat]
+Name: Willpower
+Value: 2
+[Stat]
+Name: Aegis
+Value: 5
+
+"Wooden Shield"
+[Description]
+Name: Wooden Shield
+Detail: A round wooden shield.
+[Prototype]
+Name: Item:WoodenShield
+Singleton: false
+[Appearance]
+Glyph: [
+Color: #6B4D46
+[SpriteAppearance]
+Top: wooden_shield
+[Position]
+[Item]
+ItemLevel: 1
+[Equipment]
+EquipmentSlot: Hand
+[Stat]
+Name: EV
+Value: -1
+[Stat]
+Name: SH
+Value: 9
+
+"Heater Shield"
+[Description]
+Name: Heater Shield
+Detail: A metal heater shield.
+[Prototype]
+Name: Item:HeaterShield
+Singleton: false
+[Appearance]
+Glyph: [
+Color: #6B4D46
+[SpriteAppearance]
+Top: shield_metal
+[Position]
+[Item]
+ItemLevel: 1
+[Equipment]
+EquipmentSlot: Hand
+[Stat]
+Name: EV
+Value: -4
+[Stat]
+Name: SH
+Value: 15

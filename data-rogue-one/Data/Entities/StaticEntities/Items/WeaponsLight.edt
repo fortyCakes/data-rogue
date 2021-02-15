@@ -1,13 +1,15 @@
-﻿"Bronze Dagger"
+﻿"Dagger"
 [Description]
-Name: Bronze Dagger
-Detail: A dagger made of bronze.
+Name: Dagger
+Detail: A metal dagger.
 [Prototype]
-Name: Item:BronzeDagger
+Name: Item:Dagger
 Singleton: false
 [Appearance]
 Glyph: ]
 Color: #6B4D46
+[SpriteAppearance]
+Bottom: weapon_dagger
 [Position]
 [Item]
 ItemLevel: 1
@@ -28,165 +30,191 @@ Value: 700
 Name: SH
 Value: 2
 
-"Bronze Sword"
+"Rapier"
 [Description]
-Name: Bronze Sword
-Detail: A sword made of bronze.
+Name: Rapier
+Detail: A metal rapier.
 [Prototype]
-Name: Item:BronzeSword
+Name: Item:Rapier
 Singleton: false
 [Appearance]
 Glyph: ]
 Color: #6B4D46
 [SpriteAppearance]
-Bottom: sword_1
+Bottom: weapon_rapier
 [Position]
 [Item]
-ItemLevel: 1
+ItemLevel: 2
 [Equipment]
 EquipmentSlot: Hand
 [Weapon]
-Class: Heavy
-[Stat]
-Name: EV
-Value: -1
+Class: Light
 [Stat]
 Name: Accuracy
-Value: 25
+Value: 27
 [Stat]
 Name: Damage
-Value: 11
-[Stat]
-Name: Speed
-Value: 1000
-[Stat]
-Name: SH
-Value: 4
-
-"Wooden Bow"
-[Description]
-Name: Wooden Bow
-Detail: A wooden bow. It requires arrows to fire.
-[Prototype]
-Name: Item:WoodenBow
-Singleton: false
-[Appearance]
-Glyph: )
-Color: #6B4D46
-[SpriteAppearance]
-Top: bow
-[Position]
-[Item]
-ItemLevel: 1
-[Equipment]
-EquipmentSlot: Hand
-[Weapon]
-Class: Launcher
-[RequiresAmmunition]
-AmmunitionType: Arrow
-[Stat]
-Name: Accuracy
-Value: 25
-[Stat]
-Name: Damage
-Value: 10
-[Stat]
-Name: Speed
-Value: 700
-
-"Wooden Staff"
-[Description]
-Name: Wooden Staff
-Detail: A wooden staff, suitable for blaster mages.
-[Prototype]
-Name: Item:WoodenStaff
-Singleton: false
-[Appearance]
-Glyph: )
-Color: #6B4D46
-[SpriteAppearance]
-Top: staff_1
-[Position]
-[Item]
-ItemLevel: 1
-[Equipment]
-EquipmentSlot: Hand
-[Weapon]
-Class: Blast
-[Stat]
-Name: Accuracy
-Value: 23
-[Stat]
-Name: Damage
-Value: 10
-[Stat]
-Name: Speed
-Value: 1000
-
-"Wooden Orb"
-[Description]
-Name: Wooden Orb
-Detail: A carved wooden orb, suitable for mages.
-[Prototype]
-Name: Item:WoodenOrb
-Singleton: false
-[Appearance]
-Glyph: *
-Color: #6B4D46
-[SpriteAppearance]
-Top: orb
-[Position]
-[Item]
-ItemLevel: 1
-[Equipment]
-EquipmentSlot: Hand
-[Stat]
-Name: Willpower
-Value: 2
-[Stat]
-Name: Aegis
-Value: 2
-
-"Arrow"
-[Description]
-Name: Arrow
-Detail: Arrows for use with a bow.
-[Prototype]
-Name: Item:Arrow
-Singleton: false
-[Appearance]
-Glyph: ]
-Color: #6B4D46
-[SpriteAppearance]
-Top: arrow
-[Position]
-[Item]
-ItemLevel: 1
-[Ammunition]
-AmmunitionType: Arrow
-[Stackable]
-StacksWith: Arrow
-
-"Wooden Shield"
-[Description]
-Name: Wooden Shield
-Detail: A round wooden shield.
-[Prototype]
-Name: Item:WoodenShield
-Singleton: false
-[Appearance]
-Glyph: [
-Color: #6B4D46
-[SpriteAppearance]
-Top: wooden_shield
-[Position]
-[Item]
-ItemLevel: 1
-[Equipment]
-EquipmentSlot: Hand
-[Stat]
-Name: EV
-Value: -1
-[Stat]
-Name: SH
 Value: 9
+[Stat]
+Name: Speed
+Value: 800
+[Stat]
+Name: SH
+Value: 1
+
+"Hatchet"
+[Description]
+Name: Hatchet
+Detail: A small metal axe.
+[Prototype]
+Name: Item:Hatchet
+Singleton: false
+[Appearance]
+Glyph: ]
+Color: #6B4D46
+[SpriteAppearance]
+Bottom: weapon_hatchet
+[Position]
+[Item]
+ItemLevel: 1
+[Equipment]
+EquipmentSlot: Hand
+[Weapon]
+Class: Light
+[Stat]
+Name: Accuracy
+Value: 25
+[Stat]
+Name: Damage
+Value: 10
+[Stat]
+Name: Speed
+Value: 800
+[Stat]
+Name: SH
+Value: 1
+
+"Club"
+[Description]
+Name: Hatchet
+Detail: A wooden club.
+[Prototype]
+Name: Item:Club
+Singleton: false
+[Appearance]
+Glyph: ]
+Color: #6B4D46
+[SpriteAppearance]
+Bottom: weapon_club
+[Position]
+[Item]
+ItemLevel: 1
+[Equipment]
+EquipmentSlot: Hand
+[Weapon]
+Class: Light
+[Stat]
+Name: Accuracy
+Value: 27
+[Stat]
+Name: Damage
+Value: 5
+[Stat]
+Name: Speed
+Value: 800
+[Stat]
+Name: SH
+Value: 3
+
+"Whip"
+[Description]
+Name: Whip
+Detail: A leather whip.
+[Prototype]
+Name: Item:Whip
+Singleton: false
+[Appearance]
+Glyph: ]
+Color: #6B4D46
+[SpriteAppearance]
+Bottom: weapon_whip
+[Position]
+[Item]
+ItemLevel: 1
+[Equipment]
+EquipmentSlot: Hand
+[Weapon]
+Class: Light
+[Stat]
+Name: Accuracy
+Value: 24
+[Stat]
+Name: Damage
+Value: 5
+[Stat]
+Name: Speed
+Value: 600
+
+"Shortsword"
+[Description]
+Name: Shortsword
+Detail: A metal shortsword.
+[Prototype]
+Name: Item:Shortsword
+Singleton: false
+[Appearance]
+Glyph: ]
+Color: #6B4D46
+[SpriteAppearance]
+Bottom: weapon_shortsword
+[Position]
+[Item]
+ItemLevel: 1
+[Equipment]
+EquipmentSlot: Hand
+[Weapon]
+Class: Light
+[Stat]
+Name: Accuracy
+Value: 25
+[Stat]
+Name: Damage
+Value: 10
+[Stat]
+Name: Speed
+Value: 900
+[Stat]
+Name: SH
+Value: 2
+
+"Spear"
+[Description]
+Name: Spear
+Detail: A short spear with a metal tip.
+[Prototype]
+Name: Item:Spear
+Singleton: false
+[Appearance]
+Glyph: ]
+Color: #6B4D46
+[SpriteAppearance]
+Bottom: weapon_spear
+[Position]
+[Item]
+ItemLevel: 1
+[Equipment]
+EquipmentSlot: Hand
+[Weapon]
+Class: Light
+[Stat]
+Name: Accuracy
+Value: 27
+[Stat]
+Name: Damage
+Value: 8
+[Stat]
+Name: Speed
+Value: 900
+[Stat]
+Name: SH
+Value: 3
