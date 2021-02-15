@@ -119,5 +119,8 @@ Action: ChangeMapEditorDefaultCell
 [KeyBinding]
 Key: Ctrl+N
 Action: CreateNew
+[KeyBinding]
+Key: Ctrl+W
+Action: EditDetails
 
 

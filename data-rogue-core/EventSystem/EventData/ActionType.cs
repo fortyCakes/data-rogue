@@ -31,6 +31,7 @@
         ChangeMapEditorCell,
         Open,
         ChangeMapEditorDefaultCell,
-        CreateNew
+        CreateNew,
+        EditDetails
     }
 }

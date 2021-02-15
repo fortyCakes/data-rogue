@@ -11,6 +11,7 @@ using data_rogue_core.Controls;
 using data_rogue_core.Controls.MapEditorTools;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.EventSystem.EventData;
+using data_rogue_core.Forms.StaticForms;
 using data_rogue_core.IOSystems;
 using data_rogue_core.IOSystems.BLTTiles;
 using data_rogue_core.Maps;
@@ -170,6 +171,23 @@ namespace data_rogue_core.Activities
             {
                 ShowChangeDefaultCellDialogue();
             }
+
+            if (action.Action == ActionType.EditDetails)
+            {
+                ShowMapInfoForm();
+            }
+        }
+
+        private void ShowMapInfoForm()
+        {
+            var mapInfoForm = new MapInfoForm(_systemContainer, _map, MapInfoFormCallback);
+
+            _systemContainer.ActivitySystem.Push(new FormActivity(mapInfoForm));
+        }
+
+        private void MapInfoFormCallback(MapInfoForm form)
+        {
+            throw new NotImplementedException();
         }
 
         private IEnumerable<IEntity> AllCells => _systemContainer.EntityEngine.AllEntities.Where(e => e.Has<Cell>());
