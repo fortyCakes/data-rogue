@@ -1,0 +1,74 @@
+﻿"Greaves"
+[Description]
+Name: Greaves
+Detail: A set of metal boots. This is heavy armour.
+[Prototype]
+Name: Item:Greaves
+Singleton: false
+[Appearance]
+Glyph: [
+Color: #6B4D46
+[SpriteAppearance]
+Bottom: armour_greaves
+[Position]
+[Item]
+ItemLevel: 1
+[Equipment]
+EquipmentSlot: Boots
+[Stat]
+Name: AC
+Value: 2
+[Stat]
+Name: EV
+Value: -1
+
+"Leather Boots"
+[Description]
+Name: Leather Boots
+Detail: A pair of leather boots. This is light armour. 
+[Prototype]
+Name: Item:LeatherArmourBoots
+Singleton: false
+[Appearance]
+Glyph: (
+Color: #6B4D46
+[SpriteAppearance]
+Bottom: boot_brown
+[Position]
+[Item]
+ItemLevel: 1
+[Equipment]
+EquipmentSlot: Boots
+[Stat]
+Name: AC
+Value: 1
+[Stat]
+Name: EV
+Value: 0
+
+"Shoes"
+[Description]
+Name: Shoes
+Detail: A pair of comfortable shoes. This is light armour. 
+[Prototype]
+Name: Item:Shoes
+Singleton: false
+[Appearance]
+Glyph: (
+Color: #6B4D46
+[SpriteAppearance]
+Bottom: shoe
+[Position]
+[Item]
+ItemLevel: 1
+[Equipment]
+EquipmentSlot: Boots
+[Stat]
+Name: AC
+Value: 1
+[Stat]
+Name: EV
+Value: 0
+[Stat]
+Name: Aegis
+Value: 1

@@ -1,0 +1,71 @@
+﻿"Plate Legs"
+[Description]
+Name: Plate Legs
+Detail: A set of metal plates to fit the legs, sized to fit a normal humanoid. This is heavy armour.
+[Prototype]
+Name: Item:FullPlate
+Singleton: false
+[Appearance]
+Glyph: [
+Color: #6B4D46
+[SpriteAppearance]
+Bottom: armour_platelegs
+[Position]
+[Item]
+ItemLevel: 2
+[Equipment]
+EquipmentSlot: Chest
+[Stat]
+Name: AC
+Value: 5
+[Stat]
+Name: EV
+Value: -4
+
+"Leather Chaps"
+[Description]
+Name: Leather Chaps
+Detail: Some leggings made of leather. This is light armour. 
+[Prototype]
+Name: Item:LeatherArmourLegs
+Singleton: false
+[Appearance]
+Glyph: (
+Color: #6B4D46
+[SpriteAppearance]
+Bottom: legs_brown
+[Position]
+[Item]
+ItemLevel: 1
+[Equipment]
+EquipmentSlot: Legs
+[Stat]
+Name: AC
+Value: 2
+[Stat]
+Name: EV
+Value: -1
+
+"Trousers"
+[Description]
+Name: Trousers
+Detail: Some leggings made of light cloth. This is light armour. 
+[Prototype]
+Name: Item:Trousers
+Singleton: false
+[Appearance]
+Glyph: (
+Color: #6B4D46
+[SpriteAppearance]
+Bottom: legs_brown
+[Position]
+[Item]
+ItemLevel: 1
+[Equipment]
+EquipmentSlot: Legs
+[Stat]
+Name: AC
+Value: 0
+[Stat]
+Name: EV
+Value: 0

@@ -35,7 +35,7 @@ namespace data_rogue_core.EventSystem.Rules
                 var branchLoading = new BranchLoadingScreenActivity(_systemContainer);
                 _systemContainer.ActivitySystem.Push(branchLoading);
 
-                Action<string> setBranchLoadingStatus = (progressString) => { branchLoading.Text = progressString; };
+                Action<string> setBranchLoadingStatus = (progressString) => { branchLoading.Text = "Generating branch... " + progressString; };
                 var progress = new Progress<string>(setBranchLoadingStatus);
 
                 var task = Task.Run(() => GenerateBranch(branchEntity, sender, portal, progress));

@@ -14,8 +14,10 @@ namespace data_rogue_core.World.GenerationStrategies
     {
         private class ItemList: Dictionary<int, HashSet<IEntity>> { }
 
-        public override void Generate(ISystemContainer systemContainer, GeneratedBranch generatedBranch, IEntity branch, IRandom random)
+        public override void Generate(ISystemContainer systemContainer, GeneratedBranch generatedBranch, IEntity branch, IRandom random, IProgress<string> progress)
         {
+            progress.Report("Generating random items");
+
             var power = BasePower;
 
             var monsterList = GetItemList(systemContainer, branch);

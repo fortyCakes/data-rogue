@@ -108,6 +108,28 @@ namespace data_rogue_core.UnitTests.Systems
         }
 
         [Test]
+        public void Equip_Boots_DoesNotUnequipTrousers()
+        {
+            var trousers = GiveTestItem(3, EquipmentSlot.Legs);
+            var boots = GiveTestItem(4, EquipmentSlot.Boots);
+
+            var result = equipmentSystem.Equip(entity, trousers);
+
+            result.Should().BeTrue();
+
+            result = equipmentSystem.Equip(entity, boots);
+
+            result.Should().BeTrue();
+
+            var expected = new EquipmentMappingList {
+                new EquipmentMappingListItem { EquipmentId = trousers.EntityId, Slot = new EquipmentSlotDetails {BodyPartType = BodyPartType.Legs, BodyPartLocation = BodyPartLocation.Lower, Index = 0} },
+                new EquipmentMappingListItem { EquipmentId = boots.EntityId, Slot = new EquipmentSlotDetails {BodyPartType = BodyPartType.Legs, BodyPartLocation = BodyPartLocation.Lower, Index = 0} },
+            };
+
+            entity.Get<Equipped>().EquippedItems.Should().BeEquivalentTo(expected);
+        }
+
+        [Test]
         public void Equip_HasSlotAndSomethingEquipped_SingleSlot_ReplacesEquippedAndPutsOldInInventory()
         {
             var item = GiveHelmTestItem(3);
@@ -317,6 +339,20 @@ namespace data_rogue_core.UnitTests.Systems
             return item;
         }
 
+        private IEntity GiveTestItem(uint entityId, EquipmentSlot slot)
+        {
+            var item = new Entity(entityId, "Test" + slot.ToString(), new IEntityComponent[]
+            {
+                new Equipment() {EquipmentSlot = slot}
+            });
+
+            entityEngine.Get(entityId).Returns(item);
+
+            entity.Get<Inventory>().Contents.Add(item);
+
+            return item;
+        }
+
         private IEntity GiveHandTestItem(uint entityId)
         {
             var item = new Entity(entityId, "TestHandItem", new IEntityComponent[]
@@ -338,6 +374,8 @@ namespace data_rogue_core.UnitTests.Systems
                 new EquipmentMapping {BodyPart = BodyPartType.Head, Slot = EquipmentSlot.Head},
                 new EquipmentMapping {BodyPart = BodyPartType.Arms, Slot = EquipmentSlot.Hand},
                 new EquipmentMapping {BodyPart = BodyPartType.Arms, Slot = EquipmentSlot.Hand},
+                new EquipmentMapping {BodyPart = BodyPartType.Legs, Slot = EquipmentSlot.Legs},
+                new EquipmentMapping {BodyPart = BodyPartType.Legs, Slot = EquipmentSlot.Boots},
                 new EquipmentMapping {BodyPart = BodyPartType.Arms, Slot = EquipmentSlot.Gloves}
             });
 
@@ -350,6 +388,7 @@ namespace data_rogue_core.UnitTests.Systems
             {
                 new BodyPart {Location = BodyPartLocation.Main, Type = BodyPartType.Head},
                 new BodyPart {Location = BodyPartLocation.Main, Type = BodyPartType.Arms},
+                new BodyPart {Location = BodyPartLocation.Lower, Type = BodyPartType.Legs},
                 new Inventory(),
                 new Equipped()
             });

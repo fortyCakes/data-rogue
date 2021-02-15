@@ -1,0 +1,69 @@
+﻿"Staff"
+[Description]
+Name: Staff
+Detail: A staff, suitable for mages. It's also good for blocking with.
+[Prototype]
+Name: Item:Staff
+Singleton: false
+[Appearance]
+Glyph: )
+Color: #6B4D46
+[SpriteAppearance]
+Top: staff_1
+[Position]
+[Item]
+ItemLevel: 1
+[Equipment]
+EquipmentSlot: Hand
+[Weapon]
+Class: Blast
+[Stat]
+Name: Accuracy
+Value: 23
+[Stat]
+Name: Damage
+Value: 10
+[Stat]
+Name: Willpower
+Value: 2
+[Stat]
+Name: Speed
+Value: 1000
+[Stat]
+Name: SH
+Value: 7
+
+"Wand"
+[Description]
+Name: Wand
+Detail: A wand, suitable for mages.
+[Prototype]
+Name: Item:Staff
+Singleton: false
+[Appearance]
+Glyph: )
+Color: #6B4D46
+[SpriteAppearance]
+Top: weapon_wand
+[Position]
+[Item]
+ItemLevel: 1
+[Equipment]
+EquipmentSlot: Hand
+[Weapon]
+Class: Blast
+[Stat]
+Name: Accuracy
+Value: 27
+[Stat]
+Name: Damage
+Value: 8
+[Stat]
+Name: Willpower
+Value: 2
+[Stat]
+Name: Speed
+Value: 1000
+[Stat]
+Name: Aegis
+Value: 1

@@ -1,0 +1,349 @@
+﻿"Sword"
+[Description]
+Name: Sword
+Detail: A metal sword.
+[Prototype]
+Name: Item:Sword
+Singleton: false
+[Appearance]
+Glyph: ]
+Color: #6B4D46
+[SpriteAppearance]
+Bottom: sword_1
+[Position]
+[Item]
+ItemLevel: 1
+[Equipment]
+EquipmentSlot: Hand
+[Weapon]
+Class: Heavy
+[Stat]
+Name: EV
+Value: -1
+[Stat]
+Name: Accuracy
+Value: 25
+[Stat]
+Name: Damage
+Value: 14
+[Stat]
+Name: Speed
+Value: 1000
+[Stat]
+Name: SH
+Value: 4
+
+"Pickaxe"
+[Description]
+Name: Pickaxe
+Detail: A pickaxe, designed for mining. It's not a great weapon.
+[Prototype]
+Name: Item:Pickaxe
+Singleton: false
+[Appearance]
+Glyph: ]
+Color: #6B4D46
+[SpriteAppearance]
+Bottom: weapon_pickaxe
+[Position]
+[Item]
+ItemLevel: 1
+[Equipment]
+EquipmentSlot: Hand
+[Weapon]
+Class: Heavy
+[Stat]
+Name: EV
+Value: -2
+[Stat]
+Name: Accuracy
+Value: 20
+[Stat]
+Name: Damage
+Value: 14
+[Stat]
+Name: Speed
+Value: 1000
+[Stat]
+Name: SH
+Value: 1
+
+"Bardiche"
+[Description]
+Name: Bardiche
+Detail: A long metal blade attached to a haft.
+[Prototype]
+Name: Item:Bardiche
+Singleton: false
+[Appearance]
+Glyph: ]
+Color: #6B4D46
+[SpriteAppearance]
+Bottom: weapon_bardiche
+[Position]
+[Item]
+ItemLevel: 1
+[Equipment]
+EquipmentSlot: Hand
+[Weapon]
+Class: Heavy
+[Stat]
+Name: EV
+Value: -2
+[Stat]
+Name: Accuracy
+Value: 25
+[Stat]
+Name: Damage
+Value: 18
+[Stat]
+Name: Speed
+Value: 1200
+[Stat]
+Name: SH
+Value: 4
+
+"Battleaxe"
+[Description]
+Name: Battleaxe
+Detail: A two-headed metal battleaxe.
+[Prototype]
+Name: Item:Battleaxe
+Singleton: false
+[Appearance]
+Glyph: ]
+Color: #6B4D46
+[SpriteAppearance]
+Bottom: weapon_battleaxe
+[Position]
+[Item]
+ItemLevel: 1
+[Equipment]
+EquipmentSlot: Hand
+[Weapon]
+Class: Heavy
+[Stat]
+Name: EV
+Value: -1
+[Stat]
+Name: Accuracy
+Value: 26
+[Stat]
+Name: Damage
+Value: 16
+[Stat]
+Name: Speed
+Value: 1000
+[Stat]
+Name: SH
+Value: 2
+
+"Flail"
+[Description]
+Name: Flail
+Detail: A heavy spike ball on the end of a chain.
+[Prototype]
+Name: Item:Flail
+Singleton: false
+[Appearance]
+Glyph: ]
+Color: #6B4D46
+[SpriteAppearance]
+Bottom: weapon_flail
+[Position]
+[Item]
+ItemLevel: 2
+[Equipment]
+EquipmentSlot: Hand
+[Weapon]
+Class: Heavy
+[Stat]
+Name: EV
+Value: -4
+[Stat]
+Name: Accuracy
+Value: 15
+[Stat]
+Name: Damage
+Value: 32
+[Stat]
+Name: Speed
+Value: 800
+[Stat]
+Name: SH
+Value: -1
+
+"Heavy Club"
+[Description]
+Name: Heavy Club
+Detail: A huge club made of wood.
+[Prototype]
+Name: Item:HeavyClub
+Singleton: false
+[Appearance]
+Glyph: ]
+Color: #6B4D46
+[SpriteAppearance]
+Bottom: weapon_heavy_club
+[Position]
+[Item]
+ItemLevel: 1
+[Equipment]
+EquipmentSlot: Hand
+[Weapon]
+Class: Heavy
+[Stat]
+Name: EV
+Value: -3
+[Stat]
+Name: Accuracy
+Value: 25
+[Stat]
+Name: Damage
+Value: 20
+[Stat]
+Name: Speed
+Value: 1400
+[Stat]
+Name: SH
+Value: 0
+
+"Maul"
+[Description]
+Name: Maul
+Detail: A heavy metal hammer head on a long haft.
+[Prototype]
+Name: Item:Maul
+Singleton: false
+[Appearance]
+Glyph: ]
+Color: #6B4D46
+[SpriteAppearance]
+Bottom: weapon_maul
+[Position]
+[Item]
+ItemLevel: 2
+[Equipment]
+EquipmentSlot: Hand
+[Weapon]
+Class: Heavy
+[Stat]
+Name: EV
+Value: -3
+[Stat]
+Name: Accuracy
+Value: 25
+[Stat]
+Name: Damage
+Value: 18
+[Stat]
+Name: Speed
+Value: 1000
+[Stat]
+Name: SH
+Value: 2
+
+"Morningstar"
+[Description]
+Name: Morningstar
+Detail: A spiked metal ball on a stick.
+[Prototype]
+Name: Item:Morningstar
+Singleton: false
+[Appearance]
+Glyph: ]
+Color: #6B4D46
+[SpriteAppearance]
+Bottom: weapon_morningstar
+[Position]
+[Item]
+ItemLevel: 1
+[Equipment]
+EquipmentSlot: Hand
+[Weapon]
+Class: Heavy
+[Stat]
+Name: EV
+Value: -1
+[Stat]
+Name: Accuracy
+Value: 25
+[Stat]
+Name: Damage
+Value: 18
+[Stat]
+Name: Speed
+Value: 1100
+[Stat]
+Name: SH
+Value: 3
+
+"Pike"
+[Description]
+Name: Pike
+Detail: A sharp metal spike and blade on a long haft.
+[Prototype]
+Name: Item:Pike
+Singleton: false
+[Appearance]
+Glyph: ]
+Color: #6B4D46
+[SpriteAppearance]
+Bottom: weapon_pike
+[Position]
+[Item]
+ItemLevel: 2
+[Equipment]
+EquipmentSlot: Hand
+[Weapon]
+Class: Heavy
+[Stat]
+Name: EV
+Value: -4
+[Stat]
+Name: Accuracy
+Value: 27
+[Stat]
+Name: Damage
+Value: 18
+[Stat]
+Name: Speed
+Value: 1200
+[Stat]
+Name: SH
+Value: 3
+
+"Scythe"
+[Description]
+Name: Scythe
+Detail: A curved metal blade attached to a handle.
+[Prototype]
+Name: Item:Scythe
+Singleton: false
+[Appearance]
+Glyph: ]
+Color: #6B4D46
+[SpriteAppearance]
+Bottom: weapon_scythe
+[Position]
+[Item]
+ItemLevel: 2
+[Equipment]
+EquipmentSlot: Hand
+[Weapon]
+Class: Heavy
+[Stat]
+Name: EV
+Value: -3
+[Stat]
+Name: Accuracy
+Value: 21
+[Stat]
+Name: Damage
+Value: 22
+[Stat]
+Name: Speed
+Value: 1000
+[Stat]
+Name: SH
+Value: 1
