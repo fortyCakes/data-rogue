@@ -6,17 +6,32 @@ namespace data_rogue_core.Data
 {
     public class EquipmentSlotDetails : ICustomFieldSerialization
     {
+        public EquipmentSlot EquipmentSlot;
         public BodyPartType BodyPartType;
         public BodyPartLocation BodyPartLocation;
         public int Index = 1;
+
+        public EquipmentSlotDetails()
+        {
+            // Only use for serialization
+        }
+
+        public EquipmentSlotDetails(EquipmentSlot slot, BodyPartType bodyPartType, BodyPartLocation location, int index)
+        {
+            EquipmentSlot = slot;
+            BodyPartType = bodyPartType;
+            BodyPartLocation = location;
+            Index = index;
+        }
 
         public void Deserialize(string value)
         {
             var splits = value.Split('|');
 
-            BodyPartType = (BodyPartType)Enum.Parse(typeof(BodyPartType), splits[0]);
-            BodyPartLocation = (BodyPartLocation)Enum.Parse(typeof(BodyPartLocation), splits[1]);
-            Index = int.Parse(splits[2]);
+            EquipmentSlot = (EquipmentSlot)Enum.Parse(typeof(EquipmentSlot), splits[0]);
+            BodyPartType = (BodyPartType)Enum.Parse(typeof(BodyPartType), splits[1]);
+            BodyPartLocation = (BodyPartLocation)Enum.Parse(typeof(BodyPartLocation), splits[2]);
+            Index = int.Parse(splits[3]);
         }
 
         public string Serialize()
@@ -26,7 +41,7 @@ namespace data_rogue_core.Data
 
         public override string ToString()
         {
-            return $"{BodyPartType}|{BodyPartLocation}|{Index}";
+            return $"{EquipmentSlot}|{BodyPartType}|{BodyPartLocation}|{Index}";
         }
 
         public override bool Equals(object obj)
@@ -35,17 +50,17 @@ namespace data_rogue_core.Data
 
             if (asItem == null) return false;
 
-            return BodyPartType == asItem.BodyPartType && BodyPartLocation == asItem.BodyPartLocation && Index == asItem.Index;
+            return EquipmentSlot == asItem.EquipmentSlot && BodyPartType == asItem.BodyPartType && BodyPartLocation == asItem.BodyPartLocation && Index == asItem.Index;
         }
 
         public override int GetHashCode()
         {
-            int hash = 13;
-            hash = hash * 7 + BodyPartType.GetHashCode();
-            hash = hash * 7 + BodyPartLocation.GetHashCode();
-            hash = hash * 7 + Index.GetHashCode();
-
-            return hash;
+            var hashCode = 1673211637;
+            hashCode = hashCode * -1521134295 + EquipmentSlot.GetHashCode();
+            hashCode = hashCode * -1521134295 + BodyPartType.GetHashCode();
+            hashCode = hashCode * -1521134295 + BodyPartLocation.GetHashCode();
+            hashCode = hashCode * -1521134295 + Index.GetHashCode();
+            return hashCode;
         }
 
         public static bool operator ==(EquipmentSlotDetails a, EquipmentSlotDetails b)

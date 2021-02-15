@@ -79,6 +79,7 @@
     <Compile Include="Activities\MapEditorCellMenuActivity.cs" />
     <Compile Include="Components\CanAddToMap.cs" />
     <Compile Include="Components\Cell.cs" />
+    <Compile Include="Components\Equipment.cs" />
     <Compile Include="Controls\MapEditorCellPickerControl.cs" />
     <Compile Include="Controls\MapEditorControl.cs" />
     <Compile Include="Controls\MapEditorTools\BaseFilledShapeTool.cs" />

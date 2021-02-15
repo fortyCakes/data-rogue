@@ -15,6 +15,7 @@ Top: bow
 ItemLevel: 1
 [Equipment]
 EquipmentSlot: Hand
+AdditionalEquipmentSlot: Hand
 [Weapon]
 Class: Launcher
 [RequiresAmmunition]

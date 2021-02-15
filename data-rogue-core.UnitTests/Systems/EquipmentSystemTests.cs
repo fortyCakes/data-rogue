@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using data_rogue_core.Components;
 using data_rogue_core.Data;
 using data_rogue_core.EntityEngineSystem;
@@ -43,6 +44,13 @@ namespace data_rogue_core.UnitTests.Systems
         private IPrototypeSystem prototypeSystem;
         private IEntityEngine entityEngine;
         private IEventSystem eventSystem;
+    
+        private EquipmentSlotDetails HeadSlot => new EquipmentSlotDetails(EquipmentSlot.Head, BodyPartType.Head, BodyPartLocation.Main, 0);
+        private EquipmentSlotDetails GloveSlot => new EquipmentSlotDetails(EquipmentSlot.Gloves, BodyPartType.Arms, BodyPartLocation.Main, 0);
+        private EquipmentSlotDetails HandSlot => new EquipmentSlotDetails(EquipmentSlot.Hand, BodyPartType.Arms, BodyPartLocation.Main, 0);
+        private EquipmentSlotDetails HandSlot2 => new EquipmentSlotDetails(EquipmentSlot.Hand, BodyPartType.Arms, BodyPartLocation.Main, 1);
+        private EquipmentSlotDetails LegsSlot => new EquipmentSlotDetails(EquipmentSlot.Legs, BodyPartType.Legs, BodyPartLocation.Lower, 0);
+        private EquipmentSlotDetails BootsSlot => new EquipmentSlotDetails(EquipmentSlot.Boots, BodyPartType.Legs, BodyPartLocation.Lower, 0);
 
         [Test]
         public void GetEquipmentSlots_WithMapping_ReturnsMappedSlots()
@@ -54,20 +62,32 @@ namespace data_rogue_core.UnitTests.Systems
                 {
                     EquipmentSlot.Head, new List<EquipmentSlotDetails>
                     {
-                        new EquipmentSlotDetails {BodyPartLocation = BodyPartLocation.Main, BodyPartType = BodyPartType.Head, Index = 0}
+                        HeadSlot
                     }
                 },
                 {
                     EquipmentSlot.Gloves, new List<EquipmentSlotDetails>
                     {
-                        new EquipmentSlotDetails {BodyPartLocation = BodyPartLocation.Main, BodyPartType = BodyPartType.Arms, Index = 0}
+                        GloveSlot
                     }
                 },
                 {
                     EquipmentSlot.Hand, new List<EquipmentSlotDetails>
                     {
-                        new EquipmentSlotDetails {BodyPartLocation = BodyPartLocation.Main, BodyPartType = BodyPartType.Arms, Index = 0},
-                        new EquipmentSlotDetails {BodyPartLocation = BodyPartLocation.Main, BodyPartType = BodyPartType.Arms, Index = 1}
+                        HandSlot,
+                        HandSlot2,
+                    }
+                },
+                {
+                    EquipmentSlot.Legs, new List<EquipmentSlotDetails>
+                    {
+                        LegsSlot
+                    }
+                },
+                {
+                    EquipmentSlot.Boots, new List<EquipmentSlotDetails>
+                    {
+                        BootsSlot
                     }
                 }
             };
@@ -86,7 +106,7 @@ namespace data_rogue_core.UnitTests.Systems
 
             var expected = new EquipmentMappingList
             {
-                new EquipmentMappingListItem {EquipmentId = item.EntityId, Slot = new EquipmentSlotDetails {BodyPartType = BodyPartType.Head, BodyPartLocation = BodyPartLocation.Main, Index = 0}}
+                new EquipmentMappingListItem {EquipmentId = item.EntityId, Slot = HeadSlot }
             };
 
             entity.Get<Equipped>().EquippedItems.Should().BeEquivalentTo(expected);
@@ -122,8 +142,8 @@ namespace data_rogue_core.UnitTests.Systems
             result.Should().BeTrue();
 
             var expected = new EquipmentMappingList {
-                new EquipmentMappingListItem { EquipmentId = trousers.EntityId, Slot = new EquipmentSlotDetails {BodyPartType = BodyPartType.Legs, BodyPartLocation = BodyPartLocation.Lower, Index = 0} },
-                new EquipmentMappingListItem { EquipmentId = boots.EntityId, Slot = new EquipmentSlotDetails {BodyPartType = BodyPartType.Legs, BodyPartLocation = BodyPartLocation.Lower, Index = 0} },
+                new EquipmentMappingListItem { EquipmentId = trousers.EntityId, Slot = new EquipmentSlotDetails(EquipmentSlot.Legs, BodyPartType.Legs, BodyPartLocation.Lower, 0) },
+                new EquipmentMappingListItem { EquipmentId = boots.EntityId, Slot = new EquipmentSlotDetails(EquipmentSlot.Boots, BodyPartType.Legs, BodyPartLocation.Lower, 0) }
             };
 
             entity.Get<Equipped>().EquippedItems.Should().BeEquivalentTo(expected);
@@ -142,9 +162,10 @@ namespace data_rogue_core.UnitTests.Systems
 
             result.Should().BeTrue();
 
+            
             var expected = new EquipmentMappingList
             {
-                new EquipmentMappingListItem {EquipmentId = newItem.EntityId, Slot = new EquipmentSlotDetails {BodyPartType = BodyPartType.Head, BodyPartLocation = BodyPartLocation.Main, Index = 0}}
+                new EquipmentMappingListItem {EquipmentId = newItem.EntityId, Slot = HeadSlot}
             };
 
             entity.Get<Equipped>().EquippedItems.Should().BeEquivalentTo(expected);
@@ -186,8 +207,8 @@ namespace data_rogue_core.UnitTests.Systems
             result.Should().BeTrue();
 
             var expected = new EquipmentMappingList{
-                new EquipmentMappingListItem {EquipmentId = item1.EntityId, Slot = new EquipmentSlotDetails {BodyPartType = BodyPartType.Arms, BodyPartLocation = BodyPartLocation.Main, Index = 0}},
-                new EquipmentMappingListItem {EquipmentId = item2.EntityId, Slot = new EquipmentSlotDetails {BodyPartType = BodyPartType.Arms, BodyPartLocation = BodyPartLocation.Main, Index = 1}}
+                new EquipmentMappingListItem {EquipmentId = item1.EntityId, Slot = HandSlot},
+                new EquipmentMappingListItem {EquipmentId = item2.EntityId, Slot = HandSlot2}
             };
 
             entity.Get<Equipped>().EquippedItems.Should().BeEquivalentTo(expected);
@@ -198,7 +219,7 @@ namespace data_rogue_core.UnitTests.Systems
         }
 
         [Test]
-        public void Equip_HasMultipleFullSlots_DoesNotEquip()
+        public void Equip_HasMultipleFullSlots_UnequipsFirst()
         {
             var item1 = GiveHandTestItem(3);
             var item2 = GiveHandTestItem(4);
@@ -208,16 +229,16 @@ namespace data_rogue_core.UnitTests.Systems
             equipmentSystem.Equip(entity, item2);
             var result = equipmentSystem.Equip(entity, item3);
 
-            result.Should().BeFalse();
+            result.Should().BeTrue();
 
             var expected = new EquipmentMappingList{
-                new EquipmentMappingListItem {EquipmentId = item1.EntityId, Slot = new EquipmentSlotDetails {BodyPartType = BodyPartType.Arms, BodyPartLocation = BodyPartLocation.Main, Index = 0}},
-                new EquipmentMappingListItem {EquipmentId = item2.EntityId, Slot = new EquipmentSlotDetails {BodyPartType = BodyPartType.Arms, BodyPartLocation = BodyPartLocation.Main, Index = 1}}
+                new EquipmentMappingListItem {EquipmentId = item3.EntityId, Slot = HandSlot},
+                new EquipmentMappingListItem {EquipmentId = item2.EntityId, Slot = HandSlot2}
             };
 
             entity.Get<Equipped>().EquippedItems.Should().BeEquivalentTo(expected);
 
-            var expectedInventory = new EntityReferenceList() {item3};
+            var expectedInventory = new EntityReferenceList() {item1};
 
             entity.Get<Inventory>().Contents.Should().BeEquivalentTo(expectedInventory);
         }
@@ -284,9 +305,7 @@ namespace data_rogue_core.UnitTests.Systems
             var item1 = GiveHandTestItem(3);
             equipmentSystem.Equip(entity, item1);
 
-            var slot = new EquipmentSlotDetails { BodyPartLocation = BodyPartLocation.Main, BodyPartType = BodyPartType.Arms, Index = 0 };
-
-            var result = equipmentSystem.GetItemInSlot(entity, EquipmentSlot.Hand, slot);
+            var result = equipmentSystem.GetItemInSlot(entity, EquipmentSlot.Hand, HandSlot);
 
             result.Should().Be(item1);
         }
@@ -297,9 +316,7 @@ namespace data_rogue_core.UnitTests.Systems
             var item1 = GiveHandTestItem(3);
             equipmentSystem.Equip(entity, item1);
 
-            var slot = new EquipmentSlotDetails { BodyPartLocation = BodyPartLocation.Main, BodyPartType = BodyPartType.Arms, Index = 0 };
-
-            var result = equipmentSystem.GetItemInSlot(entity, EquipmentSlot.Gloves, slot);
+            var result = equipmentSystem.GetItemInSlot(entity, EquipmentSlot.Gloves, HandSlot);
 
             result.Should().BeNull();
         }
@@ -310,9 +327,7 @@ namespace data_rogue_core.UnitTests.Systems
             var item1 = GiveHandTestItem(3);
             equipmentSystem.Equip(entity, item1);
 
-            var slot = new EquipmentSlotDetails { BodyPartLocation = BodyPartLocation.Main, BodyPartType = BodyPartType.Arms, Index = 1 };
-
-            var result = equipmentSystem.GetItemInSlot(entity, EquipmentSlot.Hand, slot);
+            var result = equipmentSystem.GetItemInSlot(entity, EquipmentSlot.Hand, HandSlot2);
 
             result.Should().BeNull();
         }
@@ -320,9 +335,71 @@ namespace data_rogue_core.UnitTests.Systems
         [Test]
         public void GetItemInSlot_SlotEmpty_ReturnsNull()
         {
-            var result = equipmentSystem.GetItemInSlot(entity, EquipmentSlot.Hand, new EquipmentSlotDetails { BodyPartType = BodyPartType.Legs });
+            var result = equipmentSystem.GetItemInSlot(entity, EquipmentSlot.Hand, LegsSlot);
 
             result.Should().BeNull();
+        }
+
+        [Test]
+        public void EquipTwoHandedItem_OnlyHaveOneHand_CantEquip()
+        {
+            Entity mappings = new Entity(1, "EquipmentMappings", new IEntityComponent[]
+            {
+                new EquipmentMapping {BodyPart = BodyPartType.Arms, Slot = EquipmentSlot.Hand}
+            });
+
+            prototypeSystem.Get("EquipmentMappings").Returns(mappings);
+            var twoHandedItem = GiveHandTestItem(3);
+            twoHandedItem.Get<Equipment>().AdditionalEquipmentSlot = EquipmentSlot.Hand;
+
+            var equipped2H = equipmentSystem.Equip(entity, twoHandedItem);
+
+            equipped2H.Should().BeFalse();
+        }
+
+        [Test]
+        public void EquipTwoHandedItem_ItemInBothHands_UnequipsBoth()
+        {
+            var firstItem = GiveHandTestItem(1);
+            var secondItem = GiveHandTestItem(2);
+            var twoHandedItem = GiveHandTestItem(3);
+            twoHandedItem.Get<Equipment>().AdditionalEquipmentSlot = EquipmentSlot.Hand;
+
+            equipmentSystem.Equip(entity, firstItem);
+            equipmentSystem.Equip(entity, secondItem);
+
+            var equipped2H = equipmentSystem.Equip(entity, twoHandedItem);
+
+            equipped2H.Should().BeTrue();
+
+            ShouldNotBeEquipped(entity, firstItem);
+            ShouldNotBeEquipped(entity, secondItem);
+        }
+
+        [Test]
+        public void EquipOneHandedItem_HoldingTwoHandedItem_UnequipsTwoHandedItem()
+        {
+            var firstItem = GiveHandTestItem(1);
+            var twoHandedItem = GiveHandTestItem(3);
+            twoHandedItem.Get<Equipment>().AdditionalEquipmentSlot = EquipmentSlot.Hand;
+
+            var equipped2H = equipmentSystem.Equip(entity, twoHandedItem);
+
+            equipped2H.Should().BeTrue();
+            equipmentSystem.Equip(entity, firstItem);
+
+            ShouldBeEquipped(entity, firstItem);
+            ShouldNotBeEquipped(entity, twoHandedItem);
+        }
+
+        private void ShouldBeEquipped(IEntity entity, IEntity item)
+        {
+            equipmentSystem.GetEquippedItems(entity).Should().Contain(item);
+        }
+
+        private void ShouldNotBeEquipped(IEntity entity, IEntity item)
+        {
+            equipmentSystem.GetEquippedItems(entity).Should().NotContain(item);
         }
 
         private IEntity GiveHelmTestItem(uint entityId)
