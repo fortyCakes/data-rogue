@@ -344,22 +344,8 @@ SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
-Name: armour_leather
-Path: Images/Sprites/Entities/Items/armour_leather.png
-Type: SingleSprite
-SpriteWidth: 16
-SpriteHeight: 16
-Scaling: 2
-[SpriteSheet]
 Name: boot_copper
 Path: Images/Sprites/Entities/Items/boot_copper.png
-Type: SingleSprite
-SpriteWidth: 16
-SpriteHeight: 16
-Scaling: 2
-[SpriteSheet]
-Name: gauntlet_copper
-Path: Images/Sprites/Entities/Items/gauntlet_copper.png
 Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16
@@ -610,13 +596,6 @@ Scaling: 2
 [SpriteSheet]
 Name: armour_scale
 Path: Images/Sprites/Entities/Items/armour_scale.png
-Type: SingleSprite
-SpriteWidth: 16
-SpriteHeight: 16
-Scaling: 2
-[SpriteSheet]
-Name: boot_copper
-Path: Images/Sprites/Entities/Items/boot_copper.png
 Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16

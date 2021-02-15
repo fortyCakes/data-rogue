@@ -51,7 +51,7 @@ Value: 0
 Name: Shoes
 Detail: A pair of comfortable shoes. This is light armour. 
 [Prototype]
-Name: Item:LeatherArmourBoots
+Name: Item:Shoes
 Singleton: false
 [Appearance]
 Glyph: (

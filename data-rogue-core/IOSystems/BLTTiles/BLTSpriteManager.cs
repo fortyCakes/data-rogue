@@ -1,6 +1,7 @@
 ﻿using BLTWrapper;
 using System.Collections.Generic;
 using data_rogue_core.Components;
+using System;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
@@ -16,6 +17,11 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
         public void Add(ISpriteSheet spriteSheet)
         {
+            if (_spriteDictionary.ContainsKey(spriteSheet.Name))
+            {
+                throw new ApplicationException($"Spritesheet loading tried to add two sprites called {spriteSheet.Name}, check spritesheet configuration.");
+            }
+
             _spriteDictionary.Add(spriteSheet.Name, spriteSheet);
         }
 

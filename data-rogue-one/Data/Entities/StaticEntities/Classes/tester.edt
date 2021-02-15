@@ -25,5 +25,11 @@ Order: 5
 Item: Item:LeatherArmourChest
 Equipped: true
 [StartsWithItem]
-Item: Item:BronzeSword
+Item: Item:Trousers
+Equipped: true
+[StartsWithItem]
+Item: Item:Shoes
+Equipped: true
+[StartsWithItem]
+Item: Item:Club
 Equipped: true
