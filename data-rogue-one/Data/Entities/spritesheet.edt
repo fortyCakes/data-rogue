@@ -657,6 +657,111 @@ SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
+Name: shield_buckler
+Path: Images/Sprites/Entities/Items/shield_buckler.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: shield_metal
+Path: Images/Sprites/Entities/Items/shield_metal.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: weapon_bardiche
+Path: Images/Sprites/Entities/Items/weapon_bardiche.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: weapon_battleaxe
+Path: Images/Sprites/Entities/Items/weapon_battleaxe.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: weapon_hatchet
+Path: Images/Sprites/Entities/Items/weapon_hatchet.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: weapon_maul
+Path: Images/Sprites/Entities/Items/weapon_maul.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: weapon_pike
+Path: Images/Sprites/Entities/Items/weapon_pike.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: weapon_scythe
+Path: Images/Sprites/Entities/Items/weapon_scythe.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: weapon_club
+Path: Images/Sprites/Entities/Items/weapon_club.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: weapon_dagger
+Path: Images/Sprites/Entities/Items/weapon_dagger.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: weapon_flail
+Path: Images/Sprites/Entities/Items/weapon_flail.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: weapon_shortsword
+Path: Images/Sprites/Entities/Items/weapon_shortsword.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: weapon_spear
+Path: Images/Sprites/Entities/Items/weapon_spear.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: weapon_wand
+Path: Images/Sprites/Entities/Items/weapon_wand.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: weapon_whip
+Path: Images/Sprites/Entities/Items/weapon_bardiche.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
 Name: trousers
 Path: Images/Sprites/Entities/Items/trousers.png
 Type: SingleSprite
