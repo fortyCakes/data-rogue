@@ -4,6 +4,7 @@ using System.Linq;
 using data_rogue_core.Activities;
 using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.Forms.StaticForms;
+using data_rogue_core.IOSystems;
 using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
 using data_rogue_core.Utils;
@@ -45,6 +46,19 @@ namespace data_rogue_core.Forms
             Title = title;
         }
 
+        public void HandleKeyboard(KeyCombination keyboard)
+        {
+            if (Fields.ContainsKey(FormSelection.SelectedItem))
+            {
+                var selectedFormData = Fields[FormSelection.SelectedItem];
+                if (selectedFormData.FormDataType == FormDataType.Text)
+                {
+                    HandleKeyboard_Text(keyboard);
+                }
+            }
+        }
+
+
         public void HandleAction(ActionEventData action)
         {
             if (action == null) return;
@@ -57,7 +71,6 @@ namespace data_rogue_core.Forms
                 switch (selectedFormData.FormDataType)
                 {
                     case FormDataType.Text:
-                        handled = HandleAction_Text(action, selectedFormData);
                         break;
                     case FormDataType.MultipleChoice:
                         handled = HandleAction_MultipleChoice(action, selectedFormData);
@@ -145,21 +158,11 @@ namespace data_rogue_core.Forms
             return false;
         }
 
-        private bool HandleAction_Text(ActionEventData action, FormData selectedFormData)
+        private bool HandleKeyboard_Text(KeyCombination keyboard)
         {
-            if (action.KeyPress.Key >= Key.A && action.KeyPress.Key <= Key.Z || action.KeyPress.Key == Key.Space)
-            {
-                if (selectedFormData.Value.ToString().Length < 29)
-                {
-                    var key = action.KeyPress.Key == Key.Space ? " " : action.KeyPress.Key.ToString();
+            var selectedFormData = Fields[FormSelection.SelectedItem];
 
-                    selectedFormData.Value += action.KeyPress.Shift ? key.ToUpper() : key.ToLower();
-                }
-
-                return true;
-            }
-
-            if (action.KeyPress.Key == Key.BackSpace || action.KeyPress.Key == Key.Back)
+            if (keyboard.Key == Key.BackSpace || keyboard.Key == Key.Back)
             {
                 string text = (string)selectedFormData.Value;
 
@@ -168,7 +171,14 @@ namespace data_rogue_core.Forms
                     text = text.Substring(0, text.Length - 1);
                     selectedFormData.Value = text;
                 }
+
                 return true;
+            }
+
+            var enteredChar = keyboard.ToChar();
+            if (enteredChar != null && selectedFormData.Value.ToString().Length < 29)
+            {
+                selectedFormData.Value = selectedFormData.Value.ToString() + enteredChar;
             }
 
             return false;

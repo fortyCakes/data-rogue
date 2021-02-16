@@ -11,12 +11,14 @@ using data_rogue_core.Controls;
 using data_rogue_core.Controls.MapEditorTools;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.EventSystem.EventData;
+using data_rogue_core.Forms;
 using data_rogue_core.Forms.StaticForms;
 using data_rogue_core.IOSystems;
 using data_rogue_core.IOSystems.BLTTiles;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
+using Form = data_rogue_core.Forms.Form;
 
 namespace data_rogue_core.Activities
 {
@@ -142,52 +144,85 @@ namespace data_rogue_core.Activities
 
         public override void HandleAction(ISystemContainer systemContainer, ActionEventData action)
         {
-            if (action.Action == ActionType.ChangeMapEditorCell)
+            if (action != null)
             {
-                ShowChangePrimaryCellDialogue();
-            }
+                if (action.Action == ActionType.ChangeMapEditorCell)
+                {
+                    ShowChangePrimaryCellDialogue();
+                }
 
-            if (action.Action == ActionType.Move)
-            {
-                CameraPosition += Vector.Parse(action.Parameters);
-            }
+                if (action.Action == ActionType.Move)
+                {
+                    CameraPosition += Vector.Parse(action.Parameters);
+                }
 
-            if (action.Action == ActionType.CreateNew)
-            {
-                NewMap();
-            }
+                if (action.Action == ActionType.CreateNew)
+                {
+                    NewMap();
+                }
 
-            if (action.Action == ActionType.Save)
-            {
-                SaveMap();
-            }
+                if (action.Action == ActionType.Save)
+                {
+                    SaveMap();
+                }
 
-            if (action.Action == ActionType.Open)
-            {
-                OpenMap();
-            }
+                if (action.Action == ActionType.Open)
+                {
+                    OpenMap();
+                }
 
-            if (action.Action == ActionType.ChangeMapEditorDefaultCell)
-            {
-                ShowChangeDefaultCellDialogue();
-            }
+                if (action.Action == ActionType.ChangeMapEditorDefaultCell)
+                {
+                    ShowChangeDefaultCellDialogue();
+                }
 
-            if (action.Action == ActionType.EditDetails)
-            {
-                ShowMapInfoForm();
+                if (action.Action == ActionType.EditDetails)
+                {
+                    ShowMapInfoForm();
+                }
             }
         }
 
         private void ShowMapInfoForm()
         {
             var mapInfoForm = new MapInfoForm(_systemContainer, _map, MapInfoFormCallback);
-
             _systemContainer.ActivitySystem.Push(new FormActivity(mapInfoForm));
         }
 
-        private void MapInfoFormCallback(MapInfoForm form)
+        private void MapInfoFormCallback(FormButton selectedButton, Form form)
         {
-            throw new NotImplementedException();
+            if (selectedButton == FormButton.Ok)
+            {
+                var mapInfoForm = form as MapInfoForm;
+
+                SetMapName(mapInfoForm.Fields["Map Name"].Value.ToString());
+                SetMapBiomes(mapInfoForm.Fields["Biomes"].Value.ToString());
+                SetMapWeight(mapInfoForm.Fields["VaultWeight"].Value.ToString());
+            }
+
+            _systemContainer.ActivitySystem.ActivityStack.Pop();
+        }
+
+        private void SetMapWeight(string formData)
+        {
+            _map.VaultWeight = double.Parse(formData);
+        }
+
+        private void SetMapBiomes(string formData)
+        {
+            var biomes = formData.Split(',').Select(b => new Biome { Name = b });
+            _map.Biomes = biomes.ToList();
+        }
+
+        private void SetMapName(string formData)
+        {
+            var newKey = new MapKey(formData);
+
+            _map.MapKey = newKey;
+            foreach(var cell in _map.Cells)
+            {
+                cell.Key.Key = newKey;
+            }
         }
 
         private IEnumerable<IEntity> AllCells => _systemContainer.EntityEngine.AllEntities.Where(e => e.Has<Cell>());

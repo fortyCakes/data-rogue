@@ -14,6 +14,7 @@ using System.Linq;
 using data_rogue_core.Utils;
 using System;
 using data_rogue_core.Forms.StaticForms;
+using OpenTK.Input;
 
 namespace data_rogue_core.Activities
 {
@@ -74,7 +75,7 @@ namespace data_rogue_core.Activities
 
         public override void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard)
         {
-            // None
+            Form.HandleKeyboard(keyboard);
         }
 
         public override void HandleAction(ISystemContainer systemContainer, ActionEventData action)

@@ -73,6 +73,10 @@ namespace data_rogue_core.Systems
                             inputActivity.HandleAction(_systemContainer, action);
                         }
                     }
+                    else
+                    {
+                        inputActivity.HandleAction(_systemContainer, null);
+                    }
 
                     if (keyPress != null)
                     {

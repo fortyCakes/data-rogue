@@ -14,16 +14,15 @@ namespace data_rogue_core.Forms.StaticForms
     public class MapInfoForm : Form
     {
         private ISystemContainer _systemContainer;
-        private Action<MapInfoForm> _callback;
 
-        public MapInfoForm(ISystemContainer systemContainer, IMap map, Action<MapInfoForm> callback) : base(systemContainer.ActivitySystem, "Map Info", FormButton.Ok | FormButton.Cancel,
+        public MapInfoForm(ISystemContainer systemContainer, IMap map, FormButtonSelected OnSelectCallback) : base(systemContainer.ActivitySystem, "Map Info", FormButton.Ok | FormButton.Cancel,
                 null)
         {
             _systemContainer = systemContainer;
 
-            _callback += callback;
-
             Fields = MapInfoFields(map);
+
+            base.OnSelectCallback = OnSelectCallback;
         }
 
         public Dictionary<string, FormData> MapInfoFields(IMap map)

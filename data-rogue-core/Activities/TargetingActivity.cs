@@ -143,18 +143,21 @@ namespace data_rogue_core.Activities
 
         public override void HandleAction(ISystemContainer systemContainer, ActionEventData action)
         {
-            switch(action.Action)
+            if (action != null)
             {
-                case ActionType.Move:
-                    var vector = Vector.Parse(action.Parameters);
-                    TryMoveTarget(vector);
-                    break;
-                case ActionType.Select:
-                    Complete();
-                    break;
-                case ActionType.EscapeMenu:
-                    CloseActivity();
-                    break;
+                switch (action.Action)
+                {
+                    case ActionType.Move:
+                        var vector = Vector.Parse(action.Parameters);
+                        TryMoveTarget(vector);
+                        break;
+                    case ActionType.Select:
+                        Complete();
+                        break;
+                    case ActionType.EscapeMenu:
+                        CloseActivity();
+                        break;
+                }
             }
         }
 
