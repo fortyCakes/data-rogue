@@ -15,6 +15,7 @@ Top: staff_1
 ItemLevel: 1
 [Equipment]
 EquipmentSlot: Hand
+AdditionalEquipmentSlot: Hand
 [Weapon]
 Class: Blast
 [Stat]

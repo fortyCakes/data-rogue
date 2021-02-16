@@ -85,6 +85,7 @@ Bottom: weapon_bardiche
 ItemLevel: 1
 [Equipment]
 EquipmentSlot: Hand
+AdditionalEquipmentSlot: Hand
 [Weapon]
 Class: Heavy
 [Stat]
@@ -155,6 +156,7 @@ Bottom: weapon_flail
 ItemLevel: 2
 [Equipment]
 EquipmentSlot: Hand
+AdditionalEquipmentSlot: Hand
 [Weapon]
 Class: Heavy
 [Stat]
@@ -190,6 +192,7 @@ Bottom: weapon_heavy_club
 ItemLevel: 1
 [Equipment]
 EquipmentSlot: Hand
+AdditionalEquipmentSlot: Hand
 [Weapon]
 Class: Heavy
 [Stat]
@@ -225,6 +228,7 @@ Bottom: weapon_maul
 ItemLevel: 2
 [Equipment]
 EquipmentSlot: Hand
+AdditionalEquipmentSlot: Hand
 [Weapon]
 Class: Heavy
 [Stat]
@@ -295,6 +299,7 @@ Bottom: weapon_pike
 ItemLevel: 2
 [Equipment]
 EquipmentSlot: Hand
+AdditionalEquipmentSlot: Hand
 [Weapon]
 Class: Heavy
 [Stat]
@@ -330,6 +335,7 @@ Bottom: weapon_scythe
 ItemLevel: 2
 [Equipment]
 EquipmentSlot: Hand
+AdditionalEquipmentSlot: Hand
 [Weapon]
 Class: Heavy
 [Stat]
