@@ -1,0 +1,90 @@
+﻿"RareItemAdjectives"
+[Prototype]
+Name: RareItemAdjectives
+Singleton: true
+[RareItemAdjective]
+Adjective: Fierce
+[RareItemAdjective]
+Adjective: Spirit
+[RareItemAdjective]
+Adjective: Blood
+[RareItemAdjective]
+Adjective: Arcane
+[RareItemAdjective]
+Adjective: Rune
+[RareItemAdjective]
+Adjective: Runic
+[RareItemAdjective]
+Adjective: Golden
+[RareItemAdjective]
+Adjective: Moon
+[RareItemAdjective]
+Adjective: Sun
+[RareItemAdjective]
+Adjective: Bone
+[RareItemAdjective]
+Adjective: Dark
+[RareItemAdjective]
+Adjective: Ancient
+[RareItemAdjective]
+Adjective: Shatter
+[RareItemAdjective]
+Adjective: Unholy
+[RareItemAdjective]
+Adjective: Holy
+[RareItemAdjective]
+Adjective: Steel
+[RareItemAdjective]
+Adjective: God
+[RareItemAdjective]
+Adjective: Devil
+[RareItemAdjective]
+Adjective: Monarch
+[RareItemAdjective]
+Adjective: Mantis
+[RareItemAdjective]
+Adjective: Void
+[RareItemAdjective]
+Adjective: Mighty
+[RareItemAdjective]
+Adjective: Subtle
+[RareItemAdjective]
+Adjective: Luminous
+[RareItemAdjective]
+Adjective: Shadow
+[RareItemAdjective]
+Adjective: Merciful
+[RareItemAdjective]
+Adjective: Merciless
+[RareItemAdjective]
+Adjective: Giant
+[RareItemAdjective]
+Adjective: Clockwork
+[RareItemAdjective]
+Adjective: Chaos
+[RareItemAdjective]
+Adjective: Order
+[RareItemAdjective]
+Adjective: Nature
+[RareItemAdjective]
+Adjective: Dire
+[RareItemAdjective]
+Adjective: Master's
+[RareItemAdjective]
+Adjective: Oath
+[RareItemAdjective]
+Adjective: Death
+[RareItemAdjective]
+Adjective: Life
+[RareItemAdjective]
+Adjective: Vengeful
+[RareItemAdjective]
+Adjective: Viper
+[RareItemAdjective]
+Adjective: Serpent
+[RareItemAdjective]
+Adjective: Tiger
+[RareItemAdjective]
+Adjective: Dragon
+[RareItemAdjective]
+Adjective: Primal

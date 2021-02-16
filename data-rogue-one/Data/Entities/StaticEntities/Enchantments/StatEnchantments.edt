@@ -1,0 +1,31 @@
+﻿"Muscle"
+[EnchantmentGeneration]
+Prefix: Strong
+Suffix: of Strength
+[StatBoostEnchantment]
+Stat: Muscle
+Value: 2
+
+"Agility"
+[EnchantmentGeneration]
+Prefix: Agile
+Suffix: of Agility
+[StatBoostEnchantment]
+Stat: Agility
+Value: 2
+
+"Intellect"
+[EnchantmentGeneration]
+Prefix: Intellectual
+Suffix: of Intellect
+[StatBoostEnchantment]
+Stat: Intellect
+Value: 2
+
+"Willpower"
+[EnchantmentGeneration]
+Prefix: Wilful
+Suffix: of Willpower
+[StatBoostEnchantment]
+Stat: Willpower
+Value: 2

@@ -1,0 +1,346 @@
+﻿"RareItemClassNouns"
+[Prototype]
+Name: RareItemClassNouns
+Singleton: true
+[RareItemClassNoun]
+ItemClass: Body
+Noun: Guard
+[RareItemClassNoun]
+ItemClass: Body
+Noun: Case
+[RareItemClassNoun]
+ItemClass: Body
+Noun: Armour
+[RareItemClassNoun]
+ItemClass: Body
+Noun: Shell
+[RareItemClassNoun]
+ItemClass: Body
+Noun: Carapace
+[RareItemClassNoun]
+ItemClass: Body
+Noun: Skin
+[RareItemClassNoun]
+ItemClass: Body
+Noun: Protector
+[RareItemClassNoun]
+ItemClass: Legs
+Noun: Plate
+[RareItemClassNoun]
+ItemClass: Legs
+Noun: Trews
+[RareItemClassNoun]
+ItemClass: Legs
+Noun: Fork
+[RareItemClassNoun]
+ItemClass: Legs
+Noun: Case
+[RareItemClassNoun]
+ItemClass: Legs
+Noun: Leggings
+[RareItemClassNoun]
+ItemClass: Legs
+Noun: Armour
+[RareItemClassNoun]
+ItemClass: Legs
+Noun: Shell
+[RareItemClassNoun]
+ItemClass: Head
+Noun: Crown
+[RareItemClassNoun]
+ItemClass: Head
+Noun: Circlet
+[RareItemClassNoun]
+ItemClass: Head
+Noun: Halo
+[RareItemClassNoun]
+ItemClass: Head
+Noun: Guard
+[RareItemClassNoun]
+ItemClass: Head
+Noun: Cap
+[RareItemClassNoun]
+ItemClass: Head
+Noun: Skull
+[RareItemClassNoun]
+ItemClass: Head
+Noun: Braid
+[RareItemClassNoun]
+ItemClass: Head
+Noun: Lid
+[RareItemClassNoun]
+ItemClass: Head
+Noun: Hat
+[RareItemClassNoun]
+ItemClass: Boots
+Noun: Shoe
+[RareItemClassNoun]
+ItemClass: Boots
+Noun: Tread
+[RareItemClassNoun]
+ItemClass: Boots
+Noun: Foot
+[RareItemClassNoun]
+ItemClass: Boots
+Noun: Hoof
+[RareItemClassNoun]
+ItemClass: Boots
+Noun: Claw
+[RareItemClassNoun]
+ItemClass: Boots
+Noun: Stomper
+[RareItemClassNoun]
+ItemClass: Boots
+Noun: Walker
+[RareItemClassNoun]
+ItemClass: Boots
+Noun: Trail
+[RareItemClassNoun]
+ItemClass: Boots
+Noun: Path
+[RareItemClassNoun]
+ItemClass: Boots
+Noun: Track
+[RareItemClassNoun]
+ItemClass: Boots
+Noun: Boot
+[RareItemClassNoun]
+ItemClass: Boots
+Noun: Slipper
+[RareItemClassNoun]
+ItemClass: Gloves
+Noun: Claw
+[RareItemClassNoun]
+ItemClass: Gloves
+Noun: Grip
+[RareItemClassNoun]
+ItemClass: Gloves
+Noun: Hand
+[RareItemClassNoun]
+ItemClass: Gloves
+Noun: Glove
+[RareItemClassNoun]
+ItemClass: Gloves
+Noun: Gauntlet
+[RareItemClassNoun]
+ItemClass: Gloves
+Noun: Fist
+[RareItemClassNoun]
+ItemClass: Gloves
+Noun: Fingers
+[RareItemClassNoun]
+ItemClass: Gloves
+Noun: Grasp
+[RareItemClassNoun]
+ItemClass: Gloves
+Noun: Gage
+[RareItemClassNoun]
+ItemClass: Ring
+Noun: Band
+[RareItemClassNoun]
+ItemClass: Ring
+Noun: Loop
+[RareItemClassNoun]
+ItemClass: Ring
+Noun: Coil
+[RareItemClassNoun]
+ItemClass: Ring
+Noun: Circle
+[RareItemClassNoun]
+ItemClass: Ring
+Noun: Ouroboros
+[RareItemClassNoun]
+ItemClass: Ring
+Noun: Jewel
+[RareItemClassNoun]
+ItemClass: Ring
+Noun: Signet
+[RareItemClassNoun]
+ItemClass: Ring
+Noun: Seal
+[RareItemClassNoun]
+ItemClass: Ring
+Noun: Ring
+[RareItemClassNoun]
+ItemClass: Amulet
+Noun: Seal
+[RareItemClassNoun]
+ItemClass: Amulet
+Noun: Locket
+[RareItemClassNoun]
+ItemClass: Amulet
+Noun: Gem
+[RareItemClassNoun]
+ItemClass: Amulet
+Noun: Pendant
+[RareItemClassNoun]
+ItemClass: Amulet
+Noun: Collar
+[RareItemClassNoun]
+ItemClass: Amulet
+Noun: Choker
+[RareItemClassNoun]
+ItemClass: Amulet
+Noun: Necklace
+[RareItemClassNoun]
+ItemClass: Amulet
+Noun: Amulet
+[RareItemClassNoun]
+ItemClass: Amulet
+Noun: Relic
+[RareItemClassNoun]
+ItemClass: Amulet
+Noun: Trinket
+[RareItemClassNoun]
+ItemClass: Amulet
+Noun: Secret
+[RareItemClassNoun]
+ItemClass: Amulet
+Noun: Eye
+[RareItemClassNoun]
+ItemClass: LightWeapon
+Noun: Barb
+[RareItemClassNoun]
+ItemClass: LightWeapon
+Noun: Gull
+[RareItemClassNoun]
+ItemClass: LightWeapon
+Noun: Flash
+[RareItemClassNoun]
+ItemClass: LightWeapon
+Noun: Striker
+[RareItemClassNoun]
+ItemClass: LightWeapon
+Noun: Tooth
+[RareItemClassNoun]
+ItemClass: LightWeapon
+Noun: Nail
+[RareItemClassNoun]
+ItemClass: LightWeapon
+Noun: Claw
+[RareItemClassNoun]
+ItemClass: LightWeapon
+Noun: Blade
+[RareItemClassNoun]
+ItemClass: LightWeapon
+Noun: Killer
+[RareItemClassNoun]
+ItemClass: LightWeapon
+Noun: Flash
+[RareItemClassNoun]
+ItemClass: LightWeapon
+Noun: Bane
+[RareItemClassNoun]
+ItemClass: HeavyWeapon
+Noun: Flash
+[RareItemClassNoun]
+ItemClass: HeavyWeapon
+Noun: Striker
+[RareItemClassNoun]
+ItemClass: HeavyWeapon
+Noun: Tooth
+[RareItemClassNoun]
+ItemClass: HeavyWeapon
+Noun: Nail
+[RareItemClassNoun]
+ItemClass: HeavyWeapon
+Noun: Claw
+[RareItemClassNoun]
+ItemClass: HeavyWeapon
+Noun: Blade
+[RareItemClassNoun]
+ItemClass: HeavyWeapon
+Noun: Hammer
+[RareItemClassNoun]
+ItemClass: HeavyWeapon
+Noun: Killer
+[RareItemClassNoun]
+ItemClass: HeavyWeapon
+Noun: Bane
+[RareItemClassNoun]
+ItemClass: HeavyWeapon
+Noun: Smasher
+[RareItemClassNoun]
+ItemClass: RangedWeapon
+Noun: Force
+[RareItemClassNoun]
+ItemClass: RangedWeapon
+Noun: Curve
+[RareItemClassNoun]
+ItemClass: RangedWeapon
+Noun: Thorn
+[RareItemClassNoun]
+ItemClass: RangedWeapon
+Noun: Launcher
+[RareItemClassNoun]
+ItemClass: RangedWeapon
+Noun: Wind
+[RareItemClassNoun]
+ItemClass: RangedWeapon
+Noun: Hail
+[RareItemClassNoun]
+ItemClass: RangedWeapon
+Noun: Hunter
+[RareItemClassNoun]
+ItemClass: RangedWeapon
+Noun: Pierce
+[RareItemClassNoun]
+ItemClass: RangedWeapon
+Noun: Breath
+[RareItemClassNoun]
+ItemClass: MagicWeapon
+Noun: Staff
+[RareItemClassNoun]
+ItemClass: MagicWeapon
+Noun: Stave
+[RareItemClassNoun]
+ItemClass: MagicWeapon
+Noun: Magus
+[RareItemClassNoun]
+ItemClass: MagicWeapon
+Noun: Focus
+[RareItemClassNoun]
+ItemClass: MagicWeapon
+Noun: Channel
+[RareItemClassNoun]
+ItemClass: MagicWeapon
+Noun: Storm
+[RareItemClassNoun]
+ItemClass: MagicWeapon
+Noun: Bolt
+[RareItemClassNoun]
+ItemClass: MagicWeapon
+Noun: Aura
+[RareItemClassNoun]
+ItemClass: MagicWeapon
+Noun: Soul
+[RareItemClassNoun]
+ItemClass: Shield
+Noun: Guard
+[RareItemClassNoun]
+ItemClass: Shield
+Noun: Wall
+[RareItemClassNoun]
+ItemClass: Shield
+Noun: Block
+[RareItemClassNoun]
+ItemClass: Shield
+Noun: Plate
+[RareItemClassNoun]
+ItemClass: Shield
+Noun: Stop
+[RareItemClassNoun]
+ItemClass: Shield
+Noun: Force
+[RareItemClassNoun]
+ItemClass: Shield
+Noun: Protector
+[RareItemClassNoun]
+ItemClass: Shield
+Noun: Defender
+[RareItemClassNoun]
+ItemClass: Shield
+Noun: Shield
+[RareItemClassNoun]
+ItemClass: Shield
+Noun: Scale

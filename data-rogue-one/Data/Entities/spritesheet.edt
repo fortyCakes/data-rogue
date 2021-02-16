@@ -351,6 +351,20 @@ SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
+Name: ring
+Path: Images/Sprites/Entities/Items/ring.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: amulet
+Path: Images/Sprites/Entities/Items/amulet.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
 Name: boot_brown
 Path: Images/Sprites/Entities/Items/boot_brown.png
 Type: SingleSprite

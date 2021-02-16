@@ -32,7 +32,7 @@ namespace data_rogue_core.Systems
             int tickBy = (int)(elapsed / TICK_LENGTH);
             _lastKnownTime += tickBy * TICK_LENGTH;
 
-            foreach (IEntity entity in Entities)
+            foreach (IEntity entity in Entities.ToList())
             {
                 ResolveAnimationFrameUpdates(tickBy, entity);
             }

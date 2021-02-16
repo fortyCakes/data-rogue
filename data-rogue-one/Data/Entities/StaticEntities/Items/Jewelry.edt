@@ -1,0 +1,35 @@
+﻿"Amulet"
+[Description]
+Name: Amulet
+Detail: Designed to hang around your neck. Often enchanted.
+[Prototype]
+Name: Item:Amulet
+Singleton: false
+[Appearance]
+Glyph: "
+Color: #DAD45E
+[SpriteAppearance]
+Top: amulet
+[Equipment]
+EquipmentSlot: Neck
+[Position]
+[Item]
+ItemLevel: 2
+
+"Ring"
+[Description]
+Name: Ring
+Detail: A small ring to be worn on the finger. Often enchanted.
+[Prototype]
+Name: Item:Ring
+Singleton: false
+[Appearance]
+Glyph: =
+Color: #DAD45E
+[SpriteAppearance]
+Top: ring
+[Equipment]
+EquipmentSlot: Ring
+[Position]
+[Item]
+ItemLevel: 2

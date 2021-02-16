@@ -1,9 +1,9 @@
 ﻿"Book of Test Skill"
 [Description]
-Name: Book of Test Skill
-Detail: A thick, leather-bound tome. It contains instructions.
+Name: Book of Skill
+Detail: A thick, leather-bound tome. It contains instructions to learn a new skill.
 [Prototype]
-Name: Item:BookSkillTest
+Name: Item:SkillBook
 Singleton: false
 [Appearance]
 Glyph: ?
@@ -39,7 +39,7 @@ Text: {
 [Prototype]
 Name: Skill:Test
 [Skill]
-Cost: 20
+Cost: 0
 ScriptName: Script: TestSkill
 [Description]
 Name: Test Skill

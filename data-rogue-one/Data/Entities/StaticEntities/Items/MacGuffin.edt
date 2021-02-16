@@ -14,6 +14,7 @@ Bottom: lamp
 [Item]
 ItemLevel: 999999
 UseScript: Script: Victory
+DoNotGenerate: true
 
 "Script: Victory"
 [Prototype]

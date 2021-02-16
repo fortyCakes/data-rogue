@@ -1,0 +1,20 @@
+﻿"Vampiric"
+[EnchantmentGeneration]
+Prefix: Vampiric
+Suffix: of the Vampire
+[ProcEnchantment]
+Name: Vampiric
+ProcChance: 50
+EventType: Attack
+ScriptName: Script: Vampiric Heal
+
+"Script: VampiricHeal"
+[Prototype]
+Name: Script: Vampiric Heal
+Singleton: true
+[Script]
+Text: {
+	health = User:Get('Health')
+	health.HP:Add(1);
+	SystemContainer.MessageSystem:Write(User:Get('Description').Name .. ' is healed for 1 health by their vampirism.')
+}

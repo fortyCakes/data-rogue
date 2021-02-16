@@ -6,5 +6,6 @@ namespace data_rogue_core.Components
     {
         public string UseScript;
         public int ItemLevel = 0;
+        public bool DoNotGenerate = false;
     }
 }

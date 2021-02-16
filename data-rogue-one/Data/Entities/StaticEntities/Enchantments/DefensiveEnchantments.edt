@@ -1,0 +1,31 @@
+﻿"Shield"
+[EnchantmentGeneration]
+Prefix: Shielding
+Suffix: of Blocking
+[StatBoostEnchantment]
+Stat: SH
+Value: 3
+
+"Dodge"
+[EnchantmentGeneration]
+Prefix: Evasive
+Suffix: of Dodging
+[StatBoostEnchantment]
+Stat: EV
+Value: 3
+
+"Armour"
+[EnchantmentGeneration]
+Prefix: Steely
+Suffix: of Armour
+[StatBoostEnchantment]
+Stat: AC
+Value: 3
+
+"Aegis"
+[EnchantmentGeneration]
+Prefix: Protective
+Suffix: of Warding
+[StatBoostEnchantment]
+Stat: Aegis
+Value: 5
