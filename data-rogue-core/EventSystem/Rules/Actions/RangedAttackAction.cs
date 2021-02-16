@@ -90,7 +90,7 @@ namespace data_rogue_core.EventSystem.Rules
 
             var weapons = equipment.Where(e => e.Has<Weapon>() && RangedAttackClasses.Contains(e.Get<Weapon>().Class));            
 
-            return weapons.OrderBy(e => equipped.EquippedItems.Single(eq => eq.EquipmentId == e.EntityId).Slot.ToString()).FirstOrDefault();
+            return weapons.OrderBy(e => equipped.EquippedItems.Where(eq => eq.EquipmentId == e.EntityId).Distinct().Single().Slot.ToString()).FirstOrDefault();
         }
 
         private void ResolveRangedAttack(IEntity attacker, MapCoordinate mapCoordinate)

@@ -24,8 +24,8 @@ HP: 8/8
 [TiltFighter]
 Tilt: 0/20
 [AuraFighter]
-Aura: 0/60
-BaseAura: 0
+Aura: 60/60
+BaseAura: 60
 [Stat]
 Name: Muscle
 Value: 4

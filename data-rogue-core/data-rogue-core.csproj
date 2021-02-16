@@ -77,6 +77,7 @@
     <Compile Include="Activities\BranchLoadingScreenActivity.cs" />
     <Compile Include="Activities\IMapActivity.cs" />
     <Compile Include="Activities\MapEditorCellMenuActivity.cs" />
+    <Compile Include="Behaviours\UseRandomSkillBehaviour.cs" />
     <Compile Include="Components\CanAddToMap.cs" />
     <Compile Include="Components\Cell.cs" />
     <Compile Include="Components\Equipment.cs" />
@@ -101,7 +102,6 @@
     <Compile Include="Activities\TargetingStatus.cs" />
     <Compile Include="Activities\TextInputActivity.cs" />
     <Compile Include="Activities\ToastActivity.cs" />
-    <Compile Include="Behaviours\UseSkillBehaviour.cs" />
     <Compile Include="Behaviours\MoveAwayFromPlayerBehaviour.cs" />
     <Compile Include="Components\Animated.cs" />
     <Compile Include="Components\Animation.cs" />
