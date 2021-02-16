@@ -27,7 +27,7 @@ namespace data_rogue_core.EventSystem.Rules
 
             var equipped = sender.Get<Equipped>();
 
-            foreach(var equippedItem in equipped.EquippedItems)
+            foreach(var equippedItem in equipped.EquippedItems.ToList())
             {
                 var id = equippedItem.EquipmentId;
                 var item = systemContainer.EntityEngine.Get(id);

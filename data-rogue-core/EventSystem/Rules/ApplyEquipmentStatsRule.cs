@@ -2,6 +2,7 @@
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.Systems.Interfaces;
+using System.Linq;
 
 namespace data_rogue_core.EventSystem.Rules
 {
@@ -26,7 +27,7 @@ namespace data_rogue_core.EventSystem.Rules
 
             var equipped = sender.Get<Equipped>();
 
-            foreach(var equippedItem in equipped.EquippedItems)
+            foreach(var equippedItem in equipped.EquippedItems.ToList())
             {
                 var item = systemContainer.EntityEngine.Get(equippedItem.EquipmentId);
 

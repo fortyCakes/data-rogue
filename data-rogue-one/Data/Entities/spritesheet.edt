@@ -699,6 +699,20 @@ SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
+Name: weapon_pickaxe
+Path: Images/Sprites/Entities/Items/weapon_pickaxe.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: weapon_heavy_club
+Path: Images/Sprites/Entities/Items/weapon_heavy_club.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
 Name: weapon_dagger
 Path: Images/Sprites/Entities/Items/weapon_dagger.png
 Type: SingleSprite

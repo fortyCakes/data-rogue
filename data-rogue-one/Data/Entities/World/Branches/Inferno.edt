@@ -12,7 +12,7 @@ WallCell: Cell:RedRockFloor
 [BiomeBasedMonsterGeneration]
 BasePower: 3
 Density: 0.01
-[RandomItemGeneration]
+[RandomItemPlacement]
 BasePower: 3
 Density: 0.005
 [DefaultEntrancePortalGeneration]

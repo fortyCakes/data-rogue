@@ -88,6 +88,8 @@
     <Compile Include="Rules\TryApplyBlockOnAttackRule.cs" />
     <Compile Include="Rules\TryApplyDodgeOnAttackRule.cs" />
     <Compile Include="Rules\TryApplyTankOnAttackRule.cs" />
+    <Compile Include="World\GenerationStrategies\ItemGeneration\EnchantedItemGenerator.cs" />
+    <Compile Include="World\GenerationStrategies\ItemGeneration\GeneratedItemPlacement.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

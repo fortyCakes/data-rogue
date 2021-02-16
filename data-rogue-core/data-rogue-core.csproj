@@ -527,9 +527,11 @@
     <Compile Include="Systems\ControlSystem.cs" />
     <Compile Include="Systems\PositionSystem.cs" />
     <Compile Include="Maps\Vector.cs" />
+    <Compile Include="World\GenerationStrategies\ItemGeneration\IItemGenerator.cs" />
     <Compile Include="World\GenerationStrategies\ItemGeneration\PlaceSpecificItem.cs" />
+    <Compile Include="World\GenerationStrategies\ItemGeneration\RandomItemGenerator.cs" />
+    <Compile Include="World\GenerationStrategies\ItemGeneration\RandomItemPlacement.cs" />
     <Compile Include="World\GenerationStrategies\ItemGeneration\ScatterSpecificItem.cs" />
-    <Compile Include="World\GenerationStrategies\ItemGeneration\RandomItemGeneration.cs" />
     <Compile Include="World\GenerationStrategies\MapGeneration\BasicDungeonBranchMapGenerator.cs" />
     <Compile Include="World\GenerationStrategies\MapGeneration\StaticBranchMapGenerator.cs" />
     <Compile Include="World\GenerationStrategies\MapGeneration\VaultBasedDungeonBranchMapGenerator.cs" />

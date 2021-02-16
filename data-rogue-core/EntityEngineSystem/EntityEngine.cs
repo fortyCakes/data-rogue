@@ -151,7 +151,7 @@ namespace data_rogue_core.EntityEngineSystem
 
         public IEntity Get(uint entityId)
         {
-            return _allEntities.Single(e => e.EntityId == entityId);
+            return _allEntities.ToList().Single(e => e.EntityId == entityId);
         }
 
         public IEnumerable<IEntity> GetEntitiesWithName(string entityName)
