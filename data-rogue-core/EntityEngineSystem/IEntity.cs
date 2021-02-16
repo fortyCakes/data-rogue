@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Drawing;
 
 namespace data_rogue_core.EntityEngineSystem
 {
@@ -20,6 +21,7 @@ namespace data_rogue_core.EntityEngineSystem
         bool Has<T>() where T : IEntityComponent;
 
         bool IsPlayer { get; }
+        Color DescriptionColor { get; }
 
         IEntityComponent Get(string typeName);
         bool Has(string typeName);

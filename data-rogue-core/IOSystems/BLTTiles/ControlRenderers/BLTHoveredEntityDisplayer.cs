@@ -68,7 +68,9 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
             BLTLayers.Set(BLTLayers.Text, display.ActivityIndex);
             BLT.Font("text");
+            BLT.Color(hoveredEntity.DescriptionColor);
             BLT.Print(x + BLTTilesIOSystem.TILE_SPACING + 4, y - 1 + BLTTilesIOSystem.TILE_SPACING / 2, hoveredEntity.DescriptionName);
+            BLT.Color(Color.White);
 
             y += 12;
 

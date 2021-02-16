@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using data_rogue_core;
 using data_rogue_core.Components;
@@ -30,7 +31,9 @@ namespace data_rogue_one.World.GenerationStrategies.ItemGeneration
                 suffix = " " + enchantment2.Get<EnchantmentGeneration>().Suffix;
             }
 
-            item.Get<Description>().Name = $"{prefix}{baseName}{suffix}";
+            Description description = item.Get<Description>();
+            description.Name = $"{prefix}{baseName}{suffix}";
+            description.Color = Color.FromArgb(0x30, 0x34, 0x6D);
 
         }
 
@@ -38,6 +41,10 @@ namespace data_rogue_one.World.GenerationStrategies.ItemGeneration
         {
             var adjective = GetAdjective(random);
             var classNoun = GetClassNoun(itemClass, random);
+
+            Description description = item.Get<Description>();
+            description.Name = $"{adjective.Adjective} {classNoun.Noun}";
+            description.Color = Color.FromArgb(0xDA, 0xD4, 0x5E);
         }
 
         private RareItemClassNoun GetClassNoun(ItemClass itemClass, IRandom random)

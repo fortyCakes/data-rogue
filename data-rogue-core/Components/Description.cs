@@ -1,4 +1,5 @@
 ﻿using data_rogue_core.EntityEngineSystem;
+using System.Drawing;
 
 namespace data_rogue_core.Components
 {
@@ -6,5 +7,6 @@ namespace data_rogue_core.Components
     {
         public string Name;
         public string Detail;
+        public Color Color = Color.White;
     }
 }

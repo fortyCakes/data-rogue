@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using data_rogue_core.Components;
 
@@ -11,6 +12,7 @@ namespace data_rogue_core.EntityEngineSystem
 
         public string Name { get; set; } = "";
         public string DescriptionName => Get<Description>()?.Name;
+        public Color DescriptionColor => Get<Description>()?.Color ?? Color.White;
 
         public bool Removed { get; set; } = false;
         public bool IsStatic { get; set; } = false;
