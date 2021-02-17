@@ -8,6 +8,7 @@ using data_rogue_core.Components;
 using data_rogue_core.Controls;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems.Interfaces;
+using data_rogue_core.Utils;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
@@ -46,7 +47,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
             BLTLayers.Set(BLTLayers.Text, statsControl.ActivityIndex);
 
-            var text = $"{entity.DescriptionName}";
+            var text = $"{entity.GetBLTName()}";
 
             y += 5;
             RenderText(x + 18, y, statsControl.ActivityIndex, out _, text, statsControl.Color, false, font: "textLarge");

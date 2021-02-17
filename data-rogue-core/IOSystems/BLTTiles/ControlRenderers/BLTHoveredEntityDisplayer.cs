@@ -9,6 +9,7 @@ using data_rogue_core.Controls;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems.Interfaces;
+using data_rogue_core.Utils;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
@@ -68,9 +69,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
             BLTLayers.Set(BLTLayers.Text, display.ActivityIndex);
             BLT.Font("text");
-            BLT.Color(hoveredEntity.DescriptionColor);
-            BLT.Print(x + BLTTilesIOSystem.TILE_SPACING + 4, y - 1 + BLTTilesIOSystem.TILE_SPACING / 2, hoveredEntity.DescriptionName);
-            BLT.Color(Color.White);
+            BLT.Print(x + BLTTilesIOSystem.TILE_SPACING + 4, y - 1 + BLTTilesIOSystem.TILE_SPACING / 2, hoveredEntity.GetBLTName());
 
             y += 12;
 

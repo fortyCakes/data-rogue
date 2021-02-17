@@ -23,5 +23,10 @@ namespace data_rogue_core.Utils
 
             return color.ToRLColor();
         }
+
+        public static string ToHexCode(this Color color)
+        {
+            return "#" + color.R.ToString("X2") + color.G.ToString("X2") + color.B.ToString("X2");
+        }
     }
 }

@@ -445,6 +445,7 @@
     <Compile Include="Systems\Interfaces\IStatSystem.cs" />
     <Compile Include="Systems\ParticleSystem.cs" />
     <Compile Include="Systems\SoundSystem.cs" />
+    <Compile Include="Utils\BLTNameExtensions.cs" />
     <Compile Include="Utils\BresenhamLineDrawingAlgorithm.cs" />
     <Compile Include="Utils\FloodFillHelper.cs" />
     <Compile Include="Utils\ILineDrawingAlgorithm.cs" />
