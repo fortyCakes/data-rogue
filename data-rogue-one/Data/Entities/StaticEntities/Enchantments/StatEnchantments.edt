@@ -2,22 +2,48 @@
 [EnchantmentGeneration]
 Prefix: Strong
 Suffix: of Strength
+EnchantPower: 3
+DescriptionLine: +2 to Strength
 [StatBoostEnchantment]
 Stat: Muscle
 Value: 2
+
+"Muscle1"
+[EnchantmentGeneration]
+Prefix: Strong
+Suffix: of Strength
+EnchantPower: 1
+DescriptionLine: +1 to Strength
+[StatBoostEnchantment]
+Stat: Muscle
+Value: 1
 
 "Agility"
 [EnchantmentGeneration]
 Prefix: Agile
 Suffix: of Agility
+EnchantPower: 3
+DescriptionLine: +2 to Agility
 [StatBoostEnchantment]
 Stat: Agility
 Value: 2
+
+"Agility1"
+[EnchantmentGeneration]
+Prefix: Agile
+Suffix: of Agility
+EnchantPower: 1
+DescriptionLine: +1 to Agility
+[StatBoostEnchantment]
+Stat: Agility
+Value: 1
 
 "Intellect"
 [EnchantmentGeneration]
 Prefix: Intellectual
 Suffix: of Intellect
+EnchantPower: 3
+DescriptionLine: +2 to Intellect
 [StatBoostEnchantment]
 Stat: Intellect
 Value: 2
@@ -26,6 +52,8 @@ Value: 2
 [EnchantmentGeneration]
 Prefix: Wilful
 Suffix: of Willpower
+EnchantPower: 3
+DescriptionLine: +2 to Willpower
 [StatBoostEnchantment]
 Stat: Willpower
 Value: 2

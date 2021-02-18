@@ -1,0 +1,41 @@
+﻿"SpawnItem"
+[Prototype]
+Name: Skill:SpawnItem
+Singleton: true
+[Skill]
+Cost: 0
+ScriptName: Script: SpawnItem
+[Description]
+Name: Teleport
+Detail: A skill that allows you to create a random item using the EnchantedItemGenerator. Intended for debugging.
+[Targeting]
+Range: 5
+CellsHit: 0,0
+MoveToCell: true
+[SpriteAppearance]
+Bottom: spawn_item
+
+"Script: SpawnItem"
+[Prototype]
+Name: Script: SpawnItem
+Singleton: true
+[Script]
+Text: {
+	withTarget(
+	function(target)
+
+		import('data-rogue-one', 'data_rogue_one.World.GenerationStrategies.ItemGeneration')
+		
+		itemList = SystemContainer.ItemSystem:GetSpawnableItems();
+
+		generator = EnchantedItemGenerator(SystemContainer, itemList);
+
+		item = generator:GenerateItem(itemList, 5, SystemContainer.Random);
+
+		SystemContainer.PositionSystem:SetPosition(item, target);
+
+		onComplete()
+	end)
+	
+	requestTarget(User, Entity)
+}

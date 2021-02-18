@@ -344,6 +344,13 @@ SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
+Name: spawn_item
+Path: Images/Sprites/Entities/Skills/spawn_item.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
 Name: boot_copper
 Path: Images/Sprites/Entities/Items/boot_copper.png
 Type: SingleSprite
@@ -671,6 +678,13 @@ SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
+Name: weapon_morningstar
+Path: Images/Sprites/Entities/Items/weapon_morningstar.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
 Name: weapon_battleaxe
 Path: Images/Sprites/Entities/Items/weapon_battleaxe.png
 Type: SingleSprite
@@ -763,7 +777,7 @@ SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
 Name: weapon_whip
-Path: Images/Sprites/Entities/Items/weapon_bardiche.png
+Path: Images/Sprites/Entities/Items/weapon_whip.png
 Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16

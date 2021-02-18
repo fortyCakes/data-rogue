@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using data_rogue_core.Components;
 using data_rogue_core.EntityEngineSystem;
+using data_rogue_one.World.GenerationStrategies.ItemGeneration;
 
-namespace data_rogue_one.World.GenerationStrategies.ItemGeneration
+namespace data_rogue_one.Utils
 {
     public static class ItemClassHelper
     {
@@ -21,7 +22,7 @@ namespace data_rogue_one.World.GenerationStrategies.ItemGeneration
             return ItemsByClass;
         }
 
-        private static ItemClass Classify(IEntity item)
+        public static ItemClass Classify(IEntity item)
         {
             if (item.Has<Wealth>()) return ItemClass.Wealth;
 
@@ -69,7 +70,7 @@ namespace data_rogue_one.World.GenerationStrategies.ItemGeneration
 
             if (item.DescriptionName == "Junk") return ItemClass.Junk;
 
-            throw new ApplicationException("Couldn't classify item: " + item.DescriptionName);
+            return ItemClass.Other;
         }
 
         private static Dictionary<ItemClass, List<IEntity>> GenerateBlankItemDictionary()

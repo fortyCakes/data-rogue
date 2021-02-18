@@ -7,10 +7,11 @@ using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Systems.Interfaces;
 using data_rogue_core.World.GenerationStrategies;
 using data_rogue_one.Components;
+using data_rogue_one.Utils;
 
 namespace data_rogue_one.World.GenerationStrategies.ItemGeneration
 {
-    internal partial class EnchantedItemGenerator : IItemGenerator
+    public class EnchantedItemGenerator : IItemGenerator
     {
         private ISystemContainer _systemContainer;
         private List<IEntity> _itemList;
@@ -67,6 +68,8 @@ namespace data_rogue_one.World.GenerationStrategies.ItemGeneration
 
             if (rarity == "Magic")
             {
+                SetEnchantedLineInDescription(item);
+
                 if (random.PickOneFrom(1, 2) == 1)
                 {
                     var enchantPower = (int)(itemLevel * 1.5);
@@ -115,14 +118,38 @@ namespace data_rogue_one.World.GenerationStrategies.ItemGeneration
             throw new ApplicationException("Unknown rarity in Enchant: " + rarity);
         }
 
+        private void SetEnchantedLineInDescription(IEntity item)
+        {
+            var description = item.Get<Description>();
+            description.Detail = description.Detail + Environment.NewLine + Environment.NewLine + "Enchantments:";
+        }
+
         private void ApplyEnchantmentTo(IEntity item, IEntity enchantment)
         {
             var enchantComponents = enchantment.Components.OfType<Enchantment>();
 
             foreach(var enchantComponent in enchantComponents)
             {
-                var clone = ComponentSerializer.Deserialize(_systemContainer, ComponentSerializer.Serialize(enchantComponent, 0), 0);
+                AddComponentToItem(item, enchantComponent);
             }
+
+            var enchantGeneration = enchantment.Get<EnchantmentGeneration>();
+
+            UpdateItemDescription(item, enchantGeneration);
+
+        }
+
+        private void UpdateItemDescription(IEntity item, EnchantmentGeneration enchantGeneration)
+        {
+            var description = item.Get<Description>();
+
+            description.Detail = description.Detail + Environment.NewLine + enchantGeneration.DescriptionLine;
+        }
+
+        private void AddComponentToItem(IEntity item, Enchantment enchantComponent)
+        {
+            var clone = ComponentSerializer.Deserialize(_systemContainer, ComponentSerializer.Serialize(enchantComponent, 0), 0);
+            _systemContainer.EntityEngine.AddComponent(item, enchantComponent);
         }
 
         private IEntity GetEnchantmentFor(IEntity item, ItemClass itemClass, int enchantPower, IRandom random)

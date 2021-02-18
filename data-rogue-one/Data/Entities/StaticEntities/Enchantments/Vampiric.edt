@@ -2,6 +2,8 @@
 [EnchantmentGeneration]
 Prefix: Vampiric
 Suffix: of the Vampire
+EnchantPower: 5
+DescriptionLine: 50% Chance To Recover 1 HP On Attack
 [ProcEnchantment]
 Name: Vampiric
 ProcChance: 50

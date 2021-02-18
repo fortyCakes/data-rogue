@@ -83,6 +83,9 @@ namespace data_rogue_core.IOSystems.BLTTiles
                     y += 3;
                 }
             }
+
+            BLT.Font("text");
+            BLT.Print(x + 4, y, hoveredEntity.Get<Description>().Detail);
         }
     }
 }

@@ -329,6 +329,15 @@ namespace data_rogue_core.Systems
 
             return entity.Get<Inventory>().Contents.Select(i => entityEngine.Get(i)).ToList();
         }
+
+        public List<IEntity> GetSpawnableItems()
+        {
+            return entityEngine
+                .AllEntities
+                .Where(e => e.Has<Prototype>() && e.Has<Item>())
+                .Where(e => !e.Get<Item>().DoNotGenerate)
+                .ToList();
+        }
     }
 }
 

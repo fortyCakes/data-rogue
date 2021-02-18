@@ -787,6 +787,9 @@
     <Content Include="Images\Sprites\Entities\Skills\slash_2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\Sprites\Entities\Skills\spawn_item.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Sprites\Misc\arrow.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

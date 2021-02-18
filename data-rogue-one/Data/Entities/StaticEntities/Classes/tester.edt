@@ -19,7 +19,7 @@ Order: 3
 Skill: Skill:ManaBolt
 Order: 4
 [KnownSkill]
-Skill: Skill:MinorHeal
+Skill: Skill:SpawnItem
 Order: 5
 [StartsWithItem]
 Item: Item:LeatherArmourChest

@@ -11,5 +11,7 @@ namespace data_rogue_one.Components
     {
         public string Prefix;
         public string Suffix;
+        public int EnchantPower = 1;
+        public string DescriptionLine;
     }
 }

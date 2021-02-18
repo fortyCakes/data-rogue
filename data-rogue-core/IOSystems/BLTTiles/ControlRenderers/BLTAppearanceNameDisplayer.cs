@@ -56,7 +56,13 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
         protected override Size GetSizeInternal(ISpriteManager spriteManager, IDataRogueControl display, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
-            return new Size(60 , Height);
+            var statsControl = (display as IDataRogueInfoControl);
+            var entity = statsControl.Entity;
+            BLT.Font("textLarge");
+            var textSize = BLT.Measure(entity.GetBLTName());
+            BLT.Font("");
+
+            return new Size(Math.Max(60, textSize.Width + 22), Height);
         }
 
         public static int Height = 18;

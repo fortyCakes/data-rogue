@@ -1,4 +1,4 @@
-﻿namespace data_rogue_one.World.GenerationStrategies.ItemGeneration
+﻿namespace data_rogue_one.Utils
 {
     public enum ItemClass
     {
@@ -18,6 +18,7 @@
         Shield,
         Junk,
         SkillBook,
-        Ammunition
+        Ammunition,
+        Other
     }
 }

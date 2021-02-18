@@ -20,6 +20,15 @@ namespace data_rogue_one.EventSystem.Utils
             if (entity.Has<Description>())
             {
                 statsDisplays.Add(new InfoDisplay {ControlType = typeof(TextControl), Parameters = entity.Get<Description>().Detail });
+
+
+                if (entity.Has<Item>())
+                {
+
+                    statsDisplays.Add(new InfoDisplay { ControlType = typeof(Spacer) });
+                    statsDisplays.Add(new InfoDisplay { ControlType = typeof(TextControl), Parameters = ItemStatsDescriber.Describe(entity) });
+                }
+
                 statsDisplays.Add(new InfoDisplay { ControlType = typeof(Spacer) });
             }
 
@@ -32,6 +41,7 @@ namespace data_rogue_one.EventSystem.Utils
             {
                 statsDisplays.AddRange(GetCombatStats(entity));
             }
+
 
             return new List<StatsConfiguration>
             {

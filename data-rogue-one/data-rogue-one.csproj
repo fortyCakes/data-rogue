@@ -80,6 +80,7 @@
     <Compile Include="Rules\IncreaseStatsOnLevelUpRule.cs" />
     <Compile Include="Rules\SaveMorgueFileOnDeathRule.cs" />
     <Compile Include="Rules\UpdateHighScoreFileOnDeathRule.cs" />
+    <Compile Include="Utils\ItemStatsDescriber.cs" />
     <Compile Include="Utils\MorgueHelper.cs" />
     <Compile Include="Utils\StatusHelper.cs" />
     <Compile Include="Rules\AddAgilityToEvasionRule.cs" />
@@ -94,8 +95,8 @@
     <Compile Include="World\GenerationStrategies\ItemGeneration\EnchantedItemGenerator.cs" />
     <Compile Include="World\GenerationStrategies\ItemGeneration\EnchantmentPicker.cs" />
     <Compile Include="World\GenerationStrategies\ItemGeneration\GeneratedEnchantedItemPlacement.cs" />
-    <Compile Include="World\GenerationStrategies\ItemGeneration\ItemClass.cs" />
-    <Compile Include="World\GenerationStrategies\ItemGeneration\ItemClassHelper.cs" />
+    <Compile Include="Utils\ItemClass.cs" />
+    <Compile Include="Utils\ItemClassHelper.cs" />
     <Compile Include="World\GenerationStrategies\ItemGeneration\ItemClassPicker.cs" />
     <Compile Include="World\GenerationStrategies\ItemGeneration\ItemNamer.cs" />
     <Compile Include="World\GenerationStrategies\ItemGeneration\RarityPicker.cs" />
@@ -283,6 +284,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\Entities\StaticEntities\Skills\spark.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Entities\StaticEntities\Skills\spawn item.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\Entities\StaticEntities\Skills\teleport.edt">

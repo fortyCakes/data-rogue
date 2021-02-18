@@ -17,5 +17,7 @@ namespace data_rogue_core.Systems
         int CheckWealth(IEntity entity, string currency);
         bool RemoveItemFromInventory(IEntity item);
         List<IEntity> GetInventory(IEntity entity);
+
+        List<IEntity> GetSpawnableItems();
     }
 }

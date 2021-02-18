@@ -2,6 +2,8 @@
 [EnchantmentGeneration]
 Prefix: Shielding
 Suffix: of Blocking
+EnchantPower: 2
+DescriptionLine: +3 Shield Block
 [StatBoostEnchantment]
 Stat: SH
 Value: 3
@@ -10,6 +12,8 @@ Value: 3
 [EnchantmentGeneration]
 Prefix: Evasive
 Suffix: of Dodging
+EnchantPower: 2
+DescriptionLine: +2 Evasion
 [StatBoostEnchantment]
 Stat: EV
 Value: 3
@@ -18,6 +22,8 @@ Value: 3
 [EnchantmentGeneration]
 Prefix: Steely
 Suffix: of Armour
+EnchantPower: 2
+DescriptionLine: +2 Armour Class
 [StatBoostEnchantment]
 Stat: AC
 Value: 3
@@ -26,6 +32,8 @@ Value: 3
 [EnchantmentGeneration]
 Prefix: Protective
 Suffix: of Warding
+EnchantPower: 2
+DescriptionLine: +2 Maximum Aegis
 [StatBoostEnchantment]
 Stat: Aegis
 Value: 5
