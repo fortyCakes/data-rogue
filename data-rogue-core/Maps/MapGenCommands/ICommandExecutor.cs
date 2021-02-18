@@ -4,7 +4,7 @@ namespace data_rogue_core.Maps.MapGenCommands
 {
     public interface ICommandExecutor
     {
-        MapGenCommandType CommandType { get; }
+        string CommandType { get; }
 
         void Execute(ISystemContainer systemContainer, Map map, MapGenCommand command, Vector offset);
     }

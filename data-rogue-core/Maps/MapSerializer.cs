@@ -208,7 +208,7 @@ namespace data_rogue_core.Maps
                 var x = int.Parse(match.Groups[1].Value);
                 var y = int.Parse(match.Groups[2].Value);
 
-                var command = (MapGenCommandType)Enum.Parse(typeof(MapGenCommandType), match.Groups[3].Value);
+                var command = match.Groups[3].Value;
 
                 var parameters = match.Groups[4].Value;
 

@@ -15,7 +15,7 @@ namespace data_rogue_core.Maps.MapGenCommands
                 .Select(type => (ICommandExecutor)Activator.CreateInstance(type))
                 .ToList();
 
-        public static ICommandExecutor GetExecutor(MapGenCommandType commandType)
+        public static ICommandExecutor GetExecutor(string commandType)
         {
             return CommandExecutors.Single(s => s.CommandType == commandType);
         }

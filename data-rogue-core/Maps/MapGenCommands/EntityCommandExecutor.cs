@@ -9,7 +9,7 @@ namespace data_rogue_core.Maps.MapGenCommands
 {
     public class EntityCommandExecutor : ICommandExecutor
     {
-        public MapGenCommandType CommandType => MapGenCommandType.Entity;
+        public string CommandType => MapGenCommandType.Entity;
 
         public void Execute(ISystemContainer systemContainer, Map map, MapGenCommand command, Vector offset)
         {

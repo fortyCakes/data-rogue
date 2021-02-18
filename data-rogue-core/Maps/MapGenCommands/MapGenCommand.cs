@@ -4,7 +4,7 @@ namespace data_rogue_core.Maps
 {
     public class MapGenCommand : ICloneable
     {
-        public MapGenCommandType MapGenCommandType { get; set; }
+        public string MapGenCommandType { get; set; }
 
         public string Parameters { get; set; }
         public Vector Vector { get; set; }
@@ -23,12 +23,5 @@ namespace data_rogue_core.Maps
                 Vector = new Vector(Vector.X, Vector.Y)
             };
         }
-    }
-
-    public enum MapGenCommandType
-    {
-        Null,
-        Entity,
-        EntityStack
     }
 }

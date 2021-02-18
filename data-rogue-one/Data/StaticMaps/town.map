@@ -4,7 +4,7 @@ default:Cell:Tree
 -36,-5: Entity(Props:Sign|Dialog.Text=^ This way to the Tutorial)
 8,-2: Entity(NPC:HumanBlue|Dialog.Text=Hello, World!)
 -31,-3: Entity(Props:StairsDown)
--34,-5: Entity(Item:PileOfGold)
+-34,-5: GenerateItem()
 .:Cell:Empty
 ,:Cell:Grass
 ~:Cell:Dirt

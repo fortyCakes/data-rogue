@@ -68,6 +68,8 @@
     <Compile Include="IOSystems\BLTDefencesDisplayer.cs" />
     <Compile Include="IOSystems\BLTTilesConfig.cs" />
     <Compile Include="IOSystems\RLNetConfig.cs" />
+    <Compile Include="Maps\MapGenCommands\GenerateItemCommandExecutor.cs" />
+    <Compile Include="Maps\MapGenCommands\MapGenCommandType.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rules\Actions\ExamineStatusAction.cs" />

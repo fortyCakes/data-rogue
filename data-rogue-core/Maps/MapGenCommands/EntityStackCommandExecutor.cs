@@ -6,7 +6,7 @@ namespace data_rogue_core.Maps.MapGenCommands
 
     public class EntityStackCommandExecutor : ICommandExecutor
     {
-        public MapGenCommandType CommandType => MapGenCommandType.EntityStack;
+        public string CommandType => MapGenCommandType.EntityStack;
 
         public void Execute(ISystemContainer systemContainer, Map map, MapGenCommand command, Vector offset)
         {

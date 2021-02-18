@@ -417,6 +417,7 @@
     <Compile Include="Maps\MapGenCommands\ICommandExecutor.cs" />
     <Compile Include="Maps\MapGenCommands\MapGenCommand.cs" />
     <Compile Include="EventSystem\EventData\DropItemEventData.cs" />
+    <Compile Include="Maps\MapGenCommands\MapGenCommandType.cs" />
     <Compile Include="Maps\VectorDouble.cs" />
     <Compile Include="Menus\DynamicMenus\DebugMenu.cs" />
     <Compile Include="Menus\DynamicMenus\SkillMenu.cs" />
