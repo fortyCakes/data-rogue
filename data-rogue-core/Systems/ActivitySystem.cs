@@ -62,7 +62,7 @@ namespace data_rogue_core.Systems
 
         public void OpenShop(IEntity shop)
         {
-            var shoppingActivity = new StaticTextActivity(this, "shooooop", true, shop);
+            var shoppingActivity = new ShopActivity(this, shop);
             ActivityStack.Push(shoppingActivity);
         }
     }

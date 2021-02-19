@@ -8,6 +8,7 @@
         Targeting = 5,
         Information = 6,
         Toast = 7,
-        MapEditor = 8
+        MapEditor = 8,
+        Shop = 9
     }
 }

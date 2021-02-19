@@ -77,6 +77,7 @@
     <Compile Include="Activities\BranchLoadingScreenActivity.cs" />
     <Compile Include="Activities\IMapActivity.cs" />
     <Compile Include="Activities\MapEditorCellMenuActivity.cs" />
+    <Compile Include="Activities\ShopActivity.cs" />
     <Compile Include="Behaviours\UseRandomSkillBehaviour.cs" />
     <Compile Include="Components\CanAddToMap.cs" />
     <Compile Include="Components\Cell.cs" />
