@@ -48,7 +48,7 @@ Name: Player
 Detail: The player character. 
 [Wealth]
 Currency: Gold
-Amount: 0
+Amount: 100
 [Inventory]
 Capacity: 26
 [BodyPart]

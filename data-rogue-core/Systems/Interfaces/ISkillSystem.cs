@@ -6,7 +6,7 @@ namespace data_rogue_core.Systems.Interfaces
 {
     public interface ISkillSystem : ISystem, IInitialisableSystem
     {
-        void Learn(IEntity learner, IEntity skill);
+        void Learn(IEntity learner, IEntity skill, bool suppressMessage = false);
         void Forget(IEntity learner, IEntity skill);
 
         void Use(IEntity user, string skillName);

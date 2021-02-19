@@ -1,0 +1,39 @@
+﻿"Monster:Vines"
+[Prototype]
+Name: Monster:Vines
+Singleton: false
+[CanAddToMap]
+[Biome]
+Name: None
+[Challenge]
+ChallengeRating: 0
+[Appearance]
+Glyph: V
+Color: #6DAA2C
+ZOrder: 10
+[SpriteAppearance]
+Bottom: vines
+[Position]
+[Physical]
+Passable: false
+Transparent: true
+[Health]
+HP: 1/1
+[TiltFighter]
+Tilt: 0/1
+[Stat]
+Name: Muscle
+Value: 0
+[Stat]
+Name: Agility
+Value: 0
+[Stat]
+Name: Willpower
+Value: 0
+[Stat]
+Name: Intellect
+Value: 0
+[Description]
+Name: Vines
+Detail: Some flimsy vines. It would be quick work to cut through them.
+[Actor]

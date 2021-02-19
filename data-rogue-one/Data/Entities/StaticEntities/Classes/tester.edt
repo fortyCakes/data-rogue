@@ -30,6 +30,3 @@ Equipped: true
 [StartsWithItem]
 Item: Item:Shoes
 Equipped: true
-[StartsWithItem]
-Item: Item:Club
-Equipped: true

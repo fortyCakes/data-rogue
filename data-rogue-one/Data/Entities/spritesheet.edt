@@ -274,6 +274,13 @@ SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
+Name: crater
+Path: Images/Sprites/Tiles/crater.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
 Name: cobble_wall_1
 Path: Images/Sprites/Tiles/cobble_wall_1.png
 Type: TilesetWall
@@ -398,6 +405,20 @@ Name: goblin
 Path: Images/Sprites/Entities/Creatures/goblin.png
 Type: SingleSprite
 Frames: Idle0,Idle1
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: training_dummy
+Path: Images/Sprites/Entities/Creatures/training_dummy.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: vines
+Path: Images/Sprites/Entities/Misc/vines.png
+Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2

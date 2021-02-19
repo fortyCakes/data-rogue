@@ -39,17 +39,17 @@ namespace data_rogue_core.Systems
             }
         }
 
-        public void Learn(IEntity learner, IEntity skill)
+        public void Learn(IEntity learner, IEntity skill, bool suppressMessage = false)
         {
             var knownSkills = learner.Components.OfType<KnownSkill>();
 
             if (knownSkills.Any(k => k.Skill == skill.Get<Prototype>().Name))
             {
-                systemContainer.MessageSystem.Write($"{learner.DescriptionName} already knows {skill.DescriptionName}.");
+                if (!suppressMessage) systemContainer.MessageSystem.Write($"{learner.DescriptionName} already knows {skill.DescriptionName}.");
             }
             else
             {
-                systemContainer.MessageSystem.Write($"{learner.DescriptionName} learns {skill.DescriptionName}!");
+                if (!suppressMessage) systemContainer.MessageSystem.Write($"{learner.DescriptionName} learns {skill.DescriptionName}!");
                 var newOrder = knownSkills.Any() ? knownSkills.Max(k => k.Order) + 1 : 1;
 
                 systemContainer.EntityEngine.AddComponent(learner, new KnownSkill { Order = newOrder, Skill = skill.Get<Prototype>().Name });

@@ -231,6 +231,12 @@
     <None Include="Data\Entities\StaticEntities\Monsters\fire imp.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Entities\StaticEntities\Monsters\vines.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Entities\StaticEntities\Monsters\training_dummy.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\Entities\StaticEntities\Monsters\stone imp.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

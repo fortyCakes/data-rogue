@@ -127,7 +127,15 @@ namespace data_rogue_core
 
             SetStartDetails(systemContainer, form, player);
 
+            PrintWelcomeMessage(systemContainer, form, player);
+
             systemContainer.PlayerSystem.Player = player;
+        }
+
+        private void PrintWelcomeMessage(ISystemContainer systemContainer, CharacterCreationForm form, IEntity player)
+        {
+            systemContainer.MessageSystem.Write($"Welcome, {player.DescriptionName} the {form.Class}!");
+            systemContainer.MessageSystem.Write($"Use the arrow keys or vi-keys to move. Try bumping into things to interact with them.");
         }
 
         private void SetStartDetails(ISystemContainer systemContainer, CharacterCreationForm form, IEntity player)
@@ -151,7 +159,7 @@ namespace data_rogue_core
 
             foreach (var skill in skills)
             {
-                systemContainer.SkillSystem.Learn(player, skill);
+                systemContainer.SkillSystem.Learn(player, skill, true);
             }
         }
 

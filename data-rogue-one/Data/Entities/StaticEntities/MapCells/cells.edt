@@ -98,6 +98,26 @@ Singleton: true
 Name: Dark Dirt
 Detail: A patch of bare dirt. It's discoloured and dark.
 
+"Cell:Crater"
+[Cell]
+[Appearance]
+Glyph: .
+Color: #4E4A4E
+ZOrder: 0
+[SpriteAppearance]
+Bottom: crater
+BottomConnect: dirt
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:Crater
+Singleton: true
+[Memorable]
+[Description]
+Name: Crater
+Detail: A patch of bare dirt. It's burned to a dark colour.
+
 "Cell:Tree"
 [Cell]
 [Appearance]
@@ -138,8 +158,8 @@ Name: Cell:SpawnPoint
 Singleton: true
 [Memorable]
 [Description]
-Name: Dark Dirt
-Detail: A patch of bare dirt. It's discoloured and dark.
+Name: Crater
+Detail: A patch of bare dirt. It's burned to a dark colour.
 
 "Cell:Wall"
 [Cell]

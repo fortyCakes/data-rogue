@@ -15,6 +15,18 @@ Action: Move(-1,0)
 Key: Right
 Action: Move(1,0)
 [KeyBinding]
+Key: K
+Action: Move(0,-1)
+[KeyBinding]
+Key: J
+Action: Move(0,1)
+[KeyBinding]
+Key: H
+Action: Move(-1,0)
+[KeyBinding]
+Key: L
+Action: Move(1,0)
+[KeyBinding]
 Key: Y
 Action: Move(-1,-1)
 [KeyBinding]

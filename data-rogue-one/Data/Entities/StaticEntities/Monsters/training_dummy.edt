@@ -1,0 +1,39 @@
+﻿"Monster:TrainingDummy"
+[Prototype]
+Name: Monster:TrainingDummy
+Singleton: false
+[CanAddToMap]
+[Biome]
+Name: None
+[Challenge]
+ChallengeRating: 0
+[Appearance]
+Glyph: T
+Color: #864D30
+ZOrder: 10
+[SpriteAppearance]
+Bottom: training_dummy
+[Position]
+[Physical]
+Passable: false
+Transparent: true
+[Health]
+HP: 100/100
+[TiltFighter]
+Tilt: 0/40
+[Stat]
+Name: Muscle
+Value: 0
+[Stat]
+Name: Agility
+Value: 0
+[Stat]
+Name: Willpower
+Value: 0
+[Stat]
+Name: Intellect
+Value: 0
+[Description]
+Name: Training Dummy
+Detail: A sturdy wooden training dummy. It's designed to take more damage once you've knocked it off balance.
+[Actor]
