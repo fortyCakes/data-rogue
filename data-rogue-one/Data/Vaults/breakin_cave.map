@@ -3,6 +3,8 @@ default:Cell:Void
 -15,-4
 -8,-4: Entity(Props:VaultConnection)
 -8,5: Entity(Props:VaultConnection)
+-8,-3: Entity(Monster:Vines)
+-8,4: Entity(Monster:Vines)
 0:Cell:Void
 #:Cell:Wall
 ,:Cell:CobbleWall
@@ -10,13 +12,13 @@ O:Cell:Boulder
 .:Cell:OrangeWall
 ~:Cell:Water
 @:Cell:OrangeRock
-######,@,######
-#..~~OO@OO@@~~.
-#.~~@@@@@@@@@~.
+     #,@,#     
+ ..~~OO@OO@@~~.
+ .~~@@@@@@@@@~.
 ..~@@@@@@@O@@~.
 .~~~@@~~@@O@~~.
 .~~~@@~@@@@@~..
-..~OO@@@@@@~~.#
-#.~~OO@O@@~~..#
-#..O~~@@@....##
-######,@,######
+..~OO@@@@@@~~. 
+ .~~OO@@@@~~.. 
+ ..O~~O@O....  
+     #,@,#     

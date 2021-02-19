@@ -5,6 +5,8 @@ default:Cell:Void
 1,8: Entity(Props:VaultConnection)
 -13,-6: Entity(Props:VaultConnection)
 3,-6: Entity(Props:VaultConnection)
+-6,0: GenerateItem()
+-4,0: GenerateItem()
 0:Cell:Void
 .:Cell:Empty
 #:Cell:Wall

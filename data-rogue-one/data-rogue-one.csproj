@@ -390,6 +390,7 @@
     <None Include="Data\Vaults\sinewave.map">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Vaults\smoke_chamber.map" />
     <None Include="Data\Vaults\smoke_cross.map">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

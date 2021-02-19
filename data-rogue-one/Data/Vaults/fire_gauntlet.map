@@ -4,6 +4,10 @@ VaultWeight: 0.2
 -9,-6
 -9,-3: Entity(Props:VaultConnection)
 8,-3: Entity(Props:Fire)
+7,-3: GenerateItem()
+7,-4: GenerateItem()
+7,-2: GenerateItem()
+8,-4: Entity(Monster:FireImp)
 0:Cell:Void
 .:Cell:Empty
 #:Cell:Wall

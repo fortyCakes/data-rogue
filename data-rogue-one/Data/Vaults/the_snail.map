@@ -2,6 +2,7 @@ Map:"the_snail"
 default:Cell:Void
 -9,-6
 -8,8: Entity(Props:VaultConnection)
+-2,1: GenerateItem()
 0:Cell:Void
 .:Cell:Empty
 #:Cell:Wall

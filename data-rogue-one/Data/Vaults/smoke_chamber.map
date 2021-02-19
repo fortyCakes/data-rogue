@@ -1,0 +1,35 @@
+Map:"smoke_chamber"
+default:Cell:Void
+-9,-4
+-6,-1: GenerateItem()
+-8,-3: Entity(Props:Smoke)
+-7,-3: Entity(Props:Smoke)
+-6,-3: Entity(Props:Smoke)
+-5,-3: Entity(Props:Smoke)
+-4,-3: Entity(Props:Smoke)
+-4,-2: Entity(Props:Smoke)
+-4,-1: Entity(Props:Smoke)
+-4,0: Entity(Props:Smoke)
+-4,1: Entity(Props:Smoke)
+-5,1: Entity(Props:Smoke)
+-6,1: Entity(Props:Smoke)
+-7,1: Entity(Props:Smoke)
+-8,1: Entity(Props:Smoke)
+-8,0: Entity(Props:Smoke)
+-8,-1: Entity(Props:Smoke)
+-8,-2: Entity(Props:Smoke)
+-9,-1: Entity(Props:VaultConnection)
+-6,-4: Entity(Props:VaultConnection)
+-3,-1: Entity(Props:VaultConnection)
+-6,2: Entity(Props:VaultConnection)
+0:Cell:Void
+.:Cell:Empty
+O:Cell:Boulder
+,:Cell:LightRock
+OOO.OOO
+O,,,,,O
+O,,,,,O
+.,,,,,.
+O,,,,,O
+O,,,,,O
+OOO.OOO
