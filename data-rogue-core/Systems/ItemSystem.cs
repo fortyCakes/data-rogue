@@ -43,7 +43,7 @@ namespace data_rogue_core.Systems
 
             if (hasRemovedItemFromSomewhere && hasSpace)
             {
-                AddItemToInventory(item, inventory);
+                AddItemDirectlyToInventory(item, inventory);
             }
             else
             {
@@ -58,7 +58,7 @@ namespace data_rogue_core.Systems
             return true;
         }
 
-        private void AddItemToInventory(IEntity item, Inventory inventory)
+        public void AddItemDirectlyToInventory(IEntity item, Inventory inventory)
         {
             bool addedToStack = false;
 

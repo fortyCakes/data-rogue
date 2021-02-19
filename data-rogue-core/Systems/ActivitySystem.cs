@@ -1,4 +1,5 @@
 ﻿using data_rogue_core.Activities;
+using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Renderers;
 using data_rogue_core.Systems.Interfaces;
 using System;
@@ -57,6 +58,12 @@ namespace data_rogue_core.Systems
             }
 
             return null;
+        }
+
+        public void OpenShop(IEntity shop)
+        {
+            var shoppingActivity = new StaticTextActivity(this, "shooooop", true, shop);
+            ActivityStack.Push(shoppingActivity);
         }
     }
 }

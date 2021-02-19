@@ -3,5 +3,6 @@
     public static class AdditionalMapGenCommandType
     {
         public static string GenerateItem = "GenerateItem";
+        public static string GenerateShop = "GenerateShop";
     }
 }

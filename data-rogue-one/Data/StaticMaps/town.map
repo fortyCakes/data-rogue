@@ -2,6 +2,7 @@ Map:"Town"
 default:Cell:Tree
 -50,-41
 -36,-5: Entity(Props:Sign|Dialog.Text=North: This way to the Tutorial)
+-36,-4: GenerateShop(5)
 8,-2: Entity(NPC:HumanBlue|Dialog.Text=Hello, World!)
 -31,-3: Entity(Props:StairsDown)
 -45,-19: Entity(Props:Sign|Dialog.Text=You can interact with <Space>. Press M to cycle through interactions if there is more than one.)

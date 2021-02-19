@@ -1,9 +1,7 @@
-﻿using data_rogue_core.Components;
-using data_rogue_core.EntityEngineSystem;
+﻿using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Systems.Interfaces;
 using data_rogue_one.World.GenerationStrategies.ItemGeneration;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace data_rogue_core.Maps.MapGenCommands

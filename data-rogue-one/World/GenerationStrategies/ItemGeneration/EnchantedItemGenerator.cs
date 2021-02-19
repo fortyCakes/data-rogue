@@ -38,13 +38,31 @@ namespace data_rogue_one.World.GenerationStrategies.ItemGeneration
             return CreateItem(itemLevel, random, itemClassPicker, rarityPicker);
         }
 
+        public IEntity TunedGenerateItem(List<IEntity> itemList, int itemLevel, IRandom random, List<RarityPicker> rarities)
+        {
+            var rarityPicker = random.WeightedPickOne(rarities, r => r.Weight);
+
+            return CreateItem(itemLevel, random, null, rarityPicker);
+        }
+
         public IEntity CreateItem(int itemLevel, IRandom random, ItemClassPicker itemClassPicker, RarityPicker rarityPicker)
         {
-            var itemClass = itemClassPicker.ItemClass;
+            IEntity selectedItem;
+            ItemClass itemClass;
 
-            var itemsInClass = _itemsByClass[itemClass];
+            if (itemClassPicker == null)
+            {
+                selectedItem = random.PickOne(_itemList);
+                itemClass = ItemClassHelper.Classify(selectedItem);
+            }
+            else
+            {
+                itemClass = itemClassPicker.ItemClass;
 
-            var selectedItem = random.PickOne(itemsInClass);
+                var itemsInClass = _itemsByClass[itemClass];
+
+                selectedItem = random.PickOne(itemsInClass);
+            }
             var item = _systemContainer.PrototypeSystem.Get(selectedItem);
 
             ApplyItemClassSpecificChanges(item, itemClass, itemLevel, random);

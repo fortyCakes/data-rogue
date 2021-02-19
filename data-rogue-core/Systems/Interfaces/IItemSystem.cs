@@ -7,6 +7,7 @@ namespace data_rogue_core.Systems
     public interface IItemSystem : ISystem, IInitialisableSystem
     {
         bool MoveToInventory(IEntity item, Inventory inventory);
+        void AddItemDirectlyToInventory(IEntity item, Inventory inventory);
         bool DropItemFromInventory(IEntity item);
         bool Use(IEntity user, IEntity item);
         void DestroyItem(IEntity item, bool all = true);

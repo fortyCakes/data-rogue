@@ -1,0 +1,22 @@
+﻿"Props:Shop"
+[Prototype]
+Name: Props:Shop
+Singleton: false
+[Appearance]
+Glyph: >
+Color: #964B00
+ZOrder: 1
+[SpriteAppearance]
+Top: shop
+[Position]
+[Physical]
+Passable: true
+Transparent: true
+[Memorable]
+[Description]
+Name: Shop
+Detail: It's a shop. You can buy items here.
+[Interaction]
+Verb: Shop
+Script: OpenShop
+[Inventory]

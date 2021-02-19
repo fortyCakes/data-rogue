@@ -1,10 +1,10 @@
 ﻿using data_rogue_core.Activities;
+using data_rogue_core.EntityEngineSystem;
 using System;
 using System.Windows.Forms;
 
 namespace data_rogue_core.Systems.Interfaces
 {
-
     public interface IActivitySystem
     {
         ActivityStack ActivityStack { get; }
@@ -21,5 +21,7 @@ namespace data_rogue_core.Systems.Interfaces
         void RemoveActivity(IActivity activity);
         IActivity GetActivityAcceptingInput();
         IMapActivity GetMapActivity();
+
+        void OpenShop(IEntity shop);
     }
 }

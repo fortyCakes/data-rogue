@@ -615,6 +615,13 @@ SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
+Name: shop
+Path: Images/Sprites/Entities/Misc/shop.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
 Name: armour_plate
 Path: Images/Sprites/Entities/Items/armour_plate.png
 Type: SingleSprite

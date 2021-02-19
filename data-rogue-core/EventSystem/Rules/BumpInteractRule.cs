@@ -51,7 +51,7 @@ namespace data_rogue_core.EventSystem.Rules
 
         private bool IsInteractable(IEntity entity)
         {
-            return entity.Has<Interaction>();
+            return entity.Has<Interaction>() && entity.Has<Physical>() && !entity.Get<Physical>().Passable;
         }
     }
 }

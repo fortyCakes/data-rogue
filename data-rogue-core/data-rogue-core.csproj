@@ -446,10 +446,12 @@
     <Compile Include="Systems\Interfaces\IStatSystem.cs" />
     <Compile Include="Systems\ParticleSystem.cs" />
     <Compile Include="Systems\SoundSystem.cs" />
+    <Compile Include="Utils\BaseShopGenerator.cs" />
     <Compile Include="Utils\BLTNameExtensions.cs" />
     <Compile Include="Utils\BresenhamLineDrawingAlgorithm.cs" />
     <Compile Include="Utils\FloodFillHelper.cs" />
     <Compile Include="Utils\ILineDrawingAlgorithm.cs" />
+    <Compile Include="Utils\IShopGenerator.cs" />
     <Compile Include="Utils\IStopwatch.cs" />
     <Compile Include="Systems\MapSystem.cs" />
     <Compile Include="Systems\NonPlayerTargeter.cs" />
@@ -768,6 +770,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Entities\Misc\random_item.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Entities\Misc\shop.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Entities\Misc\sign.png">
