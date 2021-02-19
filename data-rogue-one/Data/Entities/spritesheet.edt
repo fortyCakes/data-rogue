@@ -769,6 +769,13 @@ SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
+Name: random_item
+Path: Images/Sprites/Entities/Misc/random_item.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
 Name: weapon_wand
 Path: Images/Sprites/Entities/Items/weapon_wand.png
 Type: SingleSprite

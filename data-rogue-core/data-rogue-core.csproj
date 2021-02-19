@@ -764,6 +764,9 @@
     <Content Include="Images\Sprites\Entities\Items\wooden_shield.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\Sprites\Entities\Misc\random_item.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Sprites\Entities\Misc\sign.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

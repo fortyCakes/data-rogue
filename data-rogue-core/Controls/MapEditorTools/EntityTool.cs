@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using data_rogue_core.Activities;
 using data_rogue_core.Components;
 using data_rogue_core.EntityEngineSystem;
@@ -22,28 +23,48 @@ namespace data_rogue_core.Controls.MapEditorTools
 
         public void Apply(IMap map, MapCoordinate mapCoordinate, IEntity currentCell, IEntity alternateCell, ISystemContainer systemContainer)
         {
-            Action<IEntity> action = (entityToAdd) => { AddEntityCommandToMap(map, mapCoordinate, entityToAdd, systemContainer); };
+            Action<IEntity> action = (entityToAdd) => { AddCommandToMap(map, mapCoordinate, entityToAdd, systemContainer); };
 
             var entities = systemContainer.EntityEngine.AllEntities.Where(e => e.Has<CanAddToMap>());
 
             var entityCreationActivity = new EntityPickerMenuActivity(entities, systemContainer, "Pick an entity to add", action);
+            entityCreationActivity.HoverPrefix = "";
+            entityCreationActivity.NoCellHoverText = "(no entity selected)";
 
             systemContainer.ActivitySystem.ActivityStack.Push(entityCreationActivity);
         }
 
-        private void AddEntityCommandToMap(IMap map, MapCoordinate mapCoordinate, IEntity entityToAdd, ISystemContainer systemContainer)
+        private void AddCommandToMap(IMap map, MapCoordinate mapCoordinate, IEntity entityToAdd, ISystemContainer systemContainer)
         {
+            string commandType;
+            string parameters;
+            bool paramsIncludeEntityName;
+            if (entityToAdd.Has<MapGenerationCommand>())
+            {
+                var component = entityToAdd.Get<MapGenerationCommand>();
+                commandType = component.Command;
+                parameters = component.Parameters;
+                paramsIncludeEntityName = false;
+            }
+            else
+            {
+                commandType = MapGenCommandType.Entity;
+                parameters = null;
+                paramsIncludeEntityName = true;
+            }
+
             var entityName = entityToAdd.Get<Prototype>().Name;
 
             var mapAdd = entityToAdd.Get<CanAddToMap>();
 
             if (mapAdd.SettableProperty != null)
             {
-                Action<string> callback = (settablePropertyValue) => 
+                Action<string> callback = (settablePropertyValue) =>
                     CompleteEntityCommand(
-                        map, 
-                        mapCoordinate.ToVector(), 
-                        Parameterise(entityName, mapAdd.SettableProperty, settablePropertyValue));
+                        map,
+                        mapCoordinate.ToVector(),
+                        commandType,
+                        Parameterise(entityName, mapAdd.SettableProperty, settablePropertyValue, parameters, paramsIncludeEntityName));
 
                 var inputBox = new TextInputActivity(systemContainer.ActivitySystem, "Enter a value for property {mapAdd.SettableProperty}:", callback);
 
@@ -51,18 +72,23 @@ namespace data_rogue_core.Controls.MapEditorTools
             }
             else
             {
-                CompleteEntityCommand(map, mapCoordinate.ToVector(), entityName);
+                CompleteEntityCommand(map, mapCoordinate.ToVector(), commandType, Parameterise(entityName, null, null, parameters, paramsIncludeEntityName));
             }
         }
 
-        private string Parameterise(string entityName, string settableProperty, string settablePropertyValue)
+        private string Parameterise(string entityName, string settableProperty, string settablePropertyValue, string existingParameters, bool paramsIncludeEntityName)
         {
-            return $"{entityName}|{settableProperty}={settablePropertyValue}";
+            var sb = new StringBuilder();
+            if (paramsIncludeEntityName) sb.Append(entityName);
+            if (!string.IsNullOrEmpty(existingParameters)) sb.Append($"|{existingParameters}");
+            if (!string.IsNullOrEmpty(settableProperty)) sb.Append($"|{settableProperty}={settablePropertyValue}");
+
+            return sb.ToString();
         }
 
-        private void CompleteEntityCommand(IMap map, Vector vector, string parameters)
+        private void CompleteEntityCommand(IMap map, Vector vector, string command, string parameters)
         {
-            var entityCommand = new MapGenCommand { MapGenCommandType = MapGenCommandType.Entity, Parameters = parameters, Vector = vector };
+            var entityCommand = new MapGenCommand { MapGenCommandType = command, Parameters = parameters, Vector = vector };
             map.AddCommand(entityCommand);
         }
 

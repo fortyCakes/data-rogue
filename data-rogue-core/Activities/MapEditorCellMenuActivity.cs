@@ -14,13 +14,15 @@ namespace data_rogue_core.Activities
 {
     internal class EntityPickerMenuActivity : BaseActivity
     {
+        public string HoverPrefix = "Cell:";
+        public string NoCellHoverText = "(no cell selected)";
         private ISystemContainer _systemContainer;
         private string _caption;
         private Action<IEntity> _callback;
         private IEntity SelectedCell;
 
         private IEnumerable<IEntity> Entities;
-        private string HoveredCellText => "Cell:" + (SelectedCell?.DescriptionName ?? "(no cell selected)");
+        private string HoveredCellText => HoverPrefix + (SelectedCell?.DescriptionName ?? NoCellHoverText);
 
         public EntityPickerMenuActivity(IEnumerable<IEntity> entities, ISystemContainer systemContainer, string caption, Action<IEntity> callback)
         {

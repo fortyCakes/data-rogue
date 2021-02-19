@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using data_rogue_core.Components;
 using data_rogue_core.Controls;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Maps;
@@ -31,6 +32,14 @@ namespace data_rogue_core.IOSystems.BLTTiles
                 .Select(c => EntityCommandExecutor.GetEntityName(c, out _))
                 .Select(entityName => systemContainer.PrototypeSystem.GetPrototype(entityName))
                 .ToList();
+
+            var otherCommandEntities = commands
+                .Where(c => c.MapGenCommandType != MapGenCommandType.Entity)
+                .Select(c => c.MapGenCommandType)
+                .Select(c => systemContainer.EntityEngine.AllEntities.Single(e => e.Has<MapGenerationCommand>() && e.Get<MapGenerationCommand>().Command == c))
+                .ToList();
+
+            entityCommandEntities.AddRange(otherCommandEntities);
 
             return entityCommandEntities;
         }

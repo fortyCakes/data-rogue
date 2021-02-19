@@ -1,0 +1,18 @@
+﻿"Props:RandomItem"
+[Prototype]
+Name: Props:RandomItem
+Singleton: false
+[CanAddToMap]
+VisibleDuringPlay: false
+[Appearance]
+Glyph: I
+Color: #D37D2C
+ZOrder: 1
+[SpriteAppearance]
+Top: random_item
+[Position]
+[Description]
+Name: Random Item
+Detail: Spawns a random item here when the map is generated.
+[MapGenerationCommand]
+Command: GenerateItem
