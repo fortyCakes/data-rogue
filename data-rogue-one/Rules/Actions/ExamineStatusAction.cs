@@ -31,6 +31,27 @@ namespace data_rogue_one.EventSystem.Rules
         }
     }
 
+    public class ExamineStatusFromMenuAction : ApplyActionRule
+    {
+        public ExamineStatusFromMenuAction(ISystemContainer systemContainer) : base(systemContainer)
+        {
+        }
+
+        public override ActionType actionType => ActionType.Examine;
+
+        public override ActivityType activityType => ActivityType.Menu;
+
+        public override bool ApplyInternal(IEntity sender, ActionEventData eventData)
+        {
+            var entityId = uint.Parse(eventData.Parameters);
+            var entity = _systemContainer.EntityEngine.Get(entityId);
+
+            _systemContainer.ActivitySystem.Push(new InformationActivity(_systemContainer.ActivitySystem, StatusHelper.GetStatusConfigurations(entity), entity, true, false));
+
+            return false;
+        }
+    }
+
     public class PlayerStatusAction : ApplyActionRule
     {
         public PlayerStatusAction(ISystemContainer systemContainer) : base(systemContainer)

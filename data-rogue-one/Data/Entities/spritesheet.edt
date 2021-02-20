@@ -713,6 +713,13 @@ SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
+Name: weapon_rapier
+Path: Images/Sprites/Entities/Items/weapon_rapier.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
 Name: weapon_morningstar
 Path: Images/Sprites/Entities/Items/weapon_morningstar.png
 Type: SingleSprite

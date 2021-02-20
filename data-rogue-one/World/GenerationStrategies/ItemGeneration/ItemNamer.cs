@@ -25,7 +25,11 @@ namespace data_rogue_one.World.GenerationStrategies.ItemGeneration
         public void NameMagicItem(IEntity item, IEntity enchantment1, IEntity enchantment2)
         {
             var baseName = item.DescriptionName;
-            var prefix = enchantment1.Get<EnchantmentGeneration>().Prefix + " ";
+            var prefix = "";
+            if (enchantment1 != null)
+            {
+                prefix = enchantment1.Get<EnchantmentGeneration>().Prefix + " ";
+            }
             var suffix = "";
             if (enchantment2 != null)
             {

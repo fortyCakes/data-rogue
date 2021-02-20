@@ -84,6 +84,7 @@ namespace data_rogue_one
                 {
                     typeof(RestAction),
                     typeof(ExamineStatusAction),
+                    typeof(ExamineStatusFromMenuAction),
                     typeof(PlayerStatusAction),
                     typeof(MorgueAction)
                 };

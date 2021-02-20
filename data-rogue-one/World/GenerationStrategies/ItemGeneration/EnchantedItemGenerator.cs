@@ -16,6 +16,7 @@ namespace data_rogue_one.World.GenerationStrategies.ItemGeneration
         private ISystemContainer _systemContainer;
         private List<IEntity> _itemList;
         private ItemNamer _itemNamer;
+        private IItemPricer _itemPricer;
         private EnchantmentPicker _enchantmentPicker;
         private Dictionary<ItemClass, List<IEntity>> _itemsByClass;
 
@@ -25,6 +26,7 @@ namespace data_rogue_one.World.GenerationStrategies.ItemGeneration
             _itemList = itemList.Where(i => !i.Get<Item>().DoNotGenerate).ToList();
 
             _itemNamer = new ItemNamer(_systemContainer);
+            _itemPricer = new ItemGoldPricer(_systemContainer);
             _enchantmentPicker = new EnchantmentPicker(_systemContainer.EntityEngine.AllEntities.Where(e => e.Has<EnchantmentGeneration>()).ToList());
 
             _itemsByClass = ItemClassHelper.SplitItemsByClass(itemList);
@@ -72,7 +74,21 @@ namespace data_rogue_one.World.GenerationStrategies.ItemGeneration
                 Enchant(item, itemClass, itemLevel, random, rarityPicker);
             }
 
+            SetItemPrice(item);
+
             return item;
+        }
+
+        private void SetItemPrice(IEntity item)
+        {
+            Price itemPrice = _itemPricer.Price(item);
+
+            if (item.Has<Price>())
+            {
+                _systemContainer.EntityEngine.RemoveComponent<Price>(item);
+            }
+
+            _systemContainer.EntityEngine.AddComponent(item, itemPrice);
         }
 
         public void Enchant(IEntity item, ItemClass itemClass, int itemLevel, IRandom random, RarityPicker rarityPicker)
@@ -96,7 +112,14 @@ namespace data_rogue_one.World.GenerationStrategies.ItemGeneration
 
                     ApplyEnchantmentTo(item, enchantment1);
 
-                    _itemNamer.NameMagicItem(item, enchantment1, null);
+                    if (random.PickOneFrom(1, 2) == 1)
+                    {
+                        _itemNamer.NameMagicItem(item, enchantment1, null);
+                    }
+                    else
+                    {
+                        _itemNamer.NameMagicItem(item, null, enchantment1);
+                    }
                 }
                 else
                 {
@@ -144,7 +167,9 @@ namespace data_rogue_one.World.GenerationStrategies.ItemGeneration
 
         private void ApplyEnchantmentTo(IEntity item, IEntity enchantment)
         {
-            var enchantComponents = enchantment.Components.OfType<Enchantment>();
+            List<IEntityComponent> enchantComponents = enchantment.Components.OfType<Enchantment>().OfType<IEntityComponent>().ToList();
+
+            enchantComponents.AddRange(enchantment.Components.OfType<EnchantmentGeneration>().ToList());
 
             foreach(var enchantComponent in enchantComponents)
             {
@@ -164,7 +189,7 @@ namespace data_rogue_one.World.GenerationStrategies.ItemGeneration
             description.Detail = description.Detail + Environment.NewLine + enchantGeneration.DescriptionLine;
         }
 
-        private void AddComponentToItem(IEntity item, Enchantment enchantComponent)
+        private void AddComponentToItem(IEntity item, IEntityComponent enchantComponent)
         {
             var clone = ComponentSerializer.Deserialize(_systemContainer, ComponentSerializer.Serialize(enchantComponent, 0), 0);
             _systemContainer.EntityEngine.AddComponent(item, enchantComponent);

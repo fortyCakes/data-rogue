@@ -13,5 +13,6 @@ namespace data_rogue_one.Components
         public string Suffix;
         public int EnchantPower = 1;
         public string DescriptionLine;
+        public int GoldValue = 100;
     }
 }

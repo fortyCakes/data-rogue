@@ -33,7 +33,7 @@ Value: 3
 Prefix: Protective
 Suffix: of Warding
 EnchantPower: 2
-DescriptionLine: +2 Maximum Aegis
+DescriptionLine: +5 Maximum Aegis
 [StatBoostEnchantment]
 Stat: Aegis
 Value: 5

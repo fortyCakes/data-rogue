@@ -84,6 +84,8 @@
     <Compile Include="Rules\SaveMorgueFileOnDeathRule.cs" />
     <Compile Include="Rules\UpdateHighScoreFileOnDeathRule.cs" />
     <Compile Include="Utils\EnchantedItemShopGenerator.cs" />
+    <Compile Include="Utils\IItemPricer.cs" />
+    <Compile Include="Utils\ItemGoldPricer.cs" />
     <Compile Include="Utils\ItemStatsDescriber.cs" />
     <Compile Include="Utils\MorgueHelper.cs" />
     <Compile Include="Utils\StatusHelper.cs" />
@@ -132,6 +134,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\Entities\StaticEntities\Enchantments\DefensiveEnchantments.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Entities\StaticEntities\Enchantments\MiscEnchantments.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\Entities\StaticEntities\Items\ArmourBoots.edt">

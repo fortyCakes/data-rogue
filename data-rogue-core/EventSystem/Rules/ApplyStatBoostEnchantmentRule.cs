@@ -15,7 +15,7 @@ namespace data_rogue_core.EventSystem.Rules
 
         public EventTypeList EventTypes => new EventTypeList{ EventType.GetStat };
         public uint RuleOrder => 1;
-        public EventRuleType RuleType => EventRuleType.BeforeEvent;
+        public EventRuleType RuleType => EventRuleType.EventResolution;
 
         private ISystemContainer systemContainer { get; }
 
@@ -27,12 +27,9 @@ namespace data_rogue_core.EventSystem.Rules
 
             var equipped = sender.Get<Equipped>();
 
-            foreach(var equippedItem in equipped.EquippedItems.ToList())
+            foreach(var equippedItem in equipped.EquippedItems.Select(e => systemContainer.EntityEngine.Get(e.EquipmentId)).Distinct().ToList())
             {
-                var id = equippedItem.EquipmentId;
-                var item = systemContainer.EntityEngine.Get(id);
-
-                foreach(var boost in item.Components.OfType<StatBoostEnchantment>())
+                foreach(var boost in equippedItem.Components.OfType<StatBoostEnchantment>())
                 {
                     if (boost.Stat == data.Stat)
                     {

@@ -1,0 +1,7 @@
+﻿"Valuable"
+[EnchantmentGeneration]
+Prefix: Golden
+Suffix: of Gold
+EnchantPower: 1
+GoldValue: 1000
+DescriptionLine: Increased Value

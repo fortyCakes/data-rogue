@@ -95,7 +95,7 @@ namespace data_rogue_core.Activities
 
             var button = exitButton;
             SetSize(button, systemContainer, rendererHandle, controlRenderers, playerFov);
-            button.IsPressed = SelectedItem == null;
+            button.IsFocused = SelectedItem == null;
 
             button.Position = new Rectangle(renderer.ActivityPadding.Left, height - button.Position.Height - renderer.ActivityPadding.Bottom, button.Position.Width, button.Position.Height);
             controls.Add(button);

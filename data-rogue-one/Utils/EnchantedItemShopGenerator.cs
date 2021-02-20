@@ -23,17 +23,13 @@ namespace data_rogue_one.Utils
             {
                 var item = itemGenerator.TunedGenerateItem(itemList.ToList(), itemLevel, systemContainer.Random, rarities);
 
-                Price itemPrice = PriceItem(item);
-
-                systemContainer.EntityEngine.AddComponent(item, itemPrice);
-
                 yield return item;
             }
         }
 
-        private Price PriceItem(IEntity item)
+        private Price PriceItem(IEntity item, IItemPricer itemPricer)
         {
-            return new Price { Currency = "Gold", Amount = 10 };
+            return itemPricer.Price(item);
         }
     }
 }

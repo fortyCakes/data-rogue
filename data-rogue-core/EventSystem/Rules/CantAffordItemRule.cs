@@ -24,7 +24,7 @@ namespace data_rogue_core.EventSystem.Rules
             var price = data.PurchaseItem.Get<Price>();
             var wealth = _systemContainer.ItemSystem.CheckWealth(sender, price.Currency);
 
-            if (wealth <= price.Amount)
+            if (wealth < price.Amount)
             {
                 return false;
             }
