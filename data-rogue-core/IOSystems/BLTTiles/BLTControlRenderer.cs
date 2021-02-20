@@ -45,14 +45,14 @@ namespace data_rogue_core.IOSystems.BLTTiles
             BLT.Color("");
         }
 
-        protected static void RenderBackgroundBox(int x, int y, int activityIndex, Size size, ISpriteManager spriteManager)
+        protected static void RenderBackgroundBox(int x, int y, int activityIndex, Size size, ISpriteManager spriteManager, string spriteName = "textbox_blue")
         {
             BLTLayers.Set(BLTLayers.UIElements, activityIndex);
             BLT.Font("");
             var width = size.Width / BLTTilesIOSystem.TILE_SPACING;
             var height = size.Height / BLTTilesIOSystem.TILE_SPACING;
 
-            var spriteSheet = spriteManager.Get("textbox_blue");
+            var spriteSheet = spriteManager.Get(spriteName);
 
             for (int xCoord = 0; xCoord < width; xCoord++)
             {

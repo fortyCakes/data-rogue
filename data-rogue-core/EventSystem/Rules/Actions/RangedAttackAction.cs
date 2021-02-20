@@ -30,7 +30,7 @@ namespace data_rogue_core.EventSystem.Rules
                 return false;
             }
 
-            _systemContainer.TargetingSystem.GetTarget(sender, new Targeting { Range = 10, TargetOrigin = false }, (mapCoordinate) => ResolveRangedAttack(sender, mapCoordinate));
+            _systemContainer.TargetingSystem.GetTarget(sender, new Targeting { Range = 10, TargetOrigin = false, CellsHit = new VectorList { new Vector(0, 0)} }, (mapCoordinate) => ResolveRangedAttack(sender, mapCoordinate));
             
             return false;
         }
@@ -90,7 +90,7 @@ namespace data_rogue_core.EventSystem.Rules
 
             var weapons = equipment.Where(e => e.Has<Weapon>() && RangedAttackClasses.Contains(e.Get<Weapon>().Class));            
 
-            return weapons.OrderBy(e => equipped.EquippedItems.Where(eq => eq.EquipmentId == e.EntityId).Distinct().Single().Slot.ToString()).FirstOrDefault();
+            return weapons.OrderBy(e => equipped.EquippedItems.Where(eq => eq.EquipmentId == e.EntityId).First().Slot.ToString()).FirstOrDefault();
         }
 
         private void ResolveRangedAttack(IEntity attacker, MapCoordinate mapCoordinate)

@@ -1,6 +1,8 @@
-﻿using data_rogue_core.EntityEngineSystem;
+﻿using data_rogue_core.Components;
+using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Systems.Interfaces;
 using data_rogue_one.World.GenerationStrategies.ItemGeneration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,12 +14,26 @@ namespace data_rogue_one.Utils
         {
             var itemGenerator = new EnchantedItemGenerator(systemContainer, itemList.ToList());
 
-            var rarities = new List<RarityPicker> { RarityPicker.Magic, RarityPicker.Rare };
+            var rare = RarityPicker.Rare;
+            rare.Weight *= 3;
+
+            var rarities = new List<RarityPicker> { RarityPicker.Magic, rare };
 
             for (int i = 0; i < numberOfItems; i++)
             {
-                yield return itemGenerator.TunedGenerateItem(itemList.ToList(), itemLevel, systemContainer.Random, rarities);
+                var item = itemGenerator.TunedGenerateItem(itemList.ToList(), itemLevel, systemContainer.Random, rarities);
+
+                Price itemPrice = PriceItem(item);
+
+                systemContainer.EntityEngine.AddComponent(item, itemPrice);
+
+                yield return item;
             }
+        }
+
+        private Price PriceItem(IEntity item)
+        {
+            return new Price { Currency = "Gold", Amount = 10 };
         }
     }
 }

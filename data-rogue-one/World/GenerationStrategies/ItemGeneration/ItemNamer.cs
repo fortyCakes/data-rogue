@@ -34,7 +34,7 @@ namespace data_rogue_one.World.GenerationStrategies.ItemGeneration
 
             Description description = item.Get<Description>();
             description.Name = $"{prefix}{baseName}{suffix}";
-            description.Color = Color.FromArgb(0x30, 0x34, 0x6D);
+            description.Color = Color.FromArgb(0x59, 0x7D, 0xCE);
 
         }
 

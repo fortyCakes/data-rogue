@@ -82,6 +82,8 @@
     <Compile Include="Components\CanAddToMap.cs" />
     <Compile Include="Components\Cell.cs" />
     <Compile Include="Components\Equipment.cs" />
+    <Compile Include="Components\MapGenerationCommand.cs" />
+    <Compile Include="Components\Price.cs" />
     <Compile Include="Controls\MapEditorCellPickerControl.cs" />
     <Compile Include="Controls\MapEditorControl.cs" />
     <Compile Include="Controls\MapEditorTools\BaseFilledShapeTool.cs" />
@@ -126,6 +128,7 @@
     <Compile Include="Controls\MapEditorTools\TinyEraserTool.cs" />
     <Compile Include="Controls\MenuEntityControl.cs" />
     <Compile Include="Controls\MinimapControl.cs" />
+    <Compile Include="Controls\ShopItemControl.cs" />
     <Compile Include="Controls\SkillBarControl.cs" />
     <Compile Include="Data\HighScore.cs" />
     <Compile Include="Data\VectorList.cs" />
@@ -141,6 +144,7 @@
     <Compile Include="Controls\BaseStatsControl.cs" />
     <Compile Include="Controls\TargetingOverlayControl.cs" />
     <Compile Include="EntityEngineSystem\VaultDataProvider.cs" />
+    <Compile Include="EventSystem\EventData\PurchaseItemEventData.cs" />
     <Compile Include="EventSystem\Rules\Actions\ChangeMapEditorToolAction.cs" />
     <Compile Include="EventSystem\Rules\Actions\DebugMenuAction.cs" />
     <Compile Include="EventSystem\Rules\Actions\FollowPathAction.cs" />
@@ -154,6 +158,8 @@
     <Compile Include="EventSystem\Rules\Actions\WaitAction.cs" />
     <Compile Include="EventSystem\Rules\AttackAnimationRule.cs" />
     <Compile Include="EventSystem\Rules\BumpInteractRule.cs" />
+    <Compile Include="EventSystem\Rules\CantAffordItemRule.cs" />
+    <Compile Include="EventSystem\Rules\CompletePurchaseRule.cs" />
     <Compile Include="EventSystem\Rules\DamageNumbersPopOutRule.cs" />
     <Compile Include="EventSystem\Rules\DamageSplatParticlesRule.cs" />
     <Compile Include="EventSystem\Rules\DisplayMorgueScreenOnDeathRule.cs" />
@@ -191,6 +197,7 @@
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMessageLogRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMinimapRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMultipleChoiceFormDataRenderer.cs" />
+    <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTShopItemControlDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTSkillBarDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTStatsFormRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTMapEditorSelectedCellsRenderer.cs" />
@@ -1065,6 +1072,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Tiles\stone_wall_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\UITiles\textbox_blue_selected.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\UITiles\textbox_grey.png">

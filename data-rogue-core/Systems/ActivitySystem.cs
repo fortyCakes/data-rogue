@@ -60,9 +60,9 @@ namespace data_rogue_core.Systems
             return null;
         }
 
-        public void OpenShop(IEntity shop)
+        public void OpenShop(ISystemContainer systemContainer, IEntity shop)
         {
-            var shoppingActivity = new ShopActivity(this, shop);
+            var shoppingActivity = new ShopActivity(systemContainer, shop);
             ActivityStack.Push(shoppingActivity);
         }
     }

@@ -9,6 +9,15 @@ namespace data_rogue_core.Maps
 
         public double Length => Math.Sqrt(X * X + Y * Y);
 
+        public static Vector Left => new Vector(-1, 0);
+        public static Vector Right => new Vector(1, 0);
+        public static Vector Up => new Vector(0, -1);
+        public static Vector Down => new Vector(0, 1);
+        public static Vector UpLeft => new Vector(-1, -1);
+        public static Vector UpRight => new Vector(1, -1);
+        public static Vector DownLeft => new Vector(-1, 1);
+        public static Vector DownRight => new Vector(1, 1);
+
         public Vector(int x, int y)
         {
             X = x;
@@ -94,9 +103,7 @@ namespace data_rogue_core.Maps
         {
             return new[]
             {
-                new Vector(-1, 0),
-                new Vector(0, -1), new Vector(0, 1),
-                new Vector(1, 0)
+                Left, Up, Right, Down
             };
         }
 
@@ -104,9 +111,9 @@ namespace data_rogue_core.Maps
         {
             return new[]
             {
-                new Vector(-1, -1), new Vector(-1, 0), new Vector(-1, 1),
-                new Vector(0, -1), new Vector(0, 1),
-                new Vector(1, -1), new Vector(1, 0), new Vector(1, 1)
+                UpLeft, Left, DownLeft,
+                Up, Down,
+                UpRight, Right, DownRight
             };
         }
     }

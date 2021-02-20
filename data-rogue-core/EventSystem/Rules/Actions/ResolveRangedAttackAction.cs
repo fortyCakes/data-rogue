@@ -16,7 +16,7 @@ namespace data_rogue_core.EventSystem.Rules
         }
 
         public override ActionType actionType => ActionType.ResolveRangedAttack;
-        public override ActivityType activityType => ActivityType.Gameplay;
+        public override ActivityType activityType => ActivityType.Targeting;
 
         public override bool ApplyInternal(IEntity sender, ActionEventData eventData)
         {

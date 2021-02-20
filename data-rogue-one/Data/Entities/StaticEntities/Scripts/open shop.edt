@@ -4,6 +4,5 @@ Name: OpenShop
 Singleton: true
 [Script]
 Text: {
-	shop = User:Get('Shop');
-	SystemContainer.ActivitySystem:OpenShop(shop);
+	SystemContainer.ActivitySystem:OpenShop(SystemContainer, User);
 }

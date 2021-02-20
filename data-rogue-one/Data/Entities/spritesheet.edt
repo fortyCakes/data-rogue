@@ -42,6 +42,13 @@ SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
+Name: textbox_blue_selected
+Path: Images/Sprites/UITiles/textbox_blue_selected.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
 Name: textbox_grey
 Path: Images/Sprites/UITiles/textbox_grey.png
 Type: TilesetBox

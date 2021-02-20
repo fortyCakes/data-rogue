@@ -8,10 +8,4 @@ namespace data_rogue_core.Components
 
         public bool VisibleDuringPlay = true;
     }
-
-    public class MapGenerationCommand: IEntityComponent
-    {
-        public string Command;
-        public string Parameters;
-    }
 }

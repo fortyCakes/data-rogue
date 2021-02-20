@@ -20,3 +20,22 @@ Detail: It's a shop. You can buy items here.
 Verb: Shop
 Script: OpenShop
 [Inventory]
+
+"Props:GenerateShop"
+[Prototype]
+Name: Props:GenerateShop
+Singleton: false
+[CanAddToMap]
+VisibleDuringPlay: false
+[Appearance]
+Glyph: >
+Color: #964B00
+ZOrder: 1
+[SpriteAppearance]
+Top: shop
+[Position]
+[Description]
+Name: Random Shop
+Detail: Spawns a random shop here when the map is generated.
+[MapGenerationCommand]
+Command: GenerateShop

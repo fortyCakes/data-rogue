@@ -69,7 +69,8 @@ namespace data_rogue_core.Systems
         {
             var playerPosition = _positionSystem.CoordinateOf(entity);
 
-            var nearbyPositions = Vector.GetAdjacentAndDiagonalCellVectors().Select(v => playerPosition + v);
+            var nearbyPositions = Vector.GetAdjacentAndDiagonalCellVectors().Select(v => playerPosition + v).ToList();
+            nearbyPositions.Add(playerPosition);
 
             var interactables = Entities.Where(e => nearbyPositions.Contains(_positionSystem.CoordinateOf(e))).ToList();
 

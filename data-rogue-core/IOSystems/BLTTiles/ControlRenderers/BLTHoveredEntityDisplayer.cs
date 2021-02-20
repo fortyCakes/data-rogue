@@ -13,7 +13,7 @@ using data_rogue_core.Utils;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
-    public partial class BLTHoveredEntityDisplayer : BLTControlRenderer
+    public class BLTHoveredEntityDisplayer : BLTControlRenderer
     {
         public override Type DisplayType => typeof(HoveredEntityDisplayBox);
 

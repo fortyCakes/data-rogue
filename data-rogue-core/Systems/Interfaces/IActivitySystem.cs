@@ -22,6 +22,6 @@ namespace data_rogue_core.Systems.Interfaces
         IActivity GetActivityAcceptingInput();
         IMapActivity GetMapActivity();
 
-        void OpenShop(IEntity shop);
+        void OpenShop(ISystemContainer systemContainer, IEntity shop);
     }
 }

@@ -11,13 +11,15 @@ namespace data_rogue_core.Maps.MapGenCommands
 
         public void Execute(ISystemContainer systemContainer, Map map, MapGenCommand command, Vector offset)
         {
+            var itemLevel = string.IsNullOrEmpty(command.Parameters) ? 0 : int.Parse(command.Parameters);
+
             var coordinate = new MapCoordinate(map.MapKey, offset + command.Vector);
 
             var itemList = systemContainer.ItemSystem.GetSpawnableItems();
 
             itemList = itemList.Where(i => !i.Has<Wealth>()).ToList();
 
-            var shop = new EnchantedItemShopGenerator().GenerateShop(systemContainer, systemContainer.Random.Between(4, 10), int.Parse(command.Parameters), itemList);
+            var shop = new EnchantedItemShopGenerator().GenerateShop(systemContainer, systemContainer.Random.Between(4, 10), itemLevel, itemList);
 
             systemContainer.PositionSystem.SetPosition(shop, coordinate);
         }

@@ -2,9 +2,7 @@ Map:"Town"
 default:Cell:Tree
 -50,-41
 -36,-5: Entity(Props:Sign|Dialog.Text=North: This way to the Tutorial)
--36,-4: GenerateShop(5)
 8,-2: Entity(NPC:HumanBlue|Dialog.Text=Hello, World!)
--31,-3: Entity(Props:StairsDown)
 -45,-19: Entity(Props:Sign|Dialog.Text=You can interact with <Space>. Press M to cycle through interactions if there is more than one.)
 -46,-22: Entity(Props:Sign|Dialog.Text=Hover over something with the mouse to look at it.)
 -45,-26: Entity(Props:Sign|Dialog.Text=Or right-click on things to examine them in more detail!)
@@ -29,6 +27,24 @@ default:Cell:Tree
 -17,-4: Entity(Monster:Vines)
 -24,-13: Entity(Monster:Vines)
 -24,-16: Entity(Monster:Vines)
+-35,-7: GenerateItem()
+-34,-7: GenerateItem()
+-33,-7: GenerateItem()
+-32,-7: GenerateItem()
+-32,-6: GenerateItem()
+-33,-6: GenerateItem()
+-34,-6: GenerateItem()
+-35,-6: GenerateItem()
+-35,-5: GenerateItem()
+-34,-5: GenerateItem()
+-33,-5: GenerateItem()
+-32,-5: GenerateItem()
+-35,-4: GenerateItem()
+-34,-4: GenerateItem()
+-33,-4: GenerateItem()
+-32,-4: GenerateItem()
+14,-25: Entity(Props:StairsDown)
+-38,-3: GenerateShop(1)
 .:Cell:Empty
 ,:Cell:Grass
 ~:Cell:Dirt
@@ -41,7 +57,6 @@ O:Cell:Boulder
 ?:Cell:Water
 >:Cell:DirtLight
 <:Cell:DirtOrange
-`:Cell:DarkGrass
 !:Cell:OrangeRock
 £:Cell:DarkStoneFloor
 $:Cell:DarkGreyFloor
@@ -85,7 +100,7 @@ $:Cell:DarkGreyFloor
 ,,,,,,,,,,,~~,,,,,,,,,,,~~,,                            ,,,,>,,,~,,,,,,,,,                 #%%%%%%%%%%#                                      
 , ,,,,,,,,,,~,,,,,,,,,,,~~~~,                          ,,,,>>,,,,~~~ ,  ,,    ,            #%%%%%%%%%%#         ~~~~~~~~~~~~~~~~             
 ,,,,,,O,,, ,,,,,,,,,,,,,,,,,~~~~~~,,,,,,,,,,,,,,,,,,,,,,,,>>>,,, ,,,~~,  ################## #%%%%%%%%%%#     ~~~~~~~~~~~~~~~~~~~~~~~          
- ,,,,,,,,,  ,,,,,,,`,,,,,,,,,,    >>,>>>>>>>>>>>>,,,,>>>>>>>,,,     ,,~~~,#^^^^^^^^^^^^^^^^# #%%%%%%%%%%#  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~        
+ ,,,,,,,,,  ,,,,,,, ,,,,,,,,,,    >>,>>>>>>>>>>>>,,,,>>>>>>>,,,     ,,~~~,#^^^^^^^^^^^^^^^^# #%%%%%%%%%%#  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~        
  ,,,,,,,,,,,,,,,@@,,,,,,,,,,,     ,,,,,,>,,>>>>>>>>>>>>>>>>,,       ,,~~~^^^^^^^^^^^^^^^^^#,#%%%%%%%%%%#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~        
  ,,,,,,,,@@,,@@@,@@,,,,,,,,,,,     >>>>,,>>>>>,,>>>>>,>>>>>>,,       , ,~~^^^^^^^^^^^^^^^^^#,#%%%%%%%%%%#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~       
  ,,,,,,,,@@,,@}@,,,,,,,,,,,,,,      ,,,,,,,,,,,,,,,,,,,,,,,>>,       ,,,,,#^^^^^^^^^^^^^^^^#,#%%%%%%%%%%#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~      

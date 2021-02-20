@@ -19,7 +19,10 @@ namespace data_rogue_core.EventSystem.Rules
         {
             var interaction = _systemContainer.InteractableSystem.GetCurrentInteractionFor(sender);
 
-            _systemContainer.ScriptExecutor.ExecuteByName(interaction.Item1, interaction.Item2.Script, sender);
+            if (interaction.Item1 != null)
+            {
+                _systemContainer.ScriptExecutor.ExecuteByName(interaction.Item1, interaction.Item2.Script, sender);
+            }
 
             return false;
         }

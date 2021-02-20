@@ -23,6 +23,7 @@
         Defence,
         Action,
         Victory,
-        LevelUp
+        LevelUp,
+        PurchaseItem
     }
 }
