@@ -11,8 +11,8 @@ namespace data_rogue_one.Utils
 {
     public interface IShopGenerator
     {
-        IEnumerable<IEntity> GenerateShopItems(ISystemContainer systemContainer, int numberOfItems, int itemLevel, IEnumerable<IEntity> itemList);
+        IEnumerable<IEntity> GenerateShopItems(ISystemContainer systemContainer, int numberOfItems, int itemLevel, IEnumerable<IEntity> itemList, IRandom random);
 
-        IEntity GenerateShop(ISystemContainer systemContainer, int numberOfItems, int itemLevel, IEnumerable<IEntity> itemList);
+        IEntity GenerateShop(ISystemContainer systemContainer, int numberOfItems, int itemLevel, IEnumerable<IEntity> itemList, IRandom random);
     }
 }

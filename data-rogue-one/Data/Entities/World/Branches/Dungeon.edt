@@ -14,6 +14,9 @@ Density: 0.01
 [GeneratedEnchantedItemPlacement]
 BasePower: 0
 Density: 0.01
+[ShopPlacement]
+BasePower: 0
+Density: 0.00005
 [DefaultEntrancePortalGeneration]
 [DefaultExitPortalGeneration]
 [StairGeneration]

@@ -106,6 +106,7 @@
     <Compile Include="World\GenerationStrategies\ItemGeneration\ItemClassPicker.cs" />
     <Compile Include="World\GenerationStrategies\ItemGeneration\ItemNamer.cs" />
     <Compile Include="World\GenerationStrategies\ItemGeneration\RarityPicker.cs" />
+    <Compile Include="World\GenerationStrategies\PropGeneration\ShopPlacement.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

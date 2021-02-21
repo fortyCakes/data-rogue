@@ -19,7 +19,7 @@ namespace data_rogue_core.Maps.MapGenCommands
 
             itemList = itemList.Where(i => !i.Has<Wealth>()).ToList();
 
-            var shop = new EnchantedItemShopGenerator().GenerateShop(systemContainer, systemContainer.Random.Between(4, 10), itemLevel, itemList);
+            var shop = new EnchantedItemShopGenerator().GenerateShop(systemContainer, systemContainer.Random.Between(4, 10), itemLevel, itemList, systemContainer.Random);
 
             systemContainer.PositionSystem.SetPosition(shop, coordinate);
         }
