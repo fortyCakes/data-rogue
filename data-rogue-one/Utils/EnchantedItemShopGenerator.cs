@@ -1,4 +1,5 @@
-﻿using data_rogue_core.Components;
+﻿using data_rogue_core;
+using data_rogue_core.Components;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Systems.Interfaces;
 using data_rogue_one.World.GenerationStrategies.ItemGeneration;
@@ -10,7 +11,7 @@ namespace data_rogue_one.Utils
 {
     public class EnchantedItemShopGenerator : BaseShopGenerator
     {
-        public override IEnumerable<IEntity> GenerateShopItems(ISystemContainer systemContainer, int numberOfItems, int itemLevel, IEnumerable<IEntity> itemList)
+        public override IEnumerable<IEntity> GenerateShopItems(ISystemContainer systemContainer, int numberOfItems, int itemLevel, IEnumerable<IEntity> itemList, IRandom random)
         {
             var itemGenerator = new EnchantedItemGenerator(systemContainer, itemList.ToList());
 
@@ -21,15 +22,10 @@ namespace data_rogue_one.Utils
 
             for (int i = 0; i < numberOfItems; i++)
             {
-                var item = itemGenerator.TunedGenerateItem(itemList.ToList(), itemLevel, systemContainer.Random, rarities);
+                var item = itemGenerator.TunedGenerateItem(itemList.ToList(), itemLevel, random, rarities);
 
                 yield return item;
             }
-        }
-
-        private Price PriceItem(IEntity item, IItemPricer itemPricer)
-        {
-            return itemPricer.Price(item);
         }
     }
 }

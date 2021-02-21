@@ -27,7 +27,7 @@ namespace data_rogue_one.World.GenerationStrategies.ItemGeneration
 
             _itemNamer = new ItemNamer(_systemContainer);
             _itemPricer = new ItemGoldPricer(_systemContainer);
-            _enchantmentPicker = new EnchantmentPicker(_systemContainer.EntityEngine.AllEntities.Where(e => e.Has<EnchantmentGeneration>()).ToList());
+            _enchantmentPicker = new EnchantmentPicker(_systemContainer.EntityEngine.AllEntities.Where(e => e.Has<EnchantmentGeneration>() && !e.Has<Item>()).ToList());
 
             _itemsByClass = ItemClassHelper.SplitItemsByClass(itemList);
         }

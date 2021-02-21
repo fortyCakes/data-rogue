@@ -68,6 +68,7 @@ namespace data_rogue_core.Activities
             var left = renderer.ActivityPadding.Left;
             var top = renderer.ActivityPadding.Top;
 
+            titleControl.Position = new Rectangle(new Point(left, top), titleControl.Position.Size);
             SetSize(titleControl, systemContainer, rendererHandle, controlRenderers, playerFov);
             controls.Add(titleControl);
 
