@@ -180,6 +180,11 @@ namespace data_rogue_core.Activities
                 {
                     ShowMapInfoForm();
                 }
+
+                if (action.Action == ActionType.EscapeMenu)
+                {
+                    _systemContainer.ActivitySystem.RemoveActivity(this);
+                }
             }
         }
 

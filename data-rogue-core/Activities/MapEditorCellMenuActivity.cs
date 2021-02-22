@@ -114,18 +114,6 @@ namespace data_rogue_core.Activities
             return controls;
         }
 
-        private void CenterControls(List<IDataRogueControl> controls, int width, int height, int finalWidth, int finalHeight)
-        {
-            var x = width / 2 - finalWidth / 2;
-            var y = height / 2 - finalHeight / 2;
-
-
-            foreach(var control in controls)
-            {
-                control.Position = new Rectangle(control.Position.Left + x, control.Position.Top + y, control.Position.Width, control.Position.Height);
-            }
-        }
-
         private void buttonControl_OnClick(object sender, PositionEventHandlerArgs args)
         {
             CloseActivity();

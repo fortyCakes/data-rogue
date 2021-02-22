@@ -29,7 +29,9 @@ namespace data_rogue_core.EventSystem.Rules
             typeof(InteractAction),
             typeof(NextInteractionAction),
             typeof(HotbarAction),
-            typeof(ChangeMapEditorToolAction)
+            typeof(ChangeMapEditorToolAction),
+            typeof(EscapeMenuAction),
+            typeof(EscapeGameplayAction)
         };
 
         protected ISystemContainer _systemContainer;

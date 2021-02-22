@@ -247,11 +247,5 @@ namespace data_rogue_core.Activities
         public override void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard)
         {
         }
-
-        private static void SetSize(IDataRogueControl control, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov)
-        {
-            var size = controlRenderers.Single(c => c.DisplayType == control.GetType()).GetSize(rendererHandle, control, systemContainer, playerFov);
-            control.Position = new Rectangle(control.Position.Location, size);
-        }
     }
 }
