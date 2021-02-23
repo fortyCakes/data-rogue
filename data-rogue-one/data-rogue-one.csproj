@@ -392,6 +392,9 @@
     <None Include="Data\Vaults\mini_moat_castle.map">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Vaults\monty_hall.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\Vaults\nine_crosses.map">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
