@@ -1,0 +1,41 @@
+﻿"Monster:Platino"
+[Prototype]
+Name: Monster:Platino
+Singleton: false
+[Challenge]
+ChallengeRating: 50
+[Appearance]
+Glyph: D
+Color: #DBD75D
+ZOrder: 10
+[SpriteAppearance]
+Bottom: platino
+[Animated]
+[Animation]
+[Position]
+[Physical]
+Passable: false
+Transparent: true
+[Health]
+HP: 500/500
+[TiltFighter]
+Tilt: 0/100
+[Stat]
+Name: Muscle
+Value: 200
+[Stat]
+Name: Agility
+Value: 30
+[Stat]
+Name: Willpower
+Value: 50
+[Stat]
+Name: Intellect
+Value: 50
+[Description]
+Name: Platino
+Detail: A platinum dragon, legendary for their pixel art skills. 
+[Actor]
+Speed: 1000
+[RandomlyMoveBehaviour]
+Priority: -1

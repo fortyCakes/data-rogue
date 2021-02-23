@@ -416,6 +416,14 @@ SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
+Name: platino
+Path: Images/Sprites/Entities/Creatures/platino.png
+Type: SingleSprite
+Frames: Idle0,Idle1
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
 Name: training_dummy
 Path: Images/Sprites/Entities/Creatures/training_dummy.png
 Type: SingleSprite

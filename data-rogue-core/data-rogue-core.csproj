@@ -570,6 +570,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\Sprites\Entities\Creatures\platino.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Sprites\Entities\Creatures\training_dummy.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
