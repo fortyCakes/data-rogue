@@ -288,20 +288,6 @@ SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
-Name: cobble_wall_1
-Path: Images/Sprites/Tiles/cobble_wall_1.png
-Type: TilesetWall
-SpriteWidth: 16
-SpriteHeight: 16
-Scaling: 2
-[SpriteSheet]
-Name: cobble_wall_orange
-Path: Images/Sprites/Tiles/cobble_wall_orange.png
-Type: TilesetWall
-SpriteWidth: 16
-SpriteHeight: 16
-Scaling: 2
-[SpriteSheet]
 Name: void
 Path: Images/Sprites/Tiles/void.png
 Type: TilesetBox
@@ -1214,6 +1200,125 @@ Scaling: 2
 Name: fill_tool
 Path: Images/Sprites/Entities/Misc/fill_tool.png
 Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: cobble_wall_blue
+Path: Images/Sprites/Tiles/Walls/cobble_wall_blue.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: cobble_wall_brown
+Path: Images/Sprites/Tiles/Walls/cobble_wall_brown.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: cobble_wall_brown_grey
+Path: Images/Sprites/Tiles/Walls/cobble_wall_brown_grey.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: cobble_wall_dark
+Path: Images/Sprites/Tiles/Walls/cobble_wall_dark.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: cobble_wall_dark_grey
+Path: Images/Sprites/Tiles/Walls/cobble_wall_dark_grey.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: cobble_wall_grey
+Path: Images/Sprites/Tiles/Walls/cobble_wall_grey.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: cobble_wall_light
+Path: Images/Sprites/Tiles/Walls/cobble_wall_light.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: cobble_wall_orange
+Path: Images/Sprites/Tiles/Walls/cobble_wall_orange.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: cobble_wall_orange_2
+Path: Images/Sprites/Tiles/Walls/cobble_wall_orange_2.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: cobble_wall_orange_dark
+Path: Images/Sprites/Tiles/Walls/cobble_wall_orange_dark.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: cobble_wall_red
+Path: Images/Sprites/Tiles/Walls/cobble_wall_red.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: cobble_wall_red_grey
+Path: Images/Sprites/Tiles/Walls/cobble_wall_red_grey.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: cobble_wall_yellow
+Path: Images/Sprites/Tiles/Walls/cobble_wall_orange.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: cracked_wall_blue
+Path: Images/Sprites/Tiles/Walls/cracked_wall_blue.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: cracked_wall_blue_dark
+Path: Images/Sprites/Tiles/Walls/cracked_wall_blue_dark.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: cracked_wall_dark
+Path: Images/Sprites/Tiles/Walls/cracked_wall_dark.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: cracked_wall_light
+Path: Images/Sprites/Tiles/Walls/cracked_wall_light.png
+Type: TilesetBox
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2

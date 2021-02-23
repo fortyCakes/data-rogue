@@ -1,0 +1,79 @@
+﻿"Cell:WoodFloorBrown"
+[Cell]
+[Appearance]
+Glyph: .
+Color: #854C30
+ZOrder: 0
+[SpriteAppearance]
+Bottom: wood_floor_brown
+BottomConnect: wood
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:WoodFloorBrown
+Singleton: true
+[Memorable]
+[Description]
+Name: Wood Floor
+Detail: This is a brown wooden floor.
+
+"Cell:WoodFloorGrey"
+[Cell]
+[Appearance]
+Glyph: .
+Color: #8595A1
+ZOrder: 0
+[SpriteAppearance]
+Bottom: wood_floor_grey
+BottomConnect: wood
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:WoodFloorGrey
+Singleton: true
+[Memorable]
+[Description]
+Name: Wood Floor
+Detail: This is a grey wooden floor.
+
+"Cell:WoodFloorLight"
+[Cell]
+[Appearance]
+Glyph: .
+Color: #DAD45E
+ZOrder: 0
+[SpriteAppearance]
+Bottom: wood_floor_light
+BottomConnect: wood
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:WoodFloorLight
+Singleton: true
+[Memorable]
+[Description]
+Name: Wood Floor
+Detail: This is a light wooden floor.
+
+"Cell:WoodFloorOrange"
+[Cell]
+[Appearance]
+Glyph: .
+Color: #D27D2C
+ZOrder: 0
+[SpriteAppearance]
+Bottom: wood_floor_orange
+BottomConnect: wood
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:WoodFloorOrange
+Singleton: true
+[Memorable]
+[Description]
+Name: Wood Floor
+Detail: This is an orange wooden floor.

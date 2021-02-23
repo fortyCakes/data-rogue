@@ -29,6 +29,7 @@ Singleton: true
 Text: {
 	physical = User:Get('Physical')
 	physical.Passable = true
+	physical.Transparent = true
 
 	interaction = User:Get('Interaction')
 	interaction.Verb = 'Close'
@@ -49,6 +50,7 @@ Singleton: true
 Text: {
 	physical = User:Get('Physical')
 	physical.Passable = false
+	physical.Transparent = false
 
 	interaction = User:Get('Interaction')
 	interaction.Verb = 'Open'

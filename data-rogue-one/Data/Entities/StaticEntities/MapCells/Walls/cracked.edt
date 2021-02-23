@@ -1,0 +1,121 @@
+﻿"Cell:CrackedWallBlue"
+[Cell]
+[Appearance]
+Glyph: %
+Color: #6DC2CA
+ZOrder: 0
+[SpriteAppearance]
+Bottom: cracked_wall_blue
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:CrackedWallBlue
+Singleton: true
+[Memorable]
+[Description]
+Name: Blue Stone Wall (Cracked)
+Detail: A wall made from blue stone. It's got cracks in - maybe you could break it?
+[Interaction]
+Verb: Break
+Script: BreakWall
+
+"Cell:CrackedWallBlueDark"
+[Cell]
+[Appearance]
+Glyph: %
+Color: #597DCE
+ZOrder: 0
+[SpriteAppearance]
+Bottom: cracked_wall_blue_dark
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:CrackedWallBlue
+Singleton: true
+[Memorable]
+[Description]
+Name: Dark Blue Stone Wall (Cracked)
+Detail: A wall made from dark blue stone. It's got cracks in - maybe you could break it?
+[Interaction]
+Verb: Break
+Script: BreakWall
+
+"Cell:CrackedWallDark"
+[Cell]
+[Appearance]
+Glyph: %
+Color: #597DCE
+ZOrder: 0
+[SpriteAppearance]
+Bottom: cracked_wall_dark
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:CrackedWallDark
+Singleton: true
+[Memorable]
+[Description]
+Name: Dark Stone Wall (Cracked)
+Detail: A wall made from dark stone. It's got cracks in - maybe you could break it?
+[Interaction]
+Verb: Break
+Script: BreakWall
+
+"Cell:CrackedWallLight"
+[Cell]
+[Appearance]
+Glyph: %
+Color: #597DCE
+ZOrder: 0
+[SpriteAppearance]
+Bottom: cracked_wall_light
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:CrackedWallLight
+Singleton: true
+[Memorable]
+[Description]
+Name: Light Stone Wall (Cracked)
+Detail: A wall made from light stone. It's got cracks in - maybe you could break it?
+[Interaction]
+Verb: Break
+Script: BreakWall
+
+"Script: BreakWall"
+[Prototype]
+Name: BreakWall
+Singleton: true
+[Script]
+Text: {
+	physical = User:Get('Physical')
+	physical.Passable = false
+	physical.Transparent = false
+
+	interaction = User:Get('Interaction')
+	SystemContainer.EntityEngine:RemoveComponent(User, interaction)
+
+	appearance = User:Get('Appearance')
+	appearance.Glyph = '.'
+
+	spriteAppearance = User:Get('SpriteAppearance')
+	spriteAppearance.Top = 'rock_orange'
+
+	description = User:Get('Description')
+	description.Name = 'Broken Wall'
+	description.Detail = 'A wall that's been broken down.'
+
+	SystemContainer.MessageSystem.Write('The wall breaks down! That was surprisingly easy.')
+}

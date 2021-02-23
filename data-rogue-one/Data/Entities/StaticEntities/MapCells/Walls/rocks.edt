@@ -1,0 +1,20 @@
+﻿"Cell:Boulder"
+[Cell]
+[Appearance]
+Glyph: O
+Color: #efefef
+ZOrder: 0
+[SpriteAppearance]
+Bottom: grass_1
+BottomConnect: grass
+Top: stones
+[Physical]
+Passable: false
+Transparent: true
+[Prototype]
+Name: Cell:Boulder
+Singleton: true
+[Memorable]
+[Description]
+Name: Boulder
+Detail: A large boulder.

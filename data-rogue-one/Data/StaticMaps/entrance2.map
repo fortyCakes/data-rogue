@@ -1,11 +1,11 @@
 Map:"Entrance"
-default:Cell:Wall
+default:Cell:LightStoneWall
 1,3
 4,6: Entity(Props:Portal)
 4,18: Entity(Props:StairsUp)
-.:Cell:Empty
-X:Cell:Empty
-#:Cell:Wall
+.:Cell:LightStoneFloor
+X:Cell:LightStoneFloor
+#:Cell:LightStoneWall
 }:Cell:CobbleWall
 .......
 .......

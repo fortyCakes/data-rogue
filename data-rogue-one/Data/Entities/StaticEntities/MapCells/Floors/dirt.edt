@@ -1,0 +1,99 @@
+﻿"Cell:Dirt"
+[Cell]
+[Appearance]
+Glyph: .
+Color: #D27D2C
+ZOrder: 0
+[SpriteAppearance]
+Bottom: dirt_light
+BottomConnect: dirt
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:Dirt
+Singleton: true
+[Memorable]
+[Description]
+Name: Dirt
+Detail: A patch of bare dirt.
+
+"Cell:DarkDirt"
+[Cell]
+[Appearance]
+Glyph: .
+Color: #4E4A4E
+ZOrder: 0
+[SpriteAppearance]
+Bottom: dirt_dark
+BottomConnect: dirt
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:DarkDirt
+Singleton: true
+[Memorable]
+[Description]
+Name: Dark Dirt
+Detail: A patch of bare dirt. It's discoloured and dark.
+
+"Cell:DirtBrown"
+[Cell]
+[Appearance]
+Glyph: ,
+Color: #854C30
+ZOrder: 0
+[SpriteAppearance]
+Bottom: dirt_brown
+BottomConnect: dirt
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:DirtBrown
+Singleton: true
+[Memorable]
+[Description]
+Name: Dirt
+Detail: This is brown dirt.
+
+"Cell:DirtLight"
+[Cell]
+[Appearance]
+Glyph: ,
+Color: #DAD45E
+ZOrder: 0
+[SpriteAppearance]
+Bottom: dirt_light
+BottomConnect: dirt
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:DirtLight
+Singleton: true
+[Memorable]
+[Description]
+Name: Dirt
+Detail: This is light-coloured dirt.
+
+"Cell:DirtOrange"
+[Cell]
+[Appearance]
+Glyph: ,
+Color: #DAD45E
+ZOrder: 0
+[SpriteAppearance]
+Bottom: dirt_orange
+BottomConnect: dirt
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:DirtOrange
+Singleton: true
+[Memorable]
+[Description]
+Name: Dirt
+Detail: This is orange dirt.

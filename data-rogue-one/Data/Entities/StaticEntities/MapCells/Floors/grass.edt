@@ -1,0 +1,79 @@
+﻿"Cell:Grass"
+[Cell]
+[Appearance]
+Glyph: ,
+Color: #567E3A
+ZOrder: 0
+[SpriteAppearance]
+Bottom: grass_1
+BottomConnect: grass
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:Grass
+Singleton: true
+[Memorable]
+[Description]
+Name: Grass
+Detail: A patch of grass.
+
+"Cell:Grass2"
+[Cell]
+[Appearance]
+Glyph: `
+Color: #346524
+ZOrder: 0
+[SpriteAppearance]
+Bottom: grass_2
+BottomConnect: grass
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:Grass2
+Singleton: true
+[Memorable]
+[Description]
+Name: Grass
+Detail: This is grass.
+
+"Cell:Grass3"
+[Cell]
+[Appearance]
+Glyph: `
+Color: #346524
+ZOrder: 0
+[SpriteAppearance]
+Bottom: grass_3
+BottomConnect: grass
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:Grass3
+Singleton: true
+[Memorable]
+[Description]
+Name: Grass
+Detail: This is grass. The dirt is slightly damp.
+
+"Cell:DarkGrass"
+[Cell]
+[Appearance]
+Glyph: `
+Color: #30346D
+ZOrder: 0
+[SpriteAppearance]
+Bottom: grass_dark
+BottomConnect: grass
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:DarkGrass
+Singleton: true
+[Memorable]
+[Description]
+Name: Dark Grass
+Detail: This is dark black grass.

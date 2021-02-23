@@ -1,0 +1,79 @@
+﻿"Cell:TilledDirtBlack"
+[Cell]
+[Appearance]
+Glyph: '
+Color: #140C1C
+ZOrder: 0
+[SpriteAppearance]
+Bottom: tilled_dirt_black
+BottomConnect: tilled_dirt
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:TilledDirtBlack
+Singleton: true
+[Memorable]
+[Description]
+Name: Black Tilled Dirt
+Detail: This is a patch of tilled dirt. The dirt is black.
+
+"Cell:TilledDirtDark"
+[Cell]
+[Appearance]
+Glyph: '
+Color: #30346D
+ZOrder: 0
+[SpriteAppearance]
+Bottom: tilled_dirt_dark
+BottomConnect: tilled_dirt
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:TilledDirtDark
+Singleton: true
+[Memorable]
+[Description]
+Name: Tilled Dirt
+Detail: This is a patch of tilled dirt. The dirt is a dark brown.
+
+"Cell:TilledDirtBrown"
+[Cell]
+[Appearance]
+Glyph: '
+Color: #854C30
+ZOrder: 0
+[SpriteAppearance]
+Bottom: tilled_dirt_brown
+BottomConnect: tilled_dirt
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:TilledDirtBrown
+Singleton: true
+[Memorable]
+[Description]
+Name: Tilled Dirt
+Detail: This is a patch of tilled dirt. The dirt is brown.
+
+"Cell:TilledDirtOrange"
+[Cell]
+[Appearance]
+Glyph: '
+Color: #D27D2C
+ZOrder: 0
+[SpriteAppearance]
+Bottom: tilled_dirt_orange
+BottomConnect: tilled_dirt
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:TilledDirtOrange
+Singleton: true
+[Memorable]
+[Description]
+Name: Tilled Dirt
+Detail: This is a patch of tilled dirt. The dirt is orange.

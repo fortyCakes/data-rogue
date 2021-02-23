@@ -1,0 +1,230 @@
+﻿"Cell:CobbleWall"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #cccccc
+ZOrder: 0
+[SpriteAppearance]
+Bottom: cobble_wall_light
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:CobbleWall
+Singleton: true
+[Memorable]
+[Description]
+Name: Light Cobble Wall
+Detail: A wall made of pieces of light-coloured stone mortared together in a haphazard fashion.
+
+"Cell:CobbleWallBlue"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #30346D
+ZOrder: 0
+[SpriteAppearance]
+Bottom: cobble_wall_blue
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:CobbleWallBlue
+Singleton: true
+[Memorable]
+[Description]
+Name: Blue Cobble Wall
+Detail: A wall made of pieces of blueish stone mortared together in a haphazard fashion.
+
+"Cell:CobbleWallBrown"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #854C30
+ZOrder: 0
+[SpriteAppearance]
+Bottom: cobble_wall_brown
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:CobbleWallBrown
+Singleton: true
+[Memorable]
+[Description]
+Name: Brown Cobble Wall
+Detail: A wall made of pieces of brown stone mortared together in a haphazard fashion.
+
+"Cell:CobbleWallBrownGrey"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #D27D2C
+ZOrder: 0
+[SpriteAppearance]
+Bottom: cobble_wall_brown_grey
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:CobbleWallBrownGrey
+Singleton: true
+[Memorable]
+[Description]
+Name: Grey-Brown Cobble Wall
+Detail: A wall made of pieces of grey-brown stone mortared together in a haphazard fashion.
+
+"Cell:CobbleWallGrey"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #8595A1
+ZOrder: 0
+[SpriteAppearance]
+Bottom: cobble_wall_grey
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:CobbleWallGrey
+Singleton: true
+[Memorable]
+[Description]
+Name: Grey Cobble Wall
+Detail: A wall made of pieces of grey stone mortared together in a haphazard fashion.
+
+"Cell:CobbleWallOrangeLight"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #D27D2C
+ZOrder: 0
+[SpriteAppearance]
+Bottom: cobble_wall_orange
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:CobbleWallOrangeLight
+Singleton: true
+[Memorable]
+[Description]
+Name: Light Orange Cobble Wall
+Detail: A wall made of pieces of light orange stone mortared together in a haphazard fashion.
+
+"Cell:CobbleWallOrange2"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #D27D2C
+ZOrder: 0
+[SpriteAppearance]
+Bottom: cobble_wall_orange_2
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:CobbleWallOrange
+Singleton: true
+[Memorable]
+[Description]
+Name: Orange Cobble Wall
+Detail: A wall made of pieces of dark orange stone mortared together in a haphazard fashion.
+
+"Cell:CobbleWallOrangeDark"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #442434
+ZOrder: 0
+[SpriteAppearance]
+Bottom: cobble_wall_orange_dark
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:CobbleWallOrangeDark
+Singleton: true
+[Memorable]
+[Description]
+Name: Dark Orange Cobble Wall
+Detail: A wall made of pieces of dark orange stone mortared together in a haphazard fashion.
+
+"Cell:CobbleWallRed"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #D04648
+ZOrder: 0
+[SpriteAppearance]
+Bottom: cobble_wall_red
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:CobbleWallRed
+Singleton: true
+[Memorable]
+[Description]
+Name: Red Cobble Wall
+Detail: A wall made of pieces of red stone mortared together in a haphazard fashion.
+
+"Cell:CobbleWallRedGrey"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #D04648
+ZOrder: 0
+[SpriteAppearance]
+Bottom: cobble_wall_red_grey
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:CobbleWallRedGrey
+Singleton: true
+[Memorable]
+[Description]
+Name: Grey-Red Cobble Wall
+Detail: A wall made of pieces of red and grey stone mortared together in a haphazard fashion.
+
+"Cell:CobbleWallYellow"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #DAD45E
+ZOrder: 0
+[SpriteAppearance]
+Bottom: cobble_wall_yellow
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:CobbleWallYellow
+Singleton: true
+[Memorable]
+[Description]
+Name: Yellow Cobble Wall
+Detail: A wall made of pieces of yellow stone mortared together in a haphazard fashion.
