@@ -1005,151 +1005,151 @@
     <Content Include="Images\Sprites\Tiles\void.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\cobble_wall_blue_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\cobble_wall_blue.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\cobble_wall_brown_grey_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\cobble_wall_brown_grey.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\cobble_wall_brown_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\cobble_wall_brown.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\cobble_wall_dark_grey_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\cobble_wall_dark_grey.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\cobble_wall_dark_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\cobble_wall_dark.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\cobble_wall_grey_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\cobble_wall_grey.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\cobble_wall_light_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\cobble_wall_light.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\cobble_wall_orange_2_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\cobble_wall_orange_2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\cobble_wall_orange_dark_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\cobble_wall_orange_dark.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\cobble_wall_orange_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\cobble_wall_orange.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\cobble_wall_red_grey_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\cobble_wall_red_grey.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\cobble_wall_red_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\cobble_wall_red.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\cobble_wall_yellow_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\cobble_wall_yellow.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\cracked_wall_blue_dark_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\cracked_wall_blue_dark.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\cracked_wall_blue_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\cracked_wall_blue.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\cracked_wall_dark_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\cracked_wall_dark.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\cracked_wall_light_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\cracked_wall_light.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\mine_wall_brown_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\mine_wall_brown.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\mine_wall_orange_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\mine_wall_orange.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\mine_wall_red_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\mine_wall_red.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\mine_wall_yellow_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\mine_wall_yellow.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\shiny_wall_blue_dark_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\shiny_wall_blue_dark.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\shiny_wall_blue_dull_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\shiny_wall_blue_dull.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\shiny_wall_blue_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\shiny_wall_blue.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\shiny_wall_brown_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\shiny_wall_brown.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\shiny_wall_gold_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\shiny_wall_gold.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\shiny_wall_green_dark_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\shiny_wall_green_dark.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\shiny_wall_green_dull_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\shiny_wall_green_dull.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\shiny_wall_green_light_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\shiny_wall_green_light.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\shiny_wall_lime_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\shiny_wall_lime.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\shiny_wall_orange_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\shiny_wall_orange.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\shiny_wall_white_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\shiny_wall_white.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\shiny_wall_yellow_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\shiny_wall_yellow.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\smooth_wall_beige_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\smooth_wall_beige.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\smooth_wall_blue_light_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\smooth_wall_blue_light.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\smooth_wall_brown_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\smooth_wall_brown.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\smooth_wall_dark_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\smooth_wall_dark.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\smooth_wall_grey_dark_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\smooth_wall_grey_dark.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\smooth_wall_grey_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\smooth_wall_grey.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\smooth_wall_orange_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\smooth_wall_orange.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\smooth_wall_white_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\smooth_wall_white.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\stone_wall_blue_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\stone_wall_blue.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\stone_wall_dark_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\stone_wall_dark.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\stone_wall_grey_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\stone_wall_grey.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\stone_wall_light_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\stone_wall_light.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\wooden_wall_brown_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\wooden_wall_brown.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\wooden_wall_dark_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\wooden_wall_dark.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\wooden_wall_light_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\wooden_wall_light.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Sprites\Tiles\Walls\wooden_wall_orange_tiles.png">
+    <Content Include="Images\Sprites\Tiles\Walls\wooden_wall_orange.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Tiles\water_0.png">
