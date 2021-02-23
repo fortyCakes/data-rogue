@@ -1,230 +1,252 @@
-﻿"Cell:CobbleWall"
+﻿"Cell:ShinyWallBlue"
 [Cell]
 [Appearance]
 Glyph: #
-Color: #cccccc
+Color: #6DC2CA
 ZOrder: 0
 [SpriteAppearance]
-Bottom: cobble_wall_light
+Bottom: shiny_wall_blue
 BottomConnect: wall
 BottomConnectType: Wall
 [Physical]
 Passable: false
 Transparent: false
 [Prototype]
-Name: Cell:CobbleWall
+Name: Cell:ShinyWallBlue
 Singleton: true
 [Memorable]
 [Description]
-Name: Light Cobble Wall
-Detail: A wall made of pieces of light-coloured stone mortared together in a haphazard fashion.
+Name: Blue Shiny Wall
+Detail: A shiny blue wall.
 
-"Cell:CobbleWallBlue"
+"Cell:ShinyWallBlueDark"
 [Cell]
 [Appearance]
 Glyph: #
 Color: #30346D
 ZOrder: 0
 [SpriteAppearance]
-Bottom: cobble_wall_blue
+Bottom: shiny_wall_blue_dark
 BottomConnect: wall
 BottomConnectType: Wall
 [Physical]
 Passable: false
 Transparent: false
 [Prototype]
-Name: Cell:CobbleWallBlue
+Name: Cell:ShinyWallBlueDark
 Singleton: true
 [Memorable]
 [Description]
-Name: Blue Cobble Wall
-Detail: A wall made of pieces of blueish stone mortared together in a haphazard fashion.
+Name: Dark Blue Shiny Wall
+Detail: A shiny dark blue wall.
 
-"Cell:CobbleWallBrown"
+"Cell:ShinyWallBlueDull"
 [Cell]
 [Appearance]
 Glyph: #
 Color: #854C30
 ZOrder: 0
 [SpriteAppearance]
-Bottom: cobble_wall_brown
+Bottom: shiny_wall_blue_dull
 BottomConnect: wall
 BottomConnectType: Wall
 [Physical]
 Passable: false
 Transparent: false
 [Prototype]
-Name: Cell:CobbleWallBrown
+Name: Cell:ShinyWallBlueDull
 Singleton: true
 [Memorable]
 [Description]
-Name: Brown Cobble Wall
-Detail: A wall made of pieces of brown stone mortared together in a haphazard fashion.
+Name: Dull Blue Shiny Wall
+Detail: A scuffed shiny blue wall.
 
-"Cell:CobbleWallBrownGrey"
+"Cell:ShinyWallBrown"
 [Cell]
 [Appearance]
 Glyph: #
-Color: #D27D2C
+Color: #854C30
 ZOrder: 0
 [SpriteAppearance]
-Bottom: cobble_wall_brown_grey
+Bottom: shiny_wall_brown
 BottomConnect: wall
 BottomConnectType: Wall
 [Physical]
 Passable: false
 Transparent: false
 [Prototype]
-Name: Cell:CobbleWallBrownGrey
+Name: Cell:ShinyWallBrown
 Singleton: true
 [Memorable]
 [Description]
-Name: Grey-Brown Cobble Wall
-Detail: A wall made of pieces of grey-brown stone mortared together in a haphazard fashion.
+Name: Brown Shiny Wall
+Detail: A shiny brown wall.
 
-"Cell:CobbleWallGrey"
-[Cell]
-[Appearance]
-Glyph: #
-Color: #8595A1
-ZOrder: 0
-[SpriteAppearance]
-Bottom: cobble_wall_grey
-BottomConnect: wall
-BottomConnectType: Wall
-[Physical]
-Passable: false
-Transparent: false
-[Prototype]
-Name: Cell:CobbleWallGrey
-Singleton: true
-[Memorable]
-[Description]
-Name: Grey Cobble Wall
-Detail: A wall made of pieces of grey stone mortared together in a haphazard fashion.
-
-"Cell:CobbleWallOrangeLight"
-[Cell]
-[Appearance]
-Glyph: #
-Color: #D27D2C
-ZOrder: 0
-[SpriteAppearance]
-Bottom: cobble_wall_orange
-BottomConnect: wall
-BottomConnectType: Wall
-[Physical]
-Passable: false
-Transparent: false
-[Prototype]
-Name: Cell:CobbleWallOrangeLight
-Singleton: true
-[Memorable]
-[Description]
-Name: Light Orange Cobble Wall
-Detail: A wall made of pieces of light orange stone mortared together in a haphazard fashion.
-
-"Cell:CobbleWallOrange"
-[Cell]
-[Appearance]
-Glyph: #
-Color: #D27D2C
-ZOrder: 0
-[SpriteAppearance]
-Bottom: cobble_wall_orange_2
-BottomConnect: wall
-BottomConnectType: Wall
-[Physical]
-Passable: false
-Transparent: false
-[Prototype]
-Name: Cell:CobbleWallOrange
-Singleton: true
-[Memorable]
-[Description]
-Name: Orange Cobble Wall
-Detail: A wall made of pieces of dark orange stone mortared together in a haphazard fashion.
-
-"Cell:CobbleWallOrangeDark"
-[Cell]
-[Appearance]
-Glyph: #
-Color: #442434
-ZOrder: 0
-[SpriteAppearance]
-Bottom: cobble_wall_orange_dark
-BottomConnect: wall
-BottomConnectType: Wall
-[Physical]
-Passable: false
-Transparent: false
-[Prototype]
-Name: Cell:CobbleWallOrangeDark
-Singleton: true
-[Memorable]
-[Description]
-Name: Dark Orange Cobble Wall
-Detail: A wall made of pieces of dark orange stone mortared together in a haphazard fashion.
-
-"Cell:CobbleWallRed"
-[Cell]
-[Appearance]
-Glyph: #
-Color: #D04648
-ZOrder: 0
-[SpriteAppearance]
-Bottom: cobble_wall_red
-BottomConnect: wall
-BottomConnectType: Wall
-[Physical]
-Passable: false
-Transparent: false
-[Prototype]
-Name: Cell:CobbleWallRed
-Singleton: true
-[Memorable]
-[Description]
-Name: Red Cobble Wall
-Detail: A wall made of pieces of red stone mortared together in a haphazard fashion.
-
-"Cell:CobbleWallRedGrey"
-[Cell]
-[Appearance]
-Glyph: #
-Color: #D04648
-ZOrder: 0
-[SpriteAppearance]
-Bottom: cobble_wall_red_grey
-BottomConnect: wall
-BottomConnectType: Wall
-[Physical]
-Passable: false
-Transparent: false
-[Prototype]
-Name: Cell:CobbleWallRedGrey
-Singleton: true
-[Memorable]
-[Description]
-Name: Grey-Red Cobble Wall
-Detail: A wall made of pieces of red and grey stone mortared together in a haphazard fashion.
-
-"Cell:CobbleWallYellow"
+"Cell:ShinyWallGold"
 [Cell]
 [Appearance]
 Glyph: #
 Color: #DAD45E
 ZOrder: 0
 [SpriteAppearance]
-Bottom: cobble_wall_yellow
+Bottom: shiny_wall_gold
 BottomConnect: wall
 BottomConnectType: Wall
 [Physical]
 Passable: false
 Transparent: false
 [Prototype]
-Name: Cell:CobbleWallYellow
+Name: Cell:ShinyWallGold
 Singleton: true
 [Memorable]
 [Description]
-Name: Yellow Cobble Wall
-Detail: A wall made of pieces of yellow stone mortared together in a haphazard fashion.
+Name: Gold Shiny Wall
+Detail: A shiny gold wall.
+
+"Cell:ShinyWallGreenDark"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #346524
+ZOrder: 0
+[SpriteAppearance]
+Bottom: shiny_wall_green_dark
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:ShinyWallGreenDark
+Singleton: true
+[Memorable]
+[Description]
+Name: Dark Green Shiny Wall
+Detail: A shiny dark green wall.
+
+"Cell:ShinyWallGreenDull"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #346524
+ZOrder: 0
+[SpriteAppearance]
+Bottom: shiny_wall_green_dull
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:ShinyWallGreenDull
+Singleton: true
+[Memorable]
+[Description]
+Name: Dull Green Shiny Wall
+Detail: A scuffed shiny green wall.
+
+"Cell:ShinyWallGreenLight"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #346524
+ZOrder: 0
+[SpriteAppearance]
+Bottom: shiny_wall_green_light
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:ShinyWallGreenLight
+Singleton: true
+[Memorable]
+[Description]
+Name: Green Shiny Wall
+Detail: A shiny green wall.
+
+"Cell:ShinyWallLime"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #6DAA2C
+ZOrder: 0
+[SpriteAppearance]
+Bottom: shiny_wall_lime
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:ShinyWallLime
+Singleton: true
+[Memorable]
+[Description]
+Name: Lime Shiny Wall
+Detail: A shiny lime green wall. It smells faintly of citrus.
+
+"Cell:ShinyWallOrange"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #D27D2C
+ZOrder: 0
+[SpriteAppearance]
+Bottom: shiny_wall_orange
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:ShinyWallOrange
+Singleton: true
+[Memorable]
+[Description]
+Name: Orange Shiny Wall
+Detail: A shiny orange wall.
+
+"Cell:ShinyWallWhite"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #DEEED6
+ZOrder: 0
+[SpriteAppearance]
+Bottom: shiny_wall_white
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:ShinyWallWhite
+Singleton: true
+[Memorable]
+[Description]
+Name: White Shiny Wall
+Detail: A shiny white wall.
+
+"Cell:ShinyWallYellow"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #DAD45E
+ZOrder: 0
+[SpriteAppearance]
+Bottom: shiny_wall_yellow
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:ShinyWallYellow
+Singleton: true
+[Memorable]
+[Description]
+Name: Yellow Shiny Wall
+Detail: A shiny yellow wall.
+

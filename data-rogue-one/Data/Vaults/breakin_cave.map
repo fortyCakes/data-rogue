@@ -13,7 +13,7 @@ default:Cell:Void
 .:Cell:Empty
 #:Cell:Wall
 ,:Cell:OrangeRock
-~:Cell:CobbleWallOrange2
+~:Cell:CobbleWallOrange
 %:Cell:CrackedWallBlue
 O:Cell:Boulder
 @:Cell:Water

@@ -1,0 +1,30 @@
+Map:"glass_treasure_junction"
+default:Cell:Void
+-10,-5
+-7,-2: GenerateItem()
+-3,-2: GenerateItem()
+-7,2: GenerateItem()
+-3,2: GenerateItem()
+-8,-5: Entity(Props:VaultConnection)
+-2,-5: Entity(Props:VaultConnection)
+0,-3: Entity(Props:VaultConnection)
+0,3: Entity(Props:VaultConnection)
+-2,5: Entity(Props:VaultConnection)
+-8,5: Entity(Props:VaultConnection)
+-10,3: Entity(Props:VaultConnection)
+-10,-3: Entity(Props:VaultConnection)
+0:Cell:Void
+.:Cell:Empty
+#:Cell:Wall
+,:Cell:GlassOnStone
+##.#####.##
+#....,....#
+.....,.....
+#....,....#
+#....,....#
+#,,,,,,,,,#
+#....,....#
+#....,....#
+.....,.....
+#....,....#
+##.#####.##

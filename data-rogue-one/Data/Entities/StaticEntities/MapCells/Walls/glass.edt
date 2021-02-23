@@ -1,0 +1,22 @@
+﻿"Cell:GlassOnStone"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #6DC2CA
+ZOrder: 0
+[SpriteAppearance]
+Top: transparent_wall_blue
+TopConnect: glass
+TopConnectType: Wall
+Bottom: stone_floor_1
+BottomConnect: stone
+[Physical]
+Passable: false
+Transparent: true
+[Prototype]
+Name: Cell:GlassOnStone
+Singleton: true
+[Memorable]
+[Description]
+Name: Glass
+Detail: A wall made of enchanted unbreakable glass.
