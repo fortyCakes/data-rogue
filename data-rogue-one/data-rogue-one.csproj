@@ -260,6 +260,9 @@
     <None Include="Data\Entities\StaticEntities\Props\shop.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Entities\StaticEntities\Props\door.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\Entities\StaticEntities\Props\vault_connection.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -31,6 +31,7 @@ namespace data_rogue_core.EventSystem.Rules
 
         private void CloseGameplayActivity()
         {
+            _systemContainer.ActivitySystem.GameplayActivity.Running = false;
             _systemContainer.ActivitySystem.Push(new MenuActivity(new MainMenu(_systemContainer)));
         }
     }

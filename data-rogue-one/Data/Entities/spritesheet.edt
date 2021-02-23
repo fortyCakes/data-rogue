@@ -629,6 +629,20 @@ SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
+Name: door_closed
+Path: Images/Sprites/Entities/Misc/door_closed.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: door_open
+Path: Images/Sprites/Entities/Misc/door_open.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
 Name: armour_plate
 Path: Images/Sprites/Entities/Items/armour_plate.png
 Type: SingleSprite
