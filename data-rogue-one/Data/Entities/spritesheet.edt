@@ -395,6 +395,14 @@ SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
+Name: spikes
+Path: Images/Sprites/Entities/Misc/spikes.png
+Type: SingleSprite
+Frames: Idle0,Idle1
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
 Name: platino
 Path: Images/Sprites/Entities/Creatures/platino.png
 Type: SingleSprite

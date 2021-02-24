@@ -28,6 +28,8 @@ namespace data_rogue_core.EventSystem.Rules
         {
             var data = eventData as DamageEventData;
 
+            if (data.Damage <= 0) return true;
+
             var maxAegis = systemContainer.EventSystem.GetStat(sender, "Aegis");
 
             int currentAegis = (int)systemContainer.EventSystem.GetStat(sender, "CurrentAegisLevel");

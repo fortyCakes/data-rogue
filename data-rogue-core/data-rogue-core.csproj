@@ -79,6 +79,7 @@
     <Compile Include="Activities\MapEditorCellMenuActivity.cs" />
     <Compile Include="Activities\ShopActivity.cs" />
     <Compile Include="Behaviours\AttackClosestEnemyBehaviour.cs" />
+    <Compile Include="Behaviours\TrapAttackBehaviour.cs" />
     <Compile Include="Behaviours\UseRandomSkillBehaviour.cs" />
     <Compile Include="Components\CanAddToMap.cs" />
     <Compile Include="Components\Cell.cs" />
@@ -800,6 +801,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Entities\Misc\sign.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Entities\Misc\spikes.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Sprites\Entities\Misc\tiny_eraser_tool.png">
