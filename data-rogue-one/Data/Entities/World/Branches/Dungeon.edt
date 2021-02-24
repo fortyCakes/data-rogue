@@ -24,3 +24,6 @@ Density: 0.00005
 [StairGeneration]
 [StairGeneration]
 [StairGeneration]
+[ScatterSpecificItem]
+Item: Props:Spikes
+Density: 0.01
