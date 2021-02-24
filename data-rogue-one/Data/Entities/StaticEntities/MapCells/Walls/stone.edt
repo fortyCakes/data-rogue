@@ -1,0 +1,126 @@
+﻿"Cell:LightStoneWall"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #6DC2CA
+ZOrder: 0
+[SpriteAppearance]
+Bottom: stone_wall_light
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:LightStoneWall
+Singleton: true
+[Memorable]
+[Description]
+Name: Light Stone Wall
+Detail: A wall made from pieces of light coloured stone.
+
+"Cell:GreyStoneWall"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #8595A1
+ZOrder: 0
+[SpriteAppearance]
+Bottom: stone_wall_grey
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:GreyStoneWall
+Singleton: true
+[Memorable]
+[Description]
+Name: Grey Stone Wall
+Detail: A wall made from pieces of grey stone.
+
+"Cell:BlueStoneWall"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #597DCE
+ZOrder: 0
+[SpriteAppearance]
+Bottom: stone_wall_blue
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:BlueStoneWall
+Singleton: true
+[Memorable]
+[Description]
+Name: Blue Stone Wall
+Detail: A wall made from pieces of blue stone.
+
+"Cell:DarkStoneWall"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #4E4A4E
+ZOrder: 0
+[SpriteAppearance]
+Bottom: stone_wall_dark
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:DarkStoneWall
+Singleton: true
+[Memorable]
+[Description]
+Name: Dark Stone Wall
+Detail: A wall made from pieces of dark coloured stone.
+
+"Cell:GreenStoneWall"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #6DAA2C
+ZOrder: 0
+[SpriteAppearance]
+Bottom: stone_wall_green
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:GreenStoneWall
+Singleton: true
+[Memorable]
+[Description]
+Name: Green Stone Wall
+Detail: A wall made from pieces of green stone.
+
+
+"Cell:DarkGreenStoneWall"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #597DCE
+ZOrder: 0
+[SpriteAppearance]
+Bottom: stone_wall_green_dark
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:DarkGreenStoneWall
+Singleton: true
+[Memorable]
+[Description]
+Name: Dark Green Stone Wall
+Detail: A wall made from pieces of dark green stone.

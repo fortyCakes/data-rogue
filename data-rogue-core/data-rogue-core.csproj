@@ -1134,6 +1134,12 @@
     <Content Include="Images\Sprites\Tiles\Walls\stone_wall_dark.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\Sprites\Tiles\Walls\stone_wall_green.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Sprites\Tiles\Walls\stone_wall_green_dark.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Sprites\Tiles\Walls\stone_wall_grey.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

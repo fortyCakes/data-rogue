@@ -48,7 +48,7 @@ Color: #aaaaaa
 ZOrder: 0
 [SpriteAppearance]
 #Top: unknown
-Bottom: stone_wall_1
+Bottom: stone_wall_light
 BottomConnect: wall
 BottomConnectType: Wall
 [Physical]

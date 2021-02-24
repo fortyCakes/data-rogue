@@ -36,7 +36,7 @@ BottomConnectType: Wall
 Passable: false
 Transparent: false
 [Prototype]
-Name: Cell:CrackedWallBlue
+Name: Cell:CrackedWallBlueDark
 Singleton: true
 [Memorable]
 [Description]

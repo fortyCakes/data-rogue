@@ -236,6 +236,9 @@
     <None Include="Data\Entities\StaticEntities\MapCells\Walls\cobble.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Entities\StaticEntities\MapCells\Walls\smooth.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\Entities\StaticEntities\MapCells\Walls\shiny.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -245,6 +248,12 @@
     <None Include="Data\Entities\StaticEntities\MapCells\Walls\cracked.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Entities\StaticEntities\MapCells\Walls\wood.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Entities\StaticEntities\MapCells\Walls\stone.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\Entities\StaticEntities\MapCells\Walls\water.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -252,9 +261,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\Entities\StaticEntities\MapCells\Walls\trees.edt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Data\Entities\StaticEntities\MapCells\Walls\walls.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\Entities\StaticEntities\Monsters\goblin shaman.edt">
