@@ -39,7 +39,7 @@ Value: 4
 Name: Orc
 Detail: This is a medium-sized, green-skinned humanoid. They are known to be highly aggressive towards humans. They're competent warriors.
 [Actor]
-[MoveToPlayerBehaviour]
+[AttackClosestEnemyBehaviour]
 Priority: 0
 [RandomlyMoveBehaviour]
 Priority: -1

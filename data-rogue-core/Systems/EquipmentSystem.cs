@@ -150,13 +150,29 @@ namespace data_rogue_core.Systems
 
         private EquipmentSlotDetails UnequipItemInSlot(IEntity entity, EquipmentSlot neededSlot)
         {
-            var slot = GetEquipmentSlots(entity)[neededSlot].First();
+            var slot = GetFilledEquipmentSlots(entity, neededSlot).FirstOrDefault();
 
-            var equippedItem = GetEquippedItem(entity, slot);
+            if (slot != null)
+            {
 
-            Unequip(entity, equippedItem);
+                var equippedItem = GetEquippedItem(entity, slot);
+
+                Unequip(entity, equippedItem);
+            }
 
             return slot;
+        }
+
+        private List<EquipmentSlotDetails> GetFilledEquipmentSlots(IEntity entity, EquipmentSlot neededSlot)
+        {
+            return GetEquipmentSlots(entity)[neededSlot].Where(s => IsItemInSlot(entity, s)).ToList();
+        }
+
+        private bool IsItemInSlot(IEntity entity, EquipmentSlotDetails slot)
+        {
+            var equipped = entity.Get<Equipped>();
+
+            return equipped.EquippedItems.Any(i => i.Slot == slot);
         }
 
         private IEntity GetEquippedItem(IEntity entity, EquipmentSlotDetails slot)

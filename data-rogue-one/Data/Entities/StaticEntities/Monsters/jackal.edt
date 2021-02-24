@@ -39,7 +39,7 @@ Value: 2
 Name: Jackal
 Detail: A wild, dog-like creature with golden yellow fur.
 [Actor]
-[MoveToPlayerBehaviour]
+[AttackClosestEnemyBehaviour]
 Priority: 0
 [RandomlyMoveBehaviour]
 Priority: -1

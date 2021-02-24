@@ -39,7 +39,7 @@ Value: 8
 Name: Stone Imp
 Detail: This is a tiny devil made out of rocks. They're not very strong, but they are slightly tougher than they look.
 [Actor]
-[MoveToPlayerBehaviour]
+[AttackClosestEnemyBehaviour]
 Priority: 0
 [RandomlyMoveBehaviour]
 Priority: -1

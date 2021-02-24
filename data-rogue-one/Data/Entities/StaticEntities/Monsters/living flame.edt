@@ -40,7 +40,7 @@ Value: 10
 Name: Flame Walker
 Detail: This is a living mass of flame! Beware getting too close to it.
 [Actor]
-[MoveToPlayerBehaviour]
+[AttackClosestEnemyBehaviour]
 Priority: 0
 [RandomlyMoveBehaviour]
 Priority: -1

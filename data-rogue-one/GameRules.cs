@@ -74,7 +74,8 @@ namespace data_rogue_one
                     typeof(UpdateHighScoreFileOnDeathRule),
                     typeof(PreventDamageIfGodModeRule),
                     typeof(CantAffordItemRule),
-                    typeof(CompletePurchaseRule)
+                    typeof(CompletePurchaseRule),
+                    typeof(CantMoveIntoSameFactionRule)
                 };
 
                 list.AddRange(ApplyActionRule.AllActionRules);

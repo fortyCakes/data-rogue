@@ -52,8 +52,8 @@ Priority: 2
 Chance: 0.2
 [MoveAwayFromPlayerBehaviour]
 Priority: 1
-Chance: 0.75
-[MoveToPlayerBehaviour]
+Chance: 0.9
+[AttackClosestEnemyBehaviour]
 Priority: 0
 [RandomlyMoveBehaviour]
 Priority: -1

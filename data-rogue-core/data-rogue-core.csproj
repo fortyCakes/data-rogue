@@ -78,9 +78,11 @@
     <Compile Include="Activities\IMapActivity.cs" />
     <Compile Include="Activities\MapEditorCellMenuActivity.cs" />
     <Compile Include="Activities\ShopActivity.cs" />
+    <Compile Include="Behaviours\AttackClosestEnemyBehaviour.cs" />
     <Compile Include="Behaviours\UseRandomSkillBehaviour.cs" />
     <Compile Include="Components\CanAddToMap.cs" />
     <Compile Include="Components\Cell.cs" />
+    <Compile Include="Components\Challenge.cs" />
     <Compile Include="Components\Equipment.cs" />
     <Compile Include="Components\MapGenerationCommand.cs" />
     <Compile Include="Components\Price.cs" />
@@ -162,6 +164,7 @@
     <Compile Include="EventSystem\Rules\AttackAnimationRule.cs" />
     <Compile Include="EventSystem\Rules\BumpInteractRule.cs" />
     <Compile Include="EventSystem\Rules\CantAffordItemRule.cs" />
+    <Compile Include="EventSystem\Rules\CantMoveIntoSameFactionRule.cs" />
     <Compile Include="EventSystem\Rules\CompletePurchaseRule.cs" />
     <Compile Include="EventSystem\Rules\DamageNumbersPopOutRule.cs" />
     <Compile Include="EventSystem\Rules\DamageSplatParticlesRule.cs" />
@@ -216,7 +219,6 @@
     <Compile Include="Behaviours\ActionResults.cs" />
     <Compile Include="Behaviours\BaseBehaviour.cs" />
     <Compile Include="Behaviours\IBehaviour.cs" />
-    <Compile Include="Behaviours\MoveToPlayerBehaviour.cs" />
     <Compile Include="Behaviours\RandomlyMoveBehaviour.cs" />
     <Compile Include="Behaviours\PlayerControlledBehaviour.cs" />
     <Compile Include="Components\Ammunition.cs" />
@@ -446,8 +448,10 @@
     <Compile Include="Systems\AnimationSystem.cs" />
     <Compile Include="Systems\EntityCache.cs" />
     <Compile Include="Systems\EntityDataProviders.cs" />
+    <Compile Include="Systems\FactionSystem.cs" />
     <Compile Include="Systems\InteractableSystem.cs" />
     <Compile Include="Systems\Interfaces\IAnimationSystem.cs" />
+    <Compile Include="Systems\Interfaces\IFactionSystem.cs" />
     <Compile Include="Systems\Interfaces\IInteractableSystem.cs" />
     <Compile Include="Systems\Interfaces\IMapSystem.cs" />
     <Compile Include="Systems\Interfaces\IParticleSystem.cs" />

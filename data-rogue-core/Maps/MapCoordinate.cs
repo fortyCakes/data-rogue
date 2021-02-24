@@ -87,6 +87,13 @@ namespace data_rogue_core.Maps
             return a.Equals(b);
         }
 
+        public double? DistanceFrom(MapCoordinate position)
+        {
+            if (position == null || position.Key != Key) return null;
+
+            return Math.Sqrt(Math.Pow(position.X - X, 2) + Math.Pow(position.Y - Y, 2));
+        }
+
         public object Clone()
         {
             return new MapCoordinate { X = X, Y = Y, Key = Key };

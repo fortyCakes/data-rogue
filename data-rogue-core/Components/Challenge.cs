@@ -3,8 +3,8 @@
 namespace data_rogue_core.Components
 {
 
-    public class Biome : IEntityComponent
+    public class Challenge: IEntityComponent
     {
-        public string Name;
+        public int ChallengeRating = 0;
     }
 }

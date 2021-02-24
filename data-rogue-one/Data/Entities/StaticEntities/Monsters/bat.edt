@@ -44,7 +44,7 @@ Speed: 600
 [MoveAwayFromPlayerBehaviour]
 Priority: 1
 Chance: 0.5
-[MoveToPlayerBehaviour]
+[AttackClosestEnemyBehaviour]
 Priority: 0
 [RandomlyMoveBehaviour]
 Priority: -1

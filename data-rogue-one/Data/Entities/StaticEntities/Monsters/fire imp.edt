@@ -39,7 +39,7 @@ Value: 8
 Name: Fire Imp
 Detail: This is a tiny devil made out of fire. They're not very strong, but they have been known to spit fire.
 [Actor]
-[MoveToPlayerBehaviour]
+[AttackClosestEnemyBehaviour]
 Priority: 0
 [RandomlyMoveBehaviour]
 Priority: -1

@@ -14,6 +14,7 @@ Frames: Attack0
 Passable: false
 Transparent: true
 [Actor]
+Faction: Player
 [AegisRecovery]
 [PlayerRestBehaviour]
 Priority: 1

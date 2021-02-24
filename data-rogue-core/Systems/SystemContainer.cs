@@ -39,6 +39,7 @@ namespace data_rogue_core.Systems
         public ISoundSystem SoundSystem { get; set; }
         public IParticleSystem ParticleSystem { get; set; }
         public IInteractionSystem InteractableSystem { get; set; }
+        public IFactionSystem FactionSystem { get; set; }
 
         public string Seed { get; set; }
 
@@ -129,6 +130,8 @@ namespace data_rogue_core.Systems
 
             TargetingSystem = new TargetingSystem(this);
 
+            FactionSystem = new FactionSystem();
+
             ControlSystem = new ControlSystem(this, _keyBindingsDataProvider);
 
             SaveSystem = new SaveSystem(this, new WorldGenerator(_worldEntityDataProvider, _playerEntityDataProvider, _vaultDataProvider));
@@ -170,6 +173,7 @@ namespace data_rogue_core.Systems
             Check(SoundSystem, "SoundSystem", msg, ref valid);
             Check(ParticleSystem, "ParticleSystem", msg, ref valid);
             Check(InteractableSystem, "InteractableSystem", msg, ref valid);
+            Check(FactionSystem, "FactionSystem", msg, ref valid);
 
             if (!valid)
                 throw new ContainerNotValidException(msg.ToString());

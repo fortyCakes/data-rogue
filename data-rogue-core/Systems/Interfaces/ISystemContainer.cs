@@ -34,6 +34,7 @@ namespace data_rogue_core.Systems.Interfaces
         ISoundSystem SoundSystem { get; }
         IParticleSystem ParticleSystem { get; }
         IInteractionSystem InteractableSystem { get; }
+        IFactionSystem FactionSystem { get; }
 
         void Verify();
         void CreateSystems(string rngSeed);

@@ -40,7 +40,7 @@ Value: 4
 Name: Stone Head
 Detail: This is a moving chunk of stone. It has natural armour that regenerates quickly.
 [Actor]
-[MoveToPlayerBehaviour]
+[AttackClosestEnemyBehaviour]
 Priority: 0
 [RandomlyMoveBehaviour]
 Priority: -1

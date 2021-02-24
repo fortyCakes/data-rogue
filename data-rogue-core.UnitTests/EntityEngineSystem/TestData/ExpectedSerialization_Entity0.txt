@@ -2,6 +2,6 @@
 [Appearance]
 Color: #FF0000
 Glyph: £
-[MoveToPlayerBehaviour]
+[AttackClosestEnemyBehaviour]
 Chance: 1
 Priority: 100
