@@ -1,0 +1,167 @@
+﻿"Cell:SmoothWallBeige"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #DEEED6
+ZOrder: 0
+[SpriteAppearance]
+Bottom: smooth_wall_beige
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:SmoothWallBeige
+Singleton: true
+[Memorable]
+[Description]
+Name: Beige Smooth Wall
+Detail: A smooth beige wall.
+
+"Cell:SmoothWallBlueLight"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #DEEED6
+ZOrder: 0
+[SpriteAppearance]
+Bottom: smooth_wall_blue_light
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:SmoothWallBlueLight
+Singleton: true
+[Memorable]
+[Description]
+Name: Light Blue Smooth Wall
+Detail: A smooth light blue wall.
+
+"Cell:SmoothWallBrown"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #DEEED6
+ZOrder: 0
+[SpriteAppearance]
+Bottom: smooth_wall_brown
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:SmoothWallBrown
+Singleton: true
+[Memorable]
+[Description]
+Name: Brown Smooth Wall
+Detail: A smooth brown wall.
+
+"Cell:SmoothWallDark"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #DEEED6
+ZOrder: 0
+[SpriteAppearance]
+Bottom: smooth_wall_dark
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:SmoothWallDark
+Singleton: true
+[Memorable]
+[Description]
+Name: Dark Smooth Wall
+Detail: A smooth dark wall.
+
+"Cell:SmoothWallGrey"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #DEEED6
+ZOrder: 0
+[SpriteAppearance]
+Bottom: smooth_wall_grey
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:SmoothWallGrey
+Singleton: true
+[Memorable]
+[Description]
+Name: Grey Smooth Wall
+Detail: A smooth grey wall.
+
+"Cell:SmoothWallGreyDark"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #DEEED6
+ZOrder: 0
+[SpriteAppearance]
+Bottom: smooth_wall_grey_dark
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:SmoothWallGreyDark
+Singleton: true
+[Memorable]
+[Description]
+Name: Dark Grey Smooth Wall
+Detail: A smooth dark grey wall.
+
+"Cell:SmoothWallOrange"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #DEEED6
+ZOrder: 0
+[SpriteAppearance]
+Bottom: smooth_wall_orange
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:SmoothWallOrange
+Singleton: true
+[Memorable]
+[Description]
+Name: Orange Smooth Wall
+Detail: A smooth orange wall.
+
+"Cell:SmoothWallWhite"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #DEEED6
+ZOrder: 0
+[SpriteAppearance]
+Bottom: smooth_wall_white
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:SmoothWallWhite
+Singleton: true
+[Memorable]
+[Description]
+Name: White Smooth Wall
+Detail: A smooth white wall.

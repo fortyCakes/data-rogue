@@ -1,0 +1,79 @@
+﻿"Cell:BlueSand"
+[Cell]
+[Appearance]
+Glyph: ,
+Color: #6DC2CA
+ZOrder: 0
+[SpriteAppearance]
+Bottom: sand_blue
+BottomConnect: dirt
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:BlueSand
+Singleton: true
+[Memorable]
+[Description]
+Name: Blue Sand
+Detail: This is a blue sand floor.
+
+"Cell:DarkSand"
+[Cell]
+[Appearance]
+Glyph: ,
+Color: #757161
+ZOrder: 0
+[SpriteAppearance]
+Bottom: sand_dark
+BottomConnect: dirt
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:DarkSand
+Singleton: true
+[Memorable]
+[Description]
+Name: Dark Sand
+Detail: This is a dark grey sand floor.
+
+"Cell:LightSand"
+[Cell]
+[Appearance]
+Glyph: ,
+Color: #DAD45E
+ZOrder: 0
+[SpriteAppearance]
+Bottom: sand_light
+BottomConnect: dirt
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:LightSand
+Singleton: true
+[Memorable]
+[Description]
+Name: Light Sand
+Detail: This is a light coloured sand floor.
+
+"Cell:WhiteSand"
+[Cell]
+[Appearance]
+Glyph: ,
+Color: #DEEED6
+ZOrder: 0
+[SpriteAppearance]
+Bottom: sand_white
+BottomConnect: dirt
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:WhiteSand
+Singleton: true
+[Memorable]
+[Description]
+Name: White Sand
+Detail: This is a bright white sand floor.

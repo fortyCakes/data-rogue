@@ -1,0 +1,39 @@
+Map:"NewMap"
+default:Cell:Void
+-9,-6
+-7,0: Entity(Props:Door)
+-3,-4: Entity(Props:Door)
+1,0: Entity(Props:Door)
+-3,4: Entity(Props:Door)
+-6,0: Entity(Monster:Bat)
+-3,3: Entity(Monster:Bat)
+0,0: Entity(Monster:Bat)
+-4,-1: Entity(Item:PileOfGold)
+-2,-1: Entity(Item:PileOfGold)
+-3,-1: GenerateItem()
+-3,0: GenerateItem()
+-4,0: GenerateItem()
+-4,1: GenerateItem()
+-3,1: GenerateItem()
+-2,1: GenerateItem()
+-2,0: GenerateItem()
+-9,-5: Entity(Props:VaultConnection)
+2,-6: Entity(Props:VaultConnection)
+3,5: Entity(Props:VaultConnection)
+-8,6: Entity(Props:VaultConnection)
+0:Cell:Void
+.:Cell:Empty
+#:Cell:Wall
+###########.#
+............#
+#....#.#....#
+#....#.#....#
+#...##.##...#
+#.###...###.#
+#...#...#...#
+#.###...###.#
+#...#####...#
+#....#.#....#
+#....#.#....#
+#............
+#.###########

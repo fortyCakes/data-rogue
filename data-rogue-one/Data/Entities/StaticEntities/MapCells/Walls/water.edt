@@ -1,0 +1,23 @@
+﻿"Cell:Water"
+[Cell]
+[Appearance]
+Glyph: ~
+Color: #30346D
+ZOrder: 0
+[SpriteAppearance]
+Bottom: water
+BottomConnect: water
+[Physical]
+Passable: false
+Transparent: true
+[Prototype]
+Name: Cell:Water
+Singleton: true
+[Memorable]
+[Description]
+Name: Water
+Detail: A pit filled with water.
+[Animated]
+[Animation]
+RandomiseTicks: true
+FrameTicks: 25

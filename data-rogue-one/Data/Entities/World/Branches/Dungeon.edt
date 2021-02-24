@@ -8,6 +8,8 @@ Depth: 2
 Name: Dungeon
 [VaultBasedDungeonBranchMapGenerator]
 VaultChance: 0.8
+FloorCell: Cell:LightStoneFloor
+WallCell: Cell:LightStoneWall
 [BiomeBasedMonsterGeneration]
 BasePower: 0
 Density: 0.01

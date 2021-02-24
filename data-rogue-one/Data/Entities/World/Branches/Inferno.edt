@@ -8,7 +8,7 @@ Depth: 3
 Name: Inferno
 [BasicDungeonBranchMapGenerator]
 FloorCell: Cell:RedRockFloor
-WallCell: Cell:OrangeWall
+WallCell: Cell:CobbleWallOrangeLight
 [BiomeBasedMonsterGeneration]
 BasePower: 3
 Density: 0.01

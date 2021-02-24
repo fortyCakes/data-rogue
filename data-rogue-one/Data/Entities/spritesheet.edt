@@ -274,30 +274,9 @@ SpriteHeight: 16
 Scaling: 2
 Frames: Idle0, Idle1
 [SpriteSheet]
-Name: stone_wall_1
-Path: Images/Sprites/Tiles/stone_wall_box.png
-Type: TilesetBox
-SpriteWidth: 16
-SpriteHeight: 16
-Scaling: 2
-[SpriteSheet]
 Name: crater
 Path: Images/Sprites/Tiles/crater.png
 Type: TilesetBox
-SpriteWidth: 16
-SpriteHeight: 16
-Scaling: 2
-[SpriteSheet]
-Name: cobble_wall_1
-Path: Images/Sprites/Tiles/cobble_wall_1.png
-Type: TilesetWall
-SpriteWidth: 16
-SpriteHeight: 16
-Scaling: 2
-[SpriteSheet]
-Name: cobble_wall_orange
-Path: Images/Sprites/Tiles/cobble_wall_orange.png
-Type: TilesetWall
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
@@ -410,6 +389,14 @@ Scaling: 2
 [SpriteSheet]
 Name: goblin
 Path: Images/Sprites/Entities/Creatures/goblin.png
+Type: SingleSprite
+Frames: Idle0,Idle1
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: platino
+Path: Images/Sprites/Entities/Creatures/platino.png
 Type: SingleSprite
 Frames: Idle0,Idle1
 SpriteWidth: 16
@@ -624,6 +611,20 @@ Scaling: 2
 [SpriteSheet]
 Name: shop
 Path: Images/Sprites/Entities/Misc/shop.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: door_closed
+Path: Images/Sprites/Entities/Misc/door_closed.png
+Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: door_open
+Path: Images/Sprites/Entities/Misc/door_open.png
 Type: SingleSprite
 SpriteWidth: 16
 SpriteHeight: 16
@@ -1192,6 +1193,370 @@ Scaling: 2
 Name: fill_tool
 Path: Images/Sprites/Entities/Misc/fill_tool.png
 Type: SingleSprite
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: cobble_wall_blue
+Path: Images/Sprites/Tiles/Walls/cobble_wall_blue.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: cobble_wall_brown
+Path: Images/Sprites/Tiles/Walls/cobble_wall_brown.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: cobble_wall_brown_grey
+Path: Images/Sprites/Tiles/Walls/cobble_wall_brown_grey.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: cobble_wall_dark
+Path: Images/Sprites/Tiles/Walls/cobble_wall_dark.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: cobble_wall_dark_grey
+Path: Images/Sprites/Tiles/Walls/cobble_wall_dark_grey.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: cobble_wall_grey
+Path: Images/Sprites/Tiles/Walls/cobble_wall_grey.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: cobble_wall_light
+Path: Images/Sprites/Tiles/Walls/cobble_wall_light.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: cobble_wall_orange
+Path: Images/Sprites/Tiles/Walls/cobble_wall_orange.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: cobble_wall_orange_2
+Path: Images/Sprites/Tiles/Walls/cobble_wall_orange_2.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: cobble_wall_orange_dark
+Path: Images/Sprites/Tiles/Walls/cobble_wall_orange_dark.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: cobble_wall_red
+Path: Images/Sprites/Tiles/Walls/cobble_wall_red.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: cobble_wall_red_grey
+Path: Images/Sprites/Tiles/Walls/cobble_wall_red_grey.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: cobble_wall_yellow
+Path: Images/Sprites/Tiles/Walls/cobble_wall_orange.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: cracked_wall_blue
+Path: Images/Sprites/Tiles/Walls/cracked_wall_blue.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: cracked_wall_blue_dark
+Path: Images/Sprites/Tiles/Walls/cracked_wall_blue_dark.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: cracked_wall_dark
+Path: Images/Sprites/Tiles/Walls/cracked_wall_dark.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: cracked_wall_light
+Path: Images/Sprites/Tiles/Walls/cracked_wall_light.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: mine_wall_brown
+Path: Images/Sprites/Tiles/Walls/mine_wall_brown.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: mine_wall_orange
+Path: Images/Sprites/Tiles/Walls/mine_wall_orange.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: mine_wall_red
+Path: Images/Sprites/Tiles/Walls/mine_wall_red.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: mine_wall_yellow
+Path: Images/Sprites/Tiles/Walls/mine_wall_yellow.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: shiny_wall_blue
+Path: Images/Sprites/Tiles/Walls/shiny_wall_blue.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: shiny_wall_blue_dark
+Path: Images/Sprites/Tiles/Walls/shiny_wall_blue_dark.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: shiny_wall_brown
+Path: Images/Sprites/Tiles/Walls/shiny_wall_brown.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: shiny_wall_blue_dull
+Path: Images/Sprites/Tiles/Walls/shiny_wall_blue_dull.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: shiny_wall_gold
+Path: Images/Sprites/Tiles/Walls/shiny_wall_gold.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: shiny_wall_green_dark
+Path: Images/Sprites/Tiles/Walls/shiny_wall_green_dark.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: shiny_wall_green_dull
+Path: Images/Sprites/Tiles/Walls/shiny_wall_green_dull.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: shiny_wall_green_light
+Path: Images/Sprites/Tiles/Walls/shiny_wall_green_light.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: shiny_wall_lime
+Path: Images/Sprites/Tiles/Walls/shiny_wall_lime.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: shiny_wall_orange
+Path: Images/Sprites/Tiles/Walls/shiny_wall_orange.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: shiny_wall_white
+Path: Images/Sprites/Tiles/Walls/shiny_wall_white.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: shiny_wall_yellow
+Path: Images/Sprites/Tiles/Walls/shiny_wall_yellow.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: transparent_wall_blue
+Path: Images/Sprites/Tiles/Walls/transparent_wall_blue.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: smooth_wall_beige
+Path: Images/Sprites/Tiles/Walls/smooth_wall_beige.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: smooth_wall_blue_light
+Path: Images/Sprites/Tiles/Walls/smooth_wall_blue_light.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: smooth_wall_brown
+Path: Images/Sprites/Tiles/Walls/smooth_wall_brown.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: smooth_wall_dark
+Path: Images/Sprites/Tiles/Walls/smooth_wall_dark.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: smooth_wall_grey
+Path: Images/Sprites/Tiles/Walls/smooth_wall_grey.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: smooth_wall_grey_dark
+Path: Images/Sprites/Tiles/Walls/smooth_wall_grey_dark.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: smooth_wall_orange
+Path: Images/Sprites/Tiles/Walls/smooth_wall_orange.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: smooth_wall_white
+Path: Images/Sprites/Tiles/Walls/smooth_wall_white.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: stone_wall_blue
+Path: Images/Sprites/Tiles/Walls/stone_wall_blue.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: stone_wall_dark
+Path: Images/Sprites/Tiles/Walls/stone_wall_dark.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: stone_wall_grey
+Path: Images/Sprites/Tiles/Walls/stone_wall_grey.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: stone_wall_light
+Path: Images/Sprites/Tiles/Walls/stone_wall_light.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: stone_wall_green
+Path: Images/Sprites/Tiles/Walls/stone_wall_green.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: stone_wall_green_dark
+Path: Images/Sprites/Tiles/Walls/stone_wall_green_dark.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: wooden_wall_brown
+Path: Images/Sprites/Tiles/Walls/wooden_wall_brown.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: wooden_wall_dark
+Path: Images/Sprites/Tiles/Walls/wooden_wall_dark.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: wooden_wall_light
+Path: Images/Sprites/Tiles/Walls/wooden_wall_light.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2
+[SpriteSheet]
+Name: wooden_wall_orange
+Path: Images/Sprites/Tiles/Walls/wooden_wall_orange.png
+Type: TilesetBox
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2

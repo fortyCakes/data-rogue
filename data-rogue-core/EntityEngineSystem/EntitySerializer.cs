@@ -33,7 +33,7 @@ namespace data_rogue_core.EntityEngineSystem
 
             foreach (var page in input)
             {
-                var entityTexts = SplitIntoEntities(page);
+                var entityTexts = SplitIntoEntities(page).Where(s => !string.IsNullOrWhiteSpace(s));
 
                 returnedEntities.AddRange(entityTexts.Select(text => Deserialize(systemContainer, text)));
             }

@@ -1,0 +1,22 @@
+﻿"Cell:Tree"
+[Cell]
+[Appearance]
+Glyph: 
+Color: #567E3A
+ZOrder: 0
+[SpriteAppearance]
+Bottom: grass_1
+BottomConnect: grass
+Top: trees_1
+TopConnect: trees
+[Physical]
+Passable: false
+Transparent: true
+[Prototype]
+Name: Cell:Tree
+Singleton: true
+[Memorable]
+[Description]
+Name: Tree
+Detail: A large, sturdy-looking tree.
+

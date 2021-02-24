@@ -1,0 +1,83 @@
+﻿"Cell:MineWallBrown"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #854C30
+ZOrder: 0
+[SpriteAppearance]
+Bottom: mine_wall_brown
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:MineWallBrown
+Singleton: true
+[Memorable]
+[Description]
+Name: Brown Mine Wall
+Detail: A brown mine wall, with occasional supports.
+
+"Cell:MineWallOrange"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #D27D2C
+ZOrder: 0
+[SpriteAppearance]
+Bottom: mine_wall_orange
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:MineWallOrange
+Singleton: true
+[Memorable]
+[Description]
+Name: Orange Mine Wall
+Detail: An orange mine wall, with occasional supports.
+
+"Cell:MineWallRed"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #D04648
+ZOrder: 0
+[SpriteAppearance]
+Bottom: mine_wall_red
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:MineWallRed
+Singleton: true
+[Memorable]
+[Description]
+Name: Red Mine Wall
+Detail: A red mine wall, with occasional supports.
+
+"Cell:MineWallYellow"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #DAD45E
+ZOrder: 0
+[SpriteAppearance]
+Bottom: mine_wall_yellow
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:MineWallYellow
+Singleton: true
+[Memorable]
+[Description]
+Name: Yellow Mine Wall
+Detail: A yellow mine wall, with occasional supports.

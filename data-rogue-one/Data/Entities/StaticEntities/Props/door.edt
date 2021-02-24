@@ -1,0 +1,64 @@
+﻿"Props:Door"
+[Prototype]
+Name: Props:Door
+Singleton: false
+[CanAddToMap]
+[Appearance]
+Glyph: +
+Color: #964B00
+ZOrder: 1
+[SpriteAppearance]
+Top: door_closed
+[Position]
+[Physical]
+Passable: false
+Transparent: false
+[Memorable]
+[Description]
+Name: Door
+Detail: It's a door. Interact with it to open or close it.
+[Interaction]
+Verb: Open
+Script: OpenDoor
+
+"Script: OpenDoor"
+[Prototype]
+Name: OpenDoor
+Singleton: true
+[Script]
+Text: {
+	physical = User:Get('Physical')
+	physical.Passable = true
+	physical.Transparent = true
+
+	interaction = User:Get('Interaction')
+	interaction.Verb = 'Close'
+	interaction.Script = 'CloseDoor'
+
+	appearance = User:Get('Appearance')
+	appearance.Glyph = '-'
+
+	spriteAppearance = User:Get('SpriteAppearance')
+	spriteAppearance.Top = 'door_open'
+}
+
+"Script: CloseDoor"
+[Prototype]
+Name: CloseDoor
+Singleton: true
+[Script]
+Text: {
+	physical = User:Get('Physical')
+	physical.Passable = false
+	physical.Transparent = false
+
+	interaction = User:Get('Interaction')
+	interaction.Verb = 'Open'
+	interaction.Script = 'OpenDoor'
+
+	appearance = User:Get('Appearance')
+	appearance.Glyph = '+'
+
+	spriteAppearance = User:Get('SpriteAppearance')
+	spriteAppearance.Top = 'door_closed'
+}

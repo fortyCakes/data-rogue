@@ -1,0 +1,83 @@
+﻿"Cell:LightWoodWall"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #6DC2CA
+ZOrder: 0
+[SpriteAppearance]
+Bottom: wooden_wall_light
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:LightWoodWall
+Singleton: true
+[Memorable]
+[Description]
+Name: Light Wood Wall
+Detail: A wall made from planks of light coloured wood.
+
+"Cell:OrangeWoodWall"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #D27D2C
+ZOrder: 0
+[SpriteAppearance]
+Bottom: wooden_wall_orange
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:OrangeWoodWall
+Singleton: true
+[Memorable]
+[Description]
+Name: Orange Wood Wall
+Detail: A wall made from planks of orange coloured wood.
+
+"Cell:BrownWoodWall"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #854C30
+ZOrder: 0
+[SpriteAppearance]
+Bottom: wooden_wall_brown
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:BrownWoodWall
+Singleton: true
+[Memorable]
+[Description]
+Name: Brown Wood Wall
+Detail: A wall made from planks of brown wood.
+
+"Cell:DarkWoodWall"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #442434
+ZOrder: 0
+[SpriteAppearance]
+Bottom: wooden_wall_dark
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:DarkWoodWall
+Singleton: true
+[Memorable]
+[Description]
+Name: Dark Wood Wall
+Detail: A wall made from planks of dark coloured wood.

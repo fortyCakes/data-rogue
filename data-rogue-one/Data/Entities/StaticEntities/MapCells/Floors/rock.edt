@@ -1,0 +1,79 @@
+﻿"Cell:RedRockFloor"
+[Cell]
+[Appearance]
+Glyph: .
+Color: #864D30
+ZOrder: 0
+[SpriteAppearance]
+Bottom: rock_red
+BottomConnect: stone_floor
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:RedRockFloor
+Singleton: true
+[Memorable]
+[Description]
+Name: Floor
+Detail: This is a red rock floor.
+
+"Cell:DarkRock"
+[Cell]
+[Appearance]
+Glyph: .
+Color: #30346D
+ZOrder: 0
+[SpriteAppearance]
+Bottom: rock_dark
+BottomConnect: rock
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:DarkRock
+Singleton: true
+[Memorable]
+[Description]
+Name: Dark Rock
+Detail: This is a dark black stone floor.
+
+"Cell:LightRock"
+[Cell]
+[Appearance]
+Glyph: .
+Color: #DAD45E
+ZOrder: 0
+[SpriteAppearance]
+Bottom: rock_light
+BottomConnect: rock
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:LightRock
+Singleton: true
+[Memorable]
+[Description]
+Name: Light Rock
+Detail: This is a light yellow sandstone floor.
+
+"Cell:OrangeRock"
+[Cell]
+[Appearance]
+Glyph: .
+Color: #D27D2C
+ZOrder: 0
+[SpriteAppearance]
+Bottom: rock_orange
+BottomConnect: rock
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:OrangeRock
+Singleton: true
+[Memorable]
+[Description]
+Name: Orange Rock
+Detail: This is an orange sandstone floor.

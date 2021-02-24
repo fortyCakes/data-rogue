@@ -1,0 +1,79 @@
+﻿"Cell:BlueStoneFloor"
+[Cell]
+[Appearance]
+Glyph: .
+Color: #597DCE
+ZOrder: 0
+[SpriteAppearance]
+Bottom: stone_floor_blue
+BottomConnect: stone
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:BlueStoneFloor
+Singleton: true
+[Memorable]
+[Description]
+Name: Blue Stone Floor
+Detail: This is a floor made from bricks of blue stone.
+
+"Cell:LightStoneFloor"
+[Cell]
+[Appearance]
+Glyph: .
+Color: #aaaaaa
+ZOrder: 0
+[SpriteAppearance]
+Bottom: stone_floor_1
+BottomConnect: stone
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:LightStoneFloor
+Singleton: true
+[Memorable]
+[Description]
+Name: Stone Floor
+Detail: This is a floor made from bricks of light stone.
+
+"Cell:DarkStoneFloor"
+[Cell]
+[Appearance]
+Glyph: .
+Color: #30346D
+ZOrder: 0
+[SpriteAppearance]
+Bottom: stone_floor_dark
+BottomConnect: stone
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:DarkStoneFloor
+Singleton: true
+[Memorable]
+[Description]
+Name: Dark Stone Floor
+Detail: This is a floor made from bricks of dark stone.
+
+"Cell:DarkGreyFloor"
+[Cell]
+[Appearance]
+Glyph: .
+Color: #4E4A4E
+ZOrder: 0
+[SpriteAppearance]
+Bottom: stone_floor_darkgrey
+BottomConnect: stone
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:DarkGreyFloor
+Singleton: true
+[Memorable]
+[Description]
+Name: Dark Grey Stone Floor
+Detail: This is a floor made from bricks of dark grey stone.

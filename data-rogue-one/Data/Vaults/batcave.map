@@ -9,8 +9,8 @@ default:Cell:Void
 -6,-7: Entity(Monster:Bat)
 -2,-7: Entity(Monster:Bat)
 0:Cell:Void
-.:Cell:Empty
-#:Cell:OrangeWall
+.:Cell:LightRock
+#:Cell:CobbleWallBrown
       ### ###      
  #.#  #.# #.#  #.# 
  #.#  #.###.#  #.# 

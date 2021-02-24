@@ -1,0 +1,84 @@
+﻿"Cell:Void"
+[Cell]
+[Appearance]
+Glyph: 0
+Color: #aaaaaa
+ZOrder: 0
+[SpriteAppearance]
+Bottom: void
+BottomConnect: void
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:Void
+Singleton: true
+[Memorable]
+[Description]
+Name: Void
+Detail: There's nothing here.
+
+"Cell:Empty"
+[Cell]
+[Appearance]
+Glyph: .
+Color: #aaaaaa
+ZOrder: 0
+[SpriteAppearance]
+#Top: unknown
+Bottom: stone_floor_1
+BottomConnect: stone
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:Empty
+Singleton: true
+[Memorable]
+[Description]
+Name: EmptyCell
+Detail: There is nothing here. If you can see this, it should have been set to a different floor cell.
+
+
+"Cell:Wall"
+[Cell]
+[Appearance]
+Glyph: #
+Color: #aaaaaa
+ZOrder: 0
+[SpriteAppearance]
+#Top: unknown
+Bottom: stone_wall_light
+BottomConnect: wall
+BottomConnectType: Wall
+[Physical]
+Passable: false
+Transparent: false
+[Prototype]
+Name: Cell:Wall
+Singleton: true
+[Memorable]
+[Description]
+Name: WallCell
+Detail: There is a wall here. If you can see this, it should have been set to a different wall cell.
+
+"Cell:SpawnPoint"
+[Cell]
+[SpawnPoint]
+[Appearance]
+Glyph: .
+Color: #4E4A4E
+ZOrder: 0
+[SpriteAppearance]
+Bottom: dirt_dark
+BottomConnect: dirt
+[Physical]
+Passable: true
+Transparent: true
+[Prototype]
+Name: Cell:SpawnPoint
+Singleton: true
+[Memorable]
+[Description]
+Name: Crater
+Detail: A patch of bare dirt. It's burned to a dark colour.

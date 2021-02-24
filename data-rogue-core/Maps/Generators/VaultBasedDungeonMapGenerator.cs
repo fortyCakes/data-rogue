@@ -84,10 +84,32 @@ namespace data_rogue_core.Maps.Generators
             progress.Report("Cleaning up connection points");
             RemoveConnectionPoints(map, connectionPoints);
 
+            progress.Report("Painting walls and floors");
+            PaintWithCorrectCells(map);
+
             map.Vaults = vaultPlacements.Select(v => v.Vault.MapKey);
 
             progress.Report("Map generation complete!");
             return map;
+        }
+
+        private void PaintWithCorrectCells(IMap map)
+        {
+            var designatedEmptyCell = _systemContainer.PrototypeSystem.Get("Cell:Empty");
+            var designatedWallCell = _systemContainer.PrototypeSystem.Get("Cell:Wall");
+
+            foreach (var cell in map.Cells.ToList())
+            {
+                if (cell.Value == designatedEmptyCell)
+                {
+                    map.SetCell(cell.Key, _floorCell);
+                }
+
+                if (cell.Value == designatedWallCell)
+                {
+                    map.SetCell(cell.Key, _wallCell);
+                }
+            }
         }
 
         private void RemoveConnectionPoints(IMap map, IEnumerable<VaultConnectionPoint> connectionPoints)
