@@ -75,7 +75,8 @@ namespace data_rogue_one
                     typeof(PreventDamageIfGodModeRule),
                     typeof(CantAffordItemRule),
                     typeof(CompletePurchaseRule),
-                    typeof(CantMoveIntoSameFactionRule)
+                    typeof(CantMoveIntoSameFactionRule),
+                    typeof(MoveThroughPortalRule)
                 };
 
                 list.AddRange(ApplyActionRule.AllActionRules);

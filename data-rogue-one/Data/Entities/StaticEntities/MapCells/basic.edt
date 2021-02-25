@@ -8,8 +8,8 @@ ZOrder: 0
 Bottom: void
 BottomConnect: void
 [Physical]
-Passable: true
-Transparent: true
+Passable: false
+Transparent: false
 [Prototype]
 Name: Cell:Void
 Singleton: true

@@ -95,7 +95,7 @@ namespace data_rogue_core
 
                 var potentialPortals = engine.EntitiesWith<Portal>()
                     .Where(p => p.Get<Position>().MapCoordinate.Key == mapKey)
-                    .Where(p => !p.Get<Portal>().BranchLink.HasValue)
+                    .Where(p => string.IsNullOrEmpty( p.Get<Portal>().BranchLink))
                     .ToList();
 
                 if (!potentialPortals.Any())
@@ -106,7 +106,7 @@ namespace data_rogue_core
                 var portalEntity = Random.PickOne(potentialPortals);
                 var thisPortal = portalEntity.Get<Portal>();
 
-                thisPortal.BranchLink = prototypeSystem.Get(thatEnd.Branch).EntityId;
+                thisPortal.BranchLink = thatEnd.Branch;
 
                 var destinationBranch = prototypeSystem.Get(link.Value.Branch).Get<Branch>();
 

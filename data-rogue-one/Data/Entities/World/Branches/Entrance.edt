@@ -1,6 +1,7 @@
 ﻿"Branch:Entrance"
 [Prototype]
 Name: Branch:Entrance
+Singleton: true
 [Branch]
 BranchName: Branch:Entrance
 Depth: 2

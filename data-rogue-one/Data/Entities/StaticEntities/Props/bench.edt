@@ -13,7 +13,7 @@ TopConnect: bench
 [Position]
 [Physical]
 Passable: false
-Transparent: false
+Transparent: true
 [Memorable]
 [Description]
 Name: Table

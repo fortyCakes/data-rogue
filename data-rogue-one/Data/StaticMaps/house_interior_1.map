@@ -1,0 +1,19 @@
+Map:"house_interior_1"
+default:Cell:Void
+-7,-6
+-7,1: Entity(Props:DoorPortal|Portal.Destination=Key: Branch:Entrance:1, X: 84, Y: 4|Portal.BranchLink=Branch:Entrance)
+0:Cell:Void
+.:Cell:BlueStoneFloor
+#:Cell:DarkWoodWall
+###########
+#.........#
+#.........#
+#.........#
+#.........#
+#.........#
+#.........#
+..........#
+#.........#
+#.........#
+#.........#
+###########

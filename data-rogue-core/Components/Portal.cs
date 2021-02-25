@@ -5,7 +5,8 @@ namespace data_rogue_core.Components
 {
     public class Portal : IEntityComponent
     {
-        public uint? BranchLink;
+        public string BranchLink;
         public MapCoordinate Destination;
+        public bool Automatic = false;
     }
 }

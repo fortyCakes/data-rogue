@@ -1,6 +1,7 @@
 ﻿"Branch:Dungeon"
 [Prototype]
 Name: Branch:Dungeon
+Singleton: true
 [Branch]
 BranchName: Branch:Dungeon
 Depth: 2

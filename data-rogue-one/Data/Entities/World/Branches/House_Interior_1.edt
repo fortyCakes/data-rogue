@@ -1,0 +1,11 @@
+﻿"Branch:House_Interior_1"
+[Prototype]
+Name: Branch:House_Interior_1
+Singleton: true
+[Branch]
+BranchName: Branch:House_Interior_1
+Depth: 1
+[StaticBranchMapGenerator]
+StaticMaps: {
+house_interior_1.map
+}

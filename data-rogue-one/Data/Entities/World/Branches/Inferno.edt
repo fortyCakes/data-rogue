@@ -1,6 +1,7 @@
 ﻿"Branch:Inferno"
 [Prototype]
 Name: Branch:Inferno
+Singleton: true
 [Branch]
 BranchName: Branch:Inferno
 Depth: 3

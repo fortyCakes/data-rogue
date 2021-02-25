@@ -1,0 +1,18 @@
+﻿"Props:DoorPortal"
+[Portal]
+Automatic: true
+[Prototype]
+Name: Props:DoorPortal
+Singleton: false
+[CanAddToMap]
+[Appearance]
+Glyph: +
+Color: #aaaaff
+ZOrder: 1
+[SpriteAppearance]
+Bottom: door_closed
+[Position]
+[Memorable]
+[Description]
+Name: Door
+Detail: A door to another part of the world.
