@@ -43,3 +43,4 @@ Detail: This is a large monster, half-human, half-bull. Watch out for their horn
 Priority: 0
 [RandomlyMoveBehaviour]
 Priority: -1
+[Inventory]

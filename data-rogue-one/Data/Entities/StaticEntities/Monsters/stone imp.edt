@@ -43,3 +43,13 @@ Detail: This is a tiny devil made out of rocks. They're not very strong, but the
 Priority: 0
 [RandomlyMoveBehaviour]
 Priority: -1
+[BodyPart]
+Type: Torso
+[BodyPart]
+Type: Head
+[BodyPart]
+Type: Arms
+[BodyPart]
+Type: Legs
+[Equipped]
+[Inventory]

@@ -45,3 +45,19 @@ Priority: 0
 Priority: -1
 [ModifiedAccuracy]
 By: 10
+[BodyPart]
+Type: Torso
+[BodyPart]
+Type: Head
+[BodyPart]
+Type: Arms
+[BodyPart]
+Type: Legs
+[Inventory]
+[Equipped]
+[StartsWithItem]
+Item: Item:Sword
+Equipped: true
+[StartsWithItem]
+Item: Item:Trousers
+Equipped: true

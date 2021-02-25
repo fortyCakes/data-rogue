@@ -43,3 +43,19 @@ Detail: This is a small, green-skinned humanoid. They are known to be highly agg
 Priority: 0
 [RandomlyMoveBehaviour]
 Priority: -1
+[BodyPart]
+Type: Torso
+[BodyPart]
+Type: Head
+[BodyPart]
+Type: Arms
+[BodyPart]
+Type: Legs
+[Equipped]
+[Inventory]
+[StartsWithItem]
+Item: Item:Dagger
+Equipped: true
+[StartsWithItem]
+Item: Item:Trousers
+Equipped: true

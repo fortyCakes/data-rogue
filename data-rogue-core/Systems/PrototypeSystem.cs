@@ -89,39 +89,63 @@ namespace data_rogue_core.Systems
             }
 
             var newComponents = new List<IEntityComponent>();
+            var startWithItems = new List<StartsWithItem>();
 
             foreach(var component in entity.Components.Where(c => c.GetType() != typeof(Prototype)))
             {
-                var componentType = component.GetType();
-
-                IEntityComponent newComponent;
-
-                if (IsBehaviour(componentType))
+                if (component is StartsWithItem)
                 {
-                    newComponent = (IEntityComponent)Activator.CreateInstance(componentType, new object[] { _systemContainer });
+                    startWithItems.Add((StartsWithItem)component);
                 }
-                else {
-                    newComponent = (IEntityComponent)Activator.CreateInstance(componentType);
-                }
-
-                foreach (FieldInfo fieldInfo in componentType.GetFields())
+                else
                 {
-                    if (fieldInfo.FieldType == typeof(Counter))
-                    {
-                        Counter oldValue = (Counter)fieldInfo.GetValue(component);
-                        fieldInfo.SetValue(newComponent, new Counter { Current = oldValue.Current, Max = oldValue.Max });
-                    }
-                    else
-                    {
-                        var oldValue = fieldInfo.GetValue(component);
-                        fieldInfo.SetValue(newComponent, oldValue);
-                    }
-                }
+                    var componentType = component.GetType();
 
-                newComponents.Add(newComponent);
+                    IEntityComponent newComponent;
+
+                    if (IsBehaviour(componentType))
+                    {
+                        newComponent = (IEntityComponent)Activator.CreateInstance(componentType, new object[] { _systemContainer });
+                    }
+                    else {
+                        newComponent = (IEntityComponent)Activator.CreateInstance(componentType);
+                    }
+
+                    foreach (FieldInfo fieldInfo in componentType.GetFields())
+                    {
+                        if (fieldInfo.FieldType == typeof(Counter))
+                        {
+                            Counter oldValue = (Counter)fieldInfo.GetValue(component);
+                            fieldInfo.SetValue(newComponent, new Counter { Current = oldValue.Current, Max = oldValue.Max });
+                        }
+                        else
+                        {
+                            var oldValue = fieldInfo.GetValue(component);
+                            fieldInfo.SetValue(newComponent, oldValue);
+                        }
+                    }
+
+                    newComponents.Add(newComponent);
+                }
             }
 
-            return _engine.New(null, newComponents.ToArray());
+            var newEntity = _engine.New(null, newComponents.ToArray());
+
+            var inventory = newEntity.Get<Inventory>();
+
+            foreach (var startItem in startWithItems)
+            {
+                var item = Get(startItem.Item);
+                
+                _systemContainer.ItemSystem.AddItemDirectlyToInventory(item, inventory);
+
+                if (startItem.Equipped)
+                {
+                    _systemContainer.EquipmentSystem.Equip(newEntity, item);
+                }
+            }
+
+            return newEntity;
         }
 
         private static bool IsBehaviour(Type type)

@@ -51,3 +51,7 @@ Value: 10
 Name: CurrentAegisLevel
 Value: 10
 [AegisRecovery]
+[BodyPart]
+Type: Head
+[Equipped]
+[Inventory]

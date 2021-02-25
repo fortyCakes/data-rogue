@@ -5,8 +5,6 @@ Singleton: false
 [CanAddToMap]
 [Biome]
 Name: None
-[Challenge]
-ChallengeRating: 0
 [Appearance]
 Glyph: V
 Color: #6DAA2C

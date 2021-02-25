@@ -55,3 +55,19 @@ Order: 1
 [KnownSkill]
 Skill: Skill:Spark
 Order: 2
+[BodyPart]
+Type: Torso
+[BodyPart]
+Type: Head
+[BodyPart]
+Type: Arms
+[BodyPart]
+Type: Legs
+[Equipped]
+[Inventory]
+[StartsWithItem]
+Item: Item:Staff
+Equipped: true
+[StartsWithItem]
+Item: Item:Robe
+Equipped: true

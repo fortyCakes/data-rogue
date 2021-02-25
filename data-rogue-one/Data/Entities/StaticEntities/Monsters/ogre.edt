@@ -44,3 +44,19 @@ Speed: 1500
 Priority: 0
 [RandomlyMoveBehaviour]
 Priority: -1
+[BodyPart]
+Type: Torso
+[BodyPart]
+Type: Head
+[BodyPart]
+Type: Arms
+[BodyPart]
+Type: Legs
+[Equipped]
+[Inventory]
+[StartsWithItem]
+Item: Item:HeavyClub
+Equipped: true
+[StartsWithItem]
+Item: Item:Trousers
+Equipped: true

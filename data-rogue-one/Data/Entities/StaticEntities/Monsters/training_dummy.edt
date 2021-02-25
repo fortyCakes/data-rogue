@@ -5,8 +5,6 @@ Singleton: false
 [CanAddToMap]
 [Biome]
 Name: None
-[Challenge]
-ChallengeRating: 0
 [Appearance]
 Glyph: T
 Color: #864D30
@@ -37,3 +35,13 @@ Value: 0
 Name: Training Dummy
 Detail: A sturdy wooden training dummy. It's designed to take more damage once you've knocked it off balance.
 [Actor]
+[BodyPart]
+Type: Torso
+[BodyPart]
+Type: Head
+[BodyPart]
+Type: Arms
+[BodyPart]
+Type: Legs
+[Equipped]
+[Inventory]

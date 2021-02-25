@@ -39,3 +39,7 @@ Detail: A platinum dragon, legendary for their pixel art skills.
 Speed: 1000
 [RandomlyMoveBehaviour]
 Priority: -1
+[BodyPart]
+Type: Head
+[Equipped]
+[Inventory]

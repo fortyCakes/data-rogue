@@ -57,3 +57,19 @@ Chance: 0.85
 Priority: 0
 [RandomlyMoveBehaviour]
 Priority: -1
+[BodyPart]
+Type: Torso
+[BodyPart]
+Type: Head
+[BodyPart]
+Type: Arms
+[BodyPart]
+Type: Legs
+[Equipped]
+[StartsWithItem]
+Item: Item:Staff
+Equipped: true
+[StartsWithItem]
+Item: Item:Robe
+Equipped: true
+[Inventory]
