@@ -377,6 +377,24 @@ namespace data_rogue_core.UnitTests.Systems
         }
 
         [Test]
+        public void EquipTwoHandedItem_2HAlreadyEquipped_Unequips()
+        {
+            var firstTwoHandedItem = GiveHandTestItem(1);
+
+            firstTwoHandedItem.Get<Equipment>().AdditionalEquipmentSlot = EquipmentSlot.Hand;
+            var twoHandedItem = GiveHandTestItem(3);
+            twoHandedItem.Get<Equipment>().AdditionalEquipmentSlot = EquipmentSlot.Hand;
+
+            equipmentSystem.Equip(entity, firstTwoHandedItem);
+
+            var equipped2H = equipmentSystem.Equip(entity, twoHandedItem);
+
+            equipped2H.Should().BeTrue();
+
+            ShouldNotBeEquipped(entity, firstTwoHandedItem);
+        }
+
+        [Test]
         public void EquipOneHandedItem_HoldingTwoHandedItem_UnequipsTwoHandedItem()
         {
             var firstItem = GiveHandTestItem(1);

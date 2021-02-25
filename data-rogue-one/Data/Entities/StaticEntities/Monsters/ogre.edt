@@ -40,7 +40,7 @@ Name: Ogre
 Detail: This is a monstrous giant. They're fond of eating human flesh. Fortunately, they're quite slow.
 [Actor]
 Speed: 1500
-[MoveToPlayerBehaviour]
+[AttackClosestEnemyBehaviour]
 Priority: 0
 [RandomlyMoveBehaviour]
 Priority: -1

@@ -39,7 +39,7 @@ Value: 4
 Name: Goblin
 Detail: This is a small, green-skinned humanoid. They are known to be highly aggressive towards humans, and fast. They're also weak and frail.
 [Actor]
-[MoveToPlayerBehaviour]
+[AttackClosestEnemyBehaviour]
 Priority: 0
 [RandomlyMoveBehaviour]
 Priority: -1

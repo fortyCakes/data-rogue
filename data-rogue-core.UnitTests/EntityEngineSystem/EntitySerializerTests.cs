@@ -47,7 +47,7 @@ end";
                 
                 return entity;
             });
-            entityEngine.ComponentTypes.ReturnsForAnyArgs(new[] { typeof(Appearance), typeof(Position), typeof(Stairs), typeof(MoveToPlayerBehaviour), typeof(Script) });
+            entityEngine.ComponentTypes.ReturnsForAnyArgs(new[] { typeof(Appearance), typeof(Position), typeof(Stairs), typeof(AttackClosestEnemyBehaviour), typeof(Script) });
 
             SystemContainer.EntityEngine = entityEngine;
         }
@@ -125,7 +125,7 @@ end";
         {
             var testEntity0 = new Entity(0, "TestEntity", new IEntityComponent[] {
                 new Appearance() { Glyph = '£', Color = Color.FromArgb(255, 0, 0)},
-                new MoveToPlayerBehaviour(SystemContainer) { Priority = 100 }
+                new AttackClosestEnemyBehaviour(SystemContainer) { Priority = 100 }
             });
 
             var testEntity1 = new Entity(1, "EntityWithPosition", new[]

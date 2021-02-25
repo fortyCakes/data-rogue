@@ -40,5 +40,5 @@ Value: 0
 Name: Green Slime
 Detail: An aggressive puddle of green goop.
 [Actor]
-[MoveToPlayerBehaviour]
+[AttackClosestEnemyBehaviour]
 Priority: 0

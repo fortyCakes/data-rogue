@@ -1,0 +1,27 @@
+﻿"Props:Spikes"
+[Prototype]
+Name: Props:Spikes
+Singleton: false
+[CanAddToMap]
+[Appearance]
+Glyph: ^
+Color: #8595A1
+ZOrder: 1
+[SpriteAppearance]
+Top: spikes
+[Animated]
+[Animation]
+FrameTicks: 8
+[Position]
+[Physical]
+Passable: true
+Transparent: true
+[Memorable]
+[Description]
+Name: Spikes
+Detail: Piercing metal spikes. They'll attack anyone standing here.
+[Actor]
+[TrapAttackBehaviour]
+[Stat]
+Name: Muscle
+Value: 5

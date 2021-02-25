@@ -45,7 +45,7 @@ Detail: This is a small, green-skinned humanoid. This one is a shaman, knowing s
 [UseRandomSkillBehaviour]
 Priority: 2
 Chance: 0.5
-[MoveToPlayerBehaviour]
+[AttackClosestEnemyBehaviour]
 Priority: 0
 [RandomlyMoveBehaviour]
 Priority: -1

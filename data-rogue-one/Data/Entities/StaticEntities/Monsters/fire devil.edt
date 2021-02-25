@@ -39,7 +39,7 @@ Value: 8
 Name: Fire Devil
 Detail: This is a devil made out of fire. Smarter devils like this occasionally cast spells.
 [Actor]
-[MoveToPlayerBehaviour]
+[AttackClosestEnemyBehaviour]
 Priority: 0
 [RandomlyMoveBehaviour]
 Priority: -1
