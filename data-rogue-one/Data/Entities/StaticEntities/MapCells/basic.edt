@@ -39,7 +39,6 @@ Singleton: true
 Name: EmptyCell
 Detail: There is nothing here. If you can see this, it should have been set to a different floor cell.
 
-
 "Cell:Wall"
 [Cell]
 [Appearance]

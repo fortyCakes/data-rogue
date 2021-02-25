@@ -1560,3 +1560,10 @@ Type: TilesetBox
 SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
+[SpriteSheet]
+Name: bench
+Path: Images/Sprites/Tiles/Walls/bench.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 2

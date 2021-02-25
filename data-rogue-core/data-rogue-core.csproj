@@ -1005,6 +1005,9 @@
     <Content Include="Images\Sprites\Tiles\void.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\Sprites\Tiles\Walls\bench.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Sprites\Tiles\Walls\cobble_wall_blue.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

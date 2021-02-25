@@ -1,0 +1,20 @@
+﻿"Props:Bench"
+[Prototype]
+Name: Props:Bench
+Singleton: false
+[CanAddToMap]
+[Appearance]
+Glyph: +
+Color: #864D30
+ZOrder: 1
+[SpriteAppearance]
+Top: bench
+TopConnect: bench
+[Position]
+[Physical]
+Passable: false
+Transparent: false
+[Memorable]
+[Description]
+Name: Table
+Detail: A wooden table or counter.

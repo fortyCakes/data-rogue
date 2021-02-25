@@ -317,6 +317,9 @@
     <None Include="Data\Entities\StaticEntities\Monsters\jackal.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Entities\StaticEntities\Props\bench.edt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\Entities\StaticEntities\Props\random_item.edt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
