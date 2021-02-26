@@ -25,6 +25,8 @@ namespace data_rogue_one
                     typeof(DealDamageRule),
                     typeof(CantDealNoDamageRule),
                     typeof(PeopleDieWhenTheyAreKilledRule),
+                    typeof(PeopleDropTheirStuffWhenTheyAreKilledRule),
+                    typeof(PeopleUnequipTheirStuffWhenTheyAreKilledRule),
                     typeof(SpendTimeRule),
                     typeof(ReturnToMenuOnDeathRule),
                     typeof(PlayerVictoryRule),
