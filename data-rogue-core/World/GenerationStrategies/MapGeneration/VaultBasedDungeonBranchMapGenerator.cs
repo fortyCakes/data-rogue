@@ -15,7 +15,7 @@ namespace data_rogue_core
         public string WallCell = "Cell:Wall";
         public int NumberOfVaults = 10;
         public int MaxTries = 50;
-        public double VaultChance = 100;
+        public double VaultChance = 1;
 
         public override List<IMap> Generate(ISystemContainer systemContainer, Branch branchDefinition, IEntity branch, IProgress<string> progress)
         {
