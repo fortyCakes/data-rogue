@@ -49,7 +49,7 @@ namespace data_rogue_core.EventSystem.Rules
 
         private bool ItemIsJunk(IEntity item)
         {
-            return !item.Has<Enchantment>();
+            return !item.Components.Any(c => c is Enchantment);
         }
     }
 }
