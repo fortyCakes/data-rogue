@@ -24,6 +24,7 @@
         Action,
         Victory,
         LevelUp,
-        PurchaseItem
+        PurchaseItem,
+        SpawnEntity
     }
 }

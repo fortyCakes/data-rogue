@@ -150,6 +150,8 @@ namespace data_rogue_core.Systems
                 }
             }
 
+            _systemContainer.EventSystem.Try(EventSystem.EventType.SpawnEntity, newEntity, null);
+
             return newEntity;
         }
 

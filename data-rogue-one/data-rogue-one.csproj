@@ -80,6 +80,7 @@
     <Compile Include="Rules\ApplyModifiedDamageRule.cs" />
     <Compile Include="Rules\ApplyResistanceRule.cs" />
     <Compile Include="Rules\DisplayAdvancedMorgueScreenOnDeathRule.cs" />
+    <Compile Include="Rules\SpawnedMonsterCanHaveEnchantedGearRule.cs" />
     <Compile Include="Rules\IncreaseStatsOnLevelUpRule.cs" />
     <Compile Include="Rules\SaveMorgueFileOnDeathRule.cs" />
     <Compile Include="Rules\UpdateHighScoreFileOnDeathRule.cs" />

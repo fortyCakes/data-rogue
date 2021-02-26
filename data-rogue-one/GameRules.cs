@@ -79,7 +79,8 @@ namespace data_rogue_one
                     typeof(CantAffordItemRule),
                     typeof(CompletePurchaseRule),
                     typeof(CantMoveIntoSameFactionRule),
-                    typeof(MoveThroughPortalRule)
+                    typeof(MoveThroughPortalRule),
+                    typeof(SpawnedMonsterCanHaveEnchantedGearRule)
                 };
 
                 list.AddRange(ApplyActionRule.AllActionRules);
