@@ -31,12 +31,16 @@ namespace data_rogue_core.EventSystem.Rules
 
         public bool Apply(EventType type, IEntity sender, object eventData)
         {
-            var inventoryItems = ItemSystem.GetInventory(sender);
-            foreach (var item in inventoryItems.ToList())
+            if (sender.Has<Inventory>())
             {
-                if (ItemIsJunk(item))
+                var inventoryItems = ItemSystem.GetInventory(sender);
+
+                foreach (var item in inventoryItems.ToList())
                 {
-                    ItemSystem.DestroyItem(item);
+                    if (ItemIsJunk(item))
+                    {
+                        ItemSystem.DestroyItem(item);
+                    }
                 }
             }
 

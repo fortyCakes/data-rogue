@@ -2,14 +2,14 @@ Map:"tiled_nexus"
 default:Cell:Void
 VaultWeight: 2.0
 -7,-3
--6,-3: Entity(Props:VaultConnection)
--3,-3: Entity(Props:VaultConnection)
--2,-2: Entity(Props:VaultConnection)
--2,1: Entity(Props:VaultConnection)
--3,2: Entity(Props:VaultConnection)
--6,2: Entity(Props:VaultConnection)
--7,1: Entity(Props:VaultConnection)
--7,-2: Entity(Props:VaultConnection)
+-6,-3: VaultConnection()
+-3,-3: VaultConnection()
+-2,-2: VaultConnection()
+-2,1: VaultConnection()
+-3,2: VaultConnection()
+-6,2: VaultConnection()
+-7,1: VaultConnection()
+-7,-2: VaultConnection()
 0:Cell:Void
 .:Cell:Empty
 #:Cell:Wall

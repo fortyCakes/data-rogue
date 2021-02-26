@@ -22,6 +22,8 @@
 
     public class StatControl : BaseInfoControl { }
 
+    public class EquippedItemsListControl : BaseInfoControl { }
+
     public class StatInterpolationControl : BaseInfoControl { }
 
     public class TextControl : BaseInfoControl { }

@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using data_rogue_core.Data;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace data_rogue_core.EntityEngineSystem
 {
+    [AlwaysCreateNewInstance]
     public class EntityReferenceList : IList<uint>, ICustomFieldSerialization
     {
         private List<uint> _internalList = new List<uint>();

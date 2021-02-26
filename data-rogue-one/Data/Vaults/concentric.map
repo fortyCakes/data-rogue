@@ -1,10 +1,10 @@
 Map:"concentric"
 default:Cell:Void
 -13,-7
--11,8: Entity(Props:VaultConnection)
-1,8: Entity(Props:VaultConnection)
--13,-6: Entity(Props:VaultConnection)
-3,-6: Entity(Props:VaultConnection)
+-11,8: VaultConnection()
+1,8: VaultConnection()
+-13,-6: VaultConnection()
+3,-6: VaultConnection()
 -6,0: GenerateItem()
 -4,0: GenerateItem()
 0:Cell:Void

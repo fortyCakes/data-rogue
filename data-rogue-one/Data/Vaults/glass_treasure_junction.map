@@ -5,14 +5,14 @@ default:Cell:Void
 -3,-2: GenerateItem()
 -7,2: GenerateItem()
 -3,2: GenerateItem()
--8,-5: Entity(Props:VaultConnection)
--2,-5: Entity(Props:VaultConnection)
-0,-3: Entity(Props:VaultConnection)
-0,3: Entity(Props:VaultConnection)
--2,5: Entity(Props:VaultConnection)
--8,5: Entity(Props:VaultConnection)
--10,3: Entity(Props:VaultConnection)
--10,-3: Entity(Props:VaultConnection)
+-8,-5: VaultConnection()
+-2,-5: VaultConnection()
+0,-3: VaultConnection()
+0,3: VaultConnection()
+-2,5: VaultConnection()
+-8,5: VaultConnection()
+-10,3: VaultConnection()
+-10,-3: VaultConnection()
 0:Cell:Void
 .:Cell:Empty
 #:Cell:Wall

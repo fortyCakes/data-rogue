@@ -39,7 +39,7 @@ namespace data_rogue_core.Menus.DynamicMenus
 
             string slotDescription = GetSlotDescription(slotDetails, slot);
 
-            return new MenuItem($"{slotDescription}: {item?.Get<Description>().Name ?? "(none)"}", item?.EntityId, item != null );
+            return new MenuItem($"{slotDescription}: {item?.DescriptionName ?? "(none)"}", item?.EntityId, item != null );
         }
 
         private static string GetSlotDescription(EquipmentSlotDetails slot, EquipmentSlot slotName)

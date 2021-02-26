@@ -1,8 +1,8 @@
 Map:"swirl_oval"
 default:Cell:Void
 -10,-8
--10,-7: Entity(Props:VaultConnection)
--1,10: Entity(Props:VaultConnection)
+-10,-7: VaultConnection()
+-1,10: VaultConnection()
 0:Cell:Void
 .:Cell:Empty
 #:Cell:Wall

@@ -20,7 +20,7 @@ namespace data_rogue_core.Maps.Generators
         private void InitialiseVaultConnectionPoints()
         {
             VaultConnectionPoints = Vault.MapGenCommands
-                .Where(c => c.Parameters == "Props:VaultConnection")
+                .Where(c => c.MapGenCommandType == MapGenCommandType.VaultConnection)
                 .Select(c => new VaultConnectionPoint(Position, c.Vector, Vault))
                 .ToList();
         }

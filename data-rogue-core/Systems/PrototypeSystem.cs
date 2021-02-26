@@ -118,6 +118,11 @@ namespace data_rogue_core.Systems
                             Counter oldValue = (Counter)fieldInfo.GetValue(component);
                             fieldInfo.SetValue(newComponent, new Counter { Current = oldValue.Current, Max = oldValue.Max });
                         }
+                        else if (fieldInfo.FieldType.IsDefined(typeof(AlwaysCreateNewInstanceAttribute), false))
+                        {
+                            var instance = Activator.CreateInstance(fieldInfo.FieldType);
+                            fieldInfo.SetValue(newComponent, instance);
+                        }
                         else
                         {
                             var oldValue = fieldInfo.GetValue(component);
@@ -137,7 +142,7 @@ namespace data_rogue_core.Systems
             {
                 var item = Get(startItem.Item);
                 
-                _systemContainer.ItemSystem.AddItemDirectlyToInventory(item, inventory);
+                _systemContainer.ItemSystem.MoveToInventory(item, inventory);
 
                 if (startItem.Equipped)
                 {

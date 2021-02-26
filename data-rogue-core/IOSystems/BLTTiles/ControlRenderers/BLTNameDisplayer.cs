@@ -8,7 +8,7 @@ using data_rogue_core.Utils;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
-    internal class BLTNameDisplayer : BLTBaseTextDisplayer
+    public class BLTNameDisplayer : BLTBaseTextDisplayer
     {
         public override Type DisplayType => typeof(NameControl);
 

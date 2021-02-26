@@ -2,13 +2,13 @@
 {
     public enum EquipmentSlot
     {
-        Head,
-        Neck,
+        Hand,
         Chest,
+        Head,
         Legs,
         Gloves,
-        Hand,
-        Ring,
-        Boots
+        Boots,
+        Neck,
+        Ring
     }
 }

@@ -1,8 +1,8 @@
 Map:"snake_corridor"
 default:Cell:Void
 -11,-3
--11,-2: Entity(Props:VaultConnection)
-11,5: Entity(Props:VaultConnection)
+-11,-2: VaultConnection()
+11,5: VaultConnection()
 0:Cell:Void
 .:Cell:Empty
 #:Cell:Wall

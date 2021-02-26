@@ -1,10 +1,10 @@
 Map:"transparent_spiral"
 default:Cell:Void
 -14,-11
--13,-11: Entity(Props:VaultConnection)
--11,-11: Entity(Props:VaultConnection)
-7,9: Entity(Props:VaultConnection)
-9,9: Entity(Props:VaultConnection)
+-13,-11: VaultConnection()
+-11,-11: VaultConnection()
+7,9: VaultConnection()
+9,9: VaultConnection()
 -2,-1: GenerateItem()
 0:Cell:Void
 .:Cell:Empty

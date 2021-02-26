@@ -5,5 +5,6 @@
         public static string Null = "Null";
         public static string Entity = "Entity";
         public static string EntityStack = "EntityStack";
+        public static string VaultConnection = "VaultConnection";
     }
 }

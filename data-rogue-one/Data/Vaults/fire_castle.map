@@ -2,10 +2,10 @@ Map:"fire_castle"
 default:Cell:Void
 -10,-7
 -2,1: Entity(Props:Fire)
--2,-7: Entity(Props:VaultConnection)
-6,1: Entity(Props:VaultConnection)
--2,9: Entity(Props:VaultConnection)
--10,1: Entity(Props:VaultConnection)
+-2,-7: VaultConnection()
+6,1: VaultConnection()
+-2,9: VaultConnection()
+-10,1: VaultConnection()
 0:Cell:Void
 .:Cell:Empty
 #:Cell:Wall

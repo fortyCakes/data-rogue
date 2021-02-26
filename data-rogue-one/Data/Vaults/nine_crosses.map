@@ -1,14 +1,14 @@
 Map:"nine_crosses"
 default:Cell:Void
 -11,-8
--7,-8: Entity(Props:VaultConnection)
-1,-8: Entity(Props:VaultConnection)
-5,-4: Entity(Props:VaultConnection)
-5,4: Entity(Props:VaultConnection)
-1,8: Entity(Props:VaultConnection)
--7,8: Entity(Props:VaultConnection)
--11,4: Entity(Props:VaultConnection)
--11,-4: Entity(Props:VaultConnection)
+-7,-8: VaultConnection()
+1,-8: VaultConnection()
+5,-4: VaultConnection()
+5,4: VaultConnection()
+1,8: VaultConnection()
+-7,8: VaultConnection()
+-11,4: VaultConnection()
+-11,-4: VaultConnection()
 0:Cell:Void
 .:Cell:Empty
 #:Cell:Wall

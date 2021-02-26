@@ -2,10 +2,10 @@ Map:"abandon_hope_sign"
 default:Cell:Void
 -11,-6
 -7,-2: Entity(Props:Sign|Dialog.Text=Abandon hope!)
--7,-6: Entity(Props:VaultConnection)
--11,-2: Entity(Props:VaultConnection)
--3,-2: Entity(Props:VaultConnection)
--7,2: Entity(Props:VaultConnection)
+-7,-6: VaultConnection()
+-11,-2: VaultConnection()
+-3,-2: VaultConnection()
+-7,2: VaultConnection()
 0:Cell:Void
 #:Cell:Wall
 ,:Cell:DirtBrown

@@ -133,6 +133,7 @@
     <Compile Include="Controls\MinimapControl.cs" />
     <Compile Include="Controls\ShopItemControl.cs" />
     <Compile Include="Controls\SkillBarControl.cs" />
+    <Compile Include="Data\AlwaysCreateNewInstanceAttribute.cs" />
     <Compile Include="Data\HighScore.cs" />
     <Compile Include="Data\VectorList.cs" />
     <Compile Include="Controls\BackgroundControl.cs" />
@@ -192,6 +193,7 @@
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTBaseTextDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTButtonRenderer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTDescriptionDisplayer.cs" />
+    <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTEquippedItemListDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTExperienceDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTInteractionDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTLargeTextDisplayer.cs" />
@@ -436,6 +438,7 @@
     <Compile Include="Maps\MapGenCommands\MapGenCommand.cs" />
     <Compile Include="EventSystem\EventData\DropItemEventData.cs" />
     <Compile Include="Maps\MapGenCommands\MapGenCommandType.cs" />
+    <Compile Include="Maps\MapGenCommands\VaultConnectionCommandExecutor.cs" />
     <Compile Include="Maps\VectorDouble.cs" />
     <Compile Include="Menus\DynamicMenus\DebugMenu.cs" />
     <Compile Include="Menus\DynamicMenus\SkillMenu.cs" />

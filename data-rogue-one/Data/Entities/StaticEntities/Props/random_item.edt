@@ -5,7 +5,7 @@ Singleton: false
 [CanAddToMap]
 VisibleDuringPlay: false
 [Appearance]
-Glyph: I
+Glyph: £
 Color: #D37D2C
 ZOrder: 1
 [SpriteAppearance]

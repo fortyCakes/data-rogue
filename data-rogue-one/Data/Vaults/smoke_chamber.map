@@ -18,10 +18,10 @@ default:Cell:Void
 -8,0: Entity(Props:Smoke)
 -8,-1: Entity(Props:Smoke)
 -8,-2: Entity(Props:Smoke)
--9,-1: Entity(Props:VaultConnection)
--6,-4: Entity(Props:VaultConnection)
--3,-1: Entity(Props:VaultConnection)
--6,2: Entity(Props:VaultConnection)
+-9,-1: VaultConnection()
+-6,-4: VaultConnection()
+-3,-1: VaultConnection()
+-6,2: VaultConnection()
 0:Cell:Void
 .:Cell:Empty
 O:Cell:Boulder

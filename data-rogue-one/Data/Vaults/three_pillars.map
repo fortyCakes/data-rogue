@@ -1,9 +1,9 @@
 Map:"three_pillars"
 default:Cell:Void
 -13,-6
--13,-3: Entity(Props:VaultConnection)
-1,1: Entity(Props:VaultConnection)
--6,8: Entity(Props:VaultConnection)
+-13,-3: VaultConnection()
+1,1: VaultConnection()
+-6,8: VaultConnection()
 0:Cell:Void
 .:Cell:Empty
 #:Cell:Wall

@@ -42,6 +42,12 @@ namespace data_rogue_one.EventSystem.Utils
                 statsDisplays.AddRange(GetCombatStats(entity));
             }
 
+            if (entity.Has<Equipped>())
+            {
+                statsDisplays.Add(new InfoDisplay { ControlType = typeof(Spacer) });
+                statsDisplays.Add(new InfoDisplay { ControlType = typeof(EquippedItemsListControl) });
+            }
+
 
             return new List<StatsConfiguration>
             {

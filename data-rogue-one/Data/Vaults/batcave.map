@@ -1,9 +1,9 @@
 Map:"batcave"
 default:Cell:Void
 -13,-8
--11,-7: Entity(Props:VaultConnection)
--4,5: Entity(Props:VaultConnection)
-3,-7: Entity(Props:VaultConnection)
+-11,-7: VaultConnection()
+-4,5: VaultConnection()
+3,-7: VaultConnection()
 -11,3: Entity(Monster:Bat)
 3,3: Entity(Monster:Bat)
 -6,-7: Entity(Monster:Bat)

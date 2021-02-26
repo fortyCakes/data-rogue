@@ -14,7 +14,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
         protected override string GetText(IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
-            throw new NotImplementedException();
+            return (control as IDataRogueInfoControl).Entity.DescriptionName;
         }
     }
 }

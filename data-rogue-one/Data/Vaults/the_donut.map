@@ -1,10 +1,10 @@
 Map:"the_donut"
 default:Cell:Void
 -9,-3
--5,-3: Entity(Props:VaultConnection)
--1,1: Entity(Props:VaultConnection)
--5,5: Entity(Props:VaultConnection)
--9,1: Entity(Props:VaultConnection)
+-5,-3: VaultConnection()
+-1,1: VaultConnection()
+-5,5: VaultConnection()
+-9,1: VaultConnection()
 0:Cell:Void
 .:Cell:Empty
 #:Cell:Wall

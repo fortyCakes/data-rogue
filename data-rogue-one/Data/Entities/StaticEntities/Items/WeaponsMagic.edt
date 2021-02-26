@@ -39,7 +39,7 @@ Value: 7
 Name: Wand
 Detail: A wand, suitable for mages.
 [Prototype]
-Name: Item:Staff
+Name: Item:Wand
 Singleton: false
 [Appearance]
 Glyph: )

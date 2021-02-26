@@ -2,7 +2,7 @@ Map:"fire_gauntlet"
 default:Cell:Void
 VaultWeight: 0.2
 -9,-6
--9,-3: Entity(Props:VaultConnection)
+-9,-3: VaultConnection()
 8,-3: Entity(Props:Fire)
 7,-3: GenerateItem()
 7,-4: GenerateItem()

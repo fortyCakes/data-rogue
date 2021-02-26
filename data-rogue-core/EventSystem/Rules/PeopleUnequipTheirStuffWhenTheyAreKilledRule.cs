@@ -1,4 +1,5 @@
-﻿using data_rogue_core.EntityEngineSystem;
+﻿using data_rogue_core.Components;
+using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
 
@@ -28,10 +29,13 @@ namespace data_rogue_core.EventSystem.Rules
 
         public bool Apply(EventType type, IEntity sender, object eventData)
         {
-            var equipped = EquipmentSystem.GetEquippedItems(sender);
-            foreach (var item in equipped)
+            if (sender.Has<Equipped>())
             {
-                EquipmentSystem.Unequip(sender, item);
+                var equipped = EquipmentSystem.GetEquippedItems(sender);
+                foreach (var item in equipped)
+                {
+                    EquipmentSystem.Unequip(sender, item);
+                }
             }
 
             return true;

@@ -5,6 +5,7 @@ using data_rogue_core.EntityEngineSystem;
 
 namespace data_rogue_core.Data
 {
+    [AlwaysCreateNewInstance]
     public class EquipmentMappingList : IList<EquipmentMappingListItem>, ICustomFieldSerialization
     {
         private List<EquipmentMappingListItem> items = new List<EquipmentMappingListItem>();

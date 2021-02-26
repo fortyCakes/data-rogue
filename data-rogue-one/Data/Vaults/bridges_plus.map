@@ -1,14 +1,14 @@
 Map:"bridges_plus"
 default:Cell:Void
 -15,-8
--6,-8: Entity(Props:VaultConnection)
--2,-8: Entity(Props:VaultConnection)
-4,-2: Entity(Props:VaultConnection)
-4,2: Entity(Props:VaultConnection)
--2,8: Entity(Props:VaultConnection)
--6,8: Entity(Props:VaultConnection)
--12,2: Entity(Props:VaultConnection)
--12,-2: Entity(Props:VaultConnection)
+-6,-8: VaultConnection()
+-2,-8: VaultConnection()
+4,-2: VaultConnection()
+4,2: VaultConnection()
+-2,8: VaultConnection()
+-6,8: VaultConnection()
+-12,2: VaultConnection()
+-12,-2: VaultConnection()
 0:Cell:Void
 .:Cell:Empty
 #:Cell:Wall

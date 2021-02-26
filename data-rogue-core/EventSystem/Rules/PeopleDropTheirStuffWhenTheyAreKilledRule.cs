@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using data_rogue_core.Components;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
@@ -29,10 +30,13 @@ namespace data_rogue_core.EventSystem.Rules
 
         public bool Apply(EventType type, IEntity sender, object eventData)
         {
-            var inventoryItems = ItemSystem.GetInventory(sender);
-            foreach(var item in inventoryItems.ToList())
+            if (sender.Has<Inventory>())
             {
-                ItemSystem.DropItemFromInventory(item);
+                var inventoryItems = ItemSystem.GetInventory(sender);
+                foreach (var item in inventoryItems.ToList())
+                {
+                    ItemSystem.DropItemFromInventory(item);
+                }
             }
 
             return true;

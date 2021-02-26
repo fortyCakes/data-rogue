@@ -2,10 +2,10 @@ Map:"ooze_containment"
 default:Cell:Void
 -11,-6
 -5,0: Entity(Monster:GreenSlime)
--5,-6: Entity(Props:VaultConnection)
-1,0: Entity(Props:VaultConnection)
--5,6: Entity(Props:VaultConnection)
--11,0: Entity(Props:VaultConnection)
+-5,-6: VaultConnection()
+1,0: VaultConnection()
+-5,6: VaultConnection()
+-11,0: VaultConnection()
 0:Cell:Void
 ~:Cell:Water
 ,:Cell:BlueSand

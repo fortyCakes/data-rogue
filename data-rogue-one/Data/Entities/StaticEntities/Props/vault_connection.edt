@@ -14,3 +14,5 @@ Top: vault_connection
 [Description]
 Name: Vault Connection
 Detail: Connects out from this vault to the rest of the map.
+[MapGenerationCommand]
+Command: VaultConnection

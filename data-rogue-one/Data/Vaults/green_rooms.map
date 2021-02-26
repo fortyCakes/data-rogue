@@ -1,12 +1,12 @@
 Map:"green_rooms"
 default:Cell:Void
 -5,-4
--5,-2: Entity(Props:VaultConnection)
--3,-4: Entity(Props:VaultConnection)
--3,0: Entity(Props:VaultConnection)
-2,-4: Entity(Props:VaultConnection)
-2,0: Entity(Props:VaultConnection)
-4,-2: Entity(Props:VaultConnection)
+-5,-2: VaultConnection()
+-3,-4: VaultConnection()
+-3,0: VaultConnection()
+2,-4: VaultConnection()
+2,0: VaultConnection()
+4,-2: VaultConnection()
 0:Cell:Void
 ,:Cell:Grass
 `:Cell:Grass2

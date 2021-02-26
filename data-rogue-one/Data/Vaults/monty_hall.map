@@ -17,10 +17,10 @@ default:Cell:Void
 -3,1: GenerateItem()
 -2,1: GenerateItem()
 -2,0: GenerateItem()
--9,-5: Entity(Props:VaultConnection)
-2,-6: Entity(Props:VaultConnection)
-3,5: Entity(Props:VaultConnection)
--8,6: Entity(Props:VaultConnection)
+-9,-5: VaultConnection()
+2,-6: VaultConnection()
+3,5: VaultConnection()
+-8,6: VaultConnection()
 0:Cell:Void
 .:Cell:Empty
 #:Cell:Wall
