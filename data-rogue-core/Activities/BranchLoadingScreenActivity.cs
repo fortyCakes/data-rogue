@@ -12,7 +12,7 @@ namespace data_rogue_core.Activities
     {
         private IEntityEngine _engine;
 
-        public BranchLoadingScreenActivity(Rectangle position, Padding padding, ISystemContainer systemContainer) : base(position, padding, systemContainer.ActivitySystem, "Generating branch...", false, null)
+        public BranchLoadingScreenActivity(ISystemContainer systemContainer) : base(systemContainer.ActivitySystem, "Generating branch...", false, null)
         {
             _engine = systemContainer.EntityEngine;
 

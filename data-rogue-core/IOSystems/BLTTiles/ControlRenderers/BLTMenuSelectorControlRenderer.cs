@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using BearLib;
 using BLTWrapper;
 using data_rogue_core.Activities;
@@ -27,7 +29,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             BLT.PutExt(baseX, y, 0, -1, sprite.Tile(display.Direction));
         }
 
-        protected override Size Measure(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        protected override Size Measure(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov, Rectangle boundingBox, Padding padding, HorizontalAlignment horizontalAlignment, VerticalAlignment verticalAlignment)
         {
             return new Size(2, 4);
         }

@@ -19,17 +19,17 @@ namespace data_rogue_core.Activities
         public override ActivityType Type => ActivityType.Information;
         public override bool RendersEntireSpace { get; }
         public IEntity Entity { get; }
-        public List<StatsConfiguration> StatsConfigs { get; set; }
+        public List<IDataRogueControl> StatsControls { get; set; }
         public bool CloseOnKeyPress { get; }
         public override bool AcceptsInput => true;
 
         private readonly IActivitySystem _activitySystem;
         private BackgroundControl Background;
 
-        public InformationActivity(Rectangle position, Padding padding, IActivitySystem activitySystem, List<StatsConfiguration> statsConfigs, IEntity entity, bool closeOnKeyPress = true, bool rendersEntireSpace = false): base(position, padding)
+        public InformationActivity(Rectangle position, Padding padding, IActivitySystem activitySystem, List<IDataRogueControl> statsControls, IEntity entity, bool closeOnKeyPress = true, bool rendersEntireSpace = false): base(position, padding)
         {
             Entity = entity;
-            StatsConfigs = statsConfigs;
+            StatsControls = statsControls;
             CloseOnKeyPress = closeOnKeyPress;
             RendersEntireSpace = rendersEntireSpace;
             _activitySystem = activitySystem;
@@ -40,21 +40,9 @@ namespace data_rogue_core.Activities
             Background = new BackgroundControl { Position = Position, ShrinkToContents = !RendersEntireSpace };
             Controls.Add(Background);
 
-            foreach (var config in StatsConfigs)
+            foreach (var config in StatsControls)
             {
-                var flow = new FlowContainerControl { Position = config.Position };
-
-                foreach (var display in config.Displays)
-                {
-                    var controlType = display.ControlType;
-
-                    var control = (IDataRogueInfoControl)Activator.CreateInstance(controlType);
-                    control.SetData(Entity, display);
-
-                    flow.Controls.Add(control);
-                }
-
-                Background.Controls.Add(flow);
+                Background.Controls.Add(config);
             }
         }
 

@@ -8,6 +8,7 @@ using OpenTK.Input;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace data_rogue_core.Activities
 {
@@ -24,7 +25,14 @@ namespace data_rogue_core.Activities
         private readonly IActivitySystem _activitySystem;
         private Action<string> _callback;
 
-        public TextInputActivity(IActivitySystem activitySystem, string staticText, Action<string> callback = null) 
+        public TextInputActivity(Rectangle position, Padding padding, IActivitySystem activitySystem, string staticText, Action<string> callback = null) : base(position, padding)
+        {
+            Text = staticText;
+            _activitySystem = activitySystem;
+            _callback = callback;
+        }
+
+        public TextInputActivity(IActivitySystem activitySystem, string staticText, Action<string> callback = null) : base(activitySystem.DefaultPosition, activitySystem.DefaultPadding)
         {
             Text = staticText;
             _activitySystem = activitySystem;
@@ -83,29 +91,18 @@ namespace data_rogue_core.Activities
             Close();
         }
 
-        public override IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
+        public override void InitialiseControls()
         {
-            var minWidth = 64 + 32;
-            var minHeight = 16;
+            var label = new TextControl { Parameters = Text };
+            var textBox = new TextBoxControl { Value = InputText };
+            var background = new BackgroundControl { Position = Position };
+            var topFlow = new FlowContainerControl();
 
-            var label = new TextControl { Position = new Rectangle(1, 1, width, height), Parameters = Text };
+            topFlow.Controls.Add(label);
+            topFlow.Controls.Add(textBox);
 
-            var textRenderer = systemContainer.RendererSystem.Renderer.GetRendererFor(label);
-            var textSize = textRenderer.Layout(rendererHandle, label, systemContainer, playerFov);
-
-            var backgroundSize = new Size(Math.Max(textSize.Width + 8, minWidth), Math.Max(textSize.Height + 8, minHeight));
-            var backgroundPosition = new Point(30, 30);
-            var textLocation = new Point(backgroundPosition.X + 4, backgroundPosition.Y + 4);
-
-            label.Position = new Rectangle(textLocation, textSize);
-
-            var textBoxPosition = new Rectangle(textLocation.X, textLocation.Y + 6, textSize.Width, textSize.Height);
-
-            var textBox = new TextBoxControl { Position = textBoxPosition, Value = InputText };
-
-            var background = new BackgroundControl { Position = new Rectangle(backgroundPosition, backgroundSize) };
-
-            return new List<IDataRogueControl> { background, label, textBox };
+            Controls.Add(background);
+            Controls.Add(topFlow);
         }
 
         private void Close()

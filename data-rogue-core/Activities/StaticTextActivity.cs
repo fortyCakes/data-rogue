@@ -33,6 +33,14 @@ namespace data_rogue_core.Activities
             _displayEntity = displayEntity;
         }
 
+        public StaticTextActivity(IActivitySystem activitySystem, string staticText, bool closeOnKeyPress = true, IEntity displayEntity = null) : base(activitySystem.DefaultPosition, activitySystem.DefaultPadding)
+        {
+            Text = staticText;
+            CloseOnKeyPress = closeOnKeyPress;
+            _activitySystem = activitySystem;
+            _displayEntity = displayEntity;
+        }
+
         public override void InitialiseControls()
         {
             Background = new BackgroundControl { Position = Position, ShrinkToContents = !RendersEntireSpace };

@@ -12,6 +12,7 @@ using data_rogue_core.EntityEngineSystem;
 using System.Windows.Forms;
 using System.Drawing;
 using data_rogue_core.Utils;
+using data_rogue_core.Controls;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
@@ -71,7 +72,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
         public MapCoordinate GetGameplayMapCoordinateFromMousePosition(MapCoordinate cameraPosition, int x, int y)
         {
-            return GetMapCoordinateFromMousePosition(_ioSystemConfiguration.GameplayWindowControls.OfType<MapConfiguration>(), cameraPosition, x, y);
+            return GetMapCoordinateFromMousePosition(_ioSystemConfiguration.GameplayWindowControls.OfType<MapControl>(), cameraPosition, x, y);
         }
 
         public MapCoordinate GetMapEditorMapCoordinateFromMousePosition(MapCoordinate cameraPosition, int x, int y)
@@ -82,14 +83,14 @@ namespace data_rogue_core.IOSystems.BLTTiles
             return new MapCoordinate(cameraPosition.Key, lookupX, lookupY);
         }
 
-        public MapCoordinate GetMapCoordinateFromMousePosition(IEnumerable<MapConfiguration> maps, MapCoordinate cameraPosition, int x, int y)
+        public MapCoordinate GetMapCoordinateFromMousePosition(IEnumerable<MapControl> maps, MapCoordinate cameraPosition, int x, int y)
         {
 
             var onMaps = maps.Where(m => IsOnMap(m, x, y));
 
             var map = onMaps.Last();
 
-            if (map.GetType() == typeof(MapConfiguration) || map.GetType() == typeof(MapEditorConfiguration))
+            if (map.GetType() == typeof(MapControl) || map.GetType() == typeof(MinimapControl))
             {
                 x -= map.Position.Left;
                 y -= map.Position.Top;
@@ -100,7 +101,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
                 return new MapCoordinate(cameraPosition.Key, lookupX, lookupY);
             }
 
-            if (map.GetType() == typeof(MinimapConfiguration))
+            if (map.GetType() == typeof(MinimapControl))
             {
                 x -= map.Position.Left;
                 y -= map.Position.Top;
@@ -114,7 +115,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             return null;
         }
 
-        private bool IsOnMap(MapConfiguration map, int x, int y)
+        private bool IsOnMap(MapControl map, int x, int y)
         {
             return x >= map.Position.Left && x <= map.Position.Right && y >= map.Position.Top && y < map.Position.Bottom;
         }

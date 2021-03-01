@@ -62,7 +62,10 @@ namespace data_rogue_core.Forms.StaticForms
 
         public static FormActivity GetCharacterCreationActivity(ISystemContainer systemContainer)
         {
-            return new FormActivity(new CharacterCreationForm(systemContainer));
+            return new FormActivity(
+                systemContainer.ActivitySystem.DefaultPosition,
+                systemContainer.ActivitySystem.DefaultPadding,
+                new CharacterCreationForm(systemContainer));
         }
 
         public void HandleCharacterCreationFormSelection(FormButton button, Form form)
@@ -77,7 +80,10 @@ namespace data_rogue_core.Forms.StaticForms
                     break;
                 case FormButton.Cancel:
                     _activitySystem.Pop();
-                    _activitySystem.Push(new MenuActivity(new MainMenu(_systemContainer)));
+                    _activitySystem.Push(new MenuActivity(
+                        _systemContainer.ActivitySystem.DefaultPosition,
+                        _systemContainer.ActivitySystem.DefaultPadding,
+                        new MainMenu(_systemContainer)));
                     break;
                 default:
                     throw new ApplicationException("Unknown form button");

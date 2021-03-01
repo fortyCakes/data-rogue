@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using data_rogue_core.Controls;
+using System.Windows.Forms.VisualStyles;
+using System.Windows.Forms;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
@@ -37,7 +39,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             }
         }
 
-        protected override Size Measure(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        protected override Size Measure(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov, Rectangle boundingBox, Padding padding, HorizontalAlignment horizontalAlignment, VerticalAlignment verticalAlignment)
         {
             return control.Position.Size;
         }

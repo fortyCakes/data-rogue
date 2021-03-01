@@ -21,7 +21,11 @@ namespace data_rogue_core.EventSystem.Rules
         {
             if (systemContainer.PlayerSystem.IsPlayer(sender))
             {
-                systemContainer.ActivitySystem.Push(new EndGameScreenActivity(systemContainer, false));
+                systemContainer.ActivitySystem.Push(new EndGameScreenActivity(
+                    systemContainer.ActivitySystem.DefaultPosition,
+                    systemContainer.ActivitySystem.DefaultPadding,
+                    systemContainer, 
+                    false));
             }
 
             return true;

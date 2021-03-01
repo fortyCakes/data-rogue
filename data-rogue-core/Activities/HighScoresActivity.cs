@@ -19,6 +19,15 @@ namespace data_rogue_core.Activities
             Text = highScoreText;
         }
 
+        public HighScoresActivity(IActivitySystem activitySystem, ISaveSystem saveSystem) : base(activitySystem.DefaultPosition, activitySystem.DefaultPadding, activitySystem, "", true)
+        {
+            _saveSystem = saveSystem;
+
+            var highScoreText = GetHighScoreText();
+
+            Text = highScoreText;
+        }
+
         private string GetHighScoreText()
         {
             var highScores = _saveSystem.GetHighScores().Take(10);

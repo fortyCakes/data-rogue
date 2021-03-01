@@ -28,8 +28,9 @@ namespace data_rogue_core.Activities
         private int _displayMs;
         private int _fadeOutMs;
         private Stopwatch _stopwatch;
+        private LargeTextControl _textControl;
 
-        public ToastActivity(IActivitySystem activitySystem, string message, Color color, int displayMs = 500, int fadeOutMs = 1000)
+        public ToastActivity(Rectangle position, Padding padding, IActivitySystem activitySystem, string message, Color color, int displayMs = 500, int fadeOutMs = 1000) : base(position, padding)
         {
             _activitySystem = activitySystem;
             _message = message;
@@ -39,32 +40,17 @@ namespace data_rogue_core.Activities
             _stopwatch = new Stopwatch();
         }
 
-        public override IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
+        public override void InitialiseControls()
         {
-            if (_stopwatch.ElapsedMilliseconds > _displayMs + _fadeOutMs)
+            _textControl = new LargeTextControl
             {
-                Close();
-            }
-
-            var x = width / 2;
-            var y = height / 2;
-
-            var textControl = new LargeTextControl
-            {
-                Position = new Rectangle(x, y, 0, 0),
+                Position = Position,
                 Parameters = _message,
-                Entity = null,
-                IsFocused = false,
-                IsPressed = false
+                BackColor = Color.Transparent,
+                Color = GetColor()
             };
 
-            var controlRenderer = controlRenderers.Single(s => s.DisplayType == typeof(TextControl));
-            var size = controlRenderer.Layout(rendererHandle, textControl, systemContainer, playerFov);
-            textControl.Position = new Rectangle(x - size.Width / 2, y - size.Height / 2, size.Width, size.Height);
-
-            textControl.SetData(null, new InfoDisplay {BackColor = Color.Transparent, Color = GetColor(), ControlType = typeof(TextControl), Parameters = _message});
-
-            return new List<IDataRogueControl>{textControl};
+            Controls.Add(_textControl);
         }
 
         private Color GetColor()
@@ -97,6 +83,16 @@ namespace data_rogue_core.Activities
 
         public override void HandleAction(ISystemContainer systemContainer, ActionEventData action)
         {
+        }
+
+        public void UpdateAnimatedControls()
+        {
+            _textControl.Color = GetColor();
+
+            if (_stopwatch.ElapsedMilliseconds > _displayMs + _fadeOutMs)
+            {
+                Close();
+            }
         }
 
         private void Close()

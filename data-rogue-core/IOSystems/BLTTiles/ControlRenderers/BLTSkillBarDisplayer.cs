@@ -4,6 +4,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using BearLib;
 using data_rogue_core.Activities;
 using data_rogue_core.Components;
@@ -66,7 +68,7 @@ namespace data_rogue_core.IOSystems.BLTTiles.ControlRenderers
             return false;
         }
 
-        protected override Size Measure(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        protected override Size Measure(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov, Rectangle boundingBox, Padding padding, HorizontalAlignment horizontalAlignment, VerticalAlignment verticalAlignment)
         {
             return new Size(12 * GetSkillsOnBar(systemContainer).Count(), 12);
         }

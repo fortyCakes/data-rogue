@@ -213,7 +213,7 @@ namespace data_rogue_core.Activities
 
             if (ok)
             {
-                _systemContainer.ActivitySystem.Push(new ToastActivity(_systemContainer.ActivitySystem, $"Purchased item:{SelectedItem.DescriptionName}", Color.White));
+                _systemContainer.ActivitySystem.Push(new ToastActivity(Position, Padding, _systemContainer.ActivitySystem, $"Purchased item:{SelectedItem.DescriptionName}", Color.White));
             }
         }
 

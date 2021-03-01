@@ -27,7 +27,7 @@ namespace data_rogue_core.Controls.MapEditorTools
 
             var entities = systemContainer.EntityEngine.AllEntities.Where(e => e.Has<CanAddToMap>() && e.Has<Prototype>());
 
-            var entityCreationActivity = new EntityPickerMenuActivity(entities, systemContainer, "Pick an entity to add", action);
+            var entityCreationActivity = new EntityPickerMenuActivity(systemContainer.ActivitySystem.DefaultPosition, systemContainer.ActivitySystem.DefaultPadding, entities, systemContainer, "Pick an entity to add", action);
             entityCreationActivity.HoverPrefix = "";
             entityCreationActivity.NoCellHoverText = "(no entity selected)";
 

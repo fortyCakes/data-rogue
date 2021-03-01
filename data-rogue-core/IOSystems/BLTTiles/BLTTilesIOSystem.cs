@@ -23,12 +23,14 @@ namespace data_rogue_core.IOSystems.BLTTiles
     {
         public static IOSystemConfiguration DefaultConfiguration = new IOSystemConfiguration
         {
-            InitialHeight = 25,
             InitialWidth = 40,
+            InitialHeight = 25,
             TileHeight = 32,
             TileWidth = 32,
             WindowTitle = "data-rogue window title",
-            GameplayWindowControls = new List<IRenderingConfiguration>
+            DefaultPadding = new System.Windows.Forms.Padding(4),
+            DefaultPosition = new Rectangle(0,0, 40 * TILE_SPACING, 25 * TILE_SPACING),
+            GameplayWindowControls = new List<IDataRogueControl>
             {
                 DefaultMap,
                 DefaultMinimap,           
@@ -90,28 +92,29 @@ namespace data_rogue_core.IOSystems.BLTTiles
             } while (!isClosed);
         }
 
-        public static IRenderingConfiguration DefaultMap = new MapConfiguration { Position = new Rectangle(0, 0, 40 * TILE_SPACING, 25 * TILE_SPACING) };
-        public static IRenderingConfiguration DefaultMinimap = new MinimapConfiguration { Position = new Rectangle(40 * TILE_SPACING - 66, 2, 64, 64) };
-        public static IRenderingConfiguration DefaultStats = new StatsConfiguration
+        public static MapControl DefaultMap = new MapControl { Position = new Rectangle(0, 0, 40 * TILE_SPACING, 25 * TILE_SPACING) };
+        public static MinimapControl DefaultMinimap = new MinimapControl { Position = new Rectangle(40 * TILE_SPACING - 66, 2, 64, 64) };
+        public static FlowContainerControl DefaultStats = new FlowContainerControl
         {
             Position = new Rectangle(2, 2, 40 * TILE_SPACING - 2, 25 * TILE_SPACING - 2),
-            Displays = new List<InfoDisplay>
+            Controls = new List<IDataRogueControl>
             {
-                new InfoDisplay { ControlType = typeof(ComponentCounter), Parameters = "Health,HP", BackColor = Color.Red },
-                new InfoDisplay { ControlType =  typeof(Spacer) },
-                new InfoDisplay { ControlType =  typeof(HoveredEntityDisplayBox), Parameters = "Health,HP;" },
-            }
-        };
-        public static IRenderingConfiguration DefaultInteraction = new StatsConfiguration
-        {
-            Position = new Rectangle(40 * TILE_SPACING - 38, 25 * TILE_SPACING - 22, 32, 16),
-            Displays = new List<InfoDisplay>
-            {
-                new InfoDisplay { ControlType = typeof(InteractionControl) }
+                new ComponentCounter{ Parameters = "Health,HP", BackColor = Color.Red },
+                new Spacer(),
+                new HoveredEntityDisplayBox { Parameters = "Health,HP;" },
             }
         };
 
-        public static IRenderingConfiguration DefaultMessageLog = new MessageConfiguration
+        public static FlowContainerControl DefaultInteraction = new FlowContainerControl
+        {
+            Position = new Rectangle(40 * TILE_SPACING - 38, 25 * TILE_SPACING - 22, 32, 16),
+            Controls = new List<IDataRogueControl>
+            {
+                new InteractionControl()
+            }
+        };
+
+        public static MessageLogControl DefaultMessageLog = new MessageLogControl
         {
             Position = new Rectangle(2, 15 * TILE_SPACING, 40 * TILE_SPACING, 10 * TILE_SPACING - 2),
             NumberOfMessages = 15

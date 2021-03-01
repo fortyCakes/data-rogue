@@ -62,9 +62,9 @@ namespace data_rogue_core
 
         private void InitialiseState()
         {
-            SystemContainer.ActivitySystem.Initialise();
+            SystemContainer.ActivitySystem.Initialise(IOSystem.Configuration.DefaultPosition, IOSystem.Configuration.DefaultPadding);
 
-            SystemContainer.ActivitySystem.Push(new GameplayActivity(IOSystem.Configuration, SystemContainer.PlayerSystem));
+            SystemContainer.ActivitySystem.Push(new GameplayActivity(SystemContainer.ActivitySystem.DefaultPosition, SystemContainer.ActivitySystem.DefaultPadding, IOSystem.Configuration, SystemContainer.PlayerSystem));
 
             DisplayLoadingScreen("Loading...");
         }

@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using data_rogue_core.Activities;
+using data_rogue_core.Controls;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems.Interfaces;
 using RLNET;
@@ -11,7 +12,6 @@ namespace data_rogue_core.IOSystems.RLNetConsole
 {
     public class ConsoleUnifiedRenderer : IUnifiedRenderer
     {
-        private Dictionary<IRenderingConfiguration, RLConsole> Consoles = new Dictionary<IRenderingConfiguration, RLConsole>();
         private IOSystemConfiguration _ioSystemConfiguration;
         private List<IDataRogueControlRenderer> _controlRenderers;
 
@@ -46,15 +46,20 @@ namespace data_rogue_core.IOSystems.RLNetConsole
 
         private void DoLayout(ISystemContainer systemContainer, IActivity activity, List<MapCoordinate> playerFov)
         {
-            var height = _console.Height;
-            var width = _console.Width;
+            var activityPosition = activity.Position;
 
-            activity.Layout(this, systemContainer, _console, _controlRenderers, playerFov, width, height);
+            foreach (var control in activity.Controls)
+            {
+                if (control.Visible)
+                {
+                    control.Layout(_controlRenderers, systemContainer, activity, playerFov, activityPosition);
+                }
+            }
         }
 
         public MapCoordinate GetGameplayMapCoordinateFromMousePosition(MapCoordinate cameraPosition, int x, int y)
         {
-            foreach (MapConfiguration map in _ioSystemConfiguration.GameplayWindowControls)
+            foreach (MapControl map in _ioSystemConfiguration.GameplayWindowControls.OfType<MapControl>())
             {
                 if (IsOnMap(map, x, y))
                 {
@@ -68,7 +73,7 @@ namespace data_rogue_core.IOSystems.RLNetConsole
             return null;
         }
 
-        private bool IsOnMap(MapConfiguration map, int x, int y)
+        private bool IsOnMap(MapControl map, int x, int y)
         {
             return x >= map.Position.Left && x <= map.Position.Right && y >= map.Position.Top && y < map.Position.Bottom;
         }

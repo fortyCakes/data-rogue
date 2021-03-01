@@ -16,29 +16,31 @@ namespace data_rogue_core.IOSystems.RLNetConsole
     {
         public static IOSystemConfiguration DefaultConfiguration = new IOSystemConfiguration
         {
-            InitialHeight = 70,
             InitialWidth = 100,
+            InitialHeight = 70,
+            DefaultPadding = new System.Windows.Forms.Padding(0),
+            DefaultPosition = new Rectangle(0, 0, 100, 70),
             TileHeight = 12,
             TileWidth = 12,
             WindowTitle = "data-rogue window title",
-            GameplayWindowControls = new List<IRenderingConfiguration> {
-                new MapConfiguration { Position = new Rectangle(0, 0, 76, 54) },
-                new StatsConfiguration {
+            GameplayWindowControls = new List<IDataRogueControl> {
+                new MapControl { Position = new Rectangle(0, 0, 76, 54) },
+                new FlowContainerControl {
                     Position = new Rectangle(77, 0, 23, 70),
-                    Displays = new List<InfoDisplay>
+                    Controls = new List<IDataRogueControl>
                     {
-                        new InfoDisplay { ControlType = typeof(NameControl) },
-                        new InfoDisplay { ControlType =  typeof(TitleControl)},
-                        new InfoDisplay { ControlType = typeof(Spacer)},
-                        new InfoDisplay { ControlType = typeof(ComponentCounter), Parameters = "Health,HP", BackColor = Color.DarkRed},
-                        new InfoDisplay { ControlType = typeof(Spacer)},
-                        new InfoDisplay { ControlType = typeof(LocationControl) },
-                        new InfoDisplay { ControlType = typeof(TimeControl) },
-                        new InfoDisplay { ControlType = typeof(Spacer)},
-                        new InfoDisplay { ControlType = typeof(VisibleEnemiesControl)}
+                        new NameControl(),
+                        new TitleControl(),
+                        new Spacer(),
+                        new ComponentCounter { Parameters = "Health,HP", BackColor = Color.DarkRed},
+                        new Spacer(),
+                        new LocationControl(),
+                        new TimeControl(),
+                        new Spacer(),
+                        new VisibleEnemiesControl()
                     }
                 },
-                new MessageConfiguration { Position = new Rectangle(0, 55, 76, 15), NumberOfMessages = 10}
+                new MessageLogControl { Position = new Rectangle(0, 55, 76, 15), NumberOfMessages = 10}
             }
         };
         

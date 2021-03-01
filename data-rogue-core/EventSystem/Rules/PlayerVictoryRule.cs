@@ -26,8 +26,14 @@ namespace data_rogue_core.EventSystem.Rules
             {
                 systemContainer.ActivitySystem.ActivityStack.OfType<GameplayActivity>().Single().Running = false;
 
-                systemContainer.ActivitySystem.Push(new MenuActivity(new MainMenu(systemContainer)));
-                systemContainer.ActivitySystem.Push(new EndGameScreenActivity(systemContainer, true));
+                systemContainer.ActivitySystem.Push(new MenuActivity(
+                    systemContainer.ActivitySystem.DefaultPosition,
+                    systemContainer.ActivitySystem.DefaultPadding,
+                    new MainMenu(systemContainer)));
+                systemContainer.ActivitySystem.Push(new EndGameScreenActivity(
+                    systemContainer.ActivitySystem.DefaultPosition,
+                    systemContainer.ActivitySystem.DefaultPadding,
+                    systemContainer, true));
             }
 
             return true;

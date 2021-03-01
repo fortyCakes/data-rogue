@@ -102,7 +102,6 @@
     <Compile Include="Controls\MapEditorTools\FilledSquareTool.cs" />
     <Compile Include="Controls\MapEditorTools\FillTool.cs" />
     <Compile Include="Controls\MapEditorTools\IMapEditorTool.cs" />
-    <Compile Include="Controls\ControlFactory.cs" />
     <Compile Include="Activities\EndGameScreenActivity.cs" />
     <Compile Include="Activities\FormActivity.cs" />
     <Compile Include="Activities\HighScoresActivity.cs" />
@@ -287,7 +286,6 @@
     <Compile Include="IOSystems\BLTTiles\BLTKeyConverter.cs" />
     <Compile Include="IOSystems\IDataRogueControlRenderer.cs" />
     <Compile Include="IOSystems\IOSystemConfiguration.cs" />
-    <Compile Include="IOSystems\IRenderingConfiguration.cs" />
     <Compile Include="IOSystems\IUnifiedRenderer.cs" />
     <Compile Include="IOSystems\KeyCombination.cs" />
     <Compile Include="Data\Message.cs" />
@@ -387,11 +385,8 @@
     <Compile Include="Forms\StatInformation.cs" />
     <Compile Include="Forms\StatsFormData.cs" />
     <Compile Include="IOSystems\IIOSystem.cs" />
-    <Compile Include="IOSystems\MapConfiguration.cs" />
     <Compile Include="IOSystems\MapEditorConfiguration.cs" />
     <Compile Include="IOSystems\MapEditorTargetingConfiguration.cs" />
-    <Compile Include="IOSystems\MessageConfiguration.cs" />
-    <Compile Include="IOSystems\MinimapConfiguration.cs" />
     <Compile Include="IOSystems\MouseData.cs" />
     <Compile Include="IOSystems\RLNetConsole\ConsoleUnifiedRenderer.cs" />
     <Compile Include="IOSystems\RLNetConsole\ControlRenderers\RLNetBackgroundRenderer.cs" />
@@ -427,7 +422,6 @@
     <Compile Include="IOSystems\RLNetConsole\ControlRenderers\RLNetTitleDisplayer.cs" />
     <Compile Include="IOSystems\RLNetConsole\ControlRenderers\RLNetVisibleEnemiesDisplayer.cs" />
     <Compile Include="IOSystems\RLNetConsole\ControlRenderers\RLNetWealthDisplayer.cs" />
-    <Compile Include="IOSystems\StatsConfiguration.cs" />
     <Compile Include="Maps\Atlas.cs" />
     <Compile Include="Maps\FovCache.cs" />
     <Compile Include="Maps\Generators\BasicDungeonMapGenerator.cs" />

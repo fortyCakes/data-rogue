@@ -18,7 +18,10 @@ namespace data_rogue_core.EventSystem.Rules
 
         public override bool ApplyInternal(IEntity sender, ActionEventData eventData)
         {
-            _systemContainer.ActivitySystem.Push(new MenuActivity(new SkillMenu(_systemContainer, sender)));
+            _systemContainer.ActivitySystem.Push(new MenuActivity(
+                _systemContainer.ActivitySystem.DefaultPosition,
+                _systemContainer.ActivitySystem.DefaultPadding, 
+                new SkillMenu(_systemContainer, sender)));
 
             return false;
         }

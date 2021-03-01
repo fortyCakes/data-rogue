@@ -58,7 +58,7 @@ namespace data_rogue_core.Activities
 
         public override void InitialiseControls()
         {
-            foreach (MapConfiguration mapConfiguration in _ioSystemConfiguration.GameplayWindowControls.OfType<MapConfiguration>())
+            foreach (MapControl mapConfiguration in _ioSystemConfiguration.GameplayWindowControls.OfType<MapControl>())
             {
                 Controls.Add(new TargetingOverlayControl { Position = mapConfiguration.Position, TargetingActivity = this });
             }
