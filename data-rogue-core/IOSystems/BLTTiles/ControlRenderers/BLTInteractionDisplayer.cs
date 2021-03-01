@@ -54,11 +54,11 @@ namespace data_rogue_core.IOSystems.BLTTiles
                 BLT.Color(Color.White);
                 BLT.Print(x + BLTTilesIOSystem.TILE_SPACING + 6, y + 4 + BLTTilesIOSystem.TILE_SPACING / 2, interactEntity.DescriptionName);
 
-                RenderBackgroundBox(x, y, display.ActivityIndex, GetSizeInternal(spriteManager, control, systemContainer, playerFov), spriteManager);
+                RenderBackgroundBox(x, y, display.ActivityIndex, LayoutInternal(spriteManager, control, systemContainer, playerFov), spriteManager);
             }
         }
 
-        protected override Size GetSizeInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        protected override Size LayoutInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
             return new Size(control.Position.Width, 16);
         }

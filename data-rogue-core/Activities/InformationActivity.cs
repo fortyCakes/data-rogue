@@ -24,8 +24,9 @@ namespace data_rogue_core.Activities
         public override bool AcceptsInput => true;
 
         private readonly IActivitySystem _activitySystem;
+        private BackgroundControl Background;
 
-        public InformationActivity(IActivitySystem activitySystem, List<StatsConfiguration> statsConfigs, IEntity entity, bool closeOnKeyPress = true, bool rendersEntireSpace = false)
+        public InformationActivity(Rectangle position, Padding padding, IActivitySystem activitySystem, List<StatsConfiguration> statsConfigs, IEntity entity, bool closeOnKeyPress = true, bool rendersEntireSpace = false): base(position, padding)
         {
             Entity = entity;
             StatsConfigs = statsConfigs;
@@ -34,65 +35,27 @@ namespace data_rogue_core.Activities
             _activitySystem = activitySystem;
         }
 
-        public override IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
+        public override void InitialiseControls()
         {
-            List<IDataRogueControl> controls = new List<IDataRogueControl>();
+            Background = new BackgroundControl { Position = Position, ShrinkToContents = !RendersEntireSpace };
+            Controls.Add(Background);
 
-            var maxX = 0;
-            var maxY = 0;
-
-            foreach(var config in StatsConfigs)
+            foreach (var config in StatsConfigs)
             {
-                var x = config.Position.X + renderer.ActivityPadding.Left;
-                var y = config.Position.Y + renderer.ActivityPadding.Top;
+                var flow = new FlowContainerControl { Position = config.Position };
 
-                foreach(var display in config.Displays)
+                foreach (var display in config.Displays)
                 {
                     var controlType = display.ControlType;
 
                     var control = (IDataRogueInfoControl)Activator.CreateInstance(controlType);
                     control.SetData(Entity, display);
 
-                    var controlRenderer = controlRenderers.Single(s => s.DisplayType == control.GetType());
-                    var size = controlRenderer.GetSize(rendererHandle, control, systemContainer, playerFov);
-
-                    control.Position = new Rectangle(x, y, size.Width, size.Height);
-
-                    y += size.Height;
-
-                    if (control.Position.Width > maxX) { maxX = control.Position.Width; }
-                    maxY = y;
-
-                    controls.Add(control);
-                }
-            }
-
-            maxX += 8;
-            maxY += 8;
-
-            var spareWidth = width - maxX;
-            var spareHeight = height - maxY;
-
-            var left = spareWidth / 2;
-            var top = spareHeight / 2;
-
-            if (!RendersEntireSpace)
-            {
-
-                foreach (var control in controls)
-                {
-                    control.Position = new Rectangle(control.Position.Left + left, control.Position.Top + top, control.Position.Width, control.Position.Height);
+                    flow.Controls.Add(control);
                 }
 
-                controls.Add(new BackgroundControl { Position = new Rectangle(spareWidth / 2, spareHeight / 2, maxX, maxY) });
-
+                Background.Controls.Add(flow);
             }
-            else
-            {
-                controls.Add(new BackgroundControl { Position = new Rectangle(0, 0, width, height) });
-            }
-
-            return controls;
         }
 
         public void Initialise()

@@ -3,27 +3,34 @@ using data_rogue_core.IOSystems;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace data_rogue_core.Activities
 {
     public abstract class BaseActivity : IActivity
     {
+        public BaseActivity(Rectangle position, Padding padding)
+        {
+            Position = position;
 
-        public IEnumerable<IDataRogueControl> Controls { get; set; } = new List<IDataRogueControl>();
+            InitialiseControls();
+            Padding = padding;
+        }
+
+        public abstract void InitialiseControls();
+
+        public IList<IDataRogueControl> Controls { get; set; } = new List<IDataRogueControl>();
         public abstract ActivityType Type { get; }
         public abstract bool RendersEntireSpace { get; }
         public abstract bool AcceptsInput { get; }
 
-        public void Layout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
-        {
-            Controls = GetLayout(renderer, systemContainer, rendererHandle, controlRenderers, playerFov, width, height).ToList();
-        }
-
-        public abstract IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height);
-
+        public Rectangle Position { get; set; }
+        public Padding Padding { get; set; }
+        
         public abstract void HandleAction(ISystemContainer systemContainer, ActionEventData action);
         public abstract void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard);
         public virtual void HandleMouse(ISystemContainer systemContainer, MouseData mouse)
@@ -62,24 +69,6 @@ namespace data_rogue_core.Activities
                 systemContainer.RendererSystem.CameraPosition,
                 mouse.X,
                 mouse.Y);
-        }
-
-        protected static void SetSize(IDataRogueControl control, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov)
-        {
-            var size = controlRenderers.Single(c => c.DisplayType == control.GetType()).GetSize(rendererHandle, control, systemContainer, playerFov);
-            control.Position = new Rectangle(control.Position.Location, size);
-        }
-        
-        protected void CenterControls(List<IDataRogueControl> controls, int width, int height, int finalWidth, int finalHeight)
-        {
-            var x = width / 2 - finalWidth / 2;
-            var y = height / 2 - finalHeight / 2;
-
-
-            foreach (var control in controls)
-            {
-                control.Position = new Rectangle(control.Position.Left + x, control.Position.Top + y, control.Position.Width, control.Position.Height);
-            }
         }
     }
 }

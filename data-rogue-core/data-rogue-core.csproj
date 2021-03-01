@@ -75,6 +75,8 @@
   <ItemGroup>
     <Compile Include="Activities\BaseActivity.cs" />
     <Compile Include="Activities\BranchLoadingScreenActivity.cs" />
+    <Compile Include="Activities\IDataRogueInfoControl.cs" />
+    <Compile Include="Activities\IDataRogueParentControl.cs" />
     <Compile Include="Activities\IMapActivity.cs" />
     <Compile Include="Activities\MapEditorCellMenuActivity.cs" />
     <Compile Include="Activities\ShopActivity.cs" />
@@ -87,6 +89,9 @@
     <Compile Include="Components\Equipment.cs" />
     <Compile Include="Components\MapGenerationCommand.cs" />
     <Compile Include="Components\Price.cs" />
+    <Compile Include="Controls\BaseContainerControl.cs" />
+    <Compile Include="Controls\FlowContainerControl.cs" />
+    <Compile Include="Controls\LinesControl.cs" />
     <Compile Include="Controls\MapEditorCellPickerControl.cs" />
     <Compile Include="Controls\MapEditorControl.cs" />
     <Compile Include="Controls\MapEditorTools\BaseFilledShapeTool.cs" />
@@ -219,7 +224,6 @@
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTTextDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTTextFormDataRenderer.cs" />
     <Compile Include="IOSystems\FOVHelper.cs" />
-    <Compile Include="IOSystems\IDataRogueControl.cs" />
     <Compile Include="Activities\InformationActivity.cs" />
     <Compile Include="Activities\LoadingScreenActivity.cs" />
     <Compile Include="Activities\TargetingActivity.cs" />
@@ -280,6 +284,7 @@
     <Compile Include="IOSystems\BLTTiles\ControlRenderers\BLTWealthDisplayer.cs" />
     <Compile Include="IOSystems\BLTTiles\ISpriteManager.cs" />
     <Compile Include="IOSystems\BLTTiles\BLTKeyConverter.cs" />
+    <Compile Include="IOSystems\IDataRogueControlRenderer.cs" />
     <Compile Include="IOSystems\IOSystemConfiguration.cs" />
     <Compile Include="IOSystems\IRenderingConfiguration.cs" />
     <Compile Include="IOSystems\IUnifiedRenderer.cs" />
@@ -515,6 +520,7 @@
     <Compile Include="Utils\IPathfindingAlgorithm.cs" />
     <Compile Include="Utils\MapCoordinateExtensions.cs" />
     <Compile Include="Utils\MapExtensions.cs" />
+    <Compile Include="Utils\RectanglePaddingHelper.cs" />
     <Compile Include="Utils\ReflectiveEnumerator.cs" />
     <Compile Include="Utils\StringExtensions.cs" />
     <Compile Include="Utils\TargetingRotationHelper.cs" />

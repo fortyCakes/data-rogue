@@ -1,8 +1,11 @@
 ﻿using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.IOSystems;
+using data_rogue_core.IOSystems.BLTTiles;
+using data_rogue_core.Maps;
 using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace data_rogue_core.Activities
@@ -24,18 +27,19 @@ namespace data_rogue_core.Activities
         Color BackColor { get; }
 
         void Click(object sender, PositionEventHandlerArgs eventArgs);
+        void MouseDown(object sender, PositionEventHandlerArgs eventArgs);
+        void MouseUp(object sender, PositionEventHandlerArgs eventArgs);
+
         event PositionEventHandler OnClick;
+        event PositionEventHandler OnMouseDown;
+        event PositionEventHandler OnMouseUp;
 
         bool Visible { get; set; }
 
         bool FillsContainer { get; }
-    }
 
-    public interface IDataRogueInfoControl : IDataRogueControl
-    {
-        void SetData(IEntity entity, InfoDisplay display);
+        bool Layout(List<IDataRogueControlRenderer> controlRenderers, ISystemContainer systemContainer, object handle, List<MapCoordinate> playerFov, Rectangle boundingBox);
 
-        IEntity Entity { get; }
-        string Parameters { get; }
+        void Paint(List<IDataRogueControlRenderer> _controlRenderers, object handle, ISystemContainer systemContainer, List<MapCoordinate> playerFov);
     }
 }

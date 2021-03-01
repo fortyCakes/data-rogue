@@ -56,7 +56,7 @@ namespace data_rogue_core.Activities
 
 
             var textControl = new TextControl { Position = new Rectangle(offsetX + x, offsetY + y, 0, 0), Parameters = _caption };
-            var textSize = renderer.GetRendererFor(textControl).GetSize(rendererHandle, textControl, systemContainer, playerFov);
+            var textSize = renderer.GetRendererFor(textControl).Layout(rendererHandle, textControl, systemContainer, playerFov);
             textControl.Position = new Rectangle(offsetX + x, offsetY + y, textSize.Width, textSize.Height);
             controls.Add(textControl);
 
@@ -64,7 +64,7 @@ namespace data_rogue_core.Activities
             y += textSize.Height + 1;
             
             var hoveredCellName = new TextControl { Position = new Rectangle(offsetX + x, offsetY + y, 0, 0), Parameters = HoveredCellText };
-            textSize = renderer.GetRendererFor(hoveredCellName).GetSize(rendererHandle, hoveredCellName, systemContainer, playerFov);
+            textSize = renderer.GetRendererFor(hoveredCellName).Layout(rendererHandle, hoveredCellName, systemContainer, playerFov);
             hoveredCellName.Position = new Rectangle(offsetX + x, offsetY + y, textSize.Width, textSize.Height);
             if (SelectedCell == null) hoveredCellName.Color = Color.Gray;
             controls.Add(hoveredCellName);
@@ -72,7 +72,7 @@ namespace data_rogue_core.Activities
 
             var exampleCell = new MenuEntityControl();
 
-            var cellSize = renderer.GetRendererFor(exampleCell).GetSize(rendererHandle, exampleCell, systemContainer, playerFov);
+            var cellSize = renderer.GetRendererFor(exampleCell).Layout(rendererHandle, exampleCell, systemContainer, playerFov);
 
             foreach(var cell in Entities)
             {
@@ -96,7 +96,7 @@ namespace data_rogue_core.Activities
             var buttonControl = new ButtonControl { Position = new Rectangle(offsetX, y, 0, 0), Text = "Cancel" };
             buttonControl.OnClick += buttonControl_OnClick;
 
-            var buttonSize = renderer.GetRendererFor(buttonControl).GetSize(rendererHandle, buttonControl, systemContainer, playerFov);
+            var buttonSize = renderer.GetRendererFor(buttonControl).Layout(rendererHandle, buttonControl, systemContainer, playerFov);
 
             var buttonLeft = finalWidth - buttonSize.Width - renderer.ActivityPadding.Right;
             buttonControl.Position = new Rectangle(buttonLeft, buttonControl.Position.Top, buttonSize.Width, buttonSize.Height);

@@ -32,7 +32,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             RenderText(x + 16, y + 19, control.ActivityIndex, out _, "Right", Color.White, false);
             RenderText(x + 28, y + 19, control.ActivityIndex, out _, "Back", Color.White, false);
 
-            RenderBackgroundBox(x, y, control.ActivityIndex, GetSizeInternal(spriteManager, control, systemContainer, playerFov), spriteManager);
+            RenderBackgroundBox(x, y, control.ActivityIndex, LayoutInternal(spriteManager, control, systemContainer, playerFov), spriteManager);
 
             RenderEntitySprite(x + PrimaryCell.X, y + PrimaryCell.Y, control, systemContainer, spriteManager, systemContainer.ActivitySystem.MapEditorActivity.PrimaryCell);
             RenderEntitySprite(x + SecondaryCell.X, y + SecondaryCell.Y, control, systemContainer, spriteManager, systemContainer.ActivitySystem.MapEditorActivity.SecondaryCell);
@@ -43,7 +43,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             RenderSpriteIfSpecified(x + DefaultCell.X - 2, y + DefaultCell.Y - 2,  spriteManager, "skill_frame", AnimationFrame.Idle0);
         }
 
-        protected override Size GetSizeInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        protected override Size LayoutInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
             return new Size(5 * BLTTilesIOSystem.TILE_SPACING, 3 * BLTTilesIOSystem.TILE_SPACING);
         }

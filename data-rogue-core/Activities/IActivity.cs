@@ -6,11 +6,14 @@ using System;
 using System.Collections.Generic;
 using data_rogue_core.Maps;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace data_rogue_core.Activities
 {
     public interface IActivity
     {
+        void InitialiseControls();
+
         ActivityType Type { get; }
         bool RendersEntireSpace { get; }
         bool AcceptsInput { get; }
@@ -18,7 +21,7 @@ namespace data_rogue_core.Activities
         void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard);
         void HandleMouse(ISystemContainer systemContainer, MouseData mouse);
         void HandleAction(ISystemContainer systemContainer, ActionEventData action);
-        IEnumerable<IDataRogueControl> Controls { get; }
-        void Layout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height);
+        IList<IDataRogueControl> Controls { get; }
+        Rectangle Position { get; }
     }
 }

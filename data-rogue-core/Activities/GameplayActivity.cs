@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using data_rogue_core.Controls;
 using System.Drawing;
 using data_rogue_core.Components;
+using System.Windows.Forms;
 
 namespace data_rogue_core.Activities
 {
@@ -25,14 +26,17 @@ namespace data_rogue_core.Activities
         private readonly IOSystemConfiguration _ioSystemConfiguration;
         private readonly IPlayerSystem _playerSystem;
 
-        public GameplayActivity(IOSystemConfiguration ioSystemConfiguration, IPlayerSystem playerSystem)
+        public GameplayActivity(Rectangle position, Padding padding, IOSystemConfiguration ioSystemConfiguration, IPlayerSystem playerSystem) : base(position, padding)
         {
             _ioSystemConfiguration = ioSystemConfiguration;
             _playerSystem = playerSystem;
         }
 
-        public void Initialise()
+        public override void InitialiseControls()
         {
+            Controls = _ioSystemConfiguration.GameplayWindowControls;
+
+            Controls.Add(new LinesControl { Position = Position, Configuration = _ioSystemConfiguration });
         }
 
         public override void HandleAction(ISystemContainer systemContainer, ActionEventData action)
@@ -46,18 +50,6 @@ namespace data_rogue_core.Activities
         public override void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard)
         {
 
-        }
-
-        public override IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
-        {
-            var controls = new List<IDataRogueControl>();
-
-            var player = systemContainer.PlayerSystem.Player;
-
-            controls.Add( new LinesControl { Position = new Rectangle(0, 0, width, height), Configuration = _ioSystemConfiguration });
-            controls.AddRange(ControlFactory.GetControls(_ioSystemConfiguration.GameplayRenderingConfiguration, renderer, systemContainer, rendererHandle, controlRenderers, playerFov, systemContainer.ActivitySystem.ActivityStack.IndexOf(this)));
-
-            return controls;
         }
     }
 }

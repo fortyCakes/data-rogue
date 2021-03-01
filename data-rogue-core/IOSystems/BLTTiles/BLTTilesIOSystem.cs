@@ -28,7 +28,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             TileHeight = 32,
             TileWidth = 32,
             WindowTitle = "data-rogue window title",
-            GameplayRenderingConfiguration = new List<IRenderingConfiguration>
+            GameplayWindowControls = new List<IRenderingConfiguration>
             {
                 DefaultMap,
                 DefaultMinimap,           

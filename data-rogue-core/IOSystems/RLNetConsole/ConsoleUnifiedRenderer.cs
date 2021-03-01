@@ -40,7 +40,7 @@ namespace data_rogue_core.IOSystems.RLNetConsole
             {
                 control.ActivityIndex = activityIndex;
                 IDataRogueControlRenderer controlRenderer = GetRendererFor(control);
-                controlRenderer.Display(_console, control, systemContainer, playerFov);
+                controlRenderer.Paint(_console, control, systemContainer, playerFov);
             }
         }
 
@@ -54,7 +54,7 @@ namespace data_rogue_core.IOSystems.RLNetConsole
 
         public MapCoordinate GetGameplayMapCoordinateFromMousePosition(MapCoordinate cameraPosition, int x, int y)
         {
-            foreach (MapConfiguration map in _ioSystemConfiguration.GameplayRenderingConfiguration)
+            foreach (MapConfiguration map in _ioSystemConfiguration.GameplayWindowControls)
             {
                 if (IsOnMap(map, x, y))
                 {

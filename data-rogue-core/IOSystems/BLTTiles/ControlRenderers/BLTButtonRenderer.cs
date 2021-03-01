@@ -57,7 +57,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             BLT.Print(x + buttonSize / 2 - textSize / 2, y + (focused ? 3 : 2), display.Text);
         }
 
-        protected override Size GetSizeInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        protected override Size LayoutInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
             var display = control as ButtonControl;
 

@@ -29,7 +29,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             RenderText(display.Position.X, display.Position.Y + textSize.Height, control.ActivityIndex, out _, text2, display.Color);
         }
 
-        protected override Size GetSizeInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        protected override Size LayoutInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
             var display = control as IDataRogueInfoControl;
             var entity = display.Entity;

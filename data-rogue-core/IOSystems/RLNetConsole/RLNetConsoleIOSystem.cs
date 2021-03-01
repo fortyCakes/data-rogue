@@ -21,7 +21,7 @@ namespace data_rogue_core.IOSystems.RLNetConsole
             TileHeight = 12,
             TileWidth = 12,
             WindowTitle = "data-rogue window title",
-            GameplayRenderingConfiguration = new List<IRenderingConfiguration> {
+            GameplayWindowControls = new List<IRenderingConfiguration> {
                 new MapConfiguration { Position = new Rectangle(0, 0, 76, 54) },
                 new StatsConfiguration {
                     Position = new Rectangle(77, 0, 23, 70),

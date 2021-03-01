@@ -20,7 +20,7 @@ namespace data_rogue_core.IOSystems
 
         public abstract Type DisplayType { get; }
 
-        public void Display(object handle, IDataRogueControl display, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        public void Paint(object handle, IDataRogueControl display, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
             var console = handle as RLConsole;
             DisplayInternal(console, display, systemContainer, playerFov);
@@ -31,7 +31,7 @@ namespace data_rogue_core.IOSystems
             return null;
         }
 
-        public Size GetSize(object handle, IDataRogueControl display, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        public Size Layout(object handle, IDataRogueControl display, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
             var console = handle as RLConsole;
             return GetSizeInternal(console, display, systemContainer, playerFov);

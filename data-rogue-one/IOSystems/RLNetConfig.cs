@@ -17,8 +17,8 @@ namespace data_rogue_one.IOSystems
             var config = RLNetConsoleIOSystem.DefaultConfiguration;
 
             config.WindowTitle = "data-rogue-one";
-            config.GameplayRenderingConfiguration = config.GameplayRenderingConfiguration.Where(c => !(c is StatsConfiguration)).ToList();
-            config.GameplayRenderingConfiguration.Add(
+            config.GameplayWindowControls = config.GameplayWindowControls.Where(c => !(c is StatsConfiguration)).ToList();
+            config.GameplayWindowControls.Add(
                 new StatsConfiguration {
                     Position = new Rectangle(77, 0, 23, 70),
                     Displays = new List<InfoDisplay>

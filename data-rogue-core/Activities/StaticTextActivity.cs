@@ -101,7 +101,7 @@ namespace data_rogue_core.Activities
 
         private static Size SetSize(IDataRogueControl control, IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<MapCoordinate> playerFov)
         {
-            var size = renderer.GetRendererFor(control).GetSize(rendererHandle, control, systemContainer, playerFov);
+            var size = renderer.GetRendererFor(control).Layout(rendererHandle, control, systemContainer, playerFov);
             control.Position = new Rectangle(control.Position.Location, size);
             return size;
         }

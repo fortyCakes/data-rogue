@@ -20,18 +20,18 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
         public abstract Type DisplayType { get; }
 
-        public void Display(object handle, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        public void Paint(object handle, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
             DisplayInternal((ISpriteManager)handle, control, systemContainer, playerFov);
         }
 
-        public Size GetSize(object handle, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        public bool Layout(object handle, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov, Rectangle boundingBox)
         {
-            return GetSizeInternal((ISpriteManager)handle, control, systemContainer, playerFov);
+            return LayoutInternal((ISpriteManager)handle, control, systemContainer, playerFov, boundingBox);
         }
 
         protected abstract void DisplayInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov);
-        protected abstract Size GetSizeInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov);
+        protected abstract bool LayoutInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov, Rectangle boundingBox);
 
         protected static void RenderText(int x, int y, int activityIndex, out Size textSize, string text, Color color, bool updateY = true, string font = "text")
         {

@@ -33,12 +33,12 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
                 RenderEntityDetails(x, y, display, hoveredEntity, systemContainer, spriteManager);
 
-                RenderBackgroundBox(x, y, control.ActivityIndex, GetSizeInternal(spriteManager, control, systemContainer, playerFov), spriteManager);
+                RenderBackgroundBox(x, y, control.ActivityIndex, LayoutInternal(spriteManager, control, systemContainer, playerFov), spriteManager);
 
             }
         }
 
-        protected override Size GetSizeInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        protected override Size LayoutInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
             var height = 12;
             var display = control as IDataRogueInfoControl;

@@ -16,7 +16,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             RenderText(control.Position.X, control.Position.Y, control.ActivityIndex, out _, GetText(control, systemContainer, playerFov), control.Color);
         }
 
-        protected override Size GetSizeInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        protected override Size LayoutInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
             BLT.Font("text");
             return BLT.Measure(GetText(control, systemContainer, playerFov));

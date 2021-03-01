@@ -81,7 +81,7 @@ namespace data_rogue_one.IOSystems
             BLT.Print(x - textWidth / 2, y, text);
         }
 
-        protected override Size GetSizeInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        protected override Size LayoutInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
             return new Size(64, 10);
         }

@@ -59,7 +59,7 @@ namespace data_rogue_core.Activities
             };
 
             var controlRenderer = controlRenderers.Single(s => s.DisplayType == typeof(TextControl));
-            var size = controlRenderer.GetSize(rendererHandle, textControl, systemContainer, playerFov);
+            var size = controlRenderer.Layout(rendererHandle, textControl, systemContainer, playerFov);
             textControl.Position = new Rectangle(x - size.Width / 2, y - size.Height / 2, size.Width, size.Height);
 
             textControl.SetData(null, new InfoDisplay {BackColor = Color.Transparent, Color = GetColor(), ControlType = typeof(TextControl), Parameters = _message});

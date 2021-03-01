@@ -91,7 +91,7 @@ namespace data_rogue_core.Activities
             var label = new TextControl { Position = new Rectangle(1, 1, width, height), Parameters = Text };
 
             var textRenderer = systemContainer.RendererSystem.Renderer.GetRendererFor(label);
-            var textSize = textRenderer.GetSize(rendererHandle, label, systemContainer, playerFov);
+            var textSize = textRenderer.Layout(rendererHandle, label, systemContainer, playerFov);
 
             var backgroundSize = new Size(Math.Max(textSize.Width + 8, minWidth), Math.Max(textSize.Height + 8, minHeight));
             var backgroundPosition = new Point(30, 30);

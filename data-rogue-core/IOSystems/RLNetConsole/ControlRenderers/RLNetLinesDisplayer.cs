@@ -114,7 +114,7 @@ namespace data_rogue_core.IOSystems
 
         private bool IsInSubconsole(IOSystemConfiguration configuration, int x, int y)
         {
-            foreach (var config in configuration.GameplayRenderingConfiguration)
+            foreach (var config in configuration.GameplayWindowControls)
             {
                 if (config.Position.Contains(x, y))
                 {

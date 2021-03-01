@@ -63,7 +63,7 @@ namespace data_rogue_core.Controls
                     }
 
                     var controlRenderer = controlRenderers.Single(s => s.DisplayType == control.GetType());
-                    var size = controlRenderer.GetSize(rendererHandle, control, systemContainer, playerFov);
+                    var size = controlRenderer.Layout(rendererHandle, control, systemContainer, playerFov);
 
                     control.Position = new Rectangle(x, y, size.Width, size.Height);
 

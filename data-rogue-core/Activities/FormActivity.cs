@@ -15,6 +15,8 @@ using data_rogue_core.Utils;
 using System;
 using data_rogue_core.Forms.StaticForms;
 using OpenTK.Input;
+using System.Windows.Forms;
+using Form = data_rogue_core.Forms.Form;
 
 namespace data_rogue_core.Activities
 {
@@ -28,49 +30,76 @@ namespace data_rogue_core.Activities
 
         public Form Form { get; set; }
 
-        public FormActivity(Form form)
+        public FormActivity(Rectangle position, Padding padding, Form form) : base(position, padding)
         {
             Form = form;
             form.Activity = this;
         }
-
-        public void Initialise()
+        
+        public override void InitialiseControls()
         {
+            var paddedPosition = Position.Pad(Padding);
+
+            var backgroundControl = new BackgroundControl { Position = Position };
+
+            var topFlow = new FlowContainerControl { Position = Position };
+
+            var titleText = new LargeTextControl { Parameters = Form.Title };
+            topFlow.Controls.Add(titleText);
+            var lineControl = new LineControl();
+            topFlow.Controls.Add(lineControl);
+
+            var buttonFlowContainer = new FlowContainerControl { Position = Position, FlowDirection = FlowDirection.BottomUp }; 
+            var buttonFlow = new FlowContainerControl { Position = Position, FlowDirection = FlowDirection.LeftToRight };
+            buttonFlowContainer.Controls.Add(buttonFlow);
+
+            foreach (var button in Form.Buttons.GetFlags())
+            {
+                var buttonControl = new ButtonControl { Text = button.ToString() };
+                buttonControl.OnClick += FormButtonControl_OnClick;
+                buttonFlow.Controls.Add(buttonControl);
+            }
+
+            foreach(var formField in Form.Fields)
+            {
+                var nameText = new TextControl { Parameters = formField.Key + ": " };
+                var formFieldControl = formField.Value;
+
+                formFieldControl.OnClick += FormFieldControl_OnClick;
+
+                var subFlow = new FlowContainerControl { FlowDirection = FlowDirection.LeftToRight };
+                subFlow.Controls.Add(nameText);
+                subFlow.Controls.Add(formFieldControl);
+                topFlow.Controls.Add(subFlow);
+            }
+            
+            Controls.Add(backgroundControl);
+            Controls.Add(topFlow);
+            Controls.Add(buttonFlow);
+        }
+
+        private void FormFieldControl_OnClick(object sender, PositionEventHandlerArgs args)
+        {
+            var data = sender as FormData;
+            Form.FormSelection = new FormSelection { SelectedItem = data.Name };
+
+            if (data is SubSelectableFormData)
+            {
+                var subData = data as SubSelectableFormData;
+
+                Form.FormSelection.SubItem = subData.GetSubItems().First();
+            }
+        }
+
+        private void FormButtonControl_OnClick(object sender, PositionEventHandlerArgs args)
+        {
+            Form.FormSelection = new FormSelection { SelectedItem = (sender as ButtonControl).Text };
+            Form.Select();
         }
 
         public override void HandleMouse(ISystemContainer systemContainer, MouseData mouse)
         {
-            if (mouse.IsLeftClick)
-            {
-                var controlsUnderMouse = MouseControlHelper.GetControlsUnderMouse(mouse, Controls);
-                controlsUnderMouse = controlsUnderMouse.Where(c => c.GetType() != typeof(BackgroundControl));
 
-                if (controlsUnderMouse.Count() == 1)
-                {
-                    var control = controlsUnderMouse.Single();
-
-                    if (control is ButtonControl)
-                    {
-                        var button = control as ButtonControl;
-                        Form.FormSelection = new FormSelection { SelectedItem = button.Text };
-                        Form.Select();
-                    }
-
-                    if (control is FormData)
-                    {
-                        var data = control as FormData;
-                        Form.FormSelection = new FormSelection { SelectedItem = data.Name };
-                        control.Click(this, new PositionEventHandlerArgs(mouse.X, mouse.Y));
-
-                        if (control is SubSelectableFormData)
-                        {
-                            var subData = control as SubSelectableFormData;
-
-                            Form.FormSelection.SubItem = subData.GetSubItems().First();
-                        }
-                    }
-                }
-            }
         }
 
         public override void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard)
@@ -81,73 +110,6 @@ namespace data_rogue_core.Activities
         public override void HandleAction(ISystemContainer systemContainer, ActionEventData action)
         {
             Form.HandleAction(action);
-        }
-
-        public override IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
-        {
-            yield return new BackgroundControl { Position = new Rectangle(0, 0, width, height) };
-
-            var y = renderer.ActivityPadding.Top;
-
-            var titleText = new LargeTextControl { Position = new Rectangle(renderer.ActivityPadding.Left, y, 0, 0), Parameters = Form.Title };
-            var titleSize = GetSizeOf(systemContainer, rendererHandle, controlRenderers, playerFov, titleText);
-            y += titleSize.Height;
-            
-            var lineControl = new LineControl { Position = new Rectangle(0, y, width, 0) };
-            Size lineSize = GetSizeOf(systemContainer, rendererHandle, controlRenderers, playerFov, lineControl);
-            y += lineSize.Height;
-
-            yield return titleText;
-            yield return lineControl;
-
-            var buttonX = renderer.ActivityPadding.Left;
-            foreach (var button in Form.Buttons.GetFlags())
-            {
-                var control = new ButtonControl { Text = button.ToString(), IsFocused = Form.FormSelection.SelectedItem == button.ToString()};
-                var size = GetSizeOf(systemContainer, rendererHandle, controlRenderers, playerFov, control);
-
-                control.Position = new Rectangle(buttonX, height - renderer.ActivityPadding.Top - size.Height, size.Width, size.Height);
-                yield return control;
-
-                buttonX += size.Width + renderer.ActivityPadding.Left;
-            }
-
-            foreach(var kvp in Form.Fields)
-            {
-                var nameText = new TextControl { Parameters = kvp.Key + ": " };
-                var nameSize = GetSizeOf(systemContainer, rendererHandle, controlRenderers, playerFov, nameText);
-
-                var x = renderer.ActivityPadding.Left;
-
-                nameText.Position = new Rectangle(x, y, nameSize.Width, nameSize.Height);
-                yield return nameText;
-
-                x += nameSize.Width;
-                
-                var formData = kvp.Value;
-                var size = GetSizeOf(systemContainer, rendererHandle, controlRenderers, playerFov, formData);
-
-                formData.Position = new Rectangle(x, y, size.Width, size.Height);
-
-                formData.IsFocused = Form.FormSelection.SelectedItem == kvp.Key;
-
-                y += size.Height;
-
-                SubSelectableFormData subData;
-                if ((subData = formData as SubSelectableFormData) != null)
-                {
-                    subData.SubSelection = Form.FormSelection.SubItem;
-                }
-
-                yield return formData;
-
-                y += renderer.ActivityPadding.Top;
-            }
-        }
-
-        private static Size GetSizeOf(ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, IDataRogueControl control)
-        {
-            return controlRenderers.Single(c => c.DisplayType == control.GetType()).GetSize(rendererHandle, control, systemContainer, playerFov);
         }
     }
 }

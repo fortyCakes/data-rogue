@@ -19,7 +19,7 @@ namespace data_rogue_one.IOSystems
             var config = BLTTilesIOSystem.DefaultConfiguration;
             config.WindowTitle = "Data Rogue One";
 
-            config.GameplayRenderingConfiguration = new List<IRenderingConfiguration>
+            config.GameplayWindowControls = new List<IRenderingConfiguration>
             {
                 BLTTilesIOSystem.DefaultMap,
                 BLTTilesIOSystem.DefaultMinimap,

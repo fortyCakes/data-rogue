@@ -19,7 +19,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
         public override Type DisplayType => typeof(ComponentCounter);
 
-        protected override Size GetSizeInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        protected override Size LayoutInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
             return new Size(80, Height);
         }

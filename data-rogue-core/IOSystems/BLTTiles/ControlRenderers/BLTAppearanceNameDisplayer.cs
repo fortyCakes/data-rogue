@@ -54,7 +54,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             y += 13;
         }
 
-        protected override Size GetSizeInternal(ISpriteManager spriteManager, IDataRogueControl display, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        protected override Size LayoutInternal(ISpriteManager spriteManager, IDataRogueControl display, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
             var statsControl = (display as IDataRogueInfoControl);
             var entity = statsControl.Entity;

@@ -163,7 +163,7 @@ namespace data_rogue_core.Activities
 
         public override IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
         {
-            foreach (MapConfiguration mapConfiguration in _ioSystemConfiguration.GameplayRenderingConfiguration.OfType<MapConfiguration>())
+            foreach (MapConfiguration mapConfiguration in _ioSystemConfiguration.GameplayWindowControls.OfType<MapConfiguration>())
             {
                 yield return new TargetingOverlayControl { Position = mapConfiguration.Position, TargetingActivity = this };
             }

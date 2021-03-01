@@ -28,7 +28,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             BLT.Color("");
         }
 
-        protected override Size GetSizeInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        protected override Size LayoutInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
             var display = control as IDataRogueInfoControl;
             var text = display.Parameters;
