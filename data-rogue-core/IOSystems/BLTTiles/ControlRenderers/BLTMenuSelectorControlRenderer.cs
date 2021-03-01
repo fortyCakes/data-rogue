@@ -27,7 +27,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             BLT.PutExt(baseX, y, 0, -1, sprite.Tile(display.Direction));
         }
 
-        protected override Size LayoutInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        protected override Size Measure(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
             return new Size(2, 4);
         }

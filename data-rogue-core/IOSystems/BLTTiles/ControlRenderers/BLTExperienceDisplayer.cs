@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using BearLib;
 using data_rogue_core.Activities;
 using data_rogue_core.Components;
@@ -29,7 +31,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             RenderText(display.Position.X, display.Position.Y + textSize.Height, control.ActivityIndex, out _, text2, display.Color);
         }
 
-        protected override Size LayoutInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        protected override Size Measure(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov, Rectangle boundingBox, Padding padding, HorizontalAlignment horizontalAlignment, VerticalAlignment verticalAlignment)
         {
             var display = control as IDataRogueInfoControl;
             var entity = display.Entity;

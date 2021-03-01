@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using BearLib;
 using BLTWrapper;
 using data_rogue_core.Activities;
@@ -10,6 +12,7 @@ using data_rogue_core.Controls;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems.Interfaces;
+using Appearance = data_rogue_core.Components.Appearance;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
@@ -22,9 +25,9 @@ namespace data_rogue_core.IOSystems.BLTTiles
             RenderMap(spriteManager, control, systemContainer, playerFov);
         }
 
-        protected override Size LayoutInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        protected override Size Measure(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov, Rectangle boundingBox, Padding padding, HorizontalAlignment horizontalAlignment, VerticalAlignment verticalAlignment)
         {
-            return control.Position.Size;
+            return boundingBox.Size;
         }
 
         protected virtual List<IEntity> GetEntitiesAt(ISystemContainer systemContainer, IMap map, MapCoordinate mapCoordinate)

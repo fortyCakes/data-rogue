@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Windows.Forms;
 using data_rogue_core.Controls;
 using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.IOSystems;
@@ -16,7 +17,7 @@ namespace data_rogue_core.Activities
         private string _text;
         private Action _callback;
 
-        public ConfirmActivity(ISystemContainer systemContainer, string text, Action callback)
+        public ConfirmActivity(Rectangle position, Padding padding, ISystemContainer systemContainer, string text, Action callback) : base(position, padding)
         {
             _systemContainer = systemContainer;
             _text = text;
@@ -31,34 +32,27 @@ namespace data_rogue_core.Activities
 
         public bool OkSelected = true;
 
-        public override IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
+        public override void InitialiseControls()
         {
+            var background = new BackgroundControl { Position = Position, ShrinkToContents = !RendersEntireSpace };
             var text = new TextControl { Position = new Rectangle(), Parameters = _text };
             var okButton = new ButtonControl { Position = new Rectangle(), Text = "OK" };
             var cancelButton = new ButtonControl { Position = new Rectangle(), Text = "Cancel" };
 
-            SetSize(text, systemContainer, rendererHandle, controlRenderers, playerFov);
-            SetSize(okButton, systemContainer, rendererHandle, controlRenderers, playerFov);
-            SetSize(cancelButton, systemContainer, rendererHandle, controlRenderers, playerFov);
-
-            text.Position = new Rectangle(new Point(renderer.ActivityPadding.Left, renderer.ActivityPadding.Top), text.Position.Size);
-            okButton.Position = new Rectangle(new Point(renderer.ActivityPadding.Left, renderer.ActivityPadding.Top * 2 + text.Position.Height), okButton.Position.Size);
-            cancelButton.Position = new Rectangle(new Point(renderer.ActivityPadding.Left * 2 + okButton.Position.Width, renderer.ActivityPadding.Top * 2 + text.Position.Height), cancelButton.Position.Size);
+            var verticalFlow = new FlowContainerControl();
+            var horizontalFlow = new FlowContainerControl { FlowDirection = FlowDirection.RightToLeft };
 
             okButton.IsFocused = OkSelected;
             okButton.OnClick += OkButton_OnClick;
             cancelButton.IsFocused = !OkSelected;
             cancelButton.OnClick += CancelButton_OnClick;
 
-            var totalWidth = text.Position.Width + renderer.ActivityPadding.Left + renderer.ActivityPadding.Right;
-            var totalHeight = text.Position.Height * 2 + renderer.ActivityPadding.Top * 2 + renderer.ActivityPadding.Bottom;
-
-            var background = new BackgroundControl { Position = new Rectangle(0, 0, totalWidth, totalHeight) };
-
-            var controls = new List<IDataRogueControl> { text, background, okButton, cancelButton };
-            CenterControls(controls, width, height, totalWidth, totalHeight);
-
-            return controls;
+            Controls.Add(background);
+            background.Controls.Add(verticalFlow);
+            verticalFlow.Controls.Add(text);
+            verticalFlow.Controls.Add(horizontalFlow);
+            horizontalFlow.Controls.Add(okButton);
+            horizontalFlow.Controls.Add(cancelButton);
         }
 
         private void CancelButton_OnClick(object sender, PositionEventHandlerArgs args)

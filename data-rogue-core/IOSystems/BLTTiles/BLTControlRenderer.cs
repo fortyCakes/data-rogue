@@ -11,6 +11,8 @@ using System.Linq;
 using data_rogue_core.Activities;
 using data_rogue_core.Utils;
 using data_rogue_core.Components;
+using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
@@ -25,14 +27,19 @@ namespace data_rogue_core.IOSystems.BLTTiles
             DisplayInternal((ISpriteManager)handle, control, systemContainer, playerFov);
         }
 
-        public bool Layout(object handle, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov, Rectangle boundingBox)
+        public bool Layout(object handle, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov, Rectangle boundingBox, Padding padding, HorizontalAlignment horizontalAlignment, VerticalAlignment verticalAlignment)
         {
-            return LayoutInternal((ISpriteManager)handle, control, systemContainer, playerFov, boundingBox);
+            var size = Measure((ISpriteManager)handle, control, systemContainer, playerFov, boundingBox, padding, horizontalAlignment, verticalAlignment);
+
+            control.Position = new Rectangle(boundingBox.Location, size);
+
+            // TODO align control within bbox according to padding and aligment
+
+            return false;
         }
 
         protected abstract void DisplayInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov);
-        protected abstract bool LayoutInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov, Rectangle boundingBox);
-
+        protected abstract Size Measure(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov, Rectangle boundingBox, Padding padding, HorizontalAlignment horizontalAlignment, VerticalAlignment verticalAlignment);
         protected static void RenderText(int x, int y, int activityIndex, out Size textSize, string text, Color color, bool updateY = true, string font = "text")
         {
             BLTLayers.Set(BLTLayers.Text, activityIndex);

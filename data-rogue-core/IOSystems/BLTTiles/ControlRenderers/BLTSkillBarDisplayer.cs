@@ -66,7 +66,7 @@ namespace data_rogue_core.IOSystems.BLTTiles.ControlRenderers
             return false;
         }
 
-        protected override Size LayoutInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        protected override Size Measure(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
             return new Size(12 * GetSkillsOnBar(systemContainer).Count(), 12);
         }

@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using data_rogue_core.Controls;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.EventSystem.EventData;
@@ -20,20 +21,38 @@ namespace data_rogue_core.Activities
         private IEntity SelectedItem;
         private ISystemContainer _systemContainer;
 
-        public ShopActivity(ISystemContainer systemContainer, IEntity shop)
+        public ShopActivity(Rectangle position, Padding padding, ISystemContainer systemContainer, IEntity shop) : base(position, padding)
         {
             _systemContainer = systemContainer;
             this.shop = shop;
             SelectedItem = GetShopItems(systemContainer).First();
-
-            InitialiseControls();
         }
 
-        private void InitialiseControls()
+        public override void InitialiseControls()
         {
+            backgroundControl = new BackgroundControl { Position = Position };
+
+            var topFlow = new FlowContainerControl { FlowDirection = FlowDirection.BottomUp };
+            var downFlow = new FlowContainerControl { FlowDirection = FlowDirection.TopDown };
+            var sideFlow = new FlowContainerControl { FlowDirection = FlowDirection.LeftToRight };
+
             titleControl = new LargeTextControl { Parameters = this.shop.DescriptionName };
             exitButton = new ButtonControl { Position = new Rectangle(), Text = "Exit" };
             exitButton.OnClick += ExitButton_OnClick;
+
+            Controls.Add(backgroundControl);
+            backgroundControl.Controls.Add(topFlow);
+
+            topFlow.Controls.Add(exitButton);
+            topFlow.Controls.Add(downFlow);
+
+            downFlow.Controls.Add(titleControl);
+            downFlow.Controls.Add(sideFlow);
+
+            foreach (var item in GetShopItems(_systemContainer))
+            {
+                sideFlow.Controls.Add(new ShopItemControl { Item = item });
+            }
         }
 
         private void ExitButton_OnClick(object sender, PositionEventHandlerArgs args)
@@ -52,57 +71,11 @@ namespace data_rogue_core.Activities
 
         public override bool AcceptsInput => true;
 
-        public IDataRogueControl backgroundControl = new BackgroundControl();
-        public IDataRogueControl titleControl;
-        public IDataRogueControl exitButton;
+        public BackgroundControl backgroundControl = new BackgroundControl();
+        public LargeTextControl titleControl;
+        public ButtonControl exitButton;
 
         private int itemsPerRow = 1;
-
-        public override IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
-        {
-            var controls = new List<IDataRogueControl>();
-
-            backgroundControl.Position = new Rectangle(0, 0, width, height);
-            controls.Add(backgroundControl);
-
-            var left = renderer.ActivityPadding.Left;
-            var top = renderer.ActivityPadding.Top;
-
-            titleControl.Position = new Rectangle(new Point(left, top), titleControl.Position.Size);
-            SetSize(titleControl, systemContainer, rendererHandle, controlRenderers, playerFov);
-            controls.Add(titleControl);
-
-            top += titleControl.Position.Height + renderer.ActivityPadding.Top;
-
-            ShopItemControl shopItemControl = null;
-
-            foreach(var item in GetShopItems(systemContainer))
-            {
-                shopItemControl = new ShopItemControl { Position = new Rectangle(left, top, 0, 0), Item = item, Selected = (item == SelectedItem) };
-                SetSize(shopItemControl, systemContainer, rendererHandle, controlRenderers, playerFov);
-
-                controls.Add(shopItemControl);
-
-                left += shopItemControl.Position.Width + renderer.ActivityPadding.Left;
-
-                if (left > width - shopItemControl.Position.Width - renderer.ActivityPadding.Left - renderer.ActivityPadding.Right)
-                {
-                    left = renderer.ActivityPadding.Left;
-                    top += shopItemControl.Position.Height + renderer.ActivityPadding.Top;
-                }
-            }
-
-            this.itemsPerRow = (width - renderer.ActivityPadding.Left - renderer.ActivityPadding.Right) / (shopItemControl.Position.Width);
-
-            var button = exitButton;
-            SetSize(button, systemContainer, rendererHandle, controlRenderers, playerFov);
-            button.IsFocused = SelectedItem == null;
-
-            button.Position = new Rectangle(renderer.ActivityPadding.Left, height - button.Position.Height - renderer.ActivityPadding.Bottom, button.Position.Width, button.Position.Height);
-            controls.Add(button);
-
-            return controls;
-        }
 
         private IEnumerable<IEntity> GetShopItems(ISystemContainer systemContainer)
         {

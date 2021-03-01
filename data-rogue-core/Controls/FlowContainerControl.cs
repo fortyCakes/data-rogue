@@ -9,7 +9,6 @@ using System.Windows.Forms;
 
 namespace data_rogue_core.Controls
 {
-
     public class FlowContainerControl : BaseContainerControl
     {
         public FlowDirection FlowDirection { get; set; } = FlowDirection.TopDown;

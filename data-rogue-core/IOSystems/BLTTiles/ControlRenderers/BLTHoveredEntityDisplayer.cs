@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using BearLib;
 using data_rogue_core.Activities;
 using data_rogue_core.Components;
@@ -10,6 +12,7 @@ using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems.Interfaces;
 using data_rogue_core.Utils;
+using Appearance = data_rogue_core.Components.Appearance;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
@@ -33,12 +36,12 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
                 RenderEntityDetails(x, y, display, hoveredEntity, systemContainer, spriteManager);
 
-                RenderBackgroundBox(x, y, control.ActivityIndex, LayoutInternal(spriteManager, control, systemContainer, playerFov), spriteManager);
+                RenderBackgroundBox(x, y, control.ActivityIndex, control.Position.Size, spriteManager);
 
             }
         }
 
-        protected override Size LayoutInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        protected override Size Measure(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov, Rectangle boundingBox, Padding padding, HorizontalAlignment horizontalAlignment, VerticalAlignment verticalAlignment)
         {
             var height = 12;
             var display = control as IDataRogueInfoControl;

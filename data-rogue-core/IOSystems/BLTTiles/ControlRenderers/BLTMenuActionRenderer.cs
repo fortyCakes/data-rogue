@@ -53,7 +53,7 @@ namespace data_rogue_core.IOSystems
             }
         }
 
-        protected override Size LayoutInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        protected override Size Measure(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
             var display = control as MenuActionsControl;
             var text = $"[[{string.Join("|", display.AvailableActions.Select(a => a.ToString()))}]]";

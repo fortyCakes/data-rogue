@@ -1,12 +1,8 @@
 ﻿using data_rogue_core.Components;
-using data_rogue_core.IOSystems;
-using data_rogue_core.Renderers;
-using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
-using OpenTK.Input;
-using System.Collections.Generic;
 using System.Text;
-using data_rogue_core.Maps;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace data_rogue_core.Activities
 {
@@ -16,7 +12,7 @@ namespace data_rogue_core.Activities
 
         public override bool RendersEntireSpace => true;
 
-        public EndGameScreenActivity(ISystemContainer systemContainer, bool victory) : base(systemContainer.ActivitySystem, null, true)
+        public EndGameScreenActivity(Rectangle position, Padding padding, ISystemContainer systemContainer, bool victory) : base(position, padding, systemContainer.ActivitySystem, null, true)
         {
             _systemContainer = systemContainer;
 

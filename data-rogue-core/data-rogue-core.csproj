@@ -136,6 +136,7 @@
     <Compile Include="Controls\MapEditorTools\TinyEraserTool.cs" />
     <Compile Include="Controls\MenuEntityControl.cs" />
     <Compile Include="Controls\MinimapControl.cs" />
+    <Compile Include="Controls\PagedContainerControl.cs" />
     <Compile Include="Controls\ShopItemControl.cs" />
     <Compile Include="Controls\SkillBarControl.cs" />
     <Compile Include="Data\AlwaysCreateNewInstanceAttribute.cs" />

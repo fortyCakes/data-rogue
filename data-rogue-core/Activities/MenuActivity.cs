@@ -17,7 +17,6 @@ namespace data_rogue_core.Activities
 {
     public class MenuActivity : BaseActivity
     {
-        private TextControl PageCountText;
         private MenuSelectorControl LeftSelector;
         private MenuSelectorControl RightSelector;
 
@@ -44,23 +43,23 @@ namespace data_rogue_core.Activities
 
             var horizontalAlignment = Menu.Centred ? HorizontalAlignment.Center : HorizontalAlignment.Left;
             var verticalAlignment = Menu.Centred ? VerticalAlignment.Center : VerticalAlignment.Top;
-            var topFlow = new FlowContainerControl { Position = Position, HorizontalAlignment = horizontalAlignment };
+            var topFlow = new FlowContainerControl { HorizontalAlignment = horizontalAlignment };
 
             var titleText = new LargeTextControl { Parameters = Menu.MenuName };
             topFlow.Controls.Add(titleText);
             var lineControl = new LineControl();
             topFlow.Controls.Add(lineControl);
+            var pagingContainer = new PagedContainerControl();
+
 
             foreach(var item in Menu.MenuItems)
             {
-                topFlow.Controls.Add(item);
+                pagingContainer.Controls.Add(item);
             }
 
-            PageCountText = new TextControl { Position = Position, Parameters = $"(page 1 of {Menu.PageCount})", HorizontalAlignment = HorizontalAlignment.Right, VerticalAlignment = VerticalAlignment.Bottom };
             LeftSelector = new MenuSelectorControl { Direction = TileDirections.Left };
             RightSelector = new MenuSelectorControl { Direction = TileDirections.Right };
-
-            Controls.Add(PageCountText);
+            
             Controls.Add(LeftSelector);
             Controls.Add(RightSelector);
         }
@@ -105,18 +104,6 @@ namespace data_rogue_core.Activities
         public override void HandleAction(ISystemContainer systemContainer, ActionEventData action)
         {
             Menu.HandleAction(action);
-        }
-
-        private IEnumerable<IDataRogueControl> RenderMenuSelectors(int x, int y, Size size, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov)
-        {
-            var leftSelector = new 
-            var selectorSize = GetSizeOf(systemContainer, rendererHandle, controlRenderers, playerFov, leftSelector);
-            leftSelector.Position = new Rectangle(x - selectorSize.Width * 2, y, selectorSize.Width, selectorSize.Height);
-
-            var 
-
-            yield return leftSelector;
-            yield return rightSelector;
         }
     }
 }

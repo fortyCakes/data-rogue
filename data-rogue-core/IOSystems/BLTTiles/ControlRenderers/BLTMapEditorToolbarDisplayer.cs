@@ -69,7 +69,7 @@ namespace data_rogue_core.IOSystems.BLTTiles.ControlRenderers
             return mapEditor.CurrentTool.GetType() == tool.GetType();
         }
 
-        protected override Size LayoutInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        protected override Size Measure(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
             return new Size(12 * MapEditorActivity.GetToolbarControls().Count(), 12);
         }

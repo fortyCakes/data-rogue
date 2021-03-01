@@ -10,6 +10,9 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
+using Appearance = data_rogue_core.Components.Appearance;
 
 namespace data_rogue_core.IOSystems
 {
@@ -31,10 +34,14 @@ namespace data_rogue_core.IOSystems
             return null;
         }
 
-        public Size Layout(object handle, IDataRogueControl display, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        public bool Layout(object handle, IDataRogueControl display, ISystemContainer systemContainer, List<MapCoordinate> playerFov, Rectangle boundingBox, Padding padding, HorizontalAlignment horizontalAlignment, VerticalAlignment verticalAlignment)
         {
             var console = handle as RLConsole;
-            return GetSizeInternal(console, display, systemContainer, playerFov);
+            var size = GetSizeInternal(console, display, systemContainer, playerFov);
+
+            display.Position = new Rectangle(boundingBox.Location, size);
+
+            return false;
         }
 
         public string StringFromMouseData(IDataRogueControl display, ISystemContainer systemContainer, MouseData mouse)

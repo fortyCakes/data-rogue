@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using BearLib;
 using BLTWrapper;
 using data_rogue_core.Activities;
@@ -54,7 +56,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             y += 13;
         }
 
-        protected override Size LayoutInternal(ISpriteManager spriteManager, IDataRogueControl display, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        protected override Size Measure(ISpriteManager spriteManager, IDataRogueControl display, ISystemContainer systemContainer, List<MapCoordinate> playerFov, Rectangle boundingBox, Padding padding, HorizontalAlignment horizontalAlignment, VerticalAlignment verticalAlignment)
         {
             var statsControl = (display as IDataRogueInfoControl);
             var entity = statsControl.Entity;

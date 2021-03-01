@@ -2,6 +2,9 @@
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Systems.Interfaces;
 using System;
+using System.Drawing;
+using System.Windows.Forms;
+using Appearance = data_rogue_core.Components.Appearance;
 
 namespace data_rogue_core.Activities
 {
@@ -9,12 +12,12 @@ namespace data_rogue_core.Activities
     {
         private IEntityEngine _engine;
 
-        public BranchLoadingScreenActivity(ISystemContainer systemContainer) : base(systemContainer.ActivitySystem, "Generating branch...", false, null)
+        public BranchLoadingScreenActivity(Rectangle position, Padding padding, ISystemContainer systemContainer) : base(position, padding, systemContainer.ActivitySystem, "Generating branch...", false, null)
         {
             _engine = systemContainer.EntityEngine;
 
             _displayEntity = systemContainer.EntityEngine.New("branchGenerationTracker",
-                    new Appearance { Color = System.Drawing.Color.White, Glyph = '@' },
+                    new Appearance { Color = Color.White, Glyph = '@' },
                     new SpriteAppearance { Bottom = "generic_person" },
                     new Animated(),
                     new Animation(),
@@ -27,11 +30,5 @@ namespace data_rogue_core.Activities
             _engine.Destroy(_displayEntity);
             base.Close();
         }
-
-        public override ActivityType Type => base.Type;
-
-        public override bool RendersEntireSpace => base.RendersEntireSpace;
-
-        public override bool AcceptsInput => base.AcceptsInput;
     }
 }

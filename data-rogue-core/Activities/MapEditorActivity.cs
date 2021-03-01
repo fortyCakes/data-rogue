@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using data_rogue_core.Components;
 using data_rogue_core.Controls;
 using data_rogue_core.Controls.MapEditorTools;
@@ -44,10 +45,19 @@ namespace data_rogue_core.Activities
         private MapCoordinate _mousePosition;
         private readonly ISystemContainer _systemContainer;
 
-        public MapEditorActivity(ISystemContainer systemContainer)
+        public MapEditorActivity(Rectangle position, Padding padding, ISystemContainer systemContainer) : base(position, padding)
         {
             _systemContainer = systemContainer;
             NewMap();
+        }
+
+        public override void InitialiseControls()
+        {
+            Controls.Add(new MapControl { Position = Position });
+            Controls.Add(new MapEditorHighlightControl { Position = Position });
+            Controls.Add(new MapEditorToolbarControl { Position = Position });
+            Controls.Add(new MapEditorCellPickerControl { Position = Position, HorizontalAlignment = HorizontalAlignment.Right });
+            Controls.Add(new MessageLogControl { Position = Position, NumberOfMessages = 10, VerticalAlignment = VerticalAlignment.Bottom });
         }
 
         public static IEnumerable<IMapEditorTool> GetToolbarControls() => new List<IMapEditorTool>
@@ -120,15 +130,6 @@ namespace data_rogue_core.Activities
             CurrentTool = GetToolbarControls().SingleOrDefault(s => s.Entity.DescriptionName == toolName);
         }
 
-        public override IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
-        {
-            var config = GetRenderingConfiguration(width, height);
-
-            var controls = ControlFactory.GetControls(config, renderer, systemContainer, rendererHandle, controlRenderers, playerFov, systemContainer.ActivitySystem.ActivityStack.IndexOf(this));
-
-            return controls;
-        }
-
         public override void HandleMouse(ISystemContainer systemContainer, MouseData mouse)
         {
             if (mouse.MouseActive)
@@ -191,7 +192,7 @@ namespace data_rogue_core.Activities
         private void ShowMapInfoForm()
         {
             var mapInfoForm = new MapInfoForm(_systemContainer, _map, MapInfoFormCallback);
-            _systemContainer.ActivitySystem.Push(new FormActivity(mapInfoForm));
+            _systemContainer.ActivitySystem.Push(new FormActivity(Position, Padding, mapInfoForm));
         }
 
         private void MapInfoFormCallback(FormButton selectedButton, Form form)
@@ -234,21 +235,21 @@ namespace data_rogue_core.Activities
 
         public void ShowChangeDefaultCellDialogue()
         {
-            var inputActivity = new EntityPickerMenuActivity(AllCells, _systemContainer, "Choose a new default cell:", SetDefaultCell);
+            var inputActivity = new EntityPickerMenuActivity(Position, Padding, AllCells, _systemContainer, "Choose a new default cell:", SetDefaultCell);
 
             _systemContainer.ActivitySystem.Push(inputActivity);
         }
 
         public void ShowChangePrimaryCellDialogue()
         {
-            var inputActivity = new EntityPickerMenuActivity(AllCells, _systemContainer, "Choose a cell to use:", SetPrimaryCell);
+            var inputActivity = new EntityPickerMenuActivity(Position, Padding, AllCells, _systemContainer, "Choose a cell to use:", SetPrimaryCell);
 
             _systemContainer.ActivitySystem.Push(inputActivity);
         }
 
         public void ShowChangeSecondaryCellDialogue()
         {
-            var inputActivity = new EntityPickerMenuActivity(AllCells, _systemContainer, "Choose a cell to use:", SetSecondaryCell);
+            var inputActivity = new EntityPickerMenuActivity(Position, Padding, AllCells, _systemContainer, "Choose a cell to use:", SetSecondaryCell);
 
             _systemContainer.ActivitySystem.Push(inputActivity);
         }
@@ -266,24 +267,6 @@ namespace data_rogue_core.Activities
         private void SetSecondaryCell(IEntity parameter)
         {
             SecondaryCell = parameter;
-        }
-
-        public IEnumerable<IRenderingConfiguration> GetRenderingConfiguration(int width, int height)
-        {
-            return new List<IRenderingConfiguration>
-            {
-                new MapEditorConfiguration {Position=new Rectangle(0,0, width, height)},
-                new MapEditorTargetingConfiguration {Position=new Rectangle(0,0, width, height)},
-                new StatsConfiguration {Position = new Rectangle(0,0,width, height),
-                    Displays = new List<InfoDisplay> {
-                        new InfoDisplay { ControlType=typeof(MapEditorToolbarControl) }
-                    }
-                },
-                new StatsConfiguration{ Position = new Rectangle(width - 6 * 8, 0, 6 * 8, 24), Displays = new List<InfoDisplay>{
-                    new InfoDisplay { ControlType=typeof(MapEditorCellPickerControl)}
-                } },
-                new MessageConfiguration{Position = new Rectangle(1,height-50, width, 25), NumberOfMessages = 10}
-            };
         }
 
         public void SaveMap()

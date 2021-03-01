@@ -1,7 +1,8 @@
 ﻿using data_rogue_core.Systems.Interfaces;
-using System;
+using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace data_rogue_core.Activities
 {
@@ -9,13 +10,13 @@ namespace data_rogue_core.Activities
     {
         private ISaveSystem _saveSystem;
 
-        public HighScoresActivity(IActivitySystem activitySystem, ISaveSystem saveSystem) : base(activitySystem, "", true)
+        public HighScoresActivity(Rectangle position, Padding padding, IActivitySystem activitySystem, ISaveSystem saveSystem) : base(position, padding, activitySystem, "", true)
         {
             _saveSystem = saveSystem;
 
             var highScoreText = GetHighScoreText();
 
-            this.Text = highScoreText;
+            Text = highScoreText;
         }
 
         private string GetHighScoreText()

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using BearLib;
 using BLTWrapper;
 using data_rogue_core.Activities;
@@ -57,7 +59,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             BLT.Print(x + buttonSize / 2 - textSize / 2, y + (focused ? 3 : 2), display.Text);
         }
 
-        protected override Size LayoutInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        protected override Size Measure(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov, Rectangle boundingBox, Padding padding, HorizontalAlignment horizontalAlignment, VerticalAlignment verticalAlignment)
         {
             var display = control as ButtonControl;
 

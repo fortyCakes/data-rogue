@@ -42,7 +42,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             BLT.Font("");
         }
 
-        protected override Size LayoutInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        protected override Size Measure(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
             return control.Position.Size;
         }

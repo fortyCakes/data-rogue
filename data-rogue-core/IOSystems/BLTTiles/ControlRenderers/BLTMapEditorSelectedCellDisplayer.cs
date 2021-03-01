@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using BearLib;
 using data_rogue_core.Activities;
 using data_rogue_core.Components;
@@ -32,7 +34,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             RenderText(x + 16, y + 19, control.ActivityIndex, out _, "Right", Color.White, false);
             RenderText(x + 28, y + 19, control.ActivityIndex, out _, "Back", Color.White, false);
 
-            RenderBackgroundBox(x, y, control.ActivityIndex, LayoutInternal(spriteManager, control, systemContainer, playerFov), spriteManager);
+            RenderBackgroundBox(x, y, control.ActivityIndex, control.Position.Size, spriteManager);
 
             RenderEntitySprite(x + PrimaryCell.X, y + PrimaryCell.Y, control, systemContainer, spriteManager, systemContainer.ActivitySystem.MapEditorActivity.PrimaryCell);
             RenderEntitySprite(x + SecondaryCell.X, y + SecondaryCell.Y, control, systemContainer, spriteManager, systemContainer.ActivitySystem.MapEditorActivity.SecondaryCell);
@@ -43,7 +45,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             RenderSpriteIfSpecified(x + DefaultCell.X - 2, y + DefaultCell.Y - 2,  spriteManager, "skill_frame", AnimationFrame.Idle0);
         }
 
-        protected override Size LayoutInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
+        protected override Size Measure(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov, Rectangle boundingBox, Padding padding, HorizontalAlignment horizontalAlignment, VerticalAlignment verticalAlignment)
         {
             return new Size(5 * BLTTilesIOSystem.TILE_SPACING, 3 * BLTTilesIOSystem.TILE_SPACING);
         }

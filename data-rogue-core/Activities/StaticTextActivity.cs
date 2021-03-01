@@ -23,13 +23,30 @@ namespace data_rogue_core.Activities
 
         private readonly IActivitySystem _activitySystem;
         protected IEntity _displayEntity;
+        private BackgroundControl Background;
 
-        public StaticTextActivity(IActivitySystem activitySystem, string staticText, bool closeOnKeyPress = true, IEntity displayEntity = null)
+        public StaticTextActivity(Rectangle position, Padding padding, IActivitySystem activitySystem, string staticText, bool closeOnKeyPress = true, IEntity displayEntity = null) : base(position, padding)
         {
             Text = staticText;
             CloseOnKeyPress = closeOnKeyPress;
             _activitySystem = activitySystem;
             _displayEntity = displayEntity;
+        }
+
+        public override void InitialiseControls()
+        {
+            Background = new BackgroundControl { Position = Position, ShrinkToContents = !RendersEntireSpace };
+
+            var flow = new FlowContainerControl { FlowDirection = FlowDirection.LeftToRight };
+            Background.Controls.Add(flow);
+
+            if (_displayEntity != null)
+            {
+                var entityControl = new MenuEntityControl { Entity = _displayEntity };
+                flow.Controls.Add(entityControl);
+            }
+
+            flow.Controls.Add(new TextControl { Parameters = Text, VerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center });
         }
 
         public override void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard)
@@ -51,59 +68,6 @@ namespace data_rogue_core.Activities
         public override void HandleAction(ISystemContainer systemContainer, ActionEventData action)
         {
             //throw new System.NotImplementedException();
-        }
-
-        public override IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
-        {
-            var controls = new List<IDataRogueControl>();
-
-            if (RendersEntireSpace)
-            {
-                controls.Add( new BackgroundControl { Position = new Rectangle(0, 0, width, height) });
-                if (_displayEntity != null)
-                {
-                    var entityControl = new MenuEntityControl { Position = new Rectangle(renderer.ActivityPadding.Left, renderer.ActivityPadding.Top, 0, 0), Entity = _displayEntity };
-                    var entitySize = SetSize(entityControl, renderer, systemContainer, rendererHandle, playerFov);
-
-                    controls.Add(entityControl);
-                    controls.Add(new TextControl { Position = new Rectangle(renderer.ActivityPadding.Left + entitySize.Width + renderer.ActivityPadding.Right, renderer.ActivityPadding.Top, width, height), Parameters = Text });
-                }
-                else
-                {
-                    controls.Add(new TextControl { Position = new Rectangle(renderer.ActivityPadding.Left, renderer.ActivityPadding.Top, width, height), Parameters = Text });
-                }
-            }
-            else
-            {
-                Size entitySize = new Size(0, 0);
-                if (_displayEntity != null)
-                {
-                    var entityControl = new MenuEntityControl { Position = new Rectangle(renderer.ActivityPadding.Left, renderer.ActivityPadding.Top, 0, 0), Entity = _displayEntity };
-                    entitySize = SetSize(entityControl, renderer, systemContainer, rendererHandle, playerFov);
-                    controls.Add(entityControl);
-                }
-
-                var textControl = new TextControl { Position = new Rectangle(renderer.ActivityPadding.Left + entitySize.Width + renderer.ActivityPadding.Right, renderer.ActivityPadding.Top, 0, 0), Parameters = Text };
-                var textSize = SetSize(textControl, renderer, systemContainer, rendererHandle, playerFov);
-
-                var finalWidth = textControl.Position.Right + renderer.ActivityPadding.Right;
-                var finalHeight = textControl.Position.Bottom + renderer.ActivityPadding.Bottom;
-
-                var backgroundControl = new BackgroundControl { Position = new Rectangle(0, 0, finalWidth, finalHeight) };
-                controls.Add(textControl);
-                controls.Add(backgroundControl);
-                CenterControls(controls, width, height, finalWidth, finalHeight);
-
-            }
-
-            return controls;
-        }
-
-        private static Size SetSize(IDataRogueControl control, IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<MapCoordinate> playerFov)
-        {
-            var size = renderer.GetRendererFor(control).Layout(rendererHandle, control, systemContainer, playerFov);
-            control.Position = new Rectangle(control.Position.Location, size);
-            return size;
         }
 
         protected virtual void Close()

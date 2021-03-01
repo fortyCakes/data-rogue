@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using data_rogue_core.Utils;
+using System.Windows.Forms;
 
 namespace data_rogue_core.Activities
 {
@@ -34,6 +35,35 @@ namespace data_rogue_core.Activities
         private IEnumerable<MapCoordinate> _path = new List<MapCoordinate>();
         public Targeting TargetingData { get; set; }
 
+        public Action<MapCoordinate> Callback { get; set; }
+        public MapCoordinate TargetFrom { get; internal set; }
+
+        public TargetingActivity(Rectangle position, Padding padding, Targeting targetingData, Action<MapCoordinate> callback, ISystemContainer systemContainer, MapCoordinate targetFrom, IOSystemConfiguration ioSystemConfiguration) : base(position, padding)
+        {
+            _activitySystem = systemContainer.ActivitySystem;
+            _systemContainer = systemContainer;
+            _positionSystem = systemContainer.PositionSystem;
+            _targetingSystem = systemContainer.TargetingSystem;
+
+            TargetingData = targetingData;
+            CurrentTarget = null;
+            Callback = callback;
+            TargetFrom = targetFrom;
+
+            _targetableCells = _targetingSystem.TargetableCellsFrom(TargetingData, TargetFrom);
+
+            PickInitialTarget();
+            _ioSystemConfiguration = ioSystemConfiguration;
+        }
+
+        public override void InitialiseControls()
+        {
+            foreach (MapConfiguration mapConfiguration in _ioSystemConfiguration.GameplayWindowControls.OfType<MapConfiguration>())
+            {
+                Controls.Add(new TargetingOverlayControl { Position = mapConfiguration.Position, TargetingActivity = this });
+            }
+        }
+
         public MapCoordinate CurrentTarget
         {
             get => _currentTarget;
@@ -53,27 +83,6 @@ namespace data_rogue_core.Activities
                     }
                 }
             }
-        }
-
-        public Action<MapCoordinate> Callback { get; set; }
-        public MapCoordinate TargetFrom { get; internal set; }
-
-        public TargetingActivity(Targeting targetingData, Action<MapCoordinate> callback, ISystemContainer systemContainer, MapCoordinate targetFrom, IOSystemConfiguration ioSystemConfiguration)
-        {
-            _activitySystem = systemContainer.ActivitySystem;
-            _systemContainer = systemContainer;
-            _positionSystem = systemContainer.PositionSystem;
-            _targetingSystem = systemContainer.TargetingSystem;
-
-            TargetingData = targetingData;
-            CurrentTarget = null;
-            Callback = callback;
-            TargetFrom = targetFrom;
-
-            _targetableCells = _targetingSystem.TargetableCellsFrom(TargetingData, TargetFrom);
-
-            PickInitialTarget();
-            _ioSystemConfiguration = ioSystemConfiguration;
         }
 
         private void PickInitialTarget()
@@ -158,14 +167,6 @@ namespace data_rogue_core.Activities
                         CloseActivity();
                         break;
                 }
-            }
-        }
-
-        public override IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
-        {
-            foreach (MapConfiguration mapConfiguration in _ioSystemConfiguration.GameplayWindowControls.OfType<MapConfiguration>())
-            {
-                yield return new TargetingOverlayControl { Position = mapConfiguration.Position, TargetingActivity = this };
             }
         }
 

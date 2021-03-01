@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Windows.Forms;
 using data_rogue_core.Components;
 using data_rogue_core.Controls;
 using data_rogue_core.EntityEngineSystem;
@@ -19,12 +20,21 @@ namespace data_rogue_core.Activities
         private ISystemContainer _systemContainer;
         private string _caption;
         private Action<IEntity> _callback;
-        private IEntity SelectedCell;
+        private IEntity SelectedCell {
+            get => _selectedCell;
+            set {
+                _selectedCell = value;
+                HoveredCellName.Color = _selectedCell == null ? Color.Gray : Color.White;
+            }
+        }
 
         private IEnumerable<IEntity> Entities;
+        private TextControl HoveredCellName;
+        private IEntity _selectedCell;
+
         private string HoveredCellText => HoverPrefix + (SelectedCell?.DescriptionName ?? NoCellHoverText);
 
-        public EntityPickerMenuActivity(IEnumerable<IEntity> entities, ISystemContainer systemContainer, string caption, Action<IEntity> callback)
+        public EntityPickerMenuActivity(Rectangle position, Padding padding, IEnumerable<IEntity> entities, ISystemContainer systemContainer, string caption, Action<IEntity> callback) : base(position, padding)
         {
             _systemContainer = systemContainer;
             _caption = caption;
@@ -39,79 +49,33 @@ namespace data_rogue_core.Activities
 
         public override bool AcceptsInput => true;
 
-        public override IEnumerable<IDataRogueControl> GetLayout(IUnifiedRenderer renderer, ISystemContainer systemContainer, object rendererHandle, List<IDataRogueControlRenderer> controlRenderers, List<MapCoordinate> playerFov, int width, int height)
+        public override void InitialiseControls()
         {
-            var controls = new List<IDataRogueControl>();
-            
+            var backgroundControl = new BackgroundControl { Position = Position };
+            var topFlow = new FlowContainerControl { FlowDirection = FlowDirection.BottomUp };
+            var downFlow = new FlowContainerControl { FlowDirection = FlowDirection.TopDown };
+            var sideFlow = new FlowContainerControl { FlowDirection = FlowDirection.LeftToRight };
+            var textControl = new TextControl { Parameters = _caption };
+            var buttonControl = new ButtonControl { Text = "Cancel" };
+            HoveredCellName = new TextControl { Parameters = HoveredCellText };
 
-            var offsetX = renderer.ActivityPadding.Left * 2;
-            var offsetY = renderer.ActivityPadding.Top * 2;
+            buttonControl.OnClick += buttonControl_OnClick;
 
-            var maxWidth = width - renderer.ActivityPadding.Right - 150;
-            var maxHeight = height - renderer.ActivityPadding.Bottom;
+            Controls.Add(backgroundControl);
 
-            var x = 0;
-            var maxX = 0;
-            var y = 0;
+            backgroundControl.Controls.Add(topFlow);
 
+            topFlow.Controls.Add(buttonControl);
+            topFlow.Controls.Add(downFlow);
 
-            var textControl = new TextControl { Position = new Rectangle(offsetX + x, offsetY + y, 0, 0), Parameters = _caption };
-            var textSize = renderer.GetRendererFor(textControl).Layout(rendererHandle, textControl, systemContainer, playerFov);
-            textControl.Position = new Rectangle(offsetX + x, offsetY + y, textSize.Width, textSize.Height);
-            controls.Add(textControl);
-
-            y += textSize.Height + 1;
-            y += textSize.Height + 1;
-            
-            var hoveredCellName = new TextControl { Position = new Rectangle(offsetX + x, offsetY + y, 0, 0), Parameters = HoveredCellText };
-            textSize = renderer.GetRendererFor(hoveredCellName).Layout(rendererHandle, hoveredCellName, systemContainer, playerFov);
-            hoveredCellName.Position = new Rectangle(offsetX + x, offsetY + y, textSize.Width, textSize.Height);
-            if (SelectedCell == null) hoveredCellName.Color = Color.Gray;
-            controls.Add(hoveredCellName);
-            y += textSize.Height + 1;
-
-            var exampleCell = new MenuEntityControl();
-
-            var cellSize = renderer.GetRendererFor(exampleCell).Layout(rendererHandle, exampleCell, systemContainer, playerFov);
+            downFlow.Controls.Add(textControl);
+            downFlow.Controls.Add(sideFlow);
+            downFlow.Controls.Add(HoveredCellName);
 
             foreach(var cell in Entities)
             {
-                controls.Add(new MenuEntityControl { Position = new Rectangle(offsetX + x, offsetY + y, cellSize.Width, cellSize.Height), Entity = cell });
-
-                x += cellSize.Width + 1;
-
-                if (maxX < x) maxX = x;
-
-                if (offsetX + x + cellSize.Width >= maxWidth)
-                {
-                    x = 0;
-                    y += cellSize.Height + 1;
-                }
+                sideFlow.Controls.Add(new MenuEntityControl { Entity = cell });
             }
-
-            y += cellSize.Height * 2 + 4;
-
-
-            var finalWidth = maxX + cellSize.Width + 8;
-            var buttonControl = new ButtonControl { Position = new Rectangle(offsetX, y, 0, 0), Text = "Cancel" };
-            buttonControl.OnClick += buttonControl_OnClick;
-
-            var buttonSize = renderer.GetRendererFor(buttonControl).Layout(rendererHandle, buttonControl, systemContainer, playerFov);
-
-            var buttonLeft = finalWidth - buttonSize.Width - renderer.ActivityPadding.Right;
-            buttonControl.Position = new Rectangle(buttonLeft, buttonControl.Position.Top, buttonSize.Width, buttonSize.Height);
-            y += buttonControl.Position.Height + 1;
-            controls.Add(buttonControl);
-
-            var finalHeight = y + renderer.ActivityPadding.Bottom;
-
-            var backgroundControl = new BackgroundControl { Position = new Rectangle(renderer.ActivityPadding.Left, renderer.ActivityPadding.Left, finalWidth, finalHeight ) };
-            controls.Add(backgroundControl);
-
-
-            CenterControls(controls, width, height, finalWidth, finalHeight);
-
-            return controls;
         }
 
         private void buttonControl_OnClick(object sender, PositionEventHandlerArgs args)
