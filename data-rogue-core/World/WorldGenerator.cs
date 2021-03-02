@@ -70,7 +70,7 @@ namespace data_rogue_core
 
         private static void StartGameplayRunning(ISystemContainer systemContainer)
         {
-            systemContainer.ActivitySystem.ActivityStack.OfType<GameplayActivity>().Single().Running = true;
+            systemContainer.ActivitySystem.GameplayActivity.Running = true;
         }
 
         private static MapCoordinate CreateInitialMapAndGetSpawnPoint(ISystemContainer systemContainer)

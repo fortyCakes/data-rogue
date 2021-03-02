@@ -12,6 +12,6 @@ namespace data_rogue_core.Controls
     {
         public override bool FillsContainer => true;
 
-        public int NumberOfMessages { get; internal set; }
+        public int NumberOfMessages { get; set; }
     }
 }

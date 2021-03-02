@@ -18,9 +18,7 @@ namespace data_rogue_core.Controls
 
         public override bool Layout(List<IDataRogueControlRenderer> controlRenderers, ISystemContainer systemContainer, object handle, List<MapCoordinate> playerFov, Rectangle boundingBox)
         {
-            var internalBoundingBox = boundingBox.Pad(Margin).Pad(Padding);
-
-            var ok = base.Layout(controlRenderers, systemContainer, handle, playerFov, internalBoundingBox);
+            base.Layout(controlRenderers, systemContainer, handle, playerFov, boundingBox);
 
             if (ShrinkToContents)
             {
@@ -40,7 +38,7 @@ namespace data_rogue_core.Controls
                 Position = new Rectangle(left, top, right - left, bottom - top);
             }
 
-            return ok;
+            return false;
         }
 
 

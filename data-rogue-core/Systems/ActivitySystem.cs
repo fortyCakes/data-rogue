@@ -3,6 +3,7 @@ using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Renderers;
 using data_rogue_core.Systems.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -11,7 +12,7 @@ namespace data_rogue_core.Systems
 {
     public class ActivitySystem: IActivitySystem
     {
-        public ActivityStack ActivityStack { get; private set; }
+        private ActivityStack ActivityStack { get; set; }
 
         public void Initialise(Rectangle defaultPosition, Padding defaultPadding)
         {
@@ -23,6 +24,8 @@ namespace data_rogue_core.Systems
         public IActivity Peek() => ActivityStack.Peek();
 
         public IActivity Pop() => ActivityStack.Pop();
+
+        public IEnumerable<IActivity> ActivitiesForRendering => ActivityStack;
 
         public void Push(IActivity activity) => ActivityStack.PushAndInitialise(activity);
 
@@ -43,6 +46,8 @@ namespace data_rogue_core.Systems
         public Rectangle DefaultPosition { get; set; }
 
         public Padding DefaultPadding { get; set; }
+
+        public int Count => ActivityStack.Count();
 
         public IActivity GetActivityAcceptingInput()
         {
@@ -72,6 +77,11 @@ namespace data_rogue_core.Systems
         {
             var shoppingActivity = new ShopActivity(DefaultPosition, DefaultPadding, systemContainer, shop);
             ActivityStack.Push(shoppingActivity);
+        }
+
+        public bool HasActivity(IActivity activity)
+        {
+            return ActivityStack.Contains(activity);
         }
     }
 }

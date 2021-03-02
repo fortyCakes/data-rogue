@@ -60,7 +60,7 @@ namespace data_rogue_core.Systems
         public void HandleInput(KeyCombination keyPress, MouseData mouse)
         {
             var boundActions = GetActionsFromBoundKey(keyPress);
-            if (_activitySystem.ActivityStack.Any())
+            if (_activitySystem.Count > 0)
             {
                 IActivity inputActivity = _activitySystem.GetActivityAcceptingInput();
 

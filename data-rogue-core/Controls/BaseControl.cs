@@ -69,7 +69,10 @@ namespace data_rogue_core.Controls
 
         public virtual void Paint(List<IDataRogueControlRenderer> controlRenderers, object handle, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
-            GetCachedRenderer(controlRenderers).Paint(handle, this, systemContainer, playerFov);
+            if (Visible)
+            {
+                GetCachedRenderer(controlRenderers).Paint(handle, this, systemContainer, playerFov);
+            }
         }
 
         protected IDataRogueControlRenderer GetCachedRenderer(List<IDataRogueControlRenderer> controlRenderers)

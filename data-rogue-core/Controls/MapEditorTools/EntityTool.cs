@@ -31,7 +31,7 @@ namespace data_rogue_core.Controls.MapEditorTools
             entityCreationActivity.HoverPrefix = "";
             entityCreationActivity.NoCellHoverText = "(no entity selected)";
 
-            systemContainer.ActivitySystem.ActivityStack.Push(entityCreationActivity);
+            systemContainer.ActivitySystem.Push(entityCreationActivity);
         }
 
         private void AddCommandToMap(IMap map, MapCoordinate mapCoordinate, IEntity entityToAdd, ISystemContainer systemContainer)
@@ -68,7 +68,7 @@ namespace data_rogue_core.Controls.MapEditorTools
 
                 var inputBox = new TextInputActivity(systemContainer.ActivitySystem, "Enter a value for property {mapAdd.SettableProperty}:", callback);
 
-                systemContainer.ActivitySystem.ActivityStack.Push(inputBox);
+                systemContainer.ActivitySystem.Push(inputBox);
             }
             else
             {

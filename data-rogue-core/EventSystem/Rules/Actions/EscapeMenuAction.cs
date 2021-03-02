@@ -22,9 +22,9 @@ namespace data_rogue_core.EventSystem.Rules
 
         public override bool ApplyInternal(IEntity sender, ActionEventData eventData)
         {
-            if (_systemContainer.ActivitySystem.ActivityStack.Count > 1)
+            if (_systemContainer.ActivitySystem.Count > 1)
             {
-                _systemContainer.ActivitySystem.RemoveActivity(_systemContainer.ActivitySystem.ActivityStack.Peek());
+                _systemContainer.ActivitySystem.RemoveActivity(_systemContainer.ActivitySystem.Peek());
             }
 
             return true;

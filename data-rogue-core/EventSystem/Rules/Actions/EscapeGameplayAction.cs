@@ -23,8 +23,8 @@ namespace data_rogue_core.EventSystem.Rules
 
         public override bool ApplyInternal(IEntity sender, ActionEventData eventData)
         {
-            var confirmDialog = new ConfirmActivity(_systemContainer, "Are you sure you want to quit? Unsaved progress will be lost.", CloseGameplayActivity);
-            _systemContainer.ActivitySystem.ActivityStack.Push(confirmDialog);
+            var confirmDialog = new ConfirmActivity(_systemContainer.ActivitySystem.DefaultPosition, _systemContainer.ActivitySystem.DefaultPadding, _systemContainer, "Are you sure you want to quit? Unsaved progress will be lost.", CloseGameplayActivity);
+            _systemContainer.ActivitySystem.Push(confirmDialog);
 
             return true;
         }
@@ -32,7 +32,7 @@ namespace data_rogue_core.EventSystem.Rules
         private void CloseGameplayActivity()
         {
             _systemContainer.ActivitySystem.GameplayActivity.Running = false;
-            _systemContainer.ActivitySystem.Push(new MenuActivity(new MainMenu(_systemContainer)));
+            _systemContainer.ActivitySystem.Push(new MenuActivity(_systemContainer.ActivitySystem.DefaultPosition, _systemContainer.ActivitySystem.DefaultPadding, new MainMenu(_systemContainer)));
         }
     }
 }

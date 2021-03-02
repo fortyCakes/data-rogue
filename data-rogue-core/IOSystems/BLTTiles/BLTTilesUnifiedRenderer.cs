@@ -40,7 +40,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             
             var playerFov = systemContainer.ActivitySystem.GameplayActivity.Running ? FOVHelper.CalculatePlayerFov(systemContainer) : null;
 
-            Layout(systemContainer, activity, playerFov);
+            activity.Layout(_controlRenderers, systemContainer, playerFov, _spriteManager);
 
             Paint(systemContainer, activity, playerFov, activityIndex);
         }
@@ -53,19 +53,6 @@ namespace data_rogue_core.IOSystems.BLTTiles
                 {
                     control.ActivityIndex = activityIndex;
                     control.Paint(_controlRenderers, _spriteManager, systemContainer, playerFov);
-                }
-            }
-        }
-
-        private void Layout(ISystemContainer systemContainer, IActivity activity, List<MapCoordinate> playerFov)
-        {
-            var activityPosition = activity.Position;
-
-            foreach (var control in activity.Controls)
-            {
-                if (control.Visible)
-                {
-                    control.Layout(_controlRenderers, systemContainer, activity, playerFov, activityPosition);
                 }
             }
         }
@@ -128,7 +115,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
         public IDataRogueControl GetControlFromMousePosition(ISystemContainer systemContainer, IActivity activity, MapCoordinate cameraPosition, int x, int y)
         {
             var playerFov = systemContainer.ActivitySystem.GameplayActivity.Running ? FOVHelper.CalculatePlayerFov(systemContainer) : null;
-            Layout(systemContainer, activity, playerFov);
+            activity.Layout(_controlRenderers, systemContainer, playerFov, _spriteManager);
 
             var mousePoint = new Point(x, y);
 

@@ -52,7 +52,7 @@ namespace data_rogue_core.EventSystem.Rules
         public bool Apply(EventType type, IEntity sender, object eventData)
         {
             var data = eventData as ActionEventData;
-            var currentActivityType = _systemContainer.ActivitySystem.ActivityStack.Peek().Type;
+            var currentActivityType = _systemContainer.ActivitySystem.Peek().Type;
 
             if (data.Action == actionType && activityType == currentActivityType)
             {

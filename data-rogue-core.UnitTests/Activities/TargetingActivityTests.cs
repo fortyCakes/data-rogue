@@ -12,6 +12,8 @@ using NSubstitute;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace data_rogue_core.UnitTests.Activities
 {
@@ -45,9 +47,8 @@ namespace data_rogue_core.UnitTests.Activities
 
             _activityStack = new ActivityStack();
             _ioConfig = new IOSystemConfiguration();
-            _activityStack.Push(new GameplayActivity(_ioConfig, playerSystem));
+            _activityStack.Push(new GameplayActivity(new Rectangle(0,0,0,0), new Padding(0), _ioConfig, playerSystem));
             _activitySystem = Substitute.For<IActivitySystem>();
-            _activitySystem.ActivityStack.Returns(_activityStack);
             _positionSystem = Substitute.For<IPositionSystem>();
             _targetingSystem = Substitute.For<ITargetingSystem>();
             _systemContainer = Substitute.For<ISystemContainer>();
@@ -58,7 +59,7 @@ namespace data_rogue_core.UnitTests.Activities
 
             SetTargetableCells(new MapCoordinate("Map", 1, 0));
 
-            _targetingActivity = new TargetingActivity(_targetingData, _callback, _systemContainer, new MapCoordinate("Map", 0, 0), _ioConfig);
+            _targetingActivity = new TargetingActivity(_activitySystem.DefaultPosition, _activitySystem.DefaultPadding, _targetingData, _callback, _systemContainer, new MapCoordinate("Map", 0, 0), _ioConfig);
             _activityStack.Push(_targetingActivity);
         }
 
@@ -77,7 +78,7 @@ namespace data_rogue_core.UnitTests.Activities
         private void SetTargetableCells(params MapCoordinate[] cells)
         {
             _targetingSystem.TargetableCellsFrom(Arg.Any<Targeting>(), Arg.Any<MapCoordinate>()).ReturnsForAnyArgs(new HashSet<MapCoordinate> ( cells ));
-            _targetingActivity = new TargetingActivity(_targetingData, _callback, _systemContainer, new MapCoordinate("Map", 0, 0), _ioConfig);
+            _targetingActivity = new TargetingActivity(_activitySystem.DefaultPosition, _activitySystem.DefaultPadding, _targetingData, _callback, _systemContainer, new MapCoordinate("Map", 0, 0), _ioConfig);
         }
 
         private void _callback(MapCoordinate obj)
@@ -111,7 +112,7 @@ namespace data_rogue_core.UnitTests.Activities
             _positionSystem.EntitiesAt(Arg.Any<MapCoordinate>()).ReturnsForAnyArgs(entityList);
             _systemContainer.PositionSystem.Returns(_positionSystem);
 
-            _targetingActivity = new TargetingActivity(_targetingData, _callback, _systemContainer, new MapCoordinate("Map", 0, 0), _ioConfig);
+            _targetingActivity = new TargetingActivity(_activitySystem.DefaultPosition, _activitySystem.DefaultPadding, _targetingData, _callback, _systemContainer, new MapCoordinate("Map", 0, 0), _ioConfig);
             _targetingActivity.Complete();
 
             _callbackHappened.Should().BeTrue();

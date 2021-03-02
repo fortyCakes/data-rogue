@@ -17,12 +17,21 @@ namespace data_rogue_core.Controls
 
         public override bool Layout(List<IDataRogueControlRenderer> controlRenderers, ISystemContainer systemContainer, object handle, List<MapCoordinate> playerFov, Rectangle boundingBox)
         {
+            ApplyFlowLayout(controlRenderers, systemContainer, handle, playerFov, boundingBox);
+
+            ApplyAlignmentToContents(boundingBox);
+
+            return false;
+        }
+
+        private void ApplyFlowLayout(List<IDataRogueControlRenderer> controlRenderers, ISystemContainer systemContainer, object handle, List<MapCoordinate> playerFov, Rectangle boundingBox)
+        {
             var paddedBoundingBox = boundingBox.Pad(Margin).Pad(Padding);
             var availableSpace = new Rectangle(paddedBoundingBox.Location, paddedBoundingBox.Size);
             var largestMinorAxis = 0;
             var minorPosition = 0;
 
-            foreach(var control in Controls)
+            foreach (var control in Controls)
             {
                 var placed = false;
                 while (!placed)
@@ -51,7 +60,7 @@ namespace data_rogue_core.Controls
                 }
             }
 
-            return false;
+            ApplyAlignmentToContents(boundingBox);
         }
 
         private Rectangle ResetToNextRow(int minorPosition, Rectangle paddedBoundingBox)

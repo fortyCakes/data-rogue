@@ -24,7 +24,7 @@ namespace data_rogue_core.EventSystem.Rules
         {
             if (systemContainer.PlayerSystem.IsPlayer(sender))
             {
-                systemContainer.ActivitySystem.ActivityStack.OfType<GameplayActivity>().Single().Running = false;
+                systemContainer.ActivitySystem.GameplayActivity.Running = false;
 
                 systemContainer.ActivitySystem.Push(new MenuActivity(
                     systemContainer.ActivitySystem.DefaultPosition,

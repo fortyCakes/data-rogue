@@ -76,7 +76,7 @@ namespace data_rogue_core.Menus.DynamicMenus
 
         private void ShowToast(string message)
         {
-            _systemContainer.ActivitySystem.ActivityStack.Push(new ToastActivity(_systemContainer.ActivitySystem, message, Color.White));
+            _systemContainer.ActivitySystem.Push(new ToastActivity(_systemContainer.ActivitySystem, message, Color.White));
         }
 
         private void ExecuteSpawnCommand(string command)

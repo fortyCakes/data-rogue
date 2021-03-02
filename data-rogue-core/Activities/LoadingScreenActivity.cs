@@ -8,6 +8,12 @@ namespace data_rogue_core.Activities
     {
         public LoadingScreenActivity(Rectangle position, Padding padding, IActivitySystem activitySystem, string staticText) : base(position, padding, activitySystem, staticText, false)
         {
+
+        }
+
+        public LoadingScreenActivity(IActivitySystem activitySystem, string staticText) : base(activitySystem, staticText)
+        {
+
         }
     }
 }

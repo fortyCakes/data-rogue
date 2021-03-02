@@ -206,7 +206,7 @@ namespace data_rogue_core.Activities
                 SetMapWeight(mapInfoForm.Fields["VaultWeight"].Value.ToString());
             }
 
-            _systemContainer.ActivitySystem.ActivityStack.Pop();
+            _systemContainer.ActivitySystem.Pop();
         }
 
         private void SetMapWeight(string formData)

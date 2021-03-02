@@ -40,6 +40,16 @@ namespace data_rogue_core.Activities
             _stopwatch = new Stopwatch();
         }
 
+        public ToastActivity(IActivitySystem activitySystem, string message, Color color, int displayMs = 500, int fadeOutMs = 1000) : base(activitySystem.DefaultPosition, activitySystem.DefaultPadding)
+        {
+            _activitySystem = activitySystem;
+            _message = message;
+            _color = color;
+            _displayMs = displayMs;
+            _fadeOutMs = fadeOutMs;
+            _stopwatch = new Stopwatch();
+        }
+
         public override void InitialiseControls()
         {
             _textControl = new LargeTextControl

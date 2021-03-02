@@ -35,6 +35,15 @@ namespace data_rogue_core.Activities
             _activitySystem = activitySystem;
         }
 
+        public InformationActivity(IActivitySystem activitySystem, List<IDataRogueControl> statsControls, IEntity entity, bool closeOnKeyPress = true, bool rendersEntireSpace = false) : base(activitySystem.DefaultPosition, activitySystem.DefaultPadding)
+        {
+            Entity = entity;
+            StatsControls = statsControls;
+            CloseOnKeyPress = closeOnKeyPress;
+            RendersEntireSpace = rendersEntireSpace;
+            _activitySystem = activitySystem;
+        }
+
         public override void InitialiseControls()
         {
             Background = new BackgroundControl { Position = Position, ShrinkToContents = !RendersEntireSpace };

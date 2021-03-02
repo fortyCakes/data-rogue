@@ -12,7 +12,9 @@ namespace data_rogue_core.Activities
 {
     public interface IActivity
     {
+        bool Initialised { get; set; }
         void InitialiseControls();
+        void Layout(List<IDataRogueControlRenderer> controlRenderers, ISystemContainer systemContainer, List<MapCoordinate> playerFov, object handle);
 
         ActivityType Type { get; }
         bool RendersEntireSpace { get; }

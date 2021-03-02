@@ -96,7 +96,7 @@ namespace data_rogue_core
 
         private void DisplayMainMenu()
         {
-            SystemContainer.ActivitySystem.Push(new MenuActivity(new MainMenu(SystemContainer)));
+            SystemContainer.ActivitySystem.Push(new MenuActivity(SystemContainer.ActivitySystem.DefaultPosition, SystemContainer.ActivitySystem.DefaultPadding, new MainMenu(SystemContainer)));
         }
 
         private void OnRootConsoleRender(object sender, GameLoopEventArgs e)
@@ -109,7 +109,7 @@ namespace data_rogue_core
 
                 Stack<IActivity> renderStack = new Stack<IActivity>();
 
-                foreach (IActivity activity in SystemContainer.ActivitySystem.ActivityStack)
+                foreach (IActivity activity in SystemContainer.ActivitySystem.ActivitiesForRendering)
                 {
                     renderStack.Push(activity);
                     if (activity.RendersEntireSpace)
@@ -145,7 +145,7 @@ namespace data_rogue_core
                     var throttle = 1000;
                     while (
                        !SystemContainer.TimeSystem.WaitingForInput
-                       && SystemContainer.ActivitySystem.ActivityStack.Count > 0
+                       && SystemContainer.ActivitySystem.Count > 0
                        && SystemContainer.ActivitySystem.GetActivityAcceptingInput().Type == ActivityType.Gameplay
                        && SystemContainer.PlayerSystem.Player != null
                        && !_leaving

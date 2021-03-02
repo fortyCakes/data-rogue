@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using data_rogue_core.Activities;
 using data_rogue_core.Components;
 using data_rogue_core.Controls;
 using data_rogue_core.EntityEngineSystem;
@@ -15,67 +16,70 @@ namespace data_rogue_one.EventSystem.Utils
 {
     public static class MorgueHelper
     {
-        public static List<StatsConfiguration> GetStatusConfigurations(IEntity player)
+        public static List<IDataRogueControl> GetStatusConfigurations(IEntity player)
         {
-            var statsDisplays = new List<InfoDisplay>
+            var statsDisplays = new List<IDataRogueControl>
             {
-                new InfoDisplay { ControlType = typeof(LargeTextControl), Parameters = "You have died." },
-                new InfoDisplay { ControlType = typeof(Spacer) },
-                new InfoDisplay { ControlType = typeof(AppearanceName) },
-                new InfoDisplay { ControlType = typeof(Spacer) }
+                new LargeTextControl { Parameters = "You have died." },
+                new Spacer(),
+                new AppearanceName(),
+                new Spacer()
             };
-           
-            
-            statsDisplays.Add(new InfoDisplay { ControlType = typeof(TextControl), Parameters = player.Get<Description>().Detail });
-            statsDisplays.Add(new InfoDisplay { ControlType = typeof(ExperienceControl)});
-            statsDisplays.AddRange(GetCombatStats(player));
-            
 
-            return new List<StatsConfiguration>
+
+            statsDisplays.Add(new TextControl { Parameters = player.Get<Description>().Detail });
+            statsDisplays.Add(new ExperienceControl());
+            statsDisplays.AddRange(GetCombatStats(player));
+
+
+            return new List<IDataRogueControl>
             {
-                new StatsConfiguration
+                new FlowContainerControl
                 {
                     Position = new Rectangle(0,0,0,0),
-                    Displays = statsDisplays
+                    Controls = statsDisplays
                 }
             };
         }
 
-        public static List<InfoDisplay> GetCombatStats(IEntity entity)
+        public static List<IDataRogueControl> GetCombatStats(IEntity entity)
         {
-            var ret = new List<InfoDisplay>();
+            var ret = new List<IDataRogueControl>();
 
-            var healthStats = new List<InfoDisplay> {
-                new InfoDisplay { ControlType = typeof(ComponentCounter), Parameters = "Health,HP", BackColor = Color.DarkRed },
-                new InfoDisplay { ControlType = typeof(Spacer) }};
-
-            var auraStats = new List<InfoDisplay>
-            {
-                new InfoDisplay {ControlType = typeof(ComponentCounter), Parameters = "AuraFighter,Aura", BackColor = Color.Yellow}
-            };
-            auraStats.Add(new InfoDisplay { ControlType = typeof(Spacer)});
-
-            var aegisStats = new List<InfoDisplay>()
-            {
-                new InfoDisplay {ControlType = typeof(StatControl), Parameters = "CurrentAegisLevel"},
-                new InfoDisplay {ControlType = typeof(StatControl), Parameters = "Aegis"},
-                new InfoDisplay {ControlType = typeof(Spacer)},
+            var healthStats = new List<IDataRogueControl> {
+                new ComponentCounter{ Parameters = "Health,HP", BackColor = Color.DarkRed },
+                new Spacer()
             };
 
-            var tiltStats =  new List<InfoDisplay> {
-                new InfoDisplay { ControlType = typeof(ComponentCounter), Parameters = "TiltFighter,Tilt", BackColor = Color.Purple },
-                new InfoDisplay { ControlType = typeof(Spacer) } };
-
-            var combatStats = new List<InfoDisplay>
+            var auraStats = new List<IDataRogueControl>
             {
-                new InfoDisplay {ControlType = typeof(StatControl), Parameters = "Muscle"},
-                new InfoDisplay {ControlType = typeof(StatControl), Parameters = "Agility"},
-                new InfoDisplay {ControlType = typeof(StatControl), Parameters = "Intellect"},
-                new InfoDisplay {ControlType = typeof(StatControl), Parameters = "Willpower"},
-                new InfoDisplay {ControlType = typeof(Spacer)},
-                new InfoDisplay {ControlType = typeof(StatControl), Parameters = "AC"},
-                new InfoDisplay {ControlType = typeof(StatControl), Parameters = "EV"},
-                new InfoDisplay {ControlType = typeof(StatControl), Parameters = "SH"},
+                new ComponentCounter { Parameters = "AuraFighter,Aura", BackColor = Color.Yellow},
+                new Spacer()
+            };
+
+            var aegisStats = new List<IDataRogueControl>()
+            {
+                new StatControl { Parameters = "CurrentAegisLevel"},
+                new StatControl { Parameters = "Aegis"},
+                new Spacer(),
+            };
+
+            var tiltStats =  new List<IDataRogueControl>
+            {
+                new ComponentCounter { Parameters = "TiltFighter,Tilt", BackColor = Color.Purple },
+                new Spacer()
+            };
+
+            var combatStats = new List<IDataRogueControl>
+            {
+                new StatControl { Parameters = "Muscle"},
+                new StatControl { Parameters = "Agility"},
+                new StatControl { Parameters = "Intellect"},
+                new StatControl { Parameters = "Willpower"},
+                new Spacer(),
+                new StatControl { Parameters = "AC"},
+                new StatControl { Parameters = "EV"},
+                new StatControl { Parameters = "SH"},
             };
 
             if (entity.Has<Health>())

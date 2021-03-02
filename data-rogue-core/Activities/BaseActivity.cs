@@ -16,12 +16,29 @@ namespace data_rogue_core.Activities
         public BaseActivity(Rectangle position, Padding padding)
         {
             Position = position;
-
-            InitialiseControls();
             Padding = padding;
         }
 
+        public bool Initialised { get; set; } = false;
+
         public abstract void InitialiseControls();
+
+        public virtual void Layout(List<IDataRogueControlRenderer> controlRenderers, ISystemContainer systemContainer, List<MapCoordinate> playerFov, object handle)
+        {
+            if (!Initialised)
+            {
+                InitialiseControls();
+                Initialised = true;
+            }
+
+            foreach (var control in Controls.ToList())
+            {
+                if (control.Visible)
+                {
+                    control.Layout(controlRenderers, systemContainer, handle, playerFov, Position);
+                }
+            }
+        }
 
         public IList<IDataRogueControl> Controls { get; set; } = new List<IDataRogueControl>();
         public abstract ActivityType Type { get; }
@@ -35,7 +52,7 @@ namespace data_rogue_core.Activities
         public abstract void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard);
         public virtual void HandleMouse(ISystemContainer systemContainer, MouseData mouse)
         {
-            if (systemContainer.ActivitySystem.ActivityStack.Contains(this))
+            if (systemContainer.ActivitySystem.HasActivity(this))
             {
                 var mouseOverControl = GetMouseOverControl(systemContainer, mouse);
 

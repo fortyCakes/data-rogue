@@ -385,8 +385,6 @@
     <Compile Include="Forms\StatInformation.cs" />
     <Compile Include="Forms\StatsFormData.cs" />
     <Compile Include="IOSystems\IIOSystem.cs" />
-    <Compile Include="IOSystems\MapEditorConfiguration.cs" />
-    <Compile Include="IOSystems\MapEditorTargetingConfiguration.cs" />
     <Compile Include="IOSystems\MouseData.cs" />
     <Compile Include="IOSystems\RLNetConsole\ConsoleUnifiedRenderer.cs" />
     <Compile Include="IOSystems\RLNetConsole\ControlRenderers\RLNetBackgroundRenderer.cs" />

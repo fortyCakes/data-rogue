@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -17,8 +18,8 @@ namespace data_rogue_core.Activities
 {
     public class MenuActivity : BaseActivity
     {
-        private MenuSelectorControl LeftSelector;
-        private MenuSelectorControl RightSelector;
+        private PagedMenuControl PagedMenuControl;
+        private MenuActionsControl MenuActions;
 
         public override ActivityType Type => ActivityType.Menu;
         public override bool RendersEntireSpace => true;
@@ -35,33 +36,52 @@ namespace data_rogue_core.Activities
 
         public override void InitialiseControls()
         {
-            var background = new BackgroundControl { Position = Position };
+            var background = new BackgroundControl { Position = Position, Padding = Padding };
             Controls.Add(background);
 
-            var menuActions = new MenuActionsControl { AvailableActions = Menu.AvailableActions, SelectedAction = Menu.SelectedAction, SelectedColor = Color.Blue, VerticalAlignment = VerticalAlignment.Top };
-            Controls.Add(menuActions);
+            MenuActions = new MenuActionsControl { AvailableActions = Menu.AvailableActions, SelectedAction = Menu.SelectedAction, SelectedColor = Color.Blue, VerticalAlignment = VerticalAlignment.Top };
+            Controls.Add(MenuActions);
 
             var horizontalAlignment = Menu.Centred ? HorizontalAlignment.Center : HorizontalAlignment.Left;
             var verticalAlignment = Menu.Centred ? VerticalAlignment.Center : VerticalAlignment.Top;
-            var topFlow = new FlowContainerControl { HorizontalAlignment = horizontalAlignment };
+            var topFlow = new FlowContainerControl { HorizontalAlignment = horizontalAlignment, VerticalAlignment = verticalAlignment };
 
             var titleText = new LargeTextControl { Parameters = Menu.MenuName };
             topFlow.Controls.Add(titleText);
+
             var lineControl = new LineControl();
             topFlow.Controls.Add(lineControl);
-            var pagingContainer = new PagedContainerControl();
 
+            background.Controls.Add(topFlow);
 
-            foreach(var item in Menu.MenuItems)
+            PagedMenuControl = new PagedMenuControl { MenuItems = Menu.MenuItems, SelectedItem = Menu.SelectedItem };
+
+            topFlow.Controls.Add(PagedMenuControl);
+        }
+
+        public override void Layout(List<IDataRogueControlRenderer> controlRenderers, ISystemContainer systemContainer, List<MapCoordinate> playerFov, object handle)
+        {
+            if (!Initialised)
             {
-                pagingContainer.Controls.Add(item);
+                Initialised = true;
+                InitialiseControls();
             }
 
-            LeftSelector = new MenuSelectorControl { Direction = TileDirections.Left };
-            RightSelector = new MenuSelectorControl { Direction = TileDirections.Right };
-            
-            Controls.Add(LeftSelector);
-            Controls.Add(RightSelector);
+            UpdateMenuControls();
+
+            foreach (var control in Controls.ToList())
+            {
+                if (control.Visible)
+                {
+                    control.Layout(controlRenderers, systemContainer, handle, playerFov, Position);
+                }
+            }
+        }
+
+        private void UpdateMenuControls()
+        {
+            MenuActions.SelectedAction = Menu.SelectedAction;
+            PagedMenuControl.SelectedItem = Menu.SelectedItem;
         }
 
         public override void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard)

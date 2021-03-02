@@ -25,7 +25,7 @@ namespace data_rogue_one.EventSystem.Rules
             var entityId = uint.Parse(eventData.Parameters);
             var entity = _systemContainer.EntityEngine.Get(entityId);
 
-            _systemContainer.ActivitySystem.Push(new InformationActivity(_systemContainer.ActivitySystem, StatusHelper.GetStatusConfigurations(entity), entity, true, false));
+            _systemContainer.ActivitySystem.Push(new InformationActivity(_systemContainer.ActivitySystem.DefaultPosition, _systemContainer.ActivitySystem.DefaultPadding, _systemContainer.ActivitySystem, StatusHelper.GetStatusConfigurations(entity), entity, true, false));
 
             return false;
         }
@@ -46,7 +46,7 @@ namespace data_rogue_one.EventSystem.Rules
             var entityId = uint.Parse(eventData.Parameters);
             var entity = _systemContainer.EntityEngine.Get(entityId);
 
-            _systemContainer.ActivitySystem.Push(new InformationActivity(_systemContainer.ActivitySystem, StatusHelper.GetStatusConfigurations(entity), entity, true, false));
+            _systemContainer.ActivitySystem.Push(new InformationActivity(_systemContainer.ActivitySystem.DefaultPosition, _systemContainer.ActivitySystem.DefaultPadding, _systemContainer.ActivitySystem, StatusHelper.GetStatusConfigurations(entity), entity, true, false));
 
             return false;
         }
@@ -66,7 +66,7 @@ namespace data_rogue_one.EventSystem.Rules
         {
             var player = _systemContainer.PlayerSystem.Player;
 
-            _systemContainer.ActivitySystem.Push(new InformationActivity(_systemContainer.ActivitySystem, StatusHelper.GetStatusConfigurations(player), player, true, true));
+            _systemContainer.ActivitySystem.Push(new InformationActivity(_systemContainer.ActivitySystem.DefaultPosition, _systemContainer.ActivitySystem.DefaultPadding, _systemContainer.ActivitySystem, StatusHelper.GetStatusConfigurations(player), player, true, true));
 
             return false;
         }

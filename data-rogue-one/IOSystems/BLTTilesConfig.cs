@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using data_rogue_core.Activities;
 using data_rogue_core.Controls;
 using data_rogue_core.IOSystems;
 using data_rogue_core.IOSystems.BLTTiles;
@@ -19,7 +20,7 @@ namespace data_rogue_one.IOSystems
             var config = BLTTilesIOSystem.DefaultConfiguration;
             config.WindowTitle = "Data Rogue One";
 
-            config.GameplayWindowControls = new List<IRenderingConfiguration>
+            config.GameplayWindowControls = new List<IDataRogueControl>
             {
                 BLTTilesIOSystem.DefaultMap,
                 BLTTilesIOSystem.DefaultMinimap,
@@ -34,31 +35,31 @@ namespace data_rogue_one.IOSystems
             return new BLTTilesIOSystem(config);
         }
 
-        public static StatsConfiguration StatsConfiguration =>
-                new StatsConfiguration
+        public static FlowContainerControl StatsConfiguration =>
+                new FlowContainerControl
                 {
                     Position = new Rectangle(2, 2, 40 * TILE_SPACING - 2, 27 * TILE_SPACING - 2),
-                    Displays = new List<InfoDisplay>
+                    Controls = new List<IDataRogueControl>
                     {
-                        new InfoDisplay { ControlType = typeof(ComponentCounter), Parameters = "Health,HP", BackColor = Color.Red },
-                        new InfoDisplay { ControlType = typeof(ComponentCounter), Parameters = "AuraFighter,Aura", BackColor = Color.Gold },
-                        new InfoDisplay { ControlType = typeof(ComponentCounter), Parameters = "TiltFighter,Tilt", BackColor = Color.Purple },
-                        new InfoDisplay { ControlType =  typeof(Spacer) },
-                        new InfoDisplay { ControlType = typeof(DefencesControl) },
-                        new InfoDisplay { ControlType =  typeof(HoveredEntityDisplayBox), Parameters = "Health,HP;AuraFighter,Aura;TiltFighter,Tilt" }
+                        new ComponentCounter { Parameters = "Health,HP", BackColor = Color.Red },
+                        new ComponentCounter { Parameters = "AuraFighter,Aura", BackColor = Color.Gold },
+                        new ComponentCounter { Parameters = "TiltFighter,Tilt", BackColor = Color.Purple },
+                        new Spacer(),
+                        new DefencesControl(),
+                        new HoveredEntityDisplayBox { Parameters = "Health,HP;AuraFighter,Aura;TiltFighter,Tilt" }
                     }
                 };
-        public static StatsConfiguration SkillBar =>
-                new StatsConfiguration
+        public static FlowContainerControl SkillBar =>
+                new FlowContainerControl
                 {
                     Position = new Rectangle(0, 25 * TILE_SPACING - 18, 24 * 10, 24),
-                    Displays = new List<InfoDisplay>
+                    Controls = new List<IDataRogueControl>
                     {
-                        new InfoDisplay { ControlType = typeof(SkillBarControl) }
+                        new SkillBarControl()
                     }
                 };
 
-        public static MessageConfiguration MessageConfiguration => new MessageConfiguration {
+        public static MessageLogControl MessageConfiguration => new MessageLogControl {
                 Position = new Rectangle(2, (int)(13.5 * TILE_SPACING), 40 * TILE_SPACING, 10 * TILE_SPACING - 2),
                 NumberOfMessages = 15} ;
     }

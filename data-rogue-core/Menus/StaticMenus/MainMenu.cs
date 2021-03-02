@@ -50,7 +50,7 @@ namespace data_rogue_core.Menus.StaticMenus
                     _activitySystem.Push(new HighScoresActivity(_activitySystem, _systemContainer.SaveSystem));
                     break;
                 case "Map Editor":
-                    _activitySystem.Push(new MapEditorActivity(_systemContainer));
+                    _activitySystem.Push(new MapEditorActivity(_systemContainer.ActivitySystem.DefaultPosition, _systemContainer.ActivitySystem.DefaultPadding, _systemContainer));
                     break;
 
             }
