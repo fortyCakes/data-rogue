@@ -14,8 +14,6 @@ namespace data_rogue_core.Controls
 {
     public class BackgroundControl : BaseContainerControl
     {
-        
-
         public override bool Layout(List<IDataRogueControlRenderer> controlRenderers, ISystemContainer systemContainer, object handle, List<MapCoordinate> playerFov, Rectangle boundingBox)
         {
             base.Layout(controlRenderers, systemContainer, handle, playerFov, boundingBox);

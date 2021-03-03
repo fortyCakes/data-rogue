@@ -8,7 +8,7 @@
 
     public class HoveredEntityDisplayBox : BaseInfoControl { }
 
-    public class Spacer : BaseInfoControl { }
+    public class Spacer : BaseControl { }
 
     public class TitleControl : BaseInfoControl { }
 

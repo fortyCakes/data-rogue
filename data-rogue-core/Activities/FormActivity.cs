@@ -17,6 +17,7 @@ using data_rogue_core.Forms.StaticForms;
 using OpenTK.Input;
 using System.Windows.Forms;
 using Form = data_rogue_core.Forms.Form;
+using System.Windows.Forms.VisualStyles;
 
 namespace data_rogue_core.Activities
 {
@@ -38,24 +39,22 @@ namespace data_rogue_core.Activities
         
         public override void InitialiseControls()
         {
-            var paddedPosition = Position.PadIn(Padding);
+            var backgroundControl = new BackgroundControl { Position = Position, Padding = Padding };
 
-            var backgroundControl = new BackgroundControl { Position = Position };
-
-            var topFlow = new FlowContainerControl { Position = Position };
+            var topFlow = new FlowContainerControl { Position = Position, ShrinkToContents = true };
 
             var titleText = new LargeTextControl { Parameters = Form.Title };
             topFlow.Controls.Add(titleText);
             var lineControl = new LineControl();
             topFlow.Controls.Add(lineControl);
 
-            var buttonFlowContainer = new FlowContainerControl { Position = Position, FlowDirection = FlowDirection.BottomUp }; 
-            var buttonFlow = new FlowContainerControl { Position = Position, FlowDirection = FlowDirection.LeftToRight };
+            var buttonFlowContainer = new FlowContainerControl { Position = Position, FlowDirection = FlowDirection.BottomUp, VerticalAlignment = VerticalAlignment.Bottom, ShrinkToContents = true }; 
+            var buttonFlow = new FlowContainerControl { Position = Position, FlowDirection = FlowDirection.LeftToRight, ShrinkToContents = true, VerticalAlignment = VerticalAlignment.Bottom };
             buttonFlowContainer.Controls.Add(buttonFlow);
 
             foreach (var button in Form.Buttons.GetFlags())
             {
-                var buttonControl = new ButtonControl { Text = button.ToString() };
+                var buttonControl = new ButtonControl { Text = button.ToString(), Padding = new Padding(2) };
                 buttonControl.OnClick += FormButtonControl_OnClick;
                 buttonFlow.Controls.Add(buttonControl);
             }
@@ -67,15 +66,15 @@ namespace data_rogue_core.Activities
 
                 formFieldControl.OnClick += FormFieldControl_OnClick;
 
-                var subFlow = new FlowContainerControl { FlowDirection = FlowDirection.LeftToRight };
+                var subFlow = new FlowContainerControl { FlowDirection = FlowDirection.LeftToRight, ShrinkToContents = true, Margin = new Padding { Top = 1 } };
                 subFlow.Controls.Add(nameText);
                 subFlow.Controls.Add(formFieldControl);
                 topFlow.Controls.Add(subFlow);
             }
             
             Controls.Add(backgroundControl);
-            Controls.Add(topFlow);
-            Controls.Add(buttonFlow);
+            backgroundControl.Controls.Add(topFlow);
+            backgroundControl.Controls.Add(buttonFlow);
         }
 
         private void FormFieldControl_OnClick(object sender, PositionEventHandlerArgs args)

@@ -16,6 +16,14 @@ namespace data_rogue_core.Activities
                 {
                     yield return control;
                 }
+
+                if (control is IDataRogueParentControl)
+                {
+                    foreach(var subControl in GetControlsUnderMouse(mouse, (control as IDataRogueParentControl).Controls))
+                    {
+                        yield return subControl;
+                    }
+                }
             }
         }
     }

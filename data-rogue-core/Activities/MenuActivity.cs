@@ -96,15 +96,12 @@ namespace data_rogue_core.Activities
                 var controlsUnderMouse = MouseControlHelper.GetControlsUnderMouse(mouse, Controls);
                 controlsUnderMouse = controlsUnderMouse.Where(c => c.GetType() != typeof(BackgroundControl));
 
-                if (controlsUnderMouse.Count() == 1)
+                foreach(var control in controlsUnderMouse)
                 {
-                    var control = controlsUnderMouse.Single();
-
                     if (control is MenuItem)
                     {
                         Menu.SelectedItem = control as MenuItem;
                     }
-
 
                     if (mouse.IsLeftClick)
                     {

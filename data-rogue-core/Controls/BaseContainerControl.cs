@@ -9,10 +9,11 @@ using data_rogue_core.Utils;
 
 namespace data_rogue_core.Controls
 {
-    public class BaseContainerControl : BaseControl
+    public class BaseContainerControl : BaseControl, IDataRogueParentControl
     {
-        public List<IDataRogueControl> Controls { get; set; } = new List<IDataRogueControl>();
+        public IList<IDataRogueControl> Controls { get; set; } = new List<IDataRogueControl>();
         public bool ShrinkToContents = false;
+        public bool ApplyAlignment = false;
 
         public override void Paint(List<IDataRogueControlRenderer> controlRenderers, object handle, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
@@ -39,8 +40,11 @@ namespace data_rogue_core.Controls
                     redoLayout |= control.Layout(controlRenderers, systemContainer, handle, playerFov, interalBoundingBox);
                 }
             } while (redoLayout);
-            
-            ApplyAlignmentToContents(boundingBox);
+
+            if (ApplyAlignment)
+            {
+                ApplyAlignmentToContents(boundingBox);
+            }
 
             if (ShrinkToContents)
             {
