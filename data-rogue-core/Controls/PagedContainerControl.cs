@@ -36,12 +36,12 @@ namespace data_rogue_core.Controls
 
             // First assign space for the paging text, if it turns out to be necessary.
             PagingText.Layout(controlRenderers, systemContainer, handle, playerFov, internalBoundingBox);
-            var spaceForMenuItems = new Rectangle(internalBoundingBox.Location, new Size(internalBoundingBox.Width, internalBoundingBox.Height - PagingText.Position.Height));
+            var spaceForMenuItems = new Rectangle(internalBoundingBox.Location, new Size(internalBoundingBox.Width, internalBoundingBox.Height - PagingText.LayoutPosition.Height));
 
             // Find the size of a test menu item. Use this to work out how many pages you need. We assume we're always laying this out vertically.
             var testMenuItem = MenuItems.First();
             testMenuItem.Layout(controlRenderers, systemContainer, handle, playerFov, spaceForMenuItems);
-            var itemHeight = testMenuItem.Position.Height;
+            var itemHeight = testMenuItem.LayoutPosition.Height;
             var itemCount = MenuItems.Count();
 
             var itemsPerPage = spaceForMenuItems.Height / itemHeight;
@@ -60,7 +60,7 @@ namespace data_rogue_core.Controls
                     item.Layout(controlRenderers, systemContainer, handle, playerFov, spaceForMenuItems);
                     Controls.Add(item);
 
-                    spaceForMenuItems = spaceForMenuItems.ShrinkFromTop(item.Position.Height);
+                    spaceForMenuItems = spaceForMenuItems.ShrinkFromTop(item.LayoutPosition.Height);
                 }
             }
 
@@ -103,7 +103,7 @@ namespace data_rogue_core.Controls
 
             foreach (var control in Controls)
             {
-                var cdx = dx + controlBounding.Width / 2 - control.Position.Width / 2;
+                var cdx = dx + controlBounding.Width / 2 - control.LayoutPosition.Width / 2;
                 control.MovePosition(cdx, dy);
             }
         }
@@ -117,21 +117,21 @@ namespace data_rogue_core.Controls
 
             foreach (var control in Controls.OfType<MenuItem>())
             {
-                if (control.Position.Left < xmin)
+                if (control.LayoutPosition.Left < xmin)
                 {
-                    xmin = control.Position.Left;
+                    xmin = control.LayoutPosition.Left;
                 }
-                if (control.Position.Right > xmax)
+                if (control.LayoutPosition.Right > xmax)
                 {
-                    xmax = control.Position.Right;
+                    xmax = control.LayoutPosition.Right;
                 }
-                if (control.Position.Top < ymin)
+                if (control.LayoutPosition.Top < ymin)
                 {
-                    ymin = control.Position.Top;
+                    ymin = control.LayoutPosition.Top;
                 }
-                if (control.Position.Bottom > ymax)
+                if (control.LayoutPosition.Bottom > ymax)
                 {
-                    ymax = control.Position.Bottom;
+                    ymax = control.LayoutPosition.Bottom;
                 }
             }
 
@@ -145,14 +145,14 @@ namespace data_rogue_core.Controls
             RightSelector.Layout(controlRenderers, systemContainer, handle, playerFov, boundingBox);
 
             var leftPos = new Point(
-                SelectedItem.Position.Left - LeftSelector.Position.Width - LeftSelector.Margin.Right,
-                SelectedItem.Position.Top - SelectedItem.Position.Height / 2 + LeftSelector.Position.Height / 2);
+                SelectedItem.LayoutPosition.Left - LeftSelector.LayoutPosition.Width,
+                SelectedItem.LayoutPosition.Top - SelectedItem.LayoutPosition.Height / 2 + LeftSelector.LayoutPosition.Height / 2);
 
             LeftSelector.Position = new Rectangle(leftPos, LeftSelector.Position.Size);
 
             var rightPos = new Point(
-                SelectedItem.Position.Right + RightSelector.Margin.Left + 1,
-                SelectedItem.Position.Top - SelectedItem.Position.Height / 2 + RightSelector.Position.Height / 2);
+                SelectedItem.LayoutPosition.Right + 1,
+                SelectedItem.LayoutPosition.Top - SelectedItem.LayoutPosition.Height / 2 + RightSelector.LayoutPosition.Height / 2);
 
             RightSelector.Position = new Rectangle(rightPos, RightSelector.Position.Size);
         }

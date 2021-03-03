@@ -21,6 +21,7 @@ namespace data_rogue_core.Activities
         ActionEventData HandleMouse(MouseData mouse, IDataRogueControlRenderer renderer, ISystemContainer systemContainer);
 
         Rectangle Position { get; set;  }
+        Rectangle LayoutPosition { get; }
 
         void MovePosition(int dx, int dy);
 

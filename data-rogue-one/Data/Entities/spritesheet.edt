@@ -70,6 +70,13 @@ SpriteWidth: 16
 SpriteHeight: 16
 Scaling: 2
 [SpriteSheet]
+Name: textbox_white_small
+Path: Images/Sprites/UITiles/textbox_white.png
+Type: TilesetBox
+SpriteWidth: 16
+SpriteHeight: 16
+Scaling: 1
+[SpriteSheet]
 Name: button_unpressed
 Path: Images/Sprites/UITiles/blue_button_unpressed.png
 Type: TilesetBox

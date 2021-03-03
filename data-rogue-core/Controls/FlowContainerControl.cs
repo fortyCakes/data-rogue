@@ -42,14 +42,14 @@ namespace data_rogue_core.Controls
                 while (!placed)
                 {
                     control.Layout(controlRenderers, systemContainer, handle, playerFov, availableSpace);
-                    var neededSize = GetMajorAxisSize(control.Position);
+                    var neededSize = GetMajorAxisSize(control.LayoutPosition);
                     var availableSize = GetMajorAxisSize(availableSpace);
 
                     if (availableSize >= neededSize)
                     {
                         placed = true;
                         availableSpace = ShrinkMajorAxis(availableSpace, neededSize);
-                        var minorSize = GetMinorAxisSize(control.Position);
+                        var minorSize = GetMinorAxisSize(control.LayoutPosition);
                         if (minorSize > largestMinorAxis)
                         {
                             largestMinorAxis = minorSize;

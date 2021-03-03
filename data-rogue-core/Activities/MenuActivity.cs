@@ -32,6 +32,7 @@ namespace data_rogue_core.Activities
         {
             Menu = menu;
             Menu.Activity = this;
+            OnLayout += MenuActivity_OnLayout;
         }
 
         public override void InitialiseControls()
@@ -60,23 +61,9 @@ namespace data_rogue_core.Activities
             topFlow.Controls.Add(PagedMenuControl);
         }
 
-        public override void Layout(List<IDataRogueControlRenderer> controlRenderers, ISystemContainer systemContainer, List<MapCoordinate> playerFov, object handle)
+        private void MenuActivity_OnLayout(object sender, EventArgs e)
         {
-            if (!Initialised)
-            {
-                Initialised = true;
-                InitialiseControls();
-            }
-
             UpdateMenuControls();
-
-            foreach (var control in Controls.ToList())
-            {
-                if (control.Visible)
-                {
-                    control.Layout(controlRenderers, systemContainer, handle, playerFov, Position);
-                }
-            }
         }
 
         private void UpdateMenuControls()

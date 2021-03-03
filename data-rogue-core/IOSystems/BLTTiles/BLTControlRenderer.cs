@@ -29,11 +29,11 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
         public bool Layout(object handle, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov, Rectangle boundingBox, Padding padding, HorizontalAlignment horizontalAlignment, VerticalAlignment verticalAlignment)
         {
-            var paddedBbox = boundingBox.PadIn(control.Margin).PadIn(control.Padding);
+            var paddedBbox = boundingBox.PadIn(control.Margin);
 
             var size = Measure((ISpriteManager)handle, control, systemContainer, playerFov, paddedBbox, padding, horizontalAlignment, verticalAlignment);
-
-            control.Position = new Rectangle(boundingBox.Location, size);
+            
+            control.Position = new Rectangle(paddedBbox.Location, size);
 
             return false;
         }

@@ -24,11 +24,12 @@ namespace data_rogue_core.Controls
         public bool IsPressed { get; set; }
 
         public Rectangle Position { get; set; }
+        public Rectangle LayoutPosition => Position.PadOut(Margin);
         public Padding Padding { get; set; } = new Padding(0);
         public Padding Margin { get; set; } = new Padding(0);
 
-        public int PaddedTop => Position.Y + Padding.Top + Margin.Top;
-        public int PaddedLeft => Position.X + Padding.Left + Margin.Left;
+        public int PaddedTop => Position.Y + Padding.Top;
+        public int PaddedLeft => Position.X + Padding.Left;
         public HorizontalAlignment HorizontalAlignment { get; set; } = HorizontalAlignment.Left;
         public VerticalAlignment VerticalAlignment { get; set; } = VerticalAlignment.Top;
 

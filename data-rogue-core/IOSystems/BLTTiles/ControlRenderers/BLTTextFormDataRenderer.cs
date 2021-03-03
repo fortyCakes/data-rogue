@@ -25,7 +25,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             var y = control.Position.Y;
             var text = (control as TextFormData).Value.ToString();
 
-            var spriteSheet = spriteManager.Get("textbox_grey_small");
+            var spriteSheet = spriteManager.Get(control.IsFocused ? "textbox_white_small" : "textbox_grey_small");
             BLTLayers.Set(BLTLayers.Text, control.ActivityIndex);
             BLT.Font("text");
 

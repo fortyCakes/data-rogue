@@ -31,6 +31,8 @@ namespace data_rogue_core.Activities
                 Initialised = true;
             }
 
+            OnLayout?.Invoke(null, null);
+
             foreach (var control in Controls.ToList())
             {
                 if (control.Visible)
@@ -39,6 +41,8 @@ namespace data_rogue_core.Activities
                 }
             }
         }
+
+        public event EventHandler OnLayout;
 
         public IList<IDataRogueControl> Controls { get; set; } = new List<IDataRogueControl>();
         public abstract ActivityType Type { get; }

@@ -83,21 +83,21 @@ namespace data_rogue_core.Controls
 
             foreach (var control in Controls)
             {
-                if (control.Position.Left < xmin)
+                if (control.LayoutPosition.Left < xmin)
                 {
-                    xmin = control.Position.Left;
+                    xmin = control.LayoutPosition.Left;
                 }
-                if (control.Position.Right > xmax)
+                if (control.LayoutPosition.Right > xmax)
                 {
-                    xmax = control.Position.Right;
+                    xmax = control.LayoutPosition.Right;
                 }
-                if (control.Position.Top < ymin)
+                if (control.LayoutPosition.Top < ymin)
                 {
-                    ymin = control.Position.Top;
+                    ymin = control.LayoutPosition.Top;
                 }
-                if (control.Position.Bottom > ymax)
+                if (control.LayoutPosition.Bottom > ymax)
                 {
-                    ymax = control.Position.Bottom;
+                    ymax = control.LayoutPosition.Bottom;
                 }
             }
 
