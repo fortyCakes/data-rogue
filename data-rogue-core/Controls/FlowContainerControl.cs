@@ -20,13 +20,18 @@ namespace data_rogue_core.Controls
             ApplyFlowLayout(controlRenderers, systemContainer, handle, playerFov, boundingBox);
 
             ApplyAlignmentToContents(boundingBox);
+            
+            if (ShrinkToContents)
+            {
+                CalculateOwnPosition(boundingBox);
+            }
 
             return false;
         }
 
         private void ApplyFlowLayout(List<IDataRogueControlRenderer> controlRenderers, ISystemContainer systemContainer, object handle, List<MapCoordinate> playerFov, Rectangle boundingBox)
         {
-            var paddedBoundingBox = boundingBox.Pad(Margin).Pad(Padding);
+            var paddedBoundingBox = boundingBox.PadIn(Margin).PadIn(Padding);
             var availableSpace = new Rectangle(paddedBoundingBox.Location, paddedBoundingBox.Size);
             var largestMinorAxis = 0;
             var minorPosition = 0;

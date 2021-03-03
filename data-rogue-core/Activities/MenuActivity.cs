@@ -36,15 +36,16 @@ namespace data_rogue_core.Activities
 
         public override void InitialiseControls()
         {
-            var background = new BackgroundControl { Position = Position, Padding = Padding };
+            var horizontalAlignment = Menu.Centred ? HorizontalAlignment.Center : HorizontalAlignment.Left;
+            var verticalAlignment = Menu.Centred ? VerticalAlignment.Center : VerticalAlignment.Top;
+
+            var background = new BackgroundControl { Position = Position, Padding = Padding, HorizontalAlignment = horizontalAlignment, VerticalAlignment = verticalAlignment };
             Controls.Add(background);
 
             MenuActions = new MenuActionsControl { AvailableActions = Menu.AvailableActions, SelectedAction = Menu.SelectedAction, SelectedColor = Color.Blue, VerticalAlignment = VerticalAlignment.Top };
             Controls.Add(MenuActions);
 
-            var horizontalAlignment = Menu.Centred ? HorizontalAlignment.Center : HorizontalAlignment.Left;
-            var verticalAlignment = Menu.Centred ? VerticalAlignment.Center : VerticalAlignment.Top;
-            var topFlow = new FlowContainerControl { HorizontalAlignment = horizontalAlignment, VerticalAlignment = verticalAlignment };
+            var topFlow = new FlowContainerControl { HorizontalAlignment = horizontalAlignment, VerticalAlignment = verticalAlignment, ShrinkToContents = true };
 
             var titleText = new LargeTextControl { Parameters = Menu.MenuName };
             topFlow.Controls.Add(titleText);
@@ -54,7 +55,7 @@ namespace data_rogue_core.Activities
 
             background.Controls.Add(topFlow);
 
-            PagedMenuControl = new PagedMenuControl { MenuItems = Menu.MenuItems, SelectedItem = Menu.SelectedItem };
+            PagedMenuControl = new PagedMenuControl { MenuItems = Menu.MenuItems, SelectedItem = Menu.SelectedItem, ShrinkToContents = true };
 
             topFlow.Controls.Add(PagedMenuControl);
         }

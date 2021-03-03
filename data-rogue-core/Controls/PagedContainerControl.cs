@@ -32,7 +32,7 @@ namespace data_rogue_core.Controls
 
             Controls = new List<IDataRogueControl> { LeftSelector, RightSelector };
 
-            var internalBoundingBox = boundingBox.Pad(Margin).Pad(Padding);
+            var internalBoundingBox = boundingBox.PadIn(Margin).PadIn(Padding);
 
             // First assign space for the paging text, if it turns out to be necessary.
             PagingText.Layout(controlRenderers, systemContainer, handle, playerFov, internalBoundingBox);
@@ -64,10 +64,7 @@ namespace data_rogue_core.Controls
                 }
             }
 
-            // Place the MenuSelectorControls arond the selected item.
-            PlaceSelectorControls(controlRenderers, systemContainer, handle, playerFov, boundingBox);
-
-                    // If page count > 1, add the page text. Otherwise make sure it's not in Controls.
+            // If page count > 1, add the page text. Otherwise make sure it's not in Controls.
             if (totalPages > 1)
             {
                 var pageTextPosition = new Rectangle(internalBoundingBox.Left, spaceForMenuItems.Bottom, internalBoundingBox.Width, internalBoundingBox.Bottom - spaceForMenuItems.Bottom);
@@ -77,7 +74,69 @@ namespace data_rogue_core.Controls
                 Controls.Add(PagingText);
             }
 
+            ApplyAlignmentToContents(boundingBox);
+
+            if (ShrinkToContents)
+            {
+                CalculateOwnPosition(boundingBox);
+            }
+
+            // Place the MenuSelectorControls arond the selected item.
+            PlaceSelectorControls(controlRenderers, systemContainer, handle, playerFov, boundingBox);
+
             return false;
+        }
+
+        protected override void CalculateOwnPosition(Rectangle boundingBox)
+        {
+            Rectangle controlBounding = GetCustomControlBoundingBox();
+
+            Position = controlBounding.PadOut(Padding).PadOut(Margin);
+        }
+
+        protected override void ApplyAlignmentToContents(Rectangle boundingBox)
+        {
+            Rectangle controlBounding = GetCustomControlBoundingBox();
+
+            var dx = GetHorizontalAdjustment(boundingBox, controlBounding);
+            var dy = GetVerticalAdjustment(boundingBox, controlBounding);
+
+            foreach (var control in Controls)
+            {
+                var cdx = dx + controlBounding.Width / 2 - control.Position.Width / 2;
+                control.MovePosition(cdx, dy);
+            }
+        }
+
+        protected Rectangle GetCustomControlBoundingBox()
+        {
+            var xmin = int.MaxValue;
+            var ymin = int.MaxValue;
+            var xmax = int.MinValue;
+            var ymax = int.MinValue;
+
+            foreach (var control in Controls.OfType<MenuItem>())
+            {
+                if (control.Position.Left < xmin)
+                {
+                    xmin = control.Position.Left;
+                }
+                if (control.Position.Right > xmax)
+                {
+                    xmax = control.Position.Right;
+                }
+                if (control.Position.Top < ymin)
+                {
+                    ymin = control.Position.Top;
+                }
+                if (control.Position.Bottom > ymax)
+                {
+                    ymax = control.Position.Bottom;
+                }
+            }
+
+            var controlBounding = new Rectangle(xmin, ymin, xmax - xmin, ymax - ymin);
+            return controlBounding;
         }
 
         private void PlaceSelectorControls(List<IDataRogueControlRenderer> controlRenderers, ISystemContainer systemContainer, object handle, List<MapCoordinate> playerFov, Rectangle boundingBox)
@@ -92,7 +151,7 @@ namespace data_rogue_core.Controls
             LeftSelector.Position = new Rectangle(leftPos, LeftSelector.Position.Size);
 
             var rightPos = new Point(
-                SelectedItem.Position.Right + RightSelector.Margin.Left,
+                SelectedItem.Position.Right + RightSelector.Margin.Left + 1,
                 SelectedItem.Position.Top - SelectedItem.Position.Height / 2 + RightSelector.Position.Height / 2);
 
             RightSelector.Position = new Rectangle(rightPos, RightSelector.Position.Size);
@@ -101,8 +160,8 @@ namespace data_rogue_core.Controls
         private void InitialiseControls()
         {
             PagingText = new TextControl { Parameters = "(page xx of yy)" };
-            LeftSelector = new MenuSelectorControl { Direction = TileDirections.Left, Margin = new Padding(4) };
-            RightSelector = new MenuSelectorControl { Direction = TileDirections.Right, Margin = new Padding(4) };
+            LeftSelector = new MenuSelectorControl { Direction = TileDirections.Left, Margin = new Padding(1) };
+            RightSelector = new MenuSelectorControl { Direction = TileDirections.Right, Margin = new Padding(1) };
         }
     }
 }

@@ -38,7 +38,7 @@ namespace data_rogue_core.Activities
         
         public override void InitialiseControls()
         {
-            var paddedPosition = Position.Pad(Padding);
+            var paddedPosition = Position.PadIn(Padding);
 
             var backgroundControl = new BackgroundControl { Position = Position };
 

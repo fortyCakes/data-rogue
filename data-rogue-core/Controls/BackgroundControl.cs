@@ -14,29 +14,11 @@ namespace data_rogue_core.Controls
 {
     public class BackgroundControl : BaseContainerControl
     {
-        public bool ShrinkToContents = false;
+        
 
         public override bool Layout(List<IDataRogueControlRenderer> controlRenderers, ISystemContainer systemContainer, object handle, List<MapCoordinate> playerFov, Rectangle boundingBox)
         {
             base.Layout(controlRenderers, systemContainer, handle, playerFov, boundingBox);
-
-            if (ShrinkToContents)
-            {
-                var left = int.MaxValue;
-                var right = int.MinValue;
-                var top = int.MaxValue;
-                var bottom = int.MinValue;
-
-                foreach (var control in Controls)
-                {
-                    if (control.Position.Left < left) left = control.Position.Left;
-                    if (control.Position.Right < right) right = control.Position.Right;
-                    if (control.Position.Top < top) top = control.Position.Top;
-                    if (control.Position.Bottom < bottom) bottom = control.Position.Bottom;
-                }
-
-                Position = new Rectangle(left, top, right - left, bottom - top);
-            }
 
             return false;
         }

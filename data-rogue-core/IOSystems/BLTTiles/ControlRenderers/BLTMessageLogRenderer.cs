@@ -20,7 +20,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
         {
             var messageLog = control as MessageLogControl;
 
-            var numberOfMessages = int.Parse(messageLog.Parameters);
+            var numberOfMessages = messageLog.NumberOfMessages;
 
             BLTLayers.Set(BLTLayers.Text, control.ActivityIndex);
             BLT.Font("text");

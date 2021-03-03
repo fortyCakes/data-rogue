@@ -26,6 +26,9 @@ namespace data_rogue_core.Controls
         public Rectangle Position { get; set; }
         public Padding Padding { get; set; } = new Padding(0);
         public Padding Margin { get; set; } = new Padding(0);
+
+        public int PaddedTop => Position.Y + Padding.Top + Margin.Top;
+        public int PaddedLeft => Position.X + Padding.Left + Margin.Left;
         public HorizontalAlignment HorizontalAlignment { get; set; } = HorizontalAlignment.Left;
         public VerticalAlignment VerticalAlignment { get; set; } = VerticalAlignment.Top;
 
@@ -62,7 +65,7 @@ namespace data_rogue_core.Controls
 
         public virtual bool Layout(List<IDataRogueControlRenderer> controlRenderers, ISystemContainer systemContainer, object handle, List<MapCoordinate> playerFov, Rectangle boundingBox)
         {
-            var boxLessMargin = boundingBox.Pad(Margin);
+            var boxLessMargin = boundingBox.PadIn(Margin);
 
             return GetCachedRenderer(controlRenderers).Layout(handle, this, systemContainer, playerFov, boxLessMargin, Padding, HorizontalAlignment, VerticalAlignment);
         }
@@ -83,6 +86,11 @@ namespace data_rogue_core.Controls
             }
 
             return _cachedRenderer;
+        }
+
+        public virtual void MovePosition(int dx, int dy)
+        {
+            Position = new Rectangle(Position.X + dx, Position.Y + dy, Position.Width, Position.Height);
         }
     }
 }

@@ -4,6 +4,7 @@ using data_rogue_core.Forms.StaticForms;
 using data_rogue_core.Activities;
 using System.Linq;
 using data_rogue_core.Maps;
+using System.Windows.Forms;
 
 namespace data_rogue_core.Menus.StaticMenus
 {
@@ -17,11 +18,11 @@ namespace data_rogue_core.Menus.StaticMenus
             systemContainer.ActivitySystem,
             "Main Menu",
             null,
-            new MenuItem("New Game"),
-            new MenuItem("Load Game"),
-            new MenuItem("High Scores"),
-            new MenuItem("Map Editor"),
-            new MenuItem("Quit"))
+            new MenuItem("New Game") { Margin = new Padding(1) },
+            new MenuItem("Load Game") { Margin = new Padding(1) },
+            new MenuItem("High Scores") { Margin = new Padding(1) },
+            new MenuItem("Map Editor") { Margin = new Padding(1) },
+            new MenuItem("Quit") { Margin = new Padding(1) })
         {
             _systemContainer = systemContainer;
             OnSelectCallback += HandleMainMenuSelection;

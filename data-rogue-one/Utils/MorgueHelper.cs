@@ -22,13 +22,13 @@ namespace data_rogue_one.EventSystem.Utils
             {
                 new LargeTextControl { Parameters = "You have died." },
                 new Spacer(),
-                new AppearanceName(),
+                new AppearanceName { Entity = player },
                 new Spacer()
             };
 
 
             statsDisplays.Add(new TextControl { Parameters = player.Get<Description>().Detail });
-            statsDisplays.Add(new ExperienceControl());
+            statsDisplays.Add(new ExperienceControl { Entity = player });
             statsDisplays.AddRange(GetCombatStats(player));
 
 
@@ -47,39 +47,39 @@ namespace data_rogue_one.EventSystem.Utils
             var ret = new List<IDataRogueControl>();
 
             var healthStats = new List<IDataRogueControl> {
-                new ComponentCounter{ Parameters = "Health,HP", BackColor = Color.DarkRed },
+                new ComponentCounter{ Parameters = "Health,HP", BackColor = Color.DarkRed, Entity = entity },
                 new Spacer()
             };
 
             var auraStats = new List<IDataRogueControl>
             {
-                new ComponentCounter { Parameters = "AuraFighter,Aura", BackColor = Color.Yellow},
+                new ComponentCounter { Parameters = "AuraFighter,Aura", BackColor = Color.Yellow, Entity = entity },
                 new Spacer()
             };
 
             var aegisStats = new List<IDataRogueControl>()
             {
-                new StatControl { Parameters = "CurrentAegisLevel"},
-                new StatControl { Parameters = "Aegis"},
+                new StatControl { Parameters = "CurrentAegisLevel", Entity = entity },
+                new StatControl { Parameters = "Aegis", Entity = entity },
                 new Spacer(),
             };
 
             var tiltStats =  new List<IDataRogueControl>
             {
-                new ComponentCounter { Parameters = "TiltFighter,Tilt", BackColor = Color.Purple },
+                new ComponentCounter { Parameters = "TiltFighter,Tilt", BackColor = Color.Purple, Entity = entity },
                 new Spacer()
             };
 
             var combatStats = new List<IDataRogueControl>
             {
-                new StatControl { Parameters = "Muscle"},
-                new StatControl { Parameters = "Agility"},
-                new StatControl { Parameters = "Intellect"},
-                new StatControl { Parameters = "Willpower"},
+                new StatControl { Parameters = "Muscle", Entity = entity},
+                new StatControl { Parameters = "Agility", Entity = entity},
+                new StatControl { Parameters = "Intellect", Entity = entity},
+                new StatControl { Parameters = "Willpower", Entity = entity},
                 new Spacer(),
-                new StatControl { Parameters = "AC"},
-                new StatControl { Parameters = "EV"},
-                new StatControl { Parameters = "SH"},
+                new StatControl { Parameters = "AC", Entity = entity},
+                new StatControl { Parameters = "EV", Entity = entity},
+                new StatControl { Parameters = "SH", Entity = entity},
             };
 
             if (entity.Has<Health>())

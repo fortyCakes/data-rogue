@@ -12,6 +12,7 @@ namespace data_rogue_core.Controls
     public class BaseContainerControl : BaseControl
     {
         public List<IDataRogueControl> Controls { get; set; } = new List<IDataRogueControl>();
+        public bool ShrinkToContents = false;
 
         public override void Paint(List<IDataRogueControlRenderer> controlRenderers, object handle, ISystemContainer systemContainer, List<MapCoordinate> playerFov)
         {
@@ -23,11 +24,11 @@ namespace data_rogue_core.Controls
 
         public override bool Layout(List<IDataRogueControlRenderer> controlRenderers, ISystemContainer systemContainer, object handle, List<MapCoordinate> playerFov, Rectangle boundingBox)
         {
-            var externalBoundingBox = boundingBox.Pad(Margin);
+            var externalBoundingBox = boundingBox.PadIn(Margin);
 
             base.Layout(controlRenderers, systemContainer, handle, playerFov, externalBoundingBox);
 
-            var interalBoundingBox = externalBoundingBox.Pad(Padding);
+            var interalBoundingBox = externalBoundingBox.PadIn(Padding);
 
             var redoLayout = false;
 
@@ -41,10 +42,35 @@ namespace data_rogue_core.Controls
             
             ApplyAlignmentToContents(boundingBox);
 
+            if (ShrinkToContents)
+            {
+                CalculateOwnPosition(boundingBox);
+            }
+
             return false;
         }
 
-        public void ApplyAlignmentToContents(Rectangle boundingBox)
+        protected virtual void CalculateOwnPosition(Rectangle boundingBox)
+        {
+            Rectangle controlBounding = GetControlBoundingBox();
+
+            Position = controlBounding.PadOut(Padding).PadOut(Margin);
+        }
+
+        protected virtual void ApplyAlignmentToContents(Rectangle boundingBox)
+        {
+            Rectangle controlBounding = GetControlBoundingBox();
+
+            var dx = GetHorizontalAdjustment(boundingBox, controlBounding);
+            var dy = GetVerticalAdjustment(boundingBox, controlBounding);
+
+            foreach (var control in Controls)
+            {
+                AdjustPosition(control, dx, dy);
+            }
+        }
+
+        protected Rectangle GetControlBoundingBox()
         {
             var xmin = int.MaxValue;
             var ymin = int.MaxValue;
@@ -72,25 +98,15 @@ namespace data_rogue_core.Controls
             }
 
             var controlBounding = new Rectangle(xmin, ymin, xmax - xmin, ymax - ymin);
-            
-            var dx = GetHorizontalAdjustment(boundingBox, controlBounding);
-            var dy = GetVerticalAdjustment(boundingBox, controlBounding);
-
-            foreach(var control in Controls)
-            {
-                AdjustPosition(control, dx, dy);
-            }
-
+            return controlBounding;
         }
 
         private void AdjustPosition(IDataRogueControl control, int dx, int dy)
         {
-            int newX = control.Position.X + dx;
-            int newY = control.Position.Y + dy;
-            control.Position = new Rectangle(new Point(newX, newY), control.Position.Size);
+            control.MovePosition(dx, dy);
         }
 
-        private int GetVerticalAdjustment(Rectangle boundingBox, Rectangle controlBounding)
+        protected int GetVerticalAdjustment(Rectangle boundingBox, Rectangle controlBounding)
         {
             var dy = 0;
 
@@ -112,7 +128,7 @@ namespace data_rogue_core.Controls
             return dy;
         }
 
-        private int GetHorizontalAdjustment(Rectangle boundingBox, Rectangle controlBounding)
+        protected int GetHorizontalAdjustment(Rectangle boundingBox, Rectangle controlBounding)
         {
             var dx = 0;
 
@@ -132,6 +148,16 @@ namespace data_rogue_core.Controls
             }
 
             return dx;
+        }
+
+        public override void MovePosition(int dx, int dy)
+        {
+            base.MovePosition(dx, dy);
+
+            foreach(var control in Controls)
+            {
+                control.MovePosition(dx, dy);
+            }
         }
     }
 }

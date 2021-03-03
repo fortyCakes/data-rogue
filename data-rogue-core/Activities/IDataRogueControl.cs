@@ -7,6 +7,7 @@ using data_rogue_core.Systems.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace data_rogue_core.Activities
 {
@@ -19,7 +20,15 @@ namespace data_rogue_core.Activities
 
         ActionEventData HandleMouse(MouseData mouse, IDataRogueControlRenderer renderer, ISystemContainer systemContainer);
 
-        Rectangle Position { get; set; }
+        Rectangle Position { get; set;  }
+
+        void MovePosition(int dx, int dy);
+
+        Padding Padding { get; set; }
+        Padding Margin { get; set; }
+
+        int PaddedTop { get; }
+        int PaddedLeft { get; }
 
         int ActivityIndex { get; set; }
 

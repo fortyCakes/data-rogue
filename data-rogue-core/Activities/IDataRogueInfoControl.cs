@@ -13,9 +13,7 @@ namespace data_rogue_core.Activities
 
     public interface IDataRogueInfoControl : IDataRogueControl
     {
-        void SetData(IEntity entity, InfoDisplay display);
-
-        IEntity Entity { get; }
-        string Parameters { get; }
+        IEntity Entity { get; set; }
+        string Parameters { get; set; }
     }
 }
