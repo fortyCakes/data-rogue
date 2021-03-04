@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace data_rogue_core.Controls
 {
@@ -66,6 +67,44 @@ namespace data_rogue_core.Controls
             }
 
             ApplyAlignmentToContents(boundingBox);
+
+            if (minorPosition == 0)
+            {
+                if ((FlowDirection == FlowDirection.LeftToRight || FlowDirection == FlowDirection.RightToLeft) && VerticalAlignment == VerticalAlignment.Center)
+                {
+                    VerticallyCenterChildren();
+                }
+                if ((FlowDirection == FlowDirection.BottomUp || FlowDirection == FlowDirection.TopDown) && HorizontalAlignment == HorizontalAlignment.Center)
+                {
+                    HorizontallyCenterChildren();
+                }
+            }
+        }
+
+        private void HorizontallyCenterChildren()
+        {
+            var bbox = GetControlBoundingBox();
+
+            var centerX = bbox.X + bbox.Width / 2;
+
+            foreach(var control in Controls)
+            {
+                var dx = centerX - (control.LayoutPosition.X + control.LayoutPosition.Width / 2);
+                control.MovePosition(dx, 0);
+            }
+        }
+
+        private void VerticallyCenterChildren()
+        {
+            var bbox = GetControlBoundingBox();
+
+            var centerY = bbox.Y + bbox.Height / 2;
+
+            foreach (var control in Controls)
+            {
+                var dy = centerY - (control.LayoutPosition.Y + control.LayoutPosition.Height / 2);
+                control.MovePosition(0, dy);
+            }
         }
 
         private Rectangle ResetToNextRow(int minorPosition, Rectangle paddedBoundingBox)
