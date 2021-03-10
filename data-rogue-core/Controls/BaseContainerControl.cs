@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using data_rogue_core.Activities;
+using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.IOSystems;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems.Interfaces;
@@ -161,6 +162,24 @@ namespace data_rogue_core.Controls
             foreach(var control in Controls)
             {
                 control.MovePosition(dx, dy);
+            }
+        }
+
+        public void SetUpEntityForInfoControls(IEntity entity)
+        {
+            foreach (var control in Controls)
+            {
+                if (control is IDataRogueInfoControl)
+                {
+                    var infoControl = control as IDataRogueInfoControl;
+                    infoControl.Entity = entity;
+                }
+
+                if (control is IDataRogueParentControl)
+                {
+                    var parentControl = control as IDataRogueParentControl;
+                    parentControl.SetUpEntityForInfoControls(entity);
+                }
             }
         }
     }

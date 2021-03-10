@@ -15,6 +15,8 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
+using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace data_rogue_core.IOSystems.BLTTiles
 {
@@ -92,8 +94,14 @@ namespace data_rogue_core.IOSystems.BLTTiles
             } while (!isClosed);
         }
 
-        public static MapControl DefaultMap = new MapControl { Position = new Rectangle(0, 0, 40 * TILE_SPACING, 25 * TILE_SPACING) };
-        public static MinimapControl DefaultMinimap = new MinimapControl { Position = new Rectangle(40 * TILE_SPACING - 66, 2, 64, 64) };
+        public static MapControl DefaultMap = new MapControl {  };
+
+        public static MinimapControl DefaultMinimap = new MinimapControl {
+            HorizontalAlignment = HorizontalAlignment.Right,
+            VerticalAlignment = VerticalAlignment.Top,
+            Margin = new Padding(2)
+        };
+
         public static FlowContainerControl DefaultStats = new FlowContainerControl
         {
             Position = new Rectangle(2, 2, 40 * TILE_SPACING - 2, 25 * TILE_SPACING - 2),
@@ -107,7 +115,9 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
         public static FlowContainerControl DefaultInteraction = new FlowContainerControl
         {
-            Position = new Rectangle(40 * TILE_SPACING - 38, 25 * TILE_SPACING - 22, 32, 16),
+            VerticalAlignment = VerticalAlignment.Bottom,
+            HorizontalAlignment = HorizontalAlignment.Right,
+            Margin = new Padding(2),
             Controls = new List<IDataRogueControl>
             {
                 new InteractionControl()
@@ -116,7 +126,8 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
         public static MessageLogControl DefaultMessageLog = new MessageLogControl
         {
-            Position = new Rectangle(2, 15 * TILE_SPACING, 40 * TILE_SPACING, 10 * TILE_SPACING - 2),
+            VerticalAlignment = VerticalAlignment.Bottom,
+            Margin = new Padding(1),
             NumberOfMessages = 15
         };
 

@@ -37,6 +37,8 @@ namespace data_rogue_core.Activities
             Controls = _ioSystemConfiguration.GameplayWindowControls;
 
             Controls.Add(new LinesControl { Position = Position, Configuration = _ioSystemConfiguration });
+
+            SetUpEntityForInfoControls(_playerSystem.Player);
         }
 
         public override void HandleAction(ISystemContainer systemContainer, ActionEventData action)

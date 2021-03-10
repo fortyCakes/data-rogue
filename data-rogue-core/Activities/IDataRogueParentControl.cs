@@ -14,5 +14,7 @@ namespace data_rogue_core.Activities
     public interface IDataRogueParentControl : IDataRogueControl
     {
         IList<IDataRogueControl> Controls { get; }
+
+        void SetUpEntityForInfoControls(IEntity entity);
     }
 }

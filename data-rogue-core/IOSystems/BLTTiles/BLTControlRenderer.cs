@@ -35,7 +35,51 @@ namespace data_rogue_core.IOSystems.BLTTiles
             
             control.Position = new Rectangle(paddedBbox.Location, size);
 
+            ApplyHorizontalAlignment(horizontalAlignment, control, paddedBbox, size);
+            ApplyVerticalAlignment(verticalAlignment, control, paddedBbox, size);
+
             return false;
+        }
+
+        private void ApplyHorizontalAlignment(HorizontalAlignment horizontalAlignment, IDataRogueControl control, Rectangle paddedBbox, Size size)
+        {
+            var width = size.Width;
+            var boxWidth = paddedBbox.Width;
+            var newX = control.Position.X;
+
+            switch(horizontalAlignment)
+            {
+                case HorizontalAlignment.Left:
+                    break;
+                case HorizontalAlignment.Center:
+                    newX = paddedBbox.Left + boxWidth / 2 - width / 2;
+                    break;
+                case HorizontalAlignment.Right:
+                    newX = paddedBbox.Right - width;
+                    break;
+            }
+
+            control.Position = new Rectangle(newX, control.Position.Y, size.Width, size.Height);
+        }
+        private void ApplyVerticalAlignment(VerticalAlignment verticalAlignment, IDataRogueControl control, Rectangle paddedBbox, Size size)
+        {
+            var height = size.Height;
+            var boxHeight = paddedBbox.Height;
+            var newY = control.Position.Y;
+
+            switch (verticalAlignment)
+            {
+                case VerticalAlignment.Top:
+                    break;
+                case VerticalAlignment.Center:
+                    newY = paddedBbox.Top + boxHeight / 2 - height / 2;
+                    break;
+                case VerticalAlignment.Bottom:
+                    newY = paddedBbox.Bottom - height;
+                    break;
+            }
+
+            control.Position = new Rectangle(control.Position.X, newY, size.Width, size.Height);
         }
 
         protected abstract void DisplayInternal(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov);
