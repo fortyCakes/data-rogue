@@ -43,8 +43,8 @@ namespace data_rogue_core.Activities
             var background = new BackgroundControl { Position = Position, Padding = Padding, HorizontalAlignment = horizontalAlignment, VerticalAlignment = verticalAlignment };
             Controls.Add(background);
 
-            MenuActions = new MenuActionsControl { AvailableActions = Menu.AvailableActions, SelectedAction = Menu.SelectedAction, SelectedColor = Color.Blue, VerticalAlignment = VerticalAlignment.Top };
-            Controls.Add(MenuActions);
+            MenuActions = new MenuActionsControl { AvailableActions = Menu.AvailableActions, SelectedAction = Menu.SelectedAction, SelectedColor = Color.Blue, VerticalAlignment = VerticalAlignment.Top, HorizontalAlignment = HorizontalAlignment.Right };
+            background.Controls.Add(MenuActions);
 
             var topFlow = new FlowContainerControl { HorizontalAlignment = horizontalAlignment, VerticalAlignment = verticalAlignment, ShrinkToContents = true };
 
@@ -56,7 +56,7 @@ namespace data_rogue_core.Activities
 
             background.Controls.Add(topFlow);
 
-            PagedMenuControl = new PagedMenuControl { MenuItems = Menu.MenuItems, SelectedItem = Menu.SelectedItem, ShrinkToContents = true };
+            PagedMenuControl = new PagedMenuControl { MenuItems = Menu.MenuItems, SelectedItem = Menu.SelectedItem, ShrinkToContents = true, Margin = new Padding(4,1,1,1), HorizontalAlignment = horizontalAlignment, VerticalAlignment = verticalAlignment };
 
             topFlow.Controls.Add(PagedMenuControl);
         }

@@ -115,7 +115,7 @@ Text: {
 
 	description = User:Get('Description')
 	description.Name = 'Broken Wall'
-	description.Detail = 'A wall that's been broken down.'
+	description.Detail = 'A wall that has been broken down.'
 
 	SystemContainer.MessageSystem.Write('The wall breaks down! That was surprisingly easy.')
 }

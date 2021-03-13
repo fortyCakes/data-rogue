@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using data_rogue_core.Controls;
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.IOSystems;
@@ -43,18 +44,28 @@ namespace data_rogue_core.Activities
 
         public override void InitialiseControls()
         {
-            Background = new BackgroundControl { Position = Position, ShrinkToContents = !RendersEntireSpace };
+            var flow = new FlowContainerControl
+            {
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                ApplyAlignment = true
+            };
 
-            var flow = new FlowContainerControl { FlowDirection = FlowDirection.LeftToRight };
-            Background.Controls.Add(flow);
+            Background = new BackgroundControl { Position = Position, ShrinkToContents = !RendersEntireSpace, Padding = new Padding(4) };
+
+            var innerflow = new FlowContainerControl { FlowDirection = FlowDirection.LeftToRight, VerticalAlignment = VerticalAlignment.Center, ShrinkToContents = true };
+            Background.Controls.Add(innerflow);
 
             if (_displayEntity != null)
             {
-                var entityControl = new MenuEntityControl { Entity = _displayEntity };
-                flow.Controls.Add(entityControl);
+                var entityControl = new MenuEntityControl { Entity = _displayEntity, VerticalAlignment = VerticalAlignment.Center };
+                innerflow.Controls.Add(entityControl);
             }
 
-            flow.Controls.Add(new TextControl { Parameters = Text, VerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center });
+            innerflow.Controls.Add(new TextControl { Parameters = Text, VerticalAlignment = VerticalAlignment.Center, Margin = new Padding(2) });
+
+            Controls.Add(flow);
+            flow.Controls.Add(Background);
         }
 
         public override void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard)

@@ -72,6 +72,7 @@ namespace data_rogue_core.EventSystem.Rules
 
         private static bool CantReach(Vector vector)
         {
+            if (vector == null) return false;
             return vector.X > 1 || vector.X < -1 || vector.Y > 1 || vector.Y < -1;
         }
 

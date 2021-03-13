@@ -2,6 +2,7 @@
 using data_rogue_core.EntityEngineSystem;
 using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
+using System.Linq;
 
 namespace data_rogue_core.EventSystem.Rules
 {
@@ -31,7 +32,7 @@ namespace data_rogue_core.EventSystem.Rules
         {
             if (sender.Has<Equipped>())
             {
-                var equipped = EquipmentSystem.GetEquippedItems(sender);
+                var equipped = EquipmentSystem.GetEquippedItems(sender).Distinct();
                 foreach (var item in equipped)
                 {
                     EquipmentSystem.Unequip(sender, item);

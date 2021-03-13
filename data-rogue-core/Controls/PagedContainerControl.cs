@@ -74,13 +74,17 @@ namespace data_rogue_core.Controls
                 Controls.Add(PagingText);
             }
 
-            ApplyAlignmentToContents(boundingBox);
-
             if (ShrinkToContents)
             {
                 CalculateOwnPosition(boundingBox);
             }
 
+            ApplyAlignmentToContents(internalBoundingBox);
+
+            if (ShrinkToContents)
+            {
+                CalculateOwnPosition(boundingBox);
+            }
             // Place the MenuSelectorControls arond the selected item.
             PlaceSelectorControls(controlRenderers, systemContainer, handle, playerFov, boundingBox);
 
@@ -103,7 +107,11 @@ namespace data_rogue_core.Controls
 
             foreach (var control in Controls)
             {
-                var cdx = dx + controlBounding.Width / 2 - control.LayoutPosition.Width / 2;
+                var cdx = dx + controlBounding.Width / 2;
+                if (HorizontalAlignment == HorizontalAlignment.Center)
+                {
+                    cdx -= control.Position.Width / 2;
+                }
                 control.MovePosition(cdx, dy);
             }
         }
@@ -146,13 +154,13 @@ namespace data_rogue_core.Controls
 
             var leftPos = new Point(
                 SelectedItem.LayoutPosition.Left - LeftSelector.LayoutPosition.Width,
-                SelectedItem.LayoutPosition.Top - SelectedItem.LayoutPosition.Height / 2 + LeftSelector.LayoutPosition.Height / 2);
+                SelectedItem.LayoutPosition.Top + SelectedItem.LayoutPosition.Height / 2 + 1 - LeftSelector.LayoutPosition.Height / 2);
 
             LeftSelector.Position = new Rectangle(leftPos, LeftSelector.Position.Size);
 
             var rightPos = new Point(
                 SelectedItem.LayoutPosition.Right + 1,
-                SelectedItem.LayoutPosition.Top - SelectedItem.LayoutPosition.Height / 2 + RightSelector.LayoutPosition.Height / 2);
+                SelectedItem.LayoutPosition.Top + SelectedItem.LayoutPosition.Height / 2 + 1 - RightSelector.LayoutPosition.Height / 2);
 
             RightSelector.Position = new Rectangle(rightPos, RightSelector.Position.Size);
         }
@@ -160,8 +168,8 @@ namespace data_rogue_core.Controls
         private void InitialiseControls()
         {
             PagingText = new TextControl { Parameters = "(page xx of yy)" };
-            LeftSelector = new MenuSelectorControl { Direction = TileDirections.Left, Margin = new Padding(1) };
-            RightSelector = new MenuSelectorControl { Direction = TileDirections.Right, Margin = new Padding(1) };
+            LeftSelector = new MenuSelectorControl { Direction = TileDirections.Left, Margin = new Padding(1, 0, 1, 0) };
+            RightSelector = new MenuSelectorControl { Direction = TileDirections.Right, Margin = new Padding(1, 0, 1, 0) };
         }
     }
 }
