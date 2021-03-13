@@ -59,8 +59,8 @@ namespace data_rogue_one.IOSystems
                         new ComponentCounter { Parameters = "AuraFighter,Aura", BackColor = Color.Gold },
                         new ComponentCounter { Parameters = "TiltFighter,Tilt", BackColor = Color.Purple },
                         new Spacer(),
-                        new DefencesControl(),
-                        new HoveredEntityDisplayBox { Parameters = "Health,HP;AuraFighter,Aura;TiltFighter,Tilt" }
+                        new DefencesControl()
+                        //new HoveredEntityDisplayBox { Parameters = "Health,HP;AuraFighter,Aura;TiltFighter,Tilt" }
                     }
                 };           
                  

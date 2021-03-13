@@ -59,7 +59,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
         public MapCoordinate GetGameplayMapCoordinateFromMousePosition(MapCoordinate cameraPosition, int x, int y)
         {
-            return GetMapCoordinateFromMousePosition(_ioSystemConfiguration.GameplayWindowControls.OfType<MapControl>(), cameraPosition, x, y);
+            return GetMapCoordinateFromMousePosition(_ioSystemConfiguration.GameplayWindowControls.ToList().GetControlsRecursive().OfType<MapControl>(), cameraPosition, x, y);
         }
 
         public MapCoordinate GetMapEditorMapCoordinateFromMousePosition(MapCoordinate cameraPosition, int x, int y)
@@ -77,7 +77,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
             var map = onMaps.Last();
 
-            if (map.GetType() == typeof(MapControl) || map.GetType() == typeof(MinimapControl))
+            if (map.GetType() == typeof(MapControl))
             {
                 x -= map.Position.Left;
                 y -= map.Position.Top;

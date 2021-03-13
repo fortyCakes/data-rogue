@@ -1,19 +1,12 @@
-﻿using data_rogue_core.Activities;
-using data_rogue_core.Components;
+﻿using data_rogue_core.Components;
 using data_rogue_core.EntityEngineSystem;
-using data_rogue_core.EventSystem;
 using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.IOSystems;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems;
 using data_rogue_core.Systems.Interfaces;
 using data_rogue_core.Utils;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace data_rogue_core.Controls
 {
@@ -27,7 +20,7 @@ namespace data_rogue_core.Controls
 
         public override ActionEventData HandleMouse(MouseData mouse, IDataRogueControlRenderer renderer, ISystemContainer systemContainer)
         {
-            MapCoordinate mapCoordinate = systemContainer.RendererSystem.Renderer.GetGameplayMapCoordinateFromMousePosition(systemContainer.RendererSystem.CameraPosition, mouse.X, mouse.Y);
+            MapCoordinate mapCoordinate = GetMapCoordinate(mouse, systemContainer);
             systemContainer.ControlSystem.HoveredCoordinate = mapCoordinate;
 
             var player = systemContainer.PlayerSystem.Player;
@@ -72,7 +65,10 @@ namespace data_rogue_core.Controls
             return null;
         }
 
-
+        protected virtual MapCoordinate GetMapCoordinate(MouseData mouse, ISystemContainer systemContainer)
+        {
+            return systemContainer.RendererSystem.Renderer.GetGameplayMapCoordinateFromMousePosition(systemContainer.RendererSystem.CameraPosition, mouse.X, mouse.Y);
+        }
 
         private bool CanAutowalkToCoordinate(ISystemContainer systemContainer, MapCoordinate mapCoordinate)
         {

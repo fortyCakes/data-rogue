@@ -53,7 +53,7 @@ namespace data_rogue_core.Activities
 
         public override void InitialiseControls()
         {
-            Controls.Add(new MapControl { Position = Position });
+            Controls.Add(new MapEditorControl { Position = Position });
             Controls.Add(new MapEditorHighlightControl { Position = Position });
             Controls.Add(new MapEditorToolbarControl { Position = Position });
             Controls.Add(new MapEditorCellPickerControl { Position = Position, HorizontalAlignment = HorizontalAlignment.Right });

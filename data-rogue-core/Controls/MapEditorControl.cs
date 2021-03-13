@@ -37,7 +37,13 @@ namespace data_rogue_core.Controls
 
             return null;
         }
+
+        protected override MapCoordinate GetMapCoordinate(MouseData mouse, ISystemContainer systemContainer)
+        {
+            return systemContainer.RendererSystem.Renderer.GetMapEditorMapCoordinateFromMousePosition(systemContainer.RendererSystem.CameraPosition, mouse.X, mouse.Y);
+        }
     }
+
 
     public class MapEditorHighlightControl : BaseControl
     {
