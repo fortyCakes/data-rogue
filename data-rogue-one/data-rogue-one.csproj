@@ -469,6 +469,7 @@
     <None Include="Data\Vaults\fire_gauntlet.map">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Vaults\glass_junction.map" />
     <None Include="Data\Vaults\glass_treasure_junction.map">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

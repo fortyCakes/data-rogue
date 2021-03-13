@@ -54,6 +54,11 @@ namespace data_rogue_core.Controls
                             MoveToBottom(control, availableSpace);
                         }
 
+                        if (FlowDirection == FlowDirection.RightToLeft)
+                        {
+                            MoveToRight(control, availableSpace);
+                        }
+
                         availableSpace = ShrinkMajorAxis(availableSpace, neededSize);
                         var minorSize = GetMinorAxisSize(control.LayoutPosition);
                         if (minorSize > largestMinorAxis)
@@ -84,6 +89,11 @@ namespace data_rogue_core.Controls
                     HorizontallyCenterChildren();
                 }
             }
+        }
+
+        private void MoveToRight(IDataRogueControl control, Rectangle availableSpace)
+        {
+            control.MovePosition(availableSpace.Right - control.Position.Width - control.Position.X, 0);
         }
 
         private void MoveToBottom(IDataRogueControl control, Rectangle availableSpace)

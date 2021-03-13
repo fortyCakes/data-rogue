@@ -1,0 +1,25 @@
+Map:"glass_junction"
+default:Cell:Void
+-9,-5
+-5,-5: VaultConnection()
+-4,-5: VaultConnection()
+0,-1: VaultConnection()
+0,0: VaultConnection()
+-5,4: VaultConnection()
+-4,4: VaultConnection()
+-9,-1: VaultConnection()
+-9,0: VaultConnection()
+0:Cell:Void
+.:Cell:Empty
+#:Cell:Wall
+,:Cell:GlassOnStone
+####..####
+#,,....,,#
+#,......,#
+#..,,,,..#
+...,,,,...
+...,,,,...
+#..,,,,..#
+#,......,#
+#,,....,,#
+####..####

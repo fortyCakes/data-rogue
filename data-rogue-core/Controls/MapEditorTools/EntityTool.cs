@@ -14,7 +14,7 @@ namespace data_rogue_core.Controls.MapEditorTools
     {
         public IEntity Entity => new Entity(0, "EntityTool",
             new IEntityComponent[] {
-                new Description {Name = "Entitly Tool", Detail = "A tool for setting the entity on a tile." },
+                new Description {Name = "Entity Tool", Detail = "A tool for setting the entity on a tile." },
                 new Appearance { Glyph = 'E' },
                 new SpriteAppearance { Bottom = "entity_tool" }
             });

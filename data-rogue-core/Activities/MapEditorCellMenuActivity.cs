@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using data_rogue_core.Components;
 using data_rogue_core.Controls;
 using data_rogue_core.EntityEngineSystem;
@@ -20,17 +21,10 @@ namespace data_rogue_core.Activities
         private ISystemContainer _systemContainer;
         private string _caption;
         private Action<IEntity> _callback;
-        private IEntity SelectedCell {
-            get => _selectedCell;
-            set {
-                _selectedCell = value;
-                HoveredCellName.Color = _selectedCell == null ? Color.Gray : Color.White;
-            }
-        }
+        private IEntity SelectedCell { get; set; }
 
         private IEnumerable<IEntity> Entities;
         private TextControl HoveredCellName;
-        private IEntity _selectedCell;
 
         private string HoveredCellText => HoverPrefix + (SelectedCell?.DescriptionName ?? NoCellHoverText);
 
@@ -41,6 +35,14 @@ namespace data_rogue_core.Activities
             _callback = callback;
 
             Entities = entities;
+
+            OnLayout += EntityPickerMenuActivity_OnLayout;
+        }
+
+        private void EntityPickerMenuActivity_OnLayout(object sender, EventArgs e)
+        {
+            HoveredCellName.Parameters = HoveredCellText;
+            HoveredCellName.Color = SelectedCell == null ? Color.Gray : Color.White;
         }
 
         public override ActivityType Type => ActivityType.Menu;
@@ -51,30 +53,44 @@ namespace data_rogue_core.Activities
 
         public override void InitialiseControls()
         {
-            var backgroundControl = new BackgroundControl { Position = Position };
-            var topFlow = new FlowContainerControl { FlowDirection = FlowDirection.BottomUp };
-            var downFlow = new FlowContainerControl { FlowDirection = FlowDirection.TopDown };
-            var sideFlow = new FlowContainerControl { FlowDirection = FlowDirection.LeftToRight };
-            var textControl = new TextControl { Parameters = _caption };
+            var flow = new FlowContainerControl
+            {
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                ApplyAlignment = true,
+                Padding = new Padding(10)
+            };
+
+            var backgroundControl = new BackgroundControl
+            {
+                Position = Position,
+                Padding = new Padding(3),
+                ShrinkToContents = true,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center
+            };
+
+            var downFlow = new FlowContainerControl { FlowDirection = FlowDirection.TopDown, VerticalAlignment = VerticalAlignment.Top, ShrinkToContents = true };
+            var sideFlow = new FlowContainerControl { FlowDirection = FlowDirection.LeftToRight, ShrinkToContents = true };
+            var textControl = new TextControl { Parameters = _caption, Margin = new Padding(1) };
             var buttonControl = new ButtonControl { Text = "Cancel" };
             HoveredCellName = new TextControl { Parameters = HoveredCellText };
 
             buttonControl.OnClick += buttonControl_OnClick;
 
-            Controls.Add(backgroundControl);
+            Controls.Add(flow);
+            flow.Controls.Add(backgroundControl);
 
-            backgroundControl.Controls.Add(topFlow);
-
-            topFlow.Controls.Add(buttonControl);
-            topFlow.Controls.Add(downFlow);
+            backgroundControl.Controls.Add(downFlow);
 
             downFlow.Controls.Add(textControl);
             downFlow.Controls.Add(sideFlow);
             downFlow.Controls.Add(HoveredCellName);
+            downFlow.Controls.Add(buttonControl);
 
-            foreach(var cell in Entities)
+            foreach (var cell in Entities)
             {
-                sideFlow.Controls.Add(new MenuEntityControl { Entity = cell });
+                sideFlow.Controls.Add(new MenuEntityControl { Entity = cell, Margin = new Padding(1) });
             }
         }
 

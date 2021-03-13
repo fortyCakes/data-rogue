@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using data_rogue_core.Controls;
 using data_rogue_core.EventSystem.EventData;
 using data_rogue_core.IOSystems;
@@ -22,6 +23,7 @@ namespace data_rogue_core.Activities
             _systemContainer = systemContainer;
             _text = text;
             _callback = callback;
+            
         }
 
         public override ActivityType Type => ActivityType.Menu;
@@ -31,28 +33,40 @@ namespace data_rogue_core.Activities
         public override bool AcceptsInput => true;
 
         public bool OkSelected = true;
+        private ButtonControl OkButton;
+        private ButtonControl CancelButton;
 
         public override void InitialiseControls()
         {
-            var background = new BackgroundControl { Position = Position, ShrinkToContents = !RendersEntireSpace };
-            var text = new TextControl { Position = new Rectangle(), Parameters = _text };
-            var okButton = new ButtonControl { Position = new Rectangle(), Text = "OK" };
-            var cancelButton = new ButtonControl { Position = new Rectangle(), Text = "Cancel" };
+            var flow = new FlowContainerControl
+            {
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                ApplyAlignment = true,
+                Padding = new Padding(10)
+            };
 
-            var verticalFlow = new FlowContainerControl();
-            var horizontalFlow = new FlowContainerControl { FlowDirection = FlowDirection.RightToLeft };
 
-            okButton.IsFocused = OkSelected;
-            okButton.OnClick += OkButton_OnClick;
-            cancelButton.IsFocused = !OkSelected;
-            cancelButton.OnClick += CancelButton_OnClick;
+            var background = new BackgroundControl { ShrinkToContents = true, Padding = new Padding(2) };
+            var text = new TextControl { Position = new Rectangle(), Parameters = _text, Margin = new Padding(1) };
+            OkButton = new ButtonControl { Position = new Rectangle(), Text = "OK", Margin = new Padding(1) };
+            CancelButton = new ButtonControl { Position = new Rectangle(), Text = "Cancel", Margin = new Padding(1) };
 
-            Controls.Add(background);
+            var verticalFlow = new FlowContainerControl() { ShrinkToContents = true };
+            var horizontalFlow = new FlowContainerControl { FlowDirection = FlowDirection.LeftToRight, ShrinkToContents = true };
+
+            OkButton.IsFocused = OkSelected;
+            OkButton.OnClick += OkButton_OnClick;
+            CancelButton.IsFocused = !OkSelected;
+            CancelButton.OnClick += CancelButton_OnClick;
+
+            Controls.Add(flow);
+            flow.Controls.Add(background);
             background.Controls.Add(verticalFlow);
             verticalFlow.Controls.Add(text);
             verticalFlow.Controls.Add(horizontalFlow);
-            horizontalFlow.Controls.Add(okButton);
-            horizontalFlow.Controls.Add(cancelButton);
+            horizontalFlow.Controls.Add(OkButton);
+            horizontalFlow.Controls.Add(CancelButton);
         }
 
         private void CancelButton_OnClick(object sender, PositionEventHandlerArgs args)
@@ -75,12 +89,19 @@ namespace data_rogue_core.Activities
                 {
                     case ActionType.Move:
                         OkSelected = !OkSelected;
+                        SetButtonFocused();
                         break;
                     case ActionType.Select:
                         Select();
                         break;
                 }
             }
+        }
+
+        private void SetButtonFocused()
+        {
+            OkButton.IsFocused = OkSelected;
+            CancelButton.IsFocused = !OkSelected;
         }
 
         private void Select()
