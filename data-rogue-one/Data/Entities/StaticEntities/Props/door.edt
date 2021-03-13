@@ -40,6 +40,10 @@ Text: {
 
 	spriteAppearance = User:Get('SpriteAppearance')
 	spriteAppearance.Top = 'door_open'
+
+	mapKey = User:Get('Position').MapCoordinate.Key;
+	map = SystemContainer.MapSystem:TryGetMap(mapKey);
+	map:InvalidateCache();
 }
 
 "Script: CloseDoor"
@@ -61,4 +65,8 @@ Text: {
 
 	spriteAppearance = User:Get('SpriteAppearance')
 	spriteAppearance.Top = 'door_closed'
+
+	mapKey = User:Get('Position').MapCoordinate.Key;
+	map = SystemContainer.MapSystem:TryGetMap(mapKey);
+	map:InvalidateCache();
 }
