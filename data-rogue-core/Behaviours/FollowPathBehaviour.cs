@@ -56,6 +56,11 @@ namespace data_rogue_core.EventSystem.Rules
                 var coordinate = Path.First();
                 var vector = currentCoordinate - coordinate;
 
+                if (CantReach(vector))
+                {
+                    EndPath(entity);
+                }
+
                 return new ActionEventData { Action = ActionType.Move, Parameters = vector.ToString(), Speed = entity.Get<Actor>().Speed };
             }
             else
@@ -63,6 +68,11 @@ namespace data_rogue_core.EventSystem.Rules
                 EndPath(entity);
                 return null;
             }
+        }
+
+        private static bool CantReach(Vector vector)
+        {
+            return vector.X > 1 || vector.X < -1 || vector.Y > 1 || vector.Y < -1;
         }
 
         private void SetWaitingForInputIfPlayer(IEntity entity, bool setTo)
