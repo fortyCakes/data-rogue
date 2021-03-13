@@ -13,6 +13,7 @@ using System.Linq;
 using data_rogue_core.Maps;
 using System.Windows.Forms;
 using LargeTextControl = data_rogue_core.Controls.LargeTextControl;
+using System.Windows.Forms.VisualStyles;
 
 namespace data_rogue_core.Activities
 {
@@ -38,6 +39,8 @@ namespace data_rogue_core.Activities
             _displayMs = displayMs;
             _fadeOutMs = fadeOutMs;
             _stopwatch = new Stopwatch();
+
+            OnLayout += ToastActivity_OnLayout;
         }
 
         public ToastActivity(IActivitySystem activitySystem, string message, Color color, int displayMs = 500, int fadeOutMs = 1000) : base(activitySystem.DefaultPosition, activitySystem.DefaultPadding)
@@ -48,16 +51,25 @@ namespace data_rogue_core.Activities
             _displayMs = displayMs;
             _fadeOutMs = fadeOutMs;
             _stopwatch = new Stopwatch();
+
+            OnLayout += ToastActivity_OnLayout;
+        }
+
+
+        private void ToastActivity_OnLayout(object sender, EventArgs e)
+        {
+            UpdateAnimatedControls();
         }
 
         public override void InitialiseControls()
         {
             _textControl = new LargeTextControl
             {
-                Position = Position,
                 Parameters = _message,
                 BackColor = Color.Transparent,
-                Color = GetColor()
+                Color = GetColor(),
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center
             };
 
             Controls.Add(_textControl);

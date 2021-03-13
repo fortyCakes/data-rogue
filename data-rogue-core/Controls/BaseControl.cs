@@ -93,5 +93,10 @@ namespace data_rogue_core.Controls
         {
             Position = new Rectangle(Position.X + dx, Position.Y + dy, Position.Width, Position.Height);
         }
+
+        public virtual void SetActivityIndex(int activityIndex)
+        {
+            ActivityIndex = activityIndex;
+        }
     }
 }

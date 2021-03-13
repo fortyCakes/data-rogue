@@ -104,7 +104,6 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
         public static FlowContainerControl DefaultStats = new FlowContainerControl
         {
-            Position = new Rectangle(2, 2, 40 * TILE_SPACING - 2, 25 * TILE_SPACING - 2),
             Controls = new List<IDataRogueControl>
             {
                 new ComponentCounter{ Parameters = "Health,HP", BackColor = Color.Red },

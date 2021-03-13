@@ -1,4 +1,5 @@
-﻿using data_rogue_core.IOSystems;
+﻿using data_rogue_core.Activities;
+using data_rogue_core.IOSystems;
 using data_rogue_core.Maps;
 using data_rogue_core.Systems.Interfaces;
 using data_rogue_core.Utils;
@@ -49,6 +50,12 @@ namespace data_rogue_core.Controls
                     if (availableSize >= neededSize)
                     {
                         placed = true;
+
+                        if (FlowDirection == FlowDirection.BottomUp)
+                        {
+                            MoveToBottom(control, availableSpace);
+                        }
+
                         availableSpace = ShrinkMajorAxis(availableSpace, neededSize);
                         var minorSize = GetMinorAxisSize(control.LayoutPosition);
                         if (minorSize > largestMinorAxis)
@@ -79,6 +86,11 @@ namespace data_rogue_core.Controls
                     HorizontallyCenterChildren();
                 }
             }
+        }
+
+        private void MoveToBottom(IDataRogueControl control, Rectangle availableSpace)
+        {
+            control.MovePosition(0, availableSpace.Bottom - control.Position.Height - control.Position.Y);
         }
 
         private void HorizontallyCenterChildren()

@@ -38,7 +38,7 @@ namespace data_rogue_core.IOSystems.RLNetConsole
 
             foreach (var control in activity.Controls)
             {
-                control.ActivityIndex = activityIndex;
+                control.SetActivityIndex(activityIndex);
                 IDataRogueControlRenderer controlRenderer = GetRendererFor(control);
                 controlRenderer.Paint(_console, control, systemContainer, playerFov);
             }

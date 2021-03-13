@@ -4,6 +4,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using data_rogue_core.Activities;
 using data_rogue_core.Controls;
 using data_rogue_core.IOSystems;
@@ -20,14 +22,25 @@ namespace data_rogue_one.IOSystems
             var config = BLTTilesIOSystem.DefaultConfiguration;
             config.WindowTitle = "Data Rogue One";
 
+            MessageLogControl messageLog = BLTTilesIOSystem.DefaultMessageLog;
+            messageLog.Margin = new Padding(2, 1, 1, 1);
+
             config.GameplayWindowControls = new List<IDataRogueControl>
             {
                 BLTTilesIOSystem.DefaultMap,
                 BLTTilesIOSystem.DefaultMinimap,
                 StatsConfiguration,
-                SkillBar,
                 BLTTilesIOSystem.DefaultInteraction,
-                MessageConfiguration
+                BLTTilesIOSystem.DefaultMessageLog,
+                new FlowContainerControl { Controls =
+                    {
+                        new SkillBarControl { Margin = new Padding(1) },
+                        messageLog
+                    },
+                    FlowDirection = FlowDirection.BottomUp,
+                    VerticalAlignment = VerticalAlignment.Bottom,
+                    Margin = new Padding(2)
+                }
             };
 
             config.AdditionalControlRenderers = new List<IDataRogueControlRenderer> { new BLTDefencesDisplayer() };
@@ -38,7 +51,8 @@ namespace data_rogue_one.IOSystems
         public static FlowContainerControl StatsConfiguration =>
                 new FlowContainerControl
                 {
-                    Position = new Rectangle(2, 2, 40 * TILE_SPACING - 2, 27 * TILE_SPACING - 2),
+                    ShrinkToContents = true,
+                    Margin = new Padding(2),
                     Controls = new List<IDataRogueControl>
                     {
                         new ComponentCounter { Parameters = "Health,HP", BackColor = Color.Red },
@@ -48,19 +62,8 @@ namespace data_rogue_one.IOSystems
                         new DefencesControl(),
                         new HoveredEntityDisplayBox { Parameters = "Health,HP;AuraFighter,Aura;TiltFighter,Tilt" }
                     }
-                };
-        public static FlowContainerControl SkillBar =>
-                new FlowContainerControl
-                {
-                    Position = new Rectangle(0, 25 * TILE_SPACING - 18, 24 * 10, 24),
-                    Controls = new List<IDataRogueControl>
-                    {
-                        new SkillBarControl()
-                    }
-                };
+                };           
+                 
 
-        public static MessageLogControl MessageConfiguration => new MessageLogControl {
-                Position = new Rectangle(2, (int)(13.5 * TILE_SPACING), 40 * TILE_SPACING, 10 * TILE_SPACING - 2),
-                NumberOfMessages = 15} ;
     }
 }

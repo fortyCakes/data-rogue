@@ -46,17 +46,29 @@ namespace data_rogue_core.Activities
 
         public override void InitialiseControls()
         {
-            Background = new BackgroundControl { Position = Position, ShrinkToContents = !RendersEntireSpace };
-            Controls.Add(Background);
+            var flow = new FlowContainerControl
+            {
+                VerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                ApplyAlignment = true
+            };
+
+            Background = new BackgroundControl {
+                ShrinkToContents = !RendersEntireSpace,
+                VerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                Padding = new Padding(3)
+            };
+
+            Controls.Add(flow);
+            flow.Controls.Add(Background);
 
             foreach (var config in StatsControls)
             {
                 Background.Controls.Add(config);
             }
-        }
 
-        public void Initialise()
-        {
+            SetUpEntityForInfoControls(Entity);
         }
         
         public override void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard)

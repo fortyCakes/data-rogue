@@ -48,6 +48,7 @@ namespace data_rogue_core.Activities
 
         bool FillsContainer { get; }
 
+        void SetActivityIndex(int activityIndex);
         bool Layout(List<IDataRogueControlRenderer> controlRenderers, ISystemContainer systemContainer, object handle, List<MapCoordinate> playerFov, Rectangle boundingBox);
 
         void Paint(List<IDataRogueControlRenderer> _controlRenderers, object handle, ISystemContainer systemContainer, List<MapCoordinate> playerFov);

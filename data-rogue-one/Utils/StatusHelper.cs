@@ -54,8 +54,8 @@ namespace data_rogue_one.EventSystem.Utils
             {
                 new FlowContainerControl
                 {
-                    Position = new Rectangle(0,0,0,0),
-                    Controls = statsDisplays
+                    Controls = statsDisplays,
+                    ShrinkToContents = true
                 }
             };
         }

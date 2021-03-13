@@ -10,7 +10,7 @@ namespace data_rogue_core.Controls
 {
     public class MessageLogControl : BaseInfoControl
     {
-        public override bool FillsContainer => true;
+        public override bool FillsContainer => false;
 
         public int NumberOfMessages { get; set; }
     }

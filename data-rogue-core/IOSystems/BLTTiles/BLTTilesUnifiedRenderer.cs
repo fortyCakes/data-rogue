@@ -51,7 +51,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
             {
                 if (control.Visible)
                 {
-                    control.ActivityIndex = activityIndex;
+                    control.SetActivityIndex(activityIndex);
                     control.Paint(_controlRenderers, _spriteManager, systemContainer, playerFov);
                 }
             }

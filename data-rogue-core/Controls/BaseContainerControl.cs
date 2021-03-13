@@ -182,5 +182,15 @@ namespace data_rogue_core.Controls
                 }
             }
         }
+
+        public override void SetActivityIndex(int activityIndex)
+        {
+            base.SetActivityIndex(activityIndex);
+
+            foreach(var control in Controls)
+            {
+                control.SetActivityIndex(activityIndex);
+            }
+        }
     }
 }
