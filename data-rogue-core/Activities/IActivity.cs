@@ -25,5 +25,6 @@ namespace data_rogue_core.Activities
         void HandleAction(ISystemContainer systemContainer, ActionEventData action);
         IList<IDataRogueControl> Controls { get; }
         Rectangle Position { get; }
+
     }
 }

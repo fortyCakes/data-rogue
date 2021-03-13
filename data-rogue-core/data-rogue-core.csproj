@@ -470,6 +470,7 @@
     <Compile Include="Utils\BaseShopGenerator.cs" />
     <Compile Include="Utils\BLTNameExtensions.cs" />
     <Compile Include="Utils\BresenhamLineDrawingAlgorithm.cs" />
+    <Compile Include="Utils\ControlExtensions.cs" />
     <Compile Include="Utils\FloodFillHelper.cs" />
     <Compile Include="Utils\ILineDrawingAlgorithm.cs" />
     <Compile Include="Utils\IShopGenerator.cs" />

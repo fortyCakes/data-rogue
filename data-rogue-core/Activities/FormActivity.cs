@@ -133,11 +133,6 @@ namespace data_rogue_core.Activities
             Form.Select();
         }
 
-        public override void HandleMouse(ISystemContainer systemContainer, MouseData mouse)
-        {
-
-        }
-
         public override void HandleKeyboard(ISystemContainer systemContainer, KeyCombination keyboard)
         {
             Form.HandleKeyboard(keyboard);

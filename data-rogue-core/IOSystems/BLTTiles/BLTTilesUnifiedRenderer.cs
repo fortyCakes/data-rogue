@@ -116,10 +116,12 @@ namespace data_rogue_core.IOSystems.BLTTiles
         {
             var playerFov = systemContainer.ActivitySystem.GameplayActivity.Running ? FOVHelper.CalculatePlayerFov(systemContainer) : null;
             activity.Layout(_controlRenderers, systemContainer, playerFov, _spriteManager);
+            var allControls = activity.Controls.GetControlsRecursive();
+
 
             var mousePoint = new Point(x, y);
 
-            var onControls = activity.Controls.Where(c => c.CanHandleMouse && c.Position.Contains(mousePoint));
+            var onControls = allControls.Where(c => c.CanHandleMouse && c.Position.Contains(mousePoint));
 
             return onControls.LastOrDefault();
         }

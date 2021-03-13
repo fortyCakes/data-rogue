@@ -28,7 +28,7 @@ namespace data_rogue_core.Systems
             {
                 var mapActivity = _activitySystem.GetMapActivity();
 
-                return mapActivity.CameraPosition;
+                return mapActivity?.CameraPosition;
             }
         }
 

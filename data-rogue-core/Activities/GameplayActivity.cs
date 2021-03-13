@@ -21,7 +21,7 @@ namespace data_rogue_core.Activities
         public override bool RendersEntireSpace => true;
         public override bool AcceptsInput => true;
 
-        public MapCoordinate CameraPosition => _playerSystem.Player.Get<Position>().MapCoordinate;
+        public MapCoordinate CameraPosition => _playerSystem.Player?.Get<Position>().MapCoordinate;
 
         private readonly IOSystemConfiguration _ioSystemConfiguration;
         private readonly IPlayerSystem _playerSystem;

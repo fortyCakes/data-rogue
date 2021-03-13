@@ -76,7 +76,7 @@ namespace data_rogue_core.Activities
 
                     if (mouse.IsLeftClick)
                     {
-                        mouseOverControl.Click(mouse, new PositionEventHandlerArgs(mouse.X, mouse.Y));
+                        mouseOverControl.Click(mouseOverControl, new PositionEventHandlerArgs(mouse.X, mouse.Y));
                     }
                 }
             }

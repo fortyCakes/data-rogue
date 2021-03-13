@@ -138,7 +138,7 @@ namespace data_rogue_core.IOSystems.BLTTiles
 
         protected override Size Measure(ISpriteManager spriteManager, IDataRogueControl control, ISystemContainer systemContainer, List<MapCoordinate> playerFov, Rectangle boundingBox, Padding padding, HorizontalAlignment horizontalAlignment, VerticalAlignment verticalAlignment)
         {
-            return new Size(32 * BLTTilesIOSystem.TILE_SPACING / 8, 32 * BLTTilesIOSystem.TILE_SPACING / 8);
+            return new Size(8 * BLTTilesIOSystem.TILE_SPACING, 8 * BLTTilesIOSystem.TILE_SPACING);
         }
     }
 }
