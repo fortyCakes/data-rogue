@@ -20,8 +20,6 @@ namespace data_rogue_core.Controls
         public override bool Layout(List<IDataRogueControlRenderer> controlRenderers, ISystemContainer systemContainer, object handle, List<MapCoordinate> playerFov, Rectangle boundingBox)
         {
             ApplyFlowLayout(controlRenderers, systemContainer, handle, playerFov, boundingBox);
-
-            ApplyAlignmentToContents(boundingBox);
             
             if (ShrinkToContents)
             {
@@ -73,7 +71,7 @@ namespace data_rogue_core.Controls
                 }
             }
 
-            ApplyAlignmentToContents(boundingBox);
+            ApplyAlignmentToContents(paddedBoundingBox);
 
             if (minorPosition == 0)
             {
