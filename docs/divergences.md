@@ -56,8 +56,15 @@ confirmed by running the game.
   the directory of `data-rogue-core.dll`. `Run` accepts custom
   `EntityDataProviders`, but data-rogue-one passes `null`. Save, morgue and
   high-score paths are also fixed and sit next to the executable.
-- **Intended:** undecided. Fixed paths are workable if they are documented as the
-  engine's convention. Record the decision here.
+- **Intended:** all of these paths are configurable by the game. The current
+  layout can remain as the default.
+- **Notes:** `EntityDataProviders` covers most data paths already. Three are not
+  covered:
+  - static maps, loaded through `DataFileLoader` with a hard-coded `Data/` root;
+  - the save, morgue and high-score locations in `SaveSystem`;
+  - image paths inside `spritesheet.edt`, which are passed to BearLibTerminal
+    unmodified. They are probably resolved against the process working directory
+    rather than the executable's directory; this hasn't been checked.
 - **Where:** `data-rogue-core/EntityEngineSystem/*DataProvider.cs`,
   `Data/DataFileLoader.cs`, `Systems/SaveSystem.cs`.
 
@@ -82,8 +89,12 @@ confirmed by running the game.
 - **Current:** core defines the main menu, the character-creation form,
   new-game/load flow, the morgue screen and high scores. `DataRogueGame` always
   pushes core's `MainMenu`.
-- **Intended:** undecided. It's reasonable for core to provide default screens,
-  but a game should be able to replace them.
+- **Intended:** core provides default screens, and a game can override any of them.
+- **Notes:** screens are currently constructed directly with `new`, from many places
+  (menus push other menus, forms push the main menu on cancel). Making them
+  overridable needs one place to resolve screens, such as a registry keyed by screen
+  identity. Overriding a single class won't be enough. Character creation is also
+  tied up with D1.
 - **Where:** `data-rogue-core/Menus/StaticMenus/MainMenu.cs`,
   `Forms/StaticForms/CharacterCreationForm.cs`, `DataRogueGame.cs:97-100`.
 
@@ -93,9 +104,26 @@ confirmed by running the game.
   data-rogue-one uses only BearLibTerminal. Default control renderers are
   discovered only within the core assembly (`ReflectiveEnumerator`), so game
   renderers must be registered explicitly.
-- **Intended:** undecided. Separate backend assemblies would let a game take only
-  the backend it uses. Decide whether RLNET is still supported.
-- **Where:** `data-rogue-core/IOSystems/`, `Utils/ReflectiveEnumerator.cs`.
+- **Intended:** each renderer is a plugin in its own assembly. Core has no dependency
+  on any rendering or windowing library. RLNET and BearLibTerminal both remain
+  supported.
+- **Notes:** this goes deeper than moving `IOSystems/` out. Supposedly
+  backend-neutral code references backend and windowing types directly. The counts
+  below are of `using` directives outside `IOSystems/`, so some may be unused:
+  - **WinForms** in 27 files. Controls, activities and layout use its `Padding`,
+    `FlowDirection` and similar types as the core layout model.
+  - **OpenTK** in 7 files. `KeyCombination.Key` is an OpenTK `Key`, so the engine's
+    input model is OpenTK's.
+  - **RLNET** in 5 files, including `DataRogueGame.cs`, `ColorExtensions.cs` and
+    `ControlSystem.cs`.
+  - **BLTWrapper** in 5 files, including vault generation
+    (`VaultConnectionPoint.cs`, `VaultPossibleConnection.cs`), probably for its
+    `TileDirections` type.
+
+  Core needs its own neutral types for keys, layout and directions before the
+  backends can be split out.
+- **Where:** `data-rogue-core/IOSystems/`, `IOSystems/KeyCombination.cs`,
+  `Controls/`, `Activities/`, `Utils/ReflectiveEnumerator.cs`.
 
 ### D9 — "Entirely configured in text files" is partial
 - **Current:** the README's goal holds for content: entities, world structure,
@@ -105,8 +133,18 @@ confirmed by running the game.
   - map-gen command types;
   - UI layout (`BLTTilesConfig.cs`);
   - the RNG seed (hard-coded `"SEED_DEBUG"` in `Program.cs`).
-- **Intended:** the README states the goal. How far it should go (e.g. whether the
-  rule list or UI layout should be data) is not recorded.
+- **Intended:** the active rule list and the UI layout should be data, so that
+  different games can be assembled mostly from data. Adding new component,
+  behaviour, rule and command *types* still requires C#. The seed is not yet decided.
+- **Notes:**
+  - **Rule list:** rule order is currently implicit, from `RuleOrder` ties broken by
+    list order (H1). If the list moves to data, that tie-breaking becomes invisible
+    and fragile. Rule order should be made explicit first, or as part of the move.
+    Rules would also have to be resolved by type name, which brings the same
+    uniqueness concern as H9.
+  - **UI layout:** controls are configured through object initialisers with WinForms
+    layout types (D8). A data format for layout depends on the neutral layout types
+    that D8 needs anyway, so doing D8 first avoids designing it twice.
 
 ---
 

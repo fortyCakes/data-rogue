@@ -34,6 +34,8 @@ multiple games. It currently leaks in several places — see
 - `data-rogue-core` must not gain new knowledge of `data-rogue-one`'s content:
   no new hard-coded prototype names, stat names, action types or assets. If you
   can't avoid it, add an entry to `docs/divergences.md`.
+- Renderers are meant to become plugins (D8). Outside `data-rogue-core/IOSystems/`,
+  don't add new uses of WinForms, OpenTK, RLNET, BearLib or BLTWrapper types.
 - Put a new file in the project that owns the concept, and use that project's
   namespace (`data_rogue_core.*` / `data_rogue_one.*`). Existing files often
   don't (see divergences); don't copy that pattern.

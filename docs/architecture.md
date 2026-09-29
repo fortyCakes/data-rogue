@@ -229,8 +229,10 @@ retries). ⚠ H3
 
 - `IIOSystem` abstracts window, input and drawing. There are two implementations:
   - `BLTTilesIOSystem` (BearLibTerminal, sprite tiles), used by data-rogue-one;
-  - `RLNetConsoleIOSystem` (RLNET, ASCII console), still compiled but not used
-    by data-rogue-one.
+  - `RLNetConsoleIOSystem` (RLNET, ASCII console), which is supported but not
+    used by data-rogue-one.
+
+  Both live inside core for now; the intent is separate plugin assemblies. ⚠ D8
 - Activities expose trees of **controls** (`IDataRogueControl`: map, minimap,
   message log, stat bars, flow containers…). Each IO system has one
   **control renderer** per control type.
